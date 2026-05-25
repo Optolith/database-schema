@@ -348,8 +348,8 @@ export const RaceVariant = DB.Entity(import.meta.url, {
             type: DB.String({ minLength: 1 }),
           }),
           attribute_adjustments: DB.Optional({
-              comment: "The respective attribute adjustments text from the source book.",
-              type: DB.String({ minLength: 1 }),
+            comment: "The respective attribute adjustments text from the source book.",
+            type: DB.String({ minLength: 1 }),
           }),
           automatic_advantages: DB.Optional({
             comment: "The respective automatic advantages text from the source book.",
