@@ -9,15 +9,19 @@ on:
       - v[0-9]+.[0-9]+.[0-9]+*
 
 jobs:
-  build:
+  publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
+          registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm ci
       - name: Build TypeScript (first pass)
@@ -33,29 +37,5 @@ jobs:
         run: npm run format:check
       - name: Test schema validity
         run: npm test
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org/
-      - name: Install dependencies
-        run: npm ci
-      - name: Build TypeScript (first pass)
-        run: npm run build
-        continue-on-error: true
-      - name: Generate Typings
-        run: npm run generate
-      - name: Build TypeScript (second pass)
-        run: npm run build
       - name: Publish to npm
         run: npm publish --provenance --access public

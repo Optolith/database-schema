@@ -7,6 +7,7 @@ import {
   ProfessionIdentifier,
   RaceIdentifier,
 } from "../../_Identifier.js"
+import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -337,3 +338,207 @@ export const RestrictedToBlessedTraditionsScope = DB.Enum(import.meta.url, {
     Shamanistic: DB.EnumCase({ type: null }),
   }),
 })
+
+export const KnownItemSpecifics = DB.TypeAlias(import.meta.url, {
+  name: "KnownItemSpecifics",
+  type: () =>
+    DB.Object({
+      age: DB.Optional({
+        comment: "The age of the item is known.",
+        type: DB.IncludeIdentifier(KnownItemAge),
+      }),
+      condition: DB.Optional({
+        comment: "The condition of the item is known and well specified.",
+        type: DB.IncludeIdentifier(KnownItemCondition),
+      }),
+      stabilityRating: DB.Optional({
+        comment:
+          "The breaking point rating (weapon) or sturdiness rating (armor) of the item. Either a specific rating or a general unbreakability.",
+        type: DB.IncludeIdentifier(KnownItemStabilityRating),
+      }),
+      damageLevel: DB.Optional({
+        comment: "The *Damaged* (weapon) or *Wear* (armor) level of the item, if any.",
+        type: DB.Integer({ minimum: 1, maximum: 4 }),
+      }),
+      collectorsValue: DB.Required({
+        comment: "The collector’s value of the known item.",
+        type: DB.IncludeIdentifier(CollectorsValue),
+      }),
+    }),
+})
+
+export const KnownItemSpecificsTranslation = DB.TypeAlias(import.meta.url, {
+  name: "KnownItemSpecificsTranslation",
+  type: () =>
+    DB.Object({
+      condition: DB.Required({
+        comment: "The condition of the item.",
+        type: DB.String({ minLength: 1, markdown: "inline" }),
+      }),
+    }),
+})
+
+const KnownItemAge = DB.Enum(import.meta.url, {
+  name: "KnownItemAge",
+  comment: "The age of the item is known.",
+  values: () => ({
+    Antique: DB.EnumCase({ type: null }),
+    Old: DB.EnumCase({ type: null }),
+  }),
+})
+
+const KnownItemCondition = DB.Enum(import.meta.url, {
+  name: "KnownItemCondition",
+  comment: "The condition of the item is known and well specified.",
+  values: () => ({
+    Broken: DB.EnumCase({ type: null }),
+    Poor: DB.EnumCase({ type: null }),
+    Good: DB.EnumCase({ type: null }),
+    VeryGood: DB.EnumCase({ type: null }),
+    AsNew: DB.EnumCase({ type: null }),
+  }),
+})
+
+const KnownItemStabilityRating = DB.Enum(import.meta.url, {
+  name: "KnownItemStabilityRating",
+  comment: "Either a specific rating or a general unbreakability.",
+  values: () => ({
+    Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
+    Unbreakable: DB.EnumCase({ type: null }),
+  }),
+})
+
+const CollectorsValue = DB.Enum(import.meta.url, {
+  name: "CollectorsValue",
+  comment: "The item has a collector’s value.",
+  values: () => ({
+    Constant: DB.EnumCase({
+      comment: "The collector’s value is a fixed price in silverthalers.",
+      type: DB.IncludeIdentifier(ConstantCollectorsValue),
+    }),
+    Minimum: DB.EnumCase({
+      comment:
+        "The collector’s value is a range with an open end and the specified price in silverthalers as the minimum.",
+      type: DB.IncludeIdentifier(MinimumCollectorsValue),
+    }),
+    Invaluable: DB.EnumCase({
+      comment: "The item is invaluable to collectors.",
+      type: null,
+    }),
+  }),
+})
+
+const ConstantCollectorsValue = DB.TypeAlias(import.meta.url, {
+  name: "ConstantCollectorsValue",
+  type: () =>
+    DB.Object({
+      value: DB.Required({
+        comment: "The collector’s value is a fixed price in silverthalers.",
+        type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "ConstantCollectorsValue",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note, appended to the generated string in parenthesis.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+            replacement: DB.Optional({
+              comment: "A replacement string.",
+              type: DB.IncludeIdentifier(ResponsiveTextReplace),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
+    }),
+})
+
+const MinimumCollectorsValue = DB.TypeAlias(import.meta.url, {
+  name: "MinimumCollectorsValue",
+  type: () =>
+    DB.Object({
+      value: DB.Required({
+        comment:
+          "The collector’s value is a range with an open end and the specified price in silverthalers as the minimum.",
+        type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "MinimumCollectorsValue",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note, appended to the generated string in parenthesis.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+            replacement: DB.Optional({
+              comment: "A replacement string.",
+              type: DB.IncludeIdentifier(ResponsiveTextReplace),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
+    }),
+})
+
+/*
+
+Possible known item conditions:
+-------------------------------
+
+Die Waffe ist antik, aber gut erhalten.
+Der Schild ist antik, aber gut erhalten.
+Die Waffe ist antik, aber sehr gut erhalten und sieht aus wie neu.
+Die Waffe ist antik, aber sehr gut erhalten.
+Die Waffe ist zwar antik, aber sehr gut erhalten.
+Die Waffe ist antik und weist einige Scharten in der Klinge auf.
+Die Waffe ist antik und zerbrochen.
+Die Waffe ist antik, aber neuwertig.
+Die Waffe ist alt.
+Die Waffe ist alt, aber gut gepflegt.
+Der Magierstab ist alt, aber gut gepflegt.
+Die Waffen sind alt, aber gut gepflegt.
+Die Waffe ist alt, aber neuwertig.
+Das Schwert ist alt, aber neuwertig.
+Die Waffe ist alt, aber gut erhalten.
+Die Waffe ist alt, aber sie wurde vermutlich niemals eingesetzt und ist gut erhalten.
+Die Waffe ist alt und in schlechtem Zustand.
+Die Waffe ist alt und schlecht gepflegt.
+Die Waffe ist alt, aber in gepflegtem Zustand.
+Die Waffe ist gebraucht.
+Die Waffe ist gebraucht, aber neuwertig.
+Die Waffe ist gebraucht, aber unzerbrechlich.
+Die Waffe ist gebraucht, aber gepflegt.
+Die Rüstung ist gebraucht, aber gut erhalten.
+Die Rüstung ist gebraucht und in einem schlechten Zustand.
+Die Waffe ist neuwertig.
+Die Waffe ist neuwertig und unbenutzt.
+*leer*
+
+Wenn er gebunden wird, wird der
+Stab wie alle Traditionsartefakte nahezu unzerbrechlich.
+Sie weist 1 Stufe Beschädigung auf.
+Er weist 1 Stufe Beschädigung auf.
+Der Bruchfaktor beträgt 14.
+Der Bruchfaktor beträgt 12 und sie weist 3 Stufen Beschädigung auf.
+Sie ist unzerbrechlich.
+Einzig elementares Feuer, das heißer brennt als ein Drachenodem oder ein IGNIFAXIUS, oder aber das Eingreifen eines Gottes können die Axt zerstören.
+Einzig elementares Feuer, das heißer brennt als ein Drachenodem oder ein IGNIFAXIUS, spezielle Zauberei oder das Eingreifen eines Gottes können die Axt zerstören.
+Die Waffe war lange Zeit dem Salzwasser der Zyklopensee ausgesetzt, was allerdings bei Weitem nicht so große Schäden angerichtet hat, wie zu erwarten wäre.
+Die Waffe kann nicht benutzt werden, bis die geborstene Klinge neu geschmiedet wurde.
+Sie weist 3 Stufen Verschleiß auf und ist unbrauchbar, bis sie repariert wurde.
+
+Possible collector's values:
+----------------------------
+
+750+ S (nur Personen mit sehr zweifelhaftem Ruf würden eine solche Waffe erwerben)
+1.500+ S
+2.500 S
+500+ S (1.500+ S für ein zusammenpassendes Paar)
+unbezahlbar
+
+*/

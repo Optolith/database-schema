@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.42.4](https://github.com/Optolith/database-schema/compare/v0.42.3...v0.42.4) (2026-04-10)
+
+
+### Features
+
+* add replacement text option to known item specifics ([4a6648e](https://github.com/Optolith/database-schema/commit/4a6648e307a35a62422c923de59b156811da1119))
+
+## [0.42.3](https://github.com/Optolith/database-schema/compare/v0.42.2...v0.42.3) (2026-04-10)
+
+## [0.42.2](https://github.com/elyukai/optolith-database-schema/compare/v0.42.1...v0.42.2) (2026-04-10)
+
+
+### Features
+
+* known item specifics ([9a9a2bd](https://github.com/elyukai/optolith-database-schema/commit/9a9a2bd6a1a2ff3ee7a3c14cea064a0cce1ee52f))
+
+## [0.42.1](https://github.com/elyukai/optolith-database-schema/compare/v0.42.0...v0.42.1) (2026-03-31)
+
+
+### Features
+
+* add Bannzeichen entity ([2dd0be7](https://github.com/elyukai/optolith-database-schema/commit/2dd0be71977a447248c6916c89d624d4290601e1)), closes [#135](https://github.com/elyukai/optolith-database-schema/issues/135) [#133](https://github.com/elyukai/optolith-database-schema/issues/133)
+* add goblin rituals entity ([78dcb9a](https://github.com/elyukai/optolith-database-schema/commit/78dcb9a737ca7c76370942168163b6b9ca3971ce)), closes [#132](https://github.com/elyukai/optolith-database-schema/issues/132) [#131](https://github.com/elyukai/optolith-database-schema/issues/131)
+
 ## [0.42.0](https://github.com/elyukai/optolith-database-schema/compare/v0.41.0...v0.42.0) (2026-03-23)
 
 

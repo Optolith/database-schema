@@ -3,7 +3,15 @@ import { CloseCombatTechnique, RangedCombatTechnique } from "../../CombatTechniq
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
-import { Complexity, Cost, RestrictedTo, StructurePoints, Weight } from "./_Item.js"
+import {
+  Complexity,
+  Cost,
+  KnownItemSpecifics,
+  KnownItemSpecificsTranslation,
+  RestrictedTo,
+  StructurePoints,
+  Weight,
+} from "./_Item.js"
 import { MeleeWeapon } from "./_MeleeWeapon.js"
 import { RangedWeapon } from "./_RangedWeapon.js"
 import { checkWeaponCombatTechniqueIntegrity } from "./_Weapon.js"
@@ -57,6 +65,10 @@ export const Weapon = DB.Entity(import.meta.url, {
           "Define if during character creation this weapon can only be bought by a specific subset of characters.",
         type: DB.IncludeIdentifier(RestrictedTo),
       }),
+      knownItemSpecifics: DB.Optional({
+        comment: "The weapon is a known item, which implies some additional values.",
+        type: DB.IncludeIdentifier(KnownItemSpecifics),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,
@@ -85,6 +97,10 @@ export const Weapon = DB.Entity(import.meta.url, {
           disadvantage: DB.Optional({
             comment: "The weapon disadvantage text.",
             type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          knownItemSpecifics: DB.Optional({
+            comment: "The weapon is a known item, which implies some additional values.",
+            type: DB.IncludeIdentifier(KnownItemSpecificsTranslation),
           }),
           errata: DB.Optional({
             type: DB.IncludeIdentifier(Errata),

@@ -3,7 +3,14 @@ import { ArmorIdentifier, ArmorTypeIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
-import { ComplexComplexity, Cost, RestrictedTo, Weight } from "./_Item.js"
+import {
+  ComplexComplexity,
+  Cost,
+  KnownItemSpecifics,
+  KnownItemSpecificsTranslation,
+  RestrictedTo,
+  Weight,
+} from "./_Item.js"
 
 export const Armor = DB.Entity(import.meta.url, {
   name: "Armor",
@@ -47,6 +54,10 @@ export const Armor = DB.Entity(import.meta.url, {
           "Define if during character creation this weapon can only be bought by a specific subset of characters.",
         type: DB.IncludeIdentifier(RestrictedTo),
       }),
+      knownItemSpecifics: DB.Optional({
+        comment: "The armor is a known item, which implies some additional values.",
+        type: DB.IncludeIdentifier(KnownItemSpecifics),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,
@@ -75,6 +86,10 @@ export const Armor = DB.Entity(import.meta.url, {
           disadvantage: DB.Optional({
             comment: "The armor disadvantage text.",
             type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          knownItemSpecifics: DB.Optional({
+            comment: "The weapon is a known item, which implies some additional values.",
+            type: DB.IncludeIdentifier(KnownItemSpecificsTranslation),
           }),
           errata: DB.Optional({
             type: DB.IncludeIdentifier(Errata),

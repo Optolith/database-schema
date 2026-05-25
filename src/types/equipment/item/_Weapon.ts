@@ -109,14 +109,14 @@ export const checkWeaponCombatTechniqueIntegrity = (
         checkPart(ct.special.has_length, meleeUse.length, "a length", "close", ctId),
         checkPart(ct.special.has_reach, meleeUse.reach, "a reach", "close", ctId),
         checkPart(ct.special.has_shield_size, meleeUse.size, "a shield size", "close", ctId),
-      ].filter(v => v !== undefined)
+      ]
     }),
     ...Object.entries(instanceContent.ranged_uses ?? {}).flatMap(([ctId, rangedUse]) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- integrity has been checked, it must be present
       const ct = getInstanceById("RangedCombatTechnique", ctId)!
       return [
         checkPart(ct.special.has_ammunition, rangedUse.ammunition, "an ammunition", "ranged", ctId),
-      ].filter(v => v !== undefined)
+      ]
     }),
   ].filter(v => v !== undefined)
 }
