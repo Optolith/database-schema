@@ -25,6 +25,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ESNext",
+    "types": ["node"],
     "useUnknownInCatchVariables": true,
     "verbatimModuleSyntax": true,
   },

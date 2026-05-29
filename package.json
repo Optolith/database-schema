@@ -38,20 +38,20 @@
   "author": "Lukas Obermann",
   "license": "MPL-2.0",
   "dependencies": {
-    "@elyukai/utils": "^0.3.3",
+    "@elyukai/utils": "^0.3.4",
     "tsondb": "^0.20.3",
-    "yaml": "^2.8.2"
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.5.0",
-    "commit-and-tag-version": "^12.7.1",
-    "eslint": "^10.1.0",
-    "globals": "^17.4.0",
+    "@types/node": "^25.9.1",
+    "commit-and-tag-version": "^12.7.3",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0",
     "nodemon": "^3.1.14",
-    "prettier": "^3.8.1",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.1"
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.0"
   },
   "repository": "github:Optolith/database-schema",
   "bugs": {
