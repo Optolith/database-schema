@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.43.0](https://github.com/Optolith/database-schema/compare/v0.42.4...v0.43.0) (2026-05-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* auto/strong dis/advantages in race variantFeature/race advantage variant
+* add translation for name of spellcasters
+* add translations for favored skills
+
+### Features
+
+* add translation for name of spellcasters ([21780be](https://github.com/Optolith/database-schema/commit/21780be505cf21d08bb2ef7691e613047cb0447f))
+* add translations for favored skills ([57b1916](https://github.com/Optolith/database-schema/commit/57b1916f21edbd1acb57c8e0aa3b06f9be6da724))
+* auto/strong dis/advantages in race variantFeature/race advantage variant ([7afc6b0](https://github.com/Optolith/database-schema/commit/7afc6b032614b1fae26f54e648eceee3aa49559c)), closes [elyukai/optolith-data#1291](https://github.com/elyukai/optolith-data/issues/1291) [#139](https://github.com/Optolith/database-schema/issues/139) [#138](https://github.com/Optolith/database-schema/issues/138)
+* printed values for lesson packages ([c268659](https://github.com/Optolith/database-schema/commit/c2686593cb874e4f18ba86ea51d6c7d59f0cce85))
+
 ## [0.42.4](https://github.com/Optolith/database-schema/compare/v0.42.3...v0.42.4) (2026-04-10)
 
 
