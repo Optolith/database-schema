@@ -30,38 +30,6 @@ export const Race = DB.Entity(import.meta.url, {
         comment: "The race’s base values.",
         type: DB.IncludeIdentifier(BaseValues),
       }),
-      automatic_advantages: DB.Optional({
-        comment:
-          "A list of automatically applied advantages. This does only work for advantages with no further configuration such as level or special selection.",
-        type: DB.Array(
-          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [AdvantageIdentifier()]),
-          {
-            minItems: 1,
-          },
-        ),
-      }),
-      automatic_disadvantages: DB.Optional({
-        comment:
-          "A list of automatically applied disadvantages. This does only work for disadvantages with no further configuration such as level or special selection.",
-        type: DB.Array(
-          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [DisadvantageIdentifier()]),
-          { minItems: 1 },
-        ),
-      }),
-      strongly_recommended_advantages: DB.Optional({
-        comment: "A list of strongly recommended advantages.",
-        type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
-          { minItems: 1 },
-        ),
-      }),
-      strongly_recommended_disadvantages: DB.Optional({
-        comment: "A list of strongly recommended disadvantages.",
-        type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
-          { minItems: 1 },
-        ),
-      }),
       hairColorCount: DB.Optional({
         comment:
           "How many different hair colors a race may have. By default, they have a single one that is for their whole body, but a race may have multiple if their hair color is different for different body parts. Additionally, if the hair color is labelled differently (e.g. scale color), there might be multiple colors for different body parts as well. This should only be set if the hair color count is higher than 1.",
@@ -104,26 +72,6 @@ export const Race = DB.Entity(import.meta.url, {
         DB.Object({
           name: DB.Required({
             comment: "The race’s name.",
-            type: DB.String({ minLength: 1 }),
-          }),
-          attribute_adjustments: DB.Required({
-            comment: "The respective attribute adjustments text from the source book.",
-            type: DB.String({ minLength: 1 }),
-          }),
-          automatic_advantages: DB.Optional({
-            comment: "The respective automatic advantages text from the source book.",
-            type: DB.String({ minLength: 1 }),
-          }),
-          automatic_disadvantages: DB.Optional({
-            comment: "The respective automatic disadvantages text from the source book.",
-            type: DB.String({ minLength: 1 }),
-          }),
-          strongly_recommended_advantages: DB.Optional({
-            comment: "The respective strongly recommended advantages text from the source book.",
-            type: DB.String({ minLength: 1 }),
-          }),
-          strongly_recommended_disadvantages: DB.Optional({
-            comment: "The respective strongly recommended disadvantages text from the source book.",
             type: DB.String({ minLength: 1 }),
           }),
           hairColorLabel: DB.Optional({
@@ -316,6 +264,38 @@ export const RaceVariant = DB.Entity(import.meta.url, {
         comment: "The list of common cultures.",
         type: DB.Array(CultureIdentifier(), { minItems: 1 }),
       }),
+      automatic_advantages: DB.Optional({
+        comment:
+          "A list of automatically applied advantages. This does only work for advantages with no further configuration such as level or special selection.",
+        type: DB.Array(
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [AdvantageIdentifier()]),
+          {
+            minItems: 1,
+          },
+        ),
+      }),
+      automatic_disadvantages: DB.Optional({
+        comment:
+          "A list of automatically applied disadvantages. This does only work for disadvantages with no further configuration such as level or special selection.",
+        type: DB.Array(
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [DisadvantageIdentifier()]),
+          { minItems: 1 },
+        ),
+      }),
+      strongly_recommended_advantages: DB.Optional({
+        comment: "A list of strongly recommended advantages.",
+        type: DB.Array(
+          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
+          { minItems: 1 },
+        ),
+      }),
+      strongly_recommended_disadvantages: DB.Optional({
+        comment: "A list of strongly recommended disadvantages.",
+        type: DB.Array(
+          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
+          { minItems: 1 },
+        ),
+      }),
       common_advantages: DB.Optional({
         comment: "A list of common advantages.",
         type: DB.Array(
@@ -365,6 +345,26 @@ export const RaceVariant = DB.Entity(import.meta.url, {
           name: DB.Required({
             comment:
               "The race variant’s name. If this is the only variant for a base race and thus just provides the missing information without actually being able to select, fill in the name of the base race.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          attribute_adjustments: DB.Optional({
+            comment: "The respective attribute adjustments text from the source book.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          automatic_advantages: DB.Optional({
+            comment: "The respective automatic advantages text from the source book.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          automatic_disadvantages: DB.Optional({
+            comment: "The respective automatic disadvantages text from the source book.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          strongly_recommended_advantages: DB.Optional({
+            comment: "The respective strongly recommended advantages text from the source book.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          strongly_recommended_disadvantages: DB.Optional({
+            comment: "The respective strongly recommended disadvantages text from the source book.",
             type: DB.String({ minLength: 1 }),
           }),
           common_advantages: DB.Optional({
