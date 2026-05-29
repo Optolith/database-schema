@@ -182,6 +182,11 @@ export const LessonPackage = DB.Entity(import.meta.url, {
           comment: "The associated curriculum.",
           type: CurriculumIdentifier(),
         }),
+        apValue: DB.Optional({
+          comment:
+            "The AP value of the lesson package. This is only used to compare the generated AP value with the one in the book for error checking.",
+          type: DB.Integer({ minimum: 1 }),
+        }),
         spellwork_changes: DB.Optional({
           comment:
             "The spell values difference of the lesson package. This field reflects the changes (difference) to the field of the same name in the profession package. If a spell gets to SR 0 because of this, it will be removed completely.",
@@ -233,7 +238,7 @@ const AbilityAdjustment = DB.Enum(import.meta.url, {
   values: () => ({
     CombatTechnique: DB.EnumCase({ type: DB.IncludeIdentifier(CombatTechniqueAdjustment) }),
     Skill: DB.EnumCase({ type: DB.IncludeIdentifier(SkillAdjustment) }),
-    Spellwork: DB.EnumCase({ type: DB.IncludeIdentifier(SpellworkAdjustment) }),
+    Spellwork: DB.EnumCase({ type: DB.IncludeIdentifier(SpellworkAdjustmentWithBase) }),
   }),
 })
 
@@ -249,6 +254,11 @@ const CombatTechniqueAdjustment = DB.TypeAlias(import.meta.url, {
           "The combat technique points that will be added to the current combat technique rating.",
         type: DB.Integer({ minimum: -6, maximum: 6 }),
       }),
+      basePoints: DB.Optional({
+        comment:
+          "The combat technique rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking. Note that 6 is always added to that number, so to get a base rating of 10, this field should be 4.",
+        type: DB.Integer({ minimum: 0, maximum: 6 }),
+      }),
     }),
 })
 
@@ -262,6 +272,11 @@ const SkillAdjustment = DB.TypeAlias(import.meta.url, {
       points: DB.Required({
         comment: "The skill points that will be added to the current skill rating.",
         type: DB.Integer({ minimum: -8, maximum: 8 }),
+      }),
+      basePoints: DB.Optional({
+        comment:
+          "The skill rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking.",
+        type: DB.Integer({ minimum: 0, maximum: 8 }),
       }),
     }),
 })
@@ -277,6 +292,31 @@ const SpellworkAdjustment = DB.TypeAlias(import.meta.url, {
         comment:
           "The skill points that will be added to the current skill rating. If a spell gets to a skill rating of 0 because of this, it will be removed completely.",
         type: DB.Integer({ minimum: -10, maximum: 10 }),
+      }),
+      tradition: DB.Optional({
+        comment:
+          "The target tradition. If the target spell is not from the Guild Mage tradition, specify the tradition identifier here.",
+        type: MagicalTraditionIdentifier(),
+      }),
+    }),
+})
+
+const SpellworkAdjustmentWithBase = DB.TypeAlias(import.meta.url, {
+  name: "SpellworkAdjustmentWithBase",
+  type: () =>
+    DB.Object({
+      id: DB.Required({
+        type: DB.IncludeIdentifier(SpellworkIdentifier),
+      }),
+      points: DB.Required({
+        comment:
+          "The skill points that will be added to the current skill rating. If a spell gets to a skill rating of 0 because of this, it will be removed completely.",
+        type: DB.Integer({ minimum: -10, maximum: 10 }),
+      }),
+      basePoints: DB.Optional({
+        comment:
+          "The spell rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking.",
+        type: DB.Integer({ minimum: 0, maximum: 10 }),
       }),
       tradition: DB.Optional({
         comment:

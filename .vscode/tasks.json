@@ -6,7 +6,7 @@
     {
       "label": "watch ts build",
       "type": "shell",
-      "command": "npm run watch:ts",
+      "command": "npm run watch",
       "isBackground": true,
       "group": "build",
       "presentation": {
@@ -16,7 +16,7 @@
     {
       "label": "watch generation from ts",
       "type": "shell",
-      "command": "npm run watch:gen",
+      "command": "npm run generate:watch",
       "isBackground": true,
       "group": "build",
       "presentation": {

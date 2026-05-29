@@ -91,6 +91,11 @@ export const MagicalTradition = DB.Entity(import.meta.url, {
             type: DB.String({ minLength: 1 }),
           }),
           name_in_library,
+          nameOfSpellcasters: DB.Required({
+            comment:
+              "The name of spellcasters of this tradition. This is used to derive special rules from the data set already for this tradition.",
+            type: DB.String({ minLength: 1 }),
+          }),
           special_rules: DB.Required({
             comment:
               "The special rules of the tradition. They should be sorted like they are in the book.",
@@ -119,11 +124,11 @@ export const MagicalTradition = DB.Entity(import.meta.url, {
   ],
 })
 
-export const PrimaryAttribute = DB.TypeAlias(import.meta.url, {
+const PrimaryAttribute = DB.TypeAlias(import.meta.url, {
   name: "PrimaryAttribute",
   type: () =>
     DB.Object({
-      id: DB.Optional({
+      id: DB.Required({
         comment: "The attribute’s identifier.",
         type: AttributeIdentifier(),
       }),
