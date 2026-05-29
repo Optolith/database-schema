@@ -1434,9 +1434,16 @@ export const Locale = DB.Entity(import.meta.url, {
           "corresponding liturgical style special ability": null,
           "corresponding magic style special ability": null,
           "corresponding skill style special ability": null,
+          "Favored Skills": null,
+          "The primary attribute of this Tradition is {$attr}.": null,
+          "This primary attribute of this Tradition is {$attr}; however, {$casters} use only half of this stat (rounded up) to calculate their base AE pool or purchase AE.": null,
+          "Tradition ({$name}) has no associated primary attribute, meaning {$casters} receive no bonus to the AE pool and cannot purchase additional AE.": null,
+          ".input {$count :number} {{{$baseList}, and {$count} of your choice from the following list: {$selection}}}": null,
 
           // combat special ability -- applicable combat techniques
           "All": null,
+          "All Combat Techniques": null, // for favored combat techniques
+          "All Combat Techniques used in hunting": null,
           "All Close Combat Techniques": null,
           "All Ranged Combat Techniques": null,
           "Depends on combat style; both combat styles can be used only for their corresponding combat techniques": null,
