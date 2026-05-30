@@ -1,5 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "./Locale.js"
+import { RequirableSelectOptionIdentifier } from "./_IdentifierGroup.ts"
 
 export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.url, {
   name: "CommonnessRatedAdvantageDisadvantage",
@@ -16,12 +17,17 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
         comment: "The level of a commonness-rated advantage or disadvantage.",
         type: DB.IncludeIdentifier(CommonnessRatedAdvantageDisadvantageLevel),
       }),
+      options: DB.Optional({
+        comment: "The options the commonness rating applies to.",
+        type: DB.Array(DB.IncludeIdentifier(RequirableSelectOptionIdentifier), { minItems: 1 }),
+      }),
       translations: NestedTranslationMap(
         DB.Optional,
         "CommonnessRatedAdvantageDisadvantage",
         DB.Object({
           options: DB.Required({
-            comment: "The options the commonness rating applies to.",
+            comment:
+              "The options the commonness rating applies to. This can be specified if plain options cannot exactly describe the options as written in the publication.",
             type: DB.String({ minLength: 1 }),
           }),
         }),
