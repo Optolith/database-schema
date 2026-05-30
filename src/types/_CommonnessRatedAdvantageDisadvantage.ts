@@ -9,8 +9,12 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
   type: Identifier =>
     DB.Object({
       id: DB.Required({
-        comment: "The advantage's or disadvantage's identifier.",
+        comment: "The advantage’s or disadvantage’s identifier.",
         type: DB.TypeArgument(Identifier),
+      }),
+      level: DB.Optional({
+        comment: "The level of a commonness-rated advantage or disadvantage.",
+        type: DB.IncludeIdentifier(CommonnessRatedAdvantageDisadvantageLevel),
       }),
       translations: NestedTranslationMap(
         DB.Optional,
@@ -23,4 +27,18 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
         }),
       ),
     }),
+})
+
+const CommonnessRatedAdvantageDisadvantageLevel = DB.Enum(import.meta.url, {
+  name: "CommonnessRatedAdvantageDisadvantageLevel",
+  comment: "The level of a commonness-rated advantage or disadvantage.",
+  values: () => ({
+    Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
+    Range: DB.EnumCase({
+      type: DB.Object({
+        min: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
+        max: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
+      }),
+    }),
+  }),
 })
