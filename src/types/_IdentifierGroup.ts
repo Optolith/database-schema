@@ -407,6 +407,8 @@ export const RequirableSelectOptionIdentifier = DB.Enum(import.meta.url, {
     RangedCombatTechnique: DB.EnumCase({ type: RangedCombatTechniqueIdentifier() }),
     Property: DB.EnumCase({ type: PropertyIdentifier() }),
     Aspect: DB.EnumCase({ type: AspectIdentifier() }),
+    Disease: DB.EnumCase({ type: DiseaseIdentifier() }),
+    Poison: DB.EnumCase({ type: PoisonIdentifier() }),
     Language: DB.EnumCase({ type: LanguageIdentifier() }),
     AnimalShape: DB.EnumCase({ type: AnimalShapeIdentifier() }),
     LiturgicalChant: DB.EnumCase({ type: LiturgicalChantIdentifier() }),
