@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.43.3](https://github.com/Optolith/database-schema/compare/v0.43.2...v0.43.3) (2026-05-30)
+
+
+### Features
+
+* commonness-rated options ([ce8f55b](https://github.com/Optolith/database-schema/commit/ce8f55b9d6d8bec97ceabfb43bd04e85b846c380))
+
 ## [0.43.2](https://github.com/Optolith/database-schema/compare/v0.43.1...v0.43.2) (2026-05-30)
 
 
