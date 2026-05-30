@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.44.0](https://github.com/Optolith/database-schema/compare/v0.43.3...v0.44.0) (2026-05-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* diease and poison options can be required
+
+### Features
+
+* diease and poison options can be required ([7fc5fd1](https://github.com/Optolith/database-schema/commit/7fc5fd144adeb561a737bb01bf2d989ea2b3acd6))
+
 ## [0.43.3](https://github.com/Optolith/database-schema/compare/v0.43.2...v0.43.3) (2026-05-30)
 
 
