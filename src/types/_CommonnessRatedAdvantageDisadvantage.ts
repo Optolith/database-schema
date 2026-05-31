@@ -24,13 +24,21 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
       translations: NestedTranslationMap(
         DB.Optional,
         "CommonnessRatedAdvantageDisadvantage",
-        DB.Object({
-          options: DB.Required({
-            comment:
-              "The options the commonness rating applies to. This can be specified if plain options cannot exactly describe the options as written in the publication.",
-            type: DB.String({ minLength: 1 }),
-          }),
-        }),
+        DB.Object(
+          {
+            options: DB.Optional({
+              comment:
+                "The options the commonness rating applies to. This can be specified if plain options cannot exactly describe the options as written in the publication.",
+              type: DB.String({ minLength: 1 }),
+            }),
+            full: DB.Optional({
+              comment:
+                "A text that replaces the entire entry. No other text is generated for display, however, providing levels or a selection of options will still be relevant for highlighting entries in the application. This should only be used if the text cannot be generated from other fields at all.",
+              type: DB.String({ minLength: 1 }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
       ),
     }),
 })
