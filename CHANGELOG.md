@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.44.1](https://github.com/Optolith/database-schema/compare/v0.44.0...v0.44.1) (2026-05-31)
+
+
+### Features
+
+* full commonness-rated text replacement ([c147d16](https://github.com/Optolith/database-schema/commit/c147d1613090fc76689bf98891c06e81ee8bf962))
+
 ## [0.44.0](https://github.com/Optolith/database-schema/compare/v0.43.3...v0.44.0) (2026-05-30)
 
 
