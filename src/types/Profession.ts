@@ -748,7 +748,8 @@ const SkillsOptions = DB.TypeAlias(import.meta.url, {
         type: DB.Integer({ minimum: 1 }),
       }),
       maximum: DB.Optional({
-        comment: "If specified, you can only improve a single skill up to that many times with the provided AP value.",
+        comment:
+          "If specified, you can only improve a single skill up to that many times with the provided AP value.",
         type: DB.Integer({ minimum: 1 }),
       }),
     }),
