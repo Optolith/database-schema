@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.45.0](https://github.com/Optolith/database-schema/compare/v0.44.1...v0.45.0) (2026-05-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* add maximum sr translation
+
+### Features
+
+* add maximum sr translation ([64e7ed1](https://github.com/Optolith/database-schema/commit/64e7ed10358a26028c7c1db79a8b9a1d4bce91c5))
+
 ## [0.44.1](https://github.com/Optolith/database-schema/compare/v0.44.0...v0.44.1) (2026-05-31)
 
 
