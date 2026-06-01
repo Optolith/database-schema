@@ -4,6 +4,7 @@ import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { Complexity, Cost, StructurePoints, Weight } from "./_Item.js"
+import { LinguisticPrerequisites } from "../../_Prerequisite.js"
 
 export const Book = DB.Entity(import.meta.url, {
   name: "Book",
@@ -34,6 +35,11 @@ export const Book = DB.Entity(import.meta.url, {
       contentQuality: DB.Optional({
         comment: "The quality of the book’s content.",
         type: DB.IncludeIdentifier(BookContentQuality),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.",
+          type: DB.IncludeIdentifier(LinguisticPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

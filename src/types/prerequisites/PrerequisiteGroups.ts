@@ -20,6 +20,8 @@ import { SexualCharacteristicPrerequisite } from "./single/SexualCharacteristicP
 import { SocialStatusPrerequisite } from "./single/SocialStatusPrerequisite.js"
 import { StatePrerequisite } from "./single/StatePrerequisite.js"
 import { TextPrerequisite } from "./single/TextPrerequisite.js"
+import { ScriptPrerequisite } from "./single/ScriptPrerequisite.js"
+import { LanguagePrerequisite } from "./single/LanguagePrerequisite.js"
 import {
   BlessedTraditionPrerequisite,
   MagicalTraditionPrerequisite,
@@ -197,5 +199,13 @@ export const PreconditionGroup = DB.Enum(import.meta.url, {
     SexualCharacteristic: DB.EnumCase({
       type: DB.IncludeIdentifier(SexualCharacteristicPrerequisite),
     }),
+  }),
+})
+
+export const LinguisticPrerequisiteGroup = DB.Enum(import.meta.url, {
+  name: "LinguisticPrerequisiteGroup",
+  values: () => ({
+    Language: DB.EnumCase({ type: DB.IncludeIdentifier(LanguagePrerequisite) }),
+    Script: DB.EnumCase({ type: DB.IncludeIdentifier(ScriptPrerequisite) }),
   }),
 })
