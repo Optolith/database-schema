@@ -42,10 +42,12 @@ import { MagicalArtifact } from "./equipment/item/MagicalArtifact.js"
 import { MusicalInstrument } from "./equipment/item/MusicalInstrument.js"
 import { Newspaper } from "./equipment/item/Newspaper.js"
 import { OrienteeringAid } from "./equipment/item/OrienteeringAid.js"
+import { Plant } from "./equipment/item/Plant.js"
 import { Poison } from "./equipment/item/Poison.js"
 import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
 import { ArmorType } from "./equipment/item/sub/ArmorType.js"
+import { PlantType } from "./equipment/item/sub/PlantType.js"
 import { Reach } from "./equipment/item/sub/Reach.js"
 import { ThievesTool } from "./equipment/item/ThievesTool.js"
 import { ToolOfTheTrade } from "./equipment/item/ToolOfTheTrade.js"
@@ -278,6 +280,8 @@ export const PactTypeIdentifier: () => R = () => R(PactType)
 export const PatronCategoryIdentifier: () => R = () => R(PatronCategory)
 export const PatronIdentifier: () => R = () => R(Patron)
 export const PersonalityTraitIdentifier: () => R = () => R(PersonalityTrait)
+export const PlantIdentifier: () => R = () => R(Plant)
+export const PlantTypeIdentifier: () => R = () => R(PlantType)
 export const PlayerTypeIdentifier: () => R = () => R(PlayerType)
 export const PoisonIdentifier: () => R = () => R(Poison)
 export const ProfessionIdentifier: () => R = () => R(Profession)
