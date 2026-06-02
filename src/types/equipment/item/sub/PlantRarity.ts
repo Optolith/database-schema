@@ -1,21 +1,21 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "../../../Locale.js"
 
-export const PlantType = DB.Entity(import.meta.url, {
-  name: "PlantType",
-  namePlural: "PlantTypes",
+export const PlantRarity = DB.Entity(import.meta.url, {
+  name: "PlantRarity",
+  namePlural: "PlantRarity",
   type: () =>
     DB.Object({
       translations: NestedTranslationMap(
         DB.Required,
-        "PlantType",
+        "PlantRarity",
         DB.Object({
           name: DB.Required({
-            comment: "The plant type's name.",
+            comment: "The plant rarity's name.",
             type: DB.String({ minLength: 1 }),
           }),
           description: DB.Required({
-            comment: "The plant type's description.",
+            comment: "The plant rarity's description.",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
         }),

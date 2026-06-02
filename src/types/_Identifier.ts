@@ -15,7 +15,7 @@ import { CloseCombatTechnique, RangedCombatTechnique } from "./CombatTechnique.j
 import { Condition } from "./Condition.js"
 import { Continent } from "./Continent.js"
 import { Culture } from "./Culture.js"
-import { DerivedCharacteristic } from "./DerivedCharacteristic.ts"
+import { DerivedCharacteristic } from "./DerivedCharacteristic.js"
 import { Disadvantage } from "./Disadvantage.js"
 import { Disease } from "./Disease.js"
 import { Element } from "./Element.js"
@@ -32,6 +32,7 @@ import { Container } from "./equipment/item/Container.js"
 import { Elixir } from "./equipment/item/Elixir.js"
 import { EquipmentOfBlessedOnes } from "./equipment/item/EquipmentOfBlessedOnes.js"
 import { GemOrPreciousStone } from "./equipment/item/GemOrPreciousStone.js"
+import { HerbalAid } from "./equipment/item/HerbalAid.js"
 import { IlluminationLightSource } from "./equipment/item/IlluminationLightSource.js"
 import { IlluminationRefillOrSupply } from "./equipment/item/IlluminationRefillOrSupply.js"
 import { Jewelry } from "./equipment/item/Jewelry.js"
@@ -47,6 +48,8 @@ import { Poison } from "./equipment/item/Poison.js"
 import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
 import { ArmorType } from "./equipment/item/sub/ArmorType.js"
+import { Biome } from "./equipment/item/sub/Biome.js"
+import { PlantRarity } from "./equipment/item/sub/PlantRarity.js"
 import { PlantType } from "./equipment/item/sub/PlantType.js"
 import { Reach } from "./equipment/item/sub/Reach.js"
 import { ThievesTool } from "./equipment/item/ThievesTool.js"
@@ -55,11 +58,11 @@ import { TravelGearOrTool } from "./equipment/item/TravelGearOrTool.js"
 import { Vehicle } from "./equipment/item/Vehicle.js"
 import { Weapon } from "./equipment/item/Weapon.js"
 import { WeaponAccessory } from "./equipment/item/WeaponAccessory.js"
-import { WorkingSupernaturalCreature } from "./equipment/item/WorkingSupernaturalCreature.ts"
+import { WorkingSupernaturalCreature } from "./equipment/item/WorkingSupernaturalCreature.js"
 import { ExperienceLevel } from "./ExperienceLevel.js"
 import { EyeColor } from "./EyeColor.js"
 import { HairColor } from "./HairColor.js"
-import { Influence } from "./Influence.ts"
+import { Influence } from "./Influence.js"
 import { Curriculum, Guideline, LessonPackage } from "./Lessons.js"
 import { LiturgicalChant } from "./LiturgicalChant.js"
 import { AnimistPower } from "./magicalActions/AnimistPower.js"
@@ -189,6 +192,7 @@ export const AttributeIdentifier: () => R = () => R(Attribute)
 export const BandageOrRemedyIdentifier: () => R = () => R(BandageOrRemedy)
 export const BannzeichenIdentifier: () => R = () => R(Bannzeichen)
 export const BeutelzauberIdentifier: () => R = () => R(Beutelzauber)
+export const BiomeIdentifier: () => R = () => R(Biome)
 export const BlessedTraditionIdentifier: () => R = () => R(BlessedTradition)
 export const BlessingIdentifier: () => R = () => R(Blessing)
 export const BookIdentifier: () => R = () => R(Book)
@@ -240,6 +244,7 @@ export const GoblinRitualIdentifier: () => R = () => R(GoblinRitual)
 export const GuidelineIdentifier: () => R = () => R(Guideline)
 export const HairColorIdentifier: () => R = () => R(HairColor)
 export const HaubenzauberIdentifier: () => R = () => R(Haubenzauber)
+export const HerbalAidIdentifier: () => R = () => R(HerbalAid)
 export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLightSource)
 export const IlluminationRefillOrSupplyIdentifier: () => R = () => R(IlluminationRefillOrSupply)
 export const InfluenceIdentifier: () => R = () => R(Influence)
@@ -281,6 +286,7 @@ export const PatronCategoryIdentifier: () => R = () => R(PatronCategory)
 export const PatronIdentifier: () => R = () => R(Patron)
 export const PersonalityTraitIdentifier: () => R = () => R(PersonalityTrait)
 export const PlantIdentifier: () => R = () => R(Plant)
+export const PlantRarityIdentifier: () => R = () => R(PlantRarity)
 export const PlantTypeIdentifier: () => R = () => R(PlantType)
 export const PlayerTypeIdentifier: () => R = () => R(PlayerType)
 export const PoisonIdentifier: () => R = () => R(Poison)
