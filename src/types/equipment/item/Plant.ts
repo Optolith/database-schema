@@ -96,25 +96,27 @@ export const Plant = DB.Entity(import.meta.url, {
 const PlantOccurences = DB.TypeAlias(import.meta.url, {
   name: "PlantOccurences",
   type: () =>
-    DB.Object({
-      items: DB.Optional({
-        comment: "The biomes this plant occurs in and its rarity in those biomes.",
-        type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
-      }),
-      translation: NestedTranslationMap(
-        DB.Optional,
-        "PlantOccurrences",
-        DB.Object({
-          note: DB.Required({
-            comment: "A note to all occurences of this plant",
-            type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
+    DB.Object(
+      {
+        items: DB.Optional({
+          comment: "The biomes this plant occurs in and its rarity in those biomes.",
+          type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
         }),
-      ),
-    },
-    {
-      minProperties: 1,
-    }),
+        translation: NestedTranslationMap(
+          DB.Optional,
+          "PlantOccurrences",
+          DB.Object({
+            note: DB.Required({
+              comment: "A note to all occurences of this plant",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          }),
+        ),
+      },
+      {
+        minProperties: 1,
+      },
+    ),
 })
 
 const PlantOccurrence = DB.TypeAlias(import.meta.url, {
