@@ -36,6 +36,18 @@ export const Plant = DB.Entity(import.meta.url, {
         comment: "The applications of this plant per quality level.",
         type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }),
       }),
+      touch: DB.Optional({
+        comment: "The plant's touch effect.",
+        type: DB.IncludeIdentifier(PlantEffect),
+      }),
+      breathe: DB.Optional({
+        comment: "The plant's breathe effect.",
+        type: DB.IncludeIdentifier(PlantEffect),
+      }),
+      consume: DB.Optional({
+        comment: "The plant's consume effect.",
+        type: DB.IncludeIdentifier(PlantEffect),
+      }),
       price: DB.Required({
         comment: "The price of the plant.",
         type: DB.IncludeIdentifier(PlantPrice),
@@ -56,18 +68,6 @@ export const Plant = DB.Entity(import.meta.url, {
           alternative_names: DB.Optional({
             comment: "A list of alternative names.",
             type: DB.Array(DB.IncludeIdentifier(AlternativeName), { minItems: 1 }),
-          }),
-          touch: DB.Optional({
-            comment: "The plant's touch effect.",
-            type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
-          breathe: DB.Optional({
-            comment: "The plant's breathe effect.",
-            type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
-          consume: DB.Optional({
-            comment: "The plant's consume effect.",
-            type: DB.String({ minLength: 1, markdown: "block" }),
           }),
           remedies_and_traditions: DB.Required({
             comment: "How this plant is used as a household remedy and in folk traditions.",
@@ -134,6 +134,27 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
             comment:
               "A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.",
             type: DB.String({ minLength: 1, markdown: "inline" }),
+          }),
+        }),
+      ),
+    }),
+})
+
+const PlantEffect = DB.TypeAlias(import.meta.url, {
+  name: "PlantEffect",
+  type: () =>
+    DB.Object({
+      types: DB.Optional({
+        comment: "The effect type of this plant effect.",
+        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "PlantEffectTranslation",
+        DB.Object({
+          description: DB.Required({
+            comment: "The effect of the plant.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
           }),
         }),
       ),
