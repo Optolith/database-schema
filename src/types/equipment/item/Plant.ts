@@ -4,13 +4,12 @@ import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
 import {
   BiomeIdentifier,
-  PlantRarityIdentifier,
-  PlantTypeIdentifier,
   HerbalAidIdentifier,
   ElixirIdentifier,
   PoisonIdentifier,
 } from "../../_Identifier.js"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.js"
+import { EffectType, PlantRarity } from "./_Herbary.js"
 
 export const Plant = DB.Entity(import.meta.url, {
   name: "Plant",
@@ -18,8 +17,8 @@ export const Plant = DB.Entity(import.meta.url, {
   type: () =>
     DB.Object({
       types: DB.Required({
-        comment: "The plant types this plant belongs to.",
-        type: DB.Array(PlantTypeIdentifier(), { minItems: 1, uniqueItems: true }),
+          comment: "The plant types of this plant.",
+          type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
       }),
       occurences: DB.Optional({
         comment: "The biomes this plant occurs in and its rarity in those biomes.",
@@ -104,7 +103,7 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
       }),
       rarity: DB.Required({
         comment: "The rarity of this plant in the biome.",
-        type: PlantRarityIdentifier(),
+        type: DB.IncludeIdentifier(PlantRarity),
       }),
     }),
 })

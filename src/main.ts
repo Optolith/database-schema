@@ -136,8 +136,6 @@ export const schema = new Schema<TSONDBTypes>(
     Types.PersonalityTrait,
     Types.PlayerType,
     Types.Plant,
-    Types.PlantRarity,
-    Types.PlantType,
     Types.Poison,
     Types.Profession,
     Types.Property,
