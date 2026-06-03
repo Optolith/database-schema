@@ -1,3 +1,21 @@
+/**
+ * Originally, this type was created to represent the text of a spell, which can
+ * be displayed in full on the spell card, but also in a compressed version on
+ * the character sheet. However, it can be used for any text that has a similar
+ * requirement.
+ *
+ * The `ResponsiveTextReplace` type is a special case where the full and
+ * compressed versions are not standalone texts, but rather templates that
+ * include a placeholder (`$1`) for a generated string. The generated string is
+ * expected to adapt to different size contexts as well.
+ *
+ * The `ResponsiveTextOptional` type allows for the possibility that a
+ * compressed version may not be provided. In such cases, the full text should
+ * be used in all contexts, and the absence of a compressed version indicates
+ * that no special formatting is needed for smaller areas.
+ * @module
+ */
+
 import * as DB from "tsondb/schema/dsl"
 
 export const ResponsiveText = DB.TypeAlias(import.meta.url, {
