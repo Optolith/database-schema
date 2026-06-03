@@ -20,15 +20,15 @@ export const EffectType = DB.Enum(import.meta.url, {
 })
 
 export const PlantRarity = DB.Enum(import.meta.url, {
-    name: "PlantRarity",
-    comment: "The rarity of a plant in a biome.",
-    values: () => ({
-        Common: DB.EnumCase({ type: null }),
-        Occasional: DB.EnumCase({ type: null }),
-        RatherRare: DB.EnumCase({ type: null }),
-        Rare: DB.EnumCase({ type: null }),
-        VeryRare: DB.EnumCase({ type: null }),
-    }),
+  name: "PlantRarity",
+  comment: "The rarity of a plant in a biome.",
+  values: () => ({
+    Common: DB.EnumCase({ type: null }),
+    Occasional: DB.EnumCase({ type: null }),
+    RatherRare: DB.EnumCase({ type: null }),
+    Rare: DB.EnumCase({ type: null }),
+    VeryRare: DB.EnumCase({ type: null }),
+  }),
 })
 
 export const LaboratoryLevel = DB.Enum(import.meta.url, {
