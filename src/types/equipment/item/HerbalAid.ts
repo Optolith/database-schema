@@ -36,11 +36,11 @@ export const HerbalAid = DB.Entity(import.meta.url, {
           }),
           ingredients: DB.Required({
             comment: "The ingredients used to craft this herbal aid.",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
+            type: DB.Array(DB.String({ minLength: 1, markdown: "inline" }), { minItems: 1 }),
           }),
           typical_tools: DB.Optional({
             comment: "The typical tools used to craft this.",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
+            type: DB.Array(DB.String({ minLength: 1, markdown: "inline" }), { minItems: 1 }),
           }),
         }),
       ),

@@ -20,7 +20,7 @@ export const Plant = DB.Entity(import.meta.url, {
         comment: "The plant types of this plant.",
         type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
       }),
-      occurences: DB.Optional({
+      occurences: DB.Required({
         comment: "The biomes this plant occurs in and its rarity in those biomes.",
         type: DB.IncludeIdentifier(PlantOccurences),
       }),
@@ -40,12 +40,12 @@ export const Plant = DB.Entity(import.meta.url, {
         comment: "The plant's touch effect.",
         type: DB.IncludeIdentifier(PlantEffect),
       }),
-      breathe: DB.Optional({
-        comment: "The plant's breathe effect.",
+      inhalation: DB.Optional({
+        comment: "The plant's inhalation effect.",
         type: DB.IncludeIdentifier(PlantEffect),
       }),
-      consume: DB.Optional({
-        comment: "The plant's consume effect.",
+      ingestion: DB.Optional({
+        comment: "The plant's ingestion effect.",
         type: DB.IncludeIdentifier(PlantEffect),
       }),
       price: DB.Required({
@@ -131,8 +131,7 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
         "PlantOccurrence",
         DB.Object({
           note: DB.Required({
-            comment:
-              "A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.",
+            comment: "A note added to this occurrence",
             type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
         }),
@@ -206,7 +205,7 @@ const PlantRecipe = DB.Enum(import.meta.url, {
     Elixir: DB.EnumCase({
       type: DB.IncludeIdentifier(ElixirRecipe),
     }),
-    PoisonIdentifier: DB.EnumCase({
+    Poison: DB.EnumCase({
       type: DB.IncludeIdentifier(PoisonRecipe),
     }),
     Indefinite: DB.EnumCase({
@@ -239,11 +238,7 @@ const HerbalAidRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The herbal aid this recipe results in.",
         type: HerbalAidIdentifier(),
       }),
-      translation: NestedTranslationMap(
-        DB.Optional,
-        "HerbalAidRecipeTranslation",
-        PlantProductTranslation,
-      ),
+      translation: NestedTranslationMap(DB.Optional, "HerbalAidRecipe", PlantProductTranslation),
     }),
 })
 
@@ -255,11 +250,7 @@ const ElixirRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The elixir this recipe results in.",
         type: ElixirIdentifier(),
       }),
-      translation: NestedTranslationMap(
-        DB.Optional,
-        "ElixirRecipeTranslation",
-        PlantProductTranslation,
-      ),
+      translation: NestedTranslationMap(DB.Optional, "ElixirRecipe", PlantProductTranslation),
     }),
 })
 
@@ -271,11 +262,7 @@ const PoisonRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The poison this recipe results in.",
         type: PoisonIdentifier(),
       }),
-      translation: NestedTranslationMap(
-        DB.Optional,
-        "PoisonRecipeTranslation",
-        PlantProductTranslation,
-      ),
+      translation: NestedTranslationMap(DB.Optional, "PoisonRecipe", PlantProductTranslation),
     }),
 })
 
