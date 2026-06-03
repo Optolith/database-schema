@@ -111,6 +111,9 @@ const PlantOccurences = DB.TypeAlias(import.meta.url, {
           }),
         }),
       ),
+    },
+    {
+      minProperties: 1,
     }),
 })
 
@@ -199,18 +202,10 @@ const IndefinitePlantPrice = DB.TypeAlias(import.meta.url, {
 const PlantRecipe = DB.Enum(import.meta.url, {
   name: "PlantRecipe",
   values: () => ({
-    HerbalAid: DB.EnumCase({
-      type: DB.IncludeIdentifier(HerbalAidRecipe),
-    }),
-    Elixir: DB.EnumCase({
-      type: DB.IncludeIdentifier(ElixirRecipe),
-    }),
-    Poison: DB.EnumCase({
-      type: DB.IncludeIdentifier(PoisonRecipe),
-    }),
-    Indefinite: DB.EnumCase({
-      type: DB.IncludeIdentifier(IndefiniteRecipe),
-    }),
+    HerbalAid: DB.EnumCase({ type: DB.IncludeIdentifier(HerbalAidRecipe) }),
+    Elixir: DB.EnumCase({ type: DB.IncludeIdentifier(ElixirRecipe) }),
+    Poison: DB.EnumCase({ type: DB.IncludeIdentifier(PoisonRecipe) }),
+    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteRecipe) }),
   }),
 })
 
