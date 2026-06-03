@@ -17,12 +17,12 @@ export const Plant = DB.Entity(import.meta.url, {
   type: () =>
     DB.Object({
       types: DB.Required({
-          comment: "The plant types of this plant.",
-          type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        comment: "The plant types of this plant.",
+        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
       }),
       occurences: DB.Optional({
         comment: "The biomes this plant occurs in and its rarity in those biomes.",
-        type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
+        type: DB.IncludeIdentifier(PlantOccurences),
       }),
       search_difficulty: DB.Required({
         comment: "The search difficulty for this plant.",
@@ -93,6 +93,27 @@ export const Plant = DB.Entity(import.meta.url, {
   ],
 })
 
+const PlantOccurences = DB.TypeAlias(import.meta.url, {
+  name: "PlantOccurences",
+  type: () =>
+    DB.Object({
+      items: DB.Optional({
+        comment: "The biomes this plant occurs in and its rarity in those biomes.",
+        type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
+      }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "PlantOccurrences",
+        DB.Object({
+          note: DB.Required({
+            comment: "A note to all occurences of this plant",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
+    }),
+})
+
 const PlantOccurrence = DB.TypeAlias(import.meta.url, {
   name: "PlantOccurrence",
   type: () =>
@@ -105,6 +126,17 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
         comment: "The rarity of this plant in the biome.",
         type: DB.IncludeIdentifier(PlantRarity),
       }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "PlantOccurrence",
+        DB.Object({
+          note: DB.Required({
+            comment:
+              "A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.",
+            type: DB.String({ minLength: 1, markdown: "inline" }),
+          }),
+        }),
+      ),
     }),
 })
 
