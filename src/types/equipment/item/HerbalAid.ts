@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { src } from "../../source/_PublicationRef.js"
 import { NestedTranslationMap } from "../../Locale.js"
-import { PlantTypeIdentifier } from "../../_Identifier.js"
+import { PlantTypeIdentifier, WeaponIdentifier, ArmorIdentifier } from "../../_Identifier.js"
 
 export const HerbalAid = DB.Entity(import.meta.url, {
   name: "HerbalAid",
@@ -9,12 +9,16 @@ export const HerbalAid = DB.Entity(import.meta.url, {
   type: () =>
     DB.Object({
       types: DB.Required({
-        comment: "The plant types this plant belongs to.",
+        comment: "The plant types this aid belongs to.",
         type: DB.Array(PlantTypeIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
       crafting_difficulty: DB.Required({
         comment: "The difficulty for this aid to craft.",
         type: DB.Integer(),
+      }),
+      combatUse: DB.Optional({
+        comment: "The armor or weapon this herbal aid represents.",
+        type: DB.IncludeIdentifier(HerbalAidCombatUse),
       }),
       src,
       translations: NestedTranslationMap(
@@ -47,4 +51,12 @@ export const HerbalAid = DB.Entity(import.meta.url, {
       keyPathInEntityMap: "name",
     },
   ],
+})
+
+const HerbalAidCombatUse = DB.Enum(import.meta.url, {
+  name: "HerbalAidCombatUse",
+  values: () => ({
+    Weapon: DB.EnumCase({ type: WeaponIdentifier() }),
+    Armor: DB.EnumCase({ type: ArmorIdentifier() }),
+  }),
 })

@@ -2,7 +2,15 @@ import * as DB from "tsondb/schema/dsl"
 import { src } from "../../source/_PublicationRef.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
-import { BiomeIdentifier, PlantRarityIdentifier, PlantTypeIdentifier } from "../../_Identifier.js"
+import {
+  BiomeIdentifier,
+  PlantRarityIdentifier,
+  PlantTypeIdentifier,
+  HerbalAidIdentifier,
+  ElixirIdentifier,
+  PoisonIdentifier,
+} from "../../_Identifier.js"
+import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.js"
 
 export const Plant = DB.Entity(import.meta.url, {
   name: "Plant",
@@ -32,6 +40,10 @@ export const Plant = DB.Entity(import.meta.url, {
       price: DB.Required({
         comment: "The price of the plant.",
         type: DB.IncludeIdentifier(PlantPrice),
+      }),
+      recipes: DB.Optional({
+        comment: "The herbal aids and elixirs that can be crafted with this plant.",
+        type: DB.Array(DB.IncludeIdentifier(PlantRecipe), { minItems: 1 }),
       }),
       src,
       translations: NestedTranslationMap(
@@ -127,6 +139,105 @@ const IndefinitePlantPrice = DB.TypeAlias(import.meta.url, {
           description: DB.Required({
             comment: "A description of the price.",
             type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
+    }),
+})
+
+const PlantRecipe = DB.Enum(import.meta.url, {
+  name: "PlantRecipe",
+  values: () => ({
+    HerbalAid: DB.EnumCase({
+      type: DB.IncludeIdentifier(HerbalAidRecipe),
+    }),
+    Elixir: DB.EnumCase({
+      type: DB.IncludeIdentifier(ElixirRecipe),
+    }),
+    PoisonIdentifier: DB.EnumCase({
+      type: DB.IncludeIdentifier(PoisonRecipe),
+    }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefiniteRecipe),
+    }),
+  }),
+})
+
+const PlantProductTranslation = DB.Object(
+  {
+    note: DB.Optional({
+      comment:
+        "A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.",
+      type: DB.IncludeIdentifier(ResponsiveTextOptional),
+    }),
+    replacement: DB.Optional({
+      comment:
+        "A replacement string. If `note` is provided, it is appended to the replaced string.",
+      type: DB.IncludeIdentifier(ResponsiveTextReplace),
+    }),
+  },
+  { minProperties: 1 },
+)
+
+const HerbalAidRecipe = DB.TypeAlias(import.meta.url, {
+  name: "HerbalAidRecipe",
+  type: () =>
+    DB.Object({
+      herbal_aid: DB.Required({
+        comment: "The herbal aid this recipe results in.",
+        type: HerbalAidIdentifier(),
+      }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "HerbalAidRecipeTranslation",
+        PlantProductTranslation,
+      ),
+    }),
+})
+
+const ElixirRecipe = DB.TypeAlias(import.meta.url, {
+  name: "ElixirRecipe",
+  type: () =>
+    DB.Object({
+      elixir: DB.Required({
+        comment: "The elixir this recipe results in.",
+        type: ElixirIdentifier(),
+      }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "ElixirRecipeTranslation",
+        PlantProductTranslation,
+      ),
+    }),
+})
+
+const PoisonRecipe = DB.TypeAlias(import.meta.url, {
+  name: "PoisonRecipe",
+  type: () =>
+    DB.Object({
+      poison: DB.Required({
+        comment: "The poison this recipe results in.",
+        type: PoisonIdentifier(),
+      }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "PoisonRecipeTranslation",
+        PlantProductTranslation,
+      ),
+    }),
+})
+
+const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
+  name: "IndefiniteRecipe",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "IndefiniteRecipe",
+        DB.Object({
+          description: DB.Required({
+            comment: "A description of the recipe.",
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
         }),
       ),
