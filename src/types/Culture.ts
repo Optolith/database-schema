@@ -307,6 +307,7 @@ const BlessedCommonProfessionConstraint = DB.Enum(import.meta.url, {
   name: "BlessedCommonProfessionConstraint",
   values: () => ({
     Tradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionConstraint) }),
+    Profession: DB.EnumCase({ type: DB.IncludeIdentifier(ProfessionConstraint) }),
   }),
 })
 
