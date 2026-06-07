@@ -87,6 +87,7 @@ const isPrerequisiteFor = (
     case "Text":
     case "NoOtherAncestorBloodAdvantage":
     case "SexualCharacteristic":
+    case "PersonalityTrait":
       return false
     default:
       return assertExhaustive(prerequisite)
