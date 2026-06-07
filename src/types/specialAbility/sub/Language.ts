@@ -16,7 +16,7 @@ export const Language = DB.Entity(import.meta.url, {
         comment: "The continents this language is present on.",
         type: DB.Array(DB.IncludeIdentifier(AssociatedContinent), { minItems: 1 }),
       }),
-      specializations: DB.Optional({
+      specializations: DB.Required({
         type: DB.ChildEntities(LanguageSpecialization),
       }),
       customSpecializations: DB.Optional({
