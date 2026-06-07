@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.46.0](https://github.com/Optolith/database-schema/compare/v0.45.0...v0.46.0) (2026-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* allow blessed profession
+
+### Features
+
+* allow blessed profession ([47f9e89](https://github.com/Optolith/database-schema/commit/47f9e890bbc46b37e36ef55b0cfcbecef2a3ef44))
+* plants entity ([ae45659](https://github.com/Optolith/database-schema/commit/ae45659ff94656f60dfa803257927e6b11289c92)), closes [#142](https://github.com/Optolith/database-schema/issues/142) [#3](https://github.com/Optolith/database-schema/issues/3)
+* use library name as display name if available ([a9ea59a](https://github.com/Optolith/database-schema/commit/a9ea59a8023ea770af45ac6a913c3c70c4f0bc04))
+
+
+### Bug Fixes
+
+* required language specializations ([96d70f7](https://github.com/Optolith/database-schema/commit/96d70f7237cfae07e24ead363b00d7bee795e47d))
+
 ## [0.45.0](https://github.com/Optolith/database-schema/compare/v0.44.1...v0.45.0) (2026-05-31)
 
 
