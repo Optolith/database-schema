@@ -1,6 +1,6 @@
 {
   "name": "@optolith/database-schema",
-  "version": "0.46.0",
+  "version": "0.47.0",
   "description": "Definitions and utilities for the flat-file database of Optolith, a character creation tool for the Pen and Paper RPG “The Dark Eye 5”, and its external integrations into other software.",
   "keywords": [
     "tde",

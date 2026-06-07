@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.47.0](https://github.com/Optolith/database-schema/compare/v0.46.0...v0.47.0) (2026-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* interval for sustained cost map
+* personality trait as activatable prerequisite
+
+### Features
+
+* fixed cantrips for base profession package ([737fe37](https://github.com/Optolith/database-schema/commit/737fe3742cdec7997dbb011872d3a0484bb58bfc)), closes [#148](https://github.com/Optolith/database-schema/issues/148)
+* note for commonness-rated entries ([1f28470](https://github.com/Optolith/database-schema/commit/1f28470b8fd0516bb1ac3507d3397e8afd6d6378)), closes [#146](https://github.com/Optolith/database-schema/issues/146)
+* personality trait as activatable prerequisite ([d4ffbb9](https://github.com/Optolith/database-schema/commit/d4ffbb911165b2bb485d68e6d9b114e5dbce7a2f))
+
+
+### Bug Fixes
+
+* interval for sustained cost map ([4c2228b](https://github.com/Optolith/database-schema/commit/4c2228b6d7214bc3b9bb3b4f19bf1ac20cff0a76)), closes [#145](https://github.com/Optolith/database-schema/issues/145)
+
 ## [0.46.0](https://github.com/Optolith/database-schema/compare/v0.45.0...v0.46.0) (2026-06-07)
 
 
