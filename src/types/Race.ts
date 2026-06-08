@@ -184,20 +184,6 @@ const SelectableAttributeAdjustment = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const AutomaticAdvantageDisadvantage = DB.GenTypeAlias(import.meta.url, {
-  name: "AutomaticAdvantageDisadvantage",
-  comment:
-    "An advantage or disadvantage that is automatically applied to the character after selecting the race. This does only work for advantages or disadvantages with no further configuration such as level or special selection.",
-  parameters: [DB.Param("Identifier")],
-  type: Identifier =>
-    DB.Object({
-      id: DB.Required({
-        comment: "The automatic advantage or disadvantage.",
-        type: DB.TypeArgument(Identifier),
-      }),
-    }),
-})
-
 const RandomWeightGeneration = DB.TypeAlias(import.meta.url, {
   name: "RandomWeightGeneration",
   comment: "Configuration for random weight generation.",
@@ -266,9 +252,9 @@ export const RaceVariant = DB.Entity(import.meta.url, {
       }),
       automatic_advantages: DB.Optional({
         comment:
-          "A list of automatically applied advantages. This does only work for advantages with no further configuration such as level or special selection.",
+          "A list of automatically applied advantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [AdvantageIdentifier()]),
+            DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
           {
             minItems: 1,
           },
@@ -276,9 +262,9 @@ export const RaceVariant = DB.Entity(import.meta.url, {
       }),
       automatic_disadvantages: DB.Optional({
         comment:
-          "A list of automatically applied disadvantages. This does only work for disadvantages with no further configuration such as level or special selection.",
+          "A list of automatically applied disadvantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [DisadvantageIdentifier()]),
+            DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
           { minItems: 1 },
         ),
       }),
