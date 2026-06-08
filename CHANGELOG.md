@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.47.1](https://github.com/Optolith/database-schema/compare/v0.47.0...v0.47.1) (2026-06-08)
+
+
+### Features
+
+* skill check penalty for animist powers ([9ed6e70](https://github.com/Optolith/database-schema/commit/9ed6e7064587aaf3ac297c31f116b4eb64889b61))
+
+
+### Bug Fixes
+
+* personality trait effect supports markdown ([af43af8](https://github.com/Optolith/database-schema/commit/af43af87de963623527e5f0e6d0071d2cd09d7bc))
+
 ## [0.47.0](https://github.com/Optolith/database-schema/compare/v0.46.0...v0.47.0) (2026-06-07)
 
 
