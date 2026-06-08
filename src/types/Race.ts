@@ -251,20 +251,18 @@ export const RaceVariant = DB.Entity(import.meta.url, {
         type: DB.Array(CultureIdentifier(), { minItems: 1 }),
       }),
       automatic_advantages: DB.Optional({
-        comment:
-          "A list of automatically applied advantages.",
+        comment: "A list of automatically applied advantages.",
         type: DB.Array(
-            DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
+          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
           {
             minItems: 1,
           },
         ),
       }),
       automatic_disadvantages: DB.Optional({
-        comment:
-          "A list of automatically applied disadvantages.",
+        comment: "A list of automatically applied disadvantages.",
         type: DB.Array(
-            DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
+          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
           { minItems: 1 },
         ),
       }),
