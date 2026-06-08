@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.47.2](https://github.com/Optolith/database-schema/compare/v0.47.1...v0.47.2) (2026-06-08)
+
+
+### Features
+
+* optional target category for animist powers ([aa556a4](https://github.com/Optolith/database-schema/commit/aa556a48c842fabc80b2564c15743fc68b730668))
+
 ## [0.47.1](https://github.com/Optolith/database-schema/compare/v0.47.0...v0.47.1) (2026-06-08)
 
 
