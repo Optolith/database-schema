@@ -7,7 +7,7 @@ import { PropertyIdentifier, TribeIdentifier } from "../_Identifier.js"
 import { ImprovementCost } from "../_ImprovementCost.js"
 import { AnimistPowerPrerequisites } from "../_Prerequisite.js"
 import { ResponsiveTextOptional } from "../_ResponsiveText.js"
-import { SkillCheck } from "../_SkillCheck.js"
+import { SkillCheck, SkillCheckPenalty } from "../_SkillCheck.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
 import { PublicationRefs, src } from "../source/_PublicationRef.js"
@@ -20,6 +20,10 @@ export const AnimistPower = DB.Entity(import.meta.url, {
       check: DB.Required({
         comment: "Lists the linked three attributes used to make a skill check.",
         type: DB.IncludeIdentifier(SkillCheck),
+      }),
+      check_penalty: DB.Optional({
+        comment: "In some cases, the target's Spirit or Toughness is applied as a penalty.",
+        type: DB.IncludeIdentifier(SkillCheckPenalty),
       }),
       parameters: DB.Required({
         comment: "Measurable parameters of an animist power.",
