@@ -11,6 +11,7 @@ import {
   HairColorIdentifier,
   RaceIdentifier,
 } from "./_Identifier.js"
+import { RequirableSelectOptionIdentifier } from "./_IdentifierGroup.js"
 import { calculationContainsRaceBase, DerivedCharacteristic } from "./DerivedCharacteristic.ts"
 import { ExperienceLevel } from "./ExperienceLevel.js"
 import { NestedTranslationMap } from "./Locale.js"
@@ -184,6 +185,29 @@ const SelectableAttributeAdjustment = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const AutomaticAdvantageDisadvantage = DB.GenTypeAlias(import.meta.url, {
+  name: "AutomaticAdvantageDisadvantage",
+  comment:
+    "An advantage or disadvantage that is automatically applied to the character after selecting the race. This does only work for advantages or disadvantages with no further configuration such as level or special selection.",
+  parameters: [DB.Param("Identifier")],
+  type: Identifier =>
+    DB.Object({
+      id: DB.Required({
+        comment: "The automatic advantage or disadvantage.",
+        type: DB.TypeArgument(Identifier),
+      }),
+      level: DB.Optional({
+        comment: "The level of the entry.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+      options: DB.Optional({
+        comment:
+          "Required select options. Order is important. Typically, you only need the first array index, though.",
+        type: DB.Array(DB.IncludeIdentifier(RequirableSelectOptionIdentifier), { minItems: 1 }),
+      }),
+    }),
+})
+
 const RandomWeightGeneration = DB.TypeAlias(import.meta.url, {
   name: "RandomWeightGeneration",
   comment: "Configuration for random weight generation.",
@@ -253,7 +277,7 @@ export const RaceVariant = DB.Entity(import.meta.url, {
       automatic_advantages: DB.Optional({
         comment: "A list of automatically applied advantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [AdvantageIdentifier()]),
           {
             minItems: 1,
           },
@@ -262,21 +286,21 @@ export const RaceVariant = DB.Entity(import.meta.url, {
       automatic_disadvantages: DB.Optional({
         comment: "A list of automatically applied disadvantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [DisadvantageIdentifier()]),
           { minItems: 1 },
         ),
       }),
       strongly_recommended_advantages: DB.Optional({
         comment: "A list of strongly recommended advantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [AdvantageIdentifier()]),
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [AdvantageIdentifier()]),
           { minItems: 1 },
         ),
       }),
       strongly_recommended_disadvantages: DB.Optional({
         comment: "A list of strongly recommended disadvantages.",
         type: DB.Array(
-          DB.GenIncludeIdentifier(CommonnessRatedAdvantageDisadvantage, [DisadvantageIdentifier()]),
+          DB.GenIncludeIdentifier(AutomaticAdvantageDisadvantage, [DisadvantageIdentifier()]),
           { minItems: 1 },
         ),
       }),
