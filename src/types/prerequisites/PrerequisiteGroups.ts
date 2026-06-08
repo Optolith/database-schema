@@ -80,6 +80,7 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     SexualCharacteristic: DB.EnumCase({
       type: DB.IncludeIdentifier(SexualCharacteristicPrerequisite),
     }),
+    PersonalityTrait: DB.EnumCase({ type: DB.IncludeIdentifier(PersonalityTraitPrerequisite) }),
   }),
 })
 

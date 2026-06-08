@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.47.2](https://github.com/Optolith/database-schema/compare/v0.47.1...v0.47.2) (2026-06-08)
+
+
+### Features
+
+* optional target category for animist powers ([aa556a4](https://github.com/Optolith/database-schema/commit/aa556a48c842fabc80b2564c15743fc68b730668))
+
+## [0.47.1](https://github.com/Optolith/database-schema/compare/v0.47.0...v0.47.1) (2026-06-08)
+
+
+### Features
+
+* skill check penalty for animist powers ([9ed6e70](https://github.com/Optolith/database-schema/commit/9ed6e7064587aaf3ac297c31f116b4eb64889b61))
+
+
+### Bug Fixes
+
+* personality trait effect supports markdown ([af43af8](https://github.com/Optolith/database-schema/commit/af43af87de963623527e5f0e6d0071d2cd09d7bc))
+
+## [0.47.0](https://github.com/Optolith/database-schema/compare/v0.46.0...v0.47.0) (2026-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* interval for sustained cost map
+* personality trait as activatable prerequisite
+
+### Features
+
+* fixed cantrips for base profession package ([737fe37](https://github.com/Optolith/database-schema/commit/737fe3742cdec7997dbb011872d3a0484bb58bfc)), closes [#148](https://github.com/Optolith/database-schema/issues/148)
+* note for commonness-rated entries ([1f28470](https://github.com/Optolith/database-schema/commit/1f28470b8fd0516bb1ac3507d3397e8afd6d6378)), closes [#146](https://github.com/Optolith/database-schema/issues/146)
+* personality trait as activatable prerequisite ([d4ffbb9](https://github.com/Optolith/database-schema/commit/d4ffbb911165b2bb485d68e6d9b114e5dbce7a2f))
+
+
+### Bug Fixes
+
+* interval for sustained cost map ([4c2228b](https://github.com/Optolith/database-schema/commit/4c2228b6d7214bc3b9bb3b4f19bf1ac20cff0a76)), closes [#145](https://github.com/Optolith/database-schema/issues/145)
+
+## [0.46.0](https://github.com/Optolith/database-schema/compare/v0.45.0...v0.46.0) (2026-06-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* allow blessed profession
+
+### Features
+
+* allow blessed profession ([47f9e89](https://github.com/Optolith/database-schema/commit/47f9e890bbc46b37e36ef55b0cfcbecef2a3ef44))
+* plants entity ([ae45659](https://github.com/Optolith/database-schema/commit/ae45659ff94656f60dfa803257927e6b11289c92)), closes [#142](https://github.com/Optolith/database-schema/issues/142) [#3](https://github.com/Optolith/database-schema/issues/3)
+* use library name as display name if available ([a9ea59a](https://github.com/Optolith/database-schema/commit/a9ea59a8023ea770af45ac6a913c3c70c4f0bc04))
+
+
+### Bug Fixes
+
+* required language specializations ([96d70f7](https://github.com/Optolith/database-schema/commit/96d70f7237cfae07e24ead363b00d7bee795e47d))
+
 ## [0.45.0](https://github.com/Optolith/database-schema/compare/v0.44.1...v0.45.0) (2026-05-31)
 
 

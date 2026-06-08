@@ -1,6 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { effect, name, name_in_library } from "../_Activatable.js"
 import { ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
+import { activatableDisplayNameCustomizer } from "../_ActivatableNames.ts"
 import { propertyOptional } from "../_ActivatableNonMundane.js"
 import { OneTimeCostMap } from "../_ActivatableSkillCost.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
@@ -42,6 +43,7 @@ export const MagicalSign = DB.Entity(import.meta.url, {
       ),
     }),
   instanceDisplayName: {},
+  instanceDisplayNameCustomizer: activatableDisplayNameCustomizer,
   uniqueConstraints: [
     {
       entityMapKeyPath: "translations",

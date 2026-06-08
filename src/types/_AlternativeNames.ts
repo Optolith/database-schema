@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { LanguageIdentifier } from "./_Identifier.js"
 
 export const AlternativeName = DB.TypeAlias(import.meta.url, {
   name: "AlternativeName",
@@ -11,6 +12,10 @@ export const AlternativeName = DB.TypeAlias(import.meta.url, {
       region: DB.Optional({
         comment: "The region where this alternative name is used.",
         type: DB.String({ minLength: 1 }),
+      }),
+      language: DB.Optional({
+        comment: "The language of that alternative name if any.",
+        type: LanguageIdentifier(),
       }),
     }),
 })

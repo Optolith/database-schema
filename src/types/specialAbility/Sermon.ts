@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { levels, maximum, name, name_in_library, rules } from "../_Activatable.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
-import { nameBuilderRules } from "../_ActivatableNames.ts"
+import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.ts"
 import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
@@ -39,6 +39,7 @@ export const Sermon = DB.Entity(import.meta.url, {
       ),
     }),
   instanceDisplayName: {},
+  instanceDisplayNameCustomizer: activatableDisplayNameCustomizer,
   uniqueConstraints: [
     {
       entityMapKeyPath: "translations",

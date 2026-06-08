@@ -255,6 +255,10 @@ export const ProfessionPackage = DB.Entity(import.meta.url, {
         comment: "The skill ratings the package grants to the hero.",
         type: DB.Array(DB.IncludeIdentifier(SkillRating), { minItems: 1 }),
       }),
+      cantrips: DB.Optional({
+        comment: "The cantrips the profession receives from the package.",
+        type: DB.Array(CantripIdentifier(), { minItems: 1 }),
+      }),
       spells: DB.Optional({
         comment:
           "The skill ratings a magical profession receives for spells; these spells are considered activated. Spells from an unfamiliar Tradition, if any, are identified as such.",
