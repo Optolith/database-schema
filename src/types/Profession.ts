@@ -257,7 +257,7 @@ export const ProfessionPackage = DB.Entity(import.meta.url, {
       }),
       cantrips: DB.Optional({
         comment: "The cantrips the profession receives from the package.",
-        type: DB.Array(CantripIdentifier(), { minItems: 1 }),
+        type: DB.Array(CantripIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
       spells: DB.Optional({
         comment:
