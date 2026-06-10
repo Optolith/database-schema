@@ -232,7 +232,7 @@ export const EnhancementPrerequisites = DB.TypeAlias(import.meta.url, {
 })
 
 export const LinguisticPrerequisites = DB.TypeAlias(import.meta.url, {
-  name: "BookLinguisticPrerequisites",
+  name: "LinguisticPrerequisites",
   type: () =>
     DB.GenIncludeIdentifier(PlainPrerequisites, [
       DB.IncludeIdentifier(LinguisticPrerequisiteGroup),
