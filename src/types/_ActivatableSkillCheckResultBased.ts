@@ -14,6 +14,8 @@ const CheckResultArithmetic = DB.Enum(import.meta.url, {
   name: "CheckResultArithmetic",
   comment: "Defines how the the `value` is set off against the check result.",
   values: () => ({
+    Add: DB.EnumCase({ type: null }),
+    Subtract: DB.EnumCase({ type: null }),
     Multiply: DB.EnumCase({ type: null }),
     Divide: DB.EnumCase({ type: null }),
   }),
