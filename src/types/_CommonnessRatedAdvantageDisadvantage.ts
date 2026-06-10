@@ -31,6 +31,11 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
                 "The options the commonness rating applies to. This can be specified if plain options cannot exactly describe the options as written in the publication.",
               type: DB.String({ minLength: 1 }),
             }),
+            note: DB.Optional({
+              comment:
+                "A note, appended to the generated string in parenthesis. If options are specified as well, both will be in a single set of parentheses, with the note after the options.",
+              type: DB.String({ minLength: 1 }),
+            }),
             full: DB.Optional({
               comment:
                 "A text that replaces the entire entry. No other text is generated for display, however, providing levels or a selection of options will still be relevant for highlighting entries in the application. This should only be used if the text cannot be generated from other fields at all.",

@@ -31,3 +31,26 @@ const ActivatableNameLevelPlacement = DB.Enum(import.meta.url, {
     AfterOptions: DB.EnumCase({ type: null }),
   }),
 })
+
+export const activatableDisplayNameCustomizer = ({
+  instance,
+  instanceDisplayName,
+  instanceDisplayNameLocaleId,
+  locales,
+}: {
+  instance: { translations: Record<string, { name: string; name_in_library?: string }> }
+  instanceDisplayName: string
+  instanceDisplayNameLocaleId: string | undefined
+  locales: string[]
+}) => {
+  for (const locale of locales) {
+    const translation = instance.translations[locale]
+    if (translation) {
+      return {
+        name: translation.name_in_library ?? translation.name,
+        localeId: locale,
+      }
+    }
+  }
+  return { name: instanceDisplayName, localeId: instanceDisplayNameLocaleId }
+}

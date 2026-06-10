@@ -3,11 +3,12 @@ import { name_in_library } from "../_Activatable.js"
 import { OldParameter } from "../_ActivatableSkill.js"
 import { CheckResultBasedDuration, DurationUnitValue } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
+import { AffectedTargetCategories } from "../_ActivatableSkillTargetCategory.ts"
 import { PropertyIdentifier, TribeIdentifier } from "../_Identifier.js"
 import { ImprovementCost } from "../_ImprovementCost.js"
 import { AnimistPowerPrerequisites } from "../_Prerequisite.js"
 import { ResponsiveTextOptional } from "../_ResponsiveText.js"
-import { SkillCheck } from "../_SkillCheck.js"
+import { SkillCheck, SkillCheckPenalty } from "../_SkillCheck.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
 import { PublicationRefs, src } from "../source/_PublicationRef.js"
@@ -21,9 +22,17 @@ export const AnimistPower = DB.Entity(import.meta.url, {
         comment: "Lists the linked three attributes used to make a skill check.",
         type: DB.IncludeIdentifier(SkillCheck),
       }),
+      check_penalty: DB.Optional({
+        comment: "In some cases, the target's Spirit or Toughness is applied as a penalty.",
+        type: DB.IncludeIdentifier(SkillCheckPenalty),
+      }),
       parameters: DB.Required({
         comment: "Measurable parameters of an animist power.",
         type: DB.IncludeIdentifier(AnimistPowerPerformanceParameters),
+      }),
+      target: DB.Optional({
+        comment: "The target category – the kind of creature or object – the skill affects.",
+        type: DB.IncludeIdentifier(AffectedTargetCategories),
       }),
       property: DB.Required({
         comment: "The associated property.",

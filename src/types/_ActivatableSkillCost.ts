@@ -304,6 +304,10 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
           minItems: 2,
         }),
       }),
+      interval: DB.Required({
+        comment: "The sustain interval.",
+        type: DB.IncludeIdentifier(DurationUnitValue),
+      }),
       translations: NestedTranslationMap(
         DB.Optional,
         "SustainedCostMap",
