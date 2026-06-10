@@ -31,7 +31,7 @@ export const CheckResultBasedModifier = DB.TypeAlias(import.meta.url, {
       }),
       value: DB.Required({
         comment: "The value that is applied to the `base` using the defined `arithmetic`.",
-        type: DB.Integer({ minimum: 2 }),
+        type: DB.Integer({ minimum: 1 }),
       }),
     }),
 })
