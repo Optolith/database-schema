@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.47.3](https://github.com/Optolith/database-schema/compare/v0.47.2...v0.47.3) (2026-06-13)
+
+
+### Features
+
+* level and options for automatic and str. rec. dis/advantages in sub-races ([a7b8e7e](https://github.com/Optolith/database-schema/commit/a7b8e7ec0c6c1c90b8a656b9b19cd156d403382b)), closes [#150](https://github.com/Optolith/database-schema/issues/150)
+* optional sources for skill applications ([cdb86e9](https://github.com/Optolith/database-schema/commit/cdb86e9aa6768601c9f017f01bde6d70108db083))
+
+
+### Bug Fixes
+
+* profession cantrips must be unique ([6c9f7a6](https://github.com/Optolith/database-schema/commit/6c9f7a6ec2bafb35c40680d1199739f1b435e6a9))
+
 ## [0.47.2](https://github.com/Optolith/database-schema/compare/v0.47.1...v0.47.2) (2026-06-08)
 
 
