@@ -13,6 +13,11 @@ const EnchantmentCost = DB.Enum(import.meta.url, {
   }),
 })
 
+export const cost_note = DB.Optional({
+  comment: "A note, appended to the generated cost string in parenthesis.",
+  type: DB.IncludeIdentifier(ResponsiveTextOptional),
+})
+
 export const cost = DB.Optional({
   comment: "The cost when casting the entry.",
   type: DB.IncludeIdentifier(EnchantmentCost),
