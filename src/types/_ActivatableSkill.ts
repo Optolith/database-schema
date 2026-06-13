@@ -120,5 +120,6 @@ const ExpressionBasedParameterExpressionValue = DB.Enum(import.meta.url, {
     Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
     QualityLevels: DB.EnumCase({ type: null }),
     SkillPoints: DB.EnumCase({ type: null }),
+    SkillRating: DB.EnumCase({ type: null }),
   }),
 })
