@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { OldParameter } from "../_ActivatableSkill.js"
 import { IndefiniteOneTimeCost } from "../_ActivatableSkillCost.js"
-import { CheckResultBasedDuration, DurationUnitValue } from "../_ActivatableSkillDuration.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { PropertyIdentifier } from "../_Identifier.js"
 import { ResponsiveText, ResponsiveTextOptional } from "../_ResponsiveText.js"
@@ -125,8 +125,7 @@ const CurseDuration = DB.Enum(import.meta.url, {
   name: "CurseDuration",
   values: () => ({
     Immediate: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(DurationUnitValue) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteCurseDuration) }),
   }),
 })
@@ -155,7 +154,6 @@ const IndefiniteCurseDuration = DB.TypeAlias(import.meta.url, {
 const MaximumIndefiniteCurseDuration = DB.Enum(import.meta.url, {
   name: "MaximumIndefiniteCurseDuration",
   values: () => ({
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(DurationUnitValue) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
   }),
 })

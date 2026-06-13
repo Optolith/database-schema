@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { CheckResultBasedModifier, CheckResultValue } from "./_ActivatableSkillCheckResultBased.js"
+import { ExpressionBasedParameterValue } from "./_ActivatableSkill.ts"
 import { SkillModificationLevelIdentifier } from "./_Identifier.js"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "./_ResponsiveText.js"
 import { NestedTranslationMap } from "./Locale.js"
@@ -42,8 +42,7 @@ const RangeValue = DB.Enum(import.meta.url, {
     Self: DB.EnumCase({ type: null }),
     Global: DB.EnumCase({ comment: "German: *dereumfassend*", type: null }),
     Touch: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedRange) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedRange) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedRange) }),
   }),
 })
 
@@ -89,21 +88,17 @@ export const FixedRange = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const CheckResultBasedRange = DB.TypeAlias(import.meta.url, {
-  name: "CheckResultBasedRange",
+export const ExpressionBasedRange = DB.TypeAlias(import.meta.url, {
+  name: "ExpressionBasedRange",
   type: () =>
     DB.Object({
       is_maximum: DB.Optional({
         comment: "If the range is the maximum range.",
         type: DB.Boolean(),
       }),
-      base: DB.Required({
-        comment: "The base value that is derived from the check result.",
-        type: DB.IncludeIdentifier(CheckResultValue),
-      }),
-      modifier: DB.Optional({
-        comment: "If defined, it modifies the base value.",
-        type: DB.IncludeIdentifier(CheckResultBasedModifier),
+      value: DB.Required({
+        comment: "An expression that evaluates to the range.",
+        type: DB.IncludeIdentifier(ExpressionBasedParameterValue),
       }),
       unit: DB.Required({
         comment: "The duration unit.",

@@ -1,17 +1,17 @@
 import * as DB from "tsondb/schema/dsl"
 import { OldParameter } from "../_ActivatableSkill.js"
-import { CheckResultBasedDuration, DurationUnitValue } from "../_ActivatableSkillDuration.js"
-import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { NonModifiableOneTimeCost, NonModifiableSustainedCost } from "../_ActivatableSkillCost.js"
-import { ResponsiveTextOptional, ResponsiveTextReplace } from "../_ResponsiveText.js"
-import { FixedRange } from "../_ActivatableSkillRange.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
+import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
+import { ExpressionBasedRange } from "../_ActivatableSkillRange.js"
 import { AffectedTargetCategories } from "../_ActivatableSkillTargetCategory.js"
 import { PropertyIdentifier } from "../_Identifier.js"
+import { ImprovementCost } from "../_ImprovementCost.js"
+import { ResponsiveTextOptional, ResponsiveTextReplace } from "../_ResponsiveText.js"
 import { SkillCheck, SkillCheckPenalty } from "../_SkillCheck.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
 import { src } from "../source/_PublicationRef.js"
-import { ImprovementCost } from "../_ImprovementCost.js"
 
 export const GoblinRitual = DB.Entity(import.meta.url, {
   name: "GoblinRitual",
@@ -212,7 +212,7 @@ const GoblinRitualRangeValue = DB.Enum(import.meta.url, {
     Sight: DB.EnumCase({ type: null }),
     Self: DB.EnumCase({ type: null }),
     Touch: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedRange) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedRange) }),
   }),
 })
 
@@ -220,7 +220,6 @@ const GoblinRitualDuration = DB.Enum(import.meta.url, {
   name: "GoblinRitualDuration",
   values: () => ({
     Immediate: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(DurationUnitValue) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
   }),
 })

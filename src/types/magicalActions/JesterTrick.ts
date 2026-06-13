@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { OldParameter } from "../_ActivatableSkill.js"
-import { CheckResultBasedDuration, DurationUnit } from "../_ActivatableSkillDuration.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { AffectedTargetCategories } from "../_ActivatableSkillTargetCategory.js"
 import { PropertyIdentifier } from "../_Identifier.js"
@@ -158,22 +158,6 @@ export const JesterTrickDuration = DB.Enum(import.meta.url, {
   name: "JesterTrickDuration",
   values: () => ({
     Immediate: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedJesterTrickDuration) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
   }),
-})
-
-const FixedJesterTrickDuration = DB.TypeAlias(import.meta.url, {
-  name: "FixedJesterTrickDuration",
-  type: () =>
-    DB.Object({
-      value: DB.Required({
-        comment: "The (unitless) duration.",
-        type: DB.Integer({ minimum: 2 }),
-      }),
-      unit: DB.Required({
-        comment: "The duration unit.",
-        type: DB.IncludeIdentifier(DurationUnit),
-      }),
-    }),
 })

@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { OldParameter } from "../_ActivatableSkill.js"
-import { CheckResultBasedDuration, DurationUnit } from "../_ActivatableSkillDuration.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { PropertyIdentifier, SkillModificationLevelIdentifier } from "../_Identifier.js"
 import { ResponsiveText } from "../_ResponsiveText.js"
@@ -107,25 +107,9 @@ const DominationRitualCost = DB.TypeAlias(import.meta.url, {
 const DominationRitualDuration = DB.Enum(import.meta.url, {
   name: "DominationRitualDuration",
   values: () => ({
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedDominationRitualDuration) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteDominationRitualDuration) }),
   }),
-})
-
-const FixedDominationRitualDuration = DB.TypeAlias(import.meta.url, {
-  name: "FixedDominationRitualDuration",
-  type: () =>
-    DB.Object({
-      value: DB.Required({
-        comment: "The (unitless) duration.",
-        type: DB.Integer({ minimum: 1 }),
-      }),
-      unit: DB.Required({
-        comment: "The duration unit.",
-        type: DB.IncludeIdentifier(DurationUnit),
-      }),
-    }),
 })
 
 const IndefiniteDominationRitualDuration = DB.TypeAlias(import.meta.url, {
@@ -152,7 +136,6 @@ const IndefiniteDominationRitualDuration = DB.TypeAlias(import.meta.url, {
 const MaximumIndefiniteDominationRitualDuration = DB.Enum(import.meta.url, {
   name: "MaximumIndefiniteDominationRitualDuration",
   values: () => ({
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedDominationRitualDuration) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
   }),
 })

@@ -1,8 +1,8 @@
 import * as DB from "tsondb/schema/dsl"
 import { name_in_library } from "../_Activatable.js"
-import { CheckResultBasedDuration } from "../_ActivatableSkillDuration.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
-import { PropertyIdentifier, BannzeichenIdentifier } from "../_Identifier.js"
+import { BannzeichenIdentifier, PropertyIdentifier } from "../_Identifier.js"
 import { ImprovementCost } from "../_ImprovementCost.js"
 import { ResponsiveText, ResponsiveTextOptional } from "../_ResponsiveText.js"
 import { SkillCheck } from "../_SkillCheck.js"
@@ -189,11 +189,11 @@ const BannzeichenDuration = DB.TypeAlias(import.meta.url, {
     DB.Object({
       slow: DB.Required({
         comment: "The duration on slow Bannzeichen application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
       fast: DB.Required({
         comment: "The duration on fast Bannzeichen application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
     }),
 })

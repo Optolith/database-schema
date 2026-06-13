@@ -6,7 +6,7 @@ import {
 } from "./_ActivatableSkillCost.js"
 import {
   DurationUnitValue,
-  FixedDuration,
+  ExpressionBasedDuration,
   IndefiniteDuration,
 } from "./_ActivatableSkillDuration.js"
 import {
@@ -188,7 +188,7 @@ const FamiliarsTrickOneTimeDuration = DB.Enum(import.meta.url, {
   name: "FamiliarsTrickOneTimeDuration",
   values: () => ({
     Immediate: DB.EnumCase({ type: null }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteDuration) }),
   }),
 })
