@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.49.0](https://github.com/Optolith/database-schema/compare/v0.48.0...v0.49.0) (2026-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* add missing skill rating case to parameter expression
+
+### Bug Fixes
+
+* add missing skill rating case to parameter expression ([64ee1cc](https://github.com/Optolith/database-schema/commit/64ee1cce6adccc2027bb890289b31e2cea653645))
+
 ## [0.48.0](https://github.com/Optolith/database-schema/compare/v0.47.4...v0.48.0) (2026-06-13)
 
 
