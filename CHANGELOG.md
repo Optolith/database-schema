@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.48.0](https://github.com/Optolith/database-schema/compare/v0.47.4...v0.48.0) (2026-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* unify some skill durations and ranges with expressions
+
+### Features
+
+* unify some skill durations and ranges with expressions ([31798ca](https://github.com/Optolith/database-schema/commit/31798ca33fab12b1d1c0c6edec0c543173c8f4ac))
+
 ## [0.47.4](https://github.com/Optolith/database-schema/compare/v0.47.3...v0.47.4) (2026-06-13)
 
 
