@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.50.0](https://github.com/Optolith/database-schema/compare/v0.49.0...v0.50.0) (2026-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* allow arbitrary AP values for enhancements
+
+### Features
+
+* allow arbitrary AP values for enhancements ([1d06407](https://github.com/Optolith/database-schema/commit/1d06407eb4dee8fec24bc9f8d0d6e31833e4f995))
+* allow arbitrary text input for enhancements ([3a3af6e](https://github.com/Optolith/database-schema/commit/3a3af6e574c1a7d05113ebc75d5d6fa1b92c8dce))
+
 ## [0.49.0](https://github.com/Optolith/database-schema/compare/v0.48.0...v0.49.0) (2026-06-13)
 
 
