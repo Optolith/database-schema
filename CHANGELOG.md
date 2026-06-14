@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.50.1](https://github.com/Optolith/database-schema/compare/v0.50.0...v0.50.1) (2026-06-14)
+
+
+### Features
+
+* primary blessing for tradition ([9d97dd4](https://github.com/Optolith/database-schema/commit/9d97dd4ec95c8dd42cb6e31873a4702684a941de))
+* trade secrets for herbal aids ([27236a7](https://github.com/Optolith/database-schema/commit/27236a75884fdb891a60a0105ebb5ff82147cbc1)), closes [#159](https://github.com/Optolith/database-schema/issues/159) [#158](https://github.com/Optolith/database-schema/issues/158)
+
 ## [0.50.0](https://github.com/Optolith/database-schema/compare/v0.49.0...v0.50.0) (2026-06-14)
 
 
