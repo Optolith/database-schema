@@ -3,6 +3,7 @@
  */
 
 import * as DB from "tsondb/schema/dsl"
+import { input } from "./_Activatable.ts"
 import { SkillWithEnhancementsIdentifier } from "./_IdentifierGroup.js"
 import { EnhancementPrerequisites } from "./_Prerequisite.js"
 import { NestedTranslationMap } from "./Locale.js"
@@ -60,6 +61,7 @@ export const Enhancement = DB.Entity(import.meta.url, {
               markdown: "block",
             }),
           }),
+          input,
           errata: DB.Optional({
             type: DB.IncludeIdentifier(Errata),
           }),
