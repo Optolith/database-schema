@@ -32,12 +32,9 @@ export const Enhancement = DB.Entity(import.meta.url, {
           multipleOf: 2,
         }),
       }),
-      adventure_points_modifier: DB.Required({
-        comment:
-          "The value to multiply with the numeric representation of the associated skill's improvement cost to form the final AP cost of this enhancement.",
-        type: DB.Integer({
-          minimum: 1,
-        }),
+      adventurePoints: DB.Required({
+        comment: "Defines how to determine the AP cost of an enhancement.",
+        type: DB.IncludeIdentifier(EnhancementAdventurePoints),
       }),
       prerequisites: DB.Optional({
         type: DB.IncludeIdentifier(EnhancementPrerequisites),
@@ -91,4 +88,37 @@ export const Enhancement = DB.Entity(import.meta.url, {
       },
     ],
   ],
+})
+
+const EnhancementAdventurePoints = DB.Enum(import.meta.url, {
+  name: "EnhancementAdventurePoints",
+  comment: "Defines how to determine the AP cost of an enhancement.",
+  values: () => ({
+    DerivedFromImprovementCost: DB.EnumCase({
+      comment:
+        "Use the numeric representation of the associated skill's improvement cost as the AP cost of this enhancement.",
+      type: DB.IncludeIdentifier(DerivedEnhancementAdventurePoints),
+    }),
+    Constant: DB.EnumCase({
+      comment: "Use the specified constant value as the AP cost of this enhancement.",
+      type: DB.Integer({
+        minimum: 1,
+      }),
+    }),
+  }),
+})
+
+const DerivedEnhancementAdventurePoints = DB.TypeAlias(import.meta.url, {
+  name: "DerivedEnhancementAdventurePoints",
+  type: () =>
+    DB.Object({
+      multiplier: DB.Required({
+        comment:
+          "The value to multiply with the numeric representation of the associated skill's improvement cost to form the final AP cost of this enhancement.",
+        type: DB.Integer({
+          minimum: 1,
+          maximum: 3,
+        }),
+      }),
+    }),
 })
