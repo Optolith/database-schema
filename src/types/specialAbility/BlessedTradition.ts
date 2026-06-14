@@ -36,6 +36,11 @@ export const BlessedTradition = DB.Entity(import.meta.url, {
         comment: "The tradition’s aspects, if any.",
         type: DB.Array(AspectIdentifier(), { minItems: 2, maxItems: 2 }),
       }),
+      primaryBlessing: DB.Optional({
+        comment:
+          "The tradition’s primary blessing. Leave empty if the tradition does not have one.",
+        type: BlessingIdentifier(),
+      }),
       restricted_blessings: DB.Optional({
         comment:
           "If a tradition restricts the possible blessings, the blessings that are **not** allowed.",
