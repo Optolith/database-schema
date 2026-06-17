@@ -33,6 +33,7 @@ import { Elixir } from "./equipment/item/Elixir.js"
 import { EquipmentOfBlessedOnes } from "./equipment/item/EquipmentOfBlessedOnes.js"
 import { GemOrPreciousStone } from "./equipment/item/GemOrPreciousStone.js"
 import { HerbalAid } from "./equipment/item/HerbalAid.js"
+import { HerbalPreservation } from "./equipment/item/HerbalPreservation.js"
 import { IlluminationLightSource } from "./equipment/item/IlluminationLightSource.js"
 import { IlluminationRefillOrSupply } from "./equipment/item/IlluminationRefillOrSupply.js"
 import { Jewelry } from "./equipment/item/Jewelry.js"
@@ -49,7 +50,9 @@ import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
 import { ArmorType } from "./equipment/item/sub/ArmorType.js"
 import { Biome } from "./equipment/item/sub/Biome.js"
+import { SubBiome } from "./equipment/item/sub/SubBiome.js"
 import { Reach } from "./equipment/item/sub/Reach.js"
+import { BotanicRegion } from "./equipment/item/sub/BotanicRegion.js"
 import { ThievesTool } from "./equipment/item/ThievesTool.js"
 import { ToolOfTheTrade } from "./equipment/item/ToolOfTheTrade.js"
 import { TravelGearOrTool } from "./equipment/item/TravelGearOrTool.js"
@@ -243,6 +246,7 @@ export const GuidelineIdentifier: () => R = () => R(Guideline)
 export const HairColorIdentifier: () => R = () => R(HairColor)
 export const HaubenzauberIdentifier: () => R = () => R(Haubenzauber)
 export const HerbalAidIdentifier: () => R = () => R(HerbalAid)
+export const HerbalPreservationIdentifier: () => R = () => R(HerbalPreservation)
 export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLightSource)
 export const IlluminationRefillOrSupplyIdentifier: () => R = () => R(IlluminationRefillOrSupply)
 export const InfluenceIdentifier: () => R = () => R(Influence)
@@ -297,6 +301,7 @@ export const RaceIdentifier: () => R = () => R(Race)
 export const RaceVariantIdentifier: () => R = () => R(RaceVariant)
 export const RangedCombatTechniqueIdentifier: () => R = () => R(RangedCombatTechnique)
 export const ReachIdentifier: () => R = () => R(Reach)
+export const BotanicRegionIdentifier: () => R = () => R(BotanicRegion)
 export const RingEnchantmentIdentifier: () => R = () => R(RingEnchantment)
 export const RitualIdentifier: () => R = () => R(Ritual)
 export const RopeOrChainIdentifier: () => R = () => R(RopeOrChain)
@@ -319,6 +324,7 @@ export const SpellSwordEnchantmentIdentifier: () => R = () => R(SpellSwordEnchan
 export const StaffEnchantmentIdentifier: () => R = () => R(StaffEnchantment)
 export const StateIdentifier: () => R = () => R(State)
 export const StationeryIdentifier: () => R = () => R(Stationery)
+export const SubBiomeIdentifier: () => R = () => R(SubBiome)
 export const SubjectIdentifier: () => R = () => R(Subject)
 export const TargetCategoryIdentifier: () => R = () => R(TargetCategory)
 export const ThievesToolIdentifier: () => R = () => R(ThievesTool)

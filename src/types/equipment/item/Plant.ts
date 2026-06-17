@@ -4,7 +4,10 @@ import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
 import {
   BiomeIdentifier,
+  SubBiomeIdentifier,
+  BotanicRegionIdentifier,
   HerbalAidIdentifier,
+  HerbalPreservationIdentifier,
   ElixirIdentifier,
   PoisonIdentifier,
 } from "../../_Identifier.js"
@@ -26,15 +29,15 @@ export const Plant = DB.Entity(import.meta.url, {
       }),
       search_difficulty: DB.Required({
         comment: "The search difficulty for this plant.",
-        type: DB.Integer(),
+        type: DB.IncludeIdentifier(PlantDifficulty),
       }),
       identification_difficulty: DB.Required({
         comment: "The identification difficulty for this plant.",
-        type: DB.Integer(),
+        type: DB.IncludeIdentifier(PlantDifficulty),
       }),
       applications: DB.Required({
         comment: "The applications of this plant per quality level.",
-        type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }),
+        type: DB.IncludeIdentifier(PlantApplications),
       }),
       touch: DB.Optional({
         comment: "The plant's touch effect.",
@@ -55,6 +58,10 @@ export const Plant = DB.Entity(import.meta.url, {
       recipes: DB.Optional({
         comment: "The herbal aids and elixirs that can be crafted with this plant.",
         type: DB.Array(DB.IncludeIdentifier(PlantRecipe), { minItems: 1 }),
+      }),
+      longevity: DB.Optional({
+        comment: "The longevity of the plant.",
+        type: DB.IncludeIdentifier(PlantLongevity),
       }),
       src,
       translations: NestedTranslationMap(
@@ -123,9 +130,9 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
   name: "PlantOccurrence",
   type: () =>
     DB.Object({
-      biome: DB.Required({
-        comment: "The biome this plant occurs in.",
-        type: BiomeIdentifier(),
+      regions: DB.Required({
+        comment: "Where this plant occurs in.",
+        type: DB.IncludeIdentifier(PlantOccurenceTier),
       }),
       rarity: DB.Required({
         comment: "The rarity of this plant in the biome.",
@@ -142,6 +149,62 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
+})
+
+const PlantOccurenceTier = DB.Enum(import.meta.url, {
+  name: "PlantOccurence",
+  values: () => ({
+    Biomes: DB.EnumCase({
+      type: DB.Array(BiomeIdentifier(), { minItems: 1 }),
+    }),
+    SubBiomes: DB.EnumCase({
+      type: DB.Array(SubBiomeIdentifier(), { minItems: 1 }),
+    }),
+    BotanicRegions: DB.EnumCase({
+      type: DB.Array(BotanicRegionIdentifier(), { minItems: 1 }),
+    }),
+  }),
+})
+
+const PlantDifficulty = DB.Enum(import.meta.url, {
+  name: "PlantDifficulty",
+  values: () => ({
+    Constant: DB.EnumCase({
+      type: DB.Integer(),
+    }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
+  }),
+})
+
+const IndefinitePlantDescription = DB.TypeAlias(import.meta.url, {
+  name: "IndefinitePlantDescription",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "IndefinitePlantDescription",
+        DB.Object({
+          description: DB.Required({
+            comment: "A description of whatever is indefinite of this plant.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
+    }),
+})
+
+const PlantApplications = DB.Enum(import.meta.url, {
+  name: "PlantApplications",
+  values: () => ({
+    Constant: DB.EnumCase({
+      type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }),
+    }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
+  }),
 })
 
 const PlantEffect = DB.TypeAlias(import.meta.url, {
@@ -278,4 +341,46 @@ const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
+})
+
+const PlantLongevity = DB.TypeAlias(import.meta.url, {
+  name: "PlantLongevity",
+  type: () =>
+    DB.Object(
+      {
+        raw: NestedTranslationMap(
+          DB.Optional,
+          "PlantLongevity",
+          DB.Object({
+            longevity: DB.Required({
+              comment: "The longevity of the raw plant",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          }),
+        ),
+        preserved: DB.Optional({
+          comment: "The longevity/preservations of the preserved plant",
+          type: DB.Object(
+            {
+              preservations: DB.Optional({
+                comment: "The preservations with alternative effect of this preserved plant",
+                type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
+              }),
+              translation: NestedTranslationMap(
+                DB.Optional,
+                "PlantPreservedLongevity",
+                DB.Object({
+                  longevity: DB.Required({
+                    comment: "The longevity of the preserved plant",
+                    type: DB.String({ minLength: 1, markdown: "block" }),
+                  }),
+                }),
+              ),
+            },
+            { minProperties: 1 },
+          ),
+        }),
+      },
+      { minProperties: 1 },
+    ),
 })

@@ -150,6 +150,7 @@ export const DurationUnit = DB.Enum(import.meta.url, {
     Weeks: DB.EnumCase({ type: null }),
     Months: DB.EnumCase({ type: null }),
     Years: DB.EnumCase({ type: null }),
+    Decades: DB.EnumCase({ type: null }),
     Centuries: DB.EnumCase({ type: null }),
     Actions: DB.EnumCase({ type: null }),
     CombatRounds: DB.EnumCase({ type: null }),
