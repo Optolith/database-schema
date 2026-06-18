@@ -64,8 +64,8 @@ export const HerbalPreservationLongevity = DB.TypeAlias(import.meta.url, {
       translations: NestedTranslationMap(
         DB.Optional,
         "HerbalPreservationLongevity",
-        DB.Object({
-          replacement: DB.Optional({
+          DB.Object({
+              replacement: DB.Required({
             comment: "A replacement string.",
             type: DB.IncludeIdentifier(ResponsiveTextReplace),
           }),
@@ -86,7 +86,7 @@ export const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevityValue",
   values: () => ({
     Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
-    DiceRoll: DB.EnumCase({
+    Dice: DB.EnumCase({
       type: DB.IncludeIdentifier(Dice),
     }),
   }),
