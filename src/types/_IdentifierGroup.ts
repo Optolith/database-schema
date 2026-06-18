@@ -69,7 +69,7 @@ import {
   JesterTrickIdentifier,
   JewelryIdentifier,
   KarmaSpecialAbilityIdentifier,
-  Keulenzauber,
+  KeulenzauberIdentifier,
   KeulenzauberIdentifier,
   KrallenkettenzauberIdentifier,
   KristallkugelzauberIdentifier,
