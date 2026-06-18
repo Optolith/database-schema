@@ -1,26 +1,28 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "../../../Locale.js"
-import { SubBiome } from "./SubBiome.js"
+import { SubBiomeIdentifier } from "../../../_Identifier.js"
 
-export const Biome = DB.Entity(import.meta.url, {
-  name: "Biome",
-  namePlural: "Biome",
+export const BotanicRegion = DB.Entity(import.meta.url, {
+  name: "BotanicRegion",
+  namePlural: "BotanicRegions",
   type: () =>
     DB.Object({
+      parent: DB.Required({
+        comment: "The subbiome this region belongs to.",
+        type: SubBiomeIdentifier(),
+      }),
       translations: NestedTranslationMap(
         DB.Required,
-        "Biome",
+        "BotanicRegion",
         DB.Object({
           name: DB.Required({
-            comment: "The biome's name.",
+            comment: "The region's name.",
             type: DB.String({ minLength: 1 }),
           }),
         }),
       ),
-      sub_biomes: DB.Required({
-        type: DB.ChildEntitiesType(SubBiome),
-      }),
     }),
+  parentReferenceKey: "parent",
   instanceDisplayName: {},
   uniqueConstraints: [
     {
