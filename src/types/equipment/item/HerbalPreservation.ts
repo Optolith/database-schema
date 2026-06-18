@@ -64,8 +64,8 @@ export const HerbalPreservationLongevity = DB.TypeAlias(import.meta.url, {
       translations: NestedTranslationMap(
         DB.Optional,
         "HerbalPreservationLongevity",
-          DB.Object({
-              replacement: DB.Required({
+        DB.Object({
+          replacement: DB.Required({
             comment: "A replacement string.",
             type: DB.IncludeIdentifier(ResponsiveTextReplace),
           }),
