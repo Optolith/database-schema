@@ -148,12 +148,15 @@ import { CauldronEnchantment } from "./traditionArtifacts/CauldronEnchantment.js
 import { ChronicleEnchantment } from "./traditionArtifacts/ChronicleEnchantment.js"
 import { DaggerRitual } from "./traditionArtifacts/DaggerRitual.js"
 import { FoolsHatEnchantment } from "./traditionArtifacts/FoolsHatEnchantment.js"
+import { Hauerkettenzauber } from "./traditionArtifacts/Hauerkettenzauber.js"
 import { Haubenzauber } from "./traditionArtifacts/Haubenzauber.js"
 import { InstrumentEnchantment } from "./traditionArtifacts/InstrumentEnchantment.js"
+import { Keulenzauber } from "./traditionArtifacts/Keulenzauber.js"
 import { Krallenkettenzauber } from "./traditionArtifacts/Krallenkettenzauber.js"
 import { Kristallkugelzauber } from "./traditionArtifacts/Kristallkugelzauber.js"
 import { OrbEnchantment } from "./traditionArtifacts/OrbEnchantment.js"
 import { RingEnchantment } from "./traditionArtifacts/RingEnchantment.js"
+import { Schweinetrommelzauber } from "./traditionArtifacts/Schweinetrommelzauber.js"
 import { SickleRitual } from "./traditionArtifacts/SickleRitual.js"
 import { SpellSwordEnchantment } from "./traditionArtifacts/SpellSwordEnchantment.js"
 import { StaffEnchantment } from "./traditionArtifacts/StaffEnchantment.js"
@@ -245,6 +248,7 @@ export const GoblinRitualIdentifier: () => R = () => R(GoblinRitual)
 export const GuidelineIdentifier: () => R = () => R(Guideline)
 export const HairColorIdentifier: () => R = () => R(HairColor)
 export const HaubenzauberIdentifier: () => R = () => R(Haubenzauber)
+export const HauerkettenZauberIdentifier: () => R = () => R(Hauerkettenzauber)
 export const HerbalAidIdentifier: () => R = () => R(HerbalAid)
 export const HerbalPreservationIdentifier: () => R = () => R(HerbalPreservation)
 export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLightSource)
@@ -254,6 +258,7 @@ export const InstrumentEnchantmentIdentifier: () => R = () => R(InstrumentEnchan
 export const JesterTrickIdentifier: () => R = () => R(JesterTrick)
 export const JewelryIdentifier: () => R = () => R(Jewelry)
 export const KarmaSpecialAbilityIdentifier: () => R = () => R(KarmaSpecialAbility)
+export const KeulenzauberIdentifier: () => R = () => R(Keulenzauber)
 export const KrallenkettenzauberIdentifier: () => R = () => R(Krallenkettenzauber)
 export const KristallkugelzauberIdentifier: () => R = () => R(Kristallkugelzauber)
 export const LaboratoryIdentifier: () => R = () => R(Laboratory)
@@ -305,6 +310,7 @@ export const BotanicRegionIdentifier: () => R = () => R(BotanicRegion)
 export const RingEnchantmentIdentifier: () => R = () => R(RingEnchantment)
 export const RitualIdentifier: () => R = () => R(Ritual)
 export const RopeOrChainIdentifier: () => R = () => R(RopeOrChain)
+export const SchweinetrommelzauberIdentifier: () => R = () => R(Schweinetrommelzauber)
 export const ScriptIdentifier: () => R = () => R(Script)
 export const SermonIdentifier: () => R = () => R(Sermon)
 export const SexPracticeIdentifier: () => R = () => R(SexPractice)
