@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.51.0](https://github.com/Optolith/database-schema/compare/v0.50.1...v0.51.0) (2026-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* rework plants schema
+
+### Features
+
+* add schemas for goblin tradition artifact enchantments ([da1d245](https://github.com/Optolith/database-schema/commit/da1d2459db003a624cce4d84c2695b927d7476f0)), closes [#163](https://github.com/Optolith/database-schema/issues/163) [#162](https://github.com/Optolith/database-schema/issues/162)
+* rework plants schema ([6c62616](https://github.com/Optolith/database-schema/commit/6c6261628583cda5a27d34c194e5aae69c38a079)), closes [#161](https://github.com/Optolith/database-schema/issues/161) [#160](https://github.com/Optolith/database-schema/issues/160)
+
 ## [0.50.1](https://github.com/Optolith/database-schema/compare/v0.50.0...v0.50.1) (2026-06-14)
 
 
