@@ -70,7 +70,6 @@ import {
   JewelryIdentifier,
   KarmaSpecialAbilityIdentifier,
   KeulenzauberIdentifier,
-  KeulenzauberIdentifier,
   KrallenkettenzauberIdentifier,
   KristallkugelzauberIdentifier,
   LaboratoryIdentifier,
