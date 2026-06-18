@@ -132,7 +132,7 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
     DB.Object({
       regions: DB.Required({
         comment: "Where this plant occurs in.",
-        type: DB.IncludeIdentifier(PlantOccurenceTier),
+          type: DB.IncludeIdentifier(PlantOccurrenceTier),
       }),
       rarity: DB.Required({
         comment: "The rarity of this plant in the biome.",
