@@ -7,6 +7,7 @@ import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { src } from "../source/_PublicationRef.js"
 import { translations } from "./_shared.js"
 
+//Keulenzauber für Goblinzauberinnen
 export const Keulenzauber = DB.Entity(import.meta.url, {
   name: "Keulenzauber",
   namePlural: "Keulenzauber",
