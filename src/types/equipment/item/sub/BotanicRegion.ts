@@ -29,5 +29,8 @@ export const BotanicRegion = DB.Entity(import.meta.url, {
       entityMapKeyPath: "translations",
       keyPathInEntityMap: "name",
     },
+    {
+      keyPath: "parent",
+    },
   ],
 })
