@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.52.0](https://github.com/Optolith/database-schema/compare/v0.51.0...v0.52.0) (2026-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* enchantment cost map
+
+### Features
+
+* botanic region uniqueness per parent ([3b522aa](https://github.com/Optolith/database-schema/commit/3b522aa9d7a76b1d8dafa3a89b1712ecba4b0c85)), closes [#166](https://github.com/Optolith/database-schema/issues/166) [#165](https://github.com/Optolith/database-schema/issues/165)
+* enchantment cost map ([894fe21](https://github.com/Optolith/database-schema/commit/894fe21536d21c2bbc618ec77279da96f5303f06)), closes [#167](https://github.com/Optolith/database-schema/issues/167) [#164](https://github.com/Optolith/database-schema/issues/164)
+
 ## [0.51.0](https://github.com/Optolith/database-schema/compare/v0.50.1...v0.51.0) (2026-06-18)
 
 
