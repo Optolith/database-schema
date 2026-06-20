@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.52.1](https://github.com/Optolith/database-schema/compare/v0.52.0...v0.52.1) (2026-06-20)
+
+
+### Features
+
+* optional translation for combat technique restrictions ([1e30f55](https://github.com/Optolith/database-schema/commit/1e30f55407cae829aae2d1a1097c30eff4c68f3a)), closes [#169](https://github.com/Optolith/database-schema/issues/169) [#168](https://github.com/Optolith/database-schema/issues/168)
+
 ## [0.52.0](https://github.com/Optolith/database-schema/compare/v0.51.0...v0.52.0) (2026-06-19)
 
 
