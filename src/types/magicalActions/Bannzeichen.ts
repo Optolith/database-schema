@@ -1,5 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { name_in_library } from "../_Activatable.js"
+import { OneTimeCostMap } from "../_ActivatableSkillCost.ts"
 import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { BannzeichenIdentifier, PropertyIdentifier } from "../_Identifier.js"
@@ -111,6 +112,7 @@ const BannzeichenCost = DB.Enum(import.meta.url, {
   values: () => ({
     Single: DB.EnumCase({ type: DB.IncludeIdentifier(SingleBannzeichenCost) }),
     Disjunction: DB.EnumCase({ type: DB.IncludeIdentifier(BannzeichenCostDisjunction) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
     DerivedFromOption: DB.EnumCase({ type: null }),
   }),
 })
