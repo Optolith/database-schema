@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.52.2](https://github.com/Optolith/database-schema/compare/v0.52.1...v0.52.2) (2026-06-21)
+
+
+### Bug Fixes
+
+* combined unique constraint for botanic regions ([249af59](https://github.com/Optolith/database-schema/commit/249af59f6ac7549fa91ad756f8f12d4802593a3a))
+
 ## [0.52.1](https://github.com/Optolith/database-schema/compare/v0.52.0...v0.52.1) (2026-06-20)
 
 
