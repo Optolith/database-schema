@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.53.0](https://github.com/Optolith/database-schema/compare/v0.52.2...v0.53.0) (2026-06-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* add bannzeichen cost map
+
+### Features
+
+* add bannzeichen cost map ([0e25dbf](https://github.com/Optolith/database-schema/commit/0e25dbf4a70275b9ba87f1d6b50f8e0c5ac806c1))
+* separate tradition artifact enhancement identifiers ([7e97792](https://github.com/Optolith/database-schema/commit/7e977925b52135859dc4335dcf4238c1271c1a02))
+
 ## [0.52.2](https://github.com/Optolith/database-schema/compare/v0.52.1...v0.52.2) (2026-06-21)
 
 
