@@ -238,10 +238,6 @@ export const BannzeichenOption = DB.Entity(import.meta.url, {
 The surrounding parenthesis will/should not be included, they will/should be generated.`,
             type: DB.String({ minLength: 1 }),
           }),
-          native_name: DB.Required({
-            comment: "The native name of the Bannzeichen option.",
-            type: DB.String({ minLength: 1 }),
-          }),
         }),
       ),
     }),
