@@ -16,6 +16,7 @@ const CombatSpecialAbilityUsageType = DB.Enum(import.meta.url, {
   comment: "The definition of how the combat special ability can be used in combat.",
   values: () => ({
     Passive: DB.EnumCase({ type: null }),
+    Active: DB.EnumCase({ type: null }),
     BasicManeuver: DB.EnumCase({ type: null }),
     SpecialManeuver: DB.EnumCase({ type: null }),
   }),
