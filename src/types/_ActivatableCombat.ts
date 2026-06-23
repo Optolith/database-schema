@@ -22,12 +22,12 @@ const CombatSpecialAbilityUsageType = DB.Enum(import.meta.url, {
 })
 
 const CombatStyleUsageType = DB.Enum(import.meta.url, {
-    name: "CombatSpecialAbilityTypeUsageType",
-    comment: "The definition of how the combat special ability style can be used in combat.",
-    values: () => ({
-        Passive: DB.EnumCase({ type: null }),
-        Active: DB.EnumCase({ type: null }),
-    }),
+  name: "CombatSpecialAbilityTypeUsageType",
+  comment: "The definition of how the combat special ability style can be used in combat.",
+  values: () => ({
+    Passive: DB.EnumCase({ type: null }),
+    Active: DB.EnumCase({ type: null }),
+  }),
 })
 
 export const special_ability_usage_type = DB.Required({
@@ -36,8 +36,8 @@ export const special_ability_usage_type = DB.Required({
 })
 
 export const style_usage_type = DB.Required({
-    comment: "The definition of how the combat style can be used in combat.",
-    type: DB.IncludeIdentifier(CombatStyleUsageType),
+  comment: "The definition of how the combat style can be used in combat.",
+  type: DB.IncludeIdentifier(CombatStyleUsageType),
 })
 
 const CombatSpecialAbilityType = DB.Enum(import.meta.url, {
