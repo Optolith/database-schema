@@ -140,6 +140,8 @@ export const ActivatableIdentifier = DB.Enum(import.meta.url, {
   values: () => ({
     Advantage: DB.EnumCase({ type: AdvantageIdentifier() }),
     Disadvantage: DB.EnumCase({ type: DisadvantageIdentifier() }),
+    Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
+    Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
     ...SpecialAbilityIdentifier.type.value.values,
   }),
 })
