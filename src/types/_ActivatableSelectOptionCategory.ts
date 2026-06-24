@@ -17,6 +17,9 @@ import {
   CombatTechniqueIdentifier,
   SkillishIdentifier,
 } from "./_IdentifierGroup.js"
+import {
+    PropertyPrerequisite
+} from "./prerequisites/single/PropertyPrerequisite.js"
 
 export const SelectOptionCategory = DB.Enum(import.meta.url, {
   name: "SelectOptionCategory",
@@ -386,6 +389,7 @@ const SkillSelectOptionCategoryPrerequisite = DB.Enum(import.meta.url, {
   values: () => ({
     Self: DB.EnumCase({ type: DB.IncludeIdentifier(SelfPrerequisite) }),
     SelectOption: DB.EnumCase({ type: DB.IncludeIdentifier(OptionPrerequisite) }),
+    Property: DB.EnumCase({ type: DB.IncludeIdentifier(PropertyPrerequisite) }),
   }),
 })
 
