@@ -235,12 +235,12 @@ const SkillsSelectOptionCategoryCategory = DB.Enum(import.meta.url, {
     Skills: DB.EnumCase({ type: DB.IncludeIdentifier(SkillSelectOptionCategoryCategory) }),
     Spells: DB.EnumCase({
       type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
-        DB.IncludeIdentifierType(SpellFilter()),
+        DB.IncludeIdentifierType(SpellFilter),
       ]),
     }),
     Rituals: DB.EnumCase({
       type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
-        DB.IncludeIdentifierType(RitualFilter()),
+        DB.IncludeIdentifierType(RitualFilter),
       ]),
     }),
     LiturgicalChants: DB.EnumCase({
