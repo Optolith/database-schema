@@ -81,6 +81,10 @@ const isPrerequisiteFor = (
     case "PrimaryAttribute":
     case "BlessedTradition":
     case "MagicalTradition":
+    case "SkillStyle":
+    case "CombatStyle":
+    case "MagicalStyle":
+    case "LiturgicalStyle":
     case "RatedMinimumNumber":
     case "RatedSum":
     case "Enhancement":
