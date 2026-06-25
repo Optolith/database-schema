@@ -7,7 +7,7 @@ export const CantripPrerequisite = DB.TypeAlias(import.meta.url, {
   comment: "Requires a specific cantrip.",
   type: () =>
     DB.Object({
-      cantrip: DB.Required({
+      id: DB.Required({
         comment: "The required cantrip.",
         type: CantripIdentifier(),
       }),

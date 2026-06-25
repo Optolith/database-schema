@@ -7,7 +7,7 @@ export const BlessingPrerequisite = DB.TypeAlias(import.meta.url, {
   comment: "Requires a specific blessing.",
   type: () =>
     DB.Object({
-      blessing: DB.Required({
+      id: DB.Required({
         comment: "The required blessing.",
         type: BlessingIdentifier(),
       }),

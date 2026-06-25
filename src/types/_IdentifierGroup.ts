@@ -209,9 +209,7 @@ export const SpecialAbilityIdentifier = DB.Enum(import.meta.url, {
       AdvancedSkillSpecialAbility: DB.EnumCase({ type: AdvancedSkillSpecialAbilityIdentifier() }),
       AncestorGlyph: DB.EnumCase({ type: AncestorGlyphIdentifier() }),
       BlessedTradition: DB.EnumCase({ type: BlessedTraditionIdentifier() }),
-      Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
       BrawlingSpecialAbility: DB.EnumCase({ type: BrawlingSpecialAbilityIdentifier() }),
-      Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
       CeremonialItemSpecialAbility: DB.EnumCase({ type: CeremonialItemSpecialAbilityIdentifier() }),
       ChronicleEnchantment: DB.EnumCase({ type: ChronicleEnchantmentIdentifier() }),
       CombatSpecialAbility: DB.EnumCase({ type: CombatSpecialAbilityIdentifier() }),
@@ -506,4 +504,12 @@ export const AdvancedSkillStyleSpecialAbilityIdentifier = DB.Enum(import.meta.ur
     AdvancedCombatSpecialAbility: DB.EnumCase({ type: AdvancedCombatSpecialAbilityIdentifier() }),
     AdvancedSkillSpecialAbility: DB.EnumCase({ type: AdvancedSkillSpecialAbilityIdentifier() }),
   }),
+})
+
+export const TinyActivatableIdentifier = DB.Enum(import.meta.url, {
+  name: "TinyActivatableIdentifier",
+  values: () => ({
+    Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
+    Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
+  })
 })
