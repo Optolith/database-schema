@@ -4,6 +4,7 @@ import { DurationUnitValue } from "./_ActivatableSkillDuration.js"
 import { AspectIdentifier, PropertyIdentifier } from "./_Identifier.js"
 import { VolumePointsOptionReferenceIdentifier } from "./_IdentifierGroup.js"
 import { ResponsiveText, ResponsiveTextOptional } from "./_ResponsiveText.js"
+import { OneTimeCostMap } from "./_ActivatableSkillCost.js"
 
 const EnchantmentCost = DB.Enum(import.meta.url, {
   name: "EnchantmentCost",
@@ -11,6 +12,11 @@ const EnchantmentCost = DB.Enum(import.meta.url, {
     ArcaneEnergyCost: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCost) }),
     BindingCost: DB.EnumCase({ type: DB.IncludeIdentifier(BindingCost) }),
   }),
+})
+
+export const cost_note = DB.Optional({
+  comment: "A note, appended to the generated cost string in parenthesis.",
+  type: DB.IncludeIdentifier(ResponsiveTextOptional),
 })
 
 export const cost = DB.Optional({
@@ -32,6 +38,7 @@ export const ArcaneEnergyCost = DB.Enum(import.meta.url, {
     Disjunction: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostDisjunction) }),
     Variable: DB.EnumCase({ type: null }),
     ByLevel: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostByLevel) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
   }),
 })
 

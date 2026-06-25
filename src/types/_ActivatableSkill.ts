@@ -7,6 +7,7 @@ import { FastCastingTime, SlowCastingTime } from "./_ActivatableSkillCastingTime
 import { OneTimeCost, SustainedCost } from "./_ActivatableSkillCost.js"
 import { DurationForOneTime, DurationForSustained } from "./_ActivatableSkillDuration.js"
 import { Range } from "./_ActivatableSkillRange.js"
+import { MathOperation } from "./_MathExpression.ts"
 
 export const OneTimePerformanceParameters = DB.GenTypeAlias(import.meta.url, {
   name: "OneTimePerformanceParameters",
@@ -103,4 +104,22 @@ export const OldParameter = DB.TypeAlias(import.meta.url, {
         type: DB.String(),
       }),
     }),
+})
+
+export const ExpressionBasedParameterValue = DB.TypeAlias(import.meta.url, {
+  name: "ExpressionBasedParameterValue",
+  type: () =>
+    DB.GenIncludeIdentifier(MathOperation, [
+      DB.IncludeIdentifier(ExpressionBasedParameterExpressionValue),
+    ]),
+})
+
+const ExpressionBasedParameterExpressionValue = DB.Enum(import.meta.url, {
+  name: "ExpressionBasedParameterExpressionValue",
+  values: () => ({
+    Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
+    QualityLevels: DB.EnumCase({ type: null }),
+    SkillPoints: DB.EnumCase({ type: null }),
+    SkillRating: DB.EnumCase({ type: null }),
+  }),
 })

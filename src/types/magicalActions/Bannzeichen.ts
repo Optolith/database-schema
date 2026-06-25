@@ -1,8 +1,9 @@
 import * as DB from "tsondb/schema/dsl"
 import { name_in_library } from "../_Activatable.js"
-import { CheckResultBasedDuration } from "../_ActivatableSkillDuration.js"
+import { OneTimeCostMap } from "../_ActivatableSkillCost.ts"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
-import { PropertyIdentifier, BannzeichenIdentifier } from "../_Identifier.js"
+import { BannzeichenIdentifier, PropertyIdentifier } from "../_Identifier.js"
 import { ImprovementCost } from "../_ImprovementCost.js"
 import { ResponsiveText, ResponsiveTextOptional } from "../_ResponsiveText.js"
 import { SkillCheck } from "../_SkillCheck.js"
@@ -111,6 +112,7 @@ const BannzeichenCost = DB.Enum(import.meta.url, {
   values: () => ({
     Single: DB.EnumCase({ type: DB.IncludeIdentifier(SingleBannzeichenCost) }),
     Disjunction: DB.EnumCase({ type: DB.IncludeIdentifier(BannzeichenCostDisjunction) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
     DerivedFromOption: DB.EnumCase({ type: null }),
   }),
 })
@@ -189,11 +191,11 @@ const BannzeichenDuration = DB.TypeAlias(import.meta.url, {
     DB.Object({
       slow: DB.Required({
         comment: "The duration on slow Bannzeichen application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
       fast: DB.Required({
         comment: "The duration on fast Bannzeichen application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
     }),
 })
@@ -234,10 +236,6 @@ export const BannzeichenOption = DB.Entity(import.meta.url, {
             comment: `The Bannzeichen option’s name.
 
 The surrounding parenthesis will/should not be included, they will/should be generated.`,
-            type: DB.String({ minLength: 1 }),
-          }),
-          native_name: DB.Required({
-            comment: "The native name of the Bannzeichen option.",
             type: DB.String({ minLength: 1 }),
           }),
         }),

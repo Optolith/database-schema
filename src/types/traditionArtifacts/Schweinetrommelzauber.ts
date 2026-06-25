@@ -1,22 +1,19 @@
 import * as DB from "tsondb/schema/dsl"
 import { levels, maximum } from "../_Activatable.js"
 import { ap_value } from "../_ActivatableAdventurePointsValue.js"
-import { nameBuilderRules } from "../_ActivatableNames.ts"
+import { nameBuilderRules } from "../_ActivatableNames.js"
 import { cost, property, volume } from "../_ActivatableNonMundane.js"
-import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { src } from "../source/_PublicationRef.js"
-import { translations } from "./_shared.ts"
+import { translations } from "./_shared.js"
 
-export const BowlEnchantment = DB.Entity(import.meta.url, {
-  name: "BowlEnchantment",
-  namePlural: "BowlEnchantments",
+export const Schweinetrommelzauber = DB.Entity(import.meta.url, {
+  name: "Schweinetrommelzauber",
+  namePlural: "Schweinetrommelzauber",
   type: () =>
     DB.Object({
       levels,
       nameBuilderRules,
-      select_options,
-      explicit_select_options,
       maximum,
       prerequisites: DB.Optional({
         type: DB.IncludeIdentifier(GeneralPrerequisites),
@@ -26,7 +23,7 @@ export const BowlEnchantment = DB.Entity(import.meta.url, {
       property: property(),
       ap_value,
       src,
-      translations: translations("BowlEnchantment"),
+      translations: translations("Schweinetrommelzauber"),
     }),
   instanceDisplayName: {},
   uniqueConstraints: [

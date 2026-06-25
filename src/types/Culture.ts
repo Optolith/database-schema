@@ -146,6 +146,25 @@ const CultureLanguage = DB.TypeAlias(import.meta.url, {
         comment: "The language specializations, if any.",
         type: DB.Array(LanguageSpecializationIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "CultureLanguage",
+        DB.Object(
+          {
+            specialization: DB.Optional({
+              comment:
+                "The concrete language specialization, if the language allows to specify arbitrary text.",
+              type: DB.String({ minLength: 1 }),
+            }),
+            specializationPrompt: DB.Optional({
+              comment:
+                "A different promt fro the language specialization, if the language allows to specify arbitrary text.",
+              type: DB.String({ minLength: 1 }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
 })
 

@@ -8,7 +8,7 @@ import { ImprovementCost } from "./_ImprovementCost.js"
 import { SkillCheck } from "./_SkillCheck.js"
 import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
-import { src } from "./source/_PublicationRef.js"
+import { optionalSrc, src } from "./source/_PublicationRef.js"
 
 export const Skill = DB.Entity(import.meta.url, {
   name: "Skill",
@@ -125,6 +125,7 @@ export const SkillApplication = DB.Entity(import.meta.url, {
         comment: "The skill this application belongs to.",
         type: SkillIdentifier(),
       }),
+      src: optionalSrc,
       translations: NestedTranslationMap(
         DB.Required,
         "SkillApplication",

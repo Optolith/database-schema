@@ -2,6 +2,118 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.53.0](https://github.com/Optolith/database-schema/compare/v0.52.2...v0.53.0) (2026-06-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* add bannzeichen cost map
+
+### Features
+
+* add bannzeichen cost map ([0e25dbf](https://github.com/Optolith/database-schema/commit/0e25dbf4a70275b9ba87f1d6b50f8e0c5ac806c1))
+* separate tradition artifact enhancement identifiers ([7e97792](https://github.com/Optolith/database-schema/commit/7e977925b52135859dc4335dcf4238c1271c1a02))
+
+## [0.52.2](https://github.com/Optolith/database-schema/compare/v0.52.1...v0.52.2) (2026-06-21)
+
+
+### Bug Fixes
+
+* combined unique constraint for botanic regions ([249af59](https://github.com/Optolith/database-schema/commit/249af59f6ac7549fa91ad756f8f12d4802593a3a))
+
+## [0.52.1](https://github.com/Optolith/database-schema/compare/v0.52.0...v0.52.1) (2026-06-20)
+
+
+### Features
+
+* optional translation for combat technique restrictions ([1e30f55](https://github.com/Optolith/database-schema/commit/1e30f55407cae829aae2d1a1097c30eff4c68f3a)), closes [#169](https://github.com/Optolith/database-schema/issues/169) [#168](https://github.com/Optolith/database-schema/issues/168)
+
+## [0.52.0](https://github.com/Optolith/database-schema/compare/v0.51.0...v0.52.0) (2026-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* enchantment cost map
+
+### Features
+
+* botanic region uniqueness per parent ([3b522aa](https://github.com/Optolith/database-schema/commit/3b522aa9d7a76b1d8dafa3a89b1712ecba4b0c85)), closes [#166](https://github.com/Optolith/database-schema/issues/166) [#165](https://github.com/Optolith/database-schema/issues/165)
+* enchantment cost map ([894fe21](https://github.com/Optolith/database-schema/commit/894fe21536d21c2bbc618ec77279da96f5303f06)), closes [#167](https://github.com/Optolith/database-schema/issues/167) [#164](https://github.com/Optolith/database-schema/issues/164)
+
+## [0.51.0](https://github.com/Optolith/database-schema/compare/v0.50.1...v0.51.0) (2026-06-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* rework plants schema
+
+### Features
+
+* add schemas for goblin tradition artifact enchantments ([da1d245](https://github.com/Optolith/database-schema/commit/da1d2459db003a624cce4d84c2695b927d7476f0)), closes [#163](https://github.com/Optolith/database-schema/issues/163) [#162](https://github.com/Optolith/database-schema/issues/162)
+* rework plants schema ([6c62616](https://github.com/Optolith/database-schema/commit/6c6261628583cda5a27d34c194e5aae69c38a079)), closes [#161](https://github.com/Optolith/database-schema/issues/161) [#160](https://github.com/Optolith/database-schema/issues/160)
+
+## [0.50.1](https://github.com/Optolith/database-schema/compare/v0.50.0...v0.50.1) (2026-06-14)
+
+
+### Features
+
+* primary blessing for tradition ([9d97dd4](https://github.com/Optolith/database-schema/commit/9d97dd4ec95c8dd42cb6e31873a4702684a941de))
+* trade secrets for herbal aids ([27236a7](https://github.com/Optolith/database-schema/commit/27236a75884fdb891a60a0105ebb5ff82147cbc1)), closes [#159](https://github.com/Optolith/database-schema/issues/159) [#158](https://github.com/Optolith/database-schema/issues/158)
+
+## [0.50.0](https://github.com/Optolith/database-schema/compare/v0.49.0...v0.50.0) (2026-06-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* allow arbitrary AP values for enhancements
+
+### Features
+
+* allow arbitrary AP values for enhancements ([1d06407](https://github.com/Optolith/database-schema/commit/1d06407eb4dee8fec24bc9f8d0d6e31833e4f995))
+* allow arbitrary text input for enhancements ([3a3af6e](https://github.com/Optolith/database-schema/commit/3a3af6e574c1a7d05113ebc75d5d6fa1b92c8dce))
+
+## [0.49.0](https://github.com/Optolith/database-schema/compare/v0.48.0...v0.49.0) (2026-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* add missing skill rating case to parameter expression
+
+### Bug Fixes
+
+* add missing skill rating case to parameter expression ([64ee1cc](https://github.com/Optolith/database-schema/commit/64ee1cce6adccc2027bb890289b31e2cea653645))
+
+## [0.48.0](https://github.com/Optolith/database-schema/compare/v0.47.4...v0.48.0) (2026-06-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* unify some skill durations and ranges with expressions
+
+### Features
+
+* unify some skill durations and ranges with expressions ([31798ca](https://github.com/Optolith/database-schema/commit/31798ca33fab12b1d1c0c6edec0c543173c8f4ac))
+
+## [0.47.4](https://github.com/Optolith/database-schema/compare/v0.47.3...v0.47.4) (2026-06-13)
+
+
+### Features
+
+* culture language translations ([b5ece95](https://github.com/Optolith/database-schema/commit/b5ece951032138b19cb02dfc8172177bd337b37f))
+
+## [0.47.3](https://github.com/Optolith/database-schema/compare/v0.47.2...v0.47.3) (2026-06-13)
+
+
+### Features
+
+* level and options for automatic and str. rec. dis/advantages in sub-races ([a7b8e7e](https://github.com/Optolith/database-schema/commit/a7b8e7ec0c6c1c90b8a656b9b19cd156d403382b)), closes [#150](https://github.com/Optolith/database-schema/issues/150)
+* optional sources for skill applications ([cdb86e9](https://github.com/Optolith/database-schema/commit/cdb86e9aa6768601c9f017f01bde6d70108db083))
+
+
+### Bug Fixes
+
+* profession cantrips must be unique ([6c9f7a6](https://github.com/Optolith/database-schema/commit/6c9f7a6ec2bafb35c40680d1199739f1b435e6a9))
+
 ## [0.47.2](https://github.com/Optolith/database-schema/compare/v0.47.1...v0.47.2) (2026-06-08)
 
 

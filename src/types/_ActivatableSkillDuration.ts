@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { CheckResultBasedModifier, CheckResultValue } from "./_ActivatableSkillCheckResultBased.js"
+import { ExpressionBasedParameterValue } from "./_ActivatableSkill.ts"
 import { ResponsiveText, ResponsiveTextReplace } from "./_ResponsiveText.js"
 import { NestedTranslationMap } from "./Locale.js"
 
@@ -8,8 +8,7 @@ export const DurationForOneTime = DB.Enum(import.meta.url, {
   values: () => ({
     Immediate: DB.EnumCase({ type: DB.IncludeIdentifier(Immediate) }),
     Permanent: DB.EnumCase({ type: DB.IncludeIdentifier(PermanentDuration) }),
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedDuration) }),
-    CheckResultBased: DB.EnumCase({ type: DB.IncludeIdentifier(CheckResultBasedDuration) }),
+    Expression: DB.EnumCase({ type: DB.IncludeIdentifier(ExpressionBasedDuration) }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteDuration) }),
   }),
 })
@@ -84,21 +83,17 @@ export const FixedDuration = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-export const CheckResultBasedDuration = DB.TypeAlias(import.meta.url, {
-  name: "CheckResultBasedDuration",
+export const ExpressionBasedDuration = DB.TypeAlias(import.meta.url, {
+  name: "ExpressionBasedDuration",
   type: () =>
     DB.Object({
       is_maximum: DB.Optional({
         comment: "If the duration is the maximum duration, so it may end earlier.",
         type: DB.Boolean(),
       }),
-      base: DB.Required({
-        comment: "The base value that is derived from the check result.",
-        type: DB.IncludeIdentifier(CheckResultValue),
-      }),
-      modifier: DB.Optional({
-        comment: "If defined, it modifies the base value.",
-        type: DB.IncludeIdentifier(CheckResultBasedModifier),
+      value: DB.Required({
+        comment: "An expression that evaluates to the duration.",
+        type: DB.IncludeIdentifier(ExpressionBasedParameterValue),
       }),
       unit: DB.Required({
         comment: "The duration unit.",
@@ -106,7 +101,7 @@ export const CheckResultBasedDuration = DB.TypeAlias(import.meta.url, {
       }),
       translations: NestedTranslationMap(
         DB.Optional,
-        "CheckResultBasedDuration",
+        "ExpressionBasedDuration",
         DB.Object({
           replacement: DB.Optional({
             comment: "A replacement string.",
@@ -155,6 +150,7 @@ export const DurationUnit = DB.Enum(import.meta.url, {
     Weeks: DB.EnumCase({ type: null }),
     Months: DB.EnumCase({ type: null }),
     Years: DB.EnumCase({ type: null }),
+    Decades: DB.EnumCase({ type: null }),
     Centuries: DB.EnumCase({ type: null }),
     Actions: DB.EnumCase({ type: null }),
     CombatRounds: DB.EnumCase({ type: null }),

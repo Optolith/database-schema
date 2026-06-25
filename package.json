@@ -1,6 +1,6 @@
 {
   "name": "@optolith/database-schema",
-  "version": "0.47.2",
+  "version": "0.53.0",
   "description": "Definitions and utilities for the flat-file database of Optolith, a character creation tool for the Pen and Paper RPG “The Dark Eye 5”, and its external integrations into other software.",
   "keywords": [
     "tde",
@@ -38,7 +38,7 @@
   "author": "Lukas Obermann",
   "license": "MPL-2.0",
   "dependencies": {
-    "@elyukai/utils": "^0.3.4",
+    "@elyukai/utils": "^0.3.6",
     "tsondb": "^0.20.3",
     "yaml": "^2.9.0"
   },

@@ -1,20 +1,12 @@
 import * as DB from "tsondb/schema/dsl"
-import { effect, levels, maximum, name, name_in_library } from "../_Activatable.js"
-import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
+import { levels, maximum } from "../_Activatable.js"
+import { ap_value } from "../_ActivatableAdventurePointsValue.js"
 import { nameBuilderRules } from "../_ActivatableNames.ts"
-import {
-  aeCost,
-  bindingCost,
-  cost,
-  property,
-  volume,
-  volume_l10n,
-} from "../_ActivatableNonMundane.js"
+import { cost, property, volume } from "../_ActivatableNonMundane.js"
 import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
-import { NestedTranslationMap } from "../Locale.js"
-import { Errata } from "../source/_Erratum.js"
 import { src } from "../source/_PublicationRef.js"
+import { translations } from "./_shared.ts"
 
 export const SickleRitual = DB.Entity(import.meta.url, {
   name: "SickleRitual",
@@ -34,23 +26,7 @@ export const SickleRitual = DB.Entity(import.meta.url, {
       property: property(),
       ap_value,
       src,
-      translations: NestedTranslationMap(
-        DB.Required,
-        "SickleRitual",
-        DB.Object({
-          name,
-          name_in_library,
-          effect,
-          bindingCost,
-          aeCost,
-          volume: volume_l10n,
-          ap_value_append,
-          ap_value: ap_value_l10n,
-          errata: DB.Optional({
-            type: DB.IncludeIdentifier(Errata),
-          }),
-        }),
-      ),
+      translations: translations("SickleRitual"),
     }),
   instanceDisplayName: {},
   uniqueConstraints: [

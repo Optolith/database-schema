@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { name_in_library } from "../_Activatable.js"
 import { OldParameter } from "../_ActivatableSkill.js"
-import { CheckResultBasedDuration } from "../_ActivatableSkillDuration.js"
+import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.ts"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { MagicalRuneIdentifier, PropertyIdentifier } from "../_Identifier.js"
 import { CombatTechniqueIdentifier } from "../_IdentifierGroup.js"
@@ -259,11 +259,11 @@ const MagicalRuneDuration = DB.TypeAlias(import.meta.url, {
     DB.Object({
       slow: DB.Required({
         comment: "The duration on slow rune application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
       fast: DB.Required({
         comment: "The duration on fast rune application.",
-        type: DB.IncludeIdentifier(CheckResultBasedDuration),
+        type: DB.IncludeIdentifier(ExpressionBasedDuration),
       }),
     }),
 })

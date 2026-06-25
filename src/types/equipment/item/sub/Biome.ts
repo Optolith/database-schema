@@ -1,5 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "../../../Locale.js"
+import { SubBiome } from "./SubBiome.js"
 
 export const Biome = DB.Entity(import.meta.url, {
   name: "Biome",
@@ -16,6 +17,9 @@ export const Biome = DB.Entity(import.meta.url, {
           }),
         }),
       ),
+      sub_biomes: DB.Required({
+        type: DB.ChildEntitiesType(SubBiome),
+      }),
     }),
   instanceDisplayName: {},
   uniqueConstraints: [

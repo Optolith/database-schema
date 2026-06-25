@@ -2,7 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { src } from "../../source/_PublicationRef.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { WeaponIdentifier, ArmorIdentifier } from "../../_Identifier.js"
-import { EffectType } from "./_Herbary.js"
+import { EffectType, RecipeTradeSecret } from "./_Herbary.js"
 
 export const HerbalAid = DB.Entity(import.meta.url, {
   name: "HerbalAid",
@@ -16,6 +16,10 @@ export const HerbalAid = DB.Entity(import.meta.url, {
       crafting_difficulty: DB.Required({
         comment: "The difficulty for this aid to craft.",
         type: DB.Integer(),
+      }),
+      trade_secret: DB.Optional({
+        comment: "AP value and prerequisites of the herbal aid�s trade secret.",
+        type: DB.IncludeIdentifier(RecipeTradeSecret),
       }),
       combatUse: DB.Optional({
         comment: "The armor or weapon this herbal aid represents.",

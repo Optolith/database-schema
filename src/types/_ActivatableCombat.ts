@@ -9,6 +9,7 @@ import {
   CombatRelatedSpecialAbilityIdentifier,
   CombatTechniqueIdentifier,
 } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 const CombatSpecialAbilityUsageType = DB.Enum(import.meta.url, {
   name: "CombatSpecialAbilityUsageType",
@@ -323,6 +324,16 @@ const SpecificApplicableCombatTechnique = DB.TypeAlias(import.meta.url, {
       restriction: DB.Optional({
         type: DB.IncludeIdentifier(ApplicableSpecificCombatTechniquesRestriction),
       }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "SpecificApplicableCombatTechnique",
+        DB.Object({
+          restriction: DB.Required({
+            comment: "The additional restriction of the combat technique.",
+            type: DB.String({ minLength: 1, markdown: "inline" }),
+          }),
+        }),
+      ),
       weapons: DB.Optional({
         comment: "The specific weapons this combat special ability is only applicable to.",
         type: DB.Array(WeaponIdentifier(), { minItems: 1 }),
