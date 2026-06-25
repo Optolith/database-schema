@@ -15,6 +15,12 @@ export const name_in_library = DB.Optional({
   type: DB.String({ minLength: 1 }),
 })
 
+export const additionalName = DB.Optional({
+  comment:
+    "A part of the name that is appended in parenthesis. This can be used to specify the group of people that typically uses this entry (e.g. the name of the witch circle for a magic style for witches).\n\nIf `name_in_library` is specified, this will be ignored for places where the `name_in_library` is used.",
+  type: DB.String({ minLength: 1 }),
+})
+
 export const levels = DB.Optional({
   comment: "Number of available levels.",
   type: DB.Integer({ minimum: 2 }),
