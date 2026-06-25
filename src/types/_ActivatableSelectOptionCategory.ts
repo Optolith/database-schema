@@ -11,15 +11,14 @@ import {
   SkillIdentifier,
   SpellIdentifier,
   TargetCategoryIdentifier,
+  PropertyIdentifier,
 } from "./_Identifier.js"
 import {
   ActivatableIdentifier,
   CombatTechniqueIdentifier,
   SkillishIdentifier,
 } from "./_IdentifierGroup.js"
-import {
-    PropertyPrerequisite
-} from "./prerequisites/single/PropertyPrerequisite.js"
+import { PropertyPrerequisite } from "./prerequisites/single/PropertyPrerequisite.js"
 
 export const SelectOptionCategory = DB.Enum(import.meta.url, {
   name: "SelectOptionCategory",
@@ -214,16 +213,34 @@ const SkillsSelectOptionCategory = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const SpellFilter = DB.Enum(import.meta.url, {
+  name: "SpellFilter",
+  values: () => ({
+    Identifier: DB.EnumCase({ type: SpellIdentifier() }),
+    Property: DB.EnumCase({ type: PropertyIdentifier() }),
+  }),
+})
+
+const RitualFilter = DB.Enum(import.meta.url, {
+  name: "RitualFilter",
+  values: () => ({
+    Identifier: DB.EnumCase({ type: RitualIdentifier() }),
+    Property: DB.EnumCase({ type: PropertyIdentifier() }),
+  }),
+})
+
 const SkillsSelectOptionCategoryCategory = DB.Enum(import.meta.url, {
   name: "SkillsSelectOptionCategoryCategory",
   values: () => ({
     Skills: DB.EnumCase({ type: DB.IncludeIdentifier(SkillSelectOptionCategoryCategory) }),
     Spells: DB.EnumCase({
-      type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [SpellIdentifier()]),
+      type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
+        DB.IncludeIdentifierType(SpellFilter()),
+      ]),
     }),
     Rituals: DB.EnumCase({
       type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
-        RitualIdentifier(),
+        DB.IncludeIdentifierType(RitualFilter()),
       ]),
     }),
     LiturgicalChants: DB.EnumCase({
@@ -389,7 +406,6 @@ const SkillSelectOptionCategoryPrerequisite = DB.Enum(import.meta.url, {
   values: () => ({
     Self: DB.EnumCase({ type: DB.IncludeIdentifier(SelfPrerequisite) }),
     SelectOption: DB.EnumCase({ type: DB.IncludeIdentifier(OptionPrerequisite) }),
-    Property: DB.EnumCase({ type: DB.IncludeIdentifier(PropertyPrerequisite) }),
   }),
 })
 
