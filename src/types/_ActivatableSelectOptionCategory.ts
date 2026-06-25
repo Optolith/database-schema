@@ -18,7 +18,6 @@ import {
   CombatTechniqueIdentifier,
   SkillishIdentifier,
 } from "./_IdentifierGroup.js"
-import { PropertyPrerequisite } from "./prerequisites/single/PropertyPrerequisite.js"
 
 export const SelectOptionCategory = DB.Enum(import.meta.url, {
   name: "SelectOptionCategory",
