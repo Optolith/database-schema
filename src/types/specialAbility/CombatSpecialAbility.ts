@@ -7,7 +7,7 @@ import {
   penalty_l10n,
   special_ability_usage_type,
 } from "../_ActivatableCombat.js"
-import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.ts"
+import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.js"
 import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
 import { skill_applications, skill_uses } from "../_ActivatableSkillApplicationsAndUses.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
@@ -22,7 +22,7 @@ export const CombatSpecialAbility = DB.Entity(import.meta.url, {
     DB.Object({
       levels,
       nameBuilderRules,
-      special_ability_usage_type,
+      usage_type: special_ability_usage_type,
       select_options,
       explicit_select_options,
       skill_applications,

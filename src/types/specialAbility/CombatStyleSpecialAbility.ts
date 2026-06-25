@@ -19,7 +19,7 @@ export const CombatStyleSpecialAbility = DB.Entity(import.meta.url, {
     DB.Object({
       levels,
       nameBuilderRules,
-      style_usage_type,
+      usage_type: style_usage_type,
       type,
       select_options,
       explicit_select_options,
