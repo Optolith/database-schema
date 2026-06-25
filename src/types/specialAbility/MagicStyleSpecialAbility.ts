@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { levels, maximum, name, name_in_library, rules } from "../_Activatable.js"
+import { additionalName, levels, maximum, name, name_in_library, rules } from "../_Activatable.js"
 import { advanced } from "../_ActivatableAdvanced.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.ts"
@@ -34,6 +34,7 @@ export const MagicStyleSpecialAbility = DB.Entity(import.meta.url, {
         "MagicStyleSpecialAbility",
         DB.Object({
           name,
+          additionalName,
           name_in_library,
           rules,
           ap_value_append,
