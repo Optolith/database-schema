@@ -24,12 +24,7 @@ import {
   BlessedTraditionPrerequisite,
   MagicalTraditionPrerequisite,
 } from "./single/TraditionPrerequisite.js"
-import {
-  SkillStylePrerequisite,
-  CombatStylePrerequisite,
-  MagicalStylePrerequisite,
-  LiturgicalStylePrerequisite,
-} from "./single/StylePrerequisite.js"
+import { StylePrerequisite } from "./single/StylePrerequisite.js"
 
 export const RulePrerequisiteGroup = DB.Enum(import.meta.url, {
   name: "RulePrerequisiteGroup",
@@ -76,10 +71,7 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     PrimaryAttribute: DB.EnumCase({ type: DB.IncludeIdentifier(PrimaryAttributePrerequisite) }),
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
-    SkillStyle: DB.EnumCase({ type: DB.IncludeIdentifier(SkillStylePrerequisite) }),
-    CombatStyle: DB.EnumCase({ type: DB.IncludeIdentifier(CombatStylePrerequisite) }),
-    MagicalStyle: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalStylePrerequisite) }),
-    LiturgicalStyle: DB.EnumCase({ type: DB.IncludeIdentifier(LiturgicalStylePrerequisite) }),
+    Style: DB.EnumCase({ type: DB.IncludeIdentifier(StylePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
     RatedSum: DB.EnumCase({ type: DB.IncludeIdentifier(RatedSumPrerequisite) }),
