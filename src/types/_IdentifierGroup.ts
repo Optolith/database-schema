@@ -511,5 +511,5 @@ export const TinyActivatableIdentifier = DB.Enum(import.meta.url, {
   values: () => ({
     Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
     Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
-  })
+  }),
 })
