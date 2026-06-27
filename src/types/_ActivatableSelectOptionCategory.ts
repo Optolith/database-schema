@@ -215,7 +215,7 @@ const SkillsSelectOptionCategory = DB.TypeAlias(import.meta.url, {
 const SpellFilter = DB.Enum(import.meta.url, {
   name: "SpellFilter",
   values: () => ({
-    Identifier: DB.EnumCase({ type: SpellIdentifier() }),
+    Single: DB.EnumCase({ type: SpellIdentifier() }),
     Property: DB.EnumCase({ type: PropertyIdentifier() }),
   }),
 })
@@ -223,7 +223,7 @@ const SpellFilter = DB.Enum(import.meta.url, {
 const RitualFilter = DB.Enum(import.meta.url, {
   name: "RitualFilter",
   values: () => ({
-    Identifier: DB.EnumCase({ type: RitualIdentifier() }),
+    Single: DB.EnumCase({ type: RitualIdentifier() }),
     Property: DB.EnumCase({ type: PropertyIdentifier() }),
   }),
 })
