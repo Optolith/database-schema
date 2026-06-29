@@ -505,3 +505,11 @@ export const AdvancedSkillStyleSpecialAbilityIdentifier = DB.Enum(import.meta.ur
     AdvancedSkillSpecialAbility: DB.EnumCase({ type: AdvancedSkillSpecialAbilityIdentifier() }),
   }),
 })
+
+export const TinyActivatableIdentifier = DB.Enum(import.meta.url, {
+  name: "TinyActivatableIdentifier",
+  values: () => ({
+    Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
+    Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
+  }),
+})
