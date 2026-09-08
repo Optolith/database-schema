@@ -1,10 +1,10 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "./Locale.js"
+import { StandaloneCostMap } from "./_ActivatableSkillCost.js"
 import { DurationUnitValue } from "./_ActivatableSkillDuration.js"
 import { AspectIdentifier, PropertyIdentifier } from "./_Identifier.js"
 import { VolumePointsOptionReferenceIdentifier } from "./_IdentifierGroup.js"
 import { ResponsiveText, ResponsiveTextOptional } from "./_ResponsiveText.js"
-import { OneTimeCostMap } from "./_ActivatableSkillCost.js"
 
 const EnchantmentCost = DB.Enum(import.meta.url, {
   name: "EnchantmentCost",
@@ -38,7 +38,7 @@ export const ArcaneEnergyCost = DB.Enum(import.meta.url, {
     Disjunction: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostDisjunction) }),
     Variable: DB.EnumCase({ type: null }),
     ByLevel: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostByLevel) }),
-    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(StandaloneCostMap) }),
   }),
 })
 
