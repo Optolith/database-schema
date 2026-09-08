@@ -154,7 +154,32 @@ export const DurationUnit = DB.Enum(import.meta.url, {
     Centuries: DB.EnumCase({ type: null }),
     Actions: DB.EnumCase({ type: null }),
     CombatRounds: DB.EnumCase({ type: null }),
+    Custom: DB.EnumCase({
+      type: DB.IncludeIdentifier(CustomDurationUnit),
+    }),
   }),
+})
+
+const CustomDurationUnit = DB.TypeAlias(import.meta.url, {
+  name: "CustomDurationUnit",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "CustomDurationUnit",
+        DB.Object({
+          name: DB.Required({
+            comment: "The name of the custom duration unit.",
+            type: DB.IncludeIdentifier(ResponsiveText),
+          }),
+          symbol: DB.Required({
+            comment:
+              "A symbol or shortened label for the custom duration unit for use in small spaces.",
+            type: DB.IncludeIdentifier(ResponsiveText),
+          }),
+        }),
+      ),
+    }),
 })
 
 export const DurationUnitValue = DB.TypeAlias(import.meta.url, {
