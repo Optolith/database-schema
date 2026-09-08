@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.54.0](https://github.com/Optolith/database-schema/compare/v0.53.0...v0.54.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* active usage type for combat styles
+* custom duration unit
+* custom duration unit translations
+* derived select options based on property
+* modifiable activatable skill cost map
+* remove bannzeichen option native name
+* use parameter maps for activatable parameter maps
+
+* use parameter maps for activatable parameter maps ([5ca99fd](https://github.com/Optolith/database-schema/commit/5ca99fdb609dd5a9b5f52cbbc4bffc43713b3bdb))
+
+### Features
+
+* activatable skill casting time note ([51ea249](https://github.com/Optolith/database-schema/commit/51ea2499df00ebcc016d737fdf9bedb84887296b)), closes [#181](https://github.com/Optolith/database-schema/issues/181)
+* active usage type for combat styles ([0c8f351](https://github.com/Optolith/database-schema/commit/0c8f3518ea8e89dfa544c17323d0cd3dc5e9870d)), closes [#170](https://github.com/Optolith/database-schema/issues/170), references [#171](https://github.com/Optolith/database-schema/issues/171)
+* custom duration unit ([519f669](https://github.com/Optolith/database-schema/commit/519f669da7774befcfa3086d6a569b38f9ff4aaa)), closes [#179](https://github.com/Optolith/database-schema/issues/179)
+* derived select options based on property ([9718f7d](https://github.com/Optolith/database-schema/commit/9718f7d341a288c7c6c16c3f66ddeb1081f8a262)), closes [#174](https://github.com/Optolith/database-schema/issues/174), references [#175](https://github.com/Optolith/database-schema/issues/175)
+* modifiable activatable skill cost map ([9f88062](https://github.com/Optolith/database-schema/commit/9f88062ceeaaab01038b1408213b5165bc0faf67)), closes [#180](https://github.com/Optolith/database-schema/issues/180)
+* optional additional name for magic styles ([3b3ae6f](https://github.com/Optolith/database-schema/commit/3b3ae6f3a646a95fa320a9740d97d470328dfd1b))
+
+### Bug Fixes
+
+* custom duration unit translations ([fb36d94](https://github.com/Optolith/database-schema/commit/fb36d94b3938fa95434b4cb46bba9f194b28509e))
+* remove bannzeichen option native name ([028e438](https://github.com/Optolith/database-schema/commit/028e438909daaf726ad09f5a9d80ed9e356d4b10))
 ## [0.53.0](https://github.com/Optolith/database-schema/compare/v0.52.2...v0.53.0) (2026-06-21)
 
 
