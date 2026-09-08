@@ -2,8 +2,8 @@ import * as DB from "tsondb/schema/dsl"
 import { ResponsiveTextOptional } from "./_ResponsiveText.ts"
 import { NestedTranslationMap } from "./Locale.ts"
 
-export const CostMap = DB.GenTypeAlias(import.meta.url, {
-  name: "CostMap",
+export const ParameterMap = DB.GenTypeAlias(import.meta.url, {
+  name: "ParameterMap",
   parameters: [DB.Param("Value")],
   comment: `A content that is \`2/4/8/16 AE (activation) + 1/2/4/8 per 5 minutes for an item the size of a cup/chest/door/castle gate\` can be represented as a cost map.
 
@@ -11,19 +11,19 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
   type: Value =>
     DB.Object({
       options: DB.Required({
-        comment: "The possible costs and associated labels.",
-        type: DB.Array(DB.GenIncludeIdentifier(CostMapOption, [DB.TypeArgument(Value)]), {
+        comment: "The possible values and associated labels.",
+        type: DB.Array(DB.GenIncludeIdentifier(ParameterMapOption, [DB.TypeArgument(Value)]), {
           minItems: 2,
         }),
       }),
       style: DB.Required({
         comment:
           "The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).",
-        type: DB.IncludeIdentifier(CostMapStyle),
+        type: DB.IncludeIdentifier(ParameterMapStyle),
       }),
       translations: NestedTranslationMap(
         DB.Optional,
-        "CostMap",
+        "ParameterMap",
         DB.Object(
           {
             listPrefix: DB.Optional({
@@ -46,8 +46,8 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
     }),
 })
 
-const CostMapStyle = DB.Enum(import.meta.url, {
-  name: "CostMapStyle",
+const ParameterMapStyle = DB.Enum(import.meta.url, {
+  name: "ParameterMapStyle",
   comment:
     "The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).",
   values: () => ({
@@ -56,19 +56,19 @@ const CostMapStyle = DB.Enum(import.meta.url, {
   }),
 })
 
-const CostMapOption = DB.GenTypeAlias(import.meta.url, {
-  name: "CostMapOption",
+const ParameterMapOption = DB.GenTypeAlias(import.meta.url, {
+  name: "ParameterMapOption",
   parameters: [DB.Param("Value")],
   type: Value =>
     DB.Object({
       value: DB.Required({
         comment:
-          "The activation cost value for this option. If used for sustained cost, the interval cost is always half of this value.",
+          "The value this option represents. If used for sustained cost, the interval cost is always half of this value.",
         type: DB.TypeArgument(Value),
       }),
       translations: NestedTranslationMap(
         DB.Optional,
-        "CostMapOption",
+        "ParameterMapOption",
         DB.Object({
           label: DB.Required({
             comment: "The description of the option for cost string generation.",

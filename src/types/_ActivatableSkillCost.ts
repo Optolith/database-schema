@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { CostMap } from "./_ActivatableSkillCostMap.ts"
 import { DurationUnitValue } from "./_ActivatableSkillDuration.js"
+import { ParameterMap } from "./_ActivatableSkillParameterMap.ts"
 import { SkillModificationLevelIdentifier } from "./_Identifier.js"
 import { ResponsiveText, ResponsiveTextOptional, ResponsiveTextReplace } from "./_ResponsiveText.js"
 import { NestedTranslationMap } from "./Locale.js"
@@ -225,7 +225,7 @@ const ModifiableOneTimeCostMap = DB.TypeAlias(import.meta.url, {
     DB.Object({
       map: DB.Required({
         comment: "The cost map.",
-        type: DB.GenIncludeIdentifier(CostMap, [
+        type: DB.GenIncludeIdentifier(ParameterMap, [
           DB.IncludeIdentifier(ModifiableOneTimeCostMapOptionValue),
         ]),
       }),
@@ -238,7 +238,7 @@ const NonModifiableOneTimeCostMap = DB.TypeAlias(import.meta.url, {
     DB.Object({
       map: DB.Required({
         comment: "The cost map.",
-        type: DB.GenIncludeIdentifier(CostMap, [
+        type: DB.GenIncludeIdentifier(ParameterMap, [
           DB.IncludeIdentifier(NonModifiableOneTimeCostMapOptionValue),
         ]),
       }),
@@ -251,7 +251,7 @@ const NonModifiableOneTimeCostMap = DB.TypeAlias(import.meta.url, {
 export const StandaloneCostMap = DB.TypeAlias(import.meta.url, {
   name: "StandaloneCostMap",
   type: () =>
-    DB.GenIncludeIdentifier(CostMap, [
+    DB.GenIncludeIdentifier(ParameterMap, [
       DB.IncludeIdentifier(NonModifiableOneTimeCostMapOptionValue),
     ]),
 })
@@ -262,7 +262,7 @@ const ModifiableSustainedCostMap = DB.TypeAlias(import.meta.url, {
     DB.Object({
       map: DB.Required({
         comment: "The cost map.",
-        type: DB.GenIncludeIdentifier(CostMap, [
+        type: DB.GenIncludeIdentifier(ParameterMap, [
           DB.IncludeIdentifier(ModifiableSustainedCostMapOptionValue),
         ]),
       }),
@@ -279,7 +279,7 @@ const NonModifiableSustainedCostMap = DB.TypeAlias(import.meta.url, {
     DB.Object({
       map: DB.Required({
         comment: "The cost map.",
-        type: DB.GenIncludeIdentifier(CostMap, [
+        type: DB.GenIncludeIdentifier(ParameterMap, [
           DB.IncludeIdentifier(NonModifiableSustainedCostMapOptionValue),
         ]),
       }),
