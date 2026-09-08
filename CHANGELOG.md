@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.55.0](https://github.com/Optolith/database-schema/compare/v0.54.0...v0.55.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* restricted blessing translations and restructuring
+
+### Features
+
+* restricted blessing translations and restructuring ([f1867b7](https://github.com/Optolith/database-schema/commit/f1867b7b085a6219b13e5446b61ccf3b75878cba))
 ## [0.54.0](https://github.com/Optolith/database-schema/compare/v0.53.0...v0.54.0) (2026-09-08)
 
 ### ⚠ BREAKING CHANGES
