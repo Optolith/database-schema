@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.56.0](https://github.com/Optolith/database-schema/compare/v0.55.0...v0.56.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* advanced combat special ability type and labels
+
+### Features
+
+* advanced combat special ability type and labels ([b953514](https://github.com/Optolith/database-schema/commit/b95351409bb2a7d0e4af365b299e3a2bccf0a3a4))
 ## [0.55.0](https://github.com/Optolith/database-schema/compare/v0.54.0...v0.55.0) (2026-09-08)
 
 ### ⚠ BREAKING CHANGES
