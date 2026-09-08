@@ -1431,6 +1431,8 @@ export const Locale = DB.Entity(import.meta.url, {
           "Active": null,
           "Basic Maneuver": null,
           "Special Maneuver": null,
+          "AC": null,
+          "UC": null,
           "Volume": null,
           "Penalty": null,
           "Binding Cost": null,
