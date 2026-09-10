@@ -1439,6 +1439,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "one or two of these special abilities can alternatively be replaced by advanced special abilities {$first} and/or {$second}": null,
           ".input {$count :number} {{{$count} more by primary patron}}": null,
           "Patron": null,
+          ".input {$count :number} {{Here you can select {$count} fitting special abilities.}}": null,
           "corresponding combat style special ability": null,
           "corresponding liturgical style special ability": null,
           "corresponding magic style special ability": null,
