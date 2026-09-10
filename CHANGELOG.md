@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.57.0](https://github.com/Optolith/database-schema/compare/v0.56.0...v0.57.0) (2026-09-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow any advanced special ability for slot
+
+### Features
+
+* allow any advanced special ability for slot ([dac3a55](https://github.com/Optolith/database-schema/commit/dac3a55200c45c0c1ae0b1b6fd4faeb318907b77)), closes [#104](https://github.com/Optolith/database-schema/issues/104)
 ## [0.56.0](https://github.com/Optolith/database-schema/compare/v0.55.0...v0.56.0) (2026-09-08)
 
 ### ⚠ BREAKING CHANGES
