@@ -22,6 +22,11 @@ export const AnimalShapeSize = DB.Entity(import.meta.url, {
             comment: "The animal shape size’s name.",
             type: DB.String({ minLength: 1 }),
           }),
+          nameInAPValue: DB.Required({
+            comment:
+              "The animal shape size’s name in the generated AP Value text for the Animal Shape entry.",
+            type: DB.String({ minLength: 1 }),
+          }),
         }),
       ),
     }),
