@@ -8,6 +8,7 @@ import { MathOperation } from "../../_MathExpression.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { EffectType, LaboratoryLevel, RecipeComplexity, RecipeTradeSecret } from "./_Herbary.js"
+import { CostRange } from "./_Item.ts"
 
 export const Poison = DB.Entity(import.meta.url, {
   name: "Poison",
@@ -122,6 +123,7 @@ const PoisonCost = DB.Enum(import.meta.url, {
       comment: "The cost depends on whether the poison is being purchased or sold.",
       type: DB.IncludeIdentifier(DependingOnPurchaseOrSalePoisonCost),
     }),
+    Range: DB.EnumCase({ type: DB.IncludeIdentifier(CostRange) }),
   }),
 })
 
