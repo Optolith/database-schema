@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.58.0](https://github.com/Optolith/database-schema/compare/v0.57.0...v0.58.0) (2026-09-11)
+
+### ⚠ BREAKING CHANGES
+
+* animal shape size name for text generation
+* cauldron enchantment identifier group
+* cost range for poisons
+* missing brew translation
+
+### Features
+
+* animal shape size name for text generation ([44c7548](https://github.com/Optolith/database-schema/commit/44c754890eb8d515acc3d34e04ccb459f3145be1))
+* cost range for poisons ([290ddfa](https://github.com/Optolith/database-schema/commit/290ddfad3c0b0271ba376f4cc27d64768335105f))
+
+### Bug Fixes
+
+* cauldron enchantment identifier group ([0944f81](https://github.com/Optolith/database-schema/commit/0944f81939587aa8e8df0d6cea097c3d69e0b337))
+* missing brew translation ([5673a9a](https://github.com/Optolith/database-schema/commit/5673a9a01466c79d59776123a171e78a3a8d0628))
 ## [0.57.0](https://github.com/Optolith/database-schema/compare/v0.56.0...v0.57.0) (2026-09-10)
 
 ### ⚠ BREAKING CHANGES
