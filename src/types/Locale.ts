@@ -1434,6 +1434,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "AC": null,
           "UC": null,
           "Volume": null,
+          "Brew": null,
           "Penalty": null,
           "Binding Cost": null,
           "one or two of these special abilities can alternatively be replaced by advanced special abilities {$first} and/or {$second}": null,
