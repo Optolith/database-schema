@@ -24,6 +24,10 @@ export const Disease = DB.Entity(import.meta.url, {
         comment: "Whether the disease is a magical disease.",
         type: DB.Boolean(),
       }),
+      isVenerealDisease: DB.Required({
+        comment: "Whether the disease is a venereal disease.",
+        type: DB.Boolean(),
+      }),
       src,
       translations: NestedTranslationMap(DB.Required, "Disease", DiseaseTranslation),
     }),
