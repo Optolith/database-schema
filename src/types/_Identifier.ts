@@ -50,9 +50,9 @@ import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
 import { ArmorType } from "./equipment/item/sub/ArmorType.js"
 import { Biome } from "./equipment/item/sub/Biome.js"
-import { SubBiome } from "./equipment/item/sub/SubBiome.js"
-import { Reach } from "./equipment/item/sub/Reach.js"
 import { BotanicRegion } from "./equipment/item/sub/BotanicRegion.js"
+import { Reach } from "./equipment/item/sub/Reach.js"
+import { SubBiome } from "./equipment/item/sub/SubBiome.js"
 import { ThievesTool } from "./equipment/item/ThievesTool.js"
 import { ToolOfTheTrade } from "./equipment/item/ToolOfTheTrade.js"
 import { TravelGearOrTool } from "./equipment/item/TravelGearOrTool.js"
@@ -148,8 +148,8 @@ import { CauldronEnchantment } from "./traditionArtifacts/CauldronEnchantment.js
 import { ChronicleEnchantment } from "./traditionArtifacts/ChronicleEnchantment.js"
 import { DaggerRitual } from "./traditionArtifacts/DaggerRitual.js"
 import { FoolsHatEnchantment } from "./traditionArtifacts/FoolsHatEnchantment.js"
-import { Hauerkettenzauber } from "./traditionArtifacts/Hauerkettenzauber.js"
 import { Haubenzauber } from "./traditionArtifacts/Haubenzauber.js"
+import { Hauerkettenzauber } from "./traditionArtifacts/Hauerkettenzauber.js"
 import { InstrumentEnchantment } from "./traditionArtifacts/InstrumentEnchantment.js"
 import { Keulenzauber } from "./traditionArtifacts/Keulenzauber.js"
 import { Krallenkettenzauber } from "./traditionArtifacts/Krallenkettenzauber.js"
@@ -248,7 +248,7 @@ export const GoblinRitualIdentifier: () => R = () => R(GoblinRitual)
 export const GuidelineIdentifier: () => R = () => R(Guideline)
 export const HairColorIdentifier: () => R = () => R(HairColor)
 export const HaubenzauberIdentifier: () => R = () => R(Haubenzauber)
-export const HauerkettenZauberIdentifier: () => R = () => R(Hauerkettenzauber)
+export const HauerkettenzauberIdentifier: () => R = () => R(Hauerkettenzauber)
 export const HerbalAidIdentifier: () => R = () => R(HerbalAid)
 export const HerbalPreservationIdentifier: () => R = () => R(HerbalPreservation)
 export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLightSource)
