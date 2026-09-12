@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.59.0](https://github.com/Optolith/database-schema/compare/v0.58.0...v0.59.0) (2026-09-12)
+
+### ⚠ BREAKING CHANGES
+
+* magical dis-/advantage subtypes
+
+### Features
+
+* magical dis-/advantage subtypes ([986a5a9](https://github.com/Optolith/database-schema/commit/986a5a958f4d2f056ae47bdc6fe3f8627359ced1)), closes [#147](https://github.com/Optolith/database-schema/issues/147)
 ## [0.58.0](https://github.com/Optolith/database-schema/compare/v0.57.0...v0.58.0) (2026-09-11)
 
 ### ⚠ BREAKING CHANGES
