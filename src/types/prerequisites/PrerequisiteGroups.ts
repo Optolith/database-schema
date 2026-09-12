@@ -2,6 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { ActivatablePrerequisite } from "./single/ActivatablePrerequisite.js"
 import { AncestorBloodPrerequisite } from "./single/AncestorBloodPrerequisite.js"
 import { AnimistPowerPrerequisite } from "./single/AnimistPowerPrerequisite.js"
+import { AnySpecialAbilityOfGroupPrerequisite } from "./single/AnySpecialAbilityOfGroupPrerequisite.ts"
 import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
@@ -24,7 +25,6 @@ import {
   BlessedTraditionPrerequisite,
   MagicalTraditionPrerequisite,
 } from "./single/TraditionPrerequisite.js"
-import { StylePrerequisite } from "./single/StylePrerequisite.js"
 
 export const RulePrerequisiteGroup = DB.Enum(import.meta.url, {
   name: "RulePrerequisiteGroup",
@@ -60,7 +60,6 @@ export const PublicationPrerequisiteGroup = DB.Enum(import.meta.url, {
 export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
   name: "GeneralPrerequisiteGroup",
   values: () => ({
-    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     Sex: DB.EnumCase({ type: DB.IncludeIdentifier(SexPrerequisite) }),
     Race: DB.EnumCase({ type: DB.IncludeIdentifier(RacePrerequisite) }),
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
@@ -69,9 +68,12 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     State: DB.EnumCase({ type: DB.IncludeIdentifier(StatePrerequisite) }),
     Rule: DB.EnumCase({ type: DB.IncludeIdentifier(RulePrerequisite) }),
     PrimaryAttribute: DB.EnumCase({ type: DB.IncludeIdentifier(PrimaryAttributePrerequisite) }),
+    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
-    Style: DB.EnumCase({ type: DB.IncludeIdentifier(StylePrerequisite) }),
+    AnySpecialAbilityOfGroup: DB.EnumCase({
+      type: DB.IncludeIdentifier(AnySpecialAbilityOfGroupPrerequisite),
+    }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
     RatedSum: DB.EnumCase({ type: DB.IncludeIdentifier(RatedSumPrerequisite) }),
