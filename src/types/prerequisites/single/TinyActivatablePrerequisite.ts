@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { BlessingIdentifier, CantripIdentifier } from "../../_Identifier.js"
+import { TinyActivatableIdentifier } from "../../_IdentifierGroup.js"
 import { DisplayOption } from "../DisplayOption.js"
 
 export const TinyActivatablePrerequisite = DB.TypeAlias(import.meta.url, {
@@ -9,18 +9,10 @@ export const TinyActivatablePrerequisite = DB.TypeAlias(import.meta.url, {
     DB.Object({
       id: DB.Required({
         comment: "The required item.",
-        type: DB.IncludeIdentifierType(TinyActivatableCategory),
+        type: DB.IncludeIdentifierType(TinyActivatableIdentifier),
       }),
       display_option: DB.Optional({
         type: DB.IncludeIdentifier(DisplayOption),
       }),
     }),
-})
-
-const TinyActivatableCategory = DB.Enum(import.meta.url, {
-  name: "TinyActivatableCategory",
-  values: () => ({
-    Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
-    Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
-  }),
 })
