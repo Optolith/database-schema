@@ -21,6 +21,7 @@ import { SexualCharacteristicPrerequisite } from "./single/SexualCharacteristicP
 import { SocialStatusPrerequisite } from "./single/SocialStatusPrerequisite.js"
 import { StatePrerequisite } from "./single/StatePrerequisite.js"
 import { TextPrerequisite } from "./single/TextPrerequisite.js"
+import { TinyActivatablePrerequisite } from "./single/TinyActivatablePrerequisite.js"
 import {
   BlessedTraditionPrerequisite,
   MagicalTraditionPrerequisite,
@@ -71,6 +72,7 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
+    TinyActivatable: DB.EnumCase({ type: DB.IncludeIdentifier(TinyActivatablePrerequisite) }),
     AnySpecialAbilityOfGroup: DB.EnumCase({
       type: DB.IncludeIdentifier(AnySpecialAbilityOfGroupPrerequisite),
     }),
