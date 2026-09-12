@@ -1,12 +1,13 @@
 import * as DB from "tsondb/schema/dsl"
+import { SpecialAbilityIdentifier } from "../../_IdentifierGroup.js"
 import { DisplayOption } from "../DisplayOption.js"
 
 export const StylePrerequisite = DB.TypeAlias(import.meta.url, {
-  name: "SkillStylePrerequisite",
+  name: "AnySpecialAbilityOfGroup",
   type: () =>
     DB.Object({
       category: DB.Required({
-        type: DB.IncludeIdentifier(StyleCategory),
+        type: DB.IncludeIdentifier(SpecialAbilityCategory),
       }),
       display_option: DB.Optional({
         type: DB.IncludeIdentifier(DisplayOption),
@@ -14,9 +15,11 @@ export const StylePrerequisite = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-export const StyleCategory = DB.Enum(import.meta.url, {
-  name: "StyleCategory",
+export const SpecialAbilityCategory = DB.Enum(import.meta.url, {
+  name: "SpecialAbilityCategory",
   values: () => ({
-    SkillStyle: DB.EnumCase({ type: null }),
+    ...Object.fromEntries(
+      Object.keys(SpecialAbilityIdentifier).map(entity => [entity, DB.EnumCase({ type: null })]),
+    ),
   }),
 })
