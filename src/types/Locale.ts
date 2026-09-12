@@ -1140,6 +1140,7 @@ export const Locale = DB.Entity(import.meta.url, {
           ".input {$count :number} {{{$count} ranged combat techniques}}": null,
           "special ability": null,
           "no special ability": null,
+          ".input {$entity :string} {{a special ability}}": null,
           "Tradition": null,
           "Tradition ({$tradition})": null,
           "Church": null,
