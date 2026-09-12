@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.60.0](https://github.com/Optolith/database-schema/compare/v0.59.0...v0.60.0) (2026-09-12)
+
+### ⚠ BREAKING CHANGES
+
+* add sexual transmittable disease flag
+* any special ability of group prerequisite
+
+### Features
+
+* add prerequisite for cantrips and blessings ([a06284c](https://github.com/Optolith/database-schema/commit/a06284cb508b65749f9e2c0beabf5310aeeebb0b)), closes [Optolith/database-schema#172](https://github.com/Optolith/database-schema/issues/172), references [#173](https://github.com/Optolith/database-schema/issues/173)
+* add sexual transmittable disease flag ([998c55b](https://github.com/Optolith/database-schema/commit/998c55bdfc132ca94067bc8cbeed7a70268cb4fc)), closes [Optolith/database-schema#184](https://github.com/Optolith/database-schema/issues/184), references [#185](https://github.com/Optolith/database-schema/issues/185)
+* any special ability of group prerequisite ([376c8f9](https://github.com/Optolith/database-schema/commit/376c8f951af16d3883e800a940a62b47f3248ed6)), closes [#176](https://github.com/Optolith/database-schema/issues/176), references [#177](https://github.com/Optolith/database-schema/issues/177)
 ## [0.59.0](https://github.com/Optolith/database-schema/compare/v0.58.0...v0.59.0) (2026-09-12)
 
 ### ⚠ BREAKING CHANGES
