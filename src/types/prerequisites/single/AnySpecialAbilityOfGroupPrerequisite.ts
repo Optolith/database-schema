@@ -19,7 +19,10 @@ const SpecialAbilityGroup = DB.Enum(import.meta.url, {
   name: "SpecialAbilityGroup",
   values: () => ({
     ...Object.fromEntries(
-      Object.keys(SpecialAbilityIdentifier).map(entity => [entity, DB.EnumCase({ type: null })]),
+      Object.keys(SpecialAbilityIdentifier.type.value.values).map(entity => [
+        entity,
+        DB.EnumCase({ type: null }),
+      ]),
     ),
   }),
 })
