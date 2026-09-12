@@ -2,13 +2,14 @@ import * as DB from "tsondb/schema/dsl"
 import { ActivatablePrerequisite } from "./single/ActivatablePrerequisite.js"
 import { AncestorBloodPrerequisite } from "./single/AncestorBloodPrerequisite.js"
 import { AnimistPowerPrerequisite } from "./single/AnimistPowerPrerequisite.js"
+import { TinyActivatablePrerequisite } from "./single/TinyActivatablePrerequisite.js"
 import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
 import { PactPrerequisite } from "./single/PactPrerequisite.js"
 import { PersonalityTraitPrerequisite } from "./single/PersonalityTraitPrerequisite.js"
 import { PrimaryAttributePrerequisite } from "./single/PrimaryAttributePrerequisite.js"
-import { ProfessionPrerequisite } from "./single/ProfessionPrerequisite.ts"
+import { ProfessionPrerequisite } from "./single/ProfessionPrerequisite.js"
 import { PublicationPrerequisite } from "./single/PublicationPrerequisite.js"
 import { RacePrerequisite } from "./single/RacePrerequisite.js"
 import { RatedMinimumNumberPrerequisite } from "./single/RatedMinimumNumberPrerequisite.js"
@@ -70,6 +71,7 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
+    TinyActivatable: DB.EnumCase({ type: DB.IncludeIdentifier(TinyActivatablePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
     RatedSum: DB.EnumCase({ type: DB.IncludeIdentifier(RatedSumPrerequisite) }),
