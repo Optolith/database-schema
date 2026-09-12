@@ -60,7 +60,6 @@ export const PublicationPrerequisiteGroup = DB.Enum(import.meta.url, {
 export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
   name: "GeneralPrerequisiteGroup",
   values: () => ({
-    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     Sex: DB.EnumCase({ type: DB.IncludeIdentifier(SexPrerequisite) }),
     Race: DB.EnumCase({ type: DB.IncludeIdentifier(RacePrerequisite) }),
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
@@ -69,6 +68,7 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     State: DB.EnumCase({ type: DB.IncludeIdentifier(StatePrerequisite) }),
     Rule: DB.EnumCase({ type: DB.IncludeIdentifier(RulePrerequisite) }),
     PrimaryAttribute: DB.EnumCase({ type: DB.IncludeIdentifier(PrimaryAttributePrerequisite) }),
+    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
     TinyActivatable: DB.EnumCase({ type: DB.IncludeIdentifier(TinyActivatablePrerequisite) }),
