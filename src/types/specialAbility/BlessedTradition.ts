@@ -41,11 +41,6 @@ export const BlessedTradition = DB.Entity(import.meta.url, {
           "The tradition’s primary blessing. Leave empty if the tradition does not have one.",
         type: BlessingIdentifier(),
       }),
-      restricted_blessings: DB.Optional({
-        comment:
-          "If a tradition restricts the possible blessings, the blessings that are **not** allowed.",
-        type: DB.IncludeIdentifier(RestrictedBlessings),
-      }),
       favored_combat_techniques: DB.Optional({
         comment: "A list of favored combat techniques.",
         type: DB.IncludeIdentifier(FavoredCombatTechniques),
@@ -165,9 +160,22 @@ const BlessedTraditionType = DB.Enum(import.meta.url, {
   name: "BlessedTraditionType",
   comment: "The type of the tradition. May be either church or shamanistic.",
   values: () => ({
-    Church: DB.EnumCase({ type: null }),
+    Church: DB.EnumCase({ type: DB.IncludeIdentifier(ChurchBlessedTradition) }),
     Shamanistic: DB.EnumCase({ type: DB.IncludeIdentifier(ShamanisticBlessedTradition) }),
   }),
+})
+
+const ChurchBlessedTradition = DB.TypeAlias(import.meta.url, {
+  name: "ChurchBlessedTradition",
+  comment: "Additional rules for church traditions.",
+  type: () =>
+    DB.Object({
+      restrictedBlessings: DB.Optional({
+        comment:
+          "If a tradition restricts the possible blessings, the blessings that are **not** allowed.",
+        type: DB.IncludeIdentifier(RestrictedBlessings),
+      }),
+    }),
 })
 
 const ShamanisticBlessedTradition = DB.TypeAlias(import.meta.url, {
