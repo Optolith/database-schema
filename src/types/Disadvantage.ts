@@ -1,6 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { input, levels, maximum, name, name_in_library, rules } from "./_Activatable.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "./_ActivatableAdventurePointsValue.js"
+import { subtype } from "./_ActivatableMagical.ts"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "./_ActivatableNames.ts"
 import { explicit_select_options, select_options } from "./_ActivatableSelectOptions.js"
 import { skill_applications, skill_uses } from "./_ActivatableSkillApplicationsAndUses.js"
@@ -15,6 +16,7 @@ export const Disadvantage = DB.Entity(import.meta.url, {
   type: () =>
     DB.Object({
       levels,
+      subtype,
       nameBuilderRules,
       select_options,
       explicit_select_options,
