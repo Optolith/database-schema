@@ -1,6 +1,6 @@
 {
   "name": "@optolith/database-schema",
-  "version": "0.53.0",
+  "version": "0.59.0",
   "description": "Definitions and utilities for the flat-file database of Optolith, a character creation tool for the Pen and Paper RPG “The Dark Eye 5”, and its external integrations into other software.",
   "keywords": [
     "tde",
@@ -39,19 +39,20 @@
   "license": "MPL-2.0",
   "dependencies": {
     "@elyukai/utils": "^0.3.6",
-    "tsondb": "^0.20.3",
+    "tsondb": "^0.20.4",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.9.1",
-    "commit-and-tag-version": "^12.7.3",
-    "eslint": "^10.4.0",
-    "globals": "^17.6.0",
+    "@types/node": "^26.5.0",
+    "commit-and-tag-version": "^13.1.2",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
     "nodemon": "^3.1.14",
-    "prettier": "^3.8.3",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.60.0"
+    "prettier": "^3.9.6",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-7": "npm:typescript@^7.0.2",
+    "typescript-eslint": "^8.70.0"
   },
   "repository": "github:Optolith/database-schema",
   "bugs": {

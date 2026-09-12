@@ -3,7 +3,7 @@ import { effect, name, name_in_library } from "../_Activatable.js"
 import { ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
 import { activatableDisplayNameCustomizer } from "../_ActivatableNames.ts"
 import { propertyOptional } from "../_ActivatableNonMundane.js"
-import { OneTimeCostMap } from "../_ActivatableSkillCost.js"
+import { StandaloneCostMap } from "../_ActivatableSkillCost.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
@@ -57,7 +57,7 @@ const MagicalSignCost = DB.Enum(import.meta.url, {
   name: "MagicalSignCost",
   values: () => ({
     Constant: DB.EnumCase({ type: DB.IncludeIdentifier(ConstantMagicalSignCost) }),
-    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(StandaloneCostMap) }),
   }),
 })
 

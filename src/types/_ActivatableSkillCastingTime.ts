@@ -1,6 +1,8 @@
 import * as DB from "tsondb/schema/dsl"
+import { NestedTranslationMap } from "./Locale.ts"
 import { SlowSkillCastingTimeUnit } from "./SkillModificationLevel.js"
 import { SkillModificationLevelIdentifier } from "./_Identifier.js"
+import { ResponsiveTextOptional } from "./_ResponsiveText.ts"
 
 export const CastingTime = DB.GenEnum(import.meta.url, {
   name: "CastingTime",
@@ -19,6 +21,19 @@ const ModifiableCastingTime = DB.TypeAlias(import.meta.url, {
         comment: "The initial skill modification identifier/level.",
         type: SkillModificationLevelIdentifier(),
       }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "ModifiableCastingTime",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note, appended to the generated string in parenthesis.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
 })
 
@@ -78,6 +93,19 @@ const FastSkillNonModifiableCastingTime = DB.TypeAlias(import.meta.url, {
         comment: "The casting time value in actions.",
         type: DB.Integer({ minimum: 1 }),
       }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "FastSkillNonModifiableCastingTime",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note, appended to the generated string in parenthesis.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
 })
 
@@ -93,6 +121,19 @@ export const SlowSkillNonModifiableCastingTime = DB.TypeAlias(import.meta.url, {
         comment: "The unit of the `value`.",
         type: DB.IncludeIdentifier(SlowSkillCastingTimeUnit),
       }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "SlowSkillNonModifiableCastingTime",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note, appended to the generated string in parenthesis.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
 })
 

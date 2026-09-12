@@ -166,7 +166,7 @@ export const FixedCost = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const CostRange = DB.TypeAlias(import.meta.url, {
+export const CostRange = DB.TypeAlias(import.meta.url, {
   name: "CostRange",
   type: () =>
     DB.Object({
