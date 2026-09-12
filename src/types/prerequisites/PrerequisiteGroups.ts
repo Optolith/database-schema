@@ -2,7 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { ActivatablePrerequisite } from "./single/ActivatablePrerequisite.js"
 import { AncestorBloodPrerequisite } from "./single/AncestorBloodPrerequisite.js"
 import { AnimistPowerPrerequisite } from "./single/AnimistPowerPrerequisite.js"
-import { TinyActivatablePrerequisite } from "./single/TinyActivatablePrerequisite.js"
+import { AnySpecialAbilityOfGroupPrerequisite } from "./single/AnySpecialAbilityOfGroupPrerequisite.ts"
 import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
@@ -21,6 +21,7 @@ import { SexualCharacteristicPrerequisite } from "./single/SexualCharacteristicP
 import { SocialStatusPrerequisite } from "./single/SocialStatusPrerequisite.js"
 import { StatePrerequisite } from "./single/StatePrerequisite.js"
 import { TextPrerequisite } from "./single/TextPrerequisite.js"
+import { TinyActivatablePrerequisite } from "./single/TinyActivatablePrerequisite.js"
 import {
   BlessedTraditionPrerequisite,
   MagicalTraditionPrerequisite,
@@ -72,6 +73,9 @@ export const GeneralPrerequisiteGroup = DB.Enum(import.meta.url, {
     BlessedTradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionPrerequisite) }),
     MagicalTradition: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalTraditionPrerequisite) }),
     TinyActivatable: DB.EnumCase({ type: DB.IncludeIdentifier(TinyActivatablePrerequisite) }),
+    AnySpecialAbilityOfGroup: DB.EnumCase({
+      type: DB.IncludeIdentifier(AnySpecialAbilityOfGroupPrerequisite),
+    }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
     RatedSum: DB.EnumCase({ type: DB.IncludeIdentifier(RatedSumPrerequisite) }),
