@@ -1666,6 +1666,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Communicability to Intelligent Creatures": null,
           "childhood disease": null,
           "magical disease": null,
+          "sexually transmittable disease": null,
 
           // personality traits
           "Can be combined with": null,
