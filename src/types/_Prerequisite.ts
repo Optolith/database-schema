@@ -81,6 +81,33 @@ const PlainPrerequisites = DB.GenTypeAlias(import.meta.url, {
     DB.Array(DB.GenIncludeIdentifier(PrerequisitesElement, [DB.TypeArgument(T)]), { minItems: 1 }),
 })
 
+const PrerequisiteDiff = DB.GenEnum(import.meta.url, {
+  name: "PrerequisiteDiff",
+  parameters: [DB.Param("T")],
+  values: T => ({
+    Add: DB.EnumCase({
+      comment: "This prerequisite is added to the list of existing prerequisites.",
+      type: DB.TypeArgument(T),
+    }),
+    Remove: DB.EnumCase({
+      comment: "This prerequisite is removed from the list of existing prerequisites.",
+      type: DB.TypeArgument(T),
+    }),
+  }),
+})
+
+const PlainDiffPrerequisites = DB.GenTypeAlias(import.meta.url, {
+  name: "PlainDiffPrerequisites",
+  parameters: [DB.Param("T")],
+  type: T =>
+    DB.Array(
+      DB.GenIncludeIdentifier(PrerequisiteDiff, [
+        DB.GenIncludeIdentifier(PrerequisitesElement, [DB.TypeArgument(T)]),
+      ]),
+      { minItems: 1 },
+    ),
+})
+
 const PrerequisiteForLevel = DB.GenTypeAlias(import.meta.url, {
   name: "PrerequisiteForLevel",
   parameters: [DB.Param("T")],
@@ -146,6 +173,14 @@ export const ProfessionPrerequisites = DB.TypeAlias(import.meta.url, {
   name: "ProfessionPrerequisites",
   type: () =>
     DB.GenIncludeIdentifier(PlainPrerequisites, [
+      DB.IncludeIdentifier(ProfessionPrerequisiteGroup),
+    ]),
+})
+
+export const ProfessionVariantPrerequisites = DB.TypeAlias(import.meta.url, {
+  name: "ProfessionVariantPrerequisites",
+  type: () =>
+    DB.GenIncludeIdentifier(PlainDiffPrerequisites, [
       DB.IncludeIdentifier(ProfessionPrerequisiteGroup),
     ]),
 })

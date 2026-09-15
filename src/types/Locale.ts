@@ -1156,6 +1156,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "no advantage": null,
           "disadvantage": null,
           "no disadvantage": null,
+          "no prerequisite {$prerequisite}": null,
 
           "domain {$domain}": null,
           "{$pact} level {$pactLevel}": null,

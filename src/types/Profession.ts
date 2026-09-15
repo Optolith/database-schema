@@ -22,7 +22,7 @@ import {
   RequirableSelectOptionIdentifier,
   SpellworkIdentifier,
 } from "./_IdentifierGroup.js"
-import { ProfessionPrerequisites } from "./_Prerequisite.js"
+import { ProfessionPrerequisites, ProfessionVariantPrerequisites } from "./_Prerequisite.js"
 import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
@@ -330,7 +330,7 @@ export const ProfessionVariant = DB.Entity(import.meta.url, {
       prerequisites: DB.Optional({
         comment:
           "Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.",
-        type: DB.IncludeIdentifier(ProfessionPrerequisites),
+        type: DB.IncludeIdentifier(ProfessionVariantPrerequisites),
       }),
       options: DB.Optional({
         comment:
