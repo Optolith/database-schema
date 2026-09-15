@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.62.0](https://github.com/Optolith/database-schema/compare/v0.61.0...v0.62.0) (2026-09-15)
+
+### ⚠ BREAKING CHANGES
+
+* removable prerequisites in profession variants
+
+### Features
+
+* removable prerequisites in profession variants ([da532f7](https://github.com/Optolith/database-schema/commit/da532f7fd939602dd042ecd4599bda74cca4fc8c))
 ## [0.61.0](https://github.com/Optolith/database-schema/compare/v0.60.0...v0.61.0) (2026-09-13)
 
 ### ⚠ BREAKING CHANGES
