@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.63.0](https://github.com/Optolith/database-schema/compare/v0.62.0...v0.63.0) (2026-09-16)
+
+### ⚠ BREAKING CHANGES
+
+* custom labels for expression-based AP value
+
+### Features
+
+* custom labels for expression-based AP value ([fa1e099](https://github.com/Optolith/database-schema/commit/fa1e0993e9d10736e92ebeb036c58bcc4e66a0a6))
 ## [0.62.0](https://github.com/Optolith/database-schema/compare/v0.61.0...v0.62.0) (2026-09-15)
 
 ### ⚠ BREAKING CHANGES
