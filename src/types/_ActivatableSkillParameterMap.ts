@@ -2,28 +2,28 @@ import * as DB from "tsondb/schema/dsl"
 import { ResponsiveTextOptional } from "./_ResponsiveText.ts"
 import { NestedTranslationMap } from "./Locale.ts"
 
-export const ParameterMap = DB.GenTypeAlias(import.meta.url, {
-  name: "ParameterMap",
-  parameters: [DB.Param("Value")],
+export const ValueMap = DB.GenTypeAlias(import.meta.url, {
+  name: "ValueMap",
+  parameters: [DB.Param("Option")],
   comment: `A content that is \`2/4/8/16 AE (activation) + 1/2/4/8 per 5 minutes for an item the size of a cup/chest/door/castle gate\` can be represented as a cost map.
 
 The \`an item the size of a\` would be the *list prefix* string, while the list of options would contain four options with the activation cost and the name.`,
-  type: Value =>
+  type: Option =>
     DB.Object({
       options: DB.Required({
         comment: "The possible values and associated labels.",
-        type: DB.Array(DB.GenIncludeIdentifier(ParameterMapOption, [DB.TypeArgument(Value)]), {
+        type: DB.Array(DB.TypeArgument(Option), {
           minItems: 2,
         }),
       }),
       style: DB.Required({
         comment:
           "The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).",
-        type: DB.IncludeIdentifier(ParameterMapStyle),
+        type: DB.IncludeIdentifier(ValueMapStyle),
       }),
       translations: NestedTranslationMap(
         DB.Optional,
-        "ParameterMap",
+        "ValueMap",
         DB.Object(
           {
             listPrefix: DB.Optional({
@@ -36,7 +36,7 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
             }),
             replacement: DB.Optional({
               comment:
-                "If the string from the book cannot be generated using the default generation technique, use this string. All options still need to be inserted propertly, since it may be used by in-game tools to provide a selection to players.",
+                "If the string from the book cannot be generated using the default generation technique, use this string. All options still need to be inserted properly, since it may be used by in-game tools to provide a selection to players.",
               type: DB.IncludeIdentifier(ResponsiveTextOptional),
             }),
           },
@@ -46,8 +46,20 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
     }),
 })
 
-const ParameterMapStyle = DB.Enum(import.meta.url, {
-  name: "ParameterMapStyle",
+export const ParameterMap = DB.GenTypeAlias(import.meta.url, {
+  name: "ParameterMap",
+  parameters: [DB.Param("Value")],
+  comment: `A content that is \`2/4/8/16 AE (activation) + 1/2/4/8 per 5 minutes for an item the size of a cup/chest/door/castle gate\` can be represented as a cost map.
+
+The \`an item the size of a\` would be the *list prefix* string, while the list of options would contain four options with the activation cost and the name.`,
+  type: Value =>
+    DB.GenIncludeIdentifier(ValueMap, [
+      DB.GenIncludeIdentifier(ParameterMapOption, [DB.TypeArgument(Value)]),
+    ]),
+})
+
+const ValueMapStyle = DB.Enum(import.meta.url, {
+  name: "ValueMapStyle",
   comment:
     "The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).",
   values: () => ({
@@ -56,30 +68,52 @@ const ParameterMapStyle = DB.Enum(import.meta.url, {
   }),
 })
 
-const ParameterMapOption = DB.GenTypeAlias(import.meta.url, {
-  name: "ParameterMapOption",
-  parameters: [DB.Param("Value")],
-  type: Value =>
-    DB.Object({
-      value: DB.Required({
-        comment:
-          "The value this option represents. If used for sustained cost, the interval cost is always half of this value.",
-        type: DB.TypeArgument(Value),
+export const createValueMapOption = <
+  N extends string,
+  Params extends DB.TypeParameter[],
+  V extends { [key: string]: DB.MemberDecl },
+>(
+  name: N,
+  parameters: Params,
+  getOptionValues: (...params: Params) => V,
+  includeStandaloneLabel = true,
+) =>
+  DB.GenTypeAlias(import.meta.url, {
+    name,
+    parameters,
+    type: (...params) =>
+      DB.Object({
+        ...getOptionValues(...params),
+        translations: NestedTranslationMap(
+          DB.Required,
+          name,
+          DB.Object({
+            label: DB.Required({
+              comment: "The description of the option for cost string generation.",
+              type: DB.IncludeIdentifier(ResponsiveTextOptional),
+            }),
+            ...(includeStandaloneLabel
+              ? {
+                  standaloneLabel: DB.Optional({
+                    comment:
+                      "The description of the option if used standalone (e.g. in an in-game tool where you can select how many AE you have to pay). Only used if different from `label`.",
+                    type: DB.IncludeIdentifier(ResponsiveTextOptional),
+                  }),
+                }
+              : undefined),
+          }),
+        ),
       }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "ParameterMapOption",
-        DB.Object({
-          label: DB.Required({
-            comment: "The description of the option for cost string generation.",
-            type: DB.IncludeIdentifier(ResponsiveTextOptional),
-          }),
-          standaloneLabel: DB.Optional({
-            comment:
-              "The description of the option if used standalone (e.g. in an in-game tool where you can select how many AE you have to pay). Only used if different from `label`.",
-            type: DB.IncludeIdentifier(ResponsiveTextOptional),
-          }),
-        }),
-      ),
+  })
+
+const ParameterMapOption = createValueMapOption(
+  "ParameterMapOption",
+  [DB.Param("Value")],
+  Value => ({
+    value: DB.Required({
+      comment:
+        "The value this option represents. If used for sustained cost, the interval cost is always half of this value.",
+      type: DB.TypeArgument(Value),
     }),
-})
+  }),
+)
