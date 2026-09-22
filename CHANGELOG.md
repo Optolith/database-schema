@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.63.1](https://github.com/Optolith/database-schema/compare/v0.63.0...v0.63.1) (2026-09-22)
+
+### Features
+
+* allow duplicate pact gift names with specified pact category ([2f781f3](https://github.com/Optolith/database-schema/commit/2f781f32bd3694113b77e10a0f6d66e746c33d6d))
+* display option replacement text can be markdown ([77308f7](https://github.com/Optolith/database-schema/commit/77308f7be4fcea94695b6149329b1ad22c525401))
 ## [0.63.0](https://github.com/Optolith/database-schema/compare/v0.62.0...v0.63.0) (2026-09-16)
 
 ### ⚠ BREAKING CHANGES
