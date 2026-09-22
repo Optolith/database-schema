@@ -4,6 +4,7 @@ import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventu
 import { automatic_entries } from "../_ActivatableAutomatic.js"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.ts"
 import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
+import { PactCategoryIdentifier } from "../_Identifier.ts"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
@@ -14,6 +15,11 @@ export const PactGift = DB.Entity(import.meta.url, {
   namePlural: "PactGifts",
   type: () =>
     DB.Object({
+      associatedPactCategory: DB.Optional({
+        comment:
+          "The pact category this pact gift is associated with. This is mainly used for allowing multiple pact gifts of the same name for different pact categories.",
+        type: PactCategoryIdentifier(),
+      }),
       levels,
       nameBuilderRules,
       select_options,
@@ -47,11 +53,14 @@ export const PactGift = DB.Entity(import.meta.url, {
   instanceDisplayName: {},
   instanceDisplayNameCustomizer: activatableDisplayNameCustomizer,
   uniqueConstraints: [
-    {
-      entityMapKeyPath: "translations",
-      keyPathInEntityMap: "name_in_library",
-      keyPathInEntityMapFallback: "name",
-    },
+    [
+      {
+        entityMapKeyPath: "translations",
+        keyPathInEntityMap: "name_in_library",
+        keyPathInEntityMapFallback: "name",
+      },
+      { keyPath: "associatedPactCategory" },
+    ],
   ],
 })
 
