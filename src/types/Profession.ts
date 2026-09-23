@@ -567,6 +567,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         combat_techniques: DB.Optional({
           type: DB.IncludeIdentifier(CombatTechniquesOptions),
         }),
+        combatTechniquesForAdventurePoints: DB.Optional({
+          type: DB.IncludeIdentifier(CombatTechniquesForAdventurePointsOption),
+        }),
         cantrips: DB.Optional({
           type: DB.IncludeIdentifier(CantripsOptions),
         }),
@@ -604,6 +607,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
         combat_techniques: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
             DB.IncludeIdentifier(CombatTechniquesOptions),
+          ]),
+        }),
+        combatTechniquesForAdventurePoints: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(CombatTechniquesForAdventurePointsOption),
           ]),
         }),
         cantrips: DB.Optional({
@@ -702,6 +710,22 @@ const RatingForCombatTechniquesNumber = DB.TypeAlias(import.meta.url, {
 
 **Note:** This is a rating *bonus*, so it will be *added* to the default value of 6.`,
         type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
+})
+
+const CombatTechniquesForAdventurePointsOption = DB.TypeAlias(import.meta.url, {
+  name: "CombatTechniquesForAdventurePointsOption",
+  comment: `Distribe a set amount of Adventure Points among a given set of combat techniques.`,
+  type: () =>
+    DB.Object({
+      apValue: DB.Required({
+        comment: `The AP value to distribute.`,
+        type: DB.Integer({ minimum: 2 }),
+      }),
+      options: DB.Required({
+        comment: "The list of combat techniques to distribute to.",
+        type: DB.Array(DB.IncludeIdentifier(CombatTechniqueIdentifier), { minItems: 2 }),
       }),
     }),
 })

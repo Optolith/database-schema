@@ -1751,6 +1751,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "maximum SR per skill: {$maxSR}": null,
           "no AP to improve other {$skillsOfGroup}": null,
           ".input {$count :number} {{{$count} cantrips}}": null,
+          ".input {$apValue :number} {{{$apValue} AP to distribute among the following combat techniques: {$list}}}": null,
           "{$count} from the following list": null,
           "The Twelve Blessings": null,
           "except for {$list :list type=conjunction}": null,
