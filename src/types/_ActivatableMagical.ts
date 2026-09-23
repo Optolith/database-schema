@@ -7,6 +7,8 @@ const AdvantageDisadvantageSubtype = DB.Enum(import.meta.url, {
     MagicalTitle: DB.EnumCase({ type: null }),
     MagicalHonor: DB.EnumCase({ type: null }),
     MagicalPunishment: DB.EnumCase({ type: null }),
+    BlessedRank: DB.EnumCase({ type: null }),
+    BlessedTitle: DB.EnumCase({ type: null }),
   }),
 })
 

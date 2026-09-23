@@ -1483,6 +1483,8 @@ export const Locale = DB.Entity(import.meta.url, {
           "Magical Title": null,
           "Magical Honor": null,
           "Magical Punishment": null,
+          "Blessed Rank": null,
+          "Blessed Title": null,
 
           // combat special ability -- penalty
           ".input {$ord :number} {{{$ord}. attack}}": null,
