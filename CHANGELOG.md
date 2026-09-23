@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.64.0](https://github.com/Optolith/database-schema/compare/v0.63.1...v0.64.0) (2026-09-23)
+
+### ⚠ BREAKING CHANGES
+
+* blessed rank/title flags
+* combat techniques by AP profession option
+* optional starting age
+* spellworks by AP profession option
+
+### Features
+
+* blessed rank/title flags ([eec7536](https://github.com/Optolith/database-schema/commit/eec75368241160486c0a7affccf27093749d0e23)), closes [#189](https://github.com/Optolith/database-schema/issues/189)
+* ceremonial item special ability groups ([3989234](https://github.com/Optolith/database-schema/commit/3989234c9a62133317a2ef8d38de8ace7c7430e0))
+* combat techniques by AP profession option ([b57cb67](https://github.com/Optolith/database-schema/commit/b57cb67163e90694595e4a9aeb152ef0495cd33e)), closes [#187](https://github.com/Optolith/database-schema/issues/187)
+* spellworks by AP profession option ([3ff20c7](https://github.com/Optolith/database-schema/commit/3ff20c714cb99aaca4783a7e4e2446f5226943f9)), closes [#188](https://github.com/Optolith/database-schema/issues/188)
+
+### Bug Fixes
+
+* optional starting age ([f63a882](https://github.com/Optolith/database-schema/commit/f63a882d2a332630600939577e40c22012f91b95))
 ## [0.63.1](https://github.com/Optolith/database-schema/compare/v0.63.0...v0.63.1) (2026-09-22)
 
 ### Features
