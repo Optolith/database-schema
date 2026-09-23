@@ -579,6 +579,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         skills: DB.Optional({
           type: DB.IncludeIdentifier(SkillsOptions),
         }),
+        spellworks: DB.Optional({
+          type: DB.IncludeIdentifier(SpellworksOptions),
+        }),
         liturgies: DB.Optional({
           type: DB.IncludeIdentifier(LiturgiesOptions),
         }),
@@ -624,6 +627,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
         }),
         skills: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [DB.IncludeIdentifier(SkillsOptions)]),
+        }),
+        spellworks: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(SpellworksOptions),
+          ]),
         }),
         liturgies: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
@@ -784,6 +792,22 @@ const SkillsOptions = DB.TypeAlias(import.meta.url, {
         ? "All selected skills must be from the selected group."
         : undefined,
     ].filter(isNotNullish),
+})
+
+const SpellworksOptions = DB.TypeAlias(import.meta.url, {
+  name: "SpellworksOptions",
+  comment: `Buy a set number of spells and rituals for a specific amount of AP.`,
+  type: () =>
+    DB.Object({
+      number: DB.Required({
+        comment: "The number of spells and rituals to select.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+      apValue: DB.Required({
+        comment: "The AP value you can buy spells and rituals for.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
 })
 
 const LiturgiesOptions = DB.TypeAlias(import.meta.url, {
