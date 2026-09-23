@@ -59,6 +59,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.CauldronEnchantment,
     Types.CeremonialItem,
     Types.CeremonialItemSpecialAbility,
+    Types.CeremonialItemSpecialAbilityGroup,
     Types.Ceremony,
     Types.ChronicleEnchantment,
     Types.CloseCombatTechnique,

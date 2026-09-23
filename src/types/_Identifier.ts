@@ -132,6 +132,7 @@ import { Sermon } from "./specialAbility/Sermon.js"
 import { SexSpecialAbility } from "./specialAbility/SexSpecialAbility.js"
 import { SikaryanDrainSpecialAbility } from "./specialAbility/SikaryanDrainSpecialAbility.js"
 import { SkillStyleSpecialAbility } from "./specialAbility/SkillStyleSpecialAbility.js"
+import { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/CeremonialItemSpecialAbilityGroup.ts"
 import { Language, LanguageSpecialization } from "./specialAbility/sub/Language.js"
 import { Script } from "./specialAbility/sub/Script.js"
 import { TradeSecret } from "./specialAbility/sub/TradeSecret.js"
@@ -207,6 +208,8 @@ export const CantripIdentifier: () => R = () => R(Cantrip)
 export const CauldronEnchantmentIdentifier: () => R = () => R(CauldronEnchantment)
 export const CeremonialItemIdentifier: () => R = () => R(CeremonialItem)
 export const CeremonialItemSpecialAbilityIdentifier: () => R = () => R(CeremonialItemSpecialAbility)
+export const CeremonialItemSpecialAbilityGroupIdentifier: () => R = () =>
+  R(CeremonialItemSpecialAbilityGroup)
 export const CeremonyIdentifier: () => R = () => R(Ceremony)
 export const ChronicleEnchantmentIdentifier: () => R = () => R(ChronicleEnchantment)
 export const CloseCombatTechniqueIdentifier: () => R = () => R(CloseCombatTechnique)
