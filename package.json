@@ -39,7 +39,7 @@
   "license": "MPL-2.0",
   "dependencies": {
     "@elyukai/utils": "^0.3.6",
-    "tsondb": "^0.20.4",
+    "tsondb": "^0.21.1",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
