@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.65.0](https://github.com/Optolith/database-schema/compare/v0.64.0...v0.65.0) (2026-09-24)
+
+### ⚠ BREAKING CHANGES
+
+* adjust translations for new profession options
+* **deps:** Generated message parameter types are more narrow and
+  thus more accurate. If a type is not specified, it now defaults to
+  string, list formatters only accept arrays.
+
+### build
+
+* **deps:** upgrade to tsondb 0.21.1 ([801c93d](https://github.com/Optolith/database-schema/commit/801c93dca32969abe14a562dca14b7ff3600ad12))
+
+### Bug Fixes
+
+* adjust translations for new profession options ([84392ac](https://github.com/Optolith/database-schema/commit/84392aca41776f70865881e7a6aaf56c0ed12336))
 ## [0.64.0](https://github.com/Optolith/database-schema/compare/v0.63.1...v0.64.0) (2026-09-23)
 
 ### ⚠ BREAKING CHANGES
