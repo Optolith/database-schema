@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.67.0](https://github.com/Optolith/database-schema/compare/v0.66.0...v0.67.0) (2026-09-26)
+
+### ⚠ BREAKING CHANGES
+
+* add more shorter equipment labels
+
+### Features
+
+* add more shorter equipment labels ([e34d3c9](https://github.com/Optolith/database-schema/commit/e34d3c9daeea66e7cb2dfe9f4642652d51d2d632))
 ## [0.66.0](https://github.com/Optolith/database-schema/compare/v0.65.0...v0.66.0) (2026-09-25)
 
 ### ⚠ BREAKING CHANGES
