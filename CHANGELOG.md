@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.68.1](https://github.com/Optolith/database-schema/compare/v0.68.0...v0.68.1) (2026-09-27)
+
+### Features
+
+* optional separate sources for derived trade secrets ([9690ea4](https://github.com/Optolith/database-schema/commit/9690ea40f3fd2e6b26c54421ab9909b75036f409))
 ## [0.68.0](https://github.com/Optolith/database-schema/compare/v0.67.0...v0.68.0) (2026-09-27)
 
 ### ⚠ BREAKING CHANGES
