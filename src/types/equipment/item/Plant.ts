@@ -338,24 +338,30 @@ const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
 const PlantLongevity = DB.TypeAlias(import.meta.url, {
   name: "PlantLongevity",
   type: () =>
-    DB.Object({
-      preservations: DB.Optional({
-        comment: "The preservations with alternative effect of this preserved plant",
-        type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
-      }),
-      translations: NestedTranslationMap(
-        DB.Required,
-        "PlantLongevity",
-        DB.Object({
-          raw: DB.Required({
-            comment: "The longevity of the raw plant",
-            type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
-          preserved: DB.Optional({
-            comment: "The longevity of the preserved plant",
-            type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
+    DB.Object(
+      {
+        preservations: DB.Optional({
+          comment: "The preservations with alternative effect of this preserved plant",
+          type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
         }),
-      ),
-    }),
+        translations: NestedTranslationMap(
+          DB.Optional,
+          "PlantLongevity",
+          DB.Object(
+            {
+              raw: DB.Optional({
+                comment: "The longevity of the raw plant",
+                type: DB.String({ minLength: 1, markdown: "block" }),
+              }),
+              preserved: DB.Optional({
+                comment: "The longevity of the preserved plant",
+                type: DB.String({ minLength: 1, markdown: "block" }),
+              }),
+            },
+            { minProperties: 1 },
+          ),
+        ),
+      },
+      { minProperties: 1 },
+    ),
 })
