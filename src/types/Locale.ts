@@ -1781,6 +1781,9 @@ export const Locale = DB.Entity(import.meta.url, {
           "Ritual Enhancement {$ritual}": null,
           "Liturgical Enhancement {$liturgicalChantOrCeremony}": null,
 
+          // Trade secrets
+          "Secret Knowledge": null,
+
           // Library Entry Subtitles
           "Profession Package": null,
           "Optional Rule": null,
