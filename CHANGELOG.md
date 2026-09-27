@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.69.0](https://github.com/Optolith/database-schema/compare/v0.68.1...v0.69.0) (2026-09-27)
+
+### ⚠ BREAKING CHANGES
+
+* ancestor blood advantage cache name typo
+
+### Features
+
+* derived trade secrets cache ([18e1ea8](https://github.com/Optolith/database-schema/commit/18e1ea889894108647f3b844c6f84f19beb8eac1))
+
+### Bug Fixes
+
+* ancestor blood advantage cache name typo ([b7d2592](https://github.com/Optolith/database-schema/commit/b7d2592cf6f8542761fa0f46b76630f57011047e))
 ## [0.68.1](https://github.com/Optolith/database-schema/compare/v0.68.0...v0.68.1) (2026-09-27)
 
 ### Features
