@@ -40,7 +40,7 @@ export const Race = DB.Entity(import.meta.url, {
         comment: "Configuration for random weight generation.",
         type: DB.IncludeIdentifier(RandomWeightGeneration),
       }),
-      starting_age: DB.Required({
+      starting_age: DB.Optional({
         comment:
           "Defines the starting ages for the race. It depends on the selected experience level.",
         type: DB.NestedEntityMap({

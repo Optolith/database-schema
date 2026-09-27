@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 import { OldParameter } from "../_ActivatableSkill.js"
 import { SlowSkillNonModifiableCastingTime } from "../_ActivatableSkillCastingTime.js"
-import { OneTimeCostMap } from "../_ActivatableSkillCost.js"
+import { StandaloneCostMap } from "../_ActivatableSkillCost.js"
 import { ExpressionBasedDuration } from "../_ActivatableSkillDuration.js"
 import { ActivatableSkillEffect } from "../_ActivatableSkillEffect.js"
 import { AffectedTargetCategories } from "../_ActivatableSkillTargetCategory.js"
@@ -114,7 +114,7 @@ const GeodeRitualCost = DB.Enum(import.meta.url, {
   name: "GeodeRitualCost",
   values: () => ({
     Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedGeodeRitualCost) }),
-    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(StandaloneCostMap) }),
   }),
 })
 

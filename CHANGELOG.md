@@ -2,6 +2,212 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.69.0](https://github.com/Optolith/database-schema/compare/v0.68.1...v0.69.0) (2026-09-27)
+
+### ⚠ BREAKING CHANGES
+
+* ancestor blood advantage cache name typo
+
+### Features
+
+* derived trade secrets cache ([18e1ea8](https://github.com/Optolith/database-schema/commit/18e1ea889894108647f3b844c6f84f19beb8eac1))
+
+### Bug Fixes
+
+* ancestor blood advantage cache name typo ([b7d2592](https://github.com/Optolith/database-schema/commit/b7d2592cf6f8542761fa0f46b76630f57011047e))
+## [0.68.1](https://github.com/Optolith/database-schema/compare/v0.68.0...v0.68.1) (2026-09-27)
+
+### Features
+
+* optional separate sources for derived trade secrets ([9690ea4](https://github.com/Optolith/database-schema/commit/9690ea40f3fd2e6b26c54421ab9909b75036f409))
+## [0.68.0](https://github.com/Optolith/database-schema/compare/v0.67.0...v0.68.0) (2026-09-27)
+
+### ⚠ BREAKING CHANGES
+
+* translation for trade secret
+
+### Features
+
+* translation for trade secret ([64085e1](https://github.com/Optolith/database-schema/commit/64085e1a477af75ba3aa410c3f93070d60ec7f8a))
+## [0.67.0](https://github.com/Optolith/database-schema/compare/v0.66.0...v0.67.0) (2026-09-26)
+
+### ⚠ BREAKING CHANGES
+
+* add more shorter equipment labels
+
+### Features
+
+* add more shorter equipment labels ([e34d3c9](https://github.com/Optolith/database-schema/commit/e34d3c9daeea66e7cb2dfe9f4642652d51d2d632))
+## [0.66.0](https://github.com/Optolith/database-schema/compare/v0.65.0...v0.66.0) (2026-09-25)
+
+### ⚠ BREAKING CHANGES
+
+* add shorter equipment labels
+
+### Features
+
+* add shorter equipment labels ([76b6183](https://github.com/Optolith/database-schema/commit/76b61836f2aba9e238c9b0832a297508eb7f05d9))
+## [0.65.0](https://github.com/Optolith/database-schema/compare/v0.64.0...v0.65.0) (2026-09-24)
+
+### ⚠ BREAKING CHANGES
+
+* adjust translations for new profession options
+* **deps:** Generated message parameter types are more narrow and
+  thus more accurate. If a type is not specified, it now defaults to
+  string, list formatters only accept arrays.
+
+### build
+
+* **deps:** upgrade to tsondb 0.21.1 ([801c93d](https://github.com/Optolith/database-schema/commit/801c93dca32969abe14a562dca14b7ff3600ad12))
+
+### Bug Fixes
+
+* adjust translations for new profession options ([84392ac](https://github.com/Optolith/database-schema/commit/84392aca41776f70865881e7a6aaf56c0ed12336))
+## [0.64.0](https://github.com/Optolith/database-schema/compare/v0.63.1...v0.64.0) (2026-09-23)
+
+### ⚠ BREAKING CHANGES
+
+* blessed rank/title flags
+* combat techniques by AP profession option
+* optional starting age
+* spellworks by AP profession option
+
+### Features
+
+* blessed rank/title flags ([eec7536](https://github.com/Optolith/database-schema/commit/eec75368241160486c0a7affccf27093749d0e23)), closes [#189](https://github.com/Optolith/database-schema/issues/189)
+* ceremonial item special ability groups ([3989234](https://github.com/Optolith/database-schema/commit/3989234c9a62133317a2ef8d38de8ace7c7430e0))
+* combat techniques by AP profession option ([b57cb67](https://github.com/Optolith/database-schema/commit/b57cb67163e90694595e4a9aeb152ef0495cd33e)), closes [#187](https://github.com/Optolith/database-schema/issues/187)
+* spellworks by AP profession option ([3ff20c7](https://github.com/Optolith/database-schema/commit/3ff20c714cb99aaca4783a7e4e2446f5226943f9)), closes [#188](https://github.com/Optolith/database-schema/issues/188)
+
+### Bug Fixes
+
+* optional starting age ([f63a882](https://github.com/Optolith/database-schema/commit/f63a882d2a332630600939577e40c22012f91b95))
+## [0.63.1](https://github.com/Optolith/database-schema/compare/v0.63.0...v0.63.1) (2026-09-22)
+
+### Features
+
+* allow duplicate pact gift names with specified pact category ([2f781f3](https://github.com/Optolith/database-schema/commit/2f781f32bd3694113b77e10a0f6d66e746c33d6d))
+* display option replacement text can be markdown ([77308f7](https://github.com/Optolith/database-schema/commit/77308f7be4fcea94695b6149329b1ad22c525401))
+## [0.63.0](https://github.com/Optolith/database-schema/compare/v0.62.0...v0.63.0) (2026-09-16)
+
+### ⚠ BREAKING CHANGES
+
+* custom labels for expression-based AP value
+
+### Features
+
+* custom labels for expression-based AP value ([fa1e099](https://github.com/Optolith/database-schema/commit/fa1e0993e9d10736e92ebeb036c58bcc4e66a0a6))
+## [0.62.0](https://github.com/Optolith/database-schema/compare/v0.61.0...v0.62.0) (2026-09-15)
+
+### ⚠ BREAKING CHANGES
+
+* removable prerequisites in profession variants
+
+### Features
+
+* removable prerequisites in profession variants ([da532f7](https://github.com/Optolith/database-schema/commit/da532f7fd939602dd042ecd4599bda74cca4fc8c))
+## [0.61.0](https://github.com/Optolith/database-schema/compare/v0.60.0...v0.61.0) (2026-09-13)
+
+### ⚠ BREAKING CHANGES
+
+* **content:** add STD translation
+
+### Bug Fixes
+
+* **content:** add STD translation ([3ff3417](https://github.com/Optolith/database-schema/commit/3ff34175d031be21801f7b9449919897523256e4))
+## [0.60.0](https://github.com/Optolith/database-schema/compare/v0.59.0...v0.60.0) (2026-09-12)
+
+### ⚠ BREAKING CHANGES
+
+* add sexual transmittable disease flag
+* any special ability of group prerequisite
+
+### Features
+
+* add prerequisite for cantrips and blessings ([a06284c](https://github.com/Optolith/database-schema/commit/a06284cb508b65749f9e2c0beabf5310aeeebb0b)), closes [Optolith/database-schema#172](https://github.com/Optolith/database-schema/issues/172), references [#173](https://github.com/Optolith/database-schema/issues/173)
+* add sexual transmittable disease flag ([998c55b](https://github.com/Optolith/database-schema/commit/998c55bdfc132ca94067bc8cbeed7a70268cb4fc)), closes [Optolith/database-schema#184](https://github.com/Optolith/database-schema/issues/184), references [#185](https://github.com/Optolith/database-schema/issues/185)
+* any special ability of group prerequisite ([376c8f9](https://github.com/Optolith/database-schema/commit/376c8f951af16d3883e800a940a62b47f3248ed6)), closes [#176](https://github.com/Optolith/database-schema/issues/176), references [#177](https://github.com/Optolith/database-schema/issues/177)
+## [0.59.0](https://github.com/Optolith/database-schema/compare/v0.58.0...v0.59.0) (2026-09-12)
+
+### ⚠ BREAKING CHANGES
+
+* magical dis-/advantage subtypes
+
+### Features
+
+* magical dis-/advantage subtypes ([986a5a9](https://github.com/Optolith/database-schema/commit/986a5a958f4d2f056ae47bdc6fe3f8627359ced1)), closes [#147](https://github.com/Optolith/database-schema/issues/147)
+## [0.58.0](https://github.com/Optolith/database-schema/compare/v0.57.0...v0.58.0) (2026-09-11)
+
+### ⚠ BREAKING CHANGES
+
+* animal shape size name for text generation
+* cauldron enchantment identifier group
+* cost range for poisons
+* missing brew translation
+
+### Features
+
+* animal shape size name for text generation ([44c7548](https://github.com/Optolith/database-schema/commit/44c754890eb8d515acc3d34e04ccb459f3145be1))
+* cost range for poisons ([290ddfa](https://github.com/Optolith/database-schema/commit/290ddfad3c0b0271ba376f4cc27d64768335105f))
+
+### Bug Fixes
+
+* cauldron enchantment identifier group ([0944f81](https://github.com/Optolith/database-schema/commit/0944f81939587aa8e8df0d6cea097c3d69e0b337))
+* missing brew translation ([5673a9a](https://github.com/Optolith/database-schema/commit/5673a9a01466c79d59776123a171e78a3a8d0628))
+## [0.57.0](https://github.com/Optolith/database-schema/compare/v0.56.0...v0.57.0) (2026-09-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow any advanced special ability for slot
+
+### Features
+
+* allow any advanced special ability for slot ([dac3a55](https://github.com/Optolith/database-schema/commit/dac3a55200c45c0c1ae0b1b6fd4faeb318907b77)), closes [#104](https://github.com/Optolith/database-schema/issues/104)
+## [0.56.0](https://github.com/Optolith/database-schema/compare/v0.55.0...v0.56.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* advanced combat special ability type and labels
+
+### Features
+
+* advanced combat special ability type and labels ([b953514](https://github.com/Optolith/database-schema/commit/b95351409bb2a7d0e4af365b299e3a2bccf0a3a4))
+## [0.55.0](https://github.com/Optolith/database-schema/compare/v0.54.0...v0.55.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* restricted blessing translations and restructuring
+
+### Features
+
+* restricted blessing translations and restructuring ([f1867b7](https://github.com/Optolith/database-schema/commit/f1867b7b085a6219b13e5446b61ccf3b75878cba))
+## [0.54.0](https://github.com/Optolith/database-schema/compare/v0.53.0...v0.54.0) (2026-09-08)
+
+### ⚠ BREAKING CHANGES
+
+* active usage type for combat styles
+* custom duration unit
+* custom duration unit translations
+* derived select options based on property
+* modifiable activatable skill cost map
+* remove bannzeichen option native name
+* use parameter maps for activatable parameter maps
+
+* use parameter maps for activatable parameter maps ([5ca99fd](https://github.com/Optolith/database-schema/commit/5ca99fdb609dd5a9b5f52cbbc4bffc43713b3bdb))
+
+### Features
+
+* activatable skill casting time note ([51ea249](https://github.com/Optolith/database-schema/commit/51ea2499df00ebcc016d737fdf9bedb84887296b)), closes [#181](https://github.com/Optolith/database-schema/issues/181)
+* active usage type for combat styles ([0c8f351](https://github.com/Optolith/database-schema/commit/0c8f3518ea8e89dfa544c17323d0cd3dc5e9870d)), closes [#170](https://github.com/Optolith/database-schema/issues/170), references [#171](https://github.com/Optolith/database-schema/issues/171)
+* custom duration unit ([519f669](https://github.com/Optolith/database-schema/commit/519f669da7774befcfa3086d6a569b38f9ff4aaa)), closes [#179](https://github.com/Optolith/database-schema/issues/179)
+* derived select options based on property ([9718f7d](https://github.com/Optolith/database-schema/commit/9718f7d341a288c7c6c16c3f66ddeb1081f8a262)), closes [#174](https://github.com/Optolith/database-schema/issues/174), references [#175](https://github.com/Optolith/database-schema/issues/175)
+* modifiable activatable skill cost map ([9f88062](https://github.com/Optolith/database-schema/commit/9f88062ceeaaab01038b1408213b5165bc0faf67)), closes [#180](https://github.com/Optolith/database-schema/issues/180)
+* optional additional name for magic styles ([3b3ae6f](https://github.com/Optolith/database-schema/commit/3b3ae6f3a646a95fa320a9740d97d470328dfd1b))
+
+### Bug Fixes
+
+* custom duration unit translations ([fb36d94](https://github.com/Optolith/database-schema/commit/fb36d94b3938fa95434b4cb46bba9f194b28509e))
+* remove bannzeichen option native name ([028e438](https://github.com/Optolith/database-schema/commit/028e438909daaf726ad09f5a9d80ed9e356d4b10))
 ## [0.53.0](https://github.com/Optolith/database-schema/compare/v0.52.2...v0.53.0) (2026-06-21)
 
 

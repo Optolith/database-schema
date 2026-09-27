@@ -11,6 +11,7 @@ import {
   SkillIdentifier,
   SpellIdentifier,
   TargetCategoryIdentifier,
+  PropertyIdentifier,
 } from "./_Identifier.js"
 import {
   ActivatableIdentifier,
@@ -211,16 +212,34 @@ const SkillsSelectOptionCategory = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const SpellFilter = DB.Enum(import.meta.url, {
+  name: "SpellFilter",
+  values: () => ({
+    Single: DB.EnumCase({ type: SpellIdentifier() }),
+    Property: DB.EnumCase({ type: PropertyIdentifier() }),
+  }),
+})
+
+const RitualFilter = DB.Enum(import.meta.url, {
+  name: "RitualFilter",
+  values: () => ({
+    Single: DB.EnumCase({ type: RitualIdentifier() }),
+    Property: DB.EnumCase({ type: PropertyIdentifier() }),
+  }),
+})
+
 const SkillsSelectOptionCategoryCategory = DB.Enum(import.meta.url, {
   name: "SkillsSelectOptionCategoryCategory",
   values: () => ({
     Skills: DB.EnumCase({ type: DB.IncludeIdentifier(SkillSelectOptionCategoryCategory) }),
     Spells: DB.EnumCase({
-      type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [SpellIdentifier()]),
+      type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
+        DB.IncludeIdentifierType(SpellFilter),
+      ]),
     }),
     Rituals: DB.EnumCase({
       type: DB.GenIncludeIdentifier(GenericSkillsSelectOptionCategoryCategory, [
-        RitualIdentifier(),
+        DB.IncludeIdentifierType(RitualFilter),
       ]),
     }),
     LiturgicalChants: DB.EnumCase({

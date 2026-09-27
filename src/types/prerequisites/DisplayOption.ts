@@ -26,7 +26,7 @@ A standalone sentence is connected to the previous prerequisite string with a pe
         DB.Object({
           replacement: DB.Required({
             comment: "The replacement text.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
         }),
       ),

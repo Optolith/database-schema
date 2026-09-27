@@ -12,6 +12,9 @@ const config: GenerationConfig<TSONDBTypes> = {
         generateHelpers: true,
         inferTranslationParameters: {
           format: "mf2",
+          otherTypes: {
+            list: "string[]",
+          },
         },
       },
     }),

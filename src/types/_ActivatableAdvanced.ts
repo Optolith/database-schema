@@ -24,6 +24,10 @@ const AdvancedSpecialAbility = DB.GenEnum(import.meta.url, {
         DB.TypeArgument(Identifier),
       ]),
     }),
+    Any: DB.EnumCase({
+      comment: "Any advanced special ability is possible.",
+      type: null,
+    }),
   }),
 })
 

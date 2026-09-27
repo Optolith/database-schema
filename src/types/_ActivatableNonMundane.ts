@@ -1,10 +1,11 @@
 import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "./Locale.js"
+import { StandaloneCostMap } from "./_ActivatableSkillCost.js"
 import { DurationUnitValue } from "./_ActivatableSkillDuration.js"
+import { ParameterMap } from "./_ActivatableSkillParameterMap.ts"
 import { AspectIdentifier, PropertyIdentifier } from "./_Identifier.js"
 import { VolumePointsOptionReferenceIdentifier } from "./_IdentifierGroup.js"
 import { ResponsiveText, ResponsiveTextOptional } from "./_ResponsiveText.js"
-import { OneTimeCostMap } from "./_ActivatableSkillCost.js"
 
 const EnchantmentCost = DB.Enum(import.meta.url, {
   name: "EnchantmentCost",
@@ -38,7 +39,7 @@ export const ArcaneEnergyCost = DB.Enum(import.meta.url, {
     Disjunction: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostDisjunction) }),
     Variable: DB.EnumCase({ type: null }),
     ByLevel: DB.EnumCase({ type: DB.IncludeIdentifier(ArcaneEnergyCostByLevel) }),
-    Map: DB.EnumCase({ type: DB.IncludeIdentifier(OneTimeCostMap) }),
+    Map: DB.EnumCase({ type: DB.IncludeIdentifier(StandaloneCostMap) }),
   }),
 })
 
@@ -406,39 +407,11 @@ options:
 \`\`\`
 
 This will generate the exact same string as seen above. The associated options are not present in the example, but they link to the options the volume specification is meant for.`,
-  type: () =>
-    DB.Object({
-      options: DB.Required({
-        comment: "The possible costs and associated labels.",
-        type: DB.Array(DB.IncludeIdentifier(VolumeMapOption), { minItems: 2 }),
-      }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "VolumeMap",
-        DB.Object(
-          {
-            list_prepend: DB.Optional({
-              comment: "Place a string between the `for` and the grouped map option labels.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-            list_append: DB.Optional({
-              comment: "Place a string after the grouped map option labels.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-            replacement: DB.Optional({
-              comment:
-                "If the string from the book cannot be generated using the default generation technique, use this string. All options still need to be inserted propertly, since it may be used by in-game tools to provide a selection to players.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-          },
-          { minProperties: 1 },
-        ),
-      ),
-    }),
+  type: () => DB.GenIncludeIdentifier(ParameterMap, [DB.IncludeIdentifier(VolumeMapOptionValue)]),
 })
 
-const VolumeMapOption = DB.TypeAlias(import.meta.url, {
-  name: "VolumeMapOption",
+const VolumeMapOptionValue = DB.TypeAlias(import.meta.url, {
+  name: "VolumeMapOptionValue",
   type: () =>
     DB.Object({
       points: DB.Required({
@@ -449,24 +422,6 @@ const VolumeMapOption = DB.TypeAlias(import.meta.url, {
         comment: "Links to the options this volume specification is meant for.",
         type: DB.Array(DB.IncludeIdentifier(VolumeMapOptionAssociatedOption), { minItems: 1 }),
       }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "VolumeMapOption",
-        DB.Object(
-          {
-            label: DB.Required({
-              comment: "The description of the option for cost string generation.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-            label_standalone: DB.Optional({
-              comment:
-                "The description of the option if used standalone. Only used if different from `label`.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-          },
-          { minProperties: 1 },
-        ),
-      ),
     }),
 })
 
@@ -561,59 +516,17 @@ list_prepend: "spell-swords with the combat technique"
 
 This will generate the exact same string as seen above.`,
   type: () =>
-    DB.Object({
-      options: DB.Required({
-        comment: "The possible costs and associated labels.",
-        type: DB.Array(DB.IncludeIdentifier(BindingCostMapOption), { minItems: 2 }),
-      }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "BindingCostMap",
-        DB.Object(
-          {
-            list_prepend: DB.Optional({
-              comment: "Place a string between the `for` and the grouped map option labels.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-            list_append: DB.Optional({
-              comment: "Place a string after the grouped map option labels.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-            replacement: DB.Optional({
-              comment:
-                "If the string from the book cannot be generated using the default generation technique, use this string. All options still need to be inserted propertly, since it may be used by in-game tools to provide a selection to players.",
-              type: DB.IncludeIdentifier(ResponsiveTextOptional),
-            }),
-          },
-          { minProperties: 1 },
-        ),
-      ),
-    }),
+    DB.GenIncludeIdentifier(ParameterMap, [DB.IncludeIdentifier(BindingCostMapOptionValue)]),
 })
 
-const BindingCostMapOption = DB.TypeAlias(import.meta.url, {
-  name: "BindingCostMapOption",
+const BindingCostMapOptionValue = DB.TypeAlias(import.meta.url, {
+  name: "BindingCostMapOptionValue",
   type: () =>
     DB.Object({
-      permanent_value: DB.Required({
+      permanentValue: DB.Required({
         comment: "The full permanent AE cost value for this option.",
         type: DB.Integer({ minimum: 1 }),
       }),
-      translations: NestedTranslationMap(
-        DB.Required,
-        "BindingCostMapOption",
-        DB.Object({
-          label: DB.Required({
-            comment: "The description of the option for cost string generation.",
-            type: DB.IncludeIdentifier(ResponsiveTextOptional),
-          }),
-          label_standalone: DB.Optional({
-            comment:
-              "The description of the option if used standalone. Only used if different from `label`.",
-            type: DB.IncludeIdentifier(ResponsiveTextOptional),
-          }),
-        }),
-      ),
     }),
 })
 

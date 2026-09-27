@@ -10,7 +10,7 @@ import {
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
-import { src } from "../../source/_PublicationRef.js"
+import { optionalSrc, src } from "../../source/_PublicationRef.js"
 import { checkWeaponCombatTechniqueIntegrity } from "./_Weapon.js"
 import { SecondaryArmor } from "./Armor.js"
 import { ImprovisedWeapon } from "./Weapon.js"
@@ -166,7 +166,7 @@ export const FixedCost = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const CostRange = DB.TypeAlias(import.meta.url, {
+export const CostRange = DB.TypeAlias(import.meta.url, {
   name: "CostRange",
   type: () =>
     DB.Object({
@@ -206,12 +206,15 @@ export const Complexity = DB.Enum(import.meta.url, {
 
 export const ComplexComplexity = DB.TypeAlias(import.meta.url, {
   name: "ComplexComplexity",
+  comment:
+    "A item’s trade secret inherits the source references from its item. Specifying source references here instead means none of the item’s source references are inherited.",
   type: () =>
     DB.Object({
       ap_value: DB.Required({
         comment: "The AP value for the trade secret.",
         type: DB.Integer({ minimum: 1 }),
       }),
+      src: optionalSrc,
     }),
 })
 

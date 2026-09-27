@@ -4,6 +4,7 @@
 
 import * as DB from "tsondb/schema/dsl"
 import { PlainGeneralPrerequisites } from "../../_Prerequisite.js"
+import { optionalSrc } from "../../source/_PublicationRef.ts"
 
 export const EffectType = DB.Enum(import.meta.url, {
   name: "EffectType",
@@ -52,6 +53,8 @@ export const RecipeComplexity = DB.Enum(import.meta.url, {
 
 export const RecipeTradeSecret = DB.TypeAlias(import.meta.url, {
   name: "RecipeTradeSecret",
+  comment:
+    "A recipe’s trade secret inherits the source references from its recipe. Specifying source references here instead means none of the recipe’s source references are inherited.",
   type: () =>
     DB.Object({
       ap_value: DB.Required({
@@ -62,5 +65,6 @@ export const RecipeTradeSecret = DB.TypeAlias(import.meta.url, {
         comment: "The prerequisites of the trade secret, if any.",
         type: DB.IncludeIdentifier(PlainGeneralPrerequisites),
       }),
+      src: optionalSrc,
     }),
 })

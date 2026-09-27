@@ -17,7 +17,9 @@ import type {
   ImprovementCost,
   Poison,
   PrerequisiteForLevel,
+  Property_ID,
   RequirableSelectOptionIdentifier,
+  Ritual_ID,
   SelectOptionCategory,
   SelectOptions,
   SelectOptionsAdventurePointsValue,
@@ -28,6 +30,7 @@ import type {
   SkillSelectOptionCategoryPrerequisite,
   SpecificFromSkillSelectOptionCategoryCategory,
   SpecificTargetCategory,
+  Spell_ID,
   TargetCategory,
   TradeSecretAdventurePointsValue,
 } from "../../gen/types.js"
@@ -67,15 +70,17 @@ const wrapPlainApValue = (
 ): TradeSecretAdventurePointsValue | undefined =>
   apValue === undefined ? undefined : Case("Fixed", apValue)
 
-const matchesSpecificSkillishIdList = (
-  id: string,
-  config: SpecificFromSkillSelectOptionCategoryCategory<string>,
+const matchesSpecificSkillishIdList = <Ref>(
+  config: SpecificFromSkillSelectOptionCategoryCategory<Ref>,
+  matches: (required: Ref) => boolean,
 ): boolean => {
+  const isInList = config.list.some(matches)
+
   switch (config.operation.kind) {
     case "Intersection":
-      return config.list.includes(id)
+      return isInList
     case "Difference":
-      return !config.list.includes(id)
+      return !isInList
     default:
       return assertExhaustive(config.operation)
   }
@@ -233,14 +238,35 @@ const getDefaultSkillishFilter = <E extends SkillishEntityName>(
   const { specific } = category
   return specific === undefined
     ? undefined
-    : ({ id }) => matchesSpecificSkillishIdList(id, specific)
+    : ({ id }) => matchesSpecificSkillishIdList(specific, required => required === id)
 }
 
-const getDerivedSkillishSelectOptions = <E extends SkillishEntityName>(
+const getSpellworkFilter = <E extends "Spell" | "Ritual">(
+  category: GenericSkillsSelectOptionCategoryCategory<
+    Case<"Single", Spell_ID | Ritual_ID> | Case<"Property", Property_ID>
+  >,
+): ((instance: { id: string; content: Entity<TSONDBTypes, E> }) => boolean) | undefined => {
+  const { specific } = category
+  return specific === undefined
+    ? undefined
+    : ({ id, content: { property } }) =>
+        matchesSpecificSkillishIdList(specific, required => {
+          switch (required.kind) {
+            case "Single":
+              return required.Single === id
+            case "Property":
+              return property === required.Property
+            default:
+              return assertExhaustive(required)
+          }
+        })
+}
+
+const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
   database: TSONDB<TSONDBTypes>,
   entryId: ActivatableIdentifier,
   entity: E,
-  category: GenericSkillsSelectOptionCategoryCategory<string> & {
+  category: GenericSkillsSelectOptionCategoryCategory<ID> & {
     skill_applications?: SkillApplicationOrUse[] | undefined
     skill_uses?: SkillApplicationOrUse[] | undefined
   },
@@ -248,7 +274,7 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName>(
     bindingCost?: SelectOptionsBindingCostValue<SkillishIdentifier | CombatTechniqueIdentifier>
     ap_value?: SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier>
   },
-  filter = getDefaultSkillishFilter<E>(category),
+  filter: ((instance: { id: string; content: Entity<TSONDBTypes, E> }) => boolean) | undefined,
 ) => {
   const { prerequisites } = category
   const { bindingCost, ap_value } = options
@@ -928,7 +954,10 @@ const getDerivedSelectOptions = (
 
                 const matchesIdRequirement =
                   category.Skills.specific === undefined ||
-                  matchesSpecificSkillishIdList(id, category.Skills.specific)
+                  matchesSpecificSkillishIdList(
+                    category.Skills.specific,
+                    required => required === id,
+                  )
 
                 return matchesGroupRequirement && matchesIdRequirement
               },
@@ -940,6 +969,7 @@ const getDerivedSelectOptions = (
               "Spell",
               category.Spells,
               selectOptionCategory.Skills,
+              getSpellworkFilter(category.Spells),
             )
           case "Rituals":
             return getDerivedSkillishSelectOptions(
@@ -948,6 +978,7 @@ const getDerivedSelectOptions = (
               "Ritual",
               category.Rituals,
               selectOptionCategory.Skills,
+              getSpellworkFilter(category.Rituals),
             )
           case "LiturgicalChants":
             return getDerivedSkillishSelectOptions(
@@ -956,6 +987,7 @@ const getDerivedSelectOptions = (
               "LiturgicalChant",
               category.LiturgicalChants,
               selectOptionCategory.Skills,
+              getDefaultSkillishFilter(category.LiturgicalChants),
             )
           case "Ceremonies":
             return getDerivedSkillishSelectOptions(
@@ -964,6 +996,7 @@ const getDerivedSelectOptions = (
               "Ceremony",
               category.Ceremonies,
               selectOptionCategory.Skills,
+              getDefaultSkillishFilter(category.Ceremonies),
             )
           default:
             return assertExhaustive(category)
@@ -980,6 +1013,7 @@ const getDerivedSelectOptions = (
               "CloseCombatTechnique",
               category.CloseCombatTechniques,
               selectOptionCategory.CombatTechniques,
+              getDefaultSkillishFilter(category.CloseCombatTechniques),
             )
           case "RangedCombatTechniques":
             return getDerivedSkillishSelectOptions(
@@ -988,6 +1022,7 @@ const getDerivedSelectOptions = (
               "RangedCombatTechnique",
               category.RangedCombatTechniques,
               selectOptionCategory.CombatTechniques,
+              getDefaultSkillishFilter(category.RangedCombatTechniques),
             )
           default:
             return assertExhaustive(category)

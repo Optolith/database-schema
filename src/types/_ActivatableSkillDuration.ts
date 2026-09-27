@@ -154,7 +154,62 @@ export const DurationUnit = DB.Enum(import.meta.url, {
     Centuries: DB.EnumCase({ type: null }),
     Actions: DB.EnumCase({ type: null }),
     CombatRounds: DB.EnumCase({ type: null }),
+    Custom: DB.EnumCase({
+      type: DB.IncludeIdentifier(CustomDurationUnit),
+    }),
   }),
+})
+
+const CustomDurationUnit = DB.TypeAlias(import.meta.url, {
+  name: "CustomDurationUnit",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "CustomDurationUnit",
+        DB.Object({
+          name: DB.Required({
+            comment: "The name of the custom duration unit.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          fullNumber: DB.Required({
+            comment:
+              "A translation for a numeric value of the custom duration unit, e.g. ‘3 days’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.",
+            type: DB.String({
+              minLength: 1,
+              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/,
+            }),
+          }),
+          full: DB.Required({
+            comment:
+              "A translation for an arbitrary value of the custom duration unit, e.g. ‘3–4 days’ or ‘QL days’. The translation string can and should make use of the `$value` variable.",
+            type: DB.String({
+              minLength: 1,
+            }),
+          }),
+          symbol: DB.Required({
+            comment:
+              "A symbol or shortened label for the custom duration unit for use in small spaces.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          compressedNumber: DB.Required({
+            comment:
+              "A translation for a numeric value of the custom duration unit for use in small spaces, e.g. ‘3 d.’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.",
+            type: DB.String({
+              minLength: 1,
+              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/,
+            }),
+          }),
+          compressed: DB.Required({
+            comment:
+              "A translation for an arbitrary value of the custom duration unit for use in small spaces, e.g. ‘3–4 d.’ or ‘QL d.’. The translation string can and should make use of the `$value` variable.",
+            type: DB.String({
+              minLength: 1,
+            }),
+          }),
+        }),
+      ),
+    }),
 })
 
 export const DurationUnitValue = DB.TypeAlias(import.meta.url, {

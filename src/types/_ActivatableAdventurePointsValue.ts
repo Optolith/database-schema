@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { createValueMapOption, ValueMap } from "./_ActivatableSkillParameterMap.ts"
 import { ActivatableIdentifier } from "./_IdentifierGroup.js"
 import { MathOperation } from "./_MathExpression.js"
 import { BySizeCategory } from "./_SizeCategory.js"
@@ -160,10 +161,48 @@ const AdventurePointsDependingOnActiveInstancesExpression = DB.TypeAlias(import.
   comment:
     "The adventure points cost depends on how many instances of the entry are already active.",
   type: () =>
-    DB.GenIncludeIdentifier(MathOperation, [
-      DB.IncludeIdentifier(AdventurePointsDependingOnActiveInstancesExpressionValue),
+    DB.Object({
+      expression: DB.Required({
+        comment: "The expression to calculate the AP value.",
+        type: DB.IncludeIdentifier(AdventurePointsDependingOnActiveInstancesExpressionExpression),
+      }),
+      customLabels: DB.Optional({
+        comment:
+          "Custom labels for the expression values. If not provided, the default labels will be used.\n\nThe values to provide must be in the same order as they appear in the expression. For example, if the expression is `Active * 2 + 1`, the first option corresponds to `1`, the second option corresponds to `3`, and so on. Only the amount of options specified will be displayed.",
+        type: DB.IncludeIdentifier(AdventurePointsDependingOnActiveInstancesExpressionLabels),
+      }),
+    }),
+})
+
+const AdventurePointsDependingOnActiveInstancesExpressionLabels = DB.TypeAlias(import.meta.url, {
+  name: "AdventurePointsDependingOnActiveInstancesExpressionLabels",
+  comment:
+    "Custom labels for the expression values. If not provided, the default labels will be used.\n\nThe values to provide must be in the same order as they appear in the expression. For example, if the expression is `Active * 2 + 1`, the first option corresponds to `1`, the second option corresponds to `3`, and so on. Only the amount of options specified will be displayed.",
+  type: () =>
+    DB.GenIncludeIdentifier(ValueMap, [
+      DB.IncludeIdentifier(AdventurePointsDependingOnActiveInstancesExpressionLabelsOption),
     ]),
 })
+
+const AdventurePointsDependingOnActiveInstancesExpressionLabelsOption = createValueMapOption(
+  "AdventurePointsDependingOnActiveInstancesExpressionLabelsOption",
+  [],
+  () => ({}),
+  false,
+)
+
+const AdventurePointsDependingOnActiveInstancesExpressionExpression = DB.TypeAlias(
+  import.meta.url,
+  {
+    name: "AdventurePointsDependingOnActiveInstancesExpressionExpression",
+    comment:
+      "The adventure points cost depends on how many instances of the entry are already active.",
+    type: () =>
+      DB.GenIncludeIdentifier(MathOperation, [
+        DB.IncludeIdentifier(AdventurePointsDependingOnActiveInstancesExpressionValue),
+      ]),
+  },
+)
 
 const AdventurePointsDependingOnActiveInstancesExpressionValue = DB.Enum(import.meta.url, {
   name: "AdventurePointsDependingOnActiveInstancesExpressionValue",

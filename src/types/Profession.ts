@@ -22,7 +22,7 @@ import {
   RequirableSelectOptionIdentifier,
   SpellworkIdentifier,
 } from "./_IdentifierGroup.js"
-import { ProfessionPrerequisites } from "./_Prerequisite.js"
+import { ProfessionPrerequisites, ProfessionVariantPrerequisites } from "./_Prerequisite.js"
 import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
@@ -330,7 +330,7 @@ export const ProfessionVariant = DB.Entity(import.meta.url, {
       prerequisites: DB.Optional({
         comment:
           "Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.",
-        type: DB.IncludeIdentifier(ProfessionPrerequisites),
+        type: DB.IncludeIdentifier(ProfessionVariantPrerequisites),
       }),
       options: DB.Optional({
         comment:
@@ -567,6 +567,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         combat_techniques: DB.Optional({
           type: DB.IncludeIdentifier(CombatTechniquesOptions),
         }),
+        combatTechniquesForAdventurePoints: DB.Optional({
+          type: DB.IncludeIdentifier(CombatTechniquesForAdventurePointsOption),
+        }),
         cantrips: DB.Optional({
           type: DB.IncludeIdentifier(CantripsOptions),
         }),
@@ -575,6 +578,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         }),
         skills: DB.Optional({
           type: DB.IncludeIdentifier(SkillsOptions),
+        }),
+        spellworks: DB.Optional({
+          type: DB.IncludeIdentifier(SpellworksOptions),
         }),
         liturgies: DB.Optional({
           type: DB.IncludeIdentifier(LiturgiesOptions),
@@ -606,6 +612,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
             DB.IncludeIdentifier(CombatTechniquesOptions),
           ]),
         }),
+        combatTechniquesForAdventurePoints: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(CombatTechniquesForAdventurePointsOption),
+          ]),
+        }),
         cantrips: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
             DB.IncludeIdentifier(CantripsOptions),
@@ -616,6 +627,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
         }),
         skills: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [DB.IncludeIdentifier(SkillsOptions)]),
+        }),
+        spellworks: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(SpellworksOptions),
+          ]),
         }),
         liturgies: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
@@ -706,6 +722,22 @@ const RatingForCombatTechniquesNumber = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const CombatTechniquesForAdventurePointsOption = DB.TypeAlias(import.meta.url, {
+  name: "CombatTechniquesForAdventurePointsOption",
+  comment: `Distribe a set amount of Adventure Points among a given set of combat techniques.`,
+  type: () =>
+    DB.Object({
+      apValue: DB.Required({
+        comment: `The AP value to distribute.`,
+        type: DB.Integer({ minimum: 2 }),
+      }),
+      options: DB.Required({
+        comment: "The list of combat techniques to distribute to.",
+        type: DB.Array(DB.IncludeIdentifier(CombatTechniqueIdentifier), { minItems: 2 }),
+      }),
+    }),
+})
+
 const CantripsOptions = DB.TypeAlias(import.meta.url, {
   name: "CantripsOptions",
   comment: `Select one or more cantrips you receive.`,
@@ -760,6 +792,22 @@ const SkillsOptions = DB.TypeAlias(import.meta.url, {
         ? "All selected skills must be from the selected group."
         : undefined,
     ].filter(isNotNullish),
+})
+
+const SpellworksOptions = DB.TypeAlias(import.meta.url, {
+  name: "SpellworksOptions",
+  comment: `Buy a set number of spells and rituals for a specific amount of AP.`,
+  type: () =>
+    DB.Object({
+      number: DB.Required({
+        comment: "The number of spells and rituals to select.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+      apValue: DB.Required({
+        comment: "The AP value you can buy spells and rituals for.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
 })
 
 const LiturgiesOptions = DB.TypeAlias(import.meta.url, {

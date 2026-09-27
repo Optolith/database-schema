@@ -1,11 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
 
 type BinaryMathOperationName =
-  | "Addition"
-  | "Subtraction"
-  | "Multiplication"
-  | "Division"
-  | "Exponentiation"
+  "Addition" | "Subtraction" | "Multiplication" | "Division" | "Exponentiation"
 
 type BinaryMathOperation = {
   [K in BinaryMathOperationName]: DB.EnumCase<
