@@ -37,6 +37,7 @@ export type IdMap = {
  */
 export type Cache = {
   activatableSelectOptions: ActivatableSelectOptionsCache
+  ancestorBloodAdvantages: AncestorBloodAdvantagesCache
   derivedTradeSecrets: DerivedTradeSecretsCache
   magicalAndBlessedAdvantagesAndDisadvantages: MagicalAndBlessedAdvantagesAndDisadvantagesCache
   newApplicationsAndUses: NewApplicationsAndUsesCache
@@ -61,6 +62,7 @@ export type {
  */
 export const createCache = (db: TSONDB<TSONDBTypes>, idMap: IdMap): Cache => {
   const activatableSelectOptions = activatableSelectOptionsCacheBuilder(db, idMap)
+  const ancestorBloodAdvantages = buildAncestorBloodAdvantagesCache(db, idMap)
   const derivedTradeSecrets = buildDerivedTradeSecretsCache(db, idMap)
   const magicalAndBlessedAdvantagesAndDisadvantages =
     buildMagicalAndBlessedAdvantagesAndDisadvantagesCache(db, idMap)
@@ -72,6 +74,7 @@ export const createCache = (db: TSONDB<TSONDBTypes>, idMap: IdMap): Cache => {
 
   return {
     activatableSelectOptions,
+    ancestorBloodAdvantages,
     derivedTradeSecrets,
     magicalAndBlessedAdvantagesAndDisadvantages,
     newApplicationsAndUses,
