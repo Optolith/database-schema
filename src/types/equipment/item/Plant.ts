@@ -344,10 +344,10 @@ const PlantLongevity = DB.TypeAlias(import.meta.url, {
         type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
       translations: NestedTranslationMap(
-        DB.Required,
+        DB.Optional,
         "PlantLongevity",
         DB.Object({
-          raw: DB.Required({
+          raw: DB.Optional({
             comment: "The longevity of the raw plant",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
@@ -355,7 +355,11 @@ const PlantLongevity = DB.TypeAlias(import.meta.url, {
             comment: "The longevity of the preserved plant",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
-        }),
+        },
+          { minProperties: 1 },
+        ),
       ),
-    }),
+    },
+    { minProperties: 1 },
+  ),
 })

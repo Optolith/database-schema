@@ -3,6 +3,7 @@ import { src } from "../../source/_PublicationRef.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { WeaponIdentifier, ArmorIdentifier } from "../../_Identifier.js"
 import { EffectType, RecipeTradeSecret } from "./_Herbary.js"
+import { HerbalPreservationLongevity } from "./HerbalPreservation.ts"
 
 export const HerbalAid = DB.Entity(import.meta.url, {
   name: "HerbalAid",
@@ -13,7 +14,7 @@ export const HerbalAid = DB.Entity(import.meta.url, {
         comment: "The plant types this aid belongs to.",
         type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
       }),
-      crafting_difficulty: DB.Required({
+      crafting_difficulty: DB.Optional({
         comment: "The difficulty for this aid to craft.",
         type: DB.Integer(),
       }),
@@ -25,6 +26,10 @@ export const HerbalAid = DB.Entity(import.meta.url, {
         comment: "The armor or weapon this herbal aid represents.",
         type: DB.IncludeIdentifier(HerbalAidCombatUse),
       }),
+      longevity: DB.Optional({
+        comment: "How long this herbal aid lasts.",
+        type: DB.IncludeIdentifier(HerbalPreservationLongevity),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,
@@ -34,7 +39,7 @@ export const HerbalAid = DB.Entity(import.meta.url, {
             comment: "The herbal aid's name.",
             type: DB.String({ minLength: 1 }),
           }),
-          description: DB.Required({
+          description: DB.Optional({
             comment: "The herbal aid's description.",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
