@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.72.1](https://github.com/Optolith/database-schema/compare/v0.72.0...v0.72.1) (2026-09-28)
+
+### Features
+
+* add name of god translation option to blessed tradition ([8363f99](https://github.com/Optolith/database-schema/commit/8363f99ebcaf0e0f634aa686746c956907e933b3))
 ## [0.72.0](https://github.com/Optolith/database-schema/compare/v0.71.0...v0.72.0) (2026-09-28)
 
 ### ⚠ BREAKING CHANGES
