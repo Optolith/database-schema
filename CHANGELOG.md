@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.70.1](https://github.com/Optolith/database-schema/compare/v0.70.0...v0.70.1) (2026-09-28)
+
+### Features
+
+* different names for familiar's tricks based on tradition ([189a86d](https://github.com/Optolith/database-schema/commit/189a86da529c1b220030c746f8bdb0b94a29a3d9))
 ## [0.70.0](https://github.com/Optolith/database-schema/compare/v0.69.0...v0.70.0) (2026-09-27)
 
 ### ⚠ BREAKING CHANGES
