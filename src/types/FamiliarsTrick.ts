@@ -18,6 +18,7 @@ import { ResponsiveText } from "./_ResponsiveText.js"
 import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
+import { MagicalTradition } from "./specialAbility/MagicalTradition.ts"
 
 export const FamiliarsTrick = DB.Entity(import.meta.url, {
   name: "FamiliarsTrick",
@@ -60,6 +61,10 @@ If no traditions are given, the familiars trick is not restricted by the magical
             comment: "The familiar’s trick’s name.",
             type: DB.String({ minLength: 1 }),
           }),
+          nameByTradition: DB.Optional({
+            comment: "For some traditions, the name of the familiar’s trick is different.",
+            type: DB.IncludeIdentifier(FamiliarsTrickNameByTradition),
+          }),
           effect: DB.Required({
             comment: "The effect description.",
             type: DB.String({ minLength: 1, markdown: "block" }),
@@ -85,6 +90,23 @@ If no traditions are given, the familiars trick is not restricted by the magical
       keyPathInEntityMap: "name",
     },
   ],
+})
+
+const FamiliarsTrickNameByTradition = DB.TypeAlias(import.meta.url, {
+  name: "FamiliarsTrickNameByTradition",
+  type: () =>
+    DB.NestedEntityMap({
+      secondaryEntity: MagicalTradition,
+      name: "FamiliarsTrickNameForTradition",
+      namePlural: "FamiliarsTrickNameForTraditions",
+      type: DB.Object({
+        name: DB.Required({
+          comment: "The familiar’s trick’s name for this tradition.",
+          type: DB.String({ minLength: 1 }),
+        }),
+      }),
+      minProperties: 1,
+    }),
 })
 
 const FamiliarsTrickProperty = DB.Enum(import.meta.url, {
