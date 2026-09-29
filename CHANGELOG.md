@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.74.0](https://github.com/Optolith/database-schema/compare/v0.73.0...v0.74.0) (2026-09-29)
+
+### ⚠ BREAKING CHANGES
+
+* consolidate armor type entity into armor entity
+
+### Features
+
+* consolidate armor type entity into armor entity ([10ab468](https://github.com/Optolith/database-schema/commit/10ab4689c273ca3effe56770b05c769dc3321d12))
 ## [0.73.0](https://github.com/Optolith/database-schema/compare/v0.72.1...v0.73.0) (2026-09-29)
 
 ### ⚠ BREAKING CHANGES
