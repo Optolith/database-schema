@@ -1,5 +1,7 @@
+import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
-import { ArmorIdentifier, ArmorTypeIdentifier } from "../../_Identifier.js"
+import type * as Gen from "../../../../gen/types.js"
+import { ArmorIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -41,9 +43,9 @@ export const Armor = DB.Entity(import.meta.url, {
         comment: "Does the armor have additional penalties (MOV -1, INI -1)?",
         type: DB.IncludeIdentifier(HasAdditionalPenalties),
       }),
-      armor_type: DB.Required({
-        comment: "The armor type..",
-        type: ArmorTypeIdentifier(),
+      armorType: DB.Required({
+        comment: "The armor type.",
+        type: DB.IncludeIdentifier(ArmorType),
       }),
       hit_zone: DB.Optional({
         comment: "Specify if armor is only available for a specific hit zone.",
@@ -106,6 +108,71 @@ export const Armor = DB.Entity(import.meta.url, {
   ],
 })
 
+const ArmorType = DB.Enum(import.meta.url, {
+  name: "ArmorType",
+  comment: "The armor type.",
+  values: () => ({
+    Standard: DB.EnumCase({ type: DB.IncludeIdentifier(StandardArmorType) }),
+    StandardVariant: DB.EnumCase({ type: DB.IncludeIdentifier(StandardVariantArmorType) }),
+    Variant: DB.EnumCase({ type: DB.IncludeIdentifier(VariantArmorType) }),
+  }),
+})
+
+const StandardArmorType = DB.TypeAlias(import.meta.url, {
+  name: "StandardArmorType",
+  comment: "A standard armor.",
+  type: () =>
+    DB.Object({
+      sturdinessRating: DB.Required({
+        comment:
+          "An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.",
+        type: DB.Integer({ minimum: 1, maximum: 20 }),
+      }),
+    }),
+})
+
+const validateArmorTypeReference = (deps: {
+  getInstanceById: (entityName: "Armor", id: string) => Gen.Armor | undefined
+  instanceContent: { variantOf: Gen.Armor_ID }
+}) =>
+  [
+    deps.getInstanceById("Armor", deps.instanceContent.variantOf)?.armorType.kind !== "Standard"
+      ? "The armor is a variant of a standard armor, but the referenced armor is not a standard armor."
+      : undefined,
+  ].filter(isNotNullish)
+
+const StandardVariantArmorType = DB.TypeAlias(import.meta.url, {
+  name: "StandardVariantArmorType",
+  comment:
+    "The armor is a variant of a standard armor but still defines its own sturdiness rating and thus its own armor type.",
+  type: () =>
+    DB.Object({
+      variantOf: DB.Required({
+        comment: "The standard armor this armor is a variant of.",
+        type: ArmorIdentifier(),
+      }),
+      sturdinessRating: DB.Required({
+        comment:
+          "An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.",
+        type: DB.Integer({ minimum: 1, maximum: 20 }),
+      }),
+    }),
+  customConstraints: validateArmorTypeReference,
+})
+
+const VariantArmorType = DB.TypeAlias(import.meta.url, {
+  name: "VariantArmorType",
+  comment: "The armor is a variant of a standard armor but also defines its own .",
+  type: () =>
+    DB.Object({
+      variantOf: DB.Required({
+        comment: "The standard armor this armor is a variant of.",
+        type: ArmorIdentifier(),
+      }),
+    }),
+  customConstraints: validateArmorTypeReference,
+})
+
 export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
   name: "SecondaryArmor",
   type: () =>
@@ -122,9 +189,9 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         comment: "Does the armor have additional penalties (MOV -1, INI -1)?",
         type: DB.IncludeIdentifier(HasAdditionalPenalties),
       }),
-      armor_type: DB.Required({
-        comment: "The armor type..",
-        type: ArmorTypeIdentifier(),
+      variantOf: DB.Required({
+        comment: "The standard armor this armor is a variant of.",
+        type: ArmorIdentifier(),
       }),
       hit_zone: DB.Optional({
         comment: "Specify if armor is only available for a specific hit zone.",
@@ -153,6 +220,7 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
+  customConstraints: validateArmorTypeReference,
 })
 
 const ArmorComplexity = DB.Enum(import.meta.url, {

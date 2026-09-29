@@ -40,7 +40,6 @@ export const schema = new Schema<TSONDBTypes>(
     Types.ArcaneDancerTradition,
     Types.ArcaneOrbEnchantment,
     Types.Armor,
-    Types.ArmorType,
     Types.Aspect,
     Types.AttireEnchantment,
     Types.Attribute,

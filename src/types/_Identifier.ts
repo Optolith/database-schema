@@ -48,7 +48,6 @@ import { Plant } from "./equipment/item/Plant.js"
 import { Poison } from "./equipment/item/Poison.js"
 import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
-import { ArmorType } from "./equipment/item/sub/ArmorType.js"
 import { Biome } from "./equipment/item/sub/Biome.js"
 import { BotanicRegion } from "./equipment/item/sub/BotanicRegion.js"
 import { Reach } from "./equipment/item/sub/Reach.js"
@@ -190,7 +189,6 @@ export const ArcaneBardTraditionIdentifier: () => R = () => R(ArcaneBardTraditio
 export const ArcaneDancerTraditionIdentifier: () => R = () => R(ArcaneDancerTradition)
 export const ArcaneOrbEnchantmentIdentifier: () => R = () => R(ArcaneOrbEnchantment)
 export const ArmorIdentifier: () => R = () => R(Armor)
-export const ArmorTypeIdentifier: () => R = () => R(ArmorType)
 export const AspectIdentifier: () => R = () => R(Aspect)
 export const AttireEnchantmentIdentifier: () => R = () => R(AttireEnchantment)
 export const AttributeIdentifier: () => R = () => R(Attribute)
