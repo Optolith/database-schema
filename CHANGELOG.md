@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.73.0](https://github.com/Optolith/database-schema/compare/v0.72.1...v0.73.0) (2026-09-29)
+
+### ⚠ BREAKING CHANGES
+
+* cost range may have an open upper bound
+
+### Bug Fixes
+
+* cost range may have an open upper bound ([ec66a99](https://github.com/Optolith/database-schema/commit/ec66a991b4493185c3f7941be802fa1a9054e78b))
 ## [0.72.1](https://github.com/Optolith/database-schema/compare/v0.72.0...v0.72.1) (2026-09-28)
 
 ### Features
