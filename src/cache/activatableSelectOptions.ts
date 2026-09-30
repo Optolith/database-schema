@@ -1159,7 +1159,6 @@ const cacheKeyBase: Record<ActivatableIdentifier["kind"], null> = {
   SkillStyleSpecialAbility: null,
   SpellSwordEnchantment: null,
   StaffEnchantment: null,
-  Trick: null,
   ToyEnchantment: null,
   Trinkhornzauber: null,
   VampiricGift: null,
