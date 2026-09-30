@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.75.1](https://github.com/Optolith/database-schema/compare/v0.75.0...v0.75.1) (2026-09-30)
+
+### Bug Fixes
+
+* remove incorrect entity name ([955dbfc](https://github.com/Optolith/database-schema/commit/955dbfcc2651d8c8c865006083075bbffcb86ed5))
+* select options cache after last breaking change ([e257646](https://github.com/Optolith/database-schema/commit/e2576461b9a0663374326ae3719ca38af774db01))
 ## [0.75.0](https://github.com/Optolith/database-schema/compare/v0.74.0...v0.75.0) (2026-09-30)
 
 ### ⚠ BREAKING CHANGES
