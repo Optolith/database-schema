@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.76.0](https://github.com/Optolith/database-schema/compare/v0.75.1...v0.76.0) (2026-09-30)
+
+### ⚠ BREAKING CHANGES
+
+* blessed honor/punishment subtypes
+* grouped value map style
+* settings for mapping styles to focus rules
+
+### Features
+
+* blessed honor/punishment subtypes ([6a0a8ba](https://github.com/Optolith/database-schema/commit/6a0a8ba0f4ed010b026f647c5c06c1c942215a19)), closes [#194](https://github.com/Optolith/database-schema/issues/194)
+* grouped value map style ([238edb9](https://github.com/Optolith/database-schema/commit/238edb9d0dfb0bfb48d5ee51fedc802db40498d9))
+* settings for mapping styles to focus rules ([d1990a1](https://github.com/Optolith/database-schema/commit/d1990a15d6ad4a868b58b716d5dd45704180e9b6))
+* specify bannzeichen option in profession ([648bb02](https://github.com/Optolith/database-schema/commit/648bb0278c5a175f711aa5b49274155c66394c9a)), closes [#192](https://github.com/Optolith/database-schema/issues/192)
+* type-restricted derived blessed tradition select options ([0051e49](https://github.com/Optolith/database-schema/commit/0051e49266b41f9b565c085d65419a1ef1d79eae)), closes [#193](https://github.com/Optolith/database-schema/issues/193)
 ## [0.75.1](https://github.com/Optolith/database-schema/compare/v0.75.0...v0.75.1) (2026-09-30)
 
 ### Bug Fixes
