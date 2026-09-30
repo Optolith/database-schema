@@ -1,11 +1,18 @@
 import { Schema } from "tsondb/schema"
-import type { ChildEntityMap, EntityMap, EnumMap, TypeAliasMap } from "../gen/types.js"
+import type {
+  ChildEntityMap,
+  EntityMap,
+  EnumMap,
+  SingletonEntityMap,
+  TypeAliasMap,
+} from "../gen/types.js"
 import * as Types from "./types/index.js"
 
 declare module "tsondb/schema/gen" {
   interface Register {
     entityMap: EntityMap
     childEntityMap: ChildEntityMap
+    singletonEntityMap: SingletonEntityMap
     enumMap: EnumMap
     typeAliasMap: TypeAliasMap
   }
@@ -14,6 +21,7 @@ declare module "tsondb/schema/gen" {
 export interface TSONDBTypes {
   entityMap: EntityMap
   childEntityMap: ChildEntityMap
+  singletonEntityMap: SingletonEntityMap
   enumMap: EnumMap
   typeAliasMap: TypeAliasMap
 }
@@ -156,6 +164,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.Script,
     Types.Sermon,
     Types.Service,
+    Types.Settings,
     Types.SexPractice,
     Types.SexSpecialAbility,
     Types.SickleRitual,

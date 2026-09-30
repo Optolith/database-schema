@@ -5,13 +5,13 @@ import {
   CloseCombatTechniqueIdentifier,
   ElementIdentifier,
   LiturgicalChantIdentifier,
+  PropertyIdentifier,
   RangedCombatTechniqueIdentifier,
   RitualIdentifier,
   SkillGroupIdentifier,
   SkillIdentifier,
   SpellIdentifier,
   TargetCategoryIdentifier,
-  PropertyIdentifier,
 } from "./_Identifier.js"
 import {
   ActivatableIdentifier,
@@ -113,9 +113,9 @@ const PropertiesSelectOptionCategory = DB.TypeAlias(import.meta.url, {
   name: "PropertiesSelectOptionCategory",
   type: () =>
     DB.Object({
-      require_knowledge: DB.Optional({
-        comment: "Does each property require its corresponding property knowledge?",
-        type: DB.Boolean(),
+      requireActiveSelectionOnEntry: DB.Optional({
+        comment: "Does each property require it to be active as a selection on an instance?",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
       require_minimum_spellworks_on: DB.Optional({
         comment:
@@ -129,9 +129,9 @@ const AspectSelectOptionCategory = DB.TypeAlias(import.meta.url, {
   name: "AspectSelectOptionCategory",
   type: () =>
     DB.Object({
-      require_knowledge: DB.Optional({
-        comment: "Does each aspect require its corresponding aspect knowledge?",
-        type: DB.Boolean(),
+      requireActiveSelectionOnEntry: DB.Optional({
+        comment: "Does each aspect require it to be active as a selection on an instance?",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
       use_master_of_suffix_as_name: DB.Optional({
         comment:

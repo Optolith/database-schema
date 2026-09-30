@@ -23,16 +23,6 @@ import {
 import { buildDerivedTradeSecretsCache, type DerivedTradeSecretsCache } from "./tradeSecrets.ts"
 
 /**
- * Identifiers of specific entries in the database that are used for creating the cache.
- */
-export type IdMap = {
-  Advantage: Record<"Blessed" | "Spellcaster", string>
-  GeneralSpecialAbility: Record<"Weaponsmith" | "Armorer", string>
-  MagicalSpecialAbility: Record<"PropertyKnowledge", string>
-  KarmaSpecialAbility: Record<"AspectKnowledge", string>
-}
-
-/**
  * The cache object containing all precomputed data.
  */
 export type Cache = {
@@ -60,15 +50,21 @@ export type {
  * @param idMap An object containing identifiers of specific entries in the database that are used for creating the cache.
  * @returns The created cache object.
  */
-export const createCache = (db: TSONDB<TSONDBTypes>, idMap: IdMap): Cache => {
-  const activatableSelectOptions = activatableSelectOptionsCacheBuilder(db, idMap)
-  const ancestorBloodAdvantages = buildAncestorBloodAdvantagesCache(db, idMap)
-  const derivedTradeSecrets = buildDerivedTradeSecretsCache(db, idMap)
+export const createCache = (db: TSONDB<TSONDBTypes>): Cache => {
+  const settings = db.getSingletonInstanceOfEntity("Settings")
+
+  if (!settings) {
+    throw new Error("Settings not found in the database.")
+  }
+
+  const activatableSelectOptions = activatableSelectOptionsCacheBuilder(db, settings)
+  const ancestorBloodAdvantages = buildAncestorBloodAdvantagesCache(db, settings)
+  const derivedTradeSecrets = buildDerivedTradeSecretsCache(db, settings)
   const magicalAndBlessedAdvantagesAndDisadvantages =
-    buildMagicalAndBlessedAdvantagesAndDisadvantagesCache(db, idMap)
+    buildMagicalAndBlessedAdvantagesAndDisadvantagesCache(db, settings)
   const newApplicationsAndUses = buildNewApplicationsAndUsesCache(
     db,
-    idMap,
+    settings,
     activatableSelectOptions,
   )
 

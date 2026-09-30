@@ -1,9 +1,9 @@
 import type { TSONDB } from "tsondb"
+import type { Settings } from "../../gen/types.js"
 import type { TSONDBTypes } from "../main.ts"
-import type { IdMap } from "./index.ts"
 
 export type CacheBuilder<T = unknown, Args extends unknown[] = []> = (
   db: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
+  settings: Settings,
   ...args: Args
 ) => T

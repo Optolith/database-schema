@@ -962,7 +962,7 @@ export const Locale = DB.Entity(import.meta.url, {
           // Skill check modifiers
           " (modified by {$modifier})": null,
           " (−{$modifier})": null,
-          "{$first} or {$second}, depending on which value is higher": null,
+          "{$values :list type=disjunction}, depending on which value is higher": null,
           "Invocation Difficulty": null,
           "ID": null,
           "Creation Difficulty": null,
@@ -1663,7 +1663,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Witch kitchen": null,
           "Alchemist’s laboratory": null,
           "Resistance": null,
-          "{$first} or {$second}, depending on which value is lower": null,
+          "{$values :list type=disjunction}, depending on which value is lower": null,
           "Start": null,
           "immediate": null,
           "instant": null,

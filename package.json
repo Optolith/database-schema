@@ -39,7 +39,7 @@
   "license": "MPL-2.0",
   "dependencies": {
     "@elyukai/utils": "^0.3.6",
-    "tsondb": "^0.21.1",
+    "tsondb": "^0.21.2",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
@@ -58,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/Optolith/database-schema/issues"
   },
-  "type": "module"
+  "type": "module",
+  "allowScripts": {
+    "fsevents@2.3.3": true
+  }
 }
