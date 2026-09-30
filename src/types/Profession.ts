@@ -3,6 +3,7 @@ import * as DB from "tsondb/schema/dsl"
 import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantageDisadvantage.js"
 import {
   AdvantageIdentifier,
+  BannzeichenOptionIdentifier,
   CantripIdentifier,
   CurriculumIdentifier,
   DisadvantageIdentifier,
@@ -531,7 +532,16 @@ const ProfessionMagicalActionIdentifier = DB.TypeAlias(import.meta.url, {
         comment: "The identifier of the magical action to provide the rating for.",
         type: DB.IncludeIdentifier(MagicalActionIdentifier),
       }),
+      option: DB.Optional({
+        comment:
+          "Some Bannzeichen have options that can be selected. If the magical action has an option, this property can be set to specify the option.",
+        type: BannzeichenOptionIdentifier(),
+      }),
     }),
+  customConstraints: ({ instanceContent }) =>
+    instanceContent.option !== undefined && instanceContent.id.kind !== "Bannzeichen"
+      ? ["The option property can only be set for Bannzeichen magical actions."]
+      : [],
 })
 
 const LiturgicalChantRating = DB.TypeAlias(import.meta.url, {
