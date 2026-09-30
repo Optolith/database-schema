@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.75.0](https://github.com/Optolith/database-schema/compare/v0.74.0...v0.75.0) (2026-09-30)
+
+### ⚠ BREAKING CHANGES
+
+* global settings
+
+### Features
+
+* global settings ([e428b84](https://github.com/Optolith/database-schema/commit/e428b840d8775c55d44f3545e037495506a01cbb))
 ## [0.74.0](https://github.com/Optolith/database-schema/compare/v0.73.0...v0.74.0) (2026-09-29)
 
 ### ⚠ BREAKING CHANGES
