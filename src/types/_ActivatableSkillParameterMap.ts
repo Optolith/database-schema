@@ -61,10 +61,22 @@ The \`an item the size of a\` would be the *list prefix* string, while the list 
 const ValueMapStyle = DB.Enum(import.meta.url, {
   name: "ValueMapStyle",
   comment:
-    "The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).",
+    "The style of the generated string. It may be displayed\n\n- in a `compressed` way (e.g. *1/1/2 AE for a small/medium/large object*),\n- in a `verbose` way (e.g. *1 AE for a small object, 1 AE for a medium object, 2 AE for a large object*),\n- or in a `grouped` way (e.g. *small/medium object: 1 AE, large object: 2 AE*).\n\nA `grouped` style only really makes sense if multiple options share the same value.",
   values: () => ({
-    Compressed: DB.EnumCase({ type: null }),
-    Verbose: DB.EnumCase({ type: null }),
+    Compressed: DB.EnumCase({
+      comment: "Prints a map in a compressed way, e.g. *1/2/3 AE for a small/medium/large object*.",
+      type: null,
+    }),
+    Verbose: DB.EnumCase({
+      comment:
+        "Prints a map in a verbose way, e.g. *1 AE for a small object, 2 AE for a medium object, 3 AE for a large object*.",
+      type: null,
+    }),
+    Grouped: DB.EnumCase({
+      comment:
+        "Prints a map in a grouped way, e.g. *small/medium object: 1 AE, large object: 2 AE*.",
+      type: null,
+    }),
   }),
 })
 
