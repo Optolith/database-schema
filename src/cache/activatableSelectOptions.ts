@@ -35,7 +35,6 @@ import type {
   TradeSecretAdventurePointsValue,
 } from "../../gen/types.js"
 import type { TSONDBTypes } from "../main.js"
-import type { IdMap } from "./index.ts"
 import type { CacheBuilder } from "./internal.ts"
 import type { ResolvedNewSkillApplication, ResolvedSkillUse } from "./newApplicationsAndUses.ts"
 
@@ -309,7 +308,6 @@ const getDerivedSelectOptions = (
   selectOptionCategory: SelectOptionCategory,
   entryId: ActivatableIdentifier,
   database: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
 ): ResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
     case "Blessings":
@@ -675,20 +673,17 @@ const getDerivedSelectOptions = (
     case "Properties": {
       const getPrerequisites = (id: string): GeneralPrerequisites | undefined => {
         if (
-          selectOptionCategory.Properties.require_knowledge !== undefined ||
+          selectOptionCategory.Properties.requireActiveSelectionOnEntry !== undefined ||
           selectOptionCategory.Properties.require_minimum_spellworks_on !== undefined
         ) {
           const knowledgePrerequisite: PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
-            selectOptionCategory.Properties.require_knowledge !== undefined
+            selectOptionCategory.Properties.requireActiveSelectionOnEntry !== undefined
               ? {
                   level: 1,
                   prerequisite: Case(
                     "Single",
                     Case("Activatable", {
-                      id: Case(
-                        "MagicalSpecialAbility",
-                        idMap.MagicalSpecialAbility.PropertyKnowledge,
-                      ),
+                      id: selectOptionCategory.Properties.requireActiveSelectionOnEntry,
                       active: true,
                       options: [Case("Property", id)],
                     }),
@@ -738,17 +733,17 @@ const getDerivedSelectOptions = (
     case "Aspects": {
       const getPrerequisites = (id: string): GeneralPrerequisites | undefined => {
         if (
-          selectOptionCategory.Aspects.require_knowledge !== undefined ||
+          selectOptionCategory.Aspects.requireActiveSelectionOnEntry !== undefined ||
           selectOptionCategory.Aspects.require_minimum_liturgies_on !== undefined
         ) {
           const knowledgePrerequisite: PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
-            selectOptionCategory.Aspects.require_knowledge !== undefined
+            selectOptionCategory.Aspects.requireActiveSelectionOnEntry !== undefined
               ? {
                   level: 1,
                   prerequisite: Case(
                     "Single",
                     Case("Activatable", {
-                      id: Case("KarmaSpecialAbility", idMap.KarmaSpecialAbility.AspectKnowledge),
+                      id: selectOptionCategory.Aspects.requireActiveSelectionOnEntry,
                       active: true,
                       options: [Case("Aspect", id)],
                     }),
