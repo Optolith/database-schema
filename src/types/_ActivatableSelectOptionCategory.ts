@@ -95,7 +95,20 @@ const BlessedTraditionsSelectOptionCategory = DB.TypeAlias(import.meta.url, {
           "Should the principles (code) of the tradition be required to select the respective tradition?",
         type: DB.Boolean(),
       }),
+      onlyType: DB.Optional({
+        comment: "If set, only includes traditions of the specified type.",
+        type: DB.IncludeIdentifier(BlessedTraditionTypeForSelectOptionCategory),
+      }),
     }),
+})
+
+const BlessedTraditionTypeForSelectOptionCategory = DB.Enum(import.meta.url, {
+  name: "BlessedTraditionTypeForSelectOptionCategory",
+  comment: "The type of the tradition. May be either church or shamanistic.",
+  values: () => ({
+    Church: DB.EnumCase({ type: null }),
+    Shamanistic: DB.EnumCase({ type: null }),
+  }),
 })
 
 const ElementsSelectOptionCategory = DB.TypeAlias(import.meta.url, {

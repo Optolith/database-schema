@@ -1,4 +1,4 @@
-import { on } from "@elyukai/utils/function"
+import { constant, on } from "@elyukai/utils/function"
 import { isNotNullish } from "@elyukai/utils/nullable"
 import { mapObject } from "@elyukai/utils/object"
 import { compareNullish, compareNumber } from "@elyukai/utils/ordering"
@@ -622,6 +622,12 @@ const getDerivedSelectOptions = (
 
       return database
         .getAllInstanceContainersOfEntity("BlessedTradition")
+        .filter(
+          selectOptionCategory.BlessedTraditions.onlyType
+            ? ({ content }) =>
+                content.type.kind === selectOptionCategory.BlessedTraditions.onlyType?.kind
+            : constant(true),
+        )
         .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("BlessedTradition", id),
           content: {
