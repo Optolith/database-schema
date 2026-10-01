@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.77.0](https://github.com/Optolith/database-schema/compare/v0.76.0...v0.77.0) (2026-10-01)
+
+### ⚠ BREAKING CHANGES
+
+* more profession translation parts
+
+### Features
+
+* more profession translation parts ([9971ec0](https://github.com/Optolith/database-schema/commit/9971ec01fed1d93aa5fb4f163f9dd51a45affcac))
 ## [0.76.0](https://github.com/Optolith/database-schema/compare/v0.75.1...v0.76.0) (2026-09-30)
 
 ### ⚠ BREAKING CHANGES
