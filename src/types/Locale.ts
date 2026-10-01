@@ -1769,6 +1769,13 @@ export const Locale = DB.Entity(import.meta.url, {
           "Uncommon Advantages": null,
           "Uncommon Disadvantages": null,
 
+          "all magical and Blessed One advantages": null,
+          "all magical and Blessed One disadvantages": null,
+          "all Blessed One advantages": null,
+          "all Blessed One disadvantages": null,
+          "all magical advantages": null,
+          "all magical disadvantages": null,
+
           // cultures
           "Language": null,
           "Script": null,
@@ -1818,6 +1825,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "{$count} more spellworks totaling {$apValue} AP": null,
           "{$count} from the following list": null,
           "The Twelve Blessings": null,
+          ".input {$count :number} {{{$count} of the following liturgical chants {$rating}}}": null,
           "except for {$list :list type=conjunction}": null,
           "depends on selected tradition": null,
           "Additional Prerequisites": null,
