@@ -63,13 +63,10 @@ export const DefaultItem = (sourceUrl: string, singularName: string, pluralName?
       ).combat_use
 
       if (combatUse && combatUse.kind === "Weapon") {
-        return checkWeaponCombatTechniqueIntegrity(
-          {
-            ...rest,
-            instanceContent: combatUse.Weapon,
-          },
-          { secondary: true },
-        )
+        return checkWeaponCombatTechniqueIntegrity({
+          ...rest,
+          instanceContent: combatUse.Weapon,
+        })
       }
 
       return []

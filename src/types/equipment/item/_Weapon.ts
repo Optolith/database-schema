@@ -64,21 +64,20 @@ export const Length = DB.TypeAlias(import.meta.url, {
   type: () => DB.Integer({ minimum: 1 }),
 })
 
-export const checkWeaponCombatTechniqueIntegrity = (
-  {
-    instanceContent,
-    getInstanceById,
-    getDisplayNameAndId,
-  }: {
-    instanceContent: {
-      melee_uses?: Record<string, GenMeleeWeapon<unknown>>
-      ranged_uses?: Record<string, GenRangedWeapon<unknown>>
-    }
-    getInstanceById: GetInstanceById
-    getDisplayNameAndId: GetDisplayNameAndId
-  },
-  { secondary: _secondary }: { secondary: boolean },
-): string[] => {
+export const checkWeaponCombatTechniqueIntegrity = ({
+  instanceContent,
+  getInstanceById,
+  getDisplayNameAndId,
+}: {
+  instanceContent: {
+    melee_uses?: Record<string, GenMeleeWeapon<unknown>>
+    meleeUses?: Record<string, GenMeleeWeapon<unknown>>
+    ranged_uses?: Record<string, GenRangedWeapon<unknown>>
+    rangedUses?: Record<string, GenRangedWeapon<unknown>>
+  }
+  getInstanceById: GetInstanceById
+  getDisplayNameAndId: GetDisplayNameAndId
+}): string[] => {
   const checkPart = (
     rule: WeaponCombatTechniqueValueRule,
     value: unknown,
@@ -91,32 +90,51 @@ export const checkWeaponCombatTechniqueIntegrity = (
       : `${name} must${rule.kind === "Required" ? "" : " not"} be provided for ${type} combat technique ${getDisplayNameAndId(type === "close" ? "CloseCombatTechnique" : "RangedCombatTechnique", id)}`
 
   return [
-    instanceContent.melee_uses === undefined && instanceContent.ranged_uses === undefined
+    instanceContent.melee_uses === undefined &&
+    instanceContent.ranged_uses === undefined &&
+    instanceContent.meleeUses === undefined &&
+    instanceContent.rangedUses === undefined
       ? "either melee uses or ranged uses have to be provided"
       : undefined,
-    ...Object.entries(instanceContent.melee_uses ?? {}).flatMap(([ctId, meleeUse]) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- integrity has been checked, it must be present
-      const ct = getInstanceById("CloseCombatTechnique", ctId)!
-      return [
-        checkPart(ct.special.can_parry, meleeUse.parryModifier, "a parry modifier", "close", ctId),
-        checkPart(
-          ct.special.has_damage_threshold,
-          meleeUse.damage_threshold,
-          "a damage threshold",
-          "close",
-          ctId,
-        ),
-        checkPart(ct.special.has_length, meleeUse.length, "a length", "close", ctId),
-        checkPart(ct.special.has_reach, meleeUse.reach, "a reach", "close", ctId),
-        checkPart(ct.special.has_shield_size, meleeUse.size, "a shield size", "close", ctId),
-      ]
-    }),
-    ...Object.entries(instanceContent.ranged_uses ?? {}).flatMap(([ctId, rangedUse]) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- integrity has been checked, it must be present
-      const ct = getInstanceById("RangedCombatTechnique", ctId)!
-      return [
-        checkPart(ct.special.has_ammunition, rangedUse.ammunition, "an ammunition", "ranged", ctId),
-      ]
-    }),
+    ...Object.entries(instanceContent.melee_uses ?? instanceContent.meleeUses ?? {}).flatMap(
+      ([ctId, meleeUse]) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- integrity has been checked, it must be present
+        const ct = getInstanceById("CloseCombatTechnique", ctId)!
+        return [
+          checkPart(
+            ct.special.can_parry,
+            meleeUse.parryModifier,
+            "a parry modifier",
+            "close",
+            ctId,
+          ),
+          checkPart(
+            ct.special.has_damage_threshold,
+            meleeUse.damage_threshold,
+            "a damage threshold",
+            "close",
+            ctId,
+          ),
+          checkPart(ct.special.has_length, meleeUse.length, "a length", "close", ctId),
+          checkPart(ct.special.has_reach, meleeUse.reach, "a reach", "close", ctId),
+          checkPart(ct.special.has_shield_size, meleeUse.size, "a shield size", "close", ctId),
+        ]
+      },
+    ),
+    ...Object.entries(instanceContent.ranged_uses ?? instanceContent.rangedUses ?? {}).flatMap(
+      ([ctId, rangedUse]) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- integrity has been checked, it must be present
+        const ct = getInstanceById("RangedCombatTechnique", ctId)!
+        return [
+          checkPart(
+            ct.special.has_ammunition,
+            rangedUse.ammunition,
+            "an ammunition",
+            "ranged",
+            ctId,
+          ),
+        ]
+      },
+    ),
   ].filter(v => v !== undefined)
 }

@@ -54,13 +54,10 @@ export const IlluminationLightSource = DB.Entity(import.meta.url, {
   ],
   customConstraints: ({ instanceContent, ...rest }) => {
     if (instanceContent.combat_use && instanceContent.combat_use.kind === "Weapon") {
-      return checkWeaponCombatTechniqueIntegrity(
-        {
-          ...rest,
-          instanceContent: instanceContent.combat_use.Weapon,
-        },
-        { secondary: true },
-      )
+      return checkWeaponCombatTechniqueIntegrity({
+        ...rest,
+        instanceContent: instanceContent.combat_use.Weapon,
+      })
     }
 
     return []

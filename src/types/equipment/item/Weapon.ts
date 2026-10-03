@@ -115,7 +115,7 @@ export const Weapon = DB.Entity(import.meta.url, {
       keyPathInEntityMap: "name",
     },
   ],
-  customConstraints: params => checkWeaponCombatTechniqueIntegrity(params, { secondary: false }),
+  customConstraints: params => checkWeaponCombatTechniqueIntegrity(params),
 })
 
 export const ImprovisedWeapon = DB.TypeAlias(import.meta.url, {

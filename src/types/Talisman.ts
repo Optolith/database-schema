@@ -89,14 +89,11 @@ export const Talisman = DB.Entity(import.meta.url, {
   ],
   customConstraints: ({ instanceContent, getInstanceById, getDisplayNameAndId }) =>
     instanceContent.combatUse
-      ? checkWeaponCombatTechniqueIntegrity(
-          {
-            instanceContent: instanceContent.combatUse,
-            getDisplayNameAndId,
-            getInstanceById,
-          },
-          { secondary: true },
-        )
+      ? checkWeaponCombatTechniqueIntegrity({
+          instanceContent: instanceContent.combatUse,
+          getDisplayNameAndId,
+          getInstanceById,
+        })
       : [],
 })
 

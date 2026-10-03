@@ -30,12 +30,14 @@ import { Clothes } from "./equipment/item/Clothes.js"
 import { ClothingPackage } from "./equipment/item/ClothingPackage.js"
 import { Container } from "./equipment/item/Container.js"
 import { Elixir } from "./equipment/item/Elixir.js"
+import { EquipmentCategory } from "./equipment/item/EquipmentCategory.ts"
 import { EquipmentOfBlessedOnes } from "./equipment/item/EquipmentOfBlessedOnes.js"
 import { GemOrPreciousStone } from "./equipment/item/GemOrPreciousStone.js"
 import { HerbalAid } from "./equipment/item/HerbalAid.js"
 import { HerbalPreservation } from "./equipment/item/HerbalPreservation.js"
 import { IlluminationLightSource } from "./equipment/item/IlluminationLightSource.js"
 import { IlluminationRefillOrSupply } from "./equipment/item/IlluminationRefillOrSupply.js"
+import { Item } from "./equipment/item/Item.ts"
 import { Jewelry } from "./equipment/item/Jewelry.js"
 import { Laboratory } from "./equipment/item/Laboratory.js"
 import { Liebesspielzeug } from "./equipment/item/Liebesspielzeug.js"
@@ -233,6 +235,7 @@ export const ElementIdentifier: () => R = () => R(Element)
 export const ElixirIdentifier: () => R = () => R(Elixir)
 export const ElvenMagicalSongIdentifier: () => R = () => R(ElvenMagicalSong)
 export const EnhancementIdentifier: () => R = () => R(Enhancement)
+export const EquipmentCategoryIdentifier: () => R = () => R(EquipmentCategory)
 export const EquipmentOfBlessedOnesIdentifier: () => R = () => R(EquipmentOfBlessedOnes)
 export const ExperienceLevelIdentifier: () => R = () => R(ExperienceLevel)
 export const EyeColorIdentifier: () => R = () => R(EyeColor)
@@ -257,6 +260,7 @@ export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLi
 export const IlluminationRefillOrSupplyIdentifier: () => R = () => R(IlluminationRefillOrSupply)
 export const InfluenceIdentifier: () => R = () => R(Influence)
 export const InstrumentEnchantmentIdentifier: () => R = () => R(InstrumentEnchantment)
+export const ItemIdentifier: () => R = () => R(Item)
 export const JesterTrickIdentifier: () => R = () => R(JesterTrick)
 export const JewelryIdentifier: () => R = () => R(Jewelry)
 export const KarmaSpecialAbilityIdentifier: () => R = () => R(KarmaSpecialAbility)
