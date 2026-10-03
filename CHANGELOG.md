@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.77.1](https://github.com/Optolith/database-schema/compare/v0.77.0...v0.77.1) (2026-10-03)
+
+### Features
+
+* generic item and equipment category entities ([c154d95](https://github.com/Optolith/database-schema/commit/c154d955d161b02d8d43d13dad8a6b881a333e92))
+* mark entities sortable by index value ([5c8dd28](https://github.com/Optolith/database-schema/commit/5c8dd28937e9176b431cb8e693e816e06fcfb8d5))
+
 ## [0.77.0](https://github.com/Optolith/database-schema/compare/v0.76.0...v0.77.0) (2026-10-01)
 
 ### ⚠ BREAKING CHANGES
