@@ -23,6 +23,7 @@ export const SocialStatus = DB.Entity(import.meta.url, {
       ),
     }),
   instanceDisplayName: {},
+  sortOrder: { keyPath: "position", isIndex: true },
   uniqueConstraints: [
     { keyPath: "position" },
     {

@@ -23,9 +23,7 @@ export const Reach = DB.Entity(import.meta.url, {
       ),
     }),
   instanceDisplayName: {},
-  sortOrder: {
-    keyPath: "position",
-  },
+  sortOrder: { keyPath: "position", isIndex: true },
   uniqueConstraints: [
     {
       entityMapKeyPath: "translations",
