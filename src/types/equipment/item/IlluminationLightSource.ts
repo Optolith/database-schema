@@ -64,7 +64,7 @@ export const IlluminationLightSource = DB.Entity(import.meta.url, {
   },
 })
 
-const BurningTime = DB.Enum(import.meta.url, {
+export const BurningTime = DB.Enum(import.meta.url, {
   name: "BurningTime",
   values: () => ({
     Unlimited: DB.EnumCase({ type: null }),

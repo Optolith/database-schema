@@ -22,6 +22,7 @@ import { RangedWeapon } from "./_RangedWeapon.ts"
 import { checkWeaponCombatTechniqueIntegrity } from "./_Weapon.ts"
 import { SecondaryArmor } from "./Armor.ts"
 import { isEquipmentCategoryOfDefaultType, mergeAllValueRules } from "./EquipmentCategory.ts"
+import { BurningTime } from "./IlluminationLightSource.ts"
 
 export const Item = DB.Entity(import.meta.url, {
   name: "Item",
@@ -48,6 +49,11 @@ export const Item = DB.Entity(import.meta.url, {
         comment:
           "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.",
         type: DB.IncludeIdentifier(StructurePoints),
+      }),
+      burningTime: DB.Optional({
+        comment:
+          "The burning time is the time how long the light source can be lit. After that time you have to use a new light source.",
+        type: DB.IncludeIdentifier(BurningTime),
       }),
       meleeUses: DB.Optional({
         comment:
@@ -190,6 +196,7 @@ const checkEquipmentCategoryConstraintsWithItem = (
         applyValueRule(mergedRules.restrictedTo, item.restrictedTo, "Restriction are")
         applyValueRule(mergedRules.structurePoints, item.structurePoints, "Structure points are")
         applyValueRule(mergedRules.weight, item.weight, "A weight is")
+        applyValueRule(mergedRules.burningTime, item.burningTime, "A burning time is")
 
         return errors
       } else {
