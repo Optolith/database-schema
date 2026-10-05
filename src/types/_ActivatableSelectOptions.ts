@@ -1,4 +1,16 @@
+import { isEmpty, isNotEmpty } from "@elyukai/utils/array/nonEmpty"
 import * as DB from "tsondb/schema/dsl"
+import {
+  Case,
+  fromUniformCase,
+  type GetAllChildInstanceContainersForParent,
+  type GetInstanceById,
+} from "tsondb/schema/gen"
+import type {
+  ActivatableIdentifier,
+  ProfessionSpecialAbilityOption,
+  RequirableSelectOptionIdentifier,
+} from "../../gen/types.js"
 import { NestedTranslationMap } from "./Locale.js"
 import { SelectOptionCategory } from "./_ActivatableSelectOptionCategory.js"
 import { NewSkillApplication, SkillUse } from "./_ActivatableSkillApplicationsAndUses.js"
@@ -242,3 +254,82 @@ Note that this is only a full definition of options for simple logic that can be
 //     ]
 //   }
 // },
+
+/**
+ * Stub for once option rules are formalized in the database schema.
+ */
+export const verifyOptionsForActivatableEntry = (
+  value: {
+    id: ActivatableIdentifier | Case<"Enhancement", string>
+    level?: number
+    options?: (RequirableSelectOptionIdentifier | ProfessionSpecialAbilityOption)[]
+  },
+  getInstanceById: GetInstanceById,
+  getAllChildInstancesForParent: GetAllChildInstanceContainersForParent,
+) => {
+  if (value.id.kind === "Enhancement") {
+    return []
+  }
+
+  const referencedInstance = getInstanceById(value.id)
+
+  if (!referencedInstance) {
+    return [
+      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} not found.`,
+    ]
+  }
+
+  const generalSelectOptions = getAllChildInstancesForParent("GeneralSelectOption", value.id)
+
+  const errorMessages: string[] = []
+
+  if (
+    !("levels" in referencedInstance && typeof referencedInstance.levels === "number") &&
+    value.level !== undefined
+  ) {
+    errorMessages.push(
+      `The referenced instance of entity ${value.id.kind} with id ${fromUniformCase(
+        value.id,
+      )} does not have levels, but a level was specified in the prerequisite.`,
+    )
+  }
+
+  if (
+    (("select_options" in referencedInstance &&
+      referencedInstance.select_options?.derived !== undefined) ||
+      isNotEmpty(generalSelectOptions)) &&
+    (value.options === undefined || isEmpty(value.options))
+  ) {
+    errorMessages.push(
+      `The referenced instance of entity ${value.id.kind} with id ${fromUniformCase(
+        value.id,
+      )} has select options, but no options were specified in the prerequisite.`,
+    )
+  }
+
+  for (const option of value.options ?? []) {
+    if (option.kind === "General") {
+      const referencedOption = getInstanceById(Case("GeneralSelectOption", option.General))
+
+      if (!referencedOption) {
+        errorMessages.push(
+          `Referenced select option of entity GeneralSelectOption with id ${fromUniformCase(
+            option,
+          )} not found.`,
+        )
+      }
+
+      if (referencedOption?.parent !== value.id) {
+        errorMessages.push(
+          `Referenced select option of entity GeneralSelectOption with id ${fromUniformCase(
+            option,
+          )} does not belong to the instance of entity ${value.id.kind} with id ${fromUniformCase(
+            value.id,
+          )}.`,
+        )
+      }
+    }
+  }
+
+  return []
+}

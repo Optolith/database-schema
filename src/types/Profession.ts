@@ -1,5 +1,6 @@
 import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
+import { verifyOptionsForActivatableEntry } from "./_ActivatableSelectOptions.ts"
 import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantageDisadvantage.js"
 import {
   AdvantageIdentifier,
@@ -436,6 +437,12 @@ const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
         type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilityOption), { minItems: 1 }),
       }),
     }),
+  customConstraints: ({ instanceContent, getInstanceById, getAllChildInstancesForParent }) =>
+    verifyOptionsForActivatableEntry(
+      instanceContent,
+      getInstanceById,
+      getAllChildInstancesForParent,
+    ),
 })
 
 const ProfessionSpecialAbilitySelection = DB.TypeAlias(import.meta.url, {
