@@ -688,6 +688,10 @@ const LanguagesScriptsOptions = DB.TypeAlias(import.meta.url, {
   comment: `Buy languages and scripts for a specific amount of AP.`,
   type: () =>
     DB.Object({
+      includeScripts: DB.Required({
+        comment: "If scripts are included in the selection.",
+        type: DB.Boolean(),
+      }),
       ap_value: DB.Required({
         comment: "The AP value you can buy languages and scripts for.",
         type: DB.Integer({ minimum: 2 }),
