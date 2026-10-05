@@ -6,7 +6,7 @@ import { assertExhaustive } from "@elyukai/utils/typeSafety"
 import type { Entity, TSONDB } from "tsondb"
 import { Case, fromUniformCase } from "tsondb/schema/gen"
 import type {
-  ActivatableIdentifier,
+  ActivatableIdentifier as ActivatableIdentifierType,
   BlessedTradition,
   CombatTechniqueIdentifier,
   Element,
@@ -35,6 +35,7 @@ import type {
   TradeSecretAdventurePointsValue,
 } from "../../gen/types.js"
 import type { TSONDBTypes } from "../main.js"
+import { ActivatableIdentifier } from "../types/_IdentifierGroup.ts"
 import type { CacheBuilder } from "./internal.ts"
 import type { ResolvedNewSkillApplication, ResolvedSkillUse } from "./newApplicationsAndUses.ts"
 
@@ -207,7 +208,7 @@ const getApValueForSkillish = (
 }
 
 const convertSkillApplicationOrUse = (
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   id: Skill_ID,
   applicationOrUse: SkillApplicationOrUse,
 ) =>
@@ -261,7 +262,7 @@ const getSpellworkFilter = <E extends "Spell" | "Ritual">(
 
 const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
   database: TSONDB<TSONDBTypes>,
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   entity: E,
   category: GenericSkillsSelectOptionCategoryCategory<ID> & {
     skill_applications?: SkillApplicationOrUse[] | undefined
@@ -304,7 +305,7 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
 
 const getDerivedSelectOptions = (
   selectOptionCategory: SelectOptionCategory,
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
@@ -1066,7 +1067,7 @@ const getDerivedSelectOptions = (
 }
 
 const getExplicitSelectOptions = (
-  id: ActivatableIdentifier,
+  id: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] =>
   database
@@ -1083,7 +1084,7 @@ const getExplicitSelectOptions = (
 
 const getSelectOptions = (
   selectOptions: SelectOptions,
-  id: ActivatableIdentifier,
+  id: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] => [
   ...(selectOptions.derived === undefined
@@ -1094,7 +1095,7 @@ const getSelectOptions = (
 
 const getSelectOptionsForResults = (
   database: TSONDB<TSONDBTypes>,
-  entity: ActivatableIdentifier["kind"],
+  entity: ActivatableIdentifierType["kind"],
   results: { id: string; content: { select_options?: SelectOptions; translations?: object } }[],
 ) =>
   results.reduce<{
@@ -1108,70 +1109,16 @@ const getSelectOptionsForResults = (
   }, {})
 
 export type ActivatableSelectOptionsCache = Record<
-  ActivatableIdentifier["kind"],
+  ActivatableIdentifierType["kind"],
   {
     [id: string]: ResolvedSelectOption[]
   }
 >
 
-const cacheKeyBase: Record<ActivatableIdentifier["kind"], null> = {
-  Advantage: null,
-  Disadvantage: null,
-  AdvancedCombatSpecialAbility: null,
-  AdvancedKarmaSpecialAbility: null,
-  AdvancedMagicalSpecialAbility: null,
-  AdvancedSkillSpecialAbility: null,
-  AncestorGlyph: null,
-  ArcaneOrbEnchantment: null,
-  AttireEnchantment: null,
-  Beutelzauber: null,
-  BlessedTradition: null,
-  BowlEnchantment: null,
-  BrawlingSpecialAbility: null,
-  CauldronEnchantment: null,
-  CeremonialItemSpecialAbility: null,
-  ChronicleEnchantment: null,
-  CombatSpecialAbility: null,
-  CombatStyleSpecialAbility: null,
-  CommandSpecialAbility: null,
-  DaggerRitual: null,
-  FamiliarSpecialAbility: null,
-  FatePointSexSpecialAbility: null,
-  FatePointSpecialAbility: null,
-  FoolsHatEnchantment: null,
-  GeneralSpecialAbility: null,
-  Haubenzauber: null,
-  Hauerkettenzauber: null,
-  InstrumentEnchantment: null,
-  KarmaSpecialAbility: null,
-  Keulenzauber: null,
-  Krallenkettenzauber: null,
-  Kristallkugelzauber: null,
-  LiturgicalStyleSpecialAbility: null,
-  LycantropicGift: null,
-  MagicalSign: null,
-  MagicalSpecialAbility: null,
-  MagicalTradition: null,
-  MagicStyleSpecialAbility: null,
-  OrbEnchantment: null,
-  PactGift: null,
-  ProtectiveWardingCircleSpecialAbility: null,
-  RingEnchantment: null,
-  Schweinetrommelzauber: null,
-  Sermon: null,
-  SexSpecialAbility: null,
-  SickleRitual: null,
-  SikaryanDrainSpecialAbility: null,
-  SkillStyleSpecialAbility: null,
-  SpellSwordEnchantment: null,
-  StaffEnchantment: null,
-  ToyEnchantment: null,
-  Trinkhornzauber: null,
-  VampiricGift: null,
-  Vision: null,
-  WandEnchantment: null,
-  WeaponEnchantment: null,
-}
+const cacheKeyBase: Record<ActivatableIdentifierType["kind"], null> = mapObject(
+  ActivatableIdentifier.type.value.values,
+  () => null,
+)
 
 export const activatableSelectOptionsCacheBuilder: CacheBuilder<
   ActivatableSelectOptionsCache
@@ -1181,7 +1128,7 @@ export const activatableSelectOptionsCacheBuilder: CacheBuilder<
       (
         entity,
       ): [
-        ActivatableIdentifier["kind"],
+        ActivatableIdentifierType["kind"],
         {
           [id: string]: ResolvedSelectOption[]
         },
