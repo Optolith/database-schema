@@ -403,8 +403,43 @@ const ProfessionSpecialAbility = DB.Enum(import.meta.url, {
   }),
 })
 
+const ProfessionSpecialAbilityOption = DB.Enum(import.meta.url, {
+  name: "ProfessionSpecialAbilityOption",
+  values: () => ({
+    Identifier: DB.EnumCase({
+      comment: "The option is defined by the profession.",
+      type: DB.IncludeIdentifier(RequirableSelectOptionIdentifier),
+    }),
+    Select: DB.EnumCase({
+      comment: "The option has to be chosen when applying the profession.",
+      type: null,
+    }),
+  }),
+})
+
 const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
   name: "ConstantProfessionSpecialAbility",
+  type: () =>
+    DB.Object({
+      id: DB.Required({
+        comment: "The identifier of the special ability to grant.",
+        type: DB.IncludeIdentifier(ProfessionSpecialAbilityIdentifier),
+      }),
+      level: DB.Optional({
+        comment:
+          "The level of the received special ability. If not specified and the special ability has levels, level 1 is used automatically.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+      options: DB.Optional({
+        comment:
+          "Received select options. Order is important. Typically, you only need the first array index, though.",
+        type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilityOption), { minItems: 1 }),
+      }),
+    }),
+})
+
+const ProfessionSpecialAbilitySelectionItem = DB.TypeAlias(import.meta.url, {
+  name: "ProfessionSpecialAbilitySelectionItem",
   type: () =>
     DB.Object({
       id: DB.Required({
@@ -430,7 +465,9 @@ const ProfessionSpecialAbilitySelection = DB.TypeAlias(import.meta.url, {
     DB.Object({
       options: DB.Required({
         comment: `The list of special abilities to choose from. Must contain at least two entries.`,
-        type: DB.Array(DB.IncludeIdentifier(ConstantProfessionSpecialAbility), { minItems: 2 }),
+        type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilitySelectionItem), {
+          minItems: 2,
+        }),
       }),
     }),
 })
