@@ -1,7 +1,7 @@
 import { isNotEmpty } from "@elyukai/utils/array/nonEmpty"
 import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
-import type { GetInstanceById } from "tsondb/schema/gen"
+import type { GetDisplayNameAndId, GetInstanceById } from "tsondb/schema/gen"
 import type { Item as ItemType, ValueRule } from "../../../../gen/types.js"
 import { EquipmentCategoryIdentifier } from "../../_Identifier.ts"
 import { CloseCombatTechnique, RangedCombatTechnique } from "../../CombatTechnique.ts"
@@ -137,15 +137,17 @@ export const Item = DB.Entity(import.meta.url, {
     },
   ],
   customConstraints: ({ instanceContent, ...rest }) =>
-    checkWeaponCombatTechniqueIntegrity({
-      ...rest,
+    checkEquipmentCategoryConstraintsWithItem(
       instanceContent,
-    }).concat(checkEquipmentCategoryConstraintsWithItem(instanceContent, rest.getInstanceById)),
+      rest.getInstanceById,
+      rest.getDisplayNameAndId,
+    ),
 })
 
 const checkEquipmentCategoryConstraintsWithItem = (
   item: ItemType,
   getInstanceById: GetInstanceById,
+  getDisplayNameAndId: GetDisplayNameAndId,
 ) => {
   const categories = item.categories.map(categoryId =>
     getInstanceById("EquipmentCategory", categoryId),
@@ -157,12 +159,18 @@ const checkEquipmentCategoryConstraintsWithItem = (
         const mergedRules = mergeAllValueRules(categories.map(c => c.type.Default))
         const errors: string[] = []
 
-        if (
-          mergedRules.combatValues.isWeaponAllowed &&
-          item.meleeUses === undefined &&
-          item.rangedUses === undefined
-        ) {
-          errors.push("A weapon must defined at least one melee use or ranged use.")
+        if (mergedRules.combatValues.isWeaponAllowed) {
+          if (item.meleeUses === undefined && item.rangedUses === undefined) {
+            errors.push("A weapon must defined at least one melee use or ranged use.")
+          } else {
+            errors.push(
+              ...checkWeaponCombatTechniqueIntegrity({
+                instanceContent: item,
+                getInstanceById,
+                getDisplayNameAndId,
+              }),
+            )
+          }
         }
 
         if (mergedRules.combatValues.isArmorAllowed && item.armorUse === undefined) {
