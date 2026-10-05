@@ -403,6 +403,20 @@ const ProfessionSpecialAbility = DB.Enum(import.meta.url, {
   }),
 })
 
+const ProfessionSpecialAbilityOption = DB.Enum(import.meta.url, {
+  name: "ProfessionSpecialAbilityOption",
+  values: () => ({
+    Identifier: DB.EnumCase({
+      comment: "The option is defined by the profession.",
+      type: DB.IncludeIdentifier(RequirableSelectOptionIdentifier),
+    }),
+    Select: DB.EnumCase({
+      comment: "The option has to be chosen when applying the profession.",
+      type: null,
+    }),
+  }),
+})
+
 const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
   name: "ConstantProfessionSpecialAbility",
   type: () =>
@@ -419,7 +433,7 @@ const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
       options: DB.Optional({
         comment:
           "Received select options. Order is important. Typically, you only need the first array index, though.",
-        type: DB.Array(DB.IncludeIdentifier(RequirableSelectOptionIdentifier), { minItems: 1 }),
+        type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilityOption), { minItems: 1 }),
       }),
     }),
 })
@@ -662,24 +676,12 @@ const VariantOptionAction = DB.GenEnum(import.meta.url, {
   }),
 })
 
-const SkillSpecializationOptions = DB.Enum(import.meta.url, {
+const SkillSpecializationOptions = DB.TypeAlias(import.meta.url, {
   name: "SkillSpecializationOptions",
-  comment: `Select an application from a skill or from one of a list of skills where you get a skill specialization for. You can also specify a skill group from which you can choose a skill.`,
-  values: () => ({
-    Specific: DB.EnumCase({ type: DB.IncludeIdentifier(SpecificSkillSpecializationOptions) }),
-    Group: DB.EnumCase({ type: SkillGroupIdentifier() }),
-  }),
-})
-
-const SpecificSkillSpecializationOptions = DB.TypeAlias(import.meta.url, {
-  name: "SpecificSkillSpecializationOptions",
-  comment: `Select an application from a skill or from one of a list of skills where you get a skill specialization for.`,
+  comment: `Select an application from a skill within a skill group where you get a skill specialization for.`,
   type: () =>
     DB.Object({
-      options: DB.Required({
-        comment: `Possible skill(s) to get a skill specialization for.`,
-        type: DB.Array(SkillIdentifier(), { minItems: 1, uniqueItems: true }),
-      }),
+      group: DB.Required({ type: SkillGroupIdentifier() }),
     }),
 })
 
