@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.79.0](https://github.com/Optolith/database-schema/compare/v0.78.0...v0.79.0) (2026-10-05)
+
+### ⚠ BREAKING CHANGES
+
+* burning time option for generic items
+
+### Features
+
+* base for select option rules ([5df53d3](https://github.com/Optolith/database-schema/commit/5df53d3448d5c279c9a062b8c68cc4e5ee9cbfdb))
+* burning time option for generic items ([7feb7ff](https://github.com/Optolith/database-schema/commit/7feb7ffb449724433c7f7012369c837d5b8f6688))
+
 ## [0.78.0](https://github.com/Optolith/database-schema/compare/v0.77.1...v0.78.0) (2026-10-05)
 
 ### ⚠ BREAKING CHANGES
