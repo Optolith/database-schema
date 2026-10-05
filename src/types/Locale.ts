@@ -1803,6 +1803,8 @@ export const Locale = DB.Entity(import.meta.url, {
           "Variants": null,
           "Languages and Literacy totaling {$apValue} AP": null,
           "no Languages and Literacy totaling {$apValue} AP": null,
+          "Languages totaling {$apValue} AP": null,
+          "no Languages totaling {$apValue} AP": null,
           "Skill Specialization {$possibleSkills}": null,
           "no Skill Specialization {$possibleSkills}": null,
           "Skill Specialization for a {$skillOfGroup}": null,
