@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.78.0](https://github.com/Optolith/database-schema/compare/v0.77.1...v0.78.0) (2026-10-05)
+
+### ⚠ BREAKING CHANGES
+
+* generalize special ability option selection for professions
+* languages option with optional scripts inclusion
+* missing magical action category translations
+* some plant translations
+* translation for empty profession variants
+
+### Features
+
+* generalize special ability option selection for professions ([ef7d2c9](https://github.com/Optolith/database-schema/commit/ef7d2c9903f987720f173815e5454fdfa06b3a84))
+* languages option with optional scripts inclusion ([31862d3](https://github.com/Optolith/database-schema/commit/31862d38d0027dae845f8b69218395c4307bf59d))
+* optional different race and culture names within prerequisites ([5025e80](https://github.com/Optolith/database-schema/commit/5025e80131e41ad68aca9e51881f5ee08c23dad1))
+* prepare activatable options validation ([d0c7e87](https://github.com/Optolith/database-schema/commit/d0c7e87e3ae9aac67aa4259e63ce8c9c51e1fb3e))
+* some plant translations ([8f3fa6b](https://github.com/Optolith/database-schema/commit/8f3fa6ba1b569b9bcd3b355d01fd86c9fe287478))
+
+### Bug Fixes
+
+* missing magical action category translations ([510d11b](https://github.com/Optolith/database-schema/commit/510d11bd9e98d478ec3e4ab37627496b3c8deec9))
+* translation for empty profession variants ([8f63b30](https://github.com/Optolith/database-schema/commit/8f63b30e14508ee0f900626bdefafed1b2657078))
+
 ## [0.77.1](https://github.com/Optolith/database-schema/compare/v0.77.0...v0.77.1) (2026-10-03)
 
 ### Features
