@@ -136,6 +136,7 @@ export { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/Ceremoni
 export { Language } from "./specialAbility/sub/Language.js"
 export { Script } from "./specialAbility/sub/Script.js"
 export { TradeSecret } from "./specialAbility/sub/TradeSecret.js"
+export { Trick } from "./specialAbility/Trick.js"
 export { VampiricGift } from "./specialAbility/VampiricGift.js"
 export { Vision } from "./specialAbility/Vision.js"
 export { Spell } from "./Spell.js"

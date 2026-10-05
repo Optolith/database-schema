@@ -137,6 +137,7 @@ import { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/Ceremoni
 import { Language, LanguageSpecialization } from "./specialAbility/sub/Language.js"
 import { Script } from "./specialAbility/sub/Script.js"
 import { TradeSecret } from "./specialAbility/sub/TradeSecret.js"
+import { Trick } from "./specialAbility/Trick.ts"
 import { VampiricGift } from "./specialAbility/VampiricGift.js"
 import { Vision } from "./specialAbility/Vision.js"
 import { Spell } from "./Spell.js"
@@ -345,6 +346,7 @@ export const ToyEnchantmentIdentifier: () => R = () => R(ToyEnchantment)
 export const TradeSecretIdentifier: () => R = () => R(TradeSecret)
 export const TravelGearOrToolIdentifier: () => R = () => R(TravelGearOrTool)
 export const TribeIdentifier: () => R = () => R(Tribe)
+export const TrickIdentifier: () => R = () => R(Trick)
 export const TrinkhornzauberIdentifier: () => R = () => R(Trinkhornzauber)
 export const VampiricGiftIdentifier: () => R = () => R(VampiricGift)
 export const VehicleIdentifier: () => R = () => R(Vehicle)

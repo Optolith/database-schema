@@ -191,6 +191,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.TradeSecret,
     Types.TravelGearOrTool,
     Types.Tribe,
+    Types.Trick,
     Types.Trinkhornzauber,
     Types.VampiricGift,
     Types.Vehicle,
