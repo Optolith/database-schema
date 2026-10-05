@@ -75,6 +75,10 @@ export const Race = DB.Entity(import.meta.url, {
             comment: "The race’s name.",
             type: DB.String({ minLength: 1 }),
           }),
+          nameInPrerequisites: DB.Optional({
+            comment: "The race’s name in prerequisites, if different from the normal race’s name.",
+            type: DB.String({ minLength: 1 }),
+          }),
           hairColorLabel: DB.Optional({
             comment:
               "The label for hair colors if it is not a hair color in that sense: Some races may have different labels for hair color such as scale color.",
