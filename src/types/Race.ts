@@ -1,5 +1,7 @@
 import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
+import { Case } from "tsondb/schema/gen"
+import { verifyOptionsForActivatableEntry } from "./_ActivatableSelectOptions.ts"
 import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantageDisadvantage.js"
 import { Dice, DieType } from "./_Dice.js"
 import {
@@ -410,6 +412,22 @@ export const RaceVariant = DB.Entity(import.meta.url, {
         keyPathInEntityMap: "name",
       },
     ],
+  ],
+  customConstraints: ({ instanceContent, getInstanceById, getAllChildInstancesForParent }) => [
+    ...(instanceContent.automatic_advantages?.flatMap(advantage =>
+      verifyOptionsForActivatableEntry(
+        { ...advantage, id: Case("Advantage", advantage.id) },
+        getInstanceById,
+        getAllChildInstancesForParent,
+      ),
+    ) ?? []),
+    ...(instanceContent.automatic_disadvantages?.flatMap(disadvantage =>
+      verifyOptionsForActivatableEntry(
+        { ...disadvantage, id: Case("Disadvantage", disadvantage.id) },
+        getInstanceById,
+        getAllChildInstancesForParent,
+      ),
+    ) ?? []),
   ],
 })
 
