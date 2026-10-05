@@ -8,7 +8,11 @@ import {
   type,
 } from "../_ActivatableCombat.js"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.js"
-import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
+import {
+  explicit_select_options,
+  select_options,
+  verifySelectOptionRules,
+} from "../_ActivatableSelectOptions.js"
 import { skill_applications, skill_uses } from "../_ActivatableSkillApplicationsAndUses.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
@@ -62,4 +66,5 @@ export const AdvancedCombatSpecialAbility = DB.Entity(import.meta.url, {
       keyPathInEntityMapFallback: "name",
     },
   ],
+  customConstraints: deps => verifySelectOptionRules("AdvancedCombatSpecialAbility", deps),
 })
