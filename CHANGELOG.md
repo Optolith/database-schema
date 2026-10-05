@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.79.1](https://github.com/Optolith/database-schema/compare/v0.79.0...v0.79.1) (2026-10-05)
+
+### Bug Fixes
+
+* custom combat value constraints for generic item ([10a042a](https://github.com/Optolith/database-schema/commit/10a042ad9e72d65f1b8cb75b1f9bf3eff7badf31))
+
 ## [0.79.0](https://github.com/Optolith/database-schema/compare/v0.78.0...v0.79.0) (2026-10-05)
 
 ### ⚠ BREAKING CHANGES
