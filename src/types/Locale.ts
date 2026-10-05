@@ -1840,6 +1840,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "except for {$list :list type=conjunction}": null,
           "depends on selected tradition": null,
           "Additional Prerequisites": null,
+          "no changes": null,
 
           // Enhancements
           "Enhancements": null,
