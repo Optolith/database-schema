@@ -1696,6 +1696,12 @@ export const Locale = DB.Entity(import.meta.url, {
           "see {$link}": null,
           "CoD": null,
 
+          // plants
+          "Search Difficulty": null,
+          "Identification Difficulty": null,
+          "Plant Applications": null,
+          "Remedies and Traditions": null,
+
           // books
           "Romance Novel": null,
           "Poetry": null,
