@@ -72,6 +72,11 @@ export const LanguageSpecialization = DB.Entity(import.meta.url, {
         comment: "The language this specialization belongs to.",
         type: LanguageIdentifier(),
       }),
+      onlyForCulture: DB.Required({
+        comment:
+          "The specialization is only mentioned in a culture’s description and not where the language itself is defined.",
+        type: DB.Boolean(),
+      }),
       translations: NestedTranslationMap(
         DB.Required,
         "LanguageSpecialization",
