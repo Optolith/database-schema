@@ -134,7 +134,7 @@ export const Cost = DB.Enum(import.meta.url, {
   values: () => ({
     Free: DB.EnumCase({ type: null }),
     Various: DB.EnumCase({ type: null }),
-    Invaluable: DB.EnumCase({ type: null }),
+    Invaluable: DB.EnumCase({ type: DB.IncludeIdentifier(InvaluableCost) }),
     Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedCost) }),
     Range: DB.EnumCase({ type: DB.IncludeIdentifier(CostRange) }),
   }),
@@ -143,6 +143,20 @@ export const Cost = DB.Enum(import.meta.url, {
 const wrap_in_text = DB.Required({
   comment: "The cost get wrapped by this text using a placeholder in the text.",
   type: DB.String({ minLength: 1, pattern: /\{0\}/ }),
+})
+
+const InvaluableCost = DB.TypeAlias(import.meta.url, {
+  name: "InvaluableCost",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "InvaluableCost",
+        DB.Object({
+          wrap_in_text,
+        }),
+      ),
+    }),
 })
 
 export const FixedCost = DB.TypeAlias(import.meta.url, {

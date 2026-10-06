@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.80.0](https://github.com/Optolith/database-schema/compare/v0.79.1...v0.80.0) (2026-10-06)
+
+### ⚠ BREAKING CHANGES
+
+* culture-only language specialization flag
+* invaluable item cost translation
+
+### Features
+
+* culture-only language specialization flag ([e7e35cd](https://github.com/Optolith/database-schema/commit/e7e35cdb78c9b1e92353f64bfb6858a32fdbdd40))
+* invaluable item cost translation ([61e6e22](https://github.com/Optolith/database-schema/commit/61e6e22b19a761309c4666ba03d4770c5a59e86d))
+
 ## [0.79.1](https://github.com/Optolith/database-schema/compare/v0.79.0...v0.79.1) (2026-10-05)
 
 ### Bug Fixes
