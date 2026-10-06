@@ -4,6 +4,7 @@ import { Dice } from "./_Dice.js"
 import { BlessedTraditionIdentifier, DerivedCharacteristicIdentifier } from "./_Identifier.js"
 import { MathOperation } from "./_MathExpression.js"
 import { CloseCombatTechnique, RangedCombatTechnique } from "./CombatTechnique.js"
+import { Weight } from "./equipment/item/_Item.ts"
 import { GenMeleeWeapon } from "./equipment/item/_MeleeWeapon.js"
 import { GenRangedWeapon } from "./equipment/item/_RangedWeapon.js"
 import { checkWeaponCombatTechniqueIntegrity } from "./equipment/item/_Weapon.js"
@@ -33,33 +34,7 @@ export const Talisman = DB.Entity(import.meta.url, {
         type: DB.Integer({ minimum: 5, multipleOf: 5 }),
       }),
       combatUse: DB.Optional({
-        type: DB.Object(
-          {
-            melee_uses: DB.Optional({
-              comment:
-                "A list of stat blocks for each close combat technique this talisman can be used with.",
-              type: DB.NestedEntityMap({
-                name: "MeleeTalismanUse",
-                namePlural: "MeleeTalismanUses",
-                secondaryEntity: CloseCombatTechnique,
-                type: DB.IncludeIdentifier(TalismanMeleeWeapon),
-                minProperties: 1,
-              }),
-            }),
-            ranged_uses: DB.Optional({
-              comment:
-                "A list of stat blocks for each ranged combat technique this talisman can be used with.",
-              type: DB.NestedEntityMap({
-                name: "RangedTalismanUse",
-                namePlural: "RangedTalismanUses",
-                secondaryEntity: RangedCombatTechnique,
-                type: DB.IncludeIdentifier(TalismanRangedWeapon),
-                minProperties: 1,
-              }),
-            }),
-          },
-          { minProperties: 1 },
-        ),
+        type: DB.IncludeIdentifier(TalismanCombatUse),
       }),
       src,
       translations: NestedTranslationMap(
@@ -95,6 +70,64 @@ export const Talisman = DB.Entity(import.meta.url, {
           getInstanceById,
         })
       : [],
+})
+
+const TalismanCombatUse = DB.TypeAlias(import.meta.url, {
+  name: "TalismanCombatUse",
+  type: () =>
+    DB.Object({
+      weight: DB.Required({
+        comment: "The weight in kg.",
+        type: DB.IncludeIdentifier(Weight),
+      }),
+      meleeUses: DB.Optional({
+        comment:
+          "A list of stat blocks for each close combat technique this talisman can be used with.",
+        type: DB.NestedEntityMap({
+          name: "MeleeTalismanUse",
+          namePlural: "MeleeTalismanUses",
+          secondaryEntity: CloseCombatTechnique,
+          type: DB.IncludeIdentifier(TalismanMeleeWeapon),
+          minProperties: 1,
+        }),
+      }),
+      rangedUses: DB.Optional({
+        comment:
+          "A list of stat blocks for each ranged combat technique this talisman can be used with.",
+        type: DB.NestedEntityMap({
+          name: "RangedTalismanUse",
+          namePlural: "RangedTalismanUses",
+          secondaryEntity: RangedCombatTechnique,
+          type: DB.IncludeIdentifier(TalismanRangedWeapon),
+          minProperties: 1,
+        }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "TalismanCombatUse",
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "Note text.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+            rules: DB.Optional({
+              comment: "Special rules text.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+            advantage: DB.Optional({
+              comment: "The weapon advantage text.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+            disadvantage: DB.Optional({
+              comment: "The weapon disadvantage text.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
+    }),
 })
 
 const TalismanMeleeWeapon = DB.TypeAlias(import.meta.url, {
@@ -138,7 +171,7 @@ const TalismanActivation = DB.TypeAlias(import.meta.url, {
     DB.Object({
       cost: DB.Required({
         comment: "The cost to activate the talisman.",
-        type: DB.IncludeIdentifier(TalismanActivationCost),
+        type: DB.Array(DB.IncludeIdentifier(TalismanActivationCost), { minItems: 1 }),
       }),
       duration: DB.Required({
         comment: "The duration of how long the talisman will be active.",

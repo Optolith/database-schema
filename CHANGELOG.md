@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.82.0](https://github.com/Optolith/database-schema/compare/v0.81.0...v0.82.0) (2026-10-06)
+
+### ⚠ BREAKING CHANGES
+
+* allow more weapon values for talismans
+* allow multiple different talisman activation cost
+
+### Features
+
+* allow more weapon values for talismans ([b109d0f](https://github.com/Optolith/database-schema/commit/b109d0f90f9f9cdfa0f8e33cbacde44b2a8563ee))
+* allow multiple different talisman activation cost ([89e5d14](https://github.com/Optolith/database-schema/commit/89e5d14d2faefac220ad43765de0cba1359ece9e))
+
+## [0.81.0](https://github.com/Optolith/database-schema/compare/v0.80.0...v0.81.0) (2026-10-06)
+
+### ⚠ BREAKING CHANGES
+
+* special damage translation
+
+### Bug Fixes
+
+* special damage translation ([69dc121](https://github.com/Optolith/database-schema/commit/69dc121fcdd4d66c0cdb43e50df3ff8fd443e50a))
+
 ## [0.80.0](https://github.com/Optolith/database-schema/compare/v0.79.1...v0.80.0) (2026-10-06)
 
 ### ⚠ BREAKING CHANGES
