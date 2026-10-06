@@ -37,8 +37,7 @@ export const Book = DB.Entity(import.meta.url, {
         type: DB.IncludeIdentifier(BookContentQuality),
       }),
       prerequisites: DB.Optional({
-        comment:
-          "Which prerequisites must be met to understand the book.",
+        comment: "Which prerequisites must be met to understand the book.",
         type: DB.IncludeIdentifier(ActivatablePrerequisite),
       }),
       rules: DB.Required({
