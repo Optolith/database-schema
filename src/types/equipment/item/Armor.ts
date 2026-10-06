@@ -1,5 +1,6 @@
 import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
+import type { GetInstanceById } from "tsondb/schema/gen"
 import type * as Gen from "../../../../gen/types.js"
 import { ArmorIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
@@ -132,11 +133,14 @@ const StandardArmorType = DB.TypeAlias(import.meta.url, {
 })
 
 const validateArmorTypeReference = (deps: {
-  getInstanceById: (entityName: "Armor", id: string) => Gen.Armor | undefined
-  instanceContent: { variantOf: Gen.Armor_ID }
+  getInstanceById: GetInstanceById
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
+  instanceContent: { variantOf: Gen.Armor_ID | Gen.Item_ID }
 }) =>
   [
-    deps.getInstanceById("Armor", deps.instanceContent.variantOf)?.armorType.kind !== "Standard"
+    deps.getInstanceById("Armor", deps.instanceContent.variantOf)?.armorType.kind !== "Standard" &&
+    deps.getInstanceById("Item", deps.instanceContent.variantOf)?.armorUse?.armorType.kind !==
+      "Standard"
       ? "The armor is a variant of a standard armor, but the referenced armor is not a standard armor."
       : undefined,
   ].filter(isNotNullish)
@@ -189,9 +193,9 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         comment: "Does the armor have additional penalties (MOV -1, INI -1)?",
         type: DB.IncludeIdentifier(HasAdditionalPenalties),
       }),
-      variantOf: DB.Required({
-        comment: "The standard armor this armor is a variant of.",
-        type: ArmorIdentifier(),
+      armorType: DB.Required({
+        comment: "The armor type.",
+        type: DB.IncludeIdentifier(ArmorType),
       }),
       hit_zone: DB.Optional({
         comment: "Specify if armor is only available for a specific hit zone.",
@@ -220,7 +224,16 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
-  customConstraints: validateArmorTypeReference,
+  customConstraints: ({ instanceContent, ...deps }) =>
+    instanceContent.armorType.kind !== "Standard"
+      ? validateArmorTypeReference({
+          ...deps,
+          instanceContent:
+            instanceContent.armorType.kind === "Variant"
+              ? instanceContent.armorType.Variant
+              : instanceContent.armorType.StandardVariant,
+        })
+      : [],
 })
 
 const ArmorComplexity = DB.Enum(import.meta.url, {

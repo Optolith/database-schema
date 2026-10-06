@@ -84,6 +84,10 @@ const DefaultEquipmentCategoryTypeRules = DB.TypeAlias(import.meta.url, {
         comment: "Presence of complexity to certain groups for items in this category.",
         type: DB.IncludeIdentifier(ValueRule),
       }),
+      burningTime: DB.Required({
+        comment: "Presence of burning time to certain groups for items in this category.",
+        type: DB.IncludeIdentifier(ValueRule),
+      }),
     }),
 })
 
@@ -165,4 +169,5 @@ export const mergeAllValueRules = (
   structurePoints: { kind: mergeValueRules(categories.map(category => category.structurePoints)) },
   weight: { kind: mergeValueRules(categories.map(category => category.weight)) },
   complexity: { kind: mergeValueRules(categories.map(category => category.complexity)) },
+  burningTime: { kind: mergeValueRules(categories.map(category => category.burningTime)) },
 })
