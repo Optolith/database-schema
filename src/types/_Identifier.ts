@@ -30,12 +30,14 @@ import { Clothes } from "./equipment/item/Clothes.js"
 import { ClothingPackage } from "./equipment/item/ClothingPackage.js"
 import { Container } from "./equipment/item/Container.js"
 import { Elixir } from "./equipment/item/Elixir.js"
+import { EquipmentCategory } from "./equipment/item/EquipmentCategory.ts"
 import { EquipmentOfBlessedOnes } from "./equipment/item/EquipmentOfBlessedOnes.js"
 import { GemOrPreciousStone } from "./equipment/item/GemOrPreciousStone.js"
 import { HerbalAid } from "./equipment/item/HerbalAid.js"
 import { HerbalPreservation } from "./equipment/item/HerbalPreservation.js"
 import { IlluminationLightSource } from "./equipment/item/IlluminationLightSource.js"
 import { IlluminationRefillOrSupply } from "./equipment/item/IlluminationRefillOrSupply.js"
+import { Item } from "./equipment/item/Item.ts"
 import { Jewelry } from "./equipment/item/Jewelry.js"
 import { Laboratory } from "./equipment/item/Laboratory.js"
 import { Liebesspielzeug } from "./equipment/item/Liebesspielzeug.js"
@@ -48,7 +50,6 @@ import { Plant } from "./equipment/item/Plant.js"
 import { Poison } from "./equipment/item/Poison.js"
 import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
 import { Stationery } from "./equipment/item/Stationery.js"
-import { ArmorType } from "./equipment/item/sub/ArmorType.js"
 import { Biome } from "./equipment/item/sub/Biome.js"
 import { BotanicRegion } from "./equipment/item/sub/BotanicRegion.js"
 import { Reach } from "./equipment/item/sub/Reach.js"
@@ -68,7 +69,7 @@ import { Curriculum, Guideline, LessonPackage } from "./Lessons.js"
 import { LiturgicalChant } from "./LiturgicalChant.js"
 import { AnimistPower } from "./magicalActions/AnimistPower.js"
 import { Tribe } from "./magicalActions/AnimistPower_Tribe.js"
-import { Bannzeichen } from "./magicalActions/Bannzeichen.js"
+import { Bannzeichen, BannzeichenOption } from "./magicalActions/Bannzeichen.js"
 import { Curse } from "./magicalActions/Curse.js"
 import { DominationRitual } from "./magicalActions/DominationRitual.js"
 import { ElvenMagicalSong } from "./magicalActions/ElvenMagicalSong.js"
@@ -190,12 +191,12 @@ export const ArcaneBardTraditionIdentifier: () => R = () => R(ArcaneBardTraditio
 export const ArcaneDancerTraditionIdentifier: () => R = () => R(ArcaneDancerTradition)
 export const ArcaneOrbEnchantmentIdentifier: () => R = () => R(ArcaneOrbEnchantment)
 export const ArmorIdentifier: () => R = () => R(Armor)
-export const ArmorTypeIdentifier: () => R = () => R(ArmorType)
 export const AspectIdentifier: () => R = () => R(Aspect)
 export const AttireEnchantmentIdentifier: () => R = () => R(AttireEnchantment)
 export const AttributeIdentifier: () => R = () => R(Attribute)
 export const BandageOrRemedyIdentifier: () => R = () => R(BandageOrRemedy)
 export const BannzeichenIdentifier: () => R = () => R(Bannzeichen)
+export const BannzeichenOptionIdentifier: () => R = () => R(BannzeichenOption)
 export const BeutelzauberIdentifier: () => R = () => R(Beutelzauber)
 export const BiomeIdentifier: () => R = () => R(Biome)
 export const BlessedTraditionIdentifier: () => R = () => R(BlessedTradition)
@@ -234,6 +235,7 @@ export const ElementIdentifier: () => R = () => R(Element)
 export const ElixirIdentifier: () => R = () => R(Elixir)
 export const ElvenMagicalSongIdentifier: () => R = () => R(ElvenMagicalSong)
 export const EnhancementIdentifier: () => R = () => R(Enhancement)
+export const EquipmentCategoryIdentifier: () => R = () => R(EquipmentCategory)
 export const EquipmentOfBlessedOnesIdentifier: () => R = () => R(EquipmentOfBlessedOnes)
 export const ExperienceLevelIdentifier: () => R = () => R(ExperienceLevel)
 export const EyeColorIdentifier: () => R = () => R(EyeColor)
@@ -258,6 +260,7 @@ export const IlluminationLightSourceIdentifier: () => R = () => R(IlluminationLi
 export const IlluminationRefillOrSupplyIdentifier: () => R = () => R(IlluminationRefillOrSupply)
 export const InfluenceIdentifier: () => R = () => R(Influence)
 export const InstrumentEnchantmentIdentifier: () => R = () => R(InstrumentEnchantment)
+export const ItemIdentifier: () => R = () => R(Item)
 export const JesterTrickIdentifier: () => R = () => R(JesterTrick)
 export const JewelryIdentifier: () => R = () => R(Jewelry)
 export const KarmaSpecialAbilityIdentifier: () => R = () => R(KarmaSpecialAbility)

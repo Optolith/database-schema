@@ -1,11 +1,18 @@
 import { Schema } from "tsondb/schema"
-import type { ChildEntityMap, EntityMap, EnumMap, TypeAliasMap } from "../gen/types.js"
+import type {
+  ChildEntityMap,
+  EntityMap,
+  EnumMap,
+  SingletonEntityMap,
+  TypeAliasMap,
+} from "../gen/types.js"
 import * as Types from "./types/index.js"
 
 declare module "tsondb/schema/gen" {
   interface Register {
     entityMap: EntityMap
     childEntityMap: ChildEntityMap
+    singletonEntityMap: SingletonEntityMap
     enumMap: EnumMap
     typeAliasMap: TypeAliasMap
   }
@@ -14,6 +21,7 @@ declare module "tsondb/schema/gen" {
 export interface TSONDBTypes {
   entityMap: EntityMap
   childEntityMap: ChildEntityMap
+  singletonEntityMap: SingletonEntityMap
   enumMap: EnumMap
   typeAliasMap: TypeAliasMap
 }
@@ -40,7 +48,6 @@ export const schema = new Schema<TSONDBTypes>(
     Types.ArcaneDancerTradition,
     Types.ArcaneOrbEnchantment,
     Types.Armor,
-    Types.ArmorType,
     Types.Aspect,
     Types.AttireEnchantment,
     Types.Attribute,
@@ -83,6 +90,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.Element,
     Types.Elixir,
     Types.ElvenMagicalSong,
+    Types.EquipmentCategory,
     Types.EquipmentOfBlessedOnes,
     Types.EquipmentPackage,
     Types.ExperienceLevel,
@@ -107,6 +115,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.IlluminationLightSource,
     Types.IlluminationRefillOrSupply,
     Types.InstrumentEnchantment,
+    Types.Item,
     Types.JesterTrick,
     Types.Jewelry,
     Types.KarmaSpecialAbility,
@@ -157,6 +166,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.Script,
     Types.Sermon,
     Types.Service,
+    Types.Settings,
     Types.SexPractice,
     Types.SexSpecialAbility,
     Types.SickleRitual,

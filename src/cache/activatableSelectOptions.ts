@@ -1,4 +1,4 @@
-import { on } from "@elyukai/utils/function"
+import { constant, on } from "@elyukai/utils/function"
 import { isNotNullish } from "@elyukai/utils/nullable"
 import { mapObject } from "@elyukai/utils/object"
 import { compareNullish, compareNumber } from "@elyukai/utils/ordering"
@@ -6,7 +6,7 @@ import { assertExhaustive } from "@elyukai/utils/typeSafety"
 import type { Entity, TSONDB } from "tsondb"
 import { Case, fromUniformCase } from "tsondb/schema/gen"
 import type {
-  ActivatableIdentifier,
+  ActivatableIdentifier as ActivatableIdentifierType,
   BlessedTradition,
   CombatTechniqueIdentifier,
   Element,
@@ -35,7 +35,7 @@ import type {
   TradeSecretAdventurePointsValue,
 } from "../../gen/types.js"
 import type { TSONDBTypes } from "../main.js"
-import type { IdMap } from "./index.ts"
+import { ActivatableIdentifier } from "../types/_IdentifierGroup.ts"
 import type { CacheBuilder } from "./internal.ts"
 import type { ResolvedNewSkillApplication, ResolvedSkillUse } from "./newApplicationsAndUses.ts"
 
@@ -128,8 +128,7 @@ const getSkillishPrerequisites = (
 
 const getSkillishBindingCost = (
   bindingCost:
-    | SelectOptionsBindingCostValue<SkillishIdentifier | CombatTechniqueIdentifier>
-    | undefined,
+    SelectOptionsBindingCostValue<SkillishIdentifier | CombatTechniqueIdentifier> | undefined,
   id: Case<SkillishEntityName, string>,
 ): number | undefined => {
   if (bindingCost === undefined) {
@@ -170,8 +169,7 @@ const equalsSkillishIdGroup = (
 
 const getApValueForSkillish = (
   config:
-    | SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier>
-    | undefined,
+    SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier> | undefined,
   id: SkillishIdentifier | CombatTechniqueIdentifier,
   ic: ImprovementCost,
 ): number | undefined => {
@@ -210,7 +208,7 @@ const getApValueForSkillish = (
 }
 
 const convertSkillApplicationOrUse = (
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   id: Skill_ID,
   applicationOrUse: SkillApplicationOrUse,
 ) =>
@@ -264,7 +262,7 @@ const getSpellworkFilter = <E extends "Spell" | "Ritual">(
 
 const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
   database: TSONDB<TSONDBTypes>,
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   entity: E,
   category: GenericSkillsSelectOptionCategoryCategory<ID> & {
     skill_applications?: SkillApplicationOrUse[] | undefined
@@ -307,14 +305,14 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
 
 const getDerivedSelectOptions = (
   selectOptionCategory: SelectOptionCategory,
-  entryId: ActivatableIdentifier,
+  entryId: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
 ): ResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
     case "Blessings":
-      return database.getAllInstanceContainersOfEntity("Blessing").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Blessing")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Blessing", id),
           content: {
             parent: entryId,
@@ -323,12 +321,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "Cantrips":
-      return database.getAllInstanceContainersOfEntity("Cantrip").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Cantrip")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Cantrip", id),
           content: {
             parent: entryId,
@@ -337,12 +335,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "TradeSecrets":
-      return database.getAllInstanceContainersOfEntity("TradeSecret").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("TradeSecret")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("TradeSecret", id),
           content: {
             parent: entryId,
@@ -356,12 +354,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "Scripts":
-      return database.getAllInstanceContainersOfEntity("Script").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Script")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Script", id),
           content: {
             parent: entryId,
@@ -374,8 +372,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "AnimalShapes": {
       const animalShapePaths = database.getAllInstanceContainersOfEntity("AnimalShapePath")
@@ -459,8 +456,9 @@ const getDerivedSelectOptions = (
     }
 
     case "ArcaneBardTraditions":
-      return database.getAllInstanceContainersOfEntity("ArcaneBardTradition").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("ArcaneBardTradition")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("ArcaneBardTradition", id),
           content: {
             parent: entryId,
@@ -474,12 +472,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "ArcaneDancerTraditions":
-      return database.getAllInstanceContainersOfEntity("ArcaneDancerTradition").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("ArcaneDancerTradition")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("ArcaneDancerTradition", id),
           content: {
             parent: entryId,
@@ -493,12 +491,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "SexPractices":
-      return database.getAllInstanceContainersOfEntity("SexPractice").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("SexPractice")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("SexPractice", id),
           content: {
             parent: entryId,
@@ -509,12 +507,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "Races":
-      return database.getAllInstanceContainersOfEntity("Race").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Race")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Race", id),
           content: {
             parent: entryId,
@@ -525,12 +523,12 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "Cultures":
-      return database.getAllInstanceContainersOfEntity("Culture").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Culture")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Culture", id),
           content: {
             parent: entryId,
@@ -541,13 +539,13 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "RacesAndCultures":
       return [
-        ...database.getAllInstanceContainersOfEntity("Race").map(
-          ({ id, content }): ResolvedSelectOption => ({
+        ...database
+          .getAllInstanceContainersOfEntity("Race")
+          .map(({ id, content }): ResolvedSelectOption => ({
             id: Case("Race", id),
             content: {
               parent: entryId,
@@ -558,10 +556,10 @@ const getDerivedSelectOptions = (
             },
             newApplications: [],
             uses: [],
-          }),
-        ),
-        ...database.getAllInstanceContainersOfEntity("Culture").map(
-          ({ id, content }): ResolvedSelectOption => ({
+          })),
+        ...database
+          .getAllInstanceContainersOfEntity("Culture")
+          .map(({ id, content }): ResolvedSelectOption => ({
             id: Case("Culture", id),
             content: {
               parent: entryId,
@@ -572,13 +570,13 @@ const getDerivedSelectOptions = (
             },
             newApplications: [],
             uses: [],
-          }),
-        ),
+          })),
       ]
 
     case "HomunculusTypes":
-      return database.getAllInstanceContainersOfEntity("HomunculusType").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("HomunculusType")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("HomunculusType", id),
           content: {
             parent: entryId,
@@ -588,8 +586,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "BlessedTraditions": {
       const getPrerequisites = (
@@ -624,8 +621,15 @@ const getDerivedSelectOptions = (
         return undefined
       }
 
-      return database.getAllInstanceContainersOfEntity("BlessedTradition").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("BlessedTradition")
+        .filter(
+          selectOptionCategory.BlessedTraditions.onlyType
+            ? ({ content }) =>
+                content.type.kind === selectOptionCategory.BlessedTraditions.onlyType?.kind
+            : constant(true),
+        )
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("BlessedTradition", id),
           content: {
             parent: entryId,
@@ -637,8 +641,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
     }
 
     case "Elements": {
@@ -675,20 +678,17 @@ const getDerivedSelectOptions = (
     case "Properties": {
       const getPrerequisites = (id: string): GeneralPrerequisites | undefined => {
         if (
-          selectOptionCategory.Properties.require_knowledge !== undefined ||
+          selectOptionCategory.Properties.requireActiveSelectionOnEntry !== undefined ||
           selectOptionCategory.Properties.require_minimum_spellworks_on !== undefined
         ) {
           const knowledgePrerequisite: PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
-            selectOptionCategory.Properties.require_knowledge !== undefined
+            selectOptionCategory.Properties.requireActiveSelectionOnEntry !== undefined
               ? {
                   level: 1,
                   prerequisite: Case(
                     "Single",
                     Case("Activatable", {
-                      id: Case(
-                        "MagicalSpecialAbility",
-                        idMap.MagicalSpecialAbility.PropertyKnowledge,
-                      ),
+                      id: selectOptionCategory.Properties.requireActiveSelectionOnEntry,
                       active: true,
                       options: [Case("Property", id)],
                     }),
@@ -697,8 +697,7 @@ const getDerivedSelectOptions = (
               : undefined
 
           const minimumSpellworksPrerequisite:
-            | PrerequisiteForLevel<GeneralPrerequisiteGroup>
-            | undefined =
+            PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
             selectOptionCategory.Properties.require_minimum_spellworks_on !== undefined
               ? {
                   level: 1,
@@ -719,8 +718,9 @@ const getDerivedSelectOptions = (
         return undefined
       }
 
-      return database.getAllInstanceContainersOfEntity("Property").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Property")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Property", id),
           content: {
             parent: entryId,
@@ -731,24 +731,23 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
     }
 
     case "Aspects": {
       const getPrerequisites = (id: string): GeneralPrerequisites | undefined => {
         if (
-          selectOptionCategory.Aspects.require_knowledge !== undefined ||
+          selectOptionCategory.Aspects.requireActiveSelectionOnEntry !== undefined ||
           selectOptionCategory.Aspects.require_minimum_liturgies_on !== undefined
         ) {
           const knowledgePrerequisite: PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
-            selectOptionCategory.Aspects.require_knowledge !== undefined
+            selectOptionCategory.Aspects.requireActiveSelectionOnEntry !== undefined
               ? {
                   level: 1,
                   prerequisite: Case(
                     "Single",
                     Case("Activatable", {
-                      id: Case("KarmaSpecialAbility", idMap.KarmaSpecialAbility.AspectKnowledge),
+                      id: selectOptionCategory.Aspects.requireActiveSelectionOnEntry,
                       active: true,
                       options: [Case("Aspect", id)],
                     }),
@@ -757,8 +756,7 @@ const getDerivedSelectOptions = (
               : undefined
 
           const minimumSpellworksPrerequisite:
-            | PrerequisiteForLevel<GeneralPrerequisiteGroup>
-            | undefined =
+            PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
             selectOptionCategory.Aspects.require_minimum_liturgies_on !== undefined
               ? {
                   level: 1,
@@ -782,29 +780,28 @@ const getDerivedSelectOptions = (
       if (selectOptionCategory.Aspects.use_master_of_suffix_as_name === true) {
         return database
           .getAllInstanceContainersOfEntity("Aspect")
-          .map(
-            ({ id, content }): ResolvedSelectOption => ({
-              id: Case("Aspect", id),
-              content: {
-                parent: entryId,
-                prerequisites: getPrerequisites(id),
-                translations: mapObject(content.translations, t10n =>
-                  t10n.master_of_aspect_suffix === undefined
-                    ? undefined
-                    : {
-                        name: t10n.master_of_aspect_suffix,
-                      },
-                ),
-              },
-              newApplications: [],
-              uses: [],
-            }),
-          )
+          .map(({ id, content }): ResolvedSelectOption => ({
+            id: Case("Aspect", id),
+            content: {
+              parent: entryId,
+              prerequisites: getPrerequisites(id),
+              translations: mapObject(content.translations, t10n =>
+                t10n.master_of_aspect_suffix === undefined
+                  ? undefined
+                  : {
+                      name: t10n.master_of_aspect_suffix,
+                    },
+              ),
+            },
+            newApplications: [],
+            uses: [],
+          }))
           .filter(value => Object.keys(value.content.translations).length > 0)
       }
 
-      return database.getAllInstanceContainersOfEntity("Aspect").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Aspect")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Aspect", id),
           content: {
             parent: entryId,
@@ -815,13 +812,13 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
     }
 
     case "Diseases":
-      return database.getAllInstanceContainersOfEntity("Disease").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Disease")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Disease", id),
           content: {
             parent: entryId,
@@ -837,8 +834,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
 
     case "Poisons": {
       const getLevel = (poison: Poison): number => {
@@ -880,8 +876,9 @@ const getDerivedSelectOptions = (
         }
       }
 
-      return database.getAllInstanceContainersOfEntity("Poison").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Poison")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Poison", id),
           content: {
             parent: entryId,
@@ -897,8 +894,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
     }
 
     case "Languages": {
@@ -920,8 +916,9 @@ const getDerivedSelectOptions = (
         return undefined
       }
 
-      return database.getAllInstanceContainersOfEntity("Language").map(
-        ({ id, content }): ResolvedSelectOption => ({
+      return database
+        .getAllInstanceContainersOfEntity("Language")
+        .map(({ id, content }): ResolvedSelectOption => ({
           id: Case("Language", id),
           content: {
             parent: entryId,
@@ -933,8 +930,7 @@ const getDerivedSelectOptions = (
           },
           newApplications: [],
           uses: [],
-        }),
-      )
+        }))
     }
 
     case "Skills":
@@ -1071,11 +1067,12 @@ const getDerivedSelectOptions = (
 }
 
 const getExplicitSelectOptions = (
-  id: ActivatableIdentifier,
+  id: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] =>
-  database.getAllChildInstanceContainersForParent("GeneralSelectOption", id).map(
-    ({ id, content }): ResolvedSelectOption => ({
+  database
+    .getAllChildInstanceContainersForParent("GeneralSelectOption", id)
+    .map(({ id, content }): ResolvedSelectOption => ({
       id: Case("General", id),
       content: {
         ...content,
@@ -1083,36 +1080,28 @@ const getExplicitSelectOptions = (
       },
       newApplications: [], // database.getAllChildInstanceContainersForParent("NewSkillApplication", Case("GeneralSelectOption", id)), // prevent duplicates as these can already be queried from the database
       uses: [], // database.getAllChildInstanceContainersForParent("SkillUse", Case("GeneralSelectOption", id)), // prevent duplicates as these can already be queried from the database
-    }),
-  )
+    }))
 
 const getSelectOptions = (
   selectOptions: SelectOptions,
-  id: ActivatableIdentifier,
+  id: ActivatableIdentifierType,
   database: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
 ): ResolvedSelectOption[] => [
   ...(selectOptions.derived === undefined
     ? []
-    : getDerivedSelectOptions(selectOptions.derived, id, database, idMap)),
+    : getDerivedSelectOptions(selectOptions.derived, id, database)),
   ...getExplicitSelectOptions(id, database),
 ]
 
 const getSelectOptionsForResults = (
   database: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
-  entity: ActivatableIdentifier["kind"],
+  entity: ActivatableIdentifierType["kind"],
   results: { id: string; content: { select_options?: SelectOptions; translations?: object } }[],
 ) =>
   results.reduce<{
     [id: string]: ResolvedSelectOption[]
   }>((acc, { id, content }) => {
-    const options = getSelectOptions(
-      content.select_options ?? {},
-      Case(entity, id),
-      database,
-      idMap,
-    )
+    const options = getSelectOptions(content.select_options ?? {}, Case(entity, id), database)
     if (options.length > 0) {
       acc[id] = options
     }
@@ -1120,81 +1109,26 @@ const getSelectOptionsForResults = (
   }, {})
 
 export type ActivatableSelectOptionsCache = Record<
-  ActivatableIdentifier["kind"],
+  ActivatableIdentifierType["kind"],
   {
     [id: string]: ResolvedSelectOption[]
   }
 >
 
-const cacheKeyBase: Record<ActivatableIdentifier["kind"], null> = {
-  Advantage: null,
-  Disadvantage: null,
-  AdvancedCombatSpecialAbility: null,
-  AdvancedKarmaSpecialAbility: null,
-  AdvancedMagicalSpecialAbility: null,
-  AdvancedSkillSpecialAbility: null,
-  AncestorGlyph: null,
-  ArcaneOrbEnchantment: null,
-  AttireEnchantment: null,
-  Beutelzauber: null,
-  BlessedTradition: null,
-  BowlEnchantment: null,
-  BrawlingSpecialAbility: null,
-  CauldronEnchantment: null,
-  CeremonialItemSpecialAbility: null,
-  ChronicleEnchantment: null,
-  CombatSpecialAbility: null,
-  CombatStyleSpecialAbility: null,
-  CommandSpecialAbility: null,
-  DaggerRitual: null,
-  FamiliarSpecialAbility: null,
-  FatePointSexSpecialAbility: null,
-  FatePointSpecialAbility: null,
-  FoolsHatEnchantment: null,
-  GeneralSpecialAbility: null,
-  Haubenzauber: null,
-  Hauerkettenzauber: null,
-  InstrumentEnchantment: null,
-  KarmaSpecialAbility: null,
-  Keulenzauber: null,
-  Krallenkettenzauber: null,
-  Kristallkugelzauber: null,
-  LiturgicalStyleSpecialAbility: null,
-  LycantropicGift: null,
-  MagicalSign: null,
-  MagicalSpecialAbility: null,
-  MagicalTradition: null,
-  MagicStyleSpecialAbility: null,
-  OrbEnchantment: null,
-  PactGift: null,
-  ProtectiveWardingCircleSpecialAbility: null,
-  RingEnchantment: null,
-  Schweinetrommelzauber: null,
-  Sermon: null,
-  SexSpecialAbility: null,
-  SickleRitual: null,
-  SikaryanDrainSpecialAbility: null,
-  SkillStyleSpecialAbility: null,
-  SpellSwordEnchantment: null,
-  StaffEnchantment: null,
-  ToyEnchantment: null,
-  Trinkhornzauber: null,
-  VampiricGift: null,
-  Vision: null,
-  WandEnchantment: null,
-  WeaponEnchantment: null,
-}
+const cacheKeyBase: Record<ActivatableIdentifierType["kind"], null> = mapObject(
+  ActivatableIdentifier.type.value.values,
+  () => null,
+)
 
-export const activatableSelectOptionsCacheBuilder: CacheBuilder<ActivatableSelectOptionsCache> = (
-  database,
-  idMap,
-) =>
+export const activatableSelectOptionsCacheBuilder: CacheBuilder<
+  ActivatableSelectOptionsCache
+> = database =>
   Object.fromEntries(
     (Object.keys(cacheKeyBase) as (keyof typeof cacheKeyBase)[]).map(
       (
         entity,
       ): [
-        ActivatableIdentifier["kind"],
+        ActivatableIdentifierType["kind"],
         {
           [id: string]: ResolvedSelectOption[]
         },
@@ -1202,7 +1136,6 @@ export const activatableSelectOptionsCacheBuilder: CacheBuilder<ActivatableSelec
         entity,
         getSelectOptionsForResults(
           database,
-          idMap,
           entity,
           database.getAllInstanceContainersOfEntity(entity),
         ),

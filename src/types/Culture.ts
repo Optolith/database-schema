@@ -91,7 +91,12 @@ export const Culture = DB.Entity(import.meta.url, {
         "Culture",
         DB.Object({
           name: DB.Required({
-            comment: "The race’s name.",
+            comment: "The culture’s name.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          nameInPrerequisites: DB.Optional({
+            comment:
+              "The culture’s name in prerequisites, if different from the normal culture’s name.",
             type: DB.String({ minLength: 1 }),
           }),
           area_knowledge: DB.Required({

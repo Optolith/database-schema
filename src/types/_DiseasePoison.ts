@@ -2,9 +2,12 @@
  * This file defines some shared types for different diseases and poisons.
  */
 
+import { isNotNullish, nullableToArray } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
+import type { GetInstanceById } from "tsondb/schema/gen"
 import { NestedTranslationMap } from "./Locale.js"
 import { AlternativeName } from "./_AlternativeNames.js"
+import { DerivedCharacteristicIdentifier } from "./_Identifier.ts"
 import { Errata } from "./source/_Erratum.js"
 
 export const level = DB.Required({
@@ -15,18 +18,65 @@ export const level = DB.Required({
 export const Resistance = DB.Enum(import.meta.url, {
   name: "Resistance",
   comment:
-    "Depending on the disease, apply Spirit or Toughness as a penalty to the disease roll. It may also happen that the lower of both is applied as a penalty.",
+    "Depending on the disease or poison, apply a resistance as a penalty to the disease or poison roll. It may also happen that the minimum is applied as a penalty.",
   values: () => ({
-    Spirit: DB.EnumCase({ type: null }),
-    Toughness: DB.EnumCase({ type: null }),
-    LowerOfSpiritAndToughness: DB.EnumCase({ type: null }),
+    Single: DB.EnumCase({
+      type: DB.IncludeIdentifier(SingleResistance),
+    }),
+    Minimum: DB.EnumCase({
+      type: DB.IncludeIdentifier(MinimumResistance),
+    }),
   }),
 })
 
 export const resistance = DB.Required({
   comment:
-    "Depending on the disease, apply Spirit or Toughness as a penalty to the disease roll. It may also happen that the lower of both is applied as a penalty.",
+    "Depending on the disease or poison, apply Spirit or Toughness as a penalty to the disease or poison roll. It may also happen that the minimum is applied as a penalty.",
   type: DB.IncludeIdentifier(Resistance),
+})
+
+const checkDerivedCharacteristicIsResistance = (id: string, getInstanceById: GetInstanceById) =>
+  getInstanceById("DerivedCharacteristic", id)?.type?.kind !== "Resistance"
+    ? `The derived characteristic with the identifier "${id}" is not a resistance.`
+    : undefined
+
+const SingleResistance = DB.TypeAlias(import.meta.url, {
+  name: "SingleResistance",
+  comment: "A single derived characteristic that classifies as a resistance.",
+  type: () =>
+    DB.Object({
+      derivedCharacteristic: DB.Required({
+        comment: "The derived characteristic that is used for the skill check.",
+        type: DerivedCharacteristicIdentifier(),
+      }),
+    }),
+  customConstraints: ({ instanceContent, getInstanceById }) =>
+    nullableToArray(
+      checkDerivedCharacteristicIsResistance(
+        instanceContent.derivedCharacteristic,
+        getInstanceById,
+      ),
+    ),
+})
+
+const MinimumResistance = DB.TypeAlias(import.meta.url, {
+  name: "MinimumResistance",
+  comment:
+    "Multiple derived characteristics that classify as resistances whose minimum value represents the actual resistance against the disease.",
+  type: () =>
+    DB.Object({
+      derivedCharacteristics: DB.Required({
+        comment: "The derived characteristic that is used for the skill check.",
+        type: DB.Array(DerivedCharacteristicIdentifier(), {
+          minItems: 2,
+          uniqueItems: true,
+        }),
+      }),
+    }),
+  customConstraints: ({ instanceContent, getInstanceById }) =>
+    instanceContent.derivedCharacteristics
+      .map(id => checkDerivedCharacteristicIsResistance(id, getInstanceById))
+      .filter(isNotNullish),
 })
 
 export const Cause = DB.TypeAlias(import.meta.url, {

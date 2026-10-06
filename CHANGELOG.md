@@ -2,6 +2,147 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.79.1](https://github.com/Optolith/database-schema/compare/v0.79.0...v0.79.1) (2026-10-05)
+
+### Bug Fixes
+
+* custom combat value constraints for generic item ([10a042a](https://github.com/Optolith/database-schema/commit/10a042ad9e72d65f1b8cb75b1f9bf3eff7badf31))
+
+## [0.79.0](https://github.com/Optolith/database-schema/compare/v0.78.0...v0.79.0) (2026-10-05)
+
+### ⚠ BREAKING CHANGES
+
+* burning time option for generic items
+
+### Features
+
+* base for select option rules ([5df53d3](https://github.com/Optolith/database-schema/commit/5df53d3448d5c279c9a062b8c68cc4e5ee9cbfdb))
+* burning time option for generic items ([7feb7ff](https://github.com/Optolith/database-schema/commit/7feb7ffb449724433c7f7012369c837d5b8f6688))
+
+## [0.78.0](https://github.com/Optolith/database-schema/compare/v0.77.1...v0.78.0) (2026-10-05)
+
+### ⚠ BREAKING CHANGES
+
+* generalize special ability option selection for professions
+* languages option with optional scripts inclusion
+* missing magical action category translations
+* some plant translations
+* translation for empty profession variants
+
+### Features
+
+* generalize special ability option selection for professions ([ef7d2c9](https://github.com/Optolith/database-schema/commit/ef7d2c9903f987720f173815e5454fdfa06b3a84))
+* languages option with optional scripts inclusion ([31862d3](https://github.com/Optolith/database-schema/commit/31862d38d0027dae845f8b69218395c4307bf59d))
+* optional different race and culture names within prerequisites ([5025e80](https://github.com/Optolith/database-schema/commit/5025e80131e41ad68aca9e51881f5ee08c23dad1))
+* prepare activatable options validation ([d0c7e87](https://github.com/Optolith/database-schema/commit/d0c7e87e3ae9aac67aa4259e63ce8c9c51e1fb3e))
+* some plant translations ([8f3fa6b](https://github.com/Optolith/database-schema/commit/8f3fa6ba1b569b9bcd3b355d01fd86c9fe287478))
+
+### Bug Fixes
+
+* missing magical action category translations ([510d11b](https://github.com/Optolith/database-schema/commit/510d11bd9e98d478ec3e4ab37627496b3c8deec9))
+* translation for empty profession variants ([8f63b30](https://github.com/Optolith/database-schema/commit/8f63b30e14508ee0f900626bdefafed1b2657078))
+
+## [0.77.1](https://github.com/Optolith/database-schema/compare/v0.77.0...v0.77.1) (2026-10-03)
+
+### Features
+
+* generic item and equipment category entities ([c154d95](https://github.com/Optolith/database-schema/commit/c154d955d161b02d8d43d13dad8a6b881a333e92))
+* mark entities sortable by index value ([5c8dd28](https://github.com/Optolith/database-schema/commit/5c8dd28937e9176b431cb8e693e816e06fcfb8d5))
+
+## [0.77.0](https://github.com/Optolith/database-schema/compare/v0.76.0...v0.77.0) (2026-10-01)
+
+### ⚠ BREAKING CHANGES
+
+* more profession translation parts
+
+### Features
+
+* more profession translation parts ([9971ec0](https://github.com/Optolith/database-schema/commit/9971ec01fed1d93aa5fb4f163f9dd51a45affcac))
+## [0.76.0](https://github.com/Optolith/database-schema/compare/v0.75.1...v0.76.0) (2026-09-30)
+
+### ⚠ BREAKING CHANGES
+
+* blessed honor/punishment subtypes
+* grouped value map style
+* settings for mapping styles to focus rules
+
+### Features
+
+* blessed honor/punishment subtypes ([6a0a8ba](https://github.com/Optolith/database-schema/commit/6a0a8ba0f4ed010b026f647c5c06c1c942215a19)), closes [#194](https://github.com/Optolith/database-schema/issues/194)
+* grouped value map style ([238edb9](https://github.com/Optolith/database-schema/commit/238edb9d0dfb0bfb48d5ee51fedc802db40498d9))
+* settings for mapping styles to focus rules ([d1990a1](https://github.com/Optolith/database-schema/commit/d1990a15d6ad4a868b58b716d5dd45704180e9b6))
+* specify bannzeichen option in profession ([648bb02](https://github.com/Optolith/database-schema/commit/648bb0278c5a175f711aa5b49274155c66394c9a)), closes [#192](https://github.com/Optolith/database-schema/issues/192)
+* type-restricted derived blessed tradition select options ([0051e49](https://github.com/Optolith/database-schema/commit/0051e49266b41f9b565c085d65419a1ef1d79eae)), closes [#193](https://github.com/Optolith/database-schema/issues/193)
+## [0.75.1](https://github.com/Optolith/database-schema/compare/v0.75.0...v0.75.1) (2026-09-30)
+
+### Bug Fixes
+
+* remove incorrect entity name ([955dbfc](https://github.com/Optolith/database-schema/commit/955dbfcc2651d8c8c865006083075bbffcb86ed5))
+* select options cache after last breaking change ([e257646](https://github.com/Optolith/database-schema/commit/e2576461b9a0663374326ae3719ca38af774db01))
+## [0.75.0](https://github.com/Optolith/database-schema/compare/v0.74.0...v0.75.0) (2026-09-30)
+
+### ⚠ BREAKING CHANGES
+
+* global settings
+
+### Features
+
+* global settings ([e428b84](https://github.com/Optolith/database-schema/commit/e428b840d8775c55d44f3545e037495506a01cbb))
+## [0.74.0](https://github.com/Optolith/database-schema/compare/v0.73.0...v0.74.0) (2026-09-29)
+
+### ⚠ BREAKING CHANGES
+
+* consolidate armor type entity into armor entity
+
+### Features
+
+* consolidate armor type entity into armor entity ([10ab468](https://github.com/Optolith/database-schema/commit/10ab4689c273ca3effe56770b05c769dc3321d12))
+## [0.73.0](https://github.com/Optolith/database-schema/compare/v0.72.1...v0.73.0) (2026-09-29)
+
+### ⚠ BREAKING CHANGES
+
+* cost range may have an open upper bound
+
+### Bug Fixes
+
+* cost range may have an open upper bound ([ec66a99](https://github.com/Optolith/database-schema/commit/ec66a991b4493185c3f7941be802fa1a9054e78b))
+## [0.72.1](https://github.com/Optolith/database-schema/compare/v0.72.0...v0.72.1) (2026-09-28)
+
+### Features
+
+* add name of god translation option to blessed tradition ([8363f99](https://github.com/Optolith/database-schema/commit/8363f99ebcaf0e0f634aa686746c956907e933b3))
+## [0.72.0](https://github.com/Optolith/database-schema/compare/v0.71.0...v0.72.0) (2026-09-28)
+
+### ⚠ BREAKING CHANGES
+
+* item note translation parts
+
+### Bug Fixes
+
+* item note translation parts ([48bec47](https://github.com/Optolith/database-schema/commit/48bec479beec14731f812b6af3473b5bf45a0bfc))
+## [0.71.0](https://github.com/Optolith/database-schema/compare/v0.70.1...v0.71.0) (2026-09-28)
+
+### ⚠ BREAKING CHANGES
+
+* more translations for items
+
+### Features
+
+* more translations for items ([f4d3d79](https://github.com/Optolith/database-schema/commit/f4d3d79b1e92c34a0078fb7df24370a9a57a9b2d))
+## [0.70.1](https://github.com/Optolith/database-schema/compare/v0.70.0...v0.70.1) (2026-09-28)
+
+### Features
+
+* different names for familiar's tricks based on tradition ([189a86d](https://github.com/Optolith/database-schema/commit/189a86da529c1b220030c746f8bdb0b94a29a3d9))
+## [0.70.0](https://github.com/Optolith/database-schema/compare/v0.69.0...v0.70.0) (2026-09-27)
+
+### ⚠ BREAKING CHANGES
+
+* plant adjustments
+
+### Features
+
+* plant adjustments ([8dcd08b](https://github.com/Optolith/database-schema/commit/8dcd08b1a3492686703fbdee7f5f12c992a5d2c5)), references [#195](https://github.com/Optolith/database-schema/issues/195)
 ## [0.69.0](https://github.com/Optolith/database-schema/compare/v0.68.1...v0.69.0) (2026-09-27)
 
 ### ⚠ BREAKING CHANGES

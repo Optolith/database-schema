@@ -3,7 +3,11 @@ import { effect, levels, maximum, name, name_in_library } from "../_Activatable.
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
 import { automatic_entries } from "../_ActivatableAutomatic.js"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "../_ActivatableNames.ts"
-import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.js"
+import {
+  explicit_select_options,
+  select_options,
+  verifySelectOptionRules,
+} from "../_ActivatableSelectOptions.js"
 import { PactCategoryIdentifier } from "../_Identifier.ts"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
@@ -62,6 +66,7 @@ export const PactGift = DB.Entity(import.meta.url, {
       { keyPath: "associatedPactCategory" },
     ],
   ],
+  customConstraints: deps => verifySelectOptionRules("PactGift", deps),
 })
 
 const PactGiftPermanentDemonicConsumption = DB.Enum(import.meta.url, {

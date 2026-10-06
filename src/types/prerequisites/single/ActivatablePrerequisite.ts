@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { verifyOptionsForActivatableEntry } from "../../_ActivatableSelectOptions.ts"
 import { ActivatableIdentifier, RequirableSelectOptionIdentifier } from "../../_IdentifierGroup.js"
 import { Preconditions } from "../ConditionalPrerequisites.js"
 import { DisplayOption } from "../DisplayOption.js"
@@ -32,4 +33,10 @@ export const ActivatablePrerequisite = DB.TypeAlias(import.meta.url, {
         type: DB.IncludeIdentifier(Preconditions),
       }),
     }),
+  customConstraints: ({ instanceContent, getInstanceById, getAllChildInstancesForParent }) =>
+    verifyOptionsForActivatableEntry(
+      instanceContent,
+      getInstanceById,
+      getAllChildInstancesForParent,
+    ),
 })

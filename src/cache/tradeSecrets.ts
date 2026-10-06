@@ -68,7 +68,7 @@ const emptyDerivedHerbaryTradeSecretsCache: DerivedTradeSecretsCache["herbary"] 
 
 export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCache> = (
   database,
-  idMap,
+  settings,
 ) => {
   const cache: DerivedTradeSecretsCache = {
     equipment: emptyDerivedEquipmentTradeSecretsCache,
@@ -91,7 +91,7 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
                   Case(
                     "Single",
                     Case("Activatable", {
-                      id: Case("GeneralSpecialAbility", idMap.GeneralSpecialAbility.Weaponsmith),
+                      id: settings.derivedTradeSecrets.requiredSpecialAbilityForWeapons,
                       active: true,
                     }),
                   ),
@@ -101,7 +101,7 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
                     Case(
                       "Single",
                       Case("Activatable", {
-                        id: Case("GeneralSpecialAbility", idMap.GeneralSpecialAbility.Armorer),
+                        id: settings.derivedTradeSecrets.requiredSpecialAbilityForArmor,
                         active: true,
                       }),
                     ),

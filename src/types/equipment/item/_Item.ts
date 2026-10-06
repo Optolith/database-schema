@@ -63,13 +63,10 @@ export const DefaultItem = (sourceUrl: string, singularName: string, pluralName?
       ).combat_use
 
       if (combatUse && combatUse.kind === "Weapon") {
-        return checkWeaponCombatTechniqueIntegrity(
-          {
-            ...rest,
-            instanceContent: combatUse.Weapon,
-          },
-          { secondary: true },
-        )
+        return checkWeaponCombatTechniqueIntegrity({
+          ...rest,
+          instanceContent: combatUse.Weapon,
+        })
       }
 
       return []
@@ -174,7 +171,7 @@ export const CostRange = DB.TypeAlias(import.meta.url, {
         comment: "The lower bound of the cost in silverthalers.",
         type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
       }),
-      to: DB.Required({
+      to: DB.Optional({
         comment: "The upper bound of the cost in silverthalers.",
         type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
       }),

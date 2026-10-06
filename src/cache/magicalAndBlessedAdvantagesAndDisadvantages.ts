@@ -7,9 +7,9 @@ import type {
   AdvantageDisadvantagePrerequisites,
   Disadvantage_ID,
   RatedIdentifier,
+  Settings,
 } from "../../gen/types.js"
 import type { TSONDBTypes } from "../main.js"
-import type { IdMap } from "./index.js"
 import type { CacheBuilder } from "./internal.ts"
 
 export type MagicalAndBlessedAdvantagesAndDisadvantagesCache = Record<
@@ -17,12 +17,12 @@ export type MagicalAndBlessedAdvantagesAndDisadvantagesCache = Record<
   Record<"Magical" | "Blessed", string[]>
 >
 
-const getAdvantageId = (idMap: IdMap, type: "Magical" | "Blessed") => {
+const getAdvantageId = (settings: Settings, type: "Magical" | "Blessed") => {
   switch (type) {
     case "Magical":
-      return idMap.Advantage.Spellcaster
+      return settings.supernaturalBaseAdvantages.spellcasters
     case "Blessed":
-      return idMap.Advantage.Blessed
+      return settings.supernaturalBaseAdvantages.blessed
     default:
       return assertExhaustive(type)
   }
@@ -47,7 +47,7 @@ const isRatedFor = (type: "Magical" | "Blessed", ratedId: RatedIdentifier) => {
 }
 
 const isPrerequisiteFor = (
-  idMap: IdMap,
+  settings: Settings,
   type: "Magical" | "Blessed",
   prerequisite: AdvantageDisadvantagePrerequisiteGroup,
   getById: (
@@ -59,14 +59,14 @@ const isPrerequisiteFor = (
     case "Activatable": {
       if (
         prerequisite.Activatable.id.kind === "Advantage" &&
-        prerequisite.Activatable.id.Advantage === getAdvantageId(idMap, type) &&
+        prerequisite.Activatable.id.Advantage === getAdvantageId(settings, type) &&
         prerequisite.Activatable.active
       ) {
         return true
       }
 
       const entry = getById(prerequisite.Activatable.id)
-      return entry !== undefined && is(idMap, type, entry, getById, traversedIds)
+      return entry !== undefined && is(settings, type, entry, getById, traversedIds)
     }
     case "Rated":
       return isRatedFor(type, prerequisite.Rated.id)
@@ -97,7 +97,7 @@ const isPrerequisiteFor = (
 }
 
 const is = (
-  idMap: IdMap,
+  settings: Settings,
   type: "Magical" | "Blessed",
   entry: { id: string; content: { prerequisites?: AdvantageDisadvantagePrerequisites } },
   getById: (
@@ -117,7 +117,7 @@ const is = (
       switch (prerequisite.prerequisite.kind) {
         case "Single":
           return isPrerequisiteFor(
-            idMap,
+            settings,
             type,
             prerequisite.prerequisite.Single,
             getById,
@@ -125,11 +125,11 @@ const is = (
           )
         case "Disjunction":
           return prerequisite.prerequisite.Disjunction.list.some(p =>
-            isPrerequisiteFor(idMap, type, p, getById, newTraversedIds),
+            isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
           )
         case "Group":
           return prerequisite.prerequisite.Group.list.some(p =>
-            isPrerequisiteFor(idMap, type, p, getById, newTraversedIds),
+            isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
           )
         default:
           return assertExhaustive(prerequisite.prerequisite)
@@ -156,18 +156,18 @@ const collectIds = (
   entity: "Advantage" | "Disadvantage",
   type: "Magical" | "Blessed",
   database: TSONDB<TSONDBTypes>,
-  idMap: IdMap,
+  settings: Settings,
 ) =>
   database
     .getAllInstanceContainersOfEntity(entity)
     .filter(entry =>
-      is(idMap, type, entry, database.getInstanceContainerOfEntityById.bind(database), []),
+      is(settings, type, entry, database.getInstanceContainerOfEntityById.bind(database), []),
     )
     .map(({ id }) => id)
 
 export const buildMagicalAndBlessedAdvantagesAndDisadvantagesCache: CacheBuilder<
   MagicalAndBlessedAdvantagesAndDisadvantagesCache
-> = (database, idMap) => {
+> = (database, settings) => {
   return Object.fromEntries(
     (Object.keys(entityKeyMap) as (keyof EntityKeyMap)[]).map(
       (
@@ -178,7 +178,7 @@ export const buildMagicalAndBlessedAdvantagesAndDisadvantagesCache: CacheBuilder
           (Object.keys(typeKeyMap) as (keyof TypeKeyMap)[]).map(
             (type): [keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]] => [
               type,
-              collectIds(entity, type, database, idMap),
+              collectIds(entity, type, database, settings),
             ],
           ),
         ) as Record<keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]>,
