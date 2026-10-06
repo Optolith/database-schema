@@ -135,6 +135,10 @@ This streamlines the wording for diseases and poison by using a unified wording 
           "The reduced value. In the source, it's the text after the slash. Some entries may not have a reduced value, i.e. there is no slash with text after it. If the text after the slash is a dash, include it here as well.",
         type: DB.TypeArgument(Content),
       }),
+      additonal: DB.Optional({
+        comment: "An additional text that applies regardless of the effect being reduced or not.",
+        type: DB.String({ minLength: 1, markdown: "inline" }),
+      }),
     }),
 })
 
