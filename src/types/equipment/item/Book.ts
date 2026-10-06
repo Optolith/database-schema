@@ -1,10 +1,10 @@
 import * as DB from "tsondb/schema/dsl"
+import { ActivatablePrerequisite } from "../../prerequisites/single/ActivatablePrerequisite.js"
 import { SkillIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { Complexity, Cost, StructurePoints, Weight } from "./_Item.js"
-import { LinguisticPrerequisites } from "../../_Prerequisite.js"
 
 export const Book = DB.Entity(import.meta.url, {
   name: "Book",
@@ -38,8 +38,8 @@ export const Book = DB.Entity(import.meta.url, {
       }),
       prerequisites: DB.Optional({
         comment:
-          "Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.",
-        type: DB.IncludeIdentifier(BookLinguisticPrerequisites),
+          "Which prerequisites must be met to understand the book.",
+        type: DB.IncludeIdentifier(ActivatablePrerequisite),
       }),
       rules: DB.Required({
         comment:
@@ -304,7 +304,7 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
     DB.Object({
       prerequisities: DB.Optional({
         comment: "The prerequisites for learning the rules of this edition.",
-        type: DB.IncludeIdentifier(BookLinguisticPrerequisites),
+        type: DB.IncludeIdentifier(ActivatablePrerequisite),
       }),
       translation: NestedTranslationMap(
         DB.Required,
@@ -326,27 +326,6 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
             comment:
               "References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.",
             type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
-        }),
-      ),
-    }),
-})
-
-const BookLinguisticPrerequisites = DB.TypeAlias(import.meta.url, {
-  name: "BookLinguisticPrerequisites",
-  type: () =>
-    DB.Object({
-      linguistic: DB.Required({
-        comment: "The linguistic prerequisites for this book.",
-        type: DB.IncludeIdentifier(LinguisticPrerequisites),
-      }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "BookLinguisticPrerequisitesTranslation",
-        DB.Object({
-          replacement: DB.Required({
-            comment: "The label for this linguistic prerequisites.",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
         }),
       ),

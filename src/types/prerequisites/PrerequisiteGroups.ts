@@ -6,7 +6,6 @@ import { AnySpecialAbilityOfGroupPrerequisite } from "./single/AnySpecialAbility
 import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
-import { LanguagePrerequisite } from "./single/LanguagePrerequisite.js"
 import { PactPrerequisite } from "./single/PactPrerequisite.js"
 import { PersonalityTraitPrerequisite } from "./single/PersonalityTraitPrerequisite.js"
 import { PrimaryAttributePrerequisite } from "./single/PrimaryAttributePrerequisite.js"
@@ -17,7 +16,6 @@ import { RatedMinimumNumberPrerequisite } from "./single/RatedMinimumNumberPrere
 import { RatedPrerequisite } from "./single/RatedPrerequisite.js"
 import { RatedSumPrerequisite } from "./single/RatedSumPrerequisite.js"
 import { RulePrerequisite } from "./single/RulePrerequisite.js"
-import { ScriptPrerequisite } from "./single/ScriptPrerequisite.js"
 import { SexPrerequisite } from "./single/SexPrerequisite.js"
 import { SexualCharacteristicPrerequisite } from "./single/SexualCharacteristicPrerequisite.js"
 import { SocialStatusPrerequisite } from "./single/SocialStatusPrerequisite.js"
@@ -206,13 +204,5 @@ export const PreconditionGroup = DB.Enum(import.meta.url, {
     SexualCharacteristic: DB.EnumCase({
       type: DB.IncludeIdentifier(SexualCharacteristicPrerequisite),
     }),
-  }),
-})
-
-export const LinguisticPrerequisiteGroup = DB.Enum(import.meta.url, {
-  name: "LinguisticPrerequisiteGroup",
-  values: () => ({
-    Language: DB.EnumCase({ type: DB.IncludeIdentifier(LanguagePrerequisite) }),
-    Script: DB.EnumCase({ type: DB.IncludeIdentifier(ScriptPrerequisite) }),
   }),
 })

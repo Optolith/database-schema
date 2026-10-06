@@ -22,7 +22,6 @@ import {
   RulePrerequisiteGroup,
   SpellworkPrerequisiteGroup,
   TribePrerequisiteGroup,
-  LinguisticPrerequisiteGroup,
 } from "./prerequisites/PrerequisiteGroups.js"
 
 const PrerequisiteGroup = DB.GenTypeAlias(import.meta.url, {
@@ -263,13 +262,5 @@ export const EnhancementPrerequisites = DB.TypeAlias(import.meta.url, {
   type: () =>
     DB.GenIncludeIdentifier(PlainPrerequisites, [
       DB.IncludeIdentifier(EnhancementPrerequisiteGroup),
-    ]),
-})
-
-export const LinguisticPrerequisites = DB.TypeAlias(import.meta.url, {
-  name: "LinguisticPrerequisites",
-  type: () =>
-    DB.GenIncludeIdentifier(PlainPrerequisites, [
-      DB.IncludeIdentifier(LinguisticPrerequisiteGroup),
     ]),
 })
