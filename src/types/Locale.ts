@@ -1732,6 +1732,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Progress": null,
           "Incubation Time": null,
           "Damage": null,
+          "Duration (Disease)": null,
           "Causes": null,
           "Treatment": null,
           "Antidote": null,
