@@ -171,7 +171,7 @@ const TalismanActivation = DB.TypeAlias(import.meta.url, {
     DB.Object({
       cost: DB.Required({
         comment: "The cost to activate the talisman.",
-        type: DB.IncludeIdentifier(TalismanActivationCost),
+        type: DB.Array(DB.IncludeIdentifier(TalismanActivationCost), { minItems: 1 }),
       }),
       duration: DB.Required({
         comment: "The duration of how long the talisman will be active.",
