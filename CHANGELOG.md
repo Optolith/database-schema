@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.83.0](https://github.com/Optolith/database-schema/compare/v0.82.0...v0.83.0) (2026-10-06)
+
+### ⚠ BREAKING CHANGES
+
+* different duration translation for diseases
+* various plant schema improvements
+
+### Features
+
+* additional text for reduceable effects ([71743e8](https://github.com/Optolith/database-schema/commit/71743e82039d7aa0523c7ded646ad8d3f145ceed))
+* various plant schema improvements ([c4cb673](https://github.com/Optolith/database-schema/commit/c4cb673685d2ae817ae5705d6b8625d7e80cc60f))
+
+### Bug Fixes
+
+* different duration translation for diseases ([ef682b2](https://github.com/Optolith/database-schema/commit/ef682b28fe358b13f69250ec09c5607154754b3b))
+
 ## [0.82.0](https://github.com/Optolith/database-schema/compare/v0.81.0...v0.82.0) (2026-10-06)
 
 ### ⚠ BREAKING CHANGES
