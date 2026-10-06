@@ -1555,6 +1555,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "invaluable": null,
           "Damage Points": null,
           "DP": null,
+          "Special (Damage)": null,
           "Primary Attribute + Damage Threshold": null,
           "P+T": null,
           "Attack/Parry Modifier": null,
