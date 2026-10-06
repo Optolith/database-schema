@@ -28,10 +28,24 @@ export const SubBiome = DB.Entity(import.meta.url, {
     }),
   parentReferenceKey: "parent",
   instanceDisplayName: {},
+  instanceDisplayNameCustomizer: ({
+    instance,
+    instanceDisplayName,
+    instanceDisplayNameLocaleId,
+    getDisplayNameForInstanceId,
+  }) => ({
+    name: `${getDisplayNameForInstanceId("Biome", instance.parent)?.name ?? ""} — ${instanceDisplayName}`,
+    localeId: instanceDisplayNameLocaleId,
+  }),
   uniqueConstraints: [
-    {
-      entityMapKeyPath: "translations",
-      keyPathInEntityMap: "name",
-    },
+    [
+      {
+        keyPath: "parent",
+      },
+      {
+        entityMapKeyPath: "translations",
+        keyPathInEntityMap: "name",
+      },
+    ],
   ],
 })

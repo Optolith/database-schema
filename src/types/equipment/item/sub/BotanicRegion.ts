@@ -24,6 +24,15 @@ export const BotanicRegion = DB.Entity(import.meta.url, {
     }),
   parentReferenceKey: "parent",
   instanceDisplayName: {},
+  instanceDisplayNameCustomizer: ({
+    instance,
+    instanceDisplayName,
+    instanceDisplayNameLocaleId,
+    getDisplayNameForInstanceId,
+  }) => ({
+    name: `${getDisplayNameForInstanceId("SubBiome", instance.parent)?.name ?? ""} — ${instanceDisplayName}`,
+    localeId: instanceDisplayNameLocaleId,
+  }),
   uniqueConstraints: [
     [
       {

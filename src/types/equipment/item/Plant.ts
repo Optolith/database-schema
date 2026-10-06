@@ -154,6 +154,7 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
 const PlantOccurrenceTier = DB.Enum(import.meta.url, {
   name: "PlantOccurrenceTier",
   values: () => ({
+    AllBiomes: DB.EnumCase({ type: null }),
     Biomes: DB.EnumCase({
       type: DB.Array(BiomeIdentifier(), { minItems: 1 }),
     }),
