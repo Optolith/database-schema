@@ -163,7 +163,7 @@ const CultureLanguage = DB.TypeAlias(import.meta.url, {
             }),
             specializationPrompt: DB.Optional({
               comment:
-                "A different promt fro the language specialization, if the language allows to specify arbitrary text.",
+                "A different prompt for the language specialization, if the language allows to specify arbitrary text.",
               type: DB.String({ minLength: 1 }),
             }),
           },
