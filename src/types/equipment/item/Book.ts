@@ -38,7 +38,7 @@ export const Book = DB.Entity(import.meta.url, {
       }),
       prerequisites: DB.Optional({
         comment: "Which prerequisites must be met to understand the book.",
-        type: DB.IncludeIdentifier(ActivatablePrerequisite),
+        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
       }),
       rules: DB.Required({
         comment:
@@ -303,7 +303,7 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
     DB.Object({
       prerequisities: DB.Optional({
         comment: "The prerequisites for learning the rules of this edition.",
-        type: DB.IncludeIdentifier(ActivatablePrerequisite),
+        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
       }),
       translation: NestedTranslationMap(
         DB.Required,
@@ -329,4 +329,11 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
+})
+
+const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
+  name: "BookPrerequisiteGroup",
+  values: () => ({
+    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
+  }),
 })
