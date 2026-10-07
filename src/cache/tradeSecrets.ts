@@ -210,6 +210,7 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
             "Single",
             Case("Rule", {
               id: Case("FocusRule", settings.derivedTradeSecrets.requiredFocusRuleForTalismans),
+              active: true,
             }),
           ),
         ],

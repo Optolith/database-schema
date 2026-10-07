@@ -10,6 +10,9 @@ export const RulePrerequisite = DB.TypeAlias(import.meta.url, {
       id: DB.Required({
         type: DB.IncludeIdentifier(ExtensionRuleIdentifier),
       }),
+      active: DB.Required({
+        type: DB.Boolean(),
+      }),
       display_option: DB.Optional({
         type: DB.IncludeIdentifier(DisplayOption),
       }),
