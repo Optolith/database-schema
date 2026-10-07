@@ -149,7 +149,7 @@ const TalismanDamageOption = DB.Enum(import.meta.url, {
   name: "TalismanDamageOption",
   values: () => ({
     Random: DB.EnumCase({ type: DB.IncludeIdentifier(Dice) }),
-    Constant: DB.EnumCase({ type: null }),
+    Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
     QualityLevels: DB.EnumCase({ type: null }),
   }),
 })
