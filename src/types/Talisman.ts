@@ -27,7 +27,7 @@ export const Talisman = DB.Entity(import.meta.url, {
       }),
       activation: DB.Optional({
         comment: "The activation parameters.",
-        type: DB.IncludeIdentifier(TalismanActivation),
+        type: DB.Array(DB.IncludeIdentifier(TalismanActivation), { minItems: 1 }),
       }),
       ap_value: DB.Optional({
         comment: "The AP value for the required trade secret, if possible.",
@@ -171,7 +171,7 @@ const TalismanActivation = DB.TypeAlias(import.meta.url, {
     DB.Object({
       cost: DB.Required({
         comment: "The cost to activate the talisman.",
-        type: DB.Array(DB.IncludeIdentifier(TalismanActivationCost), { minItems: 1 }),
+        type: DB.IncludeIdentifier(TalismanActivationCost),
       }),
       duration: DB.Required({
         comment: "The duration of how long the talisman will be active.",
