@@ -24,9 +24,13 @@ type HerbaryEntitiesWithTradeSecrets = "Disease" | "Elixir" | "HerbalAid" | "Poi
 export type DerivedTradeSecretsCache = {
   equipment: { [K in EquipmentEntitiesWithComplexities]: Record<string, TradeSecret> }
   herbary: { [K in HerbaryEntitiesWithTradeSecrets]: Record<string, TradeSecret> }
+  talismans: Record<string, TradeSecret>
   all: {
     id: Case<
-      "TradeSecret" | EquipmentEntitiesWithComplexities | HerbaryEntitiesWithTradeSecrets,
+      | "TradeSecret"
+      | EquipmentEntitiesWithComplexities
+      | HerbaryEntitiesWithTradeSecrets
+      | "Talisman",
       string
     >
     content: TradeSecret
@@ -73,6 +77,7 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
   const cache: DerivedTradeSecretsCache = {
     equipment: emptyDerivedEquipmentTradeSecretsCache,
     herbary: emptyDerivedHerbaryTradeSecretsCache,
+    talismans: {},
     all: database.getAllInstanceContainersOfEntity("TradeSecret").map(container => ({
       id: Case("TradeSecret", container.id),
       content: container.content,
@@ -192,6 +197,38 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
         break
       default:
         return assertExhaustive(entity)
+    }
+  }
+
+  for (const container of database.getAllInstanceContainersOfEntity("Talisman")) {
+    if (container.content.ap_value !== undefined) {
+      const derivedTradeSecret: TradeSecret = {
+        ap_value: Case("Fixed", container.content.ap_value),
+        is_secret_knowledge: false,
+        prerequisites: [
+          Case(
+            "Single",
+            Case("Rule", {
+              id: Case("FocusRule", settings.derivedTradeSecrets.requiredFocusRuleForTalismans),
+            }),
+          ),
+        ],
+        src: container.content.src,
+        translations: Object.fromEntries(
+          Object.entries(container.content.translations).map(([lang, translation]) => [
+            lang,
+            {
+              name: translation.name,
+            },
+          ]),
+        ),
+      }
+
+      cache.talismans[container.id] = derivedTradeSecret
+      cache.all.push({
+        id: Case("Talisman", container.id),
+        content: derivedTradeSecret,
+      })
     }
   }
 
