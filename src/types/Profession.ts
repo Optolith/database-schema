@@ -106,6 +106,10 @@ const MagicalProfessionGroup = DB.TypeAlias(import.meta.url, {
         comment: "The curriculum/academy associated with this magical profession, if any.",
         type: CurriculumIdentifier(),
       }),
+      subgroup: DB.Optional({
+        comment: "The tradition’s subgroup associated with this magical profession, if any.",
+        type: CurriculumIdentifier(),
+      }),
     }),
 })
 
