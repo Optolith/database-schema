@@ -48,6 +48,16 @@ export const DerivedCharacteristic = DB.Entity(import.meta.url, {
             comment: "The derived characteristic’s abbreviation.",
             type: DB.String({ minLength: 1 }),
           }),
+          unitAbbreviation: DB.Optional({
+            comment:
+              "The unit the derived characteristic is measured in, if different from the main abbreviation.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          unitAbbreviationValueAware: DB.Optional({
+            comment:
+              "The value-aware unit the derived characteristic is measured in, if different from the normal unit abbreviation. The string must follow the MessageFormat 2 specification and receives the value for the unit as the parameter `$value`. This can be used to display the unit in singular or plural form depending on the value, if relevant.",
+            type: DB.String({ minLength: 1 }),
+          }),
           description: DB.Optional({
             comment: "The derived characteristic’s description.",
             type: DB.String({ minLength: 1, markdown: "block" }),

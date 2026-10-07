@@ -1858,6 +1858,14 @@ export const Locale = DB.Entity(import.meta.url, {
           // Trade secrets
           "Secret Knowledge": null,
 
+          // talismans
+          "Activation": null,
+          "Main Talisman": null,
+          "Minor Talisman": null,
+          "Powerful Talisman": null,
+          "Regalia": null,
+          "Talisman": null,
+
           // Library Entry Subtitles
           "Profession Package": null,
           "Optional Rule": null,
