@@ -136,6 +136,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.MagicalSign,
     Types.MagicalSpecialAbility,
     Types.MagicalTradition,
+    Types.MagicalTraditionSubgroup,
     Types.MagicStyleSpecialAbility,
     Types.MetaCondition,
     Types.MusicalInstrument,

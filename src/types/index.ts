@@ -134,6 +134,7 @@ export { SikaryanDrainSpecialAbility } from "./specialAbility/SikaryanDrainSpeci
 export { SkillStyleSpecialAbility } from "./specialAbility/SkillStyleSpecialAbility.js"
 export { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/CeremonialItemSpecialAbilityGroup.js"
 export { Language } from "./specialAbility/sub/Language.js"
+export { MagicalTraditionSubgroup } from "./specialAbility/sub/MagicalTraditionSubgroup.ts"
 export { Script } from "./specialAbility/sub/Script.js"
 export { TradeSecret } from "./specialAbility/sub/TradeSecret.js"
 export { VampiricGift } from "./specialAbility/VampiricGift.js"
