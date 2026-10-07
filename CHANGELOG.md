@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.86.0](https://github.com/Optolith/database-schema/compare/v0.85.0...v0.86.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* mundane profession group translation keys casing
+
+### Bug Fixes
+
+* mundane profession group translation keys casing ([56a54f2](https://github.com/Optolith/database-schema/commit/56a54f25f1038fe7fc2f054f5b0c090acf2c3460))
+
 ## [0.85.0](https://github.com/Optolith/database-schema/compare/v0.84.0...v0.85.0) (2026-10-07)
 
 ### ⚠ BREAKING CHANGES
