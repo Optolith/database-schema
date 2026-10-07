@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.86.0](https://github.com/Optolith/database-schema/compare/v0.85.0...v0.86.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* mundane profession group translation keys casing
+
+### Bug Fixes
+
+* mundane profession group translation keys casing ([56a54f2](https://github.com/Optolith/database-schema/commit/56a54f25f1038fe7fc2f054f5b0c090acf2c3460))
+
+## [0.85.0](https://github.com/Optolith/database-schema/compare/v0.84.0...v0.85.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* missing mundane profession group translations
+
+### Bug Fixes
+
+* missing mundane profession group translations ([7e60131](https://github.com/Optolith/database-schema/commit/7e60131bcd55d18db03803bcc9f1954d4efb5650))
+
+## [0.84.0](https://github.com/Optolith/database-schema/compare/v0.83.0...v0.84.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* include professions by mundane profession group
+
+### Features
+
+* associate profession with magical tradition subgroup ([f0a2838](https://github.com/Optolith/database-schema/commit/f0a28389c00c5b522c43197f6d278e121e391692))
+* include professions by mundane profession group ([a147553](https://github.com/Optolith/database-schema/commit/a147553a72f050b4905b7b640fb781161f7888bc))
+* magical tradition subgroup child entity ([577fdb6](https://github.com/Optolith/database-schema/commit/577fdb6455e69cec086349209dc3e610a2d8d865))
+
+## [0.83.0](https://github.com/Optolith/database-schema/compare/v0.82.0...v0.83.0) (2026-10-06)
+
+### ⚠ BREAKING CHANGES
+
+* different duration translation for diseases
+* various plant schema improvements
+
+### Features
+
+* additional text for reduceable effects ([71743e8](https://github.com/Optolith/database-schema/commit/71743e82039d7aa0523c7ded646ad8d3f145ceed))
+* various plant schema improvements ([c4cb673](https://github.com/Optolith/database-schema/commit/c4cb673685d2ae817ae5705d6b8625d7e80cc60f))
+
+### Bug Fixes
+
+* different duration translation for diseases ([ef682b2](https://github.com/Optolith/database-schema/commit/ef682b28fe358b13f69250ec09c5607154754b3b))
+
 ## [0.82.0](https://github.com/Optolith/database-schema/compare/v0.81.0...v0.82.0) (2026-10-06)
 
 ### ⚠ BREAKING CHANGES

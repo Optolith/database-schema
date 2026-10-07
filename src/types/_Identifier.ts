@@ -135,6 +135,7 @@ import { SikaryanDrainSpecialAbility } from "./specialAbility/SikaryanDrainSpeci
 import { SkillStyleSpecialAbility } from "./specialAbility/SkillStyleSpecialAbility.js"
 import { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/CeremonialItemSpecialAbilityGroup.ts"
 import { Language, LanguageSpecialization } from "./specialAbility/sub/Language.js"
+import { MagicalTraditionSubgroup } from "./specialAbility/sub/MagicalTraditionSubgroup.ts"
 import { Script } from "./specialAbility/sub/Script.js"
 import { TradeSecret } from "./specialAbility/sub/TradeSecret.js"
 import { VampiricGift } from "./specialAbility/VampiricGift.js"
@@ -285,6 +286,7 @@ export const MagicalRuneOptionIdentifier: () => R = () => R(MagicalRuneOption)
 export const MagicalSignIdentifier: () => R = () => R(MagicalSign)
 export const MagicalSpecialAbilityIdentifier: () => R = () => R(MagicalSpecialAbility)
 export const MagicalTraditionIdentifier: () => R = () => R(MagicalTradition)
+export const MagicalTraditionSubgroupIdentifier: () => R = () => R(MagicalTraditionSubgroup)
 export const MagicStyleSpecialAbilityIdentifier: () => R = () => R(MagicStyleSpecialAbility)
 export const MusicalInstrumentIdentifier: () => R = () => R(MusicalInstrument)
 export const NewspaperIdentifier: () => R = () => R(Newspaper)

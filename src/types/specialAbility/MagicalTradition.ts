@@ -18,6 +18,7 @@ import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
 import { src } from "../source/_PublicationRef.js"
 import { SpecialRule } from "./_Tradition.js"
+import { MagicalTraditionSubgroup } from "./sub/MagicalTraditionSubgroup.ts"
 
 export const MagicalTradition = DB.Entity(import.meta.url, {
   name: "MagicalTradition",
@@ -76,8 +77,12 @@ export const MagicalTradition = DB.Entity(import.meta.url, {
         type: MagicalTraditionIdentifier(),
       }),
       influences: DB.Optional({
-        comment: "The influences for the traditions. Influences are enabled by Focus Rules.",
+        comment: "The influences for the tradition. Influences are enabled by Focus Rules.",
         type: DB.Array(InfluenceIdentifier(), { minItems: 2 }),
+      }),
+      subgroups: DB.Required({
+        comment: "The subgroups of this tradition.",
+        type: DB.ChildEntities(MagicalTraditionSubgroup),
       }),
       prerequisites: DB.Optional({
         type: DB.IncludeIdentifier(GeneralPrerequisites),

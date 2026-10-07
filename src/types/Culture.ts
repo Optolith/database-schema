@@ -15,6 +15,7 @@ import {
 } from "./_Identifier.js"
 import { BinarySex } from "./_Sex.js"
 import { NestedTranslationMap } from "./Locale.js"
+import { MundaneProfessionGroup } from "./Profession.ts"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
 
@@ -315,6 +316,7 @@ const MundaneCommonProfessionConstraint = DB.Enum(import.meta.url, {
   name: "MundaneCommonProfessionConstraint",
   values: () => ({
     Profession: DB.EnumCase({ type: DB.IncludeIdentifier(ProfessionConstraint) }),
+    Group: DB.EnumCase({ type: DB.IncludeIdentifier(MundaneProfessionGroup) }),
   }),
 })
 
