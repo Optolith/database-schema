@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.87.0](https://github.com/Optolith/database-schema/compare/v0.86.0...v0.87.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* **cache:** derived talisman trade secrets
+* missing value for constant talisman damage option
+* new profession prerequisites and options for Rohals Erben
+* require a rule to be inactive
+* talisman activation duration can be different per cost
+* translations for talismans
+
+### Features
+
+* **cache:** derived talisman trade secrets ([b42ccc8](https://github.com/Optolith/database-schema/commit/b42ccc8971374f39fd0c27278497c72b2b5b40c9))
+* new profession prerequisites and options for Rohals Erben ([559a80d](https://github.com/Optolith/database-schema/commit/559a80d80e9ae3d875f7baf9595a8c9506622161))
+* require a rule to be inactive ([f9cd351](https://github.com/Optolith/database-schema/commit/f9cd351d9a47bcf502bfa674b0b60f0051738577))
+* translations for talismans ([a8e00a6](https://github.com/Optolith/database-schema/commit/a8e00a6b814ce10f3585c994c85887927f86686b))
+
+### Bug Fixes
+
+* missing value for constant talisman damage option ([7cd4c13](https://github.com/Optolith/database-schema/commit/7cd4c13ca89ac0f80ea138c225849b67b9f8d78a))
+* talisman activation duration can be different per cost ([7390677](https://github.com/Optolith/database-schema/commit/73906779620dbabf5c72d141e0a7d9a48f2828d3))
+
 ## [0.86.0](https://github.com/Optolith/database-schema/compare/v0.85.0...v0.86.0) (2026-10-07)
 
 ### ⚠ BREAKING CHANGES
