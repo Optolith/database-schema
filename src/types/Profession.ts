@@ -22,6 +22,7 @@ import {
   MagicalActionIdentifier,
   ProfessionSpecialAbilityIdentifier,
   RequirableSelectOptionIdentifier,
+  SpecialAbilityIdentifier,
   SpellworkIdentifier,
 } from "./_IdentifierGroup.js"
 import { ProfessionPrerequisites, ProfessionVariantPrerequisites } from "./_Prerequisite.js"
@@ -628,6 +629,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         languages_scripts: DB.Optional({
           type: DB.IncludeIdentifier(LanguagesScriptsOptions),
         }),
+        specialAbilitiesForAdventurePoints: DB.Optional({
+          type: DB.IncludeIdentifier(SpecialAbilitiesForAdventurePointsOption),
+        }),
         combat_techniques: DB.Optional({
           type: DB.IncludeIdentifier(CombatTechniquesOptions),
         }),
@@ -645,6 +649,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         }),
         spellworks: DB.Optional({
           type: DB.IncludeIdentifier(SpellworksOptions),
+        }),
+        spellworksForChosenProperty: DB.Optional({
+          type: DB.IncludeIdentifier(SpellworksForChosenProperty),
         }),
         liturgies: DB.Optional({
           type: DB.IncludeIdentifier(LiturgiesOptions),
@@ -671,6 +678,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
             DB.IncludeIdentifier(LanguagesScriptsOptions),
           ]),
         }),
+        specialAbilitiesForAdventurePoints: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(SpecialAbilitiesForAdventurePointsOption),
+          ]),
+        }),
         combat_techniques: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
             DB.IncludeIdentifier(CombatTechniquesOptions),
@@ -695,6 +707,11 @@ const ProfessionVariantPackageOptions = DB.TypeAlias(import.meta.url, {
         spellworks: DB.Optional({
           type: DB.GenIncludeIdentifier(VariantOptionAction, [
             DB.IncludeIdentifier(SpellworksOptions),
+          ]),
+        }),
+        spellworksForChosenProperty: DB.Optional({
+          type: DB.GenIncludeIdentifier(VariantOptionAction, [
+            DB.IncludeIdentifier(SpellworksForChosenProperty),
           ]),
         }),
         liturgies: DB.Optional({
@@ -878,6 +895,23 @@ const SpellworksOptions = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const SpellworksForChosenProperty = DB.TypeAlias(import.meta.url, {
+  name: "SpellworksForChosenProperty",
+  comment: `Buy spells and rituals that match the property option of a selected special ability for a specific amount of AP.`,
+  type: () =>
+    DB.Object({
+      entry: DB.Required({
+        comment:
+          "The entry that has a property as a select option, where you have to choose between multiple properties within the profession (the special ability must be entered as a `Selection`).",
+        type: DB.IncludeIdentifier(SpecialAbilityIdentifier),
+      }),
+      apValue: DB.Required({
+        comment: "The AP value you can buy spells and rituals for.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
+})
+
 const LiturgiesOptions = DB.TypeAlias(import.meta.url, {
   name: "LiturgiesOptions",
   comment: `Buy liturgical chants and ceremonies for a specific amount of AP.`,
@@ -885,6 +919,35 @@ const LiturgiesOptions = DB.TypeAlias(import.meta.url, {
     DB.Object({
       ap_value: DB.Required({
         comment: "The AP value you can buy liturgical chants and ceremonies for.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
+})
+
+const SpecialAbilitiesForAdventurePointsOptionGroup = DB.Enum(import.meta.url, {
+  name: "SpecialAbilitiesForAdventurePointsOptionGroup",
+  values: () =>
+    Object.fromEntries(
+      Object.keys(SpecialAbilityIdentifier.type.value.values).map(key => [
+        key,
+        DB.EnumCase({ type: null }),
+      ]),
+    ),
+})
+
+const SpecialAbilitiesForAdventurePointsOption = DB.TypeAlias(import.meta.url, {
+  name: "SpecialAbilitiesForAdventurePointsOption",
+  comment: `Buy special abilities for a specific amount of AP.`,
+  type: () =>
+    DB.Object({
+      groups: DB.Required({
+        comment: "The groups you can choose special abilities from.",
+        type: DB.Array(DB.IncludeIdentifier(SpecialAbilitiesForAdventurePointsOptionGroup), {
+          minItems: 1,
+        }),
+      }),
+      apValue: DB.Required({
+        comment: "The AP value you can buy special abilities for.",
         type: DB.Integer({ minimum: 1 }),
       }),
     }),

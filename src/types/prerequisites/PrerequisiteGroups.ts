@@ -4,6 +4,7 @@ import { AncestorBloodPrerequisite } from "./single/AncestorBloodPrerequisite.js
 import { AnimistPowerPrerequisite } from "./single/AnimistPowerPrerequisite.js"
 import { AnySpecialAbilityOfGroupPrerequisite } from "./single/AnySpecialAbilityOfGroupPrerequisite.ts"
 import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
+import { EnergyPrerequisite } from "./single/EnergyPrerequisite.ts"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
 import { PactPrerequisite } from "./single/PactPrerequisite.js"
@@ -96,6 +97,8 @@ export const ProfessionPrerequisiteGroup = DB.Enum(import.meta.url, {
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
     Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
+    RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
+    Energy: DB.EnumCase({ type: DB.IncludeIdentifier(EnergyPrerequisite) }),
   }),
 })
 
