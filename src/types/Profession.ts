@@ -99,6 +99,13 @@ export const MundaneProfessionGroup = DB.Enum(import.meta.url, {
   }),
 })
 
+export const BlessedProfessionGroup = DB.Enum(import.meta.url, {
+  name: "BlessedProfessionGroup",
+  values: () => ({
+    Religious: DB.EnumCase({ type: null }),
+  }),
+})
+
 const MagicalProfessionGroup = DB.TypeAlias(import.meta.url, {
   name: "MagicalProfessionGroup",
   type: () =>
