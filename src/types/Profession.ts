@@ -5,6 +5,7 @@ import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantag
 import {
   AdvantageIdentifier,
   BannzeichenOptionIdentifier,
+  BlessedTraditionIdentifier,
   CantripIdentifier,
   CurriculumIdentifier,
   DisadvantageIdentifier,
@@ -87,6 +88,7 @@ const ProfessionGroup = DB.Enum(import.meta.url, {
     Mundane: DB.EnumCase({ type: DB.IncludeIdentifier(MundaneProfessionGroup) }),
     Magical: DB.EnumCase({ type: DB.IncludeIdentifier(MagicalProfessionGroup) }),
     Blessed: DB.EnumCase({ type: null }),
+    Religious: DB.EnumCase({ type: DB.IncludeIdentifier(ReligiousProfessionGroup) }),
   }),
 })
 
@@ -95,7 +97,6 @@ export const MundaneProfessionGroup = DB.Enum(import.meta.url, {
   values: () => ({
     Profane: DB.EnumCase({ type: null }),
     Fighter: DB.EnumCase({ type: null }),
-    Religious: DB.EnumCase({ type: null }),
   }),
 })
 
@@ -110,6 +111,17 @@ const MagicalProfessionGroup = DB.TypeAlias(import.meta.url, {
       subgroup: DB.Optional({
         comment: "The tradition’s subgroup associated with this magical profession, if any.",
         type: CurriculumIdentifier(),
+      }),
+    }),
+})
+
+const ReligiousProfessionGroup = DB.TypeAlias(import.meta.url, {
+  name: "ReligiousProfessionGroup",
+  type: () =>
+    DB.Object({
+      associatedTradition: DB.Optional({
+        comment: "The associated blessed tradition (religion).",
+        type: BlessedTraditionIdentifier(),
       }),
     }),
 })
