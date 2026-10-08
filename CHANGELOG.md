@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.88.0](https://github.com/Optolith/database-schema/compare/v0.87.0...v0.88.0) (2026-10-08)
+
+### ⚠ BREAKING CHANGES
+
+* separate religious profession group
+
+### Features
+
+* separate religious profession group ([5058757](https://github.com/Optolith/database-schema/commit/50587570cb9bf4418b80048c604dac83adf2431f))
+
 ## [0.87.0](https://github.com/Optolith/database-schema/compare/v0.86.0...v0.87.0) (2026-10-07)
 
 ### ⚠ BREAKING CHANGES
