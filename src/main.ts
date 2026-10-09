@@ -56,6 +56,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.Beutelzauber,
     Types.Biome,
     Types.BlessedTradition,
+    Types.BlessedTraditionGroup,
     Types.Blessing,
     Types.Book,
     Types.BotanicRegion,

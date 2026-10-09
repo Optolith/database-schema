@@ -2,6 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantageDisadvantage.js"
 import {
   AdvantageIdentifier,
+  BlessedTraditionGroupIdentifier,
   BlessedTraditionIdentifier,
   DisadvantageIdentifier,
   LanguageIdentifier,
@@ -192,6 +193,7 @@ const CommonnessWeight = DB.Enum(import.meta.url, {
   values: () => ({
     Mostly: DB.EnumCase({ type: null }),
     Only: DB.EnumCase({ type: null }),
+    ExceptFor: DB.EnumCase({ type: null }),
   }),
 })
 
@@ -311,6 +313,26 @@ const BlessedTraditionConstraint = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const BlessedTraditionGroupConstraint = DB.TypeAlias(import.meta.url, {
+  name: "BlessedTraditionGroupConstraint",
+  type: () =>
+    DB.Object({
+      id: DB.Required({
+        comment: "The blessed tradition group’s identifier.",
+        type: BlessedTraditionGroupIdentifier(),
+      }),
+      weighted_professions: DB.Optional({
+        comment:
+          "Some traditions are more common than others. There may be cultures where some traditions are not represented at all.",
+        type: DB.GenIncludeIdentifier(Weighted, [BlessedTraditionIdentifier()]),
+      }),
+      rarity: DB.Optional({
+        comment: "Some traditions may be found in a culture, but are not that common.",
+        type: DB.IncludeIdentifier(Rarity),
+      }),
+    }),
+})
+
 const MundaneCommonProfessionConstraint = DB.Enum(import.meta.url, {
   name: "MundaneCommonProfessionConstraint",
   values: () => ({
@@ -332,6 +354,7 @@ const BlessedCommonProfessionConstraint = DB.Enum(import.meta.url, {
   values: () => ({
     Tradition: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionConstraint) }),
     Profession: DB.EnumCase({ type: DB.IncludeIdentifier(ProfessionConstraint) }),
+    Group: DB.EnumCase({ type: DB.IncludeIdentifier(BlessedTraditionGroupConstraint) }),
     Religious: DB.EnumCase({ type: null }),
   }),
 })
