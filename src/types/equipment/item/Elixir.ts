@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
+import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { EffectType, LaboratoryLevel, RecipeTradeSecret } from "./_Herbary.js"

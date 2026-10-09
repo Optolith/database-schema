@@ -44,12 +44,12 @@ export const ResponsiveTextReplace = DB.TypeAlias(import.meta.url, {
       full: DB.Required({
         comment:
           "The full replacement string. It must contain `$1`, which is going to be replaced with the generated string, so additional information can be provided without duplicating concrete numeric values.",
-        type: DB.String({ minLength: 1, pattern: /\$1/ }),
+        type: DB.String({ minLength: 1, pattern: /\$1/u }),
       }),
       compressed: DB.Required({
         comment:
           "A compressed replacement string for use in small areas (e.g. on character sheet). It must contain `$1`, which is going to be replaced with the generated string, so additional information can be provided without duplicating concrete numeric values.",
-        type: DB.String({ minLength: 1, pattern: /\$1/ }),
+        type: DB.String({ minLength: 1, pattern: /\$1/u }),
       }),
     }),
 })

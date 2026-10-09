@@ -126,21 +126,6 @@ const getSkillishPrerequisites = (
   })
 }
 
-const getSkillishBindingCost = (
-  bindingCost:
-    SelectOptionsBindingCostValue<SkillishIdentifier | CombatTechniqueIdentifier> | undefined,
-  id: Case<SkillishEntityName, string>,
-): number | undefined => {
-  if (bindingCost === undefined) {
-    return undefined
-  }
-
-  return (
-    bindingCost.Fixed.map.find(mapping => equalsSkillishIdGroup(mapping.id, id))?.bindingCost ??
-    bindingCost.Fixed.default
-  )
-}
-
 const equalsSkillishIdGroup = (
   a: SkillishIdentifier | CombatTechniqueIdentifier,
   b: SkillishIdentifier | CombatTechniqueIdentifier,
@@ -167,9 +152,26 @@ const equalsSkillishIdGroup = (
   }
 }
 
+const getSkillishBindingCost = (
+  bindingCost:
+    | SelectOptionsBindingCostValue<SkillishIdentifier | CombatTechniqueIdentifier>
+    | undefined,
+  id: Case<SkillishEntityName, string>,
+): number | undefined => {
+  if (bindingCost === undefined) {
+    return undefined
+  }
+
+  return (
+    bindingCost.Fixed.map.find(mapping => equalsSkillishIdGroup(mapping.id, id))?.bindingCost ??
+    bindingCost.Fixed.default
+  )
+}
+
 const getApValueForSkillish = (
   config:
-    SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier> | undefined,
+    | SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier>
+    | undefined,
   id: SkillishIdentifier | CombatTechniqueIdentifier,
   ic: ImprovementCost,
 ): number | undefined => {
@@ -213,7 +215,7 @@ const convertSkillApplicationOrUse = (
   applicationOrUse: SkillApplicationOrUse,
 ) =>
   ({
-    id: fromUniformCase(entryId) + "+" + applicationOrUse.id,
+    id: `${fromUniformCase(entryId)}+${applicationOrUse.id.toFixed()}`,
     content: {
       parent: entryId,
       skills: [id],
@@ -241,6 +243,7 @@ const getDefaultSkillishFilter = <E extends SkillishEntityName>(
 
 const getSpellworkFilter = <E extends "Spell" | "Ritual">(
   category: GenericSkillsSelectOptionCategoryCategory<
+    // oxlint-disable-next-line typescript/no-duplicate-type-constituents
     Case<"Single", Spell_ID | Ritual_ID> | Case<"Property", Property_ID>
   >,
 ): ((instance: { id: string; content: Entity<TSONDBTypes, E> }) => boolean) | undefined => {
@@ -380,9 +383,8 @@ const getDerivedSelectOptions = (
       const animalShapes = database.getAllInstanceContainersOfEntity("AnimalShape")
 
       const pathsWithOrderedIds = animalShapePaths.reduce<Record<string, string[]>>(
-        (acc, { id }) => ({
-          ...acc,
-          [id]: animalShapes
+        (acc, { id }) => {
+          acc[id] = animalShapes
             .toSorted(
               on(
                 item =>
@@ -391,8 +393,9 @@ const getDerivedSelectOptions = (
                 compareNullish(compareNumber),
               ),
             )
-            .map(({ id }) => id),
-        }),
+            .map(({ id: shapeId }) => shapeId)
+          return acc
+        },
         {},
       )
 
@@ -420,6 +423,7 @@ const getDerivedSelectOptions = (
                           Case("Activatable", {
                             id: entryId,
                             active: false,
+                            // oxlint-disable-next-line typescript/no-non-null-assertion
                             options: [Case("AnimalShape", pathsWithOrderedIds[pathId]![0]!)],
                           }),
                         ),
@@ -433,6 +437,7 @@ const getDerivedSelectOptions = (
                             id: entryId,
                             active: true,
                             options: [
+                              // oxlint-disable-next-line typescript/no-non-null-assertion
                               Case("AnimalShape", pathsWithOrderedIds[path!.id]![pathIndex - 1]!),
                             ],
                           }),
@@ -593,7 +598,7 @@ const getDerivedSelectOptions = (
         blessedTradition: BlessedTradition,
       ): GeneralPrerequisites | undefined => {
         if (
-          selectOptionCategory.BlessedTraditions.require_principles &&
+          selectOptionCategory.BlessedTraditions.require_principles === true &&
           blessedTradition.associated_principles_id !== undefined
         ) {
           const option = database.getInstanceContainerOfEntityById(
@@ -663,7 +668,7 @@ const getDerivedSelectOptions = (
         uses: [],
       })
 
-      const specific = selectOptionCategory.Elements.specific
+      const { specific } = selectOptionCategory.Elements
 
       if (specific) {
         return database
@@ -697,7 +702,8 @@ const getDerivedSelectOptions = (
               : undefined
 
           const minimumSpellworksPrerequisite:
-            PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
+            | PrerequisiteForLevel<GeneralPrerequisiteGroup>
+            | undefined =
             selectOptionCategory.Properties.require_minimum_spellworks_on !== undefined
               ? {
                   level: 1,
@@ -756,7 +762,8 @@ const getDerivedSelectOptions = (
               : undefined
 
           const minimumSpellworksPrerequisite:
-            PrerequisiteForLevel<GeneralPrerequisiteGroup> | undefined =
+            | PrerequisiteForLevel<GeneralPrerequisiteGroup>
+            | undefined =
             selectOptionCategory.Aspects.require_minimum_liturgies_on !== undefined
               ? {
                   level: 1,
@@ -1042,9 +1049,9 @@ const getDerivedSelectOptions = (
         uses: [],
       })
 
-      const list = selectOptionCategory.TargetCategories.list
+      const { list } = selectOptionCategory.TargetCategories
 
-      if (list) {
+      if (list.length > 0) {
         return database
           .getAllInstanceContainersOfEntity("TargetCategory")
           .filter(({ id }) => list.some(ref => ref.id === id))
@@ -1072,8 +1079,8 @@ const getExplicitSelectOptions = (
 ): ResolvedSelectOption[] =>
   database
     .getAllChildInstanceContainersForParent("GeneralSelectOption", id)
-    .map(({ id, content }): ResolvedSelectOption => ({
-      id: Case("General", id),
+    .map(({ id: optionid, content }): ResolvedSelectOption => ({
+      id: Case("General", optionid),
       content: {
         ...content,
         ap_value: wrapPlainApValue(content.ap_value),

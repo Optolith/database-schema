@@ -104,15 +104,15 @@ export const ProfessionPrerequisiteGroup = DB.Enum(import.meta.url, {
 
 export const AdvantageDisadvantagePrerequisiteGroup = DB.Enum(import.meta.url, {
   name: "AdvantageDisadvantagePrerequisiteGroup",
-  values: () => {
-    return {
+  values: () => (
+    {
       CommonSuggestedByRCP: DB.EnumCase({ type: null }),
       NoOtherAncestorBloodAdvantage: DB.EnumCase({
         type: AncestorBloodPrerequisite,
       }),
       ...GeneralPrerequisiteGroup.type.value.values,
     }
-  },
+  ),
 })
 
 export const ArcaneTraditionPrerequisiteGroup = DB.Enum(import.meta.url, {

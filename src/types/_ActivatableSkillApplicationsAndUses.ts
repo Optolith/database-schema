@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { SkillIdentifier } from "./_Identifier.js"
 import { NewSkillApplicationOrUseParentIdentifier } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const NewSkillApplication = DB.Entity(import.meta.url, {
   name: "NewSkillApplication",

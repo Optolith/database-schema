@@ -1,5 +1,5 @@
 /**
- * @title Prerequisites
+ * @module Prerequisites
  */
 
 import * as DB from "tsondb/schema/dsl"

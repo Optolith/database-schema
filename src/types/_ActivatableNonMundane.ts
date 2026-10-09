@@ -1,11 +1,11 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { StandaloneCostMap } from "./_ActivatableSkillCost.js"
 import { DurationUnitValue } from "./_ActivatableSkillDuration.js"
 import { ParameterMap } from "./_ActivatableSkillParameterMap.ts"
 import { AspectIdentifier, PropertyIdentifier } from "./_Identifier.js"
 import { VolumePointsOptionReferenceIdentifier } from "./_IdentifierGroup.js"
 import { ResponsiveText, ResponsiveTextOptional } from "./_ResponsiveText.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 const EnchantmentCost = DB.Enum(import.meta.url, {
   name: "EnchantmentCost",

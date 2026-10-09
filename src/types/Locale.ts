@@ -25,6 +25,7 @@ export const Locale = DB.Entity(import.meta.url, {
         type: DB.IncludeIdentifier(LocaleMeasurementAdjustments),
       }),
       translations: DB.Optional({
+        // oxlint-disable-next-line no-warning-comments
         // TODO: Make Required again once translations are added for all locales
         comment: "The translations strings for the locale.",
         // prettier-ignore

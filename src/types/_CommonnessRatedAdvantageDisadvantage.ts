@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { RequirableSelectOptionIdentifier } from "./_IdentifierGroup.ts"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.url, {
   name: "CommonnessRatedAdvantageDisadvantage",

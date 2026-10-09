@@ -1,3 +1,4 @@
+// oxlint-disable no-undef
 import { stderr } from "node:process"
 import { styleText } from "node:util"
 

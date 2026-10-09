@@ -1,6 +1,5 @@
 import { omitUndefinedKeys } from "@elyukai/utils/object"
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../Locale.ts"
 import { effect, levels, maximum, name, name_in_library } from "../_Activatable.ts"
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.ts"
 import { nameBuilderRules } from "../_ActivatableNames.ts"
@@ -20,6 +19,7 @@ import {
 } from "../_ActivatableSelectOptions.ts"
 import type { TraditionArtifactEnchantmentIdentifier } from "../_IdentifierGroup.ts"
 import { GeneralPrerequisites } from "../_Prerequisite.ts"
+import { NestedTranslationMap } from "../Locale.ts"
 import { Errata } from "../source/_Erratum.ts"
 import { src } from "../source/_PublicationRef.ts"
 

@@ -29,9 +29,9 @@
     "generate": "tsondb generate",
     "generate:watch": "nodemon --watch lib --exec \"tsondb generate\" --ext js",
     "test": "node ./lib/test.js",
-    "lint": "eslint",
-    "format": "prettier \"src/{types/**/*.{ts,tsx},*.{ts,tsx}}\" --write",
-    "format:check": "prettier \"src/{types/**/*.{ts,tsx},*.{ts,tsx}}\" --check",
+    "lint": "oxlint",
+    "format": "oxfmt \"{src,test}/**/*.{ts,tsx}\"",
+    "format:check": "oxfmt \"{src,test}/**/*.{ts,tsx}\" --check",
     "release": "commit-and-tag-version",
     "release:sign": "commit-and-tag-version --sign --signoff"
   },
@@ -39,20 +39,18 @@
   "license": "MPL-2.0",
   "dependencies": {
     "@elyukai/utils": "^0.3.6",
-    "tsondb": "^0.21.5",
-    "yaml": "^2.9.1"
+    "tsondb": "^0.21.5"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@elyukai/oxc-config": "^0.1.0",
     "@types/node": "^26.6.4",
     "commit-and-tag-version": "^13.2.1",
-    "eslint": "^10.12.0",
-    "globals": "^17.13.0",
     "nodemon": "^3.1.14",
-    "prettier": "^3.9.9",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "oxlint-tsgolint": "^7.0.2003",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-7": "npm:typescript@^7.0.2",
-    "typescript-eslint": "^8.71.0"
+    "typescript-7": "npm:typescript@^7.0.2"
   },
   "repository": "github:Optolith/database-schema",
   "bugs": {

@@ -1,5 +1,4 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import {
   CeremonyIdentifier,
   CloseCombatTechniqueIdentifier,
@@ -18,6 +17,7 @@ import {
   CombatTechniqueIdentifier,
   SkillishIdentifier,
 } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const SelectOptionCategory = DB.Enum(import.meta.url, {
   name: "SelectOptionCategory",

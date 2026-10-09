@@ -3,7 +3,7 @@ import { NestedTranslationMap } from "../Locale.js"
 
 export const MusicTraditionReference = (traditionIdentifier: DB.ReferenceIdentifier) =>
   DB.TypeAlias(import.meta.url, {
-    name: traditionIdentifier.entity.name + "Reference",
+    name: `${traditionIdentifier.entity.name  }Reference`,
     comment:
       "A reference to a music tradition with the music-tradition-specific name of the entry.",
     type: () =>
@@ -14,7 +14,7 @@ export const MusicTraditionReference = (traditionIdentifier: DB.ReferenceIdentif
         }),
         translations: NestedTranslationMap(
           DB.Required,
-          traditionIdentifier.entity.name + "ReferenceTranslation",
+          `${traditionIdentifier.entity.name  }ReferenceTranslation`,
           DB.Object({
             name: DB.Required({
               comment: "The music-tradition-specific name of the entry.",

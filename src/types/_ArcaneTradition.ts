@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { ArcaneTraditionPrerequisites } from "./_Prerequisite.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const ArcaneTraditionType =
   <TN extends string>(translationName: TN) =>

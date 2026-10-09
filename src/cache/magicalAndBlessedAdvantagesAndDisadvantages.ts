@@ -111,31 +111,28 @@ const is = (
 
   const newTraversedIds = [...traversedIds, entry.id]
 
-  return (
-    entry.content.prerequisites !== undefined &&
-    entry.content.prerequisites.some(prerequisite => {
-      switch (prerequisite.prerequisite.kind) {
-        case "Single":
-          return isPrerequisiteFor(
-            settings,
-            type,
-            prerequisite.prerequisite.Single,
-            getById,
-            newTraversedIds,
-          )
-        case "Disjunction":
-          return prerequisite.prerequisite.Disjunction.list.some(p =>
-            isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
-          )
-        case "Group":
-          return prerequisite.prerequisite.Group.list.some(p =>
-            isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
-          )
-        default:
-          return assertExhaustive(prerequisite.prerequisite)
-      }
-    })
-  )
+  return entry.content.prerequisites.some(prerequisite => {
+    switch (prerequisite.prerequisite.kind) {
+      case "Single":
+        return isPrerequisiteFor(
+          settings,
+          type,
+          prerequisite.prerequisite.Single,
+          getById,
+          newTraversedIds,
+        )
+      case "Disjunction":
+        return prerequisite.prerequisite.Disjunction.list.some(p =>
+          isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
+        )
+      case "Group":
+        return prerequisite.prerequisite.Group.list.some(p =>
+          isPrerequisiteFor(settings, type, p, getById, newTraversedIds),
+        )
+      default:
+        return assertExhaustive(prerequisite.prerequisite)
+    }
+  })
 }
 
 const entityKeyMap = {
@@ -167,22 +164,25 @@ const collectIds = (
 
 export const buildMagicalAndBlessedAdvantagesAndDisadvantagesCache: CacheBuilder<
   MagicalAndBlessedAdvantagesAndDisadvantagesCache
-> = (database, settings) => {
-  return Object.fromEntries(
+> = (database, settings) =>
+  Object.fromEntries(
     (Object.keys(entityKeyMap) as (keyof EntityKeyMap)[]).map(
       (
         entity,
+        // oxlint-disable-next-line typescript/no-duplicate-type-constituents
       ): [keyof EntityKeyMap, Record<keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]>] => [
         entity,
         Object.fromEntries(
           (Object.keys(typeKeyMap) as (keyof TypeKeyMap)[]).map(
+            // oxlint-disable-next-line typescript/no-duplicate-type-constituents
             (type): [keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]] => [
               type,
               collectIds(entity, type, database, settings),
             ],
           ),
+          // oxlint-disable-next-line typescript/no-duplicate-type-constituents
         ) as Record<keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]>,
       ],
     ),
+    // oxlint-disable-next-line typescript/no-duplicate-type-constituents
   ) as Record<keyof EntityKeyMap, Record<keyof TypeKeyMap, (Advantage_ID | Disadvantage_ID)[]>>
-}

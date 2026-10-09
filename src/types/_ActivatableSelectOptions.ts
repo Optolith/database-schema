@@ -12,11 +12,11 @@ import type {
   RequirableSelectOptionIdentifier,
   SelectOptions,
 } from "../../gen/types.js"
-import { NestedTranslationMap } from "./Locale.js"
 import { SelectOptionCategory } from "./_ActivatableSelectOptionCategory.js"
 import { NewSkillApplication, SkillUse } from "./_ActivatableSkillApplicationsAndUses.js"
 import { SelectOptionParentIdentifier } from "./_IdentifierGroup.js"
 import { GeneralPrerequisites } from "./_Prerequisite.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { optionalSrc } from "./source/_PublicationRef.js"
 

@@ -17,12 +17,11 @@ export const AnySpecialAbilityOfGroupPrerequisite = DB.TypeAlias(import.meta.url
 
 const SpecialAbilityGroup = DB.Enum(import.meta.url, {
   name: "SpecialAbilityGroup",
-  values: () => ({
-    ...Object.fromEntries(
+  values: () =>
+    Object.fromEntries(
       Object.keys(SpecialAbilityIdentifier.type.value.values).map(entity => [
         entity,
         DB.EnumCase({ type: null }),
       ]),
     ),
-  }),
 })

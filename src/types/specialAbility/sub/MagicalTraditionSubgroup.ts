@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../Locale.ts"
 import { MagicalTraditionIdentifier } from "../../_Identifier.ts"
+import { NestedTranslationMap } from "../../Locale.ts"
 
 export const MagicalTraditionSubgroup = DB.Entity(import.meta.url, {
   name: "MagicalTraditionSubgroup",

@@ -114,12 +114,14 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
                 : undefined,
           src: container.content.complexity.Complex.src ?? container.content.src,
           translations: Object.fromEntries(
-            Object.entries(container.content.translations).map(([lang, translation]) => [
-              lang,
-              {
-                name: translation.name,
-              },
-            ]),
+            Object.entries<{ name: string }>(container.content.translations).map(
+              ([lang, translation]) => [
+                lang,
+                {
+                  name: translation.name,
+                },
+              ],
+            ),
           ),
         }
 
@@ -184,7 +186,7 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
               container.content.source_type.AlchemicalPoison.trade_secret,
             )
           } else if (
-            container.content.source_type.kind == "AnimalVenom" &&
+            container.content.source_type.kind === "AnimalVenom" &&
             container.content.source_type.AnimalVenom.complexity?.kind === "Complex"
           ) {
             addTradeSecretToHerbaryCache(
