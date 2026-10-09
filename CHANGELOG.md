@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.89.0](https://github.com/Optolith/database-schema/compare/v0.88.0...v0.89.0) (2026-10-09)
+
+### ⚠ BREAKING CHANGES
+
+* blessed tradition groups in cultures
+
+### Features
+
+* blessed tradition groups in cultures ([6a1cc80](https://github.com/Optolith/database-schema/commit/6a1cc805a8f32c32e993fcc6a1226a3aa16daa30))
+* name of people in culture ([1b9fbcf](https://github.com/Optolith/database-schema/commit/1b9fbcfbfbf24a46f73ac8c14959d5c57bc9f317))
+
 ## [0.88.0](https://github.com/Optolith/database-schema/compare/v0.87.0...v0.88.0) (2026-10-08)
 
 ### ⚠ BREAKING CHANGES
