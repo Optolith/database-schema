@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.91.0](https://github.com/Optolith/database-schema/compare/v0.90.1...v0.91.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* elixir trade secret must be optional
+
+### Features
+
+* elixir trade secret must be optional ([05a22a1](https://github.com/Optolith/database-schema/commit/05a22a1871143c2d1955bcba5be5541087c07091))
+
 ## [0.90.1](https://github.com/Optolith/database-schema/compare/v0.90.0...v0.90.1) (2026-10-10)
 
 ## [0.90.0](https://github.com/Optolith/database-schema/compare/v0.89.0...v0.90.0) (2026-10-10)
