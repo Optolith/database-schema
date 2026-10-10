@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { RequirableSelectOptionIdentifier } from "./_IdentifierGroup.ts"
+import { CommonnessSelectOptionIdentifier } from "./_IdentifierGroup.ts"
 import { NestedTranslationMap } from "./Locale.js"
 
 export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.url, {
@@ -19,7 +19,7 @@ export const CommonnessRatedAdvantageDisadvantage = DB.GenTypeAlias(import.meta.
       }),
       options: DB.Optional({
         comment: "The options the commonness rating applies to.",
-        type: DB.Array(DB.IncludeIdentifier(RequirableSelectOptionIdentifier), { minItems: 1 }),
+        type: DB.Array(DB.IncludeIdentifier(CommonnessSelectOptionIdentifier), { minItems: 1 }),
       }),
       translations: NestedTranslationMap(
         DB.Optional,
