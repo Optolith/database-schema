@@ -17,7 +17,7 @@ export const Talisman = DB.Entity(import.meta.url, {
   namePlural: "Talismans",
   type: () =>
     DB.Object({
-      tradition: DB.Required({
+      tradition: DB.Optional({
         comment: "The tradition(s) the talisman belongs to.",
         type: DB.Array(BlessedTraditionIdentifier(), { minItems: 1 }),
       }),
