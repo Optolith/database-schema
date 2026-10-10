@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.92.0](https://github.com/Optolith/database-schema/compare/v0.91.0...v0.92.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* some talismans do not have a specified or existing tradition
+
+### Features
+
+* some talismans do not have a specified or existing tradition ([faeacb1](https://github.com/Optolith/database-schema/commit/faeacb1e6d9adb083bb8560d64c7b58f72fbea77))
+
 ## [0.91.0](https://github.com/Optolith/database-schema/compare/v0.90.1...v0.91.0) (2026-10-10)
 
 ### ⚠ BREAKING CHANGES
