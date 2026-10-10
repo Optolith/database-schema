@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { ActivatablePrerequisite } from "../../prerequisites/single/ActivatablePrerequisite.js"
 import { SkillIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
@@ -35,6 +36,15 @@ export const Book = DB.Entity(import.meta.url, {
         comment: "The quality of the book’s content.",
         type: DB.IncludeIdentifier(BookContentQuality),
       }),
+      prerequisites: DB.Optional({
+        comment: "Which prerequisites must be met to understand the book.",
+        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
+      }),
+      rules: DB.Required({
+        comment:
+          "Skills and abilities you can learn by reading the book, as well as any other rules and effects concerning the book.",
+        type: DB.IncludeIdentifier(BookRules),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,
@@ -48,21 +58,9 @@ export const Book = DB.Entity(import.meta.url, {
             comment: "An auxiliary name or label of the item, if available.",
             type: DB.String({ minLength: 1 }),
           }),
-          language: DB.Optional({
-            comment: "The language the book is written in, if specified.",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
-          }),
-          script: DB.Optional({
-            comment: "The script that was used for the book, if specified.",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
-          }),
           note: DB.Optional({
             comment: "Note text.",
             type: DB.String({ minLength: 1, markdown: "block" }),
-          }),
-          rules: DB.Optional({
-            comment: "Special rules text.",
-            type: DB.IncludeIdentifier(BookRules),
           }),
           legality: DB.Optional({
             comment: "The legality of the item, if specified.",
@@ -251,23 +249,29 @@ const PlainBookRules = DB.TypeAlias(import.meta.url, {
   comment: "The book’s rules without any special effects or conditions.",
   type: () =>
     DB.Object({
-      text: DB.Required({
-        comment: "The (main) rules text.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
-      reconstruction: DB.Optional({
-        comment: "Rules for reconstructing certain skills or abilities from the book.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
-      references: DB.Optional({
-        comment:
-          "References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
-      textAfter: DB.Optional({
-        comment: "Additional rules text that comes after all other rules.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
+      translation: NestedTranslationMap(
+        DB.Required,
+        "PlainBookRules",
+        DB.Object({
+          text: DB.Required({
+            comment: "The (main) rules text.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          reconstruction: DB.Optional({
+            comment: "Rules for reconstructing certain skills or abilities from the book.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          references: DB.Optional({
+            comment:
+              "References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          textAfter: DB.Optional({
+            comment: "Additional rules text that comes after all other rules.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
     }),
 })
 
@@ -280,10 +284,16 @@ const BookRulesByEdition = DB.TypeAlias(import.meta.url, {
       editions: DB.Required({
         type: DB.Array(DB.IncludeIdentifier(BookRulesOfEdition), { minItems: 1 }),
       }),
-      textAfter: DB.Optional({
-        comment: "Additional rules text that comes after all other rules.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "BookRulesByEdition",
+        DB.Object({
+          textAfter: DB.Optional({
+            comment: "Additional rules text that comes after all other rules.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
     }),
 })
 
@@ -291,22 +301,39 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
   name: "BookRulesOfEdition",
   type: () =>
     DB.Object({
-      label: DB.Required({
-        comment: "The edition(s) the rules apply to.",
-        type: DB.String({ minLength: 1 }),
+      prerequisities: DB.Optional({
+        comment: "The prerequisites for learning the rules of this edition.",
+        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
       }),
-      text: DB.Required({
-        comment: "The rules text.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
-      reconstruction: DB.Optional({
-        comment: "Rules for reconstructing certain skills or abilities from the book.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
-      references: DB.Optional({
-        comment:
-          "References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.",
-        type: DB.String({ minLength: 1, markdown: "block" }),
-      }),
+      translation: NestedTranslationMap(
+        DB.Required,
+        "BookRulesOfEdition",
+        DB.Object({
+          label: DB.Required({
+            comment: "The edition(s) the rules apply to.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          text: DB.Required({
+            comment: "The rules text.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          reconstruction: DB.Optional({
+            comment: "Rules for reconstructing certain skills or abilities from the book.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          references: DB.Optional({
+            comment:
+              "References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+        }),
+      ),
     }),
+})
+
+const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
+  name: "BookPrerequisiteGroup",
+  values: () => ({
+    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
+  }),
 })
