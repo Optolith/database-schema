@@ -30,7 +30,7 @@ export const Elixir = DB.Entity(import.meta.url, {
         comment: "The brewing difficulty, which represents the challenge of creating an elixir.",
         type: DB.Integer(),
       }),
-      trade_secret: DB.Required({
+      trade_secret: DB.Optional({
         comment: "AP value and prerequisites of the elixir recipe’s trade secret.",
         type: DB.IncludeIdentifier(RecipeTradeSecret),
       }),
