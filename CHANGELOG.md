@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.90.0](https://github.com/Optolith/database-schema/compare/v0.89.0...v0.90.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow skill groups as option in commonness-rated entries
+
+### Features
+
+* allow skill groups as option in commonness-rated entries ([fe63675](https://github.com/Optolith/database-schema/commit/fe6367575e2c8c7b062f1caa6b70bd19bfa83ef6))
+
 ## [0.89.0](https://github.com/Optolith/database-schema/compare/v0.88.0...v0.89.0) (2026-10-09)
 
 ### ⚠ BREAKING CHANGES
