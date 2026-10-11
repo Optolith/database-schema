@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { ActivatablePrerequisite } from "../../prerequisites/single/ActivatablePrerequisite.js"
 import { SkillIdentifier } from "../../_Identifier.js"
+import { BookPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -38,7 +38,7 @@ export const Book = DB.Entity(import.meta.url, {
       }),
       prerequisites: DB.Optional({
         comment: "Which prerequisites must be met to understand the book.",
-        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
+        type: DB.IncludeIdentifier(BookPrerequisites),
       }),
       rules: DB.Required({
         comment:
@@ -303,7 +303,7 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
     DB.Object({
       prerequisities: DB.Optional({
         comment: "The prerequisites for learning the rules of this edition.",
-        type: DB.IncludeIdentifier(BookPrerequisiteGroup),
+        type: DB.IncludeIdentifier(BookPrerequisites),
       }),
       translation: NestedTranslationMap(
         DB.Required,
@@ -329,11 +329,4 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
-
-const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
-  name: "BookPrerequisiteGroup",
-  values: () => ({
-    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
-  }),
 })
