@@ -249,7 +249,7 @@ const PlainBookRules = DB.TypeAlias(import.meta.url, {
   comment: "The book’s rules without any special effects or conditions.",
   type: () =>
     DB.Object({
-      translation: NestedTranslationMap(
+      translations: NestedTranslationMap(
         DB.Required,
         "PlainBookRules",
         DB.Object({
@@ -284,7 +284,7 @@ const BookRulesByEdition = DB.TypeAlias(import.meta.url, {
       editions: DB.Required({
         type: DB.Array(DB.IncludeIdentifier(BookRulesOfEdition), { minItems: 1 }),
       }),
-      translation: NestedTranslationMap(
+      translations: NestedTranslationMap(
         DB.Optional,
         "BookRulesByEdition",
         DB.Object({
@@ -305,7 +305,7 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
         comment: "The prerequisites for learning the rules of this edition.",
         type: DB.IncludeIdentifier(BookPrerequisites),
       }),
-      translation: NestedTranslationMap(
+      translations: NestedTranslationMap(
         DB.Required,
         "BookRulesOfEdition",
         DB.Object({
