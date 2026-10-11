@@ -1,6 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { SkillIdentifier } from "../../_Identifier.js"
-import { BookPrerequisites } from "../../_Prerequisite.ts"
+import { LanguageIdentifier, ScriptIdentifier, SkillIdentifier } from "../../_Identifier.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -14,6 +13,10 @@ export const Book = DB.Entity(import.meta.url, {
       types: DB.Required({
         comment: "The type of book.",
         type: DB.Array(DB.IncludeIdentifier(BookType), { minItems: 1, uniqueItems: true }),
+      }),
+      languageAndScript: DB.Optional({
+        comment: "The language(s) and script(s) the book is written in.",
+        type: DB.IncludeIdentifier(BookLanguageAndScript),
       }),
       cost: DB.Required({
         comment: "The cost in silverthalers.",
@@ -36,10 +39,6 @@ export const Book = DB.Entity(import.meta.url, {
         comment: "The quality of the book’s content.",
         type: DB.IncludeIdentifier(BookContentQuality),
       }),
-      prerequisites: DB.Optional({
-        comment: "Which prerequisites must be met to understand the book.",
-        type: DB.IncludeIdentifier(BookPrerequisites),
-      }),
       rules: DB.Required({
         comment:
           "Skills and abilities you can learn by reading the book, as well as any other rules and effects concerning the book.",
@@ -57,6 +56,11 @@ export const Book = DB.Entity(import.meta.url, {
           secondary_name: DB.Optional({
             comment: "An auxiliary name or label of the item, if available.",
             type: DB.String({ minLength: 1 }),
+          }),
+          languageAndScript: DB.Optional({
+            comment:
+              "The language(s) and script(s) the book is written in. Only to be used if the text as a whole cannot be generated from the defined language and script groups.",
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           note: DB.Optional({
             comment: "Note text.",
@@ -142,6 +146,52 @@ const MundaneBookType = DB.Enum(import.meta.url, {
       type: SkillIdentifier(),
     }),
   }),
+})
+
+const BookLanguageAndScript = DB.TypeAlias(import.meta.url, {
+  name: "BookLanguageAndScript",
+  comment: "The language and script of the book.",
+  type: () =>
+    DB.Array(DB.IncludeIdentifier(BookLanguageAndScriptGroup), { minItems: 1, uniqueItems: true }),
+})
+
+const BookLanguageAndScriptGroup = DB.TypeAlias(import.meta.url, {
+  name: "BookLanguageAndScriptGroup",
+  comment: "A combination of languages and scripts a book (variant) can be made of.",
+  type: () =>
+    DB.Object({
+      languages: DB.Required({
+        comment:
+          "The languages the book (variant) is written in. It can mean that the book is written in one of these languages or that all of these languages can be used in a single book.",
+        type: DB.Array(LanguageIdentifier(), { minItems: 1, uniqueItems: true }),
+      }),
+      scripts: DB.Required({
+        comment:
+          "The scripts the book (variant) is written in. It can mean that the book is written in one of these scripts or that all of these scripts can be used in a single book.",
+        type: DB.Array(ScriptIdentifier(), { minItems: 1, uniqueItems: true }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "BookLanguageAndScriptGroup",
+        DB.Object(
+          {
+            languages: DB.Optional({
+              comment: "The replacement text for the languages part of the group.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+            scripts: DB.Optional({
+              comment: "The replacement text for the scripts part of the group.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+            full: DB.Optional({
+              comment: "The replacement text for the whole language and script group.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
+    }),
 })
 
 const BookCost = DB.Enum(import.meta.url, {
@@ -301,9 +351,9 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
   name: "BookRulesOfEdition",
   type: () =>
     DB.Object({
-      prerequisities: DB.Optional({
-        comment: "The prerequisites for learning the rules of this edition.",
-        type: DB.IncludeIdentifier(BookPrerequisites),
+      languageAndScript: DB.Optional({
+        comment: "The language(s) and script(s) the book is written in.",
+        type: DB.IncludeIdentifier(BookLanguageAndScript),
       }),
       translations: NestedTranslationMap(
         DB.Required,
@@ -312,6 +362,11 @@ const BookRulesOfEdition = DB.TypeAlias(import.meta.url, {
           label: DB.Required({
             comment: "The edition(s) the rules apply to.",
             type: DB.String({ minLength: 1 }),
+          }),
+          languageAndScript: DB.Optional({
+            comment:
+              "The language(s) and script(s) the book is written in. Only to be used if the text as a whole cannot be generated from the defined language and script groups.",
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           text: DB.Required({
             comment: "The rules text.",

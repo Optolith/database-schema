@@ -207,10 +207,3 @@ export const PreconditionGroup = DB.Enum(import.meta.url, {
     }),
   }),
 })
-
-export const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
-  name: "BookPrerequisiteGroup",
-  values: () => ({
-    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
-  }),
-})

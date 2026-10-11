@@ -9,7 +9,6 @@ import {
   AdvantageDisadvantagePrerequisiteGroup,
   AnimistPowerPrerequisiteGroup,
   ArcaneTraditionPrerequisiteGroup,
-  BookPrerequisiteGroup,
   DerivedCharacteristicPrerequisiteGroup,
   EnhancementPrerequisiteGroup,
   GeneralPrerequisiteGroup,
@@ -264,10 +263,4 @@ export const EnhancementPrerequisites = DB.TypeAlias(import.meta.url, {
     DB.GenIncludeIdentifier(PlainPrerequisites, [
       DB.IncludeIdentifier(EnhancementPrerequisiteGroup),
     ]),
-})
-
-export const BookPrerequisites = DB.TypeAlias(import.meta.url, {
-  name: "BookPrerequisites",
-  type: () =>
-    DB.GenIncludeIdentifier(PlainPrerequisites, [DB.IncludeIdentifier(BookPrerequisiteGroup)]),
 })
