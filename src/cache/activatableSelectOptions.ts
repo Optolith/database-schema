@@ -7,9 +7,12 @@ import type { Entity, TSONDB } from "tsondb"
 import { Case, fromUniformCase } from "tsondb/schema/gen"
 import type {
   ActivatableIdentifier as ActivatableIdentifierType,
+  Advantage,
+  AdvantageDisadvantagePrerequisiteGroup,
   BlessedTradition,
   CombatTechniqueIdentifier,
   Element,
+  FixedAdventurePointsValue,
   GeneralPrerequisiteGroup,
   GeneralPrerequisites,
   GeneralSelectOption,
@@ -51,7 +54,8 @@ export type ResolvedSelectOptionIdentifier =
       | "BlessedTradition"
       | "Disease"
       | "Poison"
-      | "TargetCategory",
+      | "TargetCategory"
+      | "Advantage",
       string
     >
 
@@ -1066,6 +1070,60 @@ const getDerivedSelectOptions = (
       return database
         .getAllInstanceContainersOfEntity("TargetCategory")
         .map(tc => mapToResolvedSelectOption(tc))
+    }
+
+    case "Advantages": {
+      const mapToResolvedSelectOption = ({
+        id,
+        content,
+      }: {
+        id: string
+        content: Advantage
+      }): ResolvedSelectOption => ({
+        id: Case("Advantage", id),
+        content: {
+          parent: entryId,
+          ap_value: content.ap_value as Case<"Fixed", FixedAdventurePointsValue>,
+          translations: mapObject(content.translations, t10n => ({
+            name: t10n.name,
+          })),
+        },
+        newApplications: [],
+        uses: [],
+      })
+
+      const { dependingOn } = selectOptionCategory.Advantages
+
+      const matchesDependingOn = (prereq: AdvantageDisadvantagePrerequisiteGroup): boolean =>
+        prereq.kind === "Activatable" &&
+        prereq.Activatable.active &&
+        prereq.Activatable.id.kind === "Advantage" &&
+        dependingOn.includes(prereq.Activatable.id.Advantage)
+
+      return database
+        .getAllInstanceContainersOfEntity("Advantage")
+        .filter(
+          ({ content }) =>
+            content.ap_value.kind === "Fixed" &&
+            (content.prerequisites?.some(p => {
+              if (p.level !== 1) {
+                return false
+              }
+
+              switch (p.prerequisite.kind) {
+                case "Disjunction":
+                  return p.prerequisite.Disjunction.list.every(matchesDependingOn)
+                case "Group":
+                  return p.prerequisite.Group.list.some(matchesDependingOn)
+                case "Single":
+                  return matchesDependingOn(p.prerequisite.Single)
+                default:
+                  return assertExhaustive(p.prerequisite)
+              }
+            }) ??
+              false),
+        )
+        .map(mapToResolvedSelectOption)
     }
 
     default:
