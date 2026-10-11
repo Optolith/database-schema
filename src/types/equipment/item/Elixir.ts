@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
+import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { EffectType, LaboratoryLevel, RecipeTradeSecret } from "./_Herbary.js"
@@ -30,7 +30,7 @@ export const Elixir = DB.Entity(import.meta.url, {
         comment: "The brewing difficulty, which represents the challenge of creating an elixir.",
         type: DB.Integer(),
       }),
-      trade_secret: DB.Required({
+      trade_secret: DB.Optional({
         comment: "AP value and prerequisites of the elixir recipe’s trade secret.",
         type: DB.IncludeIdentifier(RecipeTradeSecret),
       }),

@@ -416,7 +416,7 @@ const VariantSpecialAbilityAction = DB.Enum(import.meta.url, {
 const ProfessionSpecialAbility = DB.Enum(import.meta.url, {
   name: "ProfessionSpecialAbility",
   values: () => ({
-    Constant: DB.EnumCase({ type: DB.IncludeIdentifier(ConstantProfessionSpecialAbility) }),
+    Constant: DB.EnumCase({ type: DB.IncludeIdentifier(SingleProfessionSpecialAbility) }),
     Selection: DB.EnumCase({ type: DB.IncludeIdentifier(ProfessionSpecialAbilitySelection) }),
   }),
 })
@@ -425,8 +425,12 @@ const ProfessionSpecialAbilityOption = DB.Enum(import.meta.url, {
   name: "ProfessionSpecialAbilityOption",
   values: () => ({
     Identifier: DB.EnumCase({
-      comment: "The option is defined by the profession.",
+      comment: "The option is a option specified in the database.",
       type: DB.IncludeIdentifier(RequirableSelectOptionIdentifier),
+    }),
+    Text: DB.EnumCase({
+      comment: "The option is a text.",
+      type: DB.IncludeIdentifier(ProfessionSpecialAbilityTextOption),
     }),
     Select: DB.EnumCase({
       comment: "The option has to be chosen when applying the profession.",
@@ -435,8 +439,25 @@ const ProfessionSpecialAbilityOption = DB.Enum(import.meta.url, {
   }),
 })
 
-const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
-  name: "ConstantProfessionSpecialAbility",
+const ProfessionSpecialAbilityTextOption = DB.TypeAlias(import.meta.url, {
+  name: "ProfessionSpecialAbilityTextOption",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "ProfessionSpecialAbilityTextOption",
+        DB.Object({
+          text: DB.Required({
+            comment: "The text of the option.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
+})
+
+const SingleProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
+  name: "SingleProfessionSpecialAbility",
   type: () =>
     DB.Object({
       id: DB.Required({
@@ -462,40 +483,13 @@ const ConstantProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
     ),
 })
 
-const ProfessionSpecialAbilitySelectionItem = DB.TypeAlias(import.meta.url, {
-  name: "ProfessionSpecialAbilitySelectionItem",
-  type: () =>
-    DB.Object({
-      id: DB.Required({
-        comment: "The identifier of the special ability to grant.",
-        type: DB.IncludeIdentifier(ProfessionSpecialAbilityIdentifier),
-      }),
-      level: DB.Optional({
-        comment:
-          "The level of the received special ability. If not specified and the special ability has levels, level 1 is used automatically.",
-        type: DB.Integer({ minimum: 1 }),
-      }),
-      options: DB.Optional({
-        comment:
-          "Received select options. Order is important. Typically, you only need the first array index, though.",
-        type: DB.Array(DB.IncludeIdentifier(RequirableSelectOptionIdentifier), { minItems: 1 }),
-      }),
-    }),
-  customConstraints: ({ instanceContent, getInstanceById, getAllChildInstancesForParent }) =>
-    verifyOptionsForActivatableEntry(
-      instanceContent,
-      getInstanceById,
-      getAllChildInstancesForParent,
-    ),
-})
-
 const ProfessionSpecialAbilitySelection = DB.TypeAlias(import.meta.url, {
   name: "ProfessionSpecialAbilitySelection",
   type: () =>
     DB.Object({
       options: DB.Required({
         comment: `The list of special abilities to choose from. Must contain at least two entries.`,
-        type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilitySelectionItem), {
+        type: DB.Array(DB.IncludeIdentifier(SingleProfessionSpecialAbility), {
           minItems: 2,
         }),
       }),

@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { TargetCategoryIdentifier } from "./_Identifier.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const AffectedTargetCategories = DB.TypeAlias(import.meta.url, {
   name: "AffectedTargetCategories",

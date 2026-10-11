@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../../Locale.js"
 import { SubBiomeIdentifier } from "../../../_Identifier.js"
+import { NestedTranslationMap } from "../../../Locale.js"
 
 export const BotanicRegion = DB.Entity(import.meta.url, {
   name: "BotanicRegion",

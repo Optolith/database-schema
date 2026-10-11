@@ -21,11 +21,11 @@ export const Weapon = DB.Entity(import.meta.url, {
   namePlural: "Weapons",
   type: () =>
     DB.Object({
-      cost: DB.Required({
+      cost: DB.Optional({
         comment: "The cost in silverthalers.",
         type: DB.IncludeIdentifier(Cost),
       }),
-      weight: DB.Required({
+      weight: DB.Optional({
         comment: "The weight in kg.",
         type: DB.IncludeIdentifier(Weight),
       }),

@@ -6,11 +6,11 @@ import type {
   DerivedCharacteristicBaseValue,
   MathOperation as MathOperationType,
 } from "../../gen/types.js"
-import { NestedTranslationMap } from "./Locale.js"
 import { AttributeIdentifier } from "./_Identifier.ts"
 import { ImprovementCost } from "./_ImprovementCost.ts"
 import { MathOperation } from "./_MathExpression.ts"
 import { DerivedCharacteristicPrerequisites } from "./_Prerequisite.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { DerivedCharacteristicModifierPrerequisiteGroup } from "./prerequisites/PrerequisiteGroups.ts"
 import { src } from "./source/_PublicationRef.js"
 
@@ -190,6 +190,8 @@ export const calculationContainsRaceBase = (base: DerivedCharacteristicBase): bo
       >(base)
       return calculationContainsRaceBase(left) || calculationContainsRaceBase(right)
     }
+    default:
+      return assertExhaustive(base)
   }
 }
 

@@ -1,10 +1,10 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
 import { Dice } from "../../_Dice.js"
 import { Reduceable, Resistance } from "../../_DiseasePoison.js"
 import { DiseaseIdentifier } from "../../_Identifier.ts"
 import { MathOperation } from "../../_MathExpression.js"
+import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
 import { EffectType, LaboratoryLevel, RecipeComplexity, RecipeTradeSecret } from "./_Herbary.js"
@@ -396,19 +396,6 @@ export const DemonicPoison = DB.TypeAlias(import.meta.url, {
         comment: "The poison’s level.",
         type: DB.IncludeIdentifier(DemonicPoisonLevel),
       }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "DemonicPoison",
-        DB.Object(
-          {
-            note: DB.Optional({
-              comment: "A note, if any.",
-              type: DB.String({ minLength: 1, markdown: "block" }),
-            }),
-          },
-          { minProperties: 1 },
-        ),
-      ),
     }),
 })
 

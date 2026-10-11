@@ -1,6 +1,4 @@
 import * as DB from "tsondb/schema/dsl"
-import { src } from "../../source/_PublicationRef.js"
-import { NestedTranslationMap } from "../../Locale.js"
 import { AlternativeName } from "../../_AlternativeNames.js"
 import {
   BiomeIdentifier,
@@ -12,6 +10,8 @@ import {
   PoisonIdentifier,
 } from "../../_Identifier.js"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.js"
+import { NestedTranslationMap } from "../../Locale.js"
+import { src } from "../../source/_PublicationRef.js"
 import { EffectType, PlantRarity } from "./_Herbary.js"
 
 export const Plant = DB.Entity(import.meta.url, {

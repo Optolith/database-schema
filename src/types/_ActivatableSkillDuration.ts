@@ -177,7 +177,7 @@ const CustomDurationUnit = DB.TypeAlias(import.meta.url, {
               "A translation for a numeric value of the custom duration unit, e.g. ‘3 days’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.",
             type: DB.String({
               minLength: 1,
-              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/,
+              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/u,
             }),
           }),
           full: DB.Required({
@@ -197,7 +197,7 @@ const CustomDurationUnit = DB.TypeAlias(import.meta.url, {
               "A translation for a numeric value of the custom duration unit for use in small spaces, e.g. ‘3 d.’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.",
             type: DB.String({
               minLength: 1,
-              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/,
+              pattern: /^\.input \{\$value :number\}[\n ]\.input \{\$style :string\}/u,
             }),
           }),
           compressed: DB.Required({

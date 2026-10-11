@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { cause, Cause, DiseaseTranslation, level, resistance } from "./_DiseasePoison.js"
 import { AnimalTypeIdentifier } from "./_Identifier.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { src } from "./source/_PublicationRef.js"
 
 export const AnimalDisease = DB.Entity(import.meta.url, {

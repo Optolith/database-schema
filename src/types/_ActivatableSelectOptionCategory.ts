@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import {
+  AdvantageIdentifier,
   CeremonyIdentifier,
   CloseCombatTechniqueIdentifier,
   ElementIdentifier,
@@ -18,6 +18,7 @@ import {
   CombatTechniqueIdentifier,
   SkillishIdentifier,
 } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const SelectOptionCategory = DB.Enum(import.meta.url, {
   name: "SelectOptionCategory",
@@ -49,6 +50,9 @@ export const SelectOptionCategory = DB.Enum(import.meta.url, {
     }),
     TargetCategories: DB.EnumCase({
       type: DB.IncludeIdentifier(TargetCategoriesSelectOptionCategory),
+    }),
+    Advantages: DB.EnumCase({
+      type: DB.IncludeIdentifier(AdvantagesSelectOptionCategory),
     }),
   }),
 })
@@ -595,6 +599,18 @@ const SpecificTargetCategory = DB.TypeAlias(import.meta.url, {
       volume: DB.Optional({
         comment: "The volume for this specific selection.",
         type: DB.Integer({ minimum: 0 }),
+      }),
+    }),
+})
+
+const AdvantagesSelectOptionCategory = DB.TypeAlias(import.meta.url, {
+  name: "AdvantagesSelectOptionCategory",
+  type: () =>
+    DB.Object({
+      dependingOn: DB.Required({
+        comment:
+          "A list of advantages of which the generated advantages must depend on at least one of them each.",
+        type: DB.Array(AdvantageIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
     }),
 })

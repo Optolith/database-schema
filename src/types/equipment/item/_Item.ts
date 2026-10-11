@@ -142,7 +142,7 @@ export const Cost = DB.Enum(import.meta.url, {
 
 const wrap_in_text = DB.Required({
   comment: "The cost get wrapped by this text using a placeholder in the text.",
-  type: DB.String({ minLength: 1, pattern: /\{0\}/ }),
+  type: DB.String({ minLength: 1, pattern: /\{0\}/u }),
 })
 
 const InvaluableCost = DB.TypeAlias(import.meta.url, {
