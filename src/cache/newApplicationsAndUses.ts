@@ -34,10 +34,10 @@ const groupByAffectedSkill = <
 ): Record<Skill_ID, T[]> =>
   entries.reduce<Record<Skill_ID, T[]>>(
     (acc, entry) =>
-      entry.content.skills.reduce(
-        (acc1, skillId) => ({ ...acc1, [skillId]: [...(acc1[skillId] ?? []), entry] }),
-        acc,
-      ),
+      entry.content.skills.reduce((acc1, skillId) => {
+        acc1[skillId] = [...(acc1[skillId] ?? []), entry]
+        return acc1
+      }, acc),
     prev,
   )
 

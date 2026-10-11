@@ -1,5 +1,4 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import {
   CurriculumIdentifier,
   ElementIdentifier,
@@ -9,6 +8,7 @@ import {
   SkillIdentifier,
 } from "./_Identifier.js"
 import { CombatTechniqueIdentifier, SpellworkIdentifier } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
 

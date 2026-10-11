@@ -4,9 +4,10 @@ import { TypeScriptOutput } from "tsondb/renderer/ts"
 import { schema, type TSONDBTypes } from "./lib/main.js"
 
 const config: GenerationConfig<TSONDBTypes> = {
-  schema: schema,
+  schema,
   outputs: [
     TypeScriptOutput({
+      // oxlint-disable-next-line typescript/no-unsafe-call  typescript/no-unsafe-assignment
       targetPath: join(import.meta.dirname, "gen", "types.d.ts"),
       rendererOptions: {
         generateHelpers: true,

@@ -6,11 +6,11 @@ import type {
   DerivedCharacteristicBaseValue,
   MathOperation as MathOperationType,
 } from "../../gen/types.js"
-import { NestedTranslationMap } from "./Locale.js"
 import { AttributeIdentifier } from "./_Identifier.ts"
 import { ImprovementCost } from "./_ImprovementCost.ts"
 import { MathOperation } from "./_MathExpression.ts"
 import { DerivedCharacteristicPrerequisites } from "./_Prerequisite.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { DerivedCharacteristicModifierPrerequisiteGroup } from "./prerequisites/PrerequisiteGroups.ts"
 import { src } from "./source/_PublicationRef.js"
 
@@ -46,6 +46,16 @@ export const DerivedCharacteristic = DB.Entity(import.meta.url, {
           }),
           abbreviation: DB.Required({
             comment: "The derived characteristic’s abbreviation.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          unitAbbreviation: DB.Optional({
+            comment:
+              "The unit the derived characteristic is measured in, if different from the main abbreviation.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          unitAbbreviationValueAware: DB.Optional({
+            comment:
+              "The value-aware unit the derived characteristic is measured in, if different from the normal unit abbreviation. The string must follow the MessageFormat 2 specification and receives the value for the unit as the parameter `$value`. This can be used to display the unit in singular or plural form depending on the value, if relevant.",
             type: DB.String({ minLength: 1 }),
           }),
           description: DB.Optional({
@@ -180,6 +190,8 @@ export const calculationContainsRaceBase = (base: DerivedCharacteristicBase): bo
       >(base)
       return calculationContainsRaceBase(left) || calculationContainsRaceBase(right)
     }
+    default:
+      return assertExhaustive(base)
   }
 }
 

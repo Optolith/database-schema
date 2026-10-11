@@ -2,6 +2,98 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.93.0](https://github.com/Optolith/database-schema/compare/v0.92.0...v0.93.0) (2026-10-11)
+
+### ⚠ BREAKING CHANGES
+
+* allow text option for special abilities
+* derived advantages select option category
+* optional weapon cost and weight for improvised weapons
+* remove demonic poison notes in favor of base poison notes
+
+### Features
+
+* allow text option for special abilities ([ce81dc2](https://github.com/Optolith/database-schema/commit/ce81dc248ea62c8a08d9d631b50290b173ad3571)), closes [#200](https://github.com/Optolith/database-schema/issues/200)
+* derived advantages select option category ([7e36546](https://github.com/Optolith/database-schema/commit/7e365469c4d7920528ac42a5418fa37c6406dd06)), closes [#82](https://github.com/Optolith/database-schema/issues/82)
+* optional weapon cost and weight for improvised weapons ([8941125](https://github.com/Optolith/database-schema/commit/894112599982105b46fdbb9525cb0ad13e942f6f))
+* remove demonic poison notes in favor of base poison notes ([e91b3dd](https://github.com/Optolith/database-schema/commit/e91b3ddddfd02722afa3a0affe0d49f262741dd7)), closes [#183](https://github.com/Optolith/database-schema/issues/183)
+
+## [0.92.0](https://github.com/Optolith/database-schema/compare/v0.91.0...v0.92.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* some talismans do not have a specified or existing tradition
+
+### Features
+
+* some talismans do not have a specified or existing tradition ([faeacb1](https://github.com/Optolith/database-schema/commit/faeacb1e6d9adb083bb8560d64c7b58f72fbea77))
+
+## [0.91.0](https://github.com/Optolith/database-schema/compare/v0.90.1...v0.91.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* elixir trade secret must be optional
+
+### Features
+
+* elixir trade secret must be optional ([05a22a1](https://github.com/Optolith/database-schema/commit/05a22a1871143c2d1955bcba5be5541087c07091))
+
+## [0.90.1](https://github.com/Optolith/database-schema/compare/v0.90.0...v0.90.1) (2026-10-10)
+
+## [0.90.0](https://github.com/Optolith/database-schema/compare/v0.89.0...v0.90.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow skill groups as option in commonness-rated entries
+
+### Features
+
+* allow skill groups as option in commonness-rated entries ([fe63675](https://github.com/Optolith/database-schema/commit/fe6367575e2c8c7b062f1caa6b70bd19bfa83ef6))
+
+## [0.89.0](https://github.com/Optolith/database-schema/compare/v0.88.0...v0.89.0) (2026-10-09)
+
+### ⚠ BREAKING CHANGES
+
+* blessed tradition groups in cultures
+
+### Features
+
+* blessed tradition groups in cultures ([6a1cc80](https://github.com/Optolith/database-schema/commit/6a1cc805a8f32c32e993fcc6a1226a3aa16daa30))
+* name of people in culture ([1b9fbcf](https://github.com/Optolith/database-schema/commit/1b9fbcfbfbf24a46f73ac8c14959d5c57bc9f317))
+
+## [0.88.0](https://github.com/Optolith/database-schema/compare/v0.87.0...v0.88.0) (2026-10-08)
+
+### ⚠ BREAKING CHANGES
+
+* separate religious profession group
+
+### Features
+
+* separate religious profession group ([5058757](https://github.com/Optolith/database-schema/commit/50587570cb9bf4418b80048c604dac83adf2431f))
+
+## [0.87.0](https://github.com/Optolith/database-schema/compare/v0.86.0...v0.87.0) (2026-10-07)
+
+### ⚠ BREAKING CHANGES
+
+* **cache:** derived talisman trade secrets
+* missing value for constant talisman damage option
+* new profession prerequisites and options for Rohals Erben
+* require a rule to be inactive
+* talisman activation duration can be different per cost
+* translations for talismans
+
+### Features
+
+* **cache:** derived talisman trade secrets ([b42ccc8](https://github.com/Optolith/database-schema/commit/b42ccc8971374f39fd0c27278497c72b2b5b40c9))
+* new profession prerequisites and options for Rohals Erben ([559a80d](https://github.com/Optolith/database-schema/commit/559a80d80e9ae3d875f7baf9595a8c9506622161))
+* require a rule to be inactive ([f9cd351](https://github.com/Optolith/database-schema/commit/f9cd351d9a47bcf502bfa674b0b60f0051738577))
+* translations for talismans ([a8e00a6](https://github.com/Optolith/database-schema/commit/a8e00a6b814ce10f3585c994c85887927f86686b))
+
+### Bug Fixes
+
+* missing value for constant talisman damage option ([7cd4c13](https://github.com/Optolith/database-schema/commit/7cd4c13ca89ac0f80ea138c225849b67b9f8d78a))
+* talisman activation duration can be different per cost ([7390677](https://github.com/Optolith/database-schema/commit/73906779620dbabf5c72d141e0a7d9a48f2828d3))
+
 ## [0.86.0](https://github.com/Optolith/database-schema/compare/v0.85.0...v0.86.0) (2026-10-07)
 
 ### ⚠ BREAKING CHANGES

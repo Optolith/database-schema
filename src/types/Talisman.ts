@@ -17,7 +17,7 @@ export const Talisman = DB.Entity(import.meta.url, {
   namePlural: "Talismans",
   type: () =>
     DB.Object({
-      tradition: DB.Required({
+      tradition: DB.Optional({
         comment: "The tradition(s) the talisman belongs to.",
         type: DB.Array(BlessedTraditionIdentifier(), { minItems: 1 }),
       }),
@@ -27,7 +27,7 @@ export const Talisman = DB.Entity(import.meta.url, {
       }),
       activation: DB.Optional({
         comment: "The activation parameters.",
-        type: DB.IncludeIdentifier(TalismanActivation),
+        type: DB.Array(DB.IncludeIdentifier(TalismanActivation), { minItems: 1 }),
       }),
       ap_value: DB.Optional({
         comment: "The AP value for the required trade secret, if possible.",
@@ -149,7 +149,7 @@ const TalismanDamageOption = DB.Enum(import.meta.url, {
   name: "TalismanDamageOption",
   values: () => ({
     Random: DB.EnumCase({ type: DB.IncludeIdentifier(Dice) }),
-    Constant: DB.EnumCase({ type: null }),
+    Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
     QualityLevels: DB.EnumCase({ type: null }),
   }),
 })
@@ -171,7 +171,7 @@ const TalismanActivation = DB.TypeAlias(import.meta.url, {
     DB.Object({
       cost: DB.Required({
         comment: "The cost to activate the talisman.",
-        type: DB.Array(DB.IncludeIdentifier(TalismanActivationCost), { minItems: 1 }),
+        type: DB.IncludeIdentifier(TalismanActivationCost),
       }),
       duration: DB.Required({
         comment: "The duration of how long the talisman will be active.",

@@ -1,5 +1,5 @@
 /**
- * @title Enhancements
+ * @module Enhancements
  */
 
 import * as DB from "tsondb/schema/dsl"

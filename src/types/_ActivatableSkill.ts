@@ -1,5 +1,5 @@
 /**
- * @title Activatable Skill
+ * @module Activatable Skill
  */
 
 import * as DB from "tsondb/schema/dsl"

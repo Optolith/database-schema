@@ -111,6 +111,7 @@ import {
   SickleRitualIdentifier,
   SikaryanDrainSpecialAbilityIdentifier,
   SkillApplicationIdentifier,
+  SkillGroupIdentifier,
   SkillIdentifier,
   SkillStyleSpecialAbilityIdentifier,
   SpellIdentifier,
@@ -438,6 +439,16 @@ export const RequirableSelectOptionIdentifier = DB.Enum(import.meta.url, {
     ArcaneBardTradition: DB.EnumCase({ type: ArcaneBardTraditionIdentifier() }),
     ArcaneDancerTradition: DB.EnumCase({ type: ArcaneDancerTraditionIdentifier() }),
     Element: DB.EnumCase({ type: ElementIdentifier() }),
+  }),
+})
+
+export const CommonnessSelectOptionIdentifier = DB.Enum(import.meta.url, {
+  name: "CommonnessSelectOptionIdentifier",
+  comment:
+    "A skill group can be chosen as an option for commonness-rated advantages and disadvantages, but it refers to all skills within that group, rather than being a select option itself.",
+  values: () => ({
+    ...RequirableSelectOptionIdentifier.type.value.values,
+    SkillGroup: DB.EnumCase({ type: SkillGroupIdentifier() }),
   }),
 })
 

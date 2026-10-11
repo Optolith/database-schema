@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { CultureIdentifier } from "./_Identifier.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const PatronCategory = DB.Entity(import.meta.url, {
   name: "PatronCategory",

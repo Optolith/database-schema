@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../Locale.js"
 import { TribePrerequisites } from "../_Prerequisite.js"
+import { NestedTranslationMap } from "../Locale.js"
 
 export const Tribe = DB.Entity(import.meta.url, {
   name: "Tribe",

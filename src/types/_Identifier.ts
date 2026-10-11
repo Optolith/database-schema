@@ -133,6 +133,7 @@ import { Sermon } from "./specialAbility/Sermon.js"
 import { SexSpecialAbility } from "./specialAbility/SexSpecialAbility.js"
 import { SikaryanDrainSpecialAbility } from "./specialAbility/SikaryanDrainSpecialAbility.js"
 import { SkillStyleSpecialAbility } from "./specialAbility/SkillStyleSpecialAbility.js"
+import { BlessedTraditionGroup } from "./specialAbility/sub/BlessedTraditionGroup.ts"
 import { CeremonialItemSpecialAbilityGroup } from "./specialAbility/sub/CeremonialItemSpecialAbilityGroup.ts"
 import { Language, LanguageSpecialization } from "./specialAbility/sub/Language.js"
 import { MagicalTraditionSubgroup } from "./specialAbility/sub/MagicalTraditionSubgroup.ts"
@@ -201,6 +202,7 @@ export const BannzeichenOptionIdentifier: () => R = () => R(BannzeichenOption)
 export const BeutelzauberIdentifier: () => R = () => R(Beutelzauber)
 export const BiomeIdentifier: () => R = () => R(Biome)
 export const BlessedTraditionIdentifier: () => R = () => R(BlessedTradition)
+export const BlessedTraditionGroupIdentifier: () => R = () => R(BlessedTraditionGroup)
 export const BlessingIdentifier: () => R = () => R(Blessing)
 export const BookIdentifier: () => R = () => R(Book)
 export const BowlEnchantmentIdentifier: () => R = () => R(BowlEnchantment)

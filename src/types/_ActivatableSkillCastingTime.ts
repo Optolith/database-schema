@@ -1,8 +1,8 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.ts"
-import { SlowSkillCastingTimeUnit } from "./SkillModificationLevel.js"
 import { SkillModificationLevelIdentifier } from "./_Identifier.js"
 import { ResponsiveTextOptional } from "./_ResponsiveText.ts"
+import { NestedTranslationMap } from "./Locale.ts"
+import { SlowSkillCastingTimeUnit } from "./SkillModificationLevel.js"
 
 export const CastingTime = DB.GenEnum(import.meta.url, {
   name: "CastingTime",

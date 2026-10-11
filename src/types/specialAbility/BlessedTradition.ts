@@ -11,6 +11,7 @@ import { skill_applications, skill_uses } from "../_ActivatableSkillApplications
 import {
   AspectIdentifier,
   AttributeIdentifier,
+  BlessedTraditionGroupIdentifier,
   BlessingIdentifier,
   GeneralIdentifier,
   SkillIdentifier,
@@ -27,6 +28,10 @@ export const BlessedTradition = DB.Entity(import.meta.url, {
   namePlural: "BlessedTraditions",
   type: () =>
     DB.Object({
+      group: DB.Required({
+        comment: "The group of traditions this tradition belongs to.",
+        type: BlessedTraditionGroupIdentifier(),
+      }),
       select_options,
       explicit_select_options,
       skill_applications,

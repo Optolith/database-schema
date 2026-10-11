@@ -1,7 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { PersonalityTraitIdentifier } from "./_Identifier.js"
 import { PersonalityTraitPrerequisites } from "./_Prerequisite.js"
+import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 import { src } from "./source/_PublicationRef.js"
 

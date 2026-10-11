@@ -1,11 +1,11 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "../../Locale.js"
 import { DurationUnit } from "../../_ActivatableSkillDuration.js"
-import { ResponsiveTextReplace } from "../../_ResponsiveText.js"
 import { Dice } from "../../_Dice.js"
 import { MathOperation } from "../../_MathExpression.js"
-import { EffectType } from "./_Herbary.js"
+import { ResponsiveTextReplace } from "../../_ResponsiveText.js"
+import { NestedTranslationMap } from "../../Locale.js"
 import { src } from "../../source/_PublicationRef.js"
+import { EffectType } from "./_Herbary.js"
 
 export const HerbalPreservation = DB.Entity(import.meta.url, {
   name: "HerbalPreservation",

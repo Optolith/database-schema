@@ -5,9 +5,9 @@
 import { isNotNullish, nullableToArray } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
 import type { GetInstanceById } from "tsondb/schema/gen"
-import { NestedTranslationMap } from "./Locale.js"
 import { AlternativeName } from "./_AlternativeNames.js"
 import { DerivedCharacteristicIdentifier } from "./_Identifier.ts"
+import { NestedTranslationMap } from "./Locale.js"
 import { Errata } from "./source/_Erratum.js"
 
 export const level = DB.Required({

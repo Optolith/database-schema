@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
-import { NestedTranslationMap } from "./Locale.js"
 import { TargetCategoryIdentifier } from "./_Identifier.js"
+import { NestedTranslationMap } from "./Locale.js"
 
 export const TargetCategory = DB.Entity(import.meta.url, {
   name: "TargetCategory",

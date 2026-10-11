@@ -68,6 +68,11 @@ const DerivedTradeSecretsSettings = DB.TypeAlias(import.meta.url, {
         comment: "The special ability required to buy derived trade secrets for armor.",
         type: DB.IncludeIdentifier(SpecialAbilityIdentifier),
       }),
+      requiredFocusRuleForTalismans: DB.Required({
+        displayName: "Required Focus Rule for Talismans",
+        comment: "The focus rule required to buy derived trade secrets for talismans.",
+        type: FocusRuleIdentifier(),
+      }),
     }),
 })
 
