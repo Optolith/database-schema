@@ -396,19 +396,6 @@ export const DemonicPoison = DB.TypeAlias(import.meta.url, {
         comment: "The poison’s level.",
         type: DB.IncludeIdentifier(DemonicPoisonLevel),
       }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "DemonicPoison",
-        DB.Object(
-          {
-            note: DB.Optional({
-              comment: "A note, if any.",
-              type: DB.String({ minLength: 1, markdown: "block" }),
-            }),
-          },
-          { minProperties: 1 },
-        ),
-      ),
     }),
 })
 
