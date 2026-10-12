@@ -2,7 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
-import { Cost } from "./_Item.js"
+import { Complexity, Cost } from "./_Item.js"
 
 export const Ammunition = DB.Entity(import.meta.url, {
   name: "Ammunition",
@@ -12,6 +12,10 @@ export const Ammunition = DB.Entity(import.meta.url, {
       cost: DB.Required({
         comment: "The cost in silverthalers.",
         type: DB.IncludeIdentifier(Cost),
+      }),
+      complexity: DB.Optional({
+        comment: "The complexity of crafting the item.",
+        type: DB.IncludeIdentifier(Complexity),
       }),
       src,
       translations: NestedTranslationMap(

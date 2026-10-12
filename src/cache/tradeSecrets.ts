@@ -39,6 +39,8 @@ export type DerivedTradeSecretsCache = {
 
 const emptyDerivedEquipmentTradeSecretsCache: DerivedTradeSecretsCache["equipment"] = {
   Armor: {},
+  ArmorAccessory: {},
+  Ammunition: {},
   BandageOrRemedy: {},
   Book: {},
   CeremonialItem: {},
@@ -100,18 +102,31 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
                       active: true,
                     }),
                   ),
+                  ...(container.content.complexity.Complex.prerequisites ?? []),
                 ]
-              : entity === "Armor"
+              : entity === "Ammunition"
                 ? [
                     Case(
                       "Single",
                       Case("Activatable", {
-                        id: settings.derivedTradeSecrets.requiredSpecialAbilityForArmor,
+                        id: settings.derivedTradeSecrets.requiredSpecialAbilityForAmmunition,
                         active: true,
                       }),
                     ),
+                    ...(container.content.complexity.Complex.prerequisites ?? []),
                   ]
-                : undefined,
+                : entity === "Armor"
+                  ? [
+                      Case(
+                        "Single",
+                        Case("Activatable", {
+                          id: settings.derivedTradeSecrets.requiredSpecialAbilityForArmor,
+                          active: true,
+                        }),
+                      ),
+                      ...(container.content.complexity.Complex.prerequisites ?? []),
+                    ]
+                  : (container.content.complexity.Complex.prerequisites ?? []),
           src: container.content.complexity.Complex.src ?? container.content.src,
           translations: Object.fromEntries(
             Object.entries<{ name: string }>(container.content.translations).map(

@@ -23,6 +23,7 @@ import { Ammunition } from "./equipment/item/Ammunition.js"
 import { Animal } from "./equipment/item/Animal.js"
 import { AnimalCare } from "./equipment/item/AnimalCare.js"
 import { Armor } from "./equipment/item/Armor.js"
+import { ArmorAccessory } from "./equipment/item/ArmorAccessory.ts"
 import { BandageOrRemedy } from "./equipment/item/BandageOrRemedy.js"
 import { Book } from "./equipment/item/Book.js"
 import { CeremonialItem } from "./equipment/item/CeremonialItem.js"
@@ -193,6 +194,7 @@ export const ArcaneBardTraditionIdentifier: () => R = () => R(ArcaneBardTraditio
 export const ArcaneDancerTraditionIdentifier: () => R = () => R(ArcaneDancerTradition)
 export const ArcaneOrbEnchantmentIdentifier: () => R = () => R(ArcaneOrbEnchantment)
 export const ArmorIdentifier: () => R = () => R(Armor)
+export const ArmorAccessoryIdentifier: () => R = () => R(ArmorAccessory)
 export const AspectIdentifier: () => R = () => R(Aspect)
 export const AttireEnchantmentIdentifier: () => R = () => R(AttireEnchantment)
 export const AttributeIdentifier: () => R = () => R(Attribute)

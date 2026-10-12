@@ -45,6 +45,10 @@ export const ElvenMagicalSong = DB.Entity(import.meta.url, {
         comment: "States which column is used to improve the skill.",
         type: DB.IncludeIdentifier(ImprovementCost),
       }),
+      is_distorted: DB.Required({
+        comment: "Is the song a distorted Elven magical song?",
+        type: DB.Boolean(),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,

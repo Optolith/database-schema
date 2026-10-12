@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.94.0](https://github.com/Optolith/database-schema/compare/v0.93.0...v0.94.0) (2026-10-12)
+
+### ⚠ BREAKING CHANGES
+
+* add distorted elven magical songs flag
+* derived trade secrets for ammunition
+
+### Features
+
+* add distorted elven magical songs flag ([837062e](https://github.com/Optolith/database-schema/commit/837062ee095a7bd706ce4c7c38517057580ee73a)), references [#199](https://github.com/Optolith/database-schema/issues/199)
+* derived trade secrets for ammunition ([6b5b5ae](https://github.com/Optolith/database-schema/commit/6b5b5ae8f59d26c594c6594e3798263fdd47095b))
+
 ## [0.93.0](https://github.com/Optolith/database-schema/compare/v0.92.0...v0.93.0) (2026-10-11)
 
 ### ⚠ BREAKING CHANGES

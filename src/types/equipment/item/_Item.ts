@@ -7,6 +7,7 @@ import {
   ProfessionIdentifier,
   RaceIdentifier,
 } from "../../_Identifier.js"
+import { PlainGeneralPrerequisites } from "../../_Prerequisite.ts"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
@@ -224,6 +225,11 @@ export const ComplexComplexity = DB.TypeAlias(import.meta.url, {
       ap_value: DB.Required({
         comment: "The AP value for the trade secret.",
         type: DB.Integer({ minimum: 1 }),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the trade secret, if any. Note that the special ability prerequisite for weapon and armor trade secrets is added automatically based on the value in the `Settings` singleton entity.",
+        type: DB.IncludeIdentifier(PlainGeneralPrerequisites),
       }),
       src: optionalSrc,
     }),

@@ -69,6 +69,11 @@ const DerivedTradeSecretsSettings = DB.TypeAlias(import.meta.url, {
         comment: "The special ability required to buy derived trade secrets for weapons.",
         type: DB.IncludeIdentifier(SpecialAbilityIdentifier),
       }),
+      requiredSpecialAbilityForAmmunition: DB.Required({
+        displayName: "Required Special Ability for Ammunition",
+        comment: "The special ability required to buy derived trade secrets for ammunition.",
+        type: DB.IncludeIdentifier(SpecialAbilityIdentifier),
+      }),
       requiredSpecialAbilityForArmor: DB.Required({
         displayName: "Required Special Ability for Armor",
         comment: "The special ability required to buy derived trade secrets for armor.",
