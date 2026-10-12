@@ -39,6 +39,7 @@ export type DerivedTradeSecretsCache = {
 
 const emptyDerivedEquipmentTradeSecretsCache: DerivedTradeSecretsCache["equipment"] = {
   Armor: {},
+  ArmorAccessory: {},
   Ammunition: {},
   BandageOrRemedy: {},
   Book: {},

@@ -1623,6 +1623,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Helmets": null,
           "Pieces of Armor": null,
           "Weapon Accessories": null,
+          "Armor Accessories": null,
           "Clothes": null,
           "Clothing Packages for Social Status": null,
           "Travel Gear and Tools": null,
