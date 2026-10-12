@@ -7,6 +7,7 @@ import { CulturePrerequisite } from "./single/CulturePrerequisite.js"
 import { EnergyPrerequisite } from "./single/EnergyPrerequisite.ts"
 import { EnhancementPrerequisite } from "./single/EnhancementPrerequisite.js"
 import { InfluencePrerequisite } from "./single/InfluencePrerequisite.js"
+import { LanguagePrerequisite } from "./single/LanguagePrerequisite.ts"
 import { PactPrerequisite } from "./single/PactPrerequisite.js"
 import { PersonalityTraitPrerequisite } from "./single/PersonalityTraitPrerequisite.js"
 import { PrimaryAttributePrerequisite } from "./single/PrimaryAttributePrerequisite.js"
@@ -17,6 +18,7 @@ import { RatedMinimumNumberPrerequisite } from "./single/RatedMinimumNumberPrere
 import { RatedPrerequisite } from "./single/RatedPrerequisite.js"
 import { RatedSumPrerequisite } from "./single/RatedSumPrerequisite.js"
 import { RulePrerequisite } from "./single/RulePrerequisite.js"
+import { ScriptPrerequisite } from "./single/ScriptPrerequisite.ts"
 import { SexPrerequisite } from "./single/SexPrerequisite.js"
 import { SexualCharacteristicPrerequisite } from "./single/SexualCharacteristicPrerequisite.js"
 import { SocialStatusPrerequisite } from "./single/SocialStatusPrerequisite.js"
@@ -194,6 +196,14 @@ export const EnhancementPrerequisiteGroup = DB.Enum(import.meta.url, {
   values: () => ({
     Enhancement: DB.EnumCase({ type: DB.IncludeIdentifier(EnhancementPrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
+  }),
+})
+
+export const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
+  name: "BookPrerequisiteGroup",
+  values: () => ({
+    Language: DB.EnumCase({ type: DB.IncludeIdentifier(LanguagePrerequisite) }),
+    Script: DB.EnumCase({ type: DB.IncludeIdentifier(ScriptPrerequisite) }),
   }),
 })
 
