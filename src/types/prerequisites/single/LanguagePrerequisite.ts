@@ -9,5 +9,9 @@ export const LanguagePrerequisite = DB.TypeAlias(import.meta.url, {
         comment: "The language’s identifier.",
         type: LanguageIdentifier(),
       }),
+      level: DB.Required({
+        comment: "The required minimum level of the language.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
     }),
 })
