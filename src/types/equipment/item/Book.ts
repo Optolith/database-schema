@@ -40,7 +40,7 @@ export const Book = DB.Entity(import.meta.url, {
         comment: "The quality of the book’s content.",
         type: DB.IncludeIdentifier(BookContentQuality),
       }),
-      rules: DB.Required({
+      rules: DB.Optional({
         comment:
           "Skills and abilities you can learn by reading the book, as well as any other rules and effects concerning the book.",
         type: DB.IncludeIdentifier(BookRules),
