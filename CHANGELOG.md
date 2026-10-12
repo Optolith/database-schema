@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.95.0](https://github.com/Optolith/database-schema/compare/v0.94.0...v0.95.0) (2026-10-12)
+
+### ⚠ BREAKING CHANGES
+
+* armor accessory entity
+* rearrange book values for Aventurische Bibliothek
+
+### Features
+
+* armor accessory entity ([3ecd251](https://github.com/Optolith/database-schema/commit/3ecd25145811c115228fb2c10e31501ff7e1acd2))
+* rearrange book values for Aventurische Bibliothek ([bc36e58](https://github.com/Optolith/database-schema/commit/bc36e58957e3e9ac96d40998e762dff72b62bdaa)), closes [#154](https://github.com/Optolith/database-schema/issues/154), references [#153](https://github.com/Optolith/database-schema/issues/153)
+
 ## [0.94.0](https://github.com/Optolith/database-schema/compare/v0.93.0...v0.94.0) (2026-10-12)
 
 ### ⚠ BREAKING CHANGES
