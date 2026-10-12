@@ -4,6 +4,7 @@ import {
   DerivedCharacteristicIdentifier,
   ExperienceLevelIdentifier,
   FocusRuleIdentifier,
+  PublicationIdentifier,
 } from "./_Identifier.ts"
 import { SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
 
@@ -33,6 +34,11 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
       styles: DB.Required({
         comment: StyleSpecialAbilitySettings.comment,
         type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
+      }),
+      extendedBookDescriptionPublication: DB.Required({
+        comment:
+          "The publication that extends the description of books with additional information.",
+        type: PublicationIdentifier(),
       }),
     }),
 })
