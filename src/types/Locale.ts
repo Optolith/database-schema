@@ -1726,6 +1726,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Entertainment": null,
           "Topics": null,
           "Place of Publication": null,
+          "Value": null,
 
           // sex practices
           "Failed": null,
@@ -1812,6 +1813,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "only {$variants :list type=conjunction}": null,
 
           // professions
+          "Spellworks/Magical Actions": null,
           "Suggested Advantages": null,
           "Suggested Disadvantages": null,
           "Unsuitable Advantages": null,
