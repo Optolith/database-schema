@@ -63,11 +63,14 @@ export const Advantage = DB.Entity(import.meta.url, {
   instanceDisplayName: {},
   instanceDisplayNameCustomizer: activatableDisplayNameCustomizer,
   uniqueConstraints: [
-    {
-      entityMapKeyPath: "translations",
-      keyPathInEntityMap: "name_in_library",
-      keyPathInEntityMapFallback: "name",
-    },
+    [
+      {
+        entityMapKeyPath: "translations",
+        keyPathInEntityMap: "name_in_library",
+        keyPathInEntityMapFallback: "name",
+      },
+      { keyPath: "subtype" },
+    ],
   ],
   customConstraints: deps => verifySelectOptionRules("Advantage", deps),
 })
