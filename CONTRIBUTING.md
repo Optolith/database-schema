@@ -43,4 +43,10 @@ If you add new entities, there are some additional steps to take.
 
 ## Formatting and linting
 
-This repository makes use of linting via ESLint and formatting via Prettier. It can be helpful to use available editor extensions when contributing to fix errors before they appear in your PR. Formatting and linting is checked for every pull request and must succeed in order to be able to accept your PR.
+This repository makes use of linting via `oxlint` and formatting via `oxfmt`. It can be helpful to use available editor extensions when contributing to fix errors before they appear in your PR. Formatting and linting is checked for every pull request and must succeed in order to be able to accept your PR.
+
+To lint and format the whole repo locally, there are some commands:
+
+- `npm run lint` to run the linter on all files
+- `npm run format` to format all files
+- `npm run format:check` to test if all files are formatted correctly
