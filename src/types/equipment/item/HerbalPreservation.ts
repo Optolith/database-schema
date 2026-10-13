@@ -1,11 +1,14 @@
-import * as DB from "tsondb/schema/dsl"
-import { DurationUnit } from "../../_ActivatableSkillDuration.js"
-import { Dice } from "../../_Dice.js"
-import { MathOperation } from "../../_MathExpression.js"
-import { ResponsiveText, ResponsiveTextReplace } from "../../_ResponsiveText.js"
-import { NestedTranslationMap } from "../../Locale.js"
-import { src } from "../../source/_PublicationRef.js"
-import { EffectType } from "./_Herbary.js"
+import * as DB from "tsondb/schema/dsl";
+import { DurationUnit } from "../../_ActivatableSkillDuration.js";
+import { Dice } from "../../_Dice.js";
+import { MathOperation } from "../../_MathExpression.js";
+import {
+  ResponsiveText,
+  ResponsiveTextReplace,
+} from "../../_ResponsiveText.js";
+import { NestedTranslationMap } from "../../Locale.js";
+import { src } from "../../source/_PublicationRef.js";
+import { EffectType } from "./_Herbary.js";
 
 export const HerbalPreservation = DB.Entity(import.meta.url, {
   name: "HerbalPreservation",
@@ -14,7 +17,10 @@ export const HerbalPreservation = DB.Entity(import.meta.url, {
     DB.Object({
       types: DB.Required({
         comment: "The types of this preservation.",
-        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       longevity: DB.Required({
         comment: "How long this preservation lasts.",
@@ -47,7 +53,7 @@ export const HerbalPreservation = DB.Entity(import.meta.url, {
       keyPathInEntityMap: "name",
     },
   ],
-})
+});
 
 export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevity",
@@ -82,22 +88,25 @@ export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
           DB.Object({
             text: DB.Required({
               comment: "A text describing the duration.",
-              type: DB.IncludeIdentifier(ResponsiveText)
+              type: DB.IncludeIdentifier(ResponsiveText),
             }),
           }),
         ),
       }),
     }),
   }),
-})
+});
 
-export const HerbalPreservationLongevityExpression = DB.TypeAlias(import.meta.url, {
-  name: "HerbalPreservationLongevityExpression",
-  type: () =>
-    DB.GenIncludeIdentifier(MathOperation, [
-      DB.IncludeIdentifier(HerbalPreservationLongevityValue),
-    ]),
-})
+export const HerbalPreservationLongevityExpression = DB.TypeAlias(
+  import.meta.url,
+  {
+    name: "HerbalPreservationLongevityExpression",
+    type: () =>
+      DB.GenIncludeIdentifier(MathOperation, [
+        DB.IncludeIdentifier(HerbalPreservationLongevityValue),
+      ]),
+  },
+);
 
 export const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevityValue",
@@ -107,4 +116,4 @@ export const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
       type: DB.IncludeIdentifier(Dice),
     }),
   }),
-})
+});
