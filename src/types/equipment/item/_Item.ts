@@ -238,7 +238,7 @@ export const ComplexComplexity = DB.TypeAlias(import.meta.url, {
 export const RestrictedTo = DB.TypeAlias(import.meta.url, {
   name: "RestrictedTo",
   comment:
-    "If the item is in any case restricted to a subset of characters. The differenciating aspect may be tradition, race, culture, or a profession. Each element must be applicable to a character. ",
+    "If the item is in any case restricted to a subset of characters. The differenciating aspect may be tradition, race, culture, or a profession. Each element must be applicable to a character.",
   type: () =>
     DB.Object(
       {
@@ -283,6 +283,20 @@ export const RestrictedToRaces = DB.TypeAlias(import.meta.url, {
           "The item is restricted to one of a list of races. If only one race is allowed, the list may only have a single element.",
         type: DB.Array(RaceIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "RestrictedToRaces",
+        DB.Object({
+          item: DB.Required({
+            comment: "The item’s name and surrounding words influenced by grammatical agreement.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          groupOfCultures: DB.Required({
+            comment: "The name of the group of cultures from that race.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
     }),
 })
 
@@ -297,6 +311,20 @@ export const RestrictedToCultures = DB.TypeAlias(import.meta.url, {
           "The item is restricted to one of a list of cultures. If only one culture is allowed, the list may only have a single element.",
         type: DB.Array(CultureIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "RestrictedToCultures",
+        DB.Object({
+          item: DB.Required({
+            comment: "The item’s name and surrounding words influenced by grammatical agreement.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          cultures: DB.Required({
+            comment: "The name of the culture(s) integrated into the text.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
     }),
 })
 
@@ -325,6 +353,16 @@ export const RestrictedToMagicalTraditions = DB.TypeAlias(import.meta.url, {
           "The item is restricted to one of a list of magical traditions. If only one magical tradition is allowed, the list may only have a single element.",
         type: DB.Array(MagicalTraditionIdentifier(), { minItems: 1, uniqueItems: true }),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "RestrictedToMagicalTraditions",
+        DB.Object({
+          item: DB.Required({
+            comment: "The item’s name and surrounding words influenced by grammatical agreement.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
     }),
 })
 
@@ -343,6 +381,16 @@ export const RestrictedToBlessedTraditions = DB.TypeAlias(import.meta.url, {
         comment: "The item is sanctified by the applicable listed tradition.",
         type: DB.Boolean(),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "RestrictedToBlessedTraditions",
+        DB.Object({
+          item: DB.Required({
+            comment: "The item’s name and surrounding words influenced by grammatical agreement.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
     }),
 })
 
