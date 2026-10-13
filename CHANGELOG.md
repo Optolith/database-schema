@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.99.0](https://github.com/Optolith/database-schema/compare/v0.98.0...v0.99.0) (2026-10-13)
+
+### ⚠ BREAKING CHANGES
+
+* improve natural language for more items
+
+### Features
+
+* improve natural language for more items ([e72bdc4](https://github.com/Optolith/database-schema/commit/e72bdc45d66699a8496b5b9ed6d66ff21898d71a))
+
 ## [0.98.0](https://github.com/Optolith/database-schema/compare/v0.97.1...v0.98.0) (2026-10-13)
 
 ### ⚠ BREAKING CHANGES
