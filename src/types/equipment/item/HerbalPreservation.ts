@@ -49,29 +49,46 @@ export const HerbalPreservation = DB.Entity(import.meta.url, {
   ],
 })
 
-export const HerbalPreservationLongevity = DB.TypeAlias(import.meta.url, {
+export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevity",
-  type: () =>
-    DB.Object({
-      value: DB.Required({
-        comment: "An expression that evaluates to the duration.",
-        type: DB.IncludeIdentifier(HerbalPreservationLongevityExpression),
-      }),
-      unit: DB.Required({
-        comment: "The duration unit.",
-        type: DB.IncludeIdentifier(DurationUnit),
-      }),
-      translations: NestedTranslationMap(
-        DB.Optional,
-        "HerbalPreservationLongevity",
-        DB.Object({
-          replacement: DB.Required({
-            comment: "A replacement string.",
-            type: DB.IncludeIdentifier(ResponsiveTextReplace),
-          }),
+  values: () => ({
+    Expression: DB.EnumCase({
+      type: DB.Object({
+        value: DB.Required({
+          comment: "An expression that evaluates to the duration.",
+          type: DB.IncludeIdentifier(HerbalPreservationLongevityExpression),
         }),
-      ),
+        unit: DB.Required({
+          comment: "The duration unit.",
+          type: DB.IncludeIdentifier(DurationUnit),
+        }),
+        translations: NestedTranslationMap(
+          DB.Optional,
+          "HerbalPreservationLongevity",
+          DB.Object({
+            replacement: DB.Required({
+              comment: "A replacement string.",
+              type: DB.IncludeIdentifier(ResponsiveTextReplace),
+            }),
+          }),
+        ),
+      }),
     }),
+    Translation: DB.EnumCase({
+      type: DB.Object({
+        translations: NestedTranslationMap(
+          DB.Required,
+          "HerbalPreservationLongevityTranslation",
+          DB.Object({
+            text: DB.Required({
+              comment: "A text describing the duration.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+          }),
+        ),
+      }),
+    }),
+  }),
 })
 
 export const HerbalPreservationLongevityExpression = DB.TypeAlias(import.meta.url, {
