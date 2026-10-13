@@ -1,6 +1,7 @@
 import * as DB from "tsondb/schema/dsl"
+import { BlessedTraditionIdentifier } from "../../_Identifier.ts"
 import { src } from "../../source/_PublicationRef.js"
-import { CombatUse, Cost, DefaultItemTranslations, RestrictedTo, StructurePoints } from "./_Item.js"
+import { CombatUse, Cost, DefaultItemTranslations, StructurePoints } from "./_Item.js"
 import { checkWeaponCombatTechniqueIntegrity } from "./_Weapon.js"
 
 export const EquipmentOfBlessedOnes = DB.Entity(import.meta.url, {
@@ -17,10 +18,12 @@ export const EquipmentOfBlessedOnes = DB.Entity(import.meta.url, {
           "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.",
         type: DB.IncludeIdentifier(StructurePoints),
       }),
-      restrictedTo: DB.Optional({
-        comment:
-          "Define if during character creation this item can only be bought by a specific subset of characters.",
-        type: DB.IncludeIdentifier(RestrictedTo),
+      associatedTraditions: DB.Required({
+        comment: "The traditions this item is associated with.",
+        type: DB.Array(DB.IncludeIdentifier(AssociatedTradition), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       combat_use: DB.Optional({
         comment:
@@ -47,4 +50,12 @@ export const EquipmentOfBlessedOnes = DB.Entity(import.meta.url, {
 
     return []
   },
+})
+
+const AssociatedTradition = DB.Enum(import.meta.url, {
+  name: "AssociatedTradition",
+  values: () => ({
+    Specific: DB.EnumCase({ type: BlessedTraditionIdentifier() }),
+    ManyShamans: DB.EnumCase({ type: null }),
+  }),
 })

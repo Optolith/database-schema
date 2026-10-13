@@ -385,8 +385,16 @@ export const RestrictedToBlessedTraditions = DB.TypeAlias(import.meta.url, {
         DB.Required,
         "RestrictedToBlessedTraditions",
         DB.Object({
+          sanctified: DB.Optional({
+            comment: "The item’s sanctified prefix, if different from the generated one.",
+            type: DB.String({ minLength: 1 }),
+          }),
           item: DB.Required({
             comment: "The item’s name and surrounding words influenced by grammatical agreement.",
+            type: DB.String({ minLength: 1 }),
+          }),
+          blessedOnes: DB.Optional({
+            comment: "The blessed ones able to buy the item, if different from the generated one.",
             type: DB.String({ minLength: 1 }),
           }),
         }),

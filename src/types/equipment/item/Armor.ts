@@ -129,6 +129,19 @@ const StandardArmorType = DB.TypeAlias(import.meta.url, {
           "An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.",
         type: DB.Integer({ minimum: 1, maximum: 20 }),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "StandardArmorType",
+        DB.Object(
+          {
+            nameInNote: DB.Required({
+              comment: "The name of this armor when referenced as the base of a variant in a note.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
 })
 
@@ -160,6 +173,20 @@ const StandardVariantArmorType = DB.TypeAlias(import.meta.url, {
           "An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.",
         type: DB.Integer({ minimum: 1, maximum: 20 }),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "StandardVariantArmorType",
+        DB.Object(
+          {
+            nameInNote: DB.Required({
+              comment:
+                "The name of this armor when referenced as being a variant of another armor in a note.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
   customConstraints: validateArmorTypeReference,
 })
@@ -173,6 +200,20 @@ const VariantArmorType = DB.TypeAlias(import.meta.url, {
         comment: "The standard armor this armor is a variant of.",
         type: ArmorIdentifier(),
       }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "VariantArmorType",
+        DB.Object(
+          {
+            nameInNote: DB.Required({
+              comment:
+                "The name of this armor when referenced as being a variant of another armor in a note.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          },
+          { minProperties: 1 },
+        ),
+      ),
     }),
   customConstraints: validateArmorTypeReference,
 })
