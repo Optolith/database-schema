@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.97.0](https://github.com/Optolith/database-schema/compare/v0.96.0...v0.97.0) (2026-10-13)
+
+### ⚠ BREAKING CHANGES
+
+* herbal preservation longevity can be translation-only
+* translations for book value and profession spellworks with magical actions
+
+### Bug Fixes
+
+* herbal preservation longevity can be translation-only ([4e9b529](https://github.com/Optolith/database-schema/commit/4e9b5291c04f338d6de8019bd83ed3b86aec484e)), closes [#204](https://github.com/Optolith/database-schema/issues/204), references [#203](https://github.com/Optolith/database-schema/issues/203)
+* translations for book value and profession spellworks with magical actions ([883178a](https://github.com/Optolith/database-schema/commit/883178af886579002950bcd76b99b49a030c9344))
+
 ## [0.96.0](https://github.com/Optolith/database-schema/compare/v0.95.0...v0.96.0) (2026-10-12)
 
 ### ⚠ BREAKING CHANGES
