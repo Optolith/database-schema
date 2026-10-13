@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.97.1](https://github.com/Optolith/database-schema/compare/v0.97.0...v0.97.1) (2026-10-13)
+
+### Bug Fixes
+
+* advantages and disadvantages may only differ by subtype ([2c36b0d](https://github.com/Optolith/database-schema/commit/2c36b0d2f3bf81ae1e7d66eacd6f43742ad835ee))
+
 ## [0.97.0](https://github.com/Optolith/database-schema/compare/v0.96.0...v0.97.0) (2026-10-13)
 
 ### ⚠ BREAKING CHANGES
