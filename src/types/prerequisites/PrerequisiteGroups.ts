@@ -15,6 +15,7 @@ import { ProfessionPrerequisite } from "./single/ProfessionPrerequisite.js"
 import { PublicationPrerequisite } from "./single/PublicationPrerequisite.js"
 import { RacePrerequisite } from "./single/RacePrerequisite.js"
 import { RatedMinimumNumberPrerequisite } from "./single/RatedMinimumNumberPrerequisite.js"
+import { RatedMinimumNumberPrerequisiteForProfession } from "./single/RatedMinimumNumberPrerequisiteForProfession.ts"
 import { RatedPrerequisite } from "./single/RatedPrerequisite.js"
 import { RatedSumPrerequisite } from "./single/RatedSumPrerequisite.js"
 import { RulePrerequisite } from "./single/RulePrerequisite.js"
@@ -99,7 +100,9 @@ export const ProfessionPrerequisiteGroup = DB.Enum(import.meta.url, {
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
     Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
-    RatedMinimumNumber: DB.EnumCase({ type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisite) }),
+    RatedMinimumNumber: DB.EnumCase({
+      type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisiteForProfession),
+    }),
     Energy: DB.EnumCase({ type: DB.IncludeIdentifier(EnergyPrerequisite) }),
   }),
 })

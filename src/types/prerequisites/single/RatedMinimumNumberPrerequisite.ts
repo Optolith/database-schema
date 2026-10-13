@@ -77,7 +77,8 @@ export const RatedMinimumNumberPrerequisiteSpellworksTarget = DB.TypeAlias(impor
   type: () =>
     DB.Object({
       property: DB.Required({
-        comment: "The skills that are taken into account for satisfying the prerequisite.",
+        comment:
+          "The property of which the spells are taken into account for satisfying the prerequisite.",
         type: PropertyIdentifier(),
       }),
     }),
@@ -88,7 +89,8 @@ export const RatedMinimumNumberPrerequisiteLiturgiesTarget = DB.TypeAlias(import
   type: () =>
     DB.Object({
       aspect: DB.Required({
-        comment: "The skills that are taken into account for satisfying the prerequisite.",
+        comment:
+          "The aspect of which the liturgical chants are taken into account for satisfying the prerequisite.",
         type: AspectIdentifier(),
       }),
     }),
