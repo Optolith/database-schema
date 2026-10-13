@@ -56,45 +56,38 @@ export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevity",
   values: () => ({
     Expression: DB.EnumCase({
-      type: DB.Object({
-        value: DB.Required({
-          comment: "An expression that evaluates to the duration.",
-          type: DB.IncludeIdentifier(HerbalPreservationLongevityExpression),
-        }),
-        unit: DB.Required({
-          comment: "The duration unit.",
-          type: DB.IncludeIdentifier(DurationUnit),
-        }),
-        translations: NestedTranslationMap(
-          DB.Optional,
-          "HerbalPreservationLongevity",
-          DB.Object({
-            replacement: DB.Required({
-              comment: "A replacement string.",
-              type: DB.IncludeIdentifier(ResponsiveTextReplace),
-            }),
-          }),
-        ),
-      }),
+      type: DB.IncludeIdentifier(ExpressionBasedHerbalPreservationLongevity),
     }),
-    Indefinite: DB.EnumCase({
-      type: DB.Object({
-        translations: NestedTranslationMap(
-          DB.Required,
-          "HerbalPreservationLongevityTranslation",
-          DB.Object({
-            text: DB.Required({
-              comment: "A text describing the duration.",
-              type: DB.IncludeIdentifier(ResponsiveText),
-            }),
-          }),
-        ),
-      }),
-    }),
+    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteHerbalPreservationLongevity) }),
   }),
 })
 
-export const HerbalPreservationLongevityExpression = DB.TypeAlias(import.meta.url, {
+const ExpressionBasedHerbalPreservationLongevity = DB.TypeAlias(import.meta.url, {
+  name: "ExpressionBasedHerbalPreservationLongevity",
+  type: () =>
+    DB.Object({
+      value: DB.Required({
+        comment: "An expression that evaluates to the duration.",
+        type: DB.IncludeIdentifier(HerbalPreservationLongevityExpression),
+      }),
+      unit: DB.Required({
+        comment: "The duration unit.",
+        type: DB.IncludeIdentifier(DurationUnit),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "ExpressionHerbalPreservationLongevity",
+        DB.Object({
+          replacement: DB.Required({
+            comment: "A replacement string.",
+            type: DB.IncludeIdentifier(ResponsiveTextReplace),
+          }),
+        }),
+      ),
+    }),
+})
+
+const HerbalPreservationLongevityExpression = DB.TypeAlias(import.meta.url, {
   name: "HerbalPreservationLongevityExpression",
   type: () =>
     DB.GenIncludeIdentifier(MathOperation, [
@@ -102,7 +95,7 @@ export const HerbalPreservationLongevityExpression = DB.TypeAlias(import.meta.ur
     ]),
 })
 
-export const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
+const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
   name: "HerbalPreservationLongevityValue",
   values: () => ({
     Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
@@ -110,4 +103,21 @@ export const HerbalPreservationLongevityValue = DB.Enum(import.meta.url, {
       type: DB.IncludeIdentifier(Dice),
     }),
   }),
+})
+
+const IndefiniteHerbalPreservationLongevity = DB.TypeAlias(import.meta.url, {
+  name: "IndefiniteHerbalPreservationLongevity",
+  type: () =>
+    DB.Object({
+      translations: NestedTranslationMap(
+        DB.Required,
+        "IndefiniteHerbalPreservationLongevity",
+        DB.Object({
+          text: DB.Required({
+            comment: "A text describing the duration.",
+            type: DB.IncludeIdentifier(ResponsiveText),
+          }),
+        }),
+      ),
+    }),
 })
