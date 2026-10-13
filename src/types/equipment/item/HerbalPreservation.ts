@@ -2,7 +2,7 @@ import * as DB from "tsondb/schema/dsl"
 import { DurationUnit } from "../../_ActivatableSkillDuration.js"
 import { Dice } from "../../_Dice.js"
 import { MathOperation } from "../../_MathExpression.js"
-import { ResponsiveTextReplace } from "../../_ResponsiveText.js"
+import { ResponsiveText, ResponsiveTextReplace } from "../../_ResponsiveText.js"
 import { NestedTranslationMap } from "../../Locale.js"
 import { src } from "../../source/_PublicationRef.js"
 import { EffectType } from "./_Herbary.js"
@@ -74,7 +74,7 @@ export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
         ),
       }),
     }),
-    Translation: DB.EnumCase({
+    Indefinite: DB.EnumCase({
       type: DB.Object({
         translations: NestedTranslationMap(
           DB.Required,
@@ -82,7 +82,7 @@ export const HerbalPreservationLongevity = DB.Enum(import.meta.url, {
           DB.Object({
             text: DB.Required({
               comment: "A text describing the duration.",
-              type: DB.String({ minLength: 1, markdown: "inline" }),
+              type: DB.IncludeIdentifier(ResponsiveText)
             }),
           }),
         ),
