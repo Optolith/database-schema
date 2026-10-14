@@ -11,7 +11,7 @@ import { CloseCombatTechnique, RangedCombatTechnique } from "../../CombatTechniq
 import { NestedTranslationMap } from "../../Locale.ts"
 import { Errata } from "../../source/_Erratum.ts"
 import { src } from "../../source/_PublicationRef.ts"
-import { Complexity, FixedCost } from "./_Item.ts"
+import { FixedCost } from "./_Item.ts"
 
 export const ItemComponent = DB.Entity(import.meta.url, {
   name: "ItemComponent",
@@ -24,10 +24,6 @@ export const ItemComponent = DB.Entity(import.meta.url, {
       cost: DB.Required({
         comment: ItemComponentCost.comment,
         type: DB.IncludeIdentifier(ItemComponentCost),
-      }),
-      complexity: DB.Optional({
-        comment: "The complexity of crafting the item.",
-        type: DB.IncludeIdentifier(Complexity),
       }),
       applicableItems: DB.Required({
         comment: "The items the component can be applied to.",
