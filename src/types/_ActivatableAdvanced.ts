@@ -1,6 +1,11 @@
 import * as DB from "tsondb/schema/dsl"
-import { MagicalTraditionIdentifier, PatronIdentifier } from "./_Identifier.js"
+import {
+  GeneralSelectOptionIdentifier,
+  MagicalTraditionIdentifier,
+  PatronIdentifier,
+} from "./_Identifier.js"
 import { AdvancedSpecialAbilityRestrictedOptionIdentifier } from "./_IdentifierGroup.js"
+import { NestedTranslationMap } from "./Locale.ts"
 import { DisplayOption } from "./prerequisites/DisplayOption.js"
 
 const AdvancedSpecialAbility = DB.GenEnum(import.meta.url, {
@@ -23,6 +28,9 @@ const AdvancedSpecialAbility = DB.GenEnum(import.meta.url, {
       type: DB.GenIncludeIdentifier(AdvancedSpecialAbilityDerivedFromExternalOption, [
         DB.TypeArgument(Identifier),
       ]),
+    }),
+    ByOption: DB.EnumCase({
+      type: DB.GenIncludeIdentifier(AdvancedSpecialAbilityByOption, [DB.TypeArgument(Identifier)]),
     }),
     Any: DB.EnumCase({
       comment: "Any advanced special ability is possible.",
@@ -109,6 +117,72 @@ const AdvancedSpecialAbilityDerivedFromExternalOptionMapping = DB.GenTypeAlias(i
         type: DB.TypeArgument(Identifier),
       }),
     }),
+})
+
+const AdvancedSpecialAbilityByOption = DB.GenTypeAlias(import.meta.url, {
+  name: "AdvancedSpecialAbilityByOption",
+  parameters: [DB.Param("Identifier")],
+  type: Identifier =>
+    DB.Object({
+      map: DB.Required({
+        comment: "Map options from the external entry to allowed advanced special abilities.",
+        type: DB.Array(
+          DB.GenIncludeIdentifier(AdvancedSpecialAbilityByOptionMapping, [
+            DB.TypeArgument(Identifier),
+          ]),
+          { minItems: 1 },
+        ),
+      }),
+      fallbackOption: DB.Optional({
+        comment:
+          "One of the options counts all fallback options and should be sorted last in the list.",
+        type: GeneralSelectOptionIdentifier(),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "AdvancedSpecialAbilityByOption",
+        DB.Object({
+          label: DB.Required({
+            comment:
+              "How to label all options before listing each option with its advanced special ability/-ies.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
+})
+
+const AdvancedSpecialAbilityByOptionMapping = DB.GenTypeAlias(import.meta.url, {
+  name: "AdvancedSpecialAbilityByOptionMapping",
+  parameters: [DB.Param("Identifier")],
+  comment: "Mapping from an option of this entry to an allowed advanced special ability.",
+  type: Identifier =>
+    DB.Object({
+      option: DB.Required({
+        comment: "The select option’s identifier.",
+        type: PatronIdentifier(),
+      }),
+      associatedAdvanced: DB.Required({
+        comment: "The advanced special ability’s identifier.",
+        type: DB.GenIncludeIdentifier(AdvancedSpecialAbilityByOptionMappingRule, [
+          DB.TypeArgument(Identifier),
+        ]),
+      }),
+    }),
+})
+
+const AdvancedSpecialAbilityByOptionMappingRule = DB.GenEnum(import.meta.url, {
+  name: "AdvancedSpecialAbilityByOptionMappingRule",
+  comment: "A reference to an advanced special ability.",
+  parameters: [DB.Param("Identifier")],
+  values: Identifier => ({
+    General: DB.EnumCase({ type: DB.TypeArgument(Identifier) }),
+    OneOf: DB.EnumCase({
+      type: DB.GenIncludeIdentifier(OneOfAdvancedSpecialAbilityOptions, [
+        DB.TypeArgument(Identifier),
+      ]),
+    }),
+  }),
 })
 
 export const advanced = (identifier: DB.Type) =>
