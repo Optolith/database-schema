@@ -118,6 +118,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.IlluminationRefillOrSupply,
     Types.InstrumentEnchantment,
     Types.Item,
+    Types.ItemComponent,
     Types.JesterTrick,
     Types.Jewelry,
     Types.KarmaSpecialAbility,
