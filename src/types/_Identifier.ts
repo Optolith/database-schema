@@ -39,7 +39,7 @@ import { HerbalPreservation } from "./equipment/item/HerbalPreservation.js"
 import { IlluminationLightSource } from "./equipment/item/IlluminationLightSource.js"
 import { IlluminationRefillOrSupply } from "./equipment/item/IlluminationRefillOrSupply.js"
 import { Item } from "./equipment/item/Item.ts"
-import { ItemFeature } from "./equipment/item/ItemFeature.ts"
+import { ItemComponent } from "./equipment/item/ItemComponent.ts"
 import { Jewelry } from "./equipment/item/Jewelry.js"
 import { Laboratory } from "./equipment/item/Laboratory.js"
 import { Liebesspielzeug } from "./equipment/item/Liebesspielzeug.js"
@@ -267,7 +267,7 @@ export const IlluminationRefillOrSupplyIdentifier: () => R = () => R(Illuminatio
 export const InfluenceIdentifier: () => R = () => R(Influence)
 export const InstrumentEnchantmentIdentifier: () => R = () => R(InstrumentEnchantment)
 export const ItemIdentifier: () => R = () => R(Item)
-export const ItemFeatureIdentifier: () => R = () => R(ItemFeature)
+export const ItemComponentIdentifier: () => R = () => R(ItemComponent)
 export const JesterTrickIdentifier: () => R = () => R(JesterTrick)
 export const JewelryIdentifier: () => R = () => R(Jewelry)
 export const KarmaSpecialAbilityIdentifier: () => R = () => R(KarmaSpecialAbility)

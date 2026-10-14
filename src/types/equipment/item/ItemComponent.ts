@@ -3,7 +3,7 @@ import {
   AmmunitionIdentifier,
   ArmorIdentifier,
   CloseCombatTechniqueIdentifier,
-  ItemFeatureIdentifier,
+  ItemComponentIdentifier,
   RangedCombatTechniqueIdentifier,
   WeaponIdentifier,
 } from "../../_Identifier.ts"
@@ -13,11 +13,14 @@ import { Errata } from "../../source/_Erratum.ts"
 import { src } from "../../source/_PublicationRef.ts"
 import { Complexity, FixedCost } from "./_Item.ts"
 
-export const ItemFeature = DB.Entity(import.meta.url, {
-  name: "ItemFeature",
-  namePlural: "ItemFeatures",
+export const ItemComponent = DB.Entity(import.meta.url, {
+  name: "ItemComponent",
+  namePlural: "ItemComponents",
   type: () =>
     DB.Object({
+      options: DB.Required({
+        type: DB.ChildEntities(ItemComponentOption),
+      }),
       cost: DB.Required({
         comment: ItemFeatureCost.comment,
         type: DB.IncludeIdentifier(ItemFeatureCost),
@@ -27,12 +30,12 @@ export const ItemFeature = DB.Entity(import.meta.url, {
         type: DB.IncludeIdentifier(Complexity),
       }),
       applicableItems: DB.Required({
-        comment: "The items the feature can be applied to.",
+        comment: "The items the component can be applied to.",
         type: DB.IncludeIdentifier(ApplicableItems),
       }),
-      incompatibleFeatures: DB.Optional({
-        comment: "Other features this feature is not compatible with.",
-        type: DB.Array(ItemFeatureIdentifier(), {
+      incompatibleWith: DB.Optional({
+        comment: "Other extensions this extension is not compatible with.",
+        type: DB.Array(ItemComponentIdentifier(), {
           minItems: 1,
           uniqueItems: true,
         }),
@@ -70,15 +73,53 @@ export const ItemFeature = DB.Entity(import.meta.url, {
   ],
 })
 
+const ItemComponentOption = DB.Entity(import.meta.url, {
+  name: "ItemComponentOption",
+  namePlural: "ItemComponentOptions",
+  type: () =>
+    DB.Object({
+      parent: DB.Required({
+        comment: "The item component this option belongs to.",
+        type: ItemComponentIdentifier(),
+      }),
+      cost: DB.Required({
+        comment: "The cost in silverthalers.",
+        type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
+      }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "ItemComponentOption",
+        DB.Object({
+          label: DB.Required({
+            comment: "The label for the option.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
+  parentReferenceKey: "parent",
+})
+
 const ItemFeatureCost = DB.Enum(import.meta.url, {
   name: "ItemFeatureCost",
   comment: "The cost in silverthalers.",
   values: () => ({
-    Fixed: DB.EnumCase({ type: DB.IncludeIdentifier(FixedCost) }),
+    Fixed: DB.EnumCase({
+      comment: "The cost is a fixed amount of silverthalers.",
+      type: DB.IncludeIdentifier(FixedCost),
+    }),
     ByCombatTechnique: DB.EnumCase({
+      comment: "The cost depends on the combat technique of the item it is applied to.",
       type: DB.IncludeIdentifier(ItemFeatureCostByCombatTechnique),
     }),
-    Factor: DB.EnumCase({ type: DB.Float({ minimum: { value: 0, isExclusive: true } }) }),
+    Factor: DB.EnumCase({
+      comment: "The cost is a percentage of the cost of the item it is applied to.",
+      type: DB.Float({ minimum: { value: 0, isExclusive: true } }),
+    }),
+    DerivedFromOption: DB.EnumCase({
+      comment: "The cost depends on the selected option.",
+      type: null,
+    }),
   }),
 })
 
@@ -148,6 +189,7 @@ const ApplicableItems = DB.Enum(import.meta.url, {
   values: () => ({
     MeleeWeapon: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableMeleeWeapons) }),
     RangedWeapon: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableRangedWeapons) }),
+    Ammunition: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableAmmunition) }),
     Armor: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableArmor) }),
   }),
 })
@@ -200,13 +242,6 @@ const ApplicableRangedWeapons = DB.TypeAlias(import.meta.url, {
             uniqueItems: true,
           }),
         }),
-        ammunition: DB.Optional({
-          comment: "Specific ammunition this feature can be applied to.",
-          type: DB.Array(AmmunitionIdentifier(), {
-            minItems: 1,
-            uniqueItems: true,
-          }),
-        }),
         combatTechniques: DB.Optional({
           comment: "Weapons of combat techniques this feature can be applied to.",
           type: DB.Array(RangedCombatTechniqueIdentifier(), {
@@ -214,21 +249,45 @@ const ApplicableRangedWeapons = DB.TypeAlias(import.meta.url, {
             uniqueItems: true,
           }),
         }),
-        category: DB.Optional({
-          comment: "The category of weapons this feature can be applied to.",
-          type: DB.IncludeIdentifier(ApplicableRangedWeaponCategory),
+        minimumReloadTime: DB.Optional({
+          comment:
+            "The minimum reload time a crossbow must have for it to be compatible with this component.",
+          type: DB.Integer({ minimum: 1 }),
+        }),
+        usesBullets: DB.Optional({
+          comment: "Whether the crossbow must use bullets to be compatible with this component.",
+          type: DB.Boolean(),
         }),
       },
       { minProperties: 1 },
     ),
 })
 
-const ApplicableRangedWeaponCategory = DB.Enum(import.meta.url, {
-  name: "ApplicableRangedWeaponCategory",
+const ApplicableAmmunition = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableAmmunition",
+  type: () =>
+    DB.Object(
+      {
+        ammunition: DB.Optional({
+          comment: "Specific ammunition this feature can be applied to.",
+          type: DB.Array(AmmunitionIdentifier(), {
+            minItems: 1,
+            uniqueItems: true,
+          }),
+        }),
+        category: DB.Optional({
+          comment: "The category of weapons this feature can be applied to.",
+          type: DB.IncludeIdentifier(ApplicableAmmunitionCategory),
+        }),
+      },
+      { minProperties: 1 },
+    ),
+})
+
+const ApplicableAmmunitionCategory = DB.Enum(import.meta.url, {
+  name: "ApplicableAmmunitionCategory",
   values: () => ({
-    Bow: DB.EnumCase({ type: null }),
-    Crossbow: DB.EnumCase({ type: null }),
-    Javelin: DB.EnumCase({ type: null }),
+    ArrowOrBolt: DB.EnumCase({ type: null }),
   }),
 })
 
