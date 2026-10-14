@@ -22,8 +22,8 @@ export const ItemComponent = DB.Entity(import.meta.url, {
         type: DB.ChildEntities(ItemComponentOption),
       }),
       cost: DB.Required({
-        comment: ItemFeatureCost.comment,
-        type: DB.IncludeIdentifier(ItemFeatureCost),
+        comment: ItemComponentCost.comment,
+        type: DB.IncludeIdentifier(ItemComponentCost),
       }),
       complexity: DB.Optional({
         comment: "The complexity of crafting the item.",
@@ -34,16 +34,20 @@ export const ItemComponent = DB.Entity(import.meta.url, {
         type: DB.IncludeIdentifier(ApplicableItems),
       }),
       incompatibleWith: DB.Optional({
-        comment: "Other extensions this extension is not compatible with.",
+        comment: "Other components this component is not compatible with.",
         type: DB.Array(ItemComponentIdentifier(), {
           minItems: 1,
           uniqueItems: true,
         }),
       }),
+      rules: DB.Optional({
+        comment: "Special rules for the item component.",
+        type: DB.IncludeIdentifier(ItemComponentRules),
+      }),
       src,
       translations: NestedTranslationMap(
         DB.Required,
-        "Ammunition",
+        "ItemComponent",
         DB.Object({
           name: DB.Required({
             comment: "The item’s name.",
@@ -55,7 +59,7 @@ export const ItemComponent = DB.Entity(import.meta.url, {
           }),
           applicableItems: DB.Optional({
             comment:
-              "The items the feature can be applied to. Used if the generated text is not sufficient.",
+              "The items the component can be applied to. Used if the generated text is not sufficient.",
             type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           errata: DB.Optional({
@@ -97,11 +101,12 @@ const ItemComponentOption = DB.Entity(import.meta.url, {
         }),
       ),
     }),
+  instanceDisplayName: { pathInLocaleMap: "label" },
   parentReferenceKey: "parent",
 })
 
-const ItemFeatureCost = DB.Enum(import.meta.url, {
-  name: "ItemFeatureCost",
+const ItemComponentCost = DB.Enum(import.meta.url, {
+  name: "ItemComponentCost",
   comment: "The cost in silverthalers.",
   values: () => ({
     Fixed: DB.EnumCase({
@@ -110,7 +115,7 @@ const ItemFeatureCost = DB.Enum(import.meta.url, {
     }),
     ByCombatTechnique: DB.EnumCase({
       comment: "The cost depends on the combat technique of the item it is applied to.",
-      type: DB.IncludeIdentifier(ItemFeatureCostByCombatTechnique),
+      type: DB.IncludeIdentifier(ItemComponentCostByCombatTechnique),
     }),
     Factor: DB.EnumCase({
       comment: "The cost is a percentage of the cost of the item it is applied to.",
@@ -123,16 +128,16 @@ const ItemFeatureCost = DB.Enum(import.meta.url, {
   }),
 })
 
-const ItemFeatureCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
-  name: "ItemFeatureCostByCombatTechnique",
+const ItemComponentCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
+  name: "ItemComponentCostByCombatTechnique",
   type: () =>
     DB.Object(
       {
         close: DB.Optional({
           comment: "The cost in silverthalers for close combat techniques.",
           type: DB.NestedEntityMap({
-            name: "ItemFeatureCostByCloseCombatTechnique",
-            namePlural: "ItemFeatureCostsByCloseCombatTechnique",
+            name: "ItemComponentCostByCloseCombatTechnique",
+            namePlural: "ItemComponentCostsByCloseCombatTechnique",
             secondaryEntity: CloseCombatTechnique,
             type: DB.Object({
               value: DB.Required({
@@ -141,7 +146,7 @@ const ItemFeatureCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
               }),
               translations: NestedTranslationMap(
                 DB.Optional,
-                "ItemFeatureCostByCloseCombatTechnique",
+                "ItemComponentCostByCloseCombatTechnique",
                 DB.Object({
                   label: DB.Required({
                     comment:
@@ -156,8 +161,8 @@ const ItemFeatureCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
         ranged: DB.Optional({
           comment: "The cost in silverthalers for ranged combat techniques.",
           type: DB.NestedEntityMap({
-            name: "ItemFeatureCostByRangedCombatTechnique",
-            namePlural: "ItemFeatureCostsByRangedCombatTechnique",
+            name: "ItemComponentCostByRangedCombatTechnique",
+            namePlural: "ItemComponentCostsByRangedCombatTechnique",
             secondaryEntity: RangedCombatTechnique,
             type: DB.Object({
               value: DB.Required({
@@ -166,7 +171,7 @@ const ItemFeatureCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
               }),
               translations: NestedTranslationMap(
                 DB.Optional,
-                "ItemFeatureCostByRangedCombatTechnique",
+                "ItemComponentCostByRangedCombatTechnique",
                 DB.Object({
                   label: DB.Required({
                     comment:
@@ -185,7 +190,7 @@ const ItemFeatureCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
 
 const ApplicableItems = DB.Enum(import.meta.url, {
   name: "ApplicableItems",
-  comment: "The items the feature can be applied to.",
+  comment: "The items the component can be applied to.",
   values: () => ({
     MeleeWeapon: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableMeleeWeapons) }),
     RangedWeapon: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableRangedWeapons) }),
@@ -200,21 +205,21 @@ const ApplicableMeleeWeapons = DB.TypeAlias(import.meta.url, {
     DB.Object(
       {
         weapons: DB.Optional({
-          comment: "Specific weapons this feature can be applied to.",
+          comment: "Specific weapons this component can be applied to.",
           type: DB.Array(WeaponIdentifier(), {
             minItems: 1,
             uniqueItems: true,
           }),
         }),
         combatTechniques: DB.Optional({
-          comment: "Weapons of combat techniques this feature can be applied to.",
+          comment: "Weapons of combat techniques this component can be applied to.",
           type: DB.Array(CloseCombatTechniqueIdentifier(), {
             minItems: 1,
             uniqueItems: true,
           }),
         }),
         category: DB.Optional({
-          comment: "The category of weapons this feature can be applied to.",
+          comment: "The category of weapons this component can be applied to.",
           type: DB.IncludeIdentifier(ApplicableMeleeWeaponCategory),
         }),
       },
@@ -236,14 +241,14 @@ const ApplicableRangedWeapons = DB.TypeAlias(import.meta.url, {
     DB.Object(
       {
         weapons: DB.Optional({
-          comment: "Specific weapons this feature can be applied to.",
+          comment: "Specific weapons this component can be applied to.",
           type: DB.Array(WeaponIdentifier(), {
             minItems: 1,
             uniqueItems: true,
           }),
         }),
         combatTechniques: DB.Optional({
-          comment: "Weapons of combat techniques this feature can be applied to.",
+          comment: "Weapons of combat techniques this component can be applied to.",
           type: DB.Array(RangedCombatTechniqueIdentifier(), {
             minItems: 1,
             uniqueItems: true,
@@ -269,14 +274,19 @@ const ApplicableAmmunition = DB.TypeAlias(import.meta.url, {
     DB.Object(
       {
         ammunition: DB.Optional({
-          comment: "Specific ammunition this feature can be applied to.",
+          comment: "Specific ammunition this component can be applied to.",
           type: DB.Array(AmmunitionIdentifier(), {
             minItems: 1,
             uniqueItems: true,
           }),
         }),
+        invertAmmunition: DB.Optional({
+          comment:
+            "Whether the list of ammunition is inverted, i.e. whether the component can be applied to all ammunition – or those of the specified category – except for the listed ammunition.",
+          type: DB.Boolean(),
+        }),
         category: DB.Optional({
-          comment: "The category of weapons this feature can be applied to.",
+          comment: "The category of weapons this component can be applied to.",
           type: DB.IncludeIdentifier(ApplicableAmmunitionCategory),
         }),
       },
@@ -296,14 +306,14 @@ const ApplicableArmor = DB.TypeAlias(import.meta.url, {
   type: () =>
     DB.Object({
       armor: DB.Optional({
-        comment: "Specific armor this feature can be applied to.",
+        comment: "Specific armor this component can be applied to.",
         type: DB.Array(ArmorIdentifier(), {
           minItems: 1,
           uniqueItems: true,
         }),
       }),
       category: DB.Optional({
-        comment: "The category of weapons this feature can be applied to.",
+        comment: "The category of weapons this component can be applied to.",
         type: DB.IncludeIdentifier(ApplicableArmorCategory),
       }),
     }),
@@ -314,4 +324,72 @@ const ApplicableArmorCategory = DB.Enum(import.meta.url, {
   values: () => ({
     Metal: DB.EnumCase({ type: null }),
   }),
+})
+
+const ItemComponentRules = DB.TypeAlias(import.meta.url, {
+  name: "ItemComponentRules",
+  type: () =>
+    DB.Object(
+      {
+        baseItemModifications: DB.Optional({
+          type: DB.IncludeIdentifier(ItemComponentBaseItemModifications),
+        }),
+      },
+      { minProperties: 1 },
+    ),
+})
+
+const ItemComponentBaseItemModifications = DB.TypeAlias(import.meta.url, {
+  name: "ItemComponentBaseItemModifications",
+  type: () =>
+    DB.Object(
+      {
+        damagePoints: DB.Optional({
+          comment:
+            "The damage points added to the damage points of the base item. Negative values lower the damage points.",
+          type: DB.Integer(),
+        }),
+        attackModifier: DB.Optional({
+          comment:
+            "The attack modifier added to the attack modifier of the base item. Negative values lower the attack modifier.",
+          type: DB.Integer(),
+        }),
+        parryModifier: DB.Optional({
+          comment:
+            "The parry modifier added to the parry modifier of the base item. Negative values lower the parry modifier.",
+          type: DB.Integer(),
+        }),
+        protection: DB.Optional({
+          comment:
+            "The protection added to the protection of the base item. Negative values lower the protection.",
+          type: DB.Integer(),
+        }),
+        encumbrance: DB.Optional({
+          comment:
+            "The encumbrance added to the encumbrance of the base item. Negative values lower the encumbrance.",
+          type: DB.Integer(),
+        }),
+        range: DB.Optional({
+          comment:
+            "The range added to the range of the base item. Negative values lower the range.",
+          type: DB.Integer(),
+        }),
+        reloadTime: DB.Optional({
+          comment:
+            "The reload time added to the reload time of the base item. Negative values lower the reload time.",
+          type: DB.Integer(),
+        }),
+        weight: DB.Optional({
+          comment:
+            "The weight added to the weight of the base item. Negative values lower the weight.",
+          type: DB.Float(),
+        }),
+        breakingPointRating: DB.Optional({
+          comment:
+            "The breaking point rating added to the breaking point rating of the base item. Negative values lower the breaking point rating.",
+          type: DB.Integer(),
+        }),
+      },
+      { minProperties: 1 },
+    ),
 })
