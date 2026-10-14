@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.100.0](https://github.com/Optolith/database-schema/compare/v0.99.0...v0.100.0) (2026-10-14)
+
+### ⚠ BREAKING CHANGES
+
+* advanced special abilities based on select option
+* allow multiple combat technique restrictions for combat special abilities
+* allow properties for rated minimum number prerequisite to be derived from special ability options for profession
+* item components
+
+### Features
+
+* advanced special abilities based on select option ([37128c8](https://github.com/Optolith/database-schema/commit/37128c8eacca5342c4c4868aae0610486552a5b3)), closes [#91](https://github.com/Optolith/database-schema/issues/91)
+* allow multiple combat technique restrictions for combat special abilities ([4a48db6](https://github.com/Optolith/database-schema/commit/4a48db6f164cee28cd3d796a4f05116a6c72e469)), closes [#182](https://github.com/Optolith/database-schema/issues/182)
+* allow properties for rated minimum number prerequisite to be derived from special ability options for profession ([142d175](https://github.com/Optolith/database-schema/commit/142d1757391dbd11110549c6ea848de418efffc3)), closes [#201](https://github.com/Optolith/database-schema/issues/201)
+* item components ([44eb7b4](https://github.com/Optolith/database-schema/commit/44eb7b45c37048954d779523addd0e74169e317b)), closes [#15](https://github.com/Optolith/database-schema/issues/15), references [#205](https://github.com/Optolith/database-schema/issues/205)
+* lock adventure points option in professions ([5f885db](https://github.com/Optolith/database-schema/commit/5f885dbadef7c9e733dca97b64e1fc9b27b5171e)), closes [#155](https://github.com/Optolith/database-schema/issues/155)
+* tradition may treat all spellworks with a specific property as their own ([6102602](https://github.com/Optolith/database-schema/commit/61026022ce314c74b7d167babf2f08e9d5f0e3c1))
+
+### Bug Fixes
+
+* invalid messageformat ([488c1bb](https://github.com/Optolith/database-schema/commit/488c1bba6e8eaca72d818e32ab4d77331f64803e))
+
 ## [0.99.0](https://github.com/Optolith/database-schema/compare/v0.98.0...v0.99.0) (2026-10-13)
 
 ### ⚠ BREAKING CHANGES
