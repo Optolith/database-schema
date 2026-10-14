@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.101.0](https://github.com/Optolith/database-schema/compare/v0.100.0...v0.101.0) (2026-10-14)
+
+### ⚠ BREAKING CHANGES
+
+* add rule prerequisite to professions
+* grouped commonness-rated entries
+* improve advanced special abilities and item components for rendering
+
+### Features
+
+* add rule prerequisite to professions ([9e2f929](https://github.com/Optolith/database-schema/commit/9e2f929f8bff22478200ba7dfcff76c5a26a0b89)), closes [#206](https://github.com/Optolith/database-schema/issues/206)
+* grouped commonness-rated entries ([29fe163](https://github.com/Optolith/database-schema/commit/29fe16309babd830c1215dcb6afa50635bc9c98d)), closes [#207](https://github.com/Optolith/database-schema/issues/207)
+* improve advanced special abilities and item components for rendering ([d3a96f1](https://github.com/Optolith/database-schema/commit/d3a96f17971f78fd72ee008bc36d74f14087a8a7))
+
+### Bug Fixes
+
+* item component can have a weight ([ebd8fce](https://github.com/Optolith/database-schema/commit/ebd8fce3697fc471c5bd7ae1634f5137ef2ae2db))
+
 ## [0.100.0](https://github.com/Optolith/database-schema/compare/v0.99.0...v0.100.0) (2026-10-14)
 
 ### ⚠ BREAKING CHANGES
