@@ -98,6 +98,7 @@ export const ProfessionPrerequisiteGroup = DB.Enum(import.meta.url, {
     Sex: DB.EnumCase({ type: DB.IncludeIdentifier(SexPrerequisite) }),
     Race: DB.EnumCase({ type: DB.IncludeIdentifier(RacePrerequisite) }),
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
+    Rule: DB.EnumCase({ type: DB.IncludeIdentifier(RulePrerequisite) }),
     Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({
