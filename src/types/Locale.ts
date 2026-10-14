@@ -1137,6 +1137,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "the SR for {$skill} combined must add up to at least {$minRating}": null,
           ".input {$minRating :number} {{{$count} on at least SR {$minRating}: {$list}}}": null,
           ".input {$count :number} .input {$minRating :number} {{{$count} arcane works with the property {$property} at SR {$minRating} or higher}}": null,
+          ".input {$count :number} {{at least {$count} arcane works with properties for {$specialAbility}}}": null,
           ".input {$count :number} .input {$minRating :number} {{{$count} liturgical chants and ceremonies with the aspect {$aspect} at SR {$minRating} or higher}}": null,
           ".input {$count :number} {{{$count} of the following skills}}": null,
           ".input {$count :number} {{{$count} combat techniques}}": null,
@@ -1637,6 +1638,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Pieces of Armor": null,
           "Weapon Accessories": null,
           "Armor Accessories": null,
+          "Item Components": null,
           "Clothes": null,
           "Clothing Packages for Social Status": null,
           "Travel Gear and Tools": null,
@@ -1933,6 +1935,13 @@ const LocaleMeasurementAdjustments = DB.TypeAlias(import.meta.url, {
     ),
 })
 
+type PossibleNestedType<T extends Record<string, DB.MemberDecl>> =
+  | DB.Object<T>
+  | DB.IncludeIdentifier<
+      DB.TypeParameter[],
+      DB.TypeAlias<string, PossibleNestedType<T>, DB.TypeParameter[]>
+    >
+
 export const NestedTranslationMap = <
   Name extends string,
   T extends Record<string, DB.MemberDecl>,
@@ -1944,7 +1953,7 @@ export const NestedTranslationMap = <
     type: T
   }) => DB.MemberDecl<T, R>,
   entityName: Name,
-  type: DB.Object<T>,
+  type: DB.Object<T> | DB.IncludeIdentifier<[], DB.TypeAlias<string, PossibleNestedType<T>, []>>,
 ) =>
   MemberDeclCreator({
     comment: "All translations for the entry, identified by IETF language tag (BCP47).",

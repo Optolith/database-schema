@@ -143,13 +143,7 @@ const ItemComponentCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
               translations: NestedTranslationMap(
                 DB.Optional,
                 "ItemComponentCostByCloseCombatTechnique",
-                DB.Object({
-                  label: DB.Required({
-                    comment:
-                      "The label for cost, if different from the name of the combat technique.",
-                    type: DB.String({ minLength: 1 }),
-                  }),
-                }),
+                DB.IncludeIdentifier(ItemComponentCostByCombatTechniqueTranslation),
               ),
             }),
           }),
@@ -168,13 +162,7 @@ const ItemComponentCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
               translations: NestedTranslationMap(
                 DB.Optional,
                 "ItemComponentCostByRangedCombatTechnique",
-                DB.Object({
-                  label: DB.Required({
-                    comment:
-                      "The label for cost, if different from the name of the combat technique.",
-                    type: DB.String({ minLength: 1 }),
-                  }),
-                }),
+                DB.IncludeIdentifier(ItemComponentCostByCombatTechniqueTranslation),
               ),
             }),
           }),
@@ -182,6 +170,17 @@ const ItemComponentCostByCombatTechnique = DB.TypeAlias(import.meta.url, {
       },
       { minProperties: 1 },
     ),
+})
+
+const ItemComponentCostByCombatTechniqueTranslation = DB.TypeAlias(import.meta.url, {
+  name: "ItemComponentCostByCombatTechniqueTranslation",
+  type: () =>
+    DB.Object({
+      label: DB.Required({
+        comment: "The label for cost, if different from the name of the combat technique.",
+        type: DB.String({ minLength: 1 }),
+      }),
+    }),
 })
 
 const ApplicableItems = DB.Enum(import.meta.url, {

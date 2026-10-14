@@ -338,7 +338,7 @@ const SpecificApplicableCombatTechnique = DB.TypeAlias(import.meta.url, {
       restrictions: DB.Optional({
         type: DB.IncludeIdentifier(ApplicableSpecificCombatTechniquesRestrictions),
       }),
-      translation: NestedTranslationMap(
+      translations: NestedTranslationMap(
         DB.Optional,
         "SpecificApplicableCombatTechnique",
         DB.Object({
@@ -348,10 +348,6 @@ const SpecificApplicableCombatTechnique = DB.TypeAlias(import.meta.url, {
           }),
         }),
       ),
-      weapons: DB.Optional({
-        comment: "The specific weapons this combat special ability is only applicable to.",
-        type: DB.Array(WeaponIdentifier(), { minItems: 1 }),
-      }),
     }),
 })
 
@@ -444,6 +440,10 @@ const ApplicableSpecificCombatTechniquesRestrictions = DB.TypeAlias(import.meta.
           type: DB.Integer({ minimum: 1 }),
         }),
         hasOneBluntSide: DB.Optional({ type: DB.Boolean() }),
+        weapons: DB.Optional({
+          comment: "The specific weapons this combat special ability is only applicable to.",
+          type: DB.Array(WeaponIdentifier(), { minItems: 1 }),
+        }),
       },
       { minProperties: 1 },
     ),
