@@ -12,6 +12,7 @@ import {
   AttributeIdentifier,
   InfluenceIdentifier,
   MagicalTraditionIdentifier,
+  PropertyIdentifier,
 } from "../_Identifier.js"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
@@ -75,6 +76,11 @@ export const MagicalTradition = DB.Entity(import.meta.url, {
         comment:
           "If arcane spellworks from a different tradition count as arcane spellworks of this tradition, this is the different tradition’s reference.",
         type: MagicalTraditionIdentifier(),
+      }),
+      use_arcane_spellworks_from_property: DB.Optional({
+        comment:
+          "If arcane spellworks with a specific property count as arcane spellworks of this tradition, this is the property’s reference.",
+        type: PropertyIdentifier(),
       }),
       influences: DB.Optional({
         comment: "The influences for the tradition. Influences are enabled by Focus Rules.",
