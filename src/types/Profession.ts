@@ -662,6 +662,9 @@ const ProfessionPackageOptions = DB.TypeAlias(import.meta.url, {
         liturgies: DB.Optional({
           type: DB.IncludeIdentifier(LiturgiesOptions),
         }),
+        lockAdventurePoints: DB.Optional({
+          type: DB.IncludeIdentifier(LockAdventurePointsOption),
+        }),
       },
       { minProperties: 1 },
     ),
@@ -955,6 +958,25 @@ const SpecialAbilitiesForAdventurePointsOption = DB.TypeAlias(import.meta.url, {
       apValue: DB.Required({
         comment: "The AP value you can buy special abilities for.",
         type: DB.Integer({ minimum: 1 }),
+      }),
+    }),
+})
+
+const LockAdventurePointsOption = DB.TypeAlias(import.meta.url, {
+  name: "LockAdventurePointsOption",
+  comment: `Keep AP for use after character creation to buy or improve entries.`,
+  type: () =>
+    DB.Object({
+      apValue: DB.Required({
+        comment: "The AP value that is going to be locked for later use.",
+        type: DB.Integer({ minimum: 1 }),
+      }),
+      entries: DB.Required({
+        comment: "The entries the AP can be used for.",
+        type: DB.Array(DB.IncludeIdentifier(SpellworkIdentifier), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
     }),
 })
