@@ -292,8 +292,8 @@ const AllApplicableCombatTechniques = DB.TypeAlias(import.meta.url, {
   name: "AllApplicableCombatTechniques",
   type: () =>
     DB.Object({
-      restriction: DB.Optional({
-        type: DB.IncludeIdentifier(ApplicableAllCombatTechniquesRestriction),
+      restrictions: DB.Optional({
+        type: DB.IncludeIdentifier(ApplicableAllCombatTechniquesRestrictions),
       }),
     }),
 })
@@ -302,8 +302,8 @@ const AllApplicableCloseCombatTechniques = DB.TypeAlias(import.meta.url, {
   name: "AllApplicableCloseCombatTechniques",
   type: () =>
     DB.Object({
-      restriction: DB.Optional({
-        type: DB.IncludeIdentifier(ApplicableCloseCombatTechniquesRestriction),
+      restrictions: DB.Optional({
+        type: DB.IncludeIdentifier(ApplicableCloseCombatTechniquesRestrictions),
       }),
     }),
 })
@@ -312,8 +312,8 @@ const AllApplicableRangedCombatTechniques = DB.TypeAlias(import.meta.url, {
   name: "AllApplicableRangedCombatTechniques",
   type: () =>
     DB.Object({
-      restriction: DB.Optional({
-        type: DB.IncludeIdentifier(ApplicableRangedCombatTechniquesRestriction),
+      restrictions: DB.Optional({
+        type: DB.IncludeIdentifier(ApplicableRangedCombatTechniquesRestrictions),
       }),
     }),
 })
@@ -335,15 +335,15 @@ const SpecificApplicableCombatTechnique = DB.TypeAlias(import.meta.url, {
       id: DB.Required({
         type: DB.IncludeIdentifier(CombatTechniqueIdentifier),
       }),
-      restriction: DB.Optional({
-        type: DB.IncludeIdentifier(ApplicableSpecificCombatTechniquesRestriction),
+      restrictions: DB.Optional({
+        type: DB.IncludeIdentifier(ApplicableSpecificCombatTechniquesRestrictions),
       }),
       translation: NestedTranslationMap(
         DB.Optional,
         "SpecificApplicableCombatTechnique",
         DB.Object({
-          restriction: DB.Required({
-            comment: "The additional restriction of the combat technique.",
+          restrictions: DB.Required({
+            comment: "The additional restriction(s) of the combat technique.",
             type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
         }),
@@ -355,65 +355,98 @@ const SpecificApplicableCombatTechnique = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const ApplicableAllCombatTechniquesRestriction = DB.Enum(import.meta.url, {
-  name: "ApplicableAllCombatTechniquesRestriction",
+const ApplicableAllCombatTechniquesRestrictions = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableAllCombatTechniquesRestrictions",
+  type: () =>
+    DB.Object(
+      {
+        isImprovised: DB.Optional({ type: DB.Boolean() }),
+        hasPointedBlade: DB.Optional({ type: DB.Boolean() }),
+        whileMounted: DB.Optional({ type: DB.Boolean() }),
+        race: DB.Optional({ type: RaceIdentifier() }),
+        excludeCombatTechniques: DB.Optional({
+          type: DB.GenIncludeIdentifier(
+            ApplicableCombatTechniquesNegativeCombatTechniquesRestriction,
+            [DB.IncludeIdentifier(CombatTechniqueIdentifier)],
+          ),
+        }),
+      },
+      { minProperties: 1 },
+    ),
+})
+
+const ApplicableCloseCombatTechniquesRestrictions = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableCloseCombatTechniquesRestrictions",
+  type: () =>
+    DB.Object(
+      {
+        isImprovised: DB.Optional({ type: DB.Boolean() }),
+        hasPointedBlade: DB.Optional({ type: DB.Boolean() }),
+        whileMounted: DB.Optional({ type: DB.Boolean() }),
+        hasParry: DB.Optional({ type: DB.Boolean() }),
+        isOneHanded: DB.Optional({ type: DB.Boolean() }),
+        isTwoHanded: DB.Optional({ type: DB.Boolean() }),
+        isParryingWeapon: DB.Optional({ type: DB.Boolean() }),
+        race: DB.Optional({ type: RaceIdentifier() }),
+        weaponClass: DB.Optional({
+          comment: "Only a class of melee weapon is allowed",
+          type: DB.IncludeIdentifier(MeleeWeaponClass),
+        }),
+        excludeCombatTechniques: DB.Optional({
+          type: DB.GenIncludeIdentifier(
+            ApplicableCombatTechniquesNegativeCombatTechniquesRestriction,
+            [CloseCombatTechniqueIdentifier()],
+          ),
+        }),
+      },
+      { minProperties: 1 },
+    ),
+})
+
+export const MeleeWeaponClass = DB.Enum(import.meta.url, {
+  name: "MeleeWeaponClass",
   values: () => ({
-    Improvised: DB.EnumCase({ type: null }),
-    PointedBlade: DB.EnumCase({ type: null }),
-    Mount: DB.EnumCase({ type: null }),
-    Race: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableCombatTechniquesRaceRestriction) }),
-    ExcludeCombatTechniques: DB.EnumCase({
-      type: DB.GenIncludeIdentifier(ApplicableCombatTechniquesNegativeCombatTechniquesRestriction, [
-        DB.IncludeIdentifier(CombatTechniqueIdentifier),
-      ]),
-    }),
+    Axe: DB.EnumCase({ type: null }),
   }),
 })
 
-const ApplicableCloseCombatTechniquesRestriction = DB.Enum(import.meta.url, {
-  name: "ApplicableCloseCombatTechniquesRestriction",
-  values: () => ({
-    Improvised: DB.EnumCase({ type: null }),
-    PointedBlade: DB.EnumCase({ type: null }),
-    Mount: DB.EnumCase({ type: null }),
-    HasParry: DB.EnumCase({ type: null }),
-    OneHanded: DB.EnumCase({ type: null }),
-    TwoHanded: DB.EnumCase({ type: null }),
-    ParryingWeapon: DB.EnumCase({ type: null }),
-    Race: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableCombatTechniquesRaceRestriction) }),
-    ExcludeCombatTechniques: DB.EnumCase({
-      type: DB.GenIncludeIdentifier(ApplicableCombatTechniquesNegativeCombatTechniquesRestriction, [
-        CloseCombatTechniqueIdentifier(),
-      ]),
-    }),
-  }),
+const ApplicableRangedCombatTechniquesRestrictions = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableRangedCombatTechniquesRestrictions",
+  type: () =>
+    DB.Object(
+      {
+        isImprovised: DB.Optional({ type: DB.Boolean() }),
+        hasPointedBlade: DB.Optional({ type: DB.Boolean() }),
+        whileMounted: DB.Optional({ type: DB.Boolean() }),
+        race: DB.Optional({ type: RaceIdentifier() }),
+        excludeCombatTechniques: DB.Optional({
+          type: DB.GenIncludeIdentifier(
+            ApplicableCombatTechniquesNegativeCombatTechniquesRestriction,
+            [RangedCombatTechniqueIdentifier()],
+          ),
+        }),
+      },
+      { minProperties: 1 },
+    ),
 })
 
-const ApplicableRangedCombatTechniquesRestriction = DB.Enum(import.meta.url, {
-  name: "ApplicableRangedCombatTechniquesRestriction",
-  values: () => ({
-    Improvised: DB.EnumCase({ type: null }),
-    PointedBlade: DB.EnumCase({ type: null }),
-    Mount: DB.EnumCase({ type: null }),
-    Race: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableCombatTechniquesRaceRestriction) }),
-    ExcludeCombatTechniques: DB.EnumCase({
-      type: DB.GenIncludeIdentifier(ApplicableCombatTechniquesNegativeCombatTechniquesRestriction, [
-        RangedCombatTechniqueIdentifier(),
-      ]),
-    }),
-  }),
-})
-
-const ApplicableSpecificCombatTechniquesRestriction = DB.Enum(import.meta.url, {
-  name: "ApplicableSpecificCombatTechniquesRestriction",
-  values: () => ({
-    Improvised: DB.EnumCase({ type: null }),
-    PointedBlade: DB.EnumCase({ type: null }),
-    Mount: DB.EnumCase({ type: null }),
-    Race: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableCombatTechniquesRaceRestriction) }),
-    Level: DB.EnumCase({ type: DB.IncludeIdentifier(ApplicableCombatTechniquesLevelRestriction) }),
-    OneBluntSide: DB.EnumCase({ type: null }),
-  }),
+const ApplicableSpecificCombatTechniquesRestrictions = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableSpecificCombatTechniquesRestrictions",
+  type: () =>
+    DB.Object(
+      {
+        isImprovised: DB.Optional({ type: DB.Boolean() }),
+        hasPointedBlade: DB.Optional({ type: DB.Boolean() }),
+        whileMounted: DB.Optional({ type: DB.Boolean() }),
+        race: DB.Optional({ type: RaceIdentifier() }),
+        level: DB.Optional({
+          comment: "The combat special ability is only applicable on a certain level.",
+          type: DB.Integer({ minimum: 1 }),
+        }),
+        hasOneBluntSide: DB.Optional({ type: DB.Boolean() }),
+      },
+      { minProperties: 1 },
+    ),
 })
 
 const ApplicableCombatTechniquesNegativeCombatTechniquesRestriction = DB.GenTypeAlias(
@@ -430,19 +463,3 @@ const ApplicableCombatTechniquesNegativeCombatTechniquesRestriction = DB.GenType
       }),
   },
 )
-
-const ApplicableCombatTechniquesRaceRestriction = DB.TypeAlias(import.meta.url, {
-  name: "ApplicableCombatTechniquesRaceRestriction",
-  type: () => RaceIdentifier(),
-})
-
-const ApplicableCombatTechniquesLevelRestriction = DB.TypeAlias(import.meta.url, {
-  name: "ApplicableCombatTechniquesLevelRestriction",
-  type: () =>
-    DB.Object({
-      level: DB.Required({
-        comment: "The combat special ability is only applicable on a certain level.",
-        type: DB.Integer({ minimum: 1 }),
-      }),
-    }),
-})
