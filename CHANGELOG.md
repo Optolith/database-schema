@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.103.0](https://github.com/Optolith/database-schema/compare/v0.102.1...v0.103.0) (2026-10-15)
+
+### ⚠ BREAKING CHANGES
+
+* close combat technique can validate presence of attack modifier
+
+### Features
+
+* close combat technique can validate presence of attack modifier ([e9cef1b](https://github.com/Optolith/database-schema/commit/e9cef1b22987ef4137588e666125c914f402a4f1))
+* prepare future migration stages ([7719ecc](https://github.com/Optolith/database-schema/commit/7719eccbcb188c7bb2f9fcb377c598605d8855cc))
+
 ## [0.102.1](https://github.com/Optolith/database-schema/compare/v0.102.0...v0.102.1) (2026-10-15)
 
 ## [0.102.0](https://github.com/Optolith/database-schema/compare/v0.101.0...v0.102.0) (2026-10-15)
