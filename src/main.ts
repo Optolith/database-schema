@@ -27,6 +27,7 @@ export interface TSONDBTypes {
 }
 
 export const schema = new Schema<TSONDBTypes>(
+  (await import("../package.json", { with: { type: "json" } })).default.version,
   [
     Types.AdvancedCombatSpecialAbility,
     Types.AdvancedKarmaSpecialAbility,
