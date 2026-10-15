@@ -111,8 +111,18 @@ export const CombatUse = DB.Enum(import.meta.url, {
   }),
 })
 
-export const StructurePoints = DB.TypeAlias(import.meta.url, {
+export const StructurePoints = DB.Enum(import.meta.url, {
   name: "StructurePoints",
+  comment:
+    "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points. The item may also be declared as unbreakable, in which case the item has no structure points.",
+  values: () => ({
+    Unbreakable: DB.EnumCase({ type: null }),
+    Points: DB.EnumCase({ type: DB.IncludeIdentifier(StructurePointsPoints) }),
+  }),
+})
+
+const StructurePointsPoints = DB.TypeAlias(import.meta.url, {
+  name: "StructurePointsPoints",
   comment:
     "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.",
   type: () => DB.Array(DB.IncludeIdentifier(StructurePointsComponent), { minItems: 1 }),

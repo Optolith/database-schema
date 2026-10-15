@@ -1625,6 +1625,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Medium Shield": null,
           "Small Shield": null,
           "{$value} structure points": null,
+          "unbreakable": null,
           "additional {$value} AT for main weapon": null,
           "Price": null,
           "all armor": null,
