@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.103.2](https://github.com/Optolith/database-schema/compare/v0.103.1...v0.103.2) (2026-10-15)
+
+### Features
+
+* talisman may have weight and rules without actual combat values ([99d2c40](https://github.com/Optolith/database-schema/commit/99d2c40ea0baa2fa0cb5fa2e03a9c7f5d9d3d538))
+
 ## [0.103.1](https://github.com/Optolith/database-schema/compare/v0.103.0...v0.103.1) (2026-10-15)
 
 ### Features
