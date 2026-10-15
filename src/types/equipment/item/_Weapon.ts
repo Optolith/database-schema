@@ -68,6 +68,7 @@ export const checkWeaponCombatTechniqueIntegrity = ({
   instanceContent,
   getInstanceById,
   getDisplayNameAndId,
+  allowNoUses,
 }: {
   instanceContent: {
     melee_uses?: Record<string, GenMeleeWeapon<unknown>>
@@ -77,6 +78,7 @@ export const checkWeaponCombatTechniqueIntegrity = ({
   }
   getInstanceById: GetInstanceById
   getDisplayNameAndId: GetDisplayNameAndId
+  allowNoUses?: boolean
 }): string[] => {
   const checkPart = (
     rule: WeaponCombatTechniqueValueRule,
@@ -90,6 +92,7 @@ export const checkWeaponCombatTechniqueIntegrity = ({
       : `${name} must${rule.kind === "Required" ? "" : " not"} be provided for ${type} combat technique ${getDisplayNameAndId(type === "close" ? "CloseCombatTechnique" : "RangedCombatTechnique", id)}`
 
   return [
+    allowNoUses !== true &&
     instanceContent.melee_uses === undefined &&
     instanceContent.ranged_uses === undefined &&
     instanceContent.meleeUses === undefined &&

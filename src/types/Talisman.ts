@@ -68,6 +68,7 @@ export const Talisman = DB.Entity(import.meta.url, {
           instanceContent: instanceContent.combatUse,
           getDisplayNameAndId,
           getInstanceById,
+          allowNoUses: true,
         })
       : [],
 })
