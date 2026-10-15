@@ -212,7 +212,7 @@ const ApplicableMeleeWeapons = DB.TypeAlias(import.meta.url, {
         }),
         combatTechniques: DB.Optional({
           comment: "Weapons of combat techniques this component can be applied to.",
-          type: DB.Array(CloseCombatTechniqueIdentifier(), {
+          type: DB.Array(DB.IncludeIdentifier(ApplicableMeleeCombatTechnique), {
             minItems: 1,
             uniqueItems: true,
           }),
@@ -226,11 +226,34 @@ const ApplicableMeleeWeapons = DB.TypeAlias(import.meta.url, {
     ),
 })
 
+const ApplicableMeleeCombatTechnique = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableMeleeCombatTechnique",
+  type: () =>
+    DB.Object({
+      combatTechnique: DB.Required({
+        comment: "The combat technique this component can be applied to.",
+        type: CloseCombatTechniqueIdentifier(),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "ApplicableMeleeCombatTechnique",
+        DB.Object({
+          text: DB.Required({
+            comment:
+              "The name that should be displayed if the name of combat technique should not be used.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
+})
+
 const ApplicableMeleeWeaponCategory = DB.Enum(import.meta.url, {
   name: "ApplicableMeleeWeaponCategory",
   values: () => ({
     HasMetalSurface: DB.EnumCase({ type: null }),
     HasMetalBladeOrTip: DB.EnumCase({ type: null }),
+    HasWrappableHandle: DB.EnumCase({ type: null }),
   }),
 })
 
@@ -248,7 +271,7 @@ const ApplicableRangedWeapons = DB.TypeAlias(import.meta.url, {
         }),
         combatTechniques: DB.Optional({
           comment: "Weapons of combat techniques this component can be applied to.",
-          type: DB.Array(RangedCombatTechniqueIdentifier(), {
+          type: DB.Array(DB.IncludeIdentifier(ApplicableRangedCombatTechnique), {
             minItems: 1,
             uniqueItems: true,
           }),
@@ -265,6 +288,28 @@ const ApplicableRangedWeapons = DB.TypeAlias(import.meta.url, {
       },
       { minProperties: 1 },
     ),
+})
+
+const ApplicableRangedCombatTechnique = DB.TypeAlias(import.meta.url, {
+  name: "ApplicableRangedCombatTechnique",
+  type: () =>
+    DB.Object({
+      combatTechnique: DB.Required({
+        comment: "The combat technique this component can be applied to.",
+        type: RangedCombatTechniqueIdentifier(),
+      }),
+      translations: NestedTranslationMap(
+        DB.Optional,
+        "ApplicableRangedCombatTechnique",
+        DB.Object({
+          text: DB.Required({
+            comment:
+              "The name that should be displayed if the name of combat technique should not be used.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
 })
 
 const ApplicableAmmunition = DB.TypeAlias(import.meta.url, {
