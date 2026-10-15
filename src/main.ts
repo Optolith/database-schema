@@ -1,3 +1,4 @@
+import type { MigrationStage } from "tsondb"
 import { Schema } from "tsondb/schema"
 import type {
   ChildEntityMap,
@@ -209,3 +210,5 @@ export const schema = new Schema<TSONDBTypes>(
   ],
   Types.Locale,
 )
+
+export const migrationStages: MigrationStage<TSONDBTypes>[] = []
