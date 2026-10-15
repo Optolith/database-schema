@@ -102,6 +102,13 @@ export const checkWeaponCombatTechniqueIntegrity = ({
         const ct = getInstanceById("CloseCombatTechnique", ctId)!
         return [
           checkPart(
+            ct.special.hasAttackModifier,
+            meleeUse.attackModifier,
+            "an attack modifier",
+            "close",
+            ctId,
+          ),
+          checkPart(
             ct.special.can_parry,
             meleeUse.parryModifier,
             "a parry modifier",

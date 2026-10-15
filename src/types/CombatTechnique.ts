@@ -79,6 +79,10 @@ const CloseCombatTechniqueSpecialRules = DB.TypeAlias(import.meta.url, {
   comment: "Special rules for the combat technique that apply to all weapons in this category.",
   type: () =>
     DB.Object({
+      hasAttackModifier: DB.Required({
+        comment: "Do weapons of this combat technique have an attack modifier?",
+        type: DB.IncludeIdentifier(WeaponCombatTechniqueValueRule),
+      }),
       can_parry: DB.Required({
         comment: "Is parrying possible with this combat technique?",
         type: DB.IncludeIdentifier(WeaponCombatTechniqueValueRule),
