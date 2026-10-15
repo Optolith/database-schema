@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.102.0](https://github.com/Optolith/database-schema/compare/v0.101.0...v0.102.0) (2026-10-15)
+
+### ⚠ BREAKING CHANGES
+
+* more features and translations for item components
+
+### Features
+
+* more features and translations for item components ([84b3b3c](https://github.com/Optolith/database-schema/commit/84b3b3c99acd093c1cead0a4d993fe4c92259815))
+
 ## [0.101.0](https://github.com/Optolith/database-schema/compare/v0.100.0...v0.101.0) (2026-10-14)
 
 ### ⚠ BREAKING CHANGES
