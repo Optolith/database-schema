@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.103.1](https://github.com/Optolith/database-schema/compare/v0.103.0...v0.103.1) (2026-10-15)
+
+### Features
+
+* add optional complexity to animal care ([cff0eea](https://github.com/Optolith/database-schema/commit/cff0eea7bdfd60b8a8409776c076f456e4794bbe))
+
 ## [0.103.0](https://github.com/Optolith/database-schema/compare/v0.102.1...v0.103.0) (2026-10-15)
 
 ### ⚠ BREAKING CHANGES
