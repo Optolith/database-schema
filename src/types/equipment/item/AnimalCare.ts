@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { src } from "../../source/_PublicationRef.js"
-import { Cost, DefaultItemTranslations, FixedCost, Weight } from "./_Item.js"
+import { Complexity, Cost, DefaultItemTranslations, FixedCost, Weight } from "./_Item.js"
 
 export const AnimalCare = DB.Entity(import.meta.url, {
   name: "AnimalCare",
@@ -10,6 +10,10 @@ export const AnimalCare = DB.Entity(import.meta.url, {
       type: DB.Required({
         comment: "Values depending on whether the animal care is feed.",
         type: DB.IncludeIdentifier(AnimalCareType),
+      }),
+      complexity: DB.Optional({
+        comment: "The complexity of crafting the item.",
+        type: DB.IncludeIdentifier(Complexity),
       }),
       src,
       translations: DefaultItemTranslations("AnimalCare"),
