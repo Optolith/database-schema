@@ -114,9 +114,9 @@ export const CombatUse = DB.Enum(import.meta.url, {
 export const StructurePoints = DB.Enum(import.meta.url, {
   name: "StructurePoints",
   comment:
-    "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points. The item may also be declared as unbreakable, in which case the item has no structure points.",
+    "The structure points of the item. Use an array if the item consists of multiple components that have individual structure points. The item may also be declared as indestructible, in which case the item has no structure points.",
   values: () => ({
-    Unbreakable: DB.EnumCase({ type: null }),
+    Indestructible: DB.EnumCase({ type: null }),
     Points: DB.EnumCase({ type: DB.IncludeIdentifier(StructurePointsPoints) }),
   }),
 })
