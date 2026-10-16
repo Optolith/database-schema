@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.107.1](https://github.com/Optolith/database-schema/compare/v0.107.0...v0.107.1) (2026-10-16)
+
+### Features
+
+* add trigger and type fields to magical artifacts ([e9cf0c7](https://github.com/Optolith/database-schema/commit/e9cf0c713c684e9248a8aa4d435c6739aaebcd6b))
+
 ## [0.107.0](https://github.com/Optolith/database-schema/compare/v0.106.1...v0.107.0) (2026-10-16)
 
 ### ⚠ BREAKING CHANGES
