@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.106.1](https://github.com/Optolith/database-schema/compare/v0.106.0...v0.106.1) (2026-10-16)
+
+### Features
+
+* rule prerequisites for equipment ([db0785f](https://github.com/Optolith/database-schema/commit/db0785f4dec591ef94e8a65b2a4d396976d11fbc))
+
 ## [0.106.0](https://github.com/Optolith/database-schema/compare/v0.105.0...v0.106.0) (2026-10-16)
 
 ### ⚠ BREAKING CHANGES
