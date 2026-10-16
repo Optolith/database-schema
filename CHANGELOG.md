@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.107.0](https://github.com/Optolith/database-schema/compare/v0.106.1...v0.107.0) (2026-10-16)
+
+### ⚠ BREAKING CHANGES
+
+* optional animal care weight
+
+### Features
+
+* optional animal care weight ([8b1b1a4](https://github.com/Optolith/database-schema/commit/8b1b1a4195016b6606ebae13862674b7455bc956))
+
 ## [0.106.1](https://github.com/Optolith/database-schema/compare/v0.106.0...v0.106.1) (2026-10-16)
 
 ### Features
