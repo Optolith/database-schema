@@ -2,18 +2,18 @@ import * as DB from "tsondb/schema/dsl"
 import { effect, levels, maximum, name, name_in_library } from "../_Activatable.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
 import { nameBuilderRules } from "../_ActivatableNames.ts"
-import { aspectOptional } from "../_ActivatableNonMundane.js"
 import {
   explicit_select_options,
   select_options,
   verifySelectOptionRules,
 } from "../_ActivatableSelectOptions.js"
 import { skill_applications, skill_uses } from "../_ActivatableSkillApplicationsAndUses.js"
-import { CeremonialItemSpecialAbilityGroupIdentifier } from "../_Identifier.ts"
+import { AspectIdentifier, CeremonialItemSpecialAbilityGroupIdentifier } from "../_Identifier.ts"
 import { GeneralPrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
 import { src } from "../source/_PublicationRef.js"
+import { BlessedTradition } from "./BlessedTradition.ts"
 
 export const CeremonialItemSpecialAbility = DB.Entity(import.meta.url, {
   name: "CeremonialItemSpecialAbility",
@@ -30,7 +30,10 @@ export const CeremonialItemSpecialAbility = DB.Entity(import.meta.url, {
       skill_applications,
       skill_uses,
       maximum,
-      aspect: aspectOptional(),
+      aspect: DB.Optional({
+        comment: "The blessed aspect.",
+        type: DB.IncludeIdentifier(CeremonialItemSpecialAbilityAspect),
+      }),
       prerequisites: DB.Optional({
         type: DB.IncludeIdentifier(GeneralPrerequisites),
       }),
@@ -102,4 +105,32 @@ export const CeremonialItemSpecialAbility = DB.Entity(import.meta.url, {
     ],
   ],
   customConstraints: deps => verifySelectOptionRules("CeremonialItemSpecialAbility", deps),
+})
+
+const CeremonialItemSpecialAbilityAspect = DB.Enum(import.meta.url, {
+  name: "CeremonialItemSpecialAbilityAspect",
+  values: () => ({
+    Single: DB.EnumCase({ type: DB.IncludeIdentifier(SingleCeremonialItemSpecialAbilityAspect) }),
+    ByTradition: DB.EnumCase({
+      type: DB.IncludeIdentifier(CeremonialItemSpecialAbilityAspectByTradition),
+    }),
+  }),
+})
+
+const SingleCeremonialItemSpecialAbilityAspect = DB.TypeAlias(import.meta.url, {
+  name: "SingleCeremonialItemSpecialAbilityAspect",
+  type: () => AspectIdentifier(),
+})
+
+const CeremonialItemSpecialAbilityAspectByTradition = DB.TypeAlias(import.meta.url, {
+  name: "CeremonialItemSpecialAbilityAspectByTradition",
+  type: () =>
+    DB.NestedEntityMap({
+      name: "CeremonialItemSpecialAbilityAspectForTradition",
+      namePlural: "CeremonialItemSpecialAbilityAspectForTraditions",
+      secondaryEntity: BlessedTradition,
+      type: DB.Object({
+        aspect: DB.Required({ type: AspectIdentifier() }),
+      }),
+    }),
 })

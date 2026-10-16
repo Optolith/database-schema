@@ -588,9 +588,3 @@ export const aspect = () =>
     comment: "The blessed aspect.",
     type: AspectIdentifier(),
   })
-
-export const aspectOptional = () =>
-  DB.Optional({
-    comment: "The blessed aspect.",
-    type: AspectIdentifier(),
-  })
