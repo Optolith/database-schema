@@ -1,11 +1,11 @@
 import * as DB from "tsondb/schema/dsl"
-import { BlessedTraditionIdentifier } from "../../_Identifier.js"
 import { src } from "../../source/_PublicationRef.js"
 import {
   CombatUse,
   Complexity,
   Cost,
   DefaultItemTranslations,
+  RestrictedToBlessedTraditionsScope,
   StructurePoints,
   Weight,
 } from "./_Item.js"
@@ -35,7 +35,7 @@ export const CeremonialItem = DB.Entity(import.meta.url, {
       }),
       associated_tradition: DB.Required({
         comment: "The deity associated with the equipment item.",
-        type: BlessedTraditionIdentifier(),
+        type: DB.IncludeIdentifier(RestrictedToBlessedTraditionsScope),
       }),
       combat_use: DB.Optional({
         comment:
