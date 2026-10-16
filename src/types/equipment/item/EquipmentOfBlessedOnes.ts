@@ -1,5 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { BlessedTraditionIdentifier } from "../../_Identifier.ts"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { src } from "../../source/_PublicationRef.js"
 import { CombatUse, Cost, DefaultItemTranslations, StructurePoints } from "./_Item.js"
 import { checkWeaponCombatTechniqueIntegrity } from "./_Weapon.js"
@@ -29,6 +30,11 @@ export const EquipmentOfBlessedOnes = DB.Entity(import.meta.url, {
         comment:
           "The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.",
         type: DB.IncludeIdentifier(CombatUse),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: DefaultItemTranslations("EquipmentOfBlessedOnes"),

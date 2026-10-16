@@ -4,6 +4,7 @@ import * as DB from "tsondb/schema/dsl"
 import type { GetDisplayNameAndId, GetInstanceById } from "tsondb/schema/gen"
 import type { Item as ItemType, ValueRule } from "../../../../gen/types.js"
 import { EquipmentCategoryIdentifier } from "../../_Identifier.ts"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { CloseCombatTechnique, RangedCombatTechnique } from "../../CombatTechnique.ts"
 import { NestedTranslationMap } from "../../Locale.ts"
 import { Errata } from "../../source/_Erratum.ts"
@@ -89,6 +90,11 @@ export const Item = DB.Entity(import.meta.url, {
       knownItemSpecifics: DB.Optional({
         comment: "The weapon is a known item, which implies some additional values.",
         type: DB.IncludeIdentifier(KnownItemSpecifics),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

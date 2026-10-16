@@ -7,6 +7,7 @@ import {
   RangedCombatTechniqueIdentifier,
   WeaponIdentifier,
 } from "../../_Identifier.ts"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { CloseCombatTechnique, RangedCombatTechnique } from "../../CombatTechnique.ts"
 import { NestedTranslationMap } from "../../Locale.ts"
 import { Errata } from "../../source/_Erratum.ts"
@@ -43,6 +44,11 @@ export const ItemComponent = DB.Entity(import.meta.url, {
       rules: DB.Optional({
         comment: "Special rules for the item component.",
         type: DB.IncludeIdentifier(ItemComponentRules),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

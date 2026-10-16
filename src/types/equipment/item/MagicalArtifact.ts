@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -31,6 +32,11 @@ export const MagicalArtifact = DB.Entity(import.meta.url, {
         comment:
           "The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.",
         type: DB.IncludeIdentifier(CombatUse),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

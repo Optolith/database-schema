@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -16,6 +17,11 @@ export const GemOrPreciousStone = DB.Entity(import.meta.url, {
       weight: DB.Optional({
         comment: "The weight in kg.",
         type: DB.IncludeIdentifier(Weight),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

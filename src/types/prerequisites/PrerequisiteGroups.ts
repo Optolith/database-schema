@@ -211,6 +211,13 @@ export const BookPrerequisiteGroup = DB.Enum(import.meta.url, {
   }),
 })
 
+export const EquipmentPrerequisiteGroup = DB.Enum(import.meta.url, {
+  name: "EquipmentPrerequisiteGroup",
+  values: () => ({
+    Rule: DB.EnumCase({ type: DB.IncludeIdentifier(RulePrerequisite) }),
+  }),
+})
+
 export const PreconditionGroup = DB.Enum(import.meta.url, {
   name: "PreconditionGroup",
   values: () => ({

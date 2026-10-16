@@ -7,7 +7,7 @@ import {
   ProfessionIdentifier,
   RaceIdentifier,
 } from "../../_Identifier.js"
-import { PlainGeneralPrerequisites } from "../../_Prerequisite.ts"
+import { EquipmentPrerequisites, PlainGeneralPrerequisites } from "../../_Prerequisite.ts"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
@@ -45,6 +45,11 @@ export const DefaultItem = (sourceUrl: string, singularName: string, pluralName?
           comment:
             "The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.",
           type: DB.IncludeIdentifier(CombatUse),
+        }),
+        prerequisites: DB.Optional({
+          comment:
+            "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+          type: DB.IncludeIdentifier(EquipmentPrerequisites),
         }),
         src,
         translations: DefaultItemTranslations(singularName),

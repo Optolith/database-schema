@@ -12,6 +12,7 @@ import {
   BookPrerequisiteGroup,
   DerivedCharacteristicPrerequisiteGroup,
   EnhancementPrerequisiteGroup,
+  EquipmentPrerequisiteGroup,
   GeneralPrerequisiteGroup,
   GeodeRitualPrerequisiteGroup,
   InfluencePrerequisiteGroup,
@@ -270,4 +271,10 @@ export const BookPrerequisites = DB.TypeAlias(import.meta.url, {
   name: "BookPrerequisites",
   type: () =>
     DB.GenIncludeIdentifier(PlainPrerequisites, [DB.IncludeIdentifier(BookPrerequisiteGroup)]),
+})
+
+export const EquipmentPrerequisites = DB.TypeAlias(import.meta.url, {
+  name: "EquipmentPrerequisites",
+  type: () =>
+    DB.GenIncludeIdentifier(PlainPrerequisites, [DB.IncludeIdentifier(EquipmentPrerequisiteGroup)]),
 })

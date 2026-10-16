@@ -4,6 +4,7 @@ import { Dice } from "../../_Dice.js"
 import { Reduceable, Resistance } from "../../_DiseasePoison.js"
 import { DiseaseIdentifier } from "../../_Identifier.ts"
 import { MathOperation } from "../../_MathExpression.js"
+import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -45,6 +46,11 @@ export const Poison = DB.Entity(import.meta.url, {
       cost: DB.Optional({
         comment: "Price for one dose, in silverthalers.",
         type: DB.IncludeIdentifier(PoisonCost),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(

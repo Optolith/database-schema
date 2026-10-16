@@ -1,6 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
 import { SkillIdentifier } from "../../_Identifier.js"
-import { BookPrerequisites } from "../../_Prerequisite.ts"
+import { BookPrerequisites, EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -44,6 +44,11 @@ export const Book = DB.Entity(import.meta.url, {
         comment:
           "Skills and abilities you can learn by reading the book, as well as any other rules and effects concerning the book.",
         type: DB.IncludeIdentifier(BookRules),
+      }),
+      prerequisites: DB.Optional({
+        comment:
+          "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
+        type: DB.IncludeIdentifier(EquipmentPrerequisites),
       }),
       src,
       translations: NestedTranslationMap(
