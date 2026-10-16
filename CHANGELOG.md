@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.105.0](https://github.com/Optolith/database-schema/compare/v0.104.0...v0.105.0) (2026-10-16)
+
+### ⚠ BREAKING CHANGES
+
+* aspects by tradition for ceremonial item special abilities
+* rename unbreakable to indestructible
+
+### Features
+
+* aspects by tradition for ceremonial item special abilities ([6f64bed](https://github.com/Optolith/database-schema/commit/6f64bedbcac3874f8ccd331773a2a0c2b76513a1))
+
+### Bug Fixes
+
+* rename unbreakable to indestructible ([4fcd4d3](https://github.com/Optolith/database-schema/commit/4fcd4d31f555ee7f22eaba77a2e12c9ccd3c3cf9))
+
 ## [0.104.0](https://github.com/Optolith/database-schema/compare/v0.103.2...v0.104.0) (2026-10-15)
 
 ### ⚠ BREAKING CHANGES
