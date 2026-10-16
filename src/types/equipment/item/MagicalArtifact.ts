@@ -71,6 +71,14 @@ export const MagicalArtifact = DB.Entity(import.meta.url, {
             comment: "Cost text.",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
+          trigger: DB.Optional({
+            comment: "How to trigger the effect of the artifact.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
+          type: DB.Optional({
+            comment: "The type of artifact.",
+            type: DB.String({ minLength: 1, markdown: "block" }),
+          }),
           errata: DB.Optional({
             type: DB.IncludeIdentifier(Errata),
           }),
