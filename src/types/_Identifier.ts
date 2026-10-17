@@ -92,7 +92,7 @@ import {
   ProfessionVariant,
   ProfessionVersion,
 } from "./Profession.js"
-import { Property } from "./Property.js"
+import { Property, PropertySpecialization } from "./Property.js"
 import { Race, RaceVariant } from "./Race.js"
 import { Ritual } from "./Ritual.js"
 import { AlternativeRule } from "./rule/AlternativeRule.js"
@@ -314,6 +314,7 @@ export const ProfessionPackageIdentifier: () => R = () => R(ProfessionPackage)
 export const ProfessionVersionIdentifier: () => R = () => R(ProfessionVersion)
 export const ProfessionVariantIdentifier: () => R = () => R(ProfessionVariant)
 export const PropertyIdentifier: () => R = () => R(Property)
+export const PropertySpecializationIdentifier: () => R = () => R(PropertySpecialization)
 export const ProtectiveWardingCircleSpecialAbilityIdentifier: () => R = () => R(PWCSpecialAbility)
 export const PublicationIdentifier: () => R = () => R(Publication)
 export const RaceIdentifier: () => R = () => R(Race)

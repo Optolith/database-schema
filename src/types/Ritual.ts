@@ -4,6 +4,7 @@ import { ActivatableSkillEffect } from "./_ActivatableSkillEffect.js"
 import { AffectedTargetCategories } from "./_ActivatableSkillTargetCategory.js"
 import { Enhancement } from "./_Enhancements.js"
 import { PropertyIdentifier } from "./_Identifier.js"
+import { AnyPropertySpecializationIdentifier } from "./_IdentifierGroup.ts"
 import { ImprovementCost } from "./_ImprovementCost.js"
 import { SpellworkPrerequisites } from "./_Prerequisite.js"
 import { SkillCheck, SkillCheckPenalty } from "./_SkillCheck.js"
@@ -36,6 +37,10 @@ export const Ritual = DB.Entity(import.meta.url, {
       property: DB.Required({
         comment: "The associated property.",
         type: PropertyIdentifier(),
+      }),
+      propertySpecialization: DB.Optional({
+        comment: "The associated property specialization.",
+        type: DB.IncludeIdentifier(AnyPropertySpecializationIdentifier),
       }),
       traditions: DB.Required({
         comment:

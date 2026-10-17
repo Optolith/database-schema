@@ -99,6 +99,7 @@ import {
   PatronIdentifier,
   PoisonIdentifier,
   PropertyIdentifier,
+  PropertySpecializationIdentifier,
   ProtectiveWardingCircleSpecialAbilityIdentifier,
   RaceIdentifier,
   RangedCombatTechniqueIdentifier,
@@ -526,5 +527,13 @@ export const TinyActivatableIdentifier = DB.Enum(import.meta.url, {
   values: () => ({
     Blessing: DB.EnumCase({ type: BlessingIdentifier() }),
     Cantrip: DB.EnumCase({ type: CantripIdentifier() }),
+  }),
+})
+
+export const AnyPropertySpecializationIdentifier = DB.Enum(import.meta.url, {
+  name: "AnyPropertySpecializationIdentifier",
+  values: () => ({
+    General: DB.EnumCase({ type: PropertySpecializationIdentifier() }),
+    Element: DB.EnumCase({ type: ElementIdentifier() }),
   }),
 })
