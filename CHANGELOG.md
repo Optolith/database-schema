@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.108.0](https://github.com/Optolith/database-schema/compare/v0.107.1...v0.108.0) (2026-10-17)
+
+### ⚠ BREAKING CHANGES
+
+* gems with associated properties and optional color
+
+### Features
+
+* gems with associated properties and optional color ([48a4a5e](https://github.com/Optolith/database-schema/commit/48a4a5eea0cc07336bb49aef02f5e9118664a34e))
+* property specializations ([83b38df](https://github.com/Optolith/database-schema/commit/83b38df2f64a61c63062dca23d127080605ae9a0))
+
+### Bug Fixes
+
+* **cache:** talisman trade secret prerequisites include associated tradition ([9935e24](https://github.com/Optolith/database-schema/commit/9935e24fbf4788a84b27a5f115f74d0d6a6990e0))
+
 ## [0.107.1](https://github.com/Optolith/database-schema/compare/v0.107.0...v0.107.1) (2026-10-16)
 
 ### Features
