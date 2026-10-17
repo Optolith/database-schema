@@ -1,3 +1,5 @@
+import { isNotEmpty } from "@elyukai/utils/array/nonEmpty"
+import { nullableToArray } from "@elyukai/utils/nullable"
 import { assertExhaustive } from "@elyukai/utils/typeSafety"
 import { Case } from "tsondb/schema/gen"
 import type {
@@ -230,6 +232,26 @@ export const buildDerivedTradeSecretsCache: CacheBuilder<DerivedTradeSecretsCach
               id: Case("FocusRule", settings.derivedTradeSecrets.requiredFocusRuleForTalismans),
               active: true,
             }),
+          ),
+          ...nullableToArray(
+            container.content.tradition === undefined || !isNotEmpty(container.content.tradition)
+              ? undefined
+              : container.content.tradition.length === 1
+                ? Case(
+                    "Single",
+                    Case("Activatable", {
+                      id: Case("BlessedTradition", container.content.tradition[0]),
+                      active: true,
+                    }),
+                  )
+                : Case("Disjunction", {
+                    list: container.content.tradition.map(tradition =>
+                      Case("Activatable", {
+                        id: Case("BlessedTradition", tradition),
+                        active: true,
+                      }),
+                    ),
+                  }),
           ),
         ],
         src: container.content.src,
