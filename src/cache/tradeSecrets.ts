@@ -13,13 +13,15 @@ import type {
 } from "../../gen/types.js"
 import type { CacheBuilder } from "./internal.ts"
 
-type EquipmentEntitiesWithComplexities = {
-  [K in EquipmentIdentifier["kind"]]: EntityMap[K] extends {
-    complexity?: Complexity | ArmorComplexity
-  }
-    ? K
-    : never
-}[EquipmentIdentifier["kind"]]
+type EquipmentEntitiesWithComplexities =
+  | {
+      [K in EquipmentIdentifier["kind"]]: EntityMap[K] extends {
+        complexity?: Complexity | ArmorComplexity
+      }
+        ? K
+        : never
+    }[EquipmentIdentifier["kind"]]
+  | "SpecialAmmunition"
 
 type HerbaryEntitiesWithTradeSecrets = "Disease" | "Elixir" | "HerbalAid" | "Poison"
 
@@ -59,6 +61,7 @@ const emptyDerivedEquipmentTradeSecretsCache: DerivedTradeSecretsCache["equipmen
   MusicalInstrument: {},
   OrienteeringAid: {},
   RopeOrChain: {},
+  SpecialAmmunition: {},
   Stationery: {},
   ThievesTool: {},
   ToolOfTheTrade: {},
