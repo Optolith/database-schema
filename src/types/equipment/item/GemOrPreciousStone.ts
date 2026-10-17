@@ -1,4 +1,6 @@
 import * as DB from "tsondb/schema/dsl"
+import { PropertyIdentifier } from "../../_Identifier.ts"
+import { AnyPropertySpecializationIdentifier } from "../../_IdentifierGroup.ts"
 import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
@@ -18,6 +20,10 @@ export const GemOrPreciousStone = DB.Entity(import.meta.url, {
         comment: "The weight in kg.",
         type: DB.IncludeIdentifier(Weight),
       }),
+      property: DB.Optional({
+        comment: "The associated property.",
+        type: DB.IncludeIdentifier(GemOrPreviousStoneProperty),
+      }),
       prerequisites: DB.Optional({
         comment:
           "The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.",
@@ -36,7 +42,7 @@ export const GemOrPreciousStone = DB.Entity(import.meta.url, {
             comment: "An auxiliary name or label of the item, if available.",
             type: DB.String({ minLength: 1 }),
           }),
-          color: DB.Required({
+          color: DB.Optional({
             comment: "The color of the gem or stone.",
             type: DB.String({ minLength: 1 }),
           }),
@@ -61,4 +67,19 @@ export const GemOrPreciousStone = DB.Entity(import.meta.url, {
       keyPathInEntityMap: "name",
     },
   ],
+})
+
+const GemOrPreviousStoneProperty = DB.TypeAlias(import.meta.url, {
+  name: "GemOrPreviousStoneProperty",
+  type: () =>
+    DB.Object({
+      base: DB.Required({
+        comment: "The associated property.",
+        type: PropertyIdentifier(),
+      }),
+      specialization: DB.Optional({
+        comment: "The associated property specialization.",
+        type: DB.IncludeIdentifier(AnyPropertySpecializationIdentifier),
+      }),
+    }),
 })
