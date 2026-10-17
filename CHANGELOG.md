@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.110.0](https://github.com/Optolith/database-schema/compare/v0.109.0...v0.110.0) (2026-10-17)
+
+### ⚠ BREAKING CHANGES
+
+* option identifier for advanced by option
+* profession subgroup identifier type
+
+### Features
+
+* culture naming rules may feature markdown ([b505295](https://github.com/Optolith/database-schema/commit/b505295d331ce7a1c7142335350d62cc611ccde3))
+
+### Bug Fixes
+
+* option identifier for advanced by option ([20b591e](https://github.com/Optolith/database-schema/commit/20b591ee9da7fd144305653542755ecf0c183cbd))
+* profession subgroup identifier type ([0a6c90e](https://github.com/Optolith/database-schema/commit/0a6c90eed94063f88f1c754339455af05df1fe7e))
+
 ## [0.109.0](https://github.com/Optolith/database-schema/compare/v0.108.1...v0.109.0) (2026-10-17)
 
 ### ⚠ BREAKING CHANGES
