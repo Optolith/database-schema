@@ -160,7 +160,7 @@ const AdvancedSpecialAbilityByOptionMapping = DB.GenTypeAlias(import.meta.url, {
     DB.Object({
       option: DB.Required({
         comment: "The select option’s identifier.",
-        type: PatronIdentifier(),
+        type: GeneralSelectOptionIdentifier(),
       }),
       associatedAdvanced: DB.Required({
         comment: "The advanced special ability’s identifier.",
