@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.109.0](https://github.com/Optolith/database-schema/compare/v0.108.1...v0.109.0) (2026-10-17)
+
+### ⚠ BREAKING CHANGES
+
+* item component references special ammunition only
+
+### Features
+
+* special ammunition entity ([0b149a9](https://github.com/Optolith/database-schema/commit/0b149a9073f02f425cb56c52c0b4e60b819b3024))
+
+### Bug Fixes
+
+* derived trade secrets for special ammunition ([83b8d14](https://github.com/Optolith/database-schema/commit/83b8d1410886d87b6f790fa4bb96c100f5c04ee8))
+* item component references special ammunition only ([a200ecd](https://github.com/Optolith/database-schema/commit/a200ecd5bd31e4d4bdc4cf1f13f11d73b22d88ce))
+
 ## [0.108.1](https://github.com/Optolith/database-schema/compare/v0.108.0...v0.108.1) (2026-10-17)
 
 ### Bug Fixes
