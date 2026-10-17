@@ -1,10 +1,10 @@
 import * as DB from "tsondb/schema/dsl"
 import {
-  AmmunitionIdentifier,
   ArmorIdentifier,
   CloseCombatTechniqueIdentifier,
   ItemComponentIdentifier,
   RangedCombatTechniqueIdentifier,
+  SpecialAmmunitionIdentifier,
   WeaponIdentifier,
 } from "../../_Identifier.ts"
 import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
@@ -325,7 +325,7 @@ const ApplicableAmmunition = DB.TypeAlias(import.meta.url, {
       {
         ammunition: DB.Optional({
           comment: "Specific ammunition this component can be applied to.",
-          type: DB.Array(AmmunitionIdentifier(), {
+          type: DB.Array(SpecialAmmunitionIdentifier(), {
             minItems: 1,
             uniqueItems: true,
           }),
