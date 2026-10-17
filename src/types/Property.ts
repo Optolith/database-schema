@@ -59,7 +59,7 @@ export const PropertySpecialization = DB.Entity(import.meta.url, {
       }),
       translations: NestedTranslationMap(
         DB.Required,
-        "Property",
+        "PropertySpecialization",
         DB.Object({
           name: DB.Required({
             comment: "The property’s name.",
