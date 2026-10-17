@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.108.1](https://github.com/Optolith/database-schema/compare/v0.108.0...v0.108.1) (2026-10-17)
+
+### Bug Fixes
+
+* property specialization translation name ([4049f08](https://github.com/Optolith/database-schema/commit/4049f0841e53da33e83f92d541d54093f1514914))
+
 ## [0.108.0](https://github.com/Optolith/database-schema/compare/v0.107.1...v0.108.0) (2026-10-17)
 
 ### ⚠ BREAKING CHANGES
