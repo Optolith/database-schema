@@ -182,6 +182,7 @@ export const schema = new Schema<TSONDBTypes>(
     Types.SkillModificationLevel,
     Types.SkillStyleSpecialAbility,
     Types.SocialStatus,
+    Types.SpecialAmmunition,
     Types.Spell,
     Types.SpellSwordEnchantment,
     Types.StaffEnchantment,

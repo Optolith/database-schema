@@ -51,6 +51,7 @@ import { OrienteeringAid } from "./equipment/item/OrienteeringAid.js"
 import { Plant } from "./equipment/item/Plant.js"
 import { Poison } from "./equipment/item/Poison.js"
 import { RopeOrChain } from "./equipment/item/RopeOrChain.js"
+import { SpecialAmmunition } from "./equipment/item/SpecialAmmunition.ts"
 import { Stationery } from "./equipment/item/Stationery.js"
 import { Biome } from "./equipment/item/sub/Biome.js"
 import { BotanicRegion } from "./equipment/item/sub/BotanicRegion.js"
@@ -340,6 +341,7 @@ export const SkillIdentifier: () => R = () => R(Skill)
 export const SkillModificationLevelIdentifier: () => R = () => R(SkillModificationLevel)
 export const SkillStyleSpecialAbilityIdentifier: () => R = () => R(SkillStyleSpecialAbility)
 export const SocialStatusIdentifier: () => R = () => R(SocialStatus)
+export const SpecialAmmunitionIdentifier: () => R = () => R(SpecialAmmunition)
 export const SpellIdentifier: () => R = () => R(Spell)
 export const SpellSwordEnchantmentIdentifier: () => R = () => R(SpellSwordEnchantment)
 export const StaffEnchantmentIdentifier: () => R = () => R(StaffEnchantment)
