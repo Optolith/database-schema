@@ -11,6 +11,7 @@ import {
   DisadvantageIdentifier,
   ExperienceLevelIdentifier,
   MagicalTraditionIdentifier,
+  MagicalTraditionSubgroupIdentifier,
   ProfessionIdentifier,
   ProfessionPackageIdentifier,
   ProfessionVersionIdentifier,
@@ -110,7 +111,7 @@ const MagicalProfessionGroup = DB.TypeAlias(import.meta.url, {
       }),
       subgroup: DB.Optional({
         comment: "The tradition’s subgroup associated with this magical profession, if any.",
-        type: CurriculumIdentifier(),
+        type: MagicalTraditionSubgroupIdentifier(),
       }),
     }),
 })
