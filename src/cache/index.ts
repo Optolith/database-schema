@@ -1,4 +1,4 @@
-import type { TSONDB } from "tsondb"
+import type { ReadonlyTSONDB } from "tsondb/readonly"
 import type { TSONDBTypes } from "../main.ts"
 import {
   activatableSelectOptionsCacheBuilder,
@@ -50,7 +50,7 @@ export type {
  * @param idMap An object containing identifiers of specific entries in the database that are used for creating the cache.
  * @returns The created cache object.
  */
-export const createCache = (db: TSONDB<TSONDBTypes>): Cache => {
+export const createCache = (db: ReadonlyTSONDB<TSONDBTypes>): Cache => {
   const settings = db.getSingletonInstanceOfEntity("Settings")
 
   if (!settings) {

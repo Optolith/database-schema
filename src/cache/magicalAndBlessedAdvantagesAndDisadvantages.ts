@@ -1,5 +1,5 @@
 import { assertExhaustive } from "@elyukai/utils/typeSafety"
-import type { TSONDB } from "tsondb"
+import type { ReadonlyTSONDB } from "tsondb/readonly"
 import type {
   ActivatableIdentifier,
   Advantage_ID,
@@ -152,7 +152,7 @@ type TypeKeyMap = typeof typeKeyMap
 const collectIds = (
   entity: "Advantage" | "Disadvantage",
   type: "Magical" | "Blessed",
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
   settings: Settings,
 ) =>
   database

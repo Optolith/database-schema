@@ -3,7 +3,8 @@ import { isNotNullish } from "@elyukai/utils/nullable"
 import { mapObject } from "@elyukai/utils/object"
 import { compareNullish, compareNumber } from "@elyukai/utils/ordering"
 import { assertExhaustive } from "@elyukai/utils/typeSafety"
-import type { Entity, TSONDB } from "tsondb"
+import type { Entity } from "tsondb"
+import type { ReadonlyTSONDB } from "tsondb/readonly"
 import { Case, fromUniformCase } from "tsondb/schema/gen"
 import type {
   ActivatableIdentifier as ActivatableIdentifierType,
@@ -268,7 +269,7 @@ const getSpellworkFilter = <E extends "Spell" | "Ritual">(
 }
 
 const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
   entryId: ActivatableIdentifierType,
   entity: E,
   category: GenericSkillsSelectOptionCategoryCategory<ID> & {
@@ -313,7 +314,7 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
 const getDerivedSelectOptions = (
   selectOptionCategory: SelectOptionCategory,
   entryId: ActivatableIdentifierType,
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
     case "Blessings":
@@ -1133,7 +1134,7 @@ const getDerivedSelectOptions = (
 
 const getExplicitSelectOptions = (
   id: ActivatableIdentifierType,
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] =>
   database
     .getAllChildInstanceContainersForParent("GeneralSelectOption", id)
@@ -1150,7 +1151,7 @@ const getExplicitSelectOptions = (
 const getSelectOptions = (
   selectOptions: SelectOptions,
   id: ActivatableIdentifierType,
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
 ): ResolvedSelectOption[] => [
   ...(selectOptions.derived === undefined
     ? []
@@ -1159,7 +1160,7 @@ const getSelectOptions = (
 ]
 
 const getSelectOptionsForResults = (
-  database: TSONDB<TSONDBTypes>,
+  database: ReadonlyTSONDB<TSONDBTypes>,
   entity: ActivatableIdentifierType["kind"],
   results: { id: string; content: { select_options?: SelectOptions; translations?: object } }[],
 ) =>
