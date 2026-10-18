@@ -379,7 +379,7 @@ export const PlantPoison = DB.TypeAlias(import.meta.url, {
   name: "PlantPoison",
   type: () =>
     DB.Object({
-      effect_types: DB.Required({
+      effect_types: DB.Optional({
         comment: "Effect type(s) of a plant poison.",
         type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
       }),
@@ -459,7 +459,7 @@ export const Intoxicant = DB.TypeAlias(import.meta.url, {
         DB.Required,
         "Intoxicant",
         DB.Object({
-          ingestion: DB.Required({
+          ingestion: DB.Optional({
             comment: "How to ingest the intoxicant.",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
