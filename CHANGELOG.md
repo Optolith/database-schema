@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.111.0](https://github.com/Optolith/database-schema/compare/v0.110.1...v0.111.0) (2026-10-18)
+
+### ⚠ BREAKING CHANGES
+
+* some poison do not specify ingestion or effect types
+
+### Bug Fixes
+
+* some poison do not specify ingestion or effect types ([b0087e3](https://github.com/Optolith/database-schema/commit/b0087e3bca1a065db1aad2a35abd5c9e05d66bf9))
+
 ## [0.110.1](https://github.com/Optolith/database-schema/compare/v0.110.0...v0.110.1) (2026-10-18)
 
 ### Features
