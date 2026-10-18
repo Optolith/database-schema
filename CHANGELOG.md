@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.110.1](https://github.com/Optolith/database-schema/compare/v0.110.0...v0.110.1) (2026-10-18)
+
+### Features
+
+* adoruzepterzauber ([9b5585f](https://github.com/Optolith/database-schema/commit/9b5585fad2399ef7529208d2bd12bb4f8d125636))
+
 ## [0.110.0](https://github.com/Optolith/database-schema/compare/v0.109.0...v0.110.0) (2026-10-17)
 
 ### ⚠ BREAKING CHANGES
