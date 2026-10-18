@@ -147,6 +147,7 @@ import { Vision } from "./specialAbility/Vision.js"
 import { Spell } from "./Spell.js"
 import { State } from "./State.js"
 import { TargetCategory } from "./TargetCategory.js"
+import { Adoruzepterzauber } from "./traditionArtifacts/Adoruzepterzauber.ts"
 import { ArcaneOrbEnchantment } from "./traditionArtifacts/ArcaneOrbEnchantment.js"
 import { AttireEnchantment } from "./traditionArtifacts/AttireEnchantment.js"
 import { Beutelzauber } from "./traditionArtifacts/Beutelzauber.js"
@@ -176,6 +177,7 @@ import { Trinkhornzauber } from "./traditionArtifacts/Trinkhornzauber.js"
 import { WandEnchantment } from "./traditionArtifacts/WandEnchantment.js"
 import { WeaponEnchantment } from "./traditionArtifacts/WeaponEnchantment.js"
 
+export const AdoruzepterzauberIdentifier: () => R = () => R(Adoruzepterzauber)
 export const AdvancedCombatSpecialAbilityIdentifier: () => R = () => R(AdvancedCombatSpecialAbility)
 export const AdvancedKarmaSpecialAbilityIdentifier: () => R = () => R(AdvancedKarmaSpecialAbility)
 export const AdvancedMagicalSpecialAbilityIdentifier: () => R = () =>

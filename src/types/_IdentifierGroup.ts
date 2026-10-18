@@ -1,6 +1,7 @@
 import { sortObjectKeys } from "@elyukai/utils/object"
 import * as DB from "tsondb/schema/dsl"
 import {
+  AdoruzepterzauberIdentifier,
   AdvancedCombatSpecialAbilityIdentifier,
   AdvancedKarmaSpecialAbilityIdentifier,
   AdvancedMagicalSpecialAbilityIdentifier,
@@ -175,6 +176,7 @@ export const NewSkillApplicationOrUseParentIdentifier = DB.Enum(import.meta.url,
 export const TraditionArtifactEnchantmentIdentifier = DB.Enum(import.meta.url, {
   name: "TraditionArtifactEnchantmentIdentifier",
   values: () => ({
+    Adoruzepterzauber: DB.EnumCase({ type: AdoruzepterzauberIdentifier() }),
     ArcaneOrbEnchantment: DB.EnumCase({ type: ArcaneOrbEnchantmentIdentifier() }),
     AttireEnchantment: DB.EnumCase({ type: AttireEnchantmentIdentifier() }),
     Beutelzauber: DB.EnumCase({ type: BeutelzauberIdentifier() }),
