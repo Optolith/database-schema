@@ -6,7 +6,7 @@ import {
   FocusRuleIdentifier,
   PublicationIdentifier,
 } from "./_Identifier.ts"
-import { SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
+import { ActivatableIdentifier, SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
 
 export const Settings = DB.SingletonEntity(import.meta.url, {
   name: "Settings",
@@ -39,6 +39,16 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment:
           "The publication that extends the description of books with additional information.",
         type: PublicationIdentifier(),
+      }),
+      maximumSkillRatingBonusEntry: DB.Required({
+        comment:
+          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      maximumCombatTechniqueRatingBonusEntry: DB.Required({
+        comment:
+          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
     }),
 })
