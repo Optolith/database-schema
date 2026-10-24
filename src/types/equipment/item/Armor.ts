@@ -4,6 +4,7 @@ import type { GetInstanceById } from "tsondb/schema/gen"
 import type * as Gen from "../../../../gen/types.js"
 import { ArmorIdentifier } from "../../_Identifier.js"
 import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
+import { DerivedCharacteristic } from "../../DerivedCharacteristic.ts"
 import { NestedTranslationMap } from "../../Locale.js"
 import { Errata } from "../../source/_Erratum.js"
 import { src } from "../../source/_PublicationRef.js"
@@ -306,10 +307,30 @@ export const Encumbrance = DB.TypeAlias(import.meta.url, {
   type: () => DB.Integer({ minimum: 0 }),
 })
 
-export const HasAdditionalPenalties = DB.TypeAlias(import.meta.url, {
+export const HasAdditionalPenalties = DB.Enum(import.meta.url, {
   name: "HasAdditionalPenalties",
   comment: "Does the armor have additional penalties (MOV -1, INI -1)?",
-  type: () => DB.Boolean(),
+  values: () => ({
+    Standard: DB.EnumCase({ type: DB.Boolean() }),
+    Custom: DB.EnumCase({ type: DB.IncludeIdentifier(CustomHasAdditionalPenalties) }),
+  }),
+})
+
+const CustomHasAdditionalPenalties = DB.TypeAlias(import.meta.url, {
+  name: "CustomHasAdditionalPenalties",
+  type: () =>
+    DB.NestedEntityMap({
+      name: "CustomAdditionalPenalty",
+      namePlural: "CustomAdditionalPenalties",
+      secondaryEntity: DerivedCharacteristic,
+      type: DB.Object({
+        value: DB.Required({
+          comment: "The value of the additional penalty.",
+          type: DB.Integer(),
+        }),
+      }),
+      minProperties: 1,
+    }),
 })
 
 const HitZone = DB.Enum(import.meta.url, {
