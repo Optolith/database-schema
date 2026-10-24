@@ -25,7 +25,7 @@ export const Armor = DB.Entity(import.meta.url, {
         comment: "The cost in silverthalers.",
         type: DB.IncludeIdentifier(Cost),
       }),
-      weight: DB.Required({
+      weight: DB.Optional({
         comment: "The weight in kg.",
         type: DB.IncludeIdentifier(Weight),
       }),
