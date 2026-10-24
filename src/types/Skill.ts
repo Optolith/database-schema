@@ -57,23 +57,23 @@ export const Skill = DB.Entity(import.meta.url, {
           tools: DB.Optional({
             comment:
               "Mentions any tools from the equipment list that are necessary to employ the skill.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           quality: DB.Required({
             comment: "Gives examples of the effects that various QL might provide.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           failed: DB.Required({
             comment: "Lists examples of results for a failed check.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           critical: DB.Required({
             comment: "Lists examples of results for a critical success.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           botch: DB.Required({
             comment: "Lists examples of results for botches.",
-            type: DB.String({ minLength: 1 }),
+            type: DB.String({ minLength: 1, markdown: "inline" }),
           }),
           errata: DB.Optional({
             type: DB.IncludeIdentifier(Errata),
