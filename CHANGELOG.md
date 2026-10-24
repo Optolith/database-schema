@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.112.0](https://github.com/Optolith/database-schema/compare/v0.111.1...v0.112.0) (2026-10-24)
+
+### ⚠ BREAKING CHANGES
+
+* custom additional penalties
+* define skill and combat technique rating bonus entries
+* optional armor weight
+
+### Features
+
+* custom additional penalties ([1c56824](https://github.com/Optolith/database-schema/commit/1c56824e11b36a9fdbc3b6cb57588dc0a684358e))
+* define skill and combat technique rating bonus entries ([efe4a54](https://github.com/Optolith/database-schema/commit/efe4a549c01e4ee4ed8710f6447059a5b60cd0b9))
+* optional armor weight ([35729c4](https://github.com/Optolith/database-schema/commit/35729c42a7dd7152be8c3146032a5e42a7ea915a))
+
+### Bug Fixes
+
+* skill descriptions support markdown ([1aeb838](https://github.com/Optolith/database-schema/commit/1aeb838e43bde7a31b8f34ff965b3e06ae3d2c82))
+
 ## [0.111.1](https://github.com/Optolith/database-schema/compare/v0.111.0...v0.111.1) (2026-10-18)
 
 ## [0.111.0](https://github.com/Optolith/database-schema/compare/v0.110.1...v0.111.0) (2026-10-18)
