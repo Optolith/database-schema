@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.113.1](https://github.com/Optolith/database-schema/compare/v0.113.0...v0.113.1) (2026-10-26)
+
+### Bug Fixes
+
+* **cache:** missing sources for derived select options ([68347f2](https://github.com/Optolith/database-schema/commit/68347f21f6adfc62b4c755b4bc1ad5b8db0a543e))
+
 ## [0.113.0](https://github.com/Optolith/database-schema/compare/v0.112.0...v0.113.0) (2026-10-26)
 
 ### ⚠ BREAKING CHANGES
