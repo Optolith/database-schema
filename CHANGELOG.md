@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.113.0](https://github.com/Optolith/database-schema/compare/v0.112.0...v0.113.0) (2026-10-26)
+
+### ⚠ BREAKING CHANGES
+
+* pin enhancement focus rules in settings
+
+### Features
+
+* **cache:** include parent source refs in new applications and uses ([26a0c1a](https://github.com/Optolith/database-schema/commit/26a0c1a959dd7c5ced909cee03a13be67174cc5b))
+* pin enhancement focus rules in settings ([711a7d5](https://github.com/Optolith/database-schema/commit/711a7d5ac1f008e0d684cb4a8e94c7c9209eae8a))
+
 ## [0.112.0](https://github.com/Optolith/database-schema/compare/v0.111.1...v0.112.0) (2026-10-24)
 
 ### ⚠ BREAKING CHANGES
