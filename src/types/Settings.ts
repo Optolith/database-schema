@@ -35,6 +35,10 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: StyleSpecialAbilitySettings.comment,
         type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
       }),
+      enhancements: DB.Required({
+        comment: EnhancementsSettings.comment,
+        type: DB.IncludeIdentifier(EnhancementsSettings),
+      }),
       extendedBookDescriptionPublication: DB.Required({
         comment:
           "The publication that extends the description of books with additional information.",
@@ -118,6 +122,23 @@ const StyleSpecialAbilitySettings = DB.TypeAlias(import.meta.url, {
       liturgical: DB.Required({
         comment:
           "The focus rule for liturgical style special abilities and its advanced complements.",
+        type: FocusRuleIdentifier(),
+      }),
+    }),
+})
+
+const EnhancementsSettings = DB.TypeAlias(import.meta.url, {
+  name: "EnhancementsSettings",
+  comment:
+    "Spell and Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the respective focus rule must be generated for every entry.",
+  type: () =>
+    DB.Object({
+      spell: DB.Required({
+        comment: "The focus rule for spell enhancements.",
+        type: FocusRuleIdentifier(),
+      }),
+      liturgicalChant: DB.Required({
+        comment: "The focus rule for liturgical chant enhancements.",
         type: FocusRuleIdentifier(),
       }),
     }),
