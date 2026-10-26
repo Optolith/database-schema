@@ -22,6 +22,7 @@ import type {
   Poison,
   PrerequisiteForLevel,
   Property_ID,
+  PublicationRefs,
   RequirableSelectOptionIdentifier,
   Ritual_ID,
   SelectOptionCategory,
@@ -218,12 +219,14 @@ const convertSkillApplicationOrUse = (
   entryId: ActivatableIdentifierType,
   id: Skill_ID,
   applicationOrUse: SkillApplicationOrUse,
+  src: PublicationRefs,
 ) =>
   ({
     id: `${fromUniformCase(entryId)}+${applicationOrUse.id.toFixed()}`,
     content: {
       parent: entryId,
       skills: [id],
+      src,
       translations: applicationOrUse.translations,
     },
   }) satisfies ResolvedNewSkillApplication | ResolvedSkillUse
@@ -281,6 +284,7 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
     ap_value?: SelectOptionsAdventurePointsValue<SkillishIdentifier | CombatTechniqueIdentifier>
   },
   filter: ((instance: { id: string; content: Entity<TSONDBTypes, E> }) => boolean) | undefined,
+  parentSrc: PublicationRefs,
 ) => {
   const { prerequisites } = category
   const { bindingCost, ap_value } = options
@@ -304,9 +308,13 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
         })),
       },
       newApplications:
-        category.skill_applications?.map(app => convertSkillApplicationOrUse(entryId, id, app)) ??
-        [],
-      uses: category.skill_uses?.map(use => convertSkillApplicationOrUse(entryId, id, use)) ?? [],
+        category.skill_applications?.map(app =>
+          convertSkillApplicationOrUse(entryId, id, app, parentSrc),
+        ) ?? [],
+      uses:
+        category.skill_uses?.map(use =>
+          convertSkillApplicationOrUse(entryId, id, use, parentSrc),
+        ) ?? [],
     }
   })
 }
@@ -315,6 +323,7 @@ const getDerivedSelectOptions = (
   selectOptionCategory: SelectOptionCategory,
   entryId: ActivatableIdentifierType,
   database: ReadonlyTSONDB<TSONDBTypes>,
+  parentSrc: PublicationRefs,
 ): ResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
     case "Blessings":
@@ -969,6 +978,7 @@ const getDerivedSelectOptions = (
 
                 return matchesGroupRequirement && matchesIdRequirement
               },
+              parentSrc,
             )
           case "Spells":
             return getDerivedSkillishSelectOptions(
@@ -978,6 +988,7 @@ const getDerivedSelectOptions = (
               category.Spells,
               selectOptionCategory.Skills,
               getSpellworkFilter(category.Spells),
+              parentSrc,
             )
           case "Rituals":
             return getDerivedSkillishSelectOptions(
@@ -987,6 +998,7 @@ const getDerivedSelectOptions = (
               category.Rituals,
               selectOptionCategory.Skills,
               getSpellworkFilter(category.Rituals),
+              parentSrc,
             )
           case "LiturgicalChants":
             return getDerivedSkillishSelectOptions(
@@ -996,6 +1008,7 @@ const getDerivedSelectOptions = (
               category.LiturgicalChants,
               selectOptionCategory.Skills,
               getDefaultSkillishFilter(category.LiturgicalChants),
+              parentSrc,
             )
           case "Ceremonies":
             return getDerivedSkillishSelectOptions(
@@ -1005,6 +1018,7 @@ const getDerivedSelectOptions = (
               category.Ceremonies,
               selectOptionCategory.Skills,
               getDefaultSkillishFilter(category.Ceremonies),
+              parentSrc,
             )
           default:
             return assertExhaustive(category)
@@ -1022,6 +1036,7 @@ const getDerivedSelectOptions = (
               category.CloseCombatTechniques,
               selectOptionCategory.CombatTechniques,
               getDefaultSkillishFilter(category.CloseCombatTechniques),
+              parentSrc,
             )
           case "RangedCombatTechniques":
             return getDerivedSkillishSelectOptions(
@@ -1031,6 +1046,7 @@ const getDerivedSelectOptions = (
               category.RangedCombatTechniques,
               selectOptionCategory.CombatTechniques,
               getDefaultSkillishFilter(category.RangedCombatTechniques),
+              parentSrc,
             )
           default:
             return assertExhaustive(category)
@@ -1152,22 +1168,31 @@ const getSelectOptions = (
   selectOptions: SelectOptions,
   id: ActivatableIdentifierType,
   database: ReadonlyTSONDB<TSONDBTypes>,
+  parentSrc: PublicationRefs,
 ): ResolvedSelectOption[] => [
   ...(selectOptions.derived === undefined
     ? []
-    : getDerivedSelectOptions(selectOptions.derived, id, database)),
+    : getDerivedSelectOptions(selectOptions.derived, id, database, parentSrc)),
   ...getExplicitSelectOptions(id, database),
 ]
 
 const getSelectOptionsForResults = (
   database: ReadonlyTSONDB<TSONDBTypes>,
   entity: ActivatableIdentifierType["kind"],
-  results: { id: string; content: { select_options?: SelectOptions; translations?: object } }[],
+  results: {
+    id: string
+    content: { select_options?: SelectOptions; src: PublicationRefs; translations?: object }
+  }[],
 ) =>
   results.reduce<{
     [id: string]: ResolvedSelectOption[]
   }>((acc, { id, content }) => {
-    const options = getSelectOptions(content.select_options ?? {}, Case(entity, id), database)
+    const options = getSelectOptions(
+      content.select_options ?? {},
+      Case(entity, id),
+      database,
+      content.src,
+    )
     if (options.length > 0) {
       acc[id] = options
     }
