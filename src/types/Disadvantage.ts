@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { input, levels, maximum, name, name_in_library, rules } from "./_Activatable.js"
+import { input, levels, maximum, name, name_in_library, rules, is_creature_ability } from "./_Activatable.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "./_ActivatableAdventurePointsValue.js"
 import { subtype } from "./_ActivatableMagical.ts"
 import { activatableDisplayNameCustomizer, nameBuilderRules } from "./_ActivatableNames.ts"
@@ -40,6 +40,7 @@ export const Disadvantage = DB.Entity(import.meta.url, {
           "Does this advantage exclusively applies to arcane spellworks and not to magical actions and magical applications?",
         type: DB.Boolean(),
       }),
+      is_creature_ability,
       src,
       translations: NestedTranslationMap(
         DB.Required,

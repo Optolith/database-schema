@@ -1,5 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
-import { input, levels, maximum, name, name_in_library, rules } from "../_Activatable.js"
+import { input, levels, maximum, name, name_in_library, rules, is_creature_ability } from "../_Activatable.js"
 import { ap_value, ap_value_append, ap_value_l10n } from "../_ActivatableAdventurePointsValue.js"
 import {
   combat_techniques,
@@ -36,6 +36,7 @@ export const CombatSpecialAbility = DB.Entity(import.meta.url, {
       prerequisites: DB.Optional({
         type: DB.IncludeIdentifier(GeneralPrerequisites),
       }),
+      is_creature_ability,
       combat_techniques,
       ap_value,
       src,

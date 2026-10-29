@@ -19,7 +19,7 @@ export const ParryModifier = DB.TypeAlias(import.meta.url, {
   type: () => DB.Integer(),
 })
 
-const MeleeDamage = DB.TypeAlias(import.meta.url, {
+export const MeleeDamage = DB.TypeAlias(import.meta.url, {
   name: "MeleeDamage",
   comment: "The damage of a weapon consists of a random part using dice and an optional flat part.",
   type: () =>
