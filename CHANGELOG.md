@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.114.0](https://github.com/Optolith/database-schema/compare/v0.113.1...v0.114.0) (2026-10-30)
+
+### ⚠ BREAKING CHANGES
+
+* more data-driven logic from client
+
+### Features
+
+* more data-driven logic from client ([2126a3c](https://github.com/Optolith/database-schema/commit/2126a3c70cc826a96ff427aef0c12e8cc38239ea))
+
 ## [0.113.1](https://github.com/Optolith/database-schema/compare/v0.113.0...v0.113.1) (2026-10-26)
 
 ### Bug Fixes
