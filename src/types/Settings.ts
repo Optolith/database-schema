@@ -1,6 +1,8 @@
 import * as DB from "tsondb/schema/dsl"
 import {
   AdvantageIdentifier,
+  AspectIdentifier,
+  AttributeIdentifier,
   DerivedCharacteristicIdentifier,
   ExperienceLevelIdentifier,
   FocusRuleIdentifier,
@@ -35,24 +37,26 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: StyleSpecialAbilitySettings.comment,
         type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
       }),
-      enhancements: DB.Required({
-        comment: EnhancementsSettings.comment,
-        type: DB.IncludeIdentifier(EnhancementsSettings),
-      }),
       extendedBookDescriptionPublication: DB.Required({
         comment:
           "The publication that extends the description of books with additional information.",
         type: PublicationIdentifier(),
       }),
-      maximumSkillRatingBonusEntry: DB.Required({
-        comment:
-          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
-        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      skills: DB.Required({
+        comment: SkillSettings.comment,
+        type: DB.IncludeIdentifier(SkillSettings),
       }),
-      maximumCombatTechniqueRatingBonusEntry: DB.Required({
-        comment:
-          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
-        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      combatTechniques: DB.Required({
+        comment: CombatTechniqueSettings.comment,
+        type: DB.IncludeIdentifier(CombatTechniqueSettings),
+      }),
+      spellworks: DB.Required({
+        comment: SpellworkSettings.comment,
+        type: DB.IncludeIdentifier(SpellworkSettings),
+      }),
+      liturgicalChants: DB.Required({
+        comment: LiturgicalChantSettings.comment,
+        type: DB.IncludeIdentifier(LiturgicalChantSettings),
       }),
     }),
 })
@@ -127,18 +131,71 @@ const StyleSpecialAbilitySettings = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const EnhancementsSettings = DB.TypeAlias(import.meta.url, {
-  name: "EnhancementsSettings",
-  comment:
-    "Spell and Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the respective focus rule must be generated for every entry.",
+const SkillSettings = DB.TypeAlias(import.meta.url, {
+  name: "SkillSettings",
   type: () =>
     DB.Object({
-      spell: DB.Required({
-        comment: "The focus rule for spell enhancements.",
+      maximumSkillRatingBonusEntry: DB.Required({
+        comment:
+          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+    }),
+})
+
+const CombatTechniqueSettings = DB.TypeAlias(import.meta.url, {
+  name: "CombatTechniqueSettings",
+  type: () =>
+    DB.Object({
+      maximumCombatTechniqueRatingBonusEntry: DB.Required({
+        comment:
+          "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      closeCombatTechniqueAttackAttribute: DB.Required({
+        comment: "The attribute that increases the attack value of a close combat technique.",
+        type: AttributeIdentifier(),
+      }),
+    }),
+})
+
+const SpellworkSettings = DB.TypeAlias(import.meta.url, {
+  name: "SpellworkSettings",
+  type: () =>
+    DB.Object({
+      maximumRatingUnlockEntry: DB.Required({
+        comment:
+          "The entry that removes the maximum rating of 14 from spellworks for selected properties. It must provide the property as a selected option.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      enhancementsFocusRule: DB.Required({
+        comment:
+          "Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
       }),
-      liturgicalChant: DB.Required({
-        comment: "The focus rule for liturgical chant enhancements.",
+    }),
+})
+
+const LiturgicalChantSettings = DB.TypeAlias(import.meta.url, {
+  name: "LiturgicalChantSettings",
+  type: () =>
+    DB.Object({
+      generalAspectForChurch: DB.Required({
+        comment: "The general aspect for church traditions.",
+        type: AspectIdentifier(),
+      }),
+      generalAspectForShamanistic: DB.Required({
+        comment: "The general aspect for shamanistic traditions.",
+        type: AspectIdentifier(),
+      }),
+      maximumRatingUnlockEntry: DB.Required({
+        comment:
+          "The entry that removes the maximum rating of 14 from liturgical chants for selected aspects. It must provide the aspect as a selected option.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      enhancementsFocusRule: DB.Required({
+        comment:
+          "Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
       }),
     }),

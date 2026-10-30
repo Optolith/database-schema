@@ -57,6 +57,7 @@ export type ResolvedSelectOptionIdentifier =
       | "Disease"
       | "Poison"
       | "TargetCategory"
+      | "Patron"
       | "Advantage",
       string
     >
