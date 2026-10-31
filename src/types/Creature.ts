@@ -15,9 +15,11 @@ import {
   DisadvantageIdentifier,
   PoisonIdentifier,
   DiseaseIdentifier,
-  SkillIdentifier } from "./_Identifier.js"
+  SkillIdentifier,
+} from "./_Identifier.js"
 import { Complexity } from "./equipment/item/_Item.ts"
 import { CommonnessRatedAdvantageDisadvantage } from "./_CommonnessRatedAdvantageDisadvantage.js"
+import { CombatSpecialAbility } from "./specialAbility/CombatSpecialAbility.js"
 
 export const Creature = DB.Entity(import.meta.url, {
   name: "Creature",
@@ -106,7 +108,15 @@ export const Creature = DB.Entity(import.meta.url, {
           { minItems: 1 },
         ),
       }),
-      special_abilities,
+      special_abilities: DB.Optional({
+        comment: "A list of special abilities, this creature has.",
+        type: DB.Array(
+          DB.IncludeIdentifier(CreatureSpecialAbility), {
+            minItems: 1,
+            uniqueItems: true,
+          }
+        ),
+      }),
       skills: DB.Required({
         comment: "The skills of the creature.",
         type: DB.Array(DB.IncludeIdentifier(CreatureSkill), {
@@ -198,6 +208,21 @@ const CreatureAttribute = DB.TypeAlias(import.meta.url, {
       value: DB.Optional({
         comment: "The value of the attribute.",
         type: DB.Integer({ minimum: 0 }),
+      }),
+    }),
+})
+
+const CreatureSpecialAbility = DB.TypeAlias(import.meta.url, {
+  name: "CreatureSpecialAbility",
+  type: () =>
+    DB.Object({
+      special_ability: DB.Required({
+        comment: "The special ability of the creature.",
+        type: DB.IncludeIdentifier(CombatSpecialAbility),
+      }),
+      attacks: DB.Optional({
+        comment: "The attacks this special ability can be used with.",
+        type: DB.Array(DB.IncludeIdentifier(CreatureAttack) , { minItems: 1, uniqueItems: true }),
       }),
     }),
 })
