@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.116.0](https://github.com/Optolith/database-schema/compare/v0.115.0...v0.116.0) (2026-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* translations for base race/culture/profession selection
+
+### Features
+
+* translations for base race/culture/profession selection ([81635bf](https://github.com/Optolith/database-schema/commit/81635bfd44df5d6cad623c4987d29b8b6104307f))
+
 ## [0.115.0](https://github.com/Optolith/database-schema/compare/v0.114.0...v0.115.0) (2026-11-02)
 
 ### ⚠ BREAKING CHANGES
