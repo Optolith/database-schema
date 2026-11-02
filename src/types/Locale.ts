@@ -303,6 +303,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "heroes.saveherobtn": null,
           "heroes.unsavedhero.name": null,
           "heroes.list.adventurepoints": null,
+
           "heroes.dialogs.herosaved": null,
           "heroes.dialogs.importheroerror.title": null,
           "heroes.dialogs.importheroerror.message": null,
@@ -318,6 +319,17 @@ export const Locale = DB.Entity(import.meta.url, {
            */
           "heroes.dialogs.deletehero.title": null,
           "heroes.dialogs.deletehero.message": null,
+
+          "Name of Character": null,
+          "Sex": null,
+          "Custom Sex": null,
+          "Custom Sex Name": null,
+          "Experience Level": null,
+          "Counts as male when checking binary sex prerequisites": null,
+          "Counts as female when checking binary sex prerequisites": null,
+          "Counts as having a penis when checking sex characteristic prerequisites": null,
+          "Counts as having a vagina when checking sex characteristic prerequisites": null,
+
           "heroes.dialogs.herocreation.title": null,
           "heroes.dialogs.herocreation.nameofhero": null,
           "heroes.dialogs.herocreation.sex.placeholder": null,
@@ -623,6 +635,7 @@ export const Locale = DB.Entity(import.meta.url, {
           "Use all publications": null,
           "Focus Rules": null,
           "Optional Rules": null,
+          "Alternative Rules": null,
           "rules.manualherodatarepair": null,
           "rules.manualherodatarepairexplanation": null,
 

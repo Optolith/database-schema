@@ -37,6 +37,11 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: StyleSpecialAbilitySettings.comment,
         type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
       }),
+      sexualCharacteristicsPublication: DB.Required({
+        comment:
+          "The publication that uses sexual characteristics. This makes sexual characteristic selection available for characters outside of male and female sex presets.",
+        type: PublicationIdentifier(),
+      }),
       extendedBookDescriptionPublication: DB.Required({
         comment:
           "The publication that extends the description of books with additional information.",
