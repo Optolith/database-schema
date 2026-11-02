@@ -639,122 +639,20 @@ export const Locale = DB.Entity(import.meta.url, {
           "rules.manualherodatarepair": null,
           "rules.manualherodatarepairexplanation": null,
 
-          "inlinewiki.complementarysources": null,
-
-          "race.header.name": null,
-          "race.header.adventurepoints": null,
-          "race.header.adventurepoints.tooltip": null,
-
-          "inlinewiki.apvalue": null,
-          "inlinewiki.adventurepoints": null,
-          "inlinewiki.lifepointbasevalue": null,
-          "inlinewiki.spiritbasevalue": null,
-          "inlinewiki.toughnessbasevalue": null,
-          "inlinewiki.movementbasevalue": null,
-          "inlinewiki.attributeadjustments": null,
-          "inlinewiki.automaticadvantages": null,
-          "inlinewiki.stronglyrecommendedadvantages": null,
-          "inlinewiki.stronglyrecommendeddisadvantages": null,
-          "inlinewiki.commoncultures": null,
-          "inlinewiki.commonadvantages": null,
-          "inlinewiki.commondisadvantages": null,
-          "inlinewiki.uncommonadvantages": null,
-          "inlinewiki.uncommondisadvantages": null,
-
-          "culture.filters.common.allcultures": null,
-          "culture.filters.common.commoncultures": null,
-          "culture.header.name": null,
-
-          "inlinewiki.language": null,
-          "inlinewiki.script": null,
-          "inlinewiki.areaknowledge": null,
-          "inlinewiki.socialstatus": null,
-          "inlinewiki.commonprofessions": null,
-          "inlinewiki.commonprofessions.mundane": null,
-          "inlinewiki.commonprofessions.magic": null,
-          "inlinewiki.commonprofessions.blessed": null,
-          "inlinewiki.commonskills": null,
-          "inlinewiki.uncommonskills": null,
-          "inlinewiki.commonnames": null,
-          /**
-           * - `0`: Name of cultural package
-           * - `1`: AP cost of the cultural package
-           */
-          "inlinewiki.culturalpackage": null,
-
-          "profession.ownprofession": null,
-          "profession.variants.novariant": null,
-          "profession.filters.common.allprofessions": null,
-          "profession.filters.common.commonprofessions": null,
-          "profession.filters.groups.allprofessiongroups": null,
-          "profession.filters.groups.mundaneprofessions": null,
-          "profession.filters.groups.magicalprofessions": null,
-          "profession.filters.groups.blessedprofessions": null,
-          "profession.header.name": null,
-          "profession.header.adventurepoints": null,
-          "profession.header.adventurepoints.tooltip": null,
-
-          "inlinewiki.prerequisites": null,
-          "inlinewiki.race": null,
-          "inlinewiki.specialabilities": null,
-          /**
-           * - `0`: AP given
-           */
-          "inlinewiki.languagesandliteracytotalingap": null,
-          /**
-           * - `0`: Skill name(s)
-           */
-          "inlinewiki.skillspecialization": null,
-          /**
-           * - `0`: AP given
-           * - `1`: Skill group
-           */
-          "inlinewiki.skillsselection": null,
-          "inlinewiki.combattechniques": null,
-          /**
-           * - `0`: Amount of combat techniques to choose
-           * - `1`: CtR of the selected combat techniques after application
-           * - `2`: List of possible combat techniques
-           */
-          "inlinewiki.combattechniqueselection": null,
-          "inlinewiki.combattechnique.one": null,
-          "inlinewiki.combattechnique.two": null,
-          /**
-           * - `0`: Amount of combat techniques to choose
-           * - `1`: CtR of the selected combat techniques after application
-           * - `2`: Amount of combat techniques to choose in a second selection
-           * - `3`: CtR of the selected combat techniques from second selection after application
-           * - `4`: List of possible combat techniques
-           */
-          "inlinewiki.combattechniquesecondselection": null,
-          "inlinewiki.skills": null,
-          "inlinewiki.spells": null,
-          /**
-           * - `0`: AP given
-           */
-          "inlinewiki.cursestotalingap": null,
-          /**
-           * - `0`: Amount of cantrips to choose
-           * - `1`: List of possible cantrips
-           */
-          "inlinewiki.cantripsfromlist": null,
-          "inlinewiki.cantrip.one": null,
-          "inlinewiki.cantrip.two": null,
-          "inlinewiki.liturgicalchants": null,
-          "inlinewiki.thetwelveblessings": null,
-          /**
-           * - `0`: name of first excluded blessing
-           * - `1`: name of second excluded blessing
-           * - `2`: name of third excluded blessing
-           */
-          "inlinewiki.thetwelveblessingsexceptions": null,
-          "inlinewiki.sixblessings": null,
-          "inlinewiki.suggestedadvantages": null,
-          "inlinewiki.suggesteddisadvantages": null,
-          "inlinewiki.unsuitableadvantages": null,
-          "inlinewiki.unsuitabledisadvantages": null,
-          "inlinewiki.variants": null,
-          "inlinewiki.insteadof": null,
+          "Select Race": null,
+          "Select Culture": null,
+          "Select Profession": null,
+          "Show uncommon cultures": null,
+          "Show uncommon professions": null,
+          "Go to Culture Selection": null,
+          "Go to Profession Selection": null,
+          "No variant": null,
+          "Visible professions by group": null,
+          "All Professions": null,
+          "Only Mundane Professions": null,
+          "Only Magic Professions": null,
+          "Only Blessed Professions": null,
+          "Finalize Race, Culture and Profession Selection": null,
 
           "rcpselectoptions.race": null,
           "rcpselectoptions.culture": null,
