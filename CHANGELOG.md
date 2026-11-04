@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.116.1](https://github.com/Optolith/database-schema/compare/v0.116.0...v0.116.1) (2026-11-04)
+
+### Features
+
+* select option rule verification ([c40bfa9](https://github.com/Optolith/database-schema/commit/c40bfa90e9e58ce92e745bee3c381004018da608))
+
 ## [0.116.0](https://github.com/Optolith/database-schema/compare/v0.115.0...v0.116.0) (2026-11-02)
 
 ### ⚠ BREAKING CHANGES
