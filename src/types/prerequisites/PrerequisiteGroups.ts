@@ -1,5 +1,8 @@
 import * as DB from "tsondb/schema/dsl"
-import { ActivatablePrerequisite } from "./single/ActivatablePrerequisite.js"
+import {
+  ActivatablePrerequisite,
+  ProfessionActivatablePrerequisite,
+} from "./single/ActivatablePrerequisite.js"
 import { AncestorBloodPrerequisite } from "./single/AncestorBloodPrerequisite.js"
 import { AnimistPowerPrerequisite } from "./single/AnimistPowerPrerequisite.js"
 import { AnySpecialAbilityOfGroupPrerequisite } from "./single/AnySpecialAbilityOfGroupPrerequisite.ts"
@@ -99,7 +102,7 @@ export const ProfessionPrerequisiteGroup = DB.Enum(import.meta.url, {
     Race: DB.EnumCase({ type: DB.IncludeIdentifier(RacePrerequisite) }),
     Culture: DB.EnumCase({ type: DB.IncludeIdentifier(CulturePrerequisite) }),
     Rule: DB.EnumCase({ type: DB.IncludeIdentifier(RulePrerequisite) }),
-    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ActivatablePrerequisite) }),
+    Activatable: DB.EnumCase({ type: DB.IncludeIdentifier(ProfessionActivatablePrerequisite) }),
     Rated: DB.EnumCase({ type: DB.IncludeIdentifier(RatedPrerequisite) }),
     RatedMinimumNumber: DB.EnumCase({
       type: DB.IncludeIdentifier(RatedMinimumNumberPrerequisiteForProfession),

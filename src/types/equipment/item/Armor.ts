@@ -155,12 +155,11 @@ const StandardArmorType = DB.TypeAlias(import.meta.url, {
 const validateArmorTypeReference = (deps: {
   getInstanceById: GetInstanceById
   // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
-  instanceContent: { variantOf: Gen.Armor_ID | Gen.Item_ID }
+  value: { variantOf: Gen.Armor_ID | Gen.Item_ID }
 }) =>
   [
-    deps.getInstanceById("Armor", deps.instanceContent.variantOf)?.armorType.kind !== "Standard" &&
-    deps.getInstanceById("Item", deps.instanceContent.variantOf)?.armorUse?.armorType.kind !==
-      "Standard"
+    deps.getInstanceById("Armor", deps.value.variantOf)?.armorType.kind !== "Standard" &&
+    deps.getInstanceById("Item", deps.value.variantOf)?.armorUse?.armorType.kind !== "Standard"
       ? "The armor is a variant of a standard armor, but the referenced armor is not a standard armor."
       : undefined,
   ].filter(isNotNullish)
@@ -272,14 +271,14 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
-  customConstraints: ({ instanceContent, ...deps }) =>
-    instanceContent.armorType.kind !== "Standard"
+  customConstraints: ({ value, ...deps }) =>
+    value.armorType.kind !== "Standard"
       ? validateArmorTypeReference({
           ...deps,
-          instanceContent:
-            instanceContent.armorType.kind === "Variant"
-              ? instanceContent.armorType.Variant
-              : instanceContent.armorType.StandardVariant,
+          value:
+            value.armorType.kind === "Variant"
+              ? value.armorType.Variant
+              : value.armorType.StandardVariant,
         })
       : [],
 })

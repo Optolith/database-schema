@@ -50,12 +50,9 @@ const SingleResistance = DB.TypeAlias(import.meta.url, {
         type: DerivedCharacteristicIdentifier(),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
+  customConstraints: ({ value, getInstanceById }) =>
     nullableToArray(
-      checkDerivedCharacteristicIsResistance(
-        instanceContent.derivedCharacteristic,
-        getInstanceById,
-      ),
+      checkDerivedCharacteristicIsResistance(value.derivedCharacteristic, getInstanceById),
     ),
 })
 
@@ -73,8 +70,8 @@ const MinimumResistance = DB.TypeAlias(import.meta.url, {
         }),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
-    instanceContent.derivedCharacteristics
+  customConstraints: ({ value, getInstanceById }) =>
+    value.derivedCharacteristics
       .map(id => checkDerivedCharacteristicIsResistance(id, getInstanceById))
       .filter(isNotNullish),
 })
