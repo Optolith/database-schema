@@ -95,6 +95,7 @@ import {
 } from "./Profession.js"
 import { Property, PropertySpecialization } from "./Property.js"
 import { Race, RaceVariant } from "./Race.js"
+import { Region } from "./Region.ts"
 import { Ritual } from "./Ritual.js"
 import { AlternativeRule } from "./rule/AlternativeRule.js"
 import { PlayerType } from "./rule/AlternativeRule_PlayerType.js"
@@ -324,6 +325,7 @@ export const RaceIdentifier: () => R = () => R(Race)
 export const RaceVariantIdentifier: () => R = () => R(RaceVariant)
 export const RangedCombatTechniqueIdentifier: () => R = () => R(RangedCombatTechnique)
 export const ReachIdentifier: () => R = () => R(Reach)
+export const RegionIdentifier: () => R = () => R(Region)
 export const BotanicRegionIdentifier: () => R = () => R(BotanicRegion)
 export const RingEnchantmentIdentifier: () => R = () => R(RingEnchantment)
 export const RitualIdentifier: () => R = () => R(Ritual)

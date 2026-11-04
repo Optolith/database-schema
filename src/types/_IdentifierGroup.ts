@@ -104,6 +104,7 @@ import {
   ProtectiveWardingCircleSpecialAbilityIdentifier,
   RaceIdentifier,
   RangedCombatTechniqueIdentifier,
+  RegionIdentifier,
   RingEnchantmentIdentifier,
   RitualIdentifier,
   RopeOrChainIdentifier,
@@ -444,6 +445,7 @@ export const RequirableSelectOptionIdentifier = DB.Enum(import.meta.url, {
     ArcaneBardTradition: DB.EnumCase({ type: ArcaneBardTraditionIdentifier() }),
     ArcaneDancerTradition: DB.EnumCase({ type: ArcaneDancerTraditionIdentifier() }),
     Element: DB.EnumCase({ type: ElementIdentifier() }),
+    Region: DB.EnumCase({ type: RegionIdentifier() }),
   }),
 })
 

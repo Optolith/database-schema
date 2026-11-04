@@ -483,6 +483,8 @@ const optionMatchesSelectOptions = (
       return false // only as Child config option
     case "TradeSecret":
       return derivedSelectOptions?.kind === "TradeSecrets"
+    case "Region":
+      return false // not configurable as derived select option
     case "Select":
       return true
     case "Text":
@@ -607,17 +609,60 @@ export const verifyOptionsForActivatableEntry = (
             entity: { kind: entity },
             parentIndex,
           } = configOption.value.Child
-          if (normalizedActualOption.kind !== entity) {
+
+          const parentEntry = getNormalizedActualOptionAtIndex(parentIndex)
+          if (parentEntry?.kind !== "Skill") {
             errorMessages.push(
-              `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()}, but got ${normalizedActualOption.kind}.`,
+              `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but got a parent option that is not a skill.`,
             )
+            continue
+          } else if (normalizedActualOption.kind === "Select") {
+            continue
           } else {
-            const childInstance = getInstanceById(entity, normalizedActualOption[entity])
-            const parentEntry = getNormalizedActualOptionAtIndex(parentIndex)
-            if (parentEntry?.kind !== "Skill" || childInstance?.parent !== parentEntry.Skill) {
+            const parent = getInstanceById("Skill", parentEntry.Skill)
+            if (
+              normalizedActualOption.kind === entity &&
+              getInstanceById(entity, normalizedActualOption[entity])?.parent !== parentEntry.Skill
+            ) {
               errorMessages.push(
                 `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but got a child option that does not belong to that skill.`,
               )
+            } else if (normalizedActualOption.kind !== entity) {
+              if (parent?.applications.derived?.kind === undefined) {
+                errorMessages.push(
+                  `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill does not define any derived skill applications.`,
+                )
+                continue
+              }
+              switch (parent.applications.derived.kind) {
+                case "BlessedTraditions":
+                  // Does not exist as requirable select option yet:
+                  // if (normalizedActualOption.kind !== "BlessedTradition") {
+                  //   errorMessages.push(
+                  //     `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived BlessedTradition skill applications, and the selected child option is not a BlessedTradition.`,
+                  //   )
+                  // }
+                  break
+                case "Diseases":
+                  if (normalizedActualOption.kind !== "Disease") {
+                    errorMessages.push(
+                      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived Disease skill applications, and the selected child option is not a Disease.`,
+                    )
+                  }
+                  break
+                case "Regions":
+                  if (normalizedActualOption.kind !== "Region") {
+                    errorMessages.push(
+                      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived Region skill applications, and the selected child option is not a Region.`,
+                    )
+                  }
+                  break
+                default:
+                  return assertExhaustive(
+                    parent.applications.derived,
+                    `Unknown derived skill application kind`,
+                  )
+              }
             }
           }
         }
