@@ -1,5 +1,5 @@
-import * as DB from "tsondb/schema/dsl"
-import { AlternativeName } from "../../_AlternativeNames.js"
+import * as DB from "tsondb/schema/dsl";
+import { AlternativeName } from "../../_AlternativeNames.js";
 import {
   BiomeIdentifier,
   SubBiomeIdentifier,
@@ -8,11 +8,14 @@ import {
   HerbalPreservationIdentifier,
   ElixirIdentifier,
   PoisonIdentifier,
-} from "../../_Identifier.js"
-import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.js"
-import { NestedTranslationMap } from "../../Locale.js"
-import { src } from "../../source/_PublicationRef.js"
-import { EffectType, PlantRarity } from "./_Herbary.js"
+} from "../../_Identifier.js";
+import {
+  ResponsiveTextOptional,
+  ResponsiveTextReplace,
+} from "../../_ResponsiveText.js";
+import { NestedTranslationMap } from "../../Locale.js";
+import { src } from "../../source/_PublicationRef.js";
+import { EffectType, PlantRarity } from "./_Herbary.js";
 
 export const Plant = DB.Entity(import.meta.url, {
   name: "Plant",
@@ -21,10 +24,14 @@ export const Plant = DB.Entity(import.meta.url, {
     DB.Object({
       types: DB.Required({
         comment: "The plant types of this plant.",
-        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       occurences: DB.Required({
-        comment: "The biomes this plant occurs in and its rarity in those biomes.",
+        comment:
+          "The biomes this plant occurs in and its rarity in those biomes.",
         type: DB.IncludeIdentifier(PlantOccurences),
       }),
       search_difficulty: DB.Required({
@@ -56,7 +63,8 @@ export const Plant = DB.Entity(import.meta.url, {
         type: DB.IncludeIdentifier(PlantPrice),
       }),
       recipes: DB.Optional({
-        comment: "The herbal aids and elixirs that can be crafted with this plant.",
+        comment:
+          "The herbal aids and elixirs that can be crafted with this plant.",
         type: DB.Array(DB.IncludeIdentifier(PlantRecipe), { minItems: 1 }),
       }),
       longevity: DB.Optional({
@@ -74,10 +82,13 @@ export const Plant = DB.Entity(import.meta.url, {
           }),
           alternative_names: DB.Optional({
             comment: "A list of alternative names.",
-            type: DB.Array(DB.IncludeIdentifier(AlternativeName), { minItems: 1 }),
+            type: DB.Array(DB.IncludeIdentifier(AlternativeName), {
+              minItems: 1,
+            }),
           }),
           remedies_and_traditions: DB.Required({
-            comment: "How this plant is used as a household remedy and in folk traditions.",
+            comment:
+              "How this plant is used as a household remedy and in folk traditions.",
             type: DB.String({ minLength: 1, markdown: "block" }),
           }),
           knowledge: DB.Required({
@@ -98,7 +109,7 @@ export const Plant = DB.Entity(import.meta.url, {
       keyPathInEntityMap: "name",
     },
   ],
-})
+});
 
 const PlantOccurences = DB.TypeAlias(import.meta.url, {
   name: "PlantOccurences",
@@ -106,8 +117,11 @@ const PlantOccurences = DB.TypeAlias(import.meta.url, {
     DB.Object(
       {
         items: DB.Optional({
-          comment: "The biomes this plant occurs in and its rarity in those biomes.",
-          type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
+          comment:
+            "The biomes this plant occurs in and its rarity in those biomes.",
+          type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), {
+            minItems: 1,
+          }),
         }),
         translation: NestedTranslationMap(
           DB.Optional,
@@ -124,7 +138,7 @@ const PlantOccurences = DB.TypeAlias(import.meta.url, {
         minProperties: 1,
       },
     ),
-})
+});
 
 const PlantOccurrence = DB.TypeAlias(import.meta.url, {
   name: "PlantOccurrence",
@@ -149,7 +163,7 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
+});
 
 const PlantOccurrenceTier = DB.Enum(import.meta.url, {
   name: "PlantOccurrenceTier",
@@ -165,15 +179,17 @@ const PlantOccurrenceTier = DB.Enum(import.meta.url, {
       type: DB.Array(BotanicRegionIdentifier(), { minItems: 1 }),
     }),
   }),
-})
+});
 
 const PlantDifficulty = DB.Enum(import.meta.url, {
   name: "PlantDifficulty",
   values: () => ({
     Constant: DB.EnumCase({ type: DB.Integer() }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantDescription) }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
   }),
-})
+});
 
 const IndefinitePlantDescription = DB.TypeAlias(import.meta.url, {
   name: "IndefinitePlantDescription",
@@ -190,15 +206,19 @@ const IndefinitePlantDescription = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
+});
 
 const PlantApplications = DB.Enum(import.meta.url, {
   name: "PlantApplications",
   values: () => ({
-    Constant: DB.EnumCase({ type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }) }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantDescription) }),
+    Constant: DB.EnumCase({
+      type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }),
+    }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
   }),
-})
+});
 
 const PlantEffect = DB.TypeAlias(import.meta.url, {
   name: "PlantEffect",
@@ -206,7 +226,10 @@ const PlantEffect = DB.TypeAlias(import.meta.url, {
     DB.Object({
       types: DB.Optional({
         comment: "The effect type of this plant effect.",
-        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       translations: NestedTranslationMap(
         DB.Required,
@@ -219,7 +242,7 @@ const PlantEffect = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
+});
 
 const PlantPrice = DB.Enum(import.meta.url, {
   name: "PlantPrice",
@@ -234,11 +257,23 @@ const PlantPrice = DB.Enum(import.meta.url, {
           comment: "The cost of the plant in silver coins.",
           type: DB.Float({ minimum: 0 }),
         }),
+        translations: NestedTranslationMap(
+          DB.Optional,
+          "PlantPrice",
+          DB.Object({
+            note: DB.Required({
+              comment: "A note about the price.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          }),
+        ),
       }),
     }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantPrice) }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantPrice),
+    }),
   }),
-})
+});
 
 const IndefinitePlantPrice = DB.TypeAlias(import.meta.url, {
   name: "IndefinitePlantPrice",
@@ -255,7 +290,7 @@ const IndefinitePlantPrice = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
+});
 
 const PlantRecipe = DB.Enum(import.meta.url, {
   name: "PlantRecipe",
@@ -265,7 +300,7 @@ const PlantRecipe = DB.Enum(import.meta.url, {
     Poison: DB.EnumCase({ type: DB.IncludeIdentifier(PoisonRecipe) }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefiniteRecipe) }),
   }),
-})
+});
 
 const PlantProductTranslation = DB.Object(
   {
@@ -281,7 +316,7 @@ const PlantProductTranslation = DB.Object(
     }),
   },
   { minProperties: 1 },
-)
+);
 
 const HerbalAidRecipe = DB.TypeAlias(import.meta.url, {
   name: "HerbalAidRecipe",
@@ -291,9 +326,13 @@ const HerbalAidRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The herbal aid this recipe results in.",
         type: HerbalAidIdentifier(),
       }),
-      translation: NestedTranslationMap(DB.Optional, "HerbalAidRecipe", PlantProductTranslation),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "HerbalAidRecipe",
+        PlantProductTranslation,
+      ),
     }),
-})
+});
 
 const ElixirRecipe = DB.TypeAlias(import.meta.url, {
   name: "ElixirRecipe",
@@ -303,9 +342,13 @@ const ElixirRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The elixir this recipe results in.",
         type: ElixirIdentifier(),
       }),
-      translation: NestedTranslationMap(DB.Optional, "ElixirRecipe", PlantProductTranslation),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "ElixirRecipe",
+        PlantProductTranslation,
+      ),
     }),
-})
+});
 
 const PoisonRecipe = DB.TypeAlias(import.meta.url, {
   name: "PoisonRecipe",
@@ -315,9 +358,13 @@ const PoisonRecipe = DB.TypeAlias(import.meta.url, {
         comment: "The poison this recipe results in.",
         type: PoisonIdentifier(),
       }),
-      translation: NestedTranslationMap(DB.Optional, "PoisonRecipe", PlantProductTranslation),
+      translation: NestedTranslationMap(
+        DB.Optional,
+        "PoisonRecipe",
+        PlantProductTranslation,
+      ),
     }),
-})
+});
 
 const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
   name: "IndefiniteRecipe",
@@ -334,7 +381,7 @@ const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
         }),
       ),
     }),
-})
+});
 
 const PlantLongevity = DB.TypeAlias(import.meta.url, {
   name: "PlantLongevity",
@@ -342,8 +389,12 @@ const PlantLongevity = DB.TypeAlias(import.meta.url, {
     DB.Object(
       {
         preservations: DB.Optional({
-          comment: "The preservations with alternative effect of this preserved plant",
-          type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
+          comment:
+            "The preservations with alternative effect of this preserved plant",
+          type: DB.Array(HerbalPreservationIdentifier(), {
+            minItems: 1,
+            uniqueItems: true,
+          }),
         }),
         translations: NestedTranslationMap(
           DB.Optional,
@@ -365,4 +416,4 @@ const PlantLongevity = DB.TypeAlias(import.meta.url, {
       },
       { minProperties: 1 },
     ),
-})
+});
