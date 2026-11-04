@@ -12,11 +12,7 @@ import {
   volume,
   volume_l10n,
 } from "../_ActivatableNonMundane.ts"
-import {
-  explicit_select_options,
-  select_options,
-  verifySelectOptionRules,
-} from "../_ActivatableSelectOptions.ts"
+import { explicit_select_options, select_options } from "../_ActivatableSelectOptions.ts"
 import type { TraditionArtifactEnchantmentIdentifier } from "../_IdentifierGroup.ts"
 import { GeneralPrerequisites } from "../_Prerequisite.ts"
 import { NestedTranslationMap } from "../Locale.ts"
@@ -67,7 +63,6 @@ export const full = <
         keyPathInEntityMapFallback: "name",
       },
     ],
-    customConstraints: deps => verifySelectOptionRules(options.name, deps),
   })
 
 export const translations = <T extends string>(entity: T) =>

@@ -422,8 +422,8 @@ const ProfessionSpecialAbility = DB.Enum(import.meta.url, {
   }),
 })
 
-const ProfessionSpecialAbilityOption = DB.Enum(import.meta.url, {
-  name: "ProfessionSpecialAbilityOption",
+export const ProfessionActivatableOption = DB.Enum(import.meta.url, {
+  name: "ProfessionActivatableOption",
   values: () => ({
     Identifier: DB.EnumCase({
       comment: "The option is a option specified in the database.",
@@ -473,15 +473,11 @@ const SingleProfessionSpecialAbility = DB.TypeAlias(import.meta.url, {
       options: DB.Optional({
         comment:
           "Received select options. Order is important. Typically, you only need the first array index, though.",
-        type: DB.Array(DB.IncludeIdentifier(ProfessionSpecialAbilityOption), { minItems: 1 }),
+        type: DB.Array(DB.IncludeIdentifier(ProfessionActivatableOption), { minItems: 1 }),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById, getAllChildInstancesForParent }) =>
-    verifyOptionsForActivatableEntry(
-      instanceContent,
-      getInstanceById,
-      getAllChildInstancesForParent,
-    ),
+  customConstraints: ({ value, getInstanceById, getAllChildInstancesForParent }) =>
+    verifyOptionsForActivatableEntry(value, getInstanceById, getAllChildInstancesForParent, true),
 })
 
 const ProfessionSpecialAbilitySelection = DB.TypeAlias(import.meta.url, {
@@ -600,8 +596,8 @@ const ProfessionMagicalActionIdentifier = DB.TypeAlias(import.meta.url, {
         type: BannzeichenOptionIdentifier(),
       }),
     }),
-  customConstraints: ({ instanceContent }) =>
-    instanceContent.option !== undefined && instanceContent.id.kind !== "Bannzeichen"
+  customConstraints: ({ value }) =>
+    value.option !== undefined && value.id.kind !== "Bannzeichen"
       ? ["The option property can only be set for Bannzeichen magical actions."]
       : [],
 })
@@ -879,11 +875,10 @@ const SkillsOptions = DB.TypeAlias(import.meta.url, {
         type: DB.Integer({ minimum: 1 }),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
+  customConstraints: ({ value, getInstanceById }) =>
     [
-      (instanceContent.specific?.some(
-        skillId => getInstanceById("Skill", skillId)?.group !== instanceContent.group,
-      ) ?? false)
+      (value.specific?.some(skillId => getInstanceById("Skill", skillId)?.group !== value.group) ??
+      false)
         ? "All selected skills must be from the selected group."
         : undefined,
     ].filter(isNotNullish),

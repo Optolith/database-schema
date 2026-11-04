@@ -1,18 +1,14 @@
 import { isEmpty, isNotEmpty } from "@elyukai/utils/array/nonEmpty"
+import { assertExhaustive } from "@elyukai/utils/typeSafety"
 import * as DB from "tsondb/schema/dsl"
 import {
-  Case,
+  type Case,
   fromUniformCase,
   type GetAllChildInstanceContainersForParent,
   type GetInstanceById,
 } from "tsondb/schema/gen"
-import type {
-  ActivatableIdentifier,
-  ProfessionSpecialAbilityOption,
-  RequirableSelectOptionIdentifier,
-  SelectOptions,
-} from "../../gen/types.js"
-import { SelectOptionCategory } from "./_ActivatableSelectOptionCategory.js"
+import type * as Gen from "../../gen/types.js"
+import { SelectOptionCategory } from "./_ActivatableSelectOptionCategory.ts"
 import { NewSkillApplication, SkillUse } from "./_ActivatableSkillApplicationsAndUses.js"
 import { SelectOptionParentIdentifier } from "./_IdentifierGroup.js"
 import { GeneralPrerequisites } from "./_Prerequisite.js"
@@ -76,6 +72,11 @@ export const GeneralSelectOption = DB.Entity(import.meta.url, {
         comment: "Prerequisites for the select option.",
         type: DB.IncludeIdentifier(GeneralPrerequisites),
       }),
+      // maximum: DB.Optional({
+      //   comment:
+      //     "Usually, a select option may only be chosen once. Setting this to a higher number allows the user to select the same option multiple times.",
+      //   type: DB.Integer({ minimum: 2 }),
+      // }),
       binding_cost: DB.Optional({
         comment:
           "Specific binding cost for the select option. Only has an effect if the associated entry supports binding costs.",
@@ -271,22 +272,13 @@ export const SelectOptionRules = DB.TypeAlias(import.meta.url, {
   name: "SelectOptionRules",
   comment: `Rules for how options can be selected and relate to each other. Defaults to a single predefined option if the entry has select options defined, otherwise undefined.`,
   type: () => DB.Array(DB.IncludeIdentifier(SelectOptionRule), { minItems: 1 }),
-})
-
-export const verifySelectOptionRules = (
-  _entity: ActivatableIdentifier["kind"],
-  deps: {
-    instanceId: string
-    instanceContent: {
-      select_options?: SelectOptions
-    }
+  customConstraints: (deps: {
+    value: Gen.SelectOptionRules
     getAllChildInstancesForParent: GetAllChildInstanceContainersForParent
-  },
-): string[] => {
-  const errorMessages: string[] = []
-  const rules = deps.instanceContent.select_options?.rules
+  }): string[] => {
+    const errorMessages: string[] = []
+    const rules = deps.value
 
-  if (rules) {
     const normalizedRules = rules.flatMap(rule =>
       rule.multiple
         ? Array.from(
@@ -318,8 +310,188 @@ export const verifySelectOptionRules = (
         }
       }
     }
+
+    return errorMessages
+  },
+})
+
+const matchesGenericSkillsSelectOptionCategoryCategory = <Ref>(
+  category: Gen.GenericSkillsSelectOptionCategoryCategory<Ref>,
+  matchesRef: (ref: Ref) => boolean,
+): boolean =>
+  category.specific === undefined ||
+  category.specific.list.some(matchesRef) === (category.specific.operation.kind === "Intersection")
+
+const matchesGenericSkillsSelectOptionCategory = <Category extends string, Ref>(
+  categories: { categories: Case<Category, Gen.GenericSkillsSelectOptionCategoryCategory<Ref>>[] },
+  category: Category,
+  matchesRef: (ref: Ref) => boolean,
+): boolean =>
+  categories.categories.some(
+    cat =>
+      cat.kind === category &&
+      matchesGenericSkillsSelectOptionCategoryCategory(cat[category], matchesRef),
+  )
+
+const optionMatchesSelectOptions = (
+  actualOption:
+    | Exclude<Gen.ProfessionActivatableOption, { kind: "Identifier" }>
+    | Gen.RequirableSelectOptionIdentifier,
+  generalSelectOptions: { id: string; content: Gen.GeneralSelectOption }[],
+  derivedSelectOptions: Gen.SelectOptionCategory | undefined,
+  getInstanceById: GetInstanceById,
+): boolean => {
+  switch (actualOption.kind) {
+    case "General":
+      return generalSelectOptions.some(option => option.id === actualOption.General)
+    case "AnimalShape":
+      return derivedSelectOptions?.kind === "AnimalShapes"
+    case "ArcaneBardTradition":
+      return derivedSelectOptions?.kind === "ArcaneBardTraditions"
+    case "ArcaneDancerTradition":
+      return derivedSelectOptions?.kind === "ArcaneDancerTraditions"
+    case "Aspect":
+      return derivedSelectOptions?.kind === "Aspects"
+    case "Skill":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(
+          category =>
+            category.kind === "Skills" &&
+            ((category.Skills.specific === undefined && category.Skills.groups === undefined) ||
+              category.Skills.specific === undefined ||
+              category.Skills.specific.list.some(specific => specific === actualOption.Skill) ===
+                (category.Skills.specific.operation.kind === "Intersection") ||
+              category.Skills.groups === undefined ||
+              (() => {
+                const skillGroup = getInstanceById("Skill", actualOption.Skill)?.group
+                return skillGroup === undefined || category.Skills.groups.includes(skillGroup)
+              })()),
+        )
+      )
+    case "CloseCombatTechnique":
+      return (
+        derivedSelectOptions?.kind === "CombatTechniques" &&
+        matchesGenericSkillsSelectOptionCategory(
+          derivedSelectOptions.CombatTechniques,
+          "CloseCombatTechniques",
+          ref => ref === actualOption.CloseCombatTechnique,
+        )
+      )
+    case "RangedCombatTechnique":
+      return (
+        derivedSelectOptions?.kind === "CombatTechniques" &&
+        matchesGenericSkillsSelectOptionCategory(
+          derivedSelectOptions.CombatTechniques,
+          "RangedCombatTechniques",
+          ref => ref === actualOption.RangedCombatTechnique,
+        )
+      )
+    case "Spell":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(category => {
+          if (category.kind !== "Spells") {
+            return false
+          }
+
+          const spell = getInstanceById("Spell", actualOption.Spell)
+
+          if (!spell) {
+            return false
+          }
+
+          return matchesGenericSkillsSelectOptionCategoryCategory(category.Spells, ref => {
+            switch (ref.kind) {
+              case "Property":
+                return spell.property === ref.Property
+              case "Single":
+                return actualOption.Spell === ref.Single
+              default:
+                return assertExhaustive(ref)
+            }
+          })
+        })
+      )
+    case "Ritual":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(category => {
+          if (category.kind !== "Rituals") {
+            return false
+          }
+
+          const spell = getInstanceById("Ritual", actualOption.Ritual)
+
+          if (!spell) {
+            return false
+          }
+
+          return matchesGenericSkillsSelectOptionCategoryCategory(category.Rituals, ref => {
+            switch (ref.kind) {
+              case "Property":
+                return spell.property === ref.Property
+              case "Single":
+                return actualOption.Ritual === ref.Single
+              default:
+                return assertExhaustive(ref)
+            }
+          })
+        })
+      )
+    case "LiturgicalChant":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(
+          category =>
+            category.kind === "LiturgicalChants" &&
+            matchesGenericSkillsSelectOptionCategoryCategory(
+              category.LiturgicalChants,
+              ref => ref === actualOption.LiturgicalChant,
+            ),
+        )
+      )
+    case "Ceremony":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(
+          category =>
+            category.kind === "Ceremonies" &&
+            matchesGenericSkillsSelectOptionCategoryCategory(
+              category.Ceremonies,
+              ref => ref === actualOption.Ceremony,
+            ),
+        )
+      )
+    case "Disease":
+      return derivedSelectOptions?.kind === "Diseases"
+    case "Element":
+      return (
+        derivedSelectOptions?.kind === "Elements" &&
+        (derivedSelectOptions.Elements.specific === undefined ||
+          derivedSelectOptions.Elements.specific.includes(actualOption.Element))
+      )
+    case "Language":
+      return derivedSelectOptions?.kind === "Languages"
+    case "Poison":
+      return derivedSelectOptions?.kind === "Poisons"
+    case "Property":
+      return derivedSelectOptions?.kind === "Properties"
+    case "Race":
+      return derivedSelectOptions?.kind === "Races"
+    case "SkillApplication":
+      return false // only as Child config option
+    case "TradeSecret":
+      return derivedSelectOptions?.kind === "TradeSecrets"
+    case "Region":
+      return false // not configurable as derived select option
+    case "Select":
+      return true
+    case "Text":
+      return false
+    default:
+      return assertExhaustive(actualOption, `Unknown select option kind`)
   }
-  return errorMessages
 }
 
 /**
@@ -327,12 +499,13 @@ export const verifySelectOptionRules = (
  */
 export const verifyOptionsForActivatableEntry = (
   value: {
-    id: ActivatableIdentifier | Case<"Enhancement", string>
+    id: Gen.ActivatableIdentifier | Case<"Enhancement", string>
     level?: number
-    options?: (RequirableSelectOptionIdentifier | ProfessionSpecialAbilityOption)[]
+    options?: (Gen.RequirableSelectOptionIdentifier | Gen.ProfessionActivatableOption)[]
   },
   getInstanceById: GetInstanceById,
   getAllChildInstancesForParent: GetAllChildInstanceContainersForParent,
+  enforceNumberOfOptions: boolean,
 ) => {
   if (value.id.kind === "Enhancement") {
     return []
@@ -355,48 +528,163 @@ export const verifyOptionsForActivatableEntry = (
     value.level !== undefined
   ) {
     errorMessages.push(
-      `The referenced instance of entity ${value.id.kind} with id ${fromUniformCase(
-        value.id,
-      )} does not have levels, but a level was specified in the prerequisite.`,
+      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} does not have levels, but a level was specified in the prerequisite.`,
     )
   }
 
+  const selectOptions =
+    "select_options" in referencedInstance ? referencedInstance.select_options : undefined
+
   if (
-    (("select_options" in referencedInstance &&
-      referencedInstance.select_options?.derived !== undefined) ||
-      isNotEmpty(generalSelectOptions)) &&
+    enforceNumberOfOptions &&
+    (selectOptions?.derived !== undefined || isNotEmpty(generalSelectOptions)) &&
     (value.options === undefined || isEmpty(value.options))
   ) {
     errorMessages.push(
-      `The referenced instance of entity ${value.id.kind} with id ${fromUniformCase(
-        value.id,
-      )} has select options, but no options were specified in the prerequisite.`,
+      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} has select options, but no options were specified in the prerequisite.`,
     )
   }
 
-  for (const option of value.options ?? []) {
-    if (option.kind === "General") {
-      const referencedOption = getInstanceById(Case("GeneralSelectOption", option.General))
+  const optionsConfig: Gen.SelectOptionRules | undefined =
+    selectOptions?.rules !== undefined
+      ? selectOptions.rules
+      : isNotEmpty(generalSelectOptions) || selectOptions?.derived !== undefined
+        ? [{ value: { kind: "Predefined" } }]
+        : undefined
 
-      if (!referencedOption) {
-        errorMessages.push(
-          `Referenced select option of entity GeneralSelectOption with id ${fromUniformCase(
-            option,
-          )} not found.`,
-        )
+  const normalizedOptionsConfig =
+    optionsConfig?.flatMap(rule => {
+      if (rule.multiple) {
+        const count =
+          rule.multiple.kind === "Constant" ? rule.multiple.Constant : rule.multiple.Range.max
+        return Array.from({ length: count }, () => rule)
       }
+      return [rule]
+    }) ?? []
 
-      if (referencedOption?.parent !== value.id) {
-        errorMessages.push(
-          `Referenced select option of entity GeneralSelectOption with id ${fromUniformCase(
-            option,
-          )} does not belong to the instance of entity ${value.id.kind} with id ${fromUniformCase(
-            value.id,
-          )}.`,
-        )
+  const actualOptions = value.options ?? []
+
+  const getNormalizedActualOptionAtIndex = (index: number) => {
+    const opt = actualOptions[index]
+    return opt === undefined ? undefined : opt.kind === "Identifier" ? opt.Identifier : opt
+  }
+
+  for (const [index, configOption] of normalizedOptionsConfig.entries()) {
+    const normalizedActualOption = getNormalizedActualOptionAtIndex(index)
+    if (!enforceNumberOfOptions && normalizedActualOption === undefined) {
+      break
+    }
+    switch (configOption.value.kind) {
+      case "Predefined":
+      case "PredefinedOrTextInput": {
+        if (normalizedActualOption === undefined) {
+          errorMessages.push(
+            `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a predefined${configOption.value.kind === "PredefinedOrTextInput" ? " or text input" : ""} option at index ${index.toFixed()}, but got none.`,
+          )
+        } else if (
+          !optionMatchesSelectOptions(
+            normalizedActualOption,
+            generalSelectOptions,
+            selectOptions?.derived,
+            getInstanceById,
+          ) &&
+          !(
+            configOption.value.kind === "PredefinedOrTextInput" &&
+            normalizedActualOption.kind === "Text"
+          )
+        ) {
+          errorMessages.push(
+            `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a predefined${configOption.value.kind === "PredefinedOrTextInput" ? " or text input" : ""} option at index ${index.toFixed()}, but got an option that does not match any of the available select options.`,
+          )
+        }
+        continue
       }
+      case "Child": {
+        if (normalizedActualOption === undefined) {
+          errorMessages.push(
+            `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a predefined child option at index ${index.toFixed()}, but got none.`,
+          )
+        } else {
+          const {
+            entity: { kind: entity },
+            parentIndex,
+          } = configOption.value.Child
+
+          const parentEntry = getNormalizedActualOptionAtIndex(parentIndex)
+          if (parentEntry?.kind !== "Skill") {
+            errorMessages.push(
+              `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but got a parent option that is not a skill.`,
+            )
+            continue
+          } else if (normalizedActualOption.kind === "Select") {
+            continue
+          } else {
+            const parent = getInstanceById("Skill", parentEntry.Skill)
+            if (
+              normalizedActualOption.kind === entity &&
+              getInstanceById(entity, normalizedActualOption[entity])?.parent !== parentEntry.Skill
+            ) {
+              errorMessages.push(
+                `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but got a child option that does not belong to that skill.`,
+              )
+            } else if (normalizedActualOption.kind !== entity) {
+              if (parent?.applications.derived?.kind === undefined) {
+                errorMessages.push(
+                  `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill does not define any derived skill applications.`,
+                )
+                continue
+              }
+              switch (parent.applications.derived.kind) {
+                case "BlessedTraditions":
+                  // Does not exist as requirable select option yet:
+                  // if (normalizedActualOption.kind !== "BlessedTradition") {
+                  //   errorMessages.push(
+                  //     `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived BlessedTradition skill applications, and the selected child option is not a BlessedTradition.`,
+                  //   )
+                  // }
+                  break
+                case "Diseases":
+                  if (normalizedActualOption.kind !== "Disease") {
+                    errorMessages.push(
+                      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived Disease skill applications, and the selected child option is not a Disease.`,
+                    )
+                  }
+                  break
+                case "Regions":
+                  if (normalizedActualOption.kind !== "Region") {
+                    errorMessages.push(
+                      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a child option of entity ${entity} at index ${index.toFixed()} that belongs to the skill selected at index ${parentIndex.toFixed()}, but that skill only defines derived Region skill applications, and the selected child option is not a Region.`,
+                    )
+                  }
+                  break
+                default:
+                  return assertExhaustive(
+                    parent.applications.derived,
+                    `Unknown derived skill application kind`,
+                  )
+              }
+            }
+          }
+        }
+        continue
+      }
+      case "TextInput":
+        if (actualOptions[index]?.kind !== "Text" && actualOptions[index]?.kind !== "Select") {
+          errorMessages.push(
+            `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} expected a text input option at index ${index.toFixed()}, but got ${actualOptions[index]?.kind ?? "none"}.`,
+          )
+        }
+        continue
+      default:
+        return assertExhaustive(configOption.value, `Unknown select option rule value kind`)
     }
   }
 
-  return []
+  if (actualOptions.length > normalizedOptionsConfig.length) {
+    errorMessages.push(
+      `Referenced instance of entity ${value.id.kind} with id ${fromUniformCase(value.id)} has more options specified (${actualOptions.length.toFixed()}) than allowed by the select option rules (${normalizedOptionsConfig.length.toFixed()}).`,
+    )
+  }
+
+  return errorMessages
 }

@@ -157,6 +157,16 @@ const DerivedCharacteristicBaseValue = DB.Enum(import.meta.url, {
   }),
 })
 
+const DerivedCharacteristicPurchaseMaximumValue = DB.Enum(import.meta.url, {
+  name: "DerivedCharacteristicPurchaseMaximumValue",
+  values: () => ({
+    Attribute: DB.EnumCase({ type: AttributeIdentifier() }),
+    PrimaryAttribute: DB.EnumCase({
+      type: DB.IncludeIdentifier(DerivedCharacteristicPrimaryAttributeValue),
+    }),
+  }),
+})
+
 const DerivedCharacteristicBase = DB.TypeAlias(import.meta.url, {
   name: "DerivedCharacteristicBase",
   type: () =>
@@ -237,7 +247,7 @@ const DerivedCharacteristicPurchase = DB.TypeAlias(import.meta.url, {
       maximum: DB.Required({
         comment:
           "The maximum value that can be achieved for the derived characteristic through improvements.",
-        type: DB.IncludeIdentifier(DerivedCharacteristicBase),
+        type: DB.IncludeIdentifier(DerivedCharacteristicPurchaseMaximumValue),
       }),
     }),
 })

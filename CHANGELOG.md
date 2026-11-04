@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.116.2](https://github.com/Optolith/database-schema/compare/v0.116.1...v0.116.2) (2026-11-04)
+
+### Bug Fixes
+
+* an armor can be a variant of any other armor ([b7e5e89](https://github.com/Optolith/database-schema/commit/b7e5e89108161c4fd5ca79d55dbced5534e52e80))
+* child select option custom constraint ([c36caff](https://github.com/Optolith/database-schema/commit/c36caff26433c08ec14d09857769032539d3904b))
+
+## [0.116.1](https://github.com/Optolith/database-schema/compare/v0.116.0...v0.116.1) (2026-11-04)
+
+### Features
+
+* select option rule verification ([c40bfa9](https://github.com/Optolith/database-schema/commit/c40bfa90e9e58ce92e745bee3c381004018da608))
+
+## [0.116.0](https://github.com/Optolith/database-schema/compare/v0.115.0...v0.116.0) (2026-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* translations for base race/culture/profession selection
+
+### Features
+
+* translations for base race/culture/profession selection ([81635bf](https://github.com/Optolith/database-schema/commit/81635bfd44df5d6cad623c4987d29b8b6104307f))
+
+## [0.115.0](https://github.com/Optolith/database-schema/compare/v0.114.0...v0.115.0) (2026-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* translations and settings for initial character setup
+
+### Features
+
+* translations and settings for initial character setup ([5cf1733](https://github.com/Optolith/database-schema/commit/5cf17337bd59572c0f6d1ed830feb77c7510786e))
+
+## [0.114.0](https://github.com/Optolith/database-schema/compare/v0.113.1...v0.114.0) (2026-10-30)
+
+### ⚠ BREAKING CHANGES
+
+* more data-driven logic from client
+
+### Features
+
+* more data-driven logic from client ([2126a3c](https://github.com/Optolith/database-schema/commit/2126a3c70cc826a96ff427aef0c12e8cc38239ea))
+
 ## [0.113.1](https://github.com/Optolith/database-schema/compare/v0.113.0...v0.113.1) (2026-10-26)
 
 ### Bug Fixes
