@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.117.0](https://github.com/Optolith/database-schema/compare/v0.116.2...v0.117.0) (2026-11-04)
+
+### ⚠ BREAKING CHANGES
+
+* derived patron select options
+
+### Features
+
+* complete derived select option identifier type ([ef723d4](https://github.com/Optolith/database-schema/commit/ef723d461e93ab6142bd9f911790adf61c40a721))
+* derived patron select options ([fea92e4](https://github.com/Optolith/database-schema/commit/fea92e4ee4916aa641e10808ea6cfa34b2d3e187))
+
 ## [0.116.2](https://github.com/Optolith/database-schema/compare/v0.116.1...v0.116.2) (2026-11-04)
 
 ### Bug Fixes
