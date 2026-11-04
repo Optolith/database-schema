@@ -71,7 +71,8 @@ export type DerivedSelectOptionIdentifier = Case<
   | "LiturgicalChant"
   | "Ceremony"
   | "TargetCategory"
-  | "TradeSecret",
+  | "TradeSecret"
+  | "Patron",
   string
 >
 
@@ -1164,6 +1165,22 @@ const getDerivedSelectOptions = (
         )
         .map(mapToResolvedSelectOption)
     }
+
+    case "Patrons":
+      return database
+        .getAllInstanceContainersOfEntity("Patron")
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
+          id: Case("Patron", id),
+          content: {
+            parent: entryId,
+            src: content.src,
+            translations: mapObject(content.translations, t10n => ({
+              name: t10n.name,
+            })),
+          },
+          newApplications: [],
+          uses: [],
+        }))
 
     default:
       return assertExhaustive(selectOptionCategory)
