@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.116.2](https://github.com/Optolith/database-schema/compare/v0.116.1...v0.116.2) (2026-11-04)
+
+### Bug Fixes
+
+* an armor can be a variant of any other armor ([b7e5e89](https://github.com/Optolith/database-schema/commit/b7e5e89108161c4fd5ca79d55dbced5534e52e80))
+* child select option custom constraint ([c36caff](https://github.com/Optolith/database-schema/commit/c36caff26433c08ec14d09857769032539d3904b))
+
 ## [0.116.1](https://github.com/Optolith/database-schema/compare/v0.116.0...v0.116.1) (2026-11-04)
 
 ### Features
