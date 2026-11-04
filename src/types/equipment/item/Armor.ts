@@ -1,7 +1,4 @@
-import { isNotNullish } from "@elyukai/utils/nullable"
 import * as DB from "tsondb/schema/dsl"
-import type { GetInstanceById } from "tsondb/schema/gen"
-import type * as Gen from "../../../../gen/types.js"
 import { ArmorIdentifier } from "../../_Identifier.js"
 import { EquipmentPrerequisites } from "../../_Prerequisite.ts"
 import { DerivedCharacteristic } from "../../DerivedCharacteristic.ts"
@@ -152,18 +149,6 @@ const StandardArmorType = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const validateArmorTypeReference = (deps: {
-  getInstanceById: GetInstanceById
-  // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
-  value: { variantOf: Gen.Armor_ID | Gen.Item_ID }
-}) =>
-  [
-    deps.getInstanceById("Armor", deps.value.variantOf)?.armorType.kind !== "Standard" &&
-    deps.getInstanceById("Item", deps.value.variantOf)?.armorUse?.armorType.kind !== "Standard"
-      ? "The armor is a variant of a standard armor, but the referenced armor is not a standard armor."
-      : undefined,
-  ].filter(isNotNullish)
-
 const StandardVariantArmorType = DB.TypeAlias(import.meta.url, {
   name: "StandardVariantArmorType",
   comment:
@@ -194,7 +179,6 @@ const StandardVariantArmorType = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
-  customConstraints: validateArmorTypeReference,
 })
 
 const VariantArmorType = DB.TypeAlias(import.meta.url, {
@@ -221,7 +205,6 @@ const VariantArmorType = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
-  customConstraints: validateArmorTypeReference,
 })
 
 export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
@@ -271,16 +254,6 @@ export const SecondaryArmor = DB.TypeAlias(import.meta.url, {
         ),
       ),
     }),
-  customConstraints: ({ value, ...deps }) =>
-    value.armorType.kind !== "Standard"
-      ? validateArmorTypeReference({
-          ...deps,
-          value:
-            value.armorType.kind === "Variant"
-              ? value.armorType.Variant
-              : value.armorType.StandardVariant,
-        })
-      : [],
 })
 
 const ArmorComplexity = DB.Enum(import.meta.url, {
