@@ -654,6 +654,12 @@ export const Locale = DB.Entity(import.meta.url, {
           "Only Blessed Professions": null,
           "Finalize Race, Culture and Profession Selection": null,
 
+          "Attribute Adjustment": null,
+          "Select Attribute Adjustment": null,
+          "Buy Cultural Package": null,
+          "Buy Script": null,
+          "Skill Specialization": null,
+          "NT": null,
           "rcpselectoptions.race": null,
           "rcpselectoptions.culture": null,
           "rcpselectoptions.profession": null,
