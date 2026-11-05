@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.118.0](https://github.com/Optolith/database-schema/compare/v0.117.0...v0.118.0) (2026-11-05)
+
+### ⚠ BREAKING CHANGES
+
+* effect type translations
+* race/culture/profession select option translations
+
+### Features
+
+* effect type translations ([ae094e2](https://github.com/Optolith/database-schema/commit/ae094e25492434373a5496aefd277a72e7b0d367))
+* race/culture/profession select option translations ([8ce1d2b](https://github.com/Optolith/database-schema/commit/8ce1d2b8368a2322de941682eea49d6ae00f27a5))
+* skill applications cache ([5bdecb5](https://github.com/Optolith/database-schema/commit/5bdecb593de31182d12043a31b513487c79cff27))
+
 ## [0.117.0](https://github.com/Optolith/database-schema/compare/v0.116.2...v0.117.0) (2026-11-04)
 
 ### ⚠ BREAKING CHANGES
