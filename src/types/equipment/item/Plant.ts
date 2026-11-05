@@ -347,10 +347,33 @@ const PoisonRecipe = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const PlantRecipeGroup = DB.Enum(import.meta.url, {
+  name: "PlantRecipeGroup",
+  values: () => ({
+    HerbalAid: DB.EnumCase({ type: null }),
+    Elixir: DB.EnumCase({ type: null }),
+    AlchemicalPoison: DB.EnumCase({ type: null }),
+    AlchemicalIntoxicant: DB.EnumCase({ type: null }),
+    PlantPoison: DB.EnumCase({ type: null }),
+    PlantIntoxicant: DB.EnumCase({ type: null }),
+  }),
+})
+
 const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
   name: "IndefiniteRecipe",
   type: () =>
     DB.Object({
+      types: DB.Optional({
+        comment: "The effect types of this recipe.",
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
+      }),
+      group: DB.Optional({
+        comment: "The group this recipe belongs to.",
+        type: DB.IncludeIdentifier(PlantRecipeGroup),
+      }),
       translations: NestedTranslationMap(
         DB.Required,
         "IndefiniteRecipe",
