@@ -1822,6 +1822,14 @@ export const Locale = DB.Entity(import.meta.url, {
           // Library Entry Subtitles
           "Profession Package": null,
           "Optional Rule": null,
+
+          "Beneficial Effect": null,
+          "Defensive Effect": null,
+          "Healing Effect": null,
+          "Physical Effect": null,
+          "Poison Effect": null,
+          "Psychic Effect": null,
+          "Supernatural Effect": null,
         }, { allKeysAreRequired: true }),
       }),
     }),
