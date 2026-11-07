@@ -9,6 +9,7 @@ import {
   PublicationIdentifier,
 } from "./_Identifier.ts"
 import { ActivatableIdentifier, SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
+import { ImprovementCost } from "./_ImprovementCost.ts"
 
 export const Settings = DB.SingletonEntity(import.meta.url, {
   name: "Settings",
@@ -59,9 +60,28 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: SpellworkSettings.comment,
         type: DB.IncludeIdentifier(SpellworkSettings),
       }),
+      magicalActions: DB.Required({
+        comment: MagicalActionSettings.comment,
+        type: DB.IncludeIdentifier(MagicalActionSettings),
+      }),
       liturgicalChants: DB.Required({
         comment: LiturgicalChantSettings.comment,
         type: DB.IncludeIdentifier(LiturgicalChantSettings),
+      }),
+      language: DB.Required({
+        comment:
+          "The entry representing languages. This is used to add native languages to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      script: DB.Required({
+        comment:
+          "The entry representing languages. This is used to add native literacy to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      skillSpecialization: DB.Required({
+        comment:
+          "The entry representing skill specializations. This is used to add skill specializations to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
     }),
 })
@@ -177,6 +197,25 @@ const SpellworkSettings = DB.TypeAlias(import.meta.url, {
         comment:
           "Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
+      }),
+    }),
+})
+
+const MagicalActionSettings = DB.TypeAlias(import.meta.url, {
+  name: "MagicalActionSettings",
+  type: () =>
+    DB.Object({
+      curseImprovementCost: DB.Required({
+        comment: "The improvement cost for all curses.",
+        type: DB.IncludeIdentifier(ImprovementCost),
+      }),
+      dominationRitualImprovementCost: DB.Required({
+        comment: "The improvement cost for all domination rituals.",
+        type: DB.IncludeIdentifier(ImprovementCost),
+      }),
+      geodeRitualImprovementCost: DB.Required({
+        comment: "The improvement cost for all geode rituals.",
+        type: DB.IncludeIdentifier(ImprovementCost),
       }),
     }),
 })
