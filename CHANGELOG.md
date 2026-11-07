@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.119.0](https://github.com/Optolith/database-schema/compare/v0.118.0...v0.119.0) (2026-11-07)
+
+### ⚠ BREAKING CHANGES
+
+* add more translations and values for rcp application to character
+
+### Features
+
+* add more translations and values for rcp application to character ([0804a05](https://github.com/Optolith/database-schema/commit/0804a05a8244b9cee5eeac6483a022ef7498595f))
+
 ## [0.118.0](https://github.com/Optolith/database-schema/compare/v0.117.0...v0.118.0) (2026-11-05)
 
 ### ⚠ BREAKING CHANGES
