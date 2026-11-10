@@ -369,6 +369,17 @@ const optionMatchesSelectOptions = (
               })()),
         )
       )
+    case "SkillGroup":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(
+          category =>
+            category.kind === "Skills" &&
+            category.Skills.specific === undefined &&
+            (category.Skills.groups === undefined ||
+              category.Skills.groups.includes(actualOption.SkillGroup)),
+        )
+      )
     case "CloseCombatTechnique":
       return (
         derivedSelectOptions?.kind === "CombatTechniques" &&
