@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.120.1](https://github.com/Optolith/database-schema/compare/v0.120.0...v0.120.1) (2026-11-10)
+
+### Features
+
+* associated magical actions for magical traditions ([9a0b455](https://github.com/Optolith/database-schema/commit/9a0b455be3f32cbee5916550a086e95dd9ffc528))
+
 ## [0.120.0](https://github.com/Optolith/database-schema/compare/v0.119.0...v0.120.0) (2026-11-10)
 
 ### ⚠ BREAKING CHANGES
