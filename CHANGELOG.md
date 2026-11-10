@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.120.0](https://github.com/Optolith/database-schema/compare/v0.119.0...v0.120.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* style settings within focus rule namespace
+
+### Features
+
+* combat technique parry modifier sources ([c79a339](https://github.com/Optolith/database-schema/commit/c79a339b7af42de01767256f9fd42e62262aab0e))
+* optional rule options ([9ae0104](https://github.com/Optolith/database-schema/commit/9ae01042ac76bbfaa04185a158f834641a72cf9b))
+* style settings within focus rule namespace ([c3fdae8](https://github.com/Optolith/database-schema/commit/c3fdae88bffd3fc4795da1c665a83b59e752c5e9))
+
 ## [0.119.0](https://github.com/Optolith/database-schema/compare/v0.118.0...v0.119.0) (2026-11-07)
 
 ### ⚠ BREAKING CHANGES
