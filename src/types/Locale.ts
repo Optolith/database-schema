@@ -1672,8 +1672,6 @@ export const Locale = DB.Entity(import.meta.url, {
           "Combat Use": null,
           "Healing": null,
           "Poison": null,
-          "Physical Effect": null,
-          "Psychic Effect": null,
           "Beneficial": null,
           "Defensive": null,
           "Supernatural": null,
