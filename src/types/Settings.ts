@@ -6,6 +6,7 @@ import {
   DerivedCharacteristicIdentifier,
   ExperienceLevelIdentifier,
   FocusRuleIdentifier,
+  OptionalRuleIdentifier,
   PublicationIdentifier,
 } from "./_Identifier.ts"
 import { ActivatableIdentifier, SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
@@ -204,6 +205,30 @@ const CombatTechniqueSettings = DB.TypeAlias(import.meta.url, {
       closeCombatTechniqueAttackAttribute: DB.Required({
         comment: "The attribute that increases the attack value of a close combat technique.",
         type: AttributeIdentifier(),
+      }),
+      parryModifiers: DB.Optional({
+        comment:
+          "Character traits that modify the parry base of a close combat technique. If an optional rule. ",
+        type: DB.Array(DB.IncludeIdentifier(CombatTechniqueParryModifier), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
+      }),
+    }),
+})
+
+const CombatTechniqueParryModifier = DB.TypeAlias(import.meta.url, {
+  name: "CombatTechniqueParryModifier",
+  type: () =>
+    DB.Object({
+      source: DB.Required({
+        comment: "The entry that modifies the parry base of a close combat technique.",
+        type: OptionalRuleIdentifier(),
+      }),
+      modifier: DB.Required({
+        comment:
+          "The modifier that is applied to the parry base of a close combat technique. If the optional rule has options, the modifier is multiplied by the option value and then applied to the parry base.",
+        type: DB.Integer(),
       }),
     }),
 })
