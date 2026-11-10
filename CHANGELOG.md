@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.121.0](https://github.com/Optolith/database-schema/compare/v0.120.1...v0.121.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow skill group in prerequisite options
+
+### Features
+
+* allow skill group in prerequisite options ([03ee2e3](https://github.com/Optolith/database-schema/commit/03ee2e3dc859c6c2faf7532ccf022f2191b2a07c))
+* **cache:** skills by skill group cache ([55dbfd1](https://github.com/Optolith/database-schema/commit/55dbfd13b1e69c766524e674adc8b18becef69bb))
+
 ## [0.120.1](https://github.com/Optolith/database-schema/compare/v0.120.0...v0.120.1) (2026-11-10)
 
 ### Features
