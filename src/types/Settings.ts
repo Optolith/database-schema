@@ -19,6 +19,14 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: "The default experience level for new characters and profession packages.",
         type: ExperienceLevelIdentifier(),
       }),
+      focusRules: DB.Required({
+        comment: FocusRuleSettings.comment,
+        type: DB.IncludeIdentifier(FocusRuleSettings),
+      }),
+      // optionalRules: DB.Required({
+      //   comment: OptionalRuleSettings.comment,
+      //   type: DB.IncludeIdentifier(OptionalRuleSettings),
+      // }),
       additionalArmorPenalties: DB.Required({
         comment: "Which derived characteristics are affected by additional armor penalties.",
         type: DB.Array(DerivedCharacteristicIdentifier(), {
@@ -33,10 +41,6 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
       supernaturalBaseAdvantages: DB.Required({
         comment: SupernaturalBaseAdvantageSettings.comment,
         type: DB.IncludeIdentifier(SupernaturalBaseAdvantageSettings),
-      }),
-      styles: DB.Required({
-        comment: StyleSpecialAbilitySettings.comment,
-        type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
       }),
       sexualCharacteristicsPublication: DB.Required({
         comment:
@@ -85,6 +89,26 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
       }),
     }),
 })
+
+const FocusRuleSettings = DB.TypeAlias(import.meta.url, {
+  name: "FocusRuleSettings",
+  comment:
+    "Settings for focus rules. This may include references to specific focus rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.",
+  type: () =>
+    DB.Object({
+      styles: DB.Required({
+        comment: StyleSpecialAbilitySettings.comment,
+        type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
+      }),
+    }),
+})
+
+// const OptionalRuleSettings = DB.TypeAlias(import.meta.url, {
+//   name: "OptionalRuleSettings",
+//   comment:
+//     "Settings for optional rules. This may include references to specific optional rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.",
+//   type: () => DB.Object({}),
+// })
 
 const SupernaturalBaseAdvantageSettings = DB.TypeAlias(import.meta.url, {
   name: "SupernaturalBaseAdvantageSettings",
