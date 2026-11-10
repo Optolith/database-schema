@@ -6,9 +6,11 @@ import {
   DerivedCharacteristicIdentifier,
   ExperienceLevelIdentifier,
   FocusRuleIdentifier,
+  OptionalRuleIdentifier,
   PublicationIdentifier,
 } from "./_Identifier.ts"
 import { ActivatableIdentifier, SpecialAbilityIdentifier } from "./_IdentifierGroup.ts"
+import { ImprovementCost } from "./_ImprovementCost.ts"
 
 export const Settings = DB.SingletonEntity(import.meta.url, {
   name: "Settings",
@@ -18,6 +20,14 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: "The default experience level for new characters and profession packages.",
         type: ExperienceLevelIdentifier(),
       }),
+      focusRules: DB.Required({
+        comment: FocusRuleSettings.comment,
+        type: DB.IncludeIdentifier(FocusRuleSettings),
+      }),
+      // optionalRules: DB.Required({
+      //   comment: OptionalRuleSettings.comment,
+      //   type: DB.IncludeIdentifier(OptionalRuleSettings),
+      // }),
       additionalArmorPenalties: DB.Required({
         comment: "Which derived characteristics are affected by additional armor penalties.",
         type: DB.Array(DerivedCharacteristicIdentifier(), {
@@ -32,10 +42,6 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
       supernaturalBaseAdvantages: DB.Required({
         comment: SupernaturalBaseAdvantageSettings.comment,
         type: DB.IncludeIdentifier(SupernaturalBaseAdvantageSettings),
-      }),
-      styles: DB.Required({
-        comment: StyleSpecialAbilitySettings.comment,
-        type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
       }),
       sexualCharacteristicsPublication: DB.Required({
         comment:
@@ -59,12 +65,51 @@ export const Settings = DB.SingletonEntity(import.meta.url, {
         comment: SpellworkSettings.comment,
         type: DB.IncludeIdentifier(SpellworkSettings),
       }),
+      magicalActions: DB.Required({
+        comment: MagicalActionSettings.comment,
+        type: DB.IncludeIdentifier(MagicalActionSettings),
+      }),
       liturgicalChants: DB.Required({
         comment: LiturgicalChantSettings.comment,
         type: DB.IncludeIdentifier(LiturgicalChantSettings),
       }),
+      language: DB.Required({
+        comment:
+          "The entry representing languages. This is used to add native languages to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      script: DB.Required({
+        comment:
+          "The entry representing languages. This is used to add native literacy to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      skillSpecialization: DB.Required({
+        comment:
+          "The entry representing skill specializations. This is used to add skill specializations to characters, for example.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
     }),
 })
+
+const FocusRuleSettings = DB.TypeAlias(import.meta.url, {
+  name: "FocusRuleSettings",
+  comment:
+    "Settings for focus rules. This may include references to specific focus rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.",
+  type: () =>
+    DB.Object({
+      styles: DB.Required({
+        comment: StyleSpecialAbilitySettings.comment,
+        type: DB.IncludeIdentifier(StyleSpecialAbilitySettings),
+      }),
+    }),
+})
+
+// const OptionalRuleSettings = DB.TypeAlias(import.meta.url, {
+//   name: "OptionalRuleSettings",
+//   comment:
+//     "Settings for optional rules. This may include references to specific optional rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.",
+//   type: () => DB.Object({}),
+// })
 
 const SupernaturalBaseAdvantageSettings = DB.TypeAlias(import.meta.url, {
   name: "SupernaturalBaseAdvantageSettings",
@@ -161,6 +206,30 @@ const CombatTechniqueSettings = DB.TypeAlias(import.meta.url, {
         comment: "The attribute that increases the attack value of a close combat technique.",
         type: AttributeIdentifier(),
       }),
+      parryModifiers: DB.Optional({
+        comment:
+          "Character traits that modify the parry base of a close combat technique. If an optional rule. ",
+        type: DB.Array(DB.IncludeIdentifier(CombatTechniqueParryModifier), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
+      }),
+    }),
+})
+
+const CombatTechniqueParryModifier = DB.TypeAlias(import.meta.url, {
+  name: "CombatTechniqueParryModifier",
+  type: () =>
+    DB.Object({
+      source: DB.Required({
+        comment: "The entry that modifies the parry base of a close combat technique.",
+        type: OptionalRuleIdentifier(),
+      }),
+      modifier: DB.Required({
+        comment:
+          "The modifier that is applied to the parry base of a close combat technique. If the optional rule has options, the modifier is multiplied by the option value and then applied to the parry base.",
+        type: DB.Integer(),
+      }),
     }),
 })
 
@@ -177,6 +246,25 @@ const SpellworkSettings = DB.TypeAlias(import.meta.url, {
         comment:
           "Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
+      }),
+    }),
+})
+
+const MagicalActionSettings = DB.TypeAlias(import.meta.url, {
+  name: "MagicalActionSettings",
+  type: () =>
+    DB.Object({
+      curseImprovementCost: DB.Required({
+        comment: "The improvement cost for all curses.",
+        type: DB.IncludeIdentifier(ImprovementCost),
+      }),
+      dominationRitualImprovementCost: DB.Required({
+        comment: "The improvement cost for all domination rituals.",
+        type: DB.IncludeIdentifier(ImprovementCost),
+      }),
+      geodeRitualImprovementCost: DB.Required({
+        comment: "The improvement cost for all geode rituals.",
+        type: DB.IncludeIdentifier(ImprovementCost),
       }),
     }),
 })

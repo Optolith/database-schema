@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.120.1](https://github.com/Optolith/database-schema/compare/v0.120.0...v0.120.1) (2026-11-10)
+
+### Features
+
+* associated magical actions for magical traditions ([9a0b455](https://github.com/Optolith/database-schema/commit/9a0b455be3f32cbee5916550a086e95dd9ffc528))
+
+## [0.120.0](https://github.com/Optolith/database-schema/compare/v0.119.0...v0.120.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* style settings within focus rule namespace
+
+### Features
+
+* combat technique parry modifier sources ([c79a339](https://github.com/Optolith/database-schema/commit/c79a339b7af42de01767256f9fd42e62262aab0e))
+* optional rule options ([9ae0104](https://github.com/Optolith/database-schema/commit/9ae01042ac76bbfaa04185a158f834641a72cf9b))
+* style settings within focus rule namespace ([c3fdae8](https://github.com/Optolith/database-schema/commit/c3fdae88bffd3fc4795da1c665a83b59e752c5e9))
+
+## [0.119.0](https://github.com/Optolith/database-schema/compare/v0.118.0...v0.119.0) (2026-11-07)
+
+### ⚠ BREAKING CHANGES
+
+* add more translations and values for rcp application to character
+
+### Features
+
+* add more translations and values for rcp application to character ([0804a05](https://github.com/Optolith/database-schema/commit/0804a05a8244b9cee5eeac6483a022ef7498595f))
+
+## [0.118.0](https://github.com/Optolith/database-schema/compare/v0.117.0...v0.118.0) (2026-11-05)
+
+### ⚠ BREAKING CHANGES
+
+* effect type translations
+* race/culture/profession select option translations
+
+### Features
+
+* effect type translations ([ae094e2](https://github.com/Optolith/database-schema/commit/ae094e25492434373a5496aefd277a72e7b0d367))
+* race/culture/profession select option translations ([8ce1d2b](https://github.com/Optolith/database-schema/commit/8ce1d2b8368a2322de941682eea49d6ae00f27a5))
+* skill applications cache ([5bdecb5](https://github.com/Optolith/database-schema/commit/5bdecb593de31182d12043a31b513487c79cff27))
+
 ## [0.117.0](https://github.com/Optolith/database-schema/compare/v0.116.2...v0.117.0) (2026-11-04)
 
 ### ⚠ BREAKING CHANGES

@@ -78,6 +78,10 @@ export const MagicalTradition = DB.Entity(import.meta.url, {
           "If arcane spellworks with a specific property count as arcane spellworks of this tradition, this is the property’s reference.",
         type: PropertyIdentifier(),
       }),
+      magicalActions: DB.Optional({
+        comment: AssociatedMagicalActions.comment,
+        type: DB.IncludeIdentifier(AssociatedMagicalActions),
+      }),
       influences: DB.Optional({
         comment: "The influences for the tradition. Influences are enabled by Focus Rules.",
         type: DB.Array(InfluenceIdentifier(), { minItems: 2 }),
@@ -147,6 +151,37 @@ const PrimaryAttribute = DB.TypeAlias(import.meta.url, {
       use_half_for_arcane_energy: DB.Required({
         comment:
           "Typically, the value of the primary attribute (if one exists) is added onto the base of 20 AE to get the actual AE. But sometimes, only half the value is added.",
+        type: DB.Boolean(),
+      }),
+    }),
+})
+
+const AssociatedMagicalActions = DB.Enum(import.meta.url, {
+  name: "AssociatedMagicalActions",
+  comment: "The magical actions of the tradition, if any.",
+  values: () => ({
+    Bannzeichen: DB.EnumCase({ type: null }),
+    Curse: DB.EnumCase({ type: null }),
+    ElvenMagicalSong: DB.EnumCase({ type: DB.IncludeIdentifier(AssociatedElvenMagicalSongs) }),
+    DominationRitual: DB.EnumCase({ type: null }),
+    MagicalMelody: DB.EnumCase({ type: null }),
+    MagicalDance: DB.EnumCase({ type: null }),
+    JesterTrick: DB.EnumCase({ type: null }),
+    AnimistPower: DB.EnumCase({ type: null }),
+    GeodeRitual: DB.EnumCase({ type: null }),
+    GoblinRitual: DB.EnumCase({ type: null }),
+    ZibiljaRitual: DB.EnumCase({ type: null }),
+    MagicalRune: DB.EnumCase({ type: null }),
+  }),
+})
+
+const AssociatedElvenMagicalSongs = DB.TypeAlias(import.meta.url, {
+  name: "AssociatedElvenMagicalSongs",
+  type: () =>
+    DB.Object({
+      areDistorted: DB.Required({
+        comment:
+          "If checked, only distored Elven magical songs can be used. Otherwise, only undistorted Elven magical songs can be used.",
         type: DB.Boolean(),
       }),
     }),

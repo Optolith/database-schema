@@ -1,4 +1,5 @@
 import * as DB from "tsondb/schema/dsl"
+import { OptionalRuleIdentifier } from "../_Identifier.ts"
 import { RulePrerequisites } from "../_Prerequisite.js"
 import { NestedTranslationMap } from "../Locale.js"
 import { Errata } from "../source/_Erratum.js"
@@ -13,6 +14,10 @@ export const OptionalRule = DB.Entity(import.meta.url, {
         comment:
           "Has the optional rule not been implemented in Optolith yet? This is also true if the optional rule does not (currently) apply to any Optolith feature.",
         type: DB.Boolean(),
+      }),
+      options: DB.Required({
+        comment: "The options the optional rule has, if any.",
+        type: DB.ChildEntities(OptionalRuleOption),
       }),
       complexityInfluence: DB.Optional({
         comment: "How this optional rule influences the complexity of the game, if specified.",
@@ -65,4 +70,32 @@ const ComplexityInfluence = DB.Enum(import.meta.url, {
     }),
     More: DB.EnumCase({ comment: "The optional rule makes the game more complex.", type: null }),
   }),
+})
+
+export const OptionalRuleOption = DB.Entity(import.meta.url, {
+  name: "OptionalRuleOption",
+  namePlural: "OptionalRuleOptions",
+  type: () =>
+    DB.Object({
+      parent: DB.Required({
+        comment: "The optional rule this option belongs to.",
+        type: OptionalRuleIdentifier(),
+      }),
+      value: DB.Required({
+        comment: "The value what this option means in context of the optional rule.",
+        type: DB.Integer(),
+      }),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "OptionalRuleOption",
+        DB.Object({
+          name: DB.Required({
+            comment: `The optional rule option’s name.`,
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
+  parentReferenceKey: "parent",
+  instanceDisplayName: {},
 })

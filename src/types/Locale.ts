@@ -654,6 +654,12 @@ export const Locale = DB.Entity(import.meta.url, {
           "Only Blessed Professions": null,
           "Finalize Race, Culture and Profession Selection": null,
 
+          "Attribute Adjustment": null,
+          "Select Attribute Adjustment": null,
+          "Buy Cultural Package": null,
+          "Buy Script": null,
+          "NT": null,
+          "Other Selections": null,
           "rcpselectoptions.race": null,
           "rcpselectoptions.culture": null,
           "rcpselectoptions.profession": null,
@@ -1861,6 +1867,14 @@ export const Locale = DB.Entity(import.meta.url, {
           // Library Entry Subtitles
           "Profession Package": null,
           "Optional Rule": null,
+
+          "Beneficial Effect": null,
+          "Defensive Effect": null,
+          "Healing Effect": null,
+          "Physical Effect": null,
+          "Poison Effect": null,
+          "Psychic Effect": null,
+          "Supernatural Effect": null,
         }, { allKeysAreRequired: true }),
       }),
     }),
