@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.122.0](https://github.com/Optolith/database-schema/compare/v0.121.0...v0.122.0) (2026-11-11)
+
+### ⚠ BREAKING CHANGES
+
+* add settings for managing style special abilities
+
+### Features
+
+* add settings for managing style special abilities ([4db45c7](https://github.com/Optolith/database-schema/commit/4db45c75972737e3eebadbab714e349623ad09d1))
+
 ## [0.121.0](https://github.com/Optolith/database-schema/compare/v0.120.1...v0.121.0) (2026-11-10)
 
 ### ⚠ BREAKING CHANGES
