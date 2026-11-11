@@ -198,6 +198,10 @@ const SkillSettings = DB.TypeAlias(import.meta.url, {
           "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
         type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
+      offsettingAttributesForRoutineChecks: DB.Required({
+        comment: "The rule that allows offsetting attributes for routine checks.",
+        type: OptionalRuleIdentifier(),
+      }),
     }),
 })
 
