@@ -255,6 +255,11 @@ const SpellworkSettings = DB.TypeAlias(import.meta.url, {
           "Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
       }),
+      associatedEnergy: DB.Required({
+        comment:
+          "The energy that is associated with spellworks. This is used to determine what energy to display on the character sheet.",
+        type: DerivedCharacteristicIdentifier(),
+      }),
     }),
 })
 
@@ -298,6 +303,11 @@ const LiturgicalChantSettings = DB.TypeAlias(import.meta.url, {
         comment:
           "Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
+      }),
+      associatedEnergy: DB.Required({
+        comment:
+          "The energy that is associated with liturgical chants. This is used to determine what energy to display on the character sheet.",
+        type: DerivedCharacteristicIdentifier(),
       }),
     }),
 })
