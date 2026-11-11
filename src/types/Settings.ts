@@ -169,9 +169,17 @@ const StyleSpecialAbilitySettings = DB.TypeAlias(import.meta.url, {
         comment: "The focus rule for combat style special abilities and its advanced complements.",
         type: FocusRuleIdentifier(),
       }),
+      combatCombination: DB.Required({
+        comment: "The entry that allows a third combat style special ability from either type.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
       magic: DB.Required({
         comment: "The focus rule for magic style special abilities and its advanced complements.",
         type: FocusRuleIdentifier(),
+      }),
+      magicCombination: DB.Required({
+        comment: "The entry that allows a second magic style special ability.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
       liturgical: DB.Required({
         comment:
