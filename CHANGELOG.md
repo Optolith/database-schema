@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.123.0](https://github.com/Optolith/database-schema/compare/v0.122.0...v0.123.0) (2026-11-12)
+
+### ⚠ BREAKING CHANGES
+
+* base settings and translations for character sheet
+* remaining translations for basic character sheet
+* routine checks optional rule setting
+
+### Features
+
+* base settings and translations for character sheet ([32dca23](https://github.com/Optolith/database-schema/commit/32dca23d95c1a096940950b160c233b61bb73d83))
+* remaining translations for basic character sheet ([da3256d](https://github.com/Optolith/database-schema/commit/da3256daff0cd6908a96986627c49818ed015961))
+* routine checks optional rule setting ([0888e14](https://github.com/Optolith/database-schema/commit/0888e14ca423482c119063764a2e32086c36d8b4))
+
 ## [0.122.0](https://github.com/Optolith/database-schema/compare/v0.121.0...v0.122.0) (2026-11-11)
 
 ### ⚠ BREAKING CHANGES
