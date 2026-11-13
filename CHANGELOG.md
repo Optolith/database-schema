@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.124.0](https://github.com/Optolith/database-schema/compare/v0.123.0...v0.124.0) (2026-11-13)
+
+### ⚠ BREAKING CHANGES
+
+* character sheed save translations
+
+### Features
+
+* character sheed save translations ([bdfb31d](https://github.com/Optolith/database-schema/commit/bdfb31d6d3920ba62cad9198bdcb0a10ee74fb52))
+
 ## [0.123.0](https://github.com/Optolith/database-schema/compare/v0.122.0...v0.123.0) (2026-11-12)
 
 ### ⚠ BREAKING CHANGES
