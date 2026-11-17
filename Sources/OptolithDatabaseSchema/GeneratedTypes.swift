@@ -1086,16 +1086,16 @@ public struct AdvancedCombatSpecialAbility: Decodable, Equatable, Sendable, Iden
   let type: CombatSpecialAbilityType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -1321,7 +1321,7 @@ public enum CombatSpecialAbilityType: Decodable, Equatable, Sendable {
 }
 
 /// Definitions for possible options for the activatable entry. They can either be derived from entry categories or be defined explicitly. Both can happen as well, but if there is an explicitly defined select option and a derived select option has the same identifier (which may only happen if skill or combat technique identifiers are used for explicit select options), the explicit definition overwrites the derived option.
-/// 
+///
 /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
 public struct SelectOptions: Decodable, Equatable, Sendable {
   /// An entry category with optional further configuration. All available entries from the specified categories will be included as separate select options. You can also specify a set of groups that should only be included. Groups not mentioned will be excluded then.
@@ -3552,16 +3552,16 @@ public struct Advantage: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -4161,16 +4161,16 @@ public struct Disadvantage: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -4478,16 +4478,16 @@ public struct AdvancedKarmaSpecialAbility: Decodable, Equatable, Sendable, Ident
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -5273,7 +5273,7 @@ public enum DisplayOption: Decodable, Equatable, Sendable {
 
 public struct ReplacementDisplayOption: Decodable, Equatable, Sendable {
   /// If the replacement text is a sentence or sentence-like fragment, this property ensures it is integrated into the prerequisite string correctly.
-  /// 
+  ///
   /// A standalone sentence is connected to the previous prerequisite string with a period and a period is also added at the end of the sentence automatically, if it is not present. A connected sentence is connected to the previous prerequisite string with a semicolon and a period is not added to the end of the sentence. In this case, if there are prerequisites after this one, they will be connected using a semicolon again, unless a different punctuation mark is present at the end of the given text.
   let sentenceType: SentenceType?
 
@@ -5541,7 +5541,7 @@ public struct Since: Decodable, Equatable, Sendable {
 
 public struct Deprecation: Decodable, Equatable, Sendable {
   /// The publication’s printing since which the entry has been removed.
-  /// 
+  ///
   /// This can also be used if the entry hss been removed by the release of this publication (that is, the first printing).
   let printing: Int
 
@@ -6247,7 +6247,7 @@ public enum DerivedCharacteristicType: Decodable, Equatable, Sendable {
 /// Additional values that can be defined for an energy.
 public struct EnergyType: Decodable, Equatable, Sendable {
   /// If set, the energy’s maximum value can be improved by spending AP.
-  /// 
+  ///
   /// If the energy’s permanent losses can be bought back, points will not be able to be purchased unless all permanent losses have been bought back.
   let purchase: DerivedCharacteristicPurchase?
 
@@ -8166,14 +8166,14 @@ public struct TextPrerequisite: Decodable, Equatable, Sendable {
   let verification: TextVerificationRule
 
   /// If the text is a sentence or sentence-like fragment, this property ensures it is integrated into the prerequisite string correctly.
-  /// 
+  ///
   /// A standalone sentence is connected to the previous prerequisite string with a period and a period is also added at the end of the sentence automatically, if it is not present. A connected sentence is connected to the previous prerequisite string with a semicolon and a period is not added to the end of the sentence. In this case, if there are prerequisites after this one, they will be connected using a semicolon again, unless a different punctuation mark is present at the end of the given text.
   let sentenceType: SentenceType?
 
   /// If the text does not represent an actual prerequisite but a prerequisite for the use of certain aspects or the entry the prerequisite is associated with, or something like that, this property is set to `true`.
-  /// 
+  ///
   /// If all prerequisites of an entry are marked as meta, the entry is considered to have no prerequisites and thus the string `none` must be rendered before the list of meta prerequisites.
-  /// 
+  ///
   /// This is the only use case for this property.
   let isMeta: Bool?
 
@@ -8240,7 +8240,7 @@ public enum TextVerificationRule: Decodable, Equatable, Sendable {
 }
 
 /// An effect or other parameter that may be reduced by a failed disease check for lessening or a degraded poison.
-/// 
+///
 /// This streamlines the wording for diseases and poison by using a unified wording for *lessened* (disease) and *degraded* (poison).
 public struct Reduceable<Content: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The default value. In the source, it's the text before the slash.
@@ -10481,12 +10481,12 @@ public struct ModifiableOneTimeCostMap: Decodable, Equatable, Sendable {
 }
 
 /// A content that is `2/4/8/16 AE (activation) + 1/2/4/8 per 5 minutes for an item the size of a cup/chest/door/castle gate` can be represented as a cost map.
-/// 
+///
 /// The `an item the size of a` would be the *list prefix* string, while the list of options would contain four options with the activation cost and the name.
 public typealias ParameterMap<Value: Decodable & Equatable & Sendable> = ValueMap<ParameterMapOption<Value>>
 
 /// A content that is `2/4/8/16 AE (activation) + 1/2/4/8 per 5 minutes for an item the size of a cup/chest/door/castle gate` can be represented as a cost map.
-/// 
+///
 /// The `an item the size of a` would be the *list prefix* string, while the list of options would contain four options with the activation cost and the name.
 public struct ValueMap<Option: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The possible values and associated labels.
@@ -10539,11 +10539,11 @@ public struct ValueMapTranslation: Decodable, Equatable, Sendable {
 }
 
 /// The style of the generated string. It may be displayed
-/// 
+///
 /// - in a `compressed` way (e.g. *1/1/2 AE for a small/medium/large object*),
 /// - in a `verbose` way (e.g. *1 AE for a small object, 1 AE for a medium object, 2 AE for a large object*),
 /// - or in a `grouped` way (e.g. *small/medium object: 1 AE, large object: 2 AE*).
-/// 
+///
 /// A `grouped` style only really makes sense if multiple options share the same value.
 public enum ValueMapStyle: Decodable, Equatable, Sendable {
   /// Prints a map in a compressed way, e.g. *1/2/3 AE for a small/medium/large object*.
@@ -11223,7 +11223,7 @@ public struct IndefiniteDurationTranslation: Decodable, Equatable, Sendable {
 public typealias FastCastingTime = CastingTimeIncludingLovemaking<FastSkillNonModifiableCastingTime>
 
 /// The casting time may have two different values: One for use in “normal” time, i. e. actions, combat rounds and others, and one for use during lovemaking, which is a rule set from Aventurian Intimacy.
-/// 
+///
 /// There must always be at least one casting time value.
 public struct CastingTimeIncludingLovemaking<NonModifiable: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The default casting time definition.
@@ -11667,7 +11667,7 @@ public struct DurationForSustained: Decodable, Equatable, Sendable {
 }
 
 /// The target category – the kind of creature or object – the skill affects.
-/// 
+///
 /// If no target categories are given, the skill applies to all target categories.
 public typealias AffectedTargetCategories = [SpecificAffectedTargetCategory]
 
@@ -11862,7 +11862,7 @@ public struct BlessedTradition: Decodable, Equatable, Sendable, Identifiable {
   let group: BlessedTraditionGroup.ID
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
@@ -12725,7 +12725,7 @@ public struct AdventurePointsDependingOnActiveInstancesExpression: Decodable, Eq
   let expression: AdventurePointsDependingOnActiveInstancesExpressionExpression
 
   /// Custom labels for the expression values. If not provided, the default labels will be used.
-  /// 
+  ///
   /// The values to provide must be in the same order as they appear in the expression. For example, if the expression is `Active * 2 + 1`, the first option corresponds to `1`, the second option corresponds to `3`, and so on. Only the amount of options specified will be displayed.
   let customLabels: AdventurePointsDependingOnActiveInstancesExpressionLabels?
 
@@ -12777,7 +12777,7 @@ public enum AdventurePointsDependingOnActiveInstancesExpressionValue: Decodable,
 }
 
 /// Custom labels for the expression values. If not provided, the default labels will be used.
-/// 
+///
 /// The values to provide must be in the same order as they appear in the expression. For example, if the expression is `Active * 2 + 1`, the first option corresponds to `1`, the second option corresponds to `3`, and so on. Only the amount of options specified will be displayed.
 public typealias AdventurePointsDependingOnActiveInstancesExpressionLabels = ValueMap<AdventurePointsDependingOnActiveInstancesExpressionLabelsOption>
 
@@ -13306,7 +13306,7 @@ public struct MagicalTradition: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
@@ -16529,7 +16529,7 @@ public struct RatingForCombatTechniquesNumber: Decodable, Equatable, Sendable {
   let number: Int
 
   /// The rating bonus provided for the selected combat technique(s).
-  /// 
+  ///
   /// **Note:** This is a rating *bonus*, so it will be *added* to the default value of 6.
   let ratingModifier: Int
 
@@ -17337,16 +17337,16 @@ public struct Adoruzepterzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -17585,7 +17585,7 @@ public struct VolumeByLevelItem: Decodable, Equatable, Sendable {
 }
 
 /// A content that is `3/4/5 Points for Chimera, Daimonid, Golems, Undead / Fairies, Ghosts / Demons, Elementals` may be respresented as the following map:
-/// 
+///
 /// ```yaml
 /// options:
 ///   - points: 3
@@ -17619,7 +17619,7 @@ public struct VolumeByLevelItem: Decodable, Equatable, Sendable {
 ///         label: "Demons, Elementals"
 ///         label_standalone: "Demons/Elementals"
 /// ```
-/// 
+///
 /// This will generate the exact same string as seen above. The associated options are not present in the example, but they link to the options the volume specification is meant for.
 public typealias VolumeMap = ParameterMap<VolumeMapOptionValue>
 
@@ -18185,7 +18185,7 @@ public enum BindingCost: Decodable, Equatable, Sendable {
 
 public struct FixedBindingCost: Decodable, Equatable, Sendable {
   /// The permanent AE cost.
-  /// 
+  ///
   /// If the enchantment has multiple levels, it is only applied for the first level.
   let permanentValue: Int
 
@@ -18216,7 +18216,7 @@ public struct BindingCostPerLevel: Decodable, Equatable, Sendable {
 }
 
 /// A content that is `2/4/8 permanent AE for spell-swords with the combat technique Daggers, Swords, or Two-Handed Swords` may be respresented as the following map:
-/// 
+///
 /// ```yaml
 /// options:
 ///   - permanent_value: 2
@@ -18236,7 +18236,7 @@ public struct BindingCostPerLevel: Decodable, Equatable, Sendable {
 ///         label_standalone: "Two-Handed Sword"
 /// list_prepend: "spell-swords with the combat technique"
 /// ```
-/// 
+///
 /// This will generate the exact same string as seen above.
 public typealias BindingCostMap = ParameterMap<BindingCostMapOptionValue>
 
@@ -18336,16 +18336,16 @@ public struct AdvancedMagicalSpecialAbility: Decodable, Equatable, Sendable, Ide
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -18455,16 +18455,16 @@ public struct AdvancedSkillSpecialAbility: Decodable, Equatable, Sendable, Ident
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -18574,16 +18574,16 @@ public struct AncestorGlyph: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -18697,16 +18697,16 @@ public struct ArcaneOrbEnchantment: Decodable, Equatable, Sendable, Identifiable
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -18853,16 +18853,16 @@ public struct AttireEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -19009,16 +19009,16 @@ public struct Beutelzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -19165,16 +19165,16 @@ public struct BowlEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -19324,16 +19324,16 @@ public struct BrawlingSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -21171,16 +21171,16 @@ public struct CauldronEnchantment: Decodable, Equatable, Sendable, Identifiable 
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -21384,16 +21384,16 @@ public struct CeremonialItemSpecialAbility: Decodable, Equatable, Sendable, Iden
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -21609,16 +21609,16 @@ public struct ChronicleEnchantment: Decodable, Equatable, Sendable, Identifiable
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -21768,16 +21768,16 @@ public struct CombatSpecialAbility: Decodable, Equatable, Sendable, Identifiable
   let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -22217,16 +22217,16 @@ public struct CombatStyleSpecialAbility: Decodable, Equatable, Sendable, Identif
   let type: CombatSpecialAbilityType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -22584,17 +22584,17 @@ public struct Patron: Decodable, Equatable, Sendable, Identifiable {
   let improvementCost: ImprovementCost?
 
   /// The patron may grant common advantages that are taken into account during character creation.
-  /// 
+  ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
   let commonAdvantages: [Advantage.ID]?
 
   /// The patron may grant common disadvantages that are taken into account during character creation.
-  /// 
+  ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
   let commonDisadvantages: [Disadvantage.ID]?
 
   /// The animist may learn spellworks common for this patron.
-  /// 
+  ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
   let commonSpellworks: [SpellworkIdentifier]?
 
@@ -23184,16 +23184,16 @@ public struct CommandSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -23372,16 +23372,16 @@ public struct DaggerRitual: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -23608,16 +23608,16 @@ public struct FamiliarSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -23726,16 +23726,16 @@ public struct FatePointSexSpecialAbility: Decodable, Equatable, Sendable, Identi
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -23844,16 +23844,16 @@ public struct FatePointSpecialAbility: Decodable, Equatable, Sendable, Identifia
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -23962,16 +23962,16 @@ public struct FoolsHatEnchantment: Decodable, Equatable, Sendable, Identifiable 
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24118,16 +24118,16 @@ public struct GeneralSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24241,16 +24241,16 @@ public struct Haubenzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24397,16 +24397,16 @@ public struct Hauerkettenzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24553,16 +24553,16 @@ public struct InstrumentEnchantment: Decodable, Equatable, Sendable, Identifiabl
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24709,16 +24709,16 @@ public struct KarmaSpecialAbility: Decodable, Equatable, Sendable, Identifiable 
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24827,16 +24827,16 @@ public struct Keulenzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -24983,16 +24983,16 @@ public struct Krallenkettenzauber: Decodable, Equatable, Sendable, Identifiable 
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25139,16 +25139,16 @@ public struct Kristallkugelzauber: Decodable, Equatable, Sendable, Identifiable 
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25295,16 +25295,16 @@ public struct LiturgicalStyleSpecialAbility: Decodable, Equatable, Sendable, Ide
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25418,16 +25418,16 @@ public struct LycantropicGift: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25683,16 +25683,16 @@ public struct MagicalSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25806,16 +25806,16 @@ public struct MagicStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -25881,7 +25881,7 @@ public struct MagicStyleSpecialAbilityTranslation: Decodable, Equatable, Sendabl
   let name: String
 
   /// A part of the name that is appended in parenthesis. This can be used to specify the group of people that typically uses this entry (e.g. the name of the witch circle for a magic style for witches).
-  /// 
+  ///
   /// If `name_in_library` is specified, this will be ignored for places where the `name_in_library` is used.
   let additionalName: String?
 
@@ -25936,16 +25936,16 @@ public struct OrbEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -26095,16 +26095,16 @@ public struct PactGift: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -26596,16 +26596,16 @@ public struct ProtectiveWardingCircleSpecialAbility: Decodable, Equatable, Senda
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -26724,16 +26724,16 @@ public struct RingEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -26880,16 +26880,16 @@ public struct Schweinetrommelzauber: Decodable, Equatable, Sendable, Identifiabl
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27036,16 +27036,16 @@ public struct Sermon: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27154,16 +27154,16 @@ public struct SexSpecialAbility: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27272,16 +27272,16 @@ public struct SickleRitual: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27428,16 +27428,16 @@ public struct SikaryanDrainSpecialAbility: Decodable, Equatable, Sendable, Ident
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27546,16 +27546,16 @@ public struct SkillStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27696,16 +27696,16 @@ public struct SpellSwordEnchantment: Decodable, Equatable, Sendable, Identifiabl
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -27852,16 +27852,16 @@ public struct StaffEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28008,16 +28008,16 @@ public struct ToyEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28164,16 +28164,16 @@ public struct Trinkhornzauber: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28320,16 +28320,16 @@ public struct VampiricGift: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28438,16 +28438,16 @@ public struct Vision: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28556,16 +28556,16 @@ public struct WandEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -28707,16 +28707,16 @@ public struct WeaponEnchantment: Decodable, Equatable, Sendable, Identifiable {
   let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
-  /// 
+  ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
-  /// 
+  ///
   /// - **Advantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Disadvantage:** `1` in all cases (as specified in the **Core Rules**)
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
-  /// 
+  ///
   /// The maximum is only set if it differs from the defaults specified above.
   let maximum: Int?
 
@@ -29350,7 +29350,7 @@ public struct CombatTechniqueRating: Decodable, Equatable, Sendable {
   let id: CombatTechniqueIdentifier
 
   /// The rating bonus provided for the combat technique. If used in a profession variant, it can also be used to lower the bonus of the base profession.
-  /// 
+  ///
   /// **Note:** This is a rating *bonus*, so it will be *added* to the default value of 6.
   let ratingModifier: Int
 
@@ -29392,7 +29392,7 @@ public struct MagicalSkillRating: Decodable, Equatable, Sendable {
   let id: [ProfessionMagicalSkillIdentifier]
 
   /// The rating bonus provided for the (selected) magical skill. If used in a profession variant, it can also be used to lower the bonus of the base profession.
-  /// 
+  ///
   /// **Note:** If due to a variant a spell rating is lowered to 0, the spell is considered deactivated. Both setting the value for a spell and deactivating it by setting it to 0 takes into account the additional activation cost for spells.
   let ratingModifier: Int
 
@@ -29615,7 +29615,7 @@ public struct Bannzeichen: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BannzeichenTranslation: Decodable, Equatable, Sendable {
   /// The Bannzeichen’s name.
-  /// 
+  ///
   /// If the Bannzeichen has an option, the option’s name will/should not be included in the name as well as its surrounding parenthesis. It will/should be combined on demand.
   let name: String
 
@@ -29723,7 +29723,7 @@ public struct BannzeichenOption: Decodable, Equatable, Sendable, Identifiable, C
 
 public struct BannzeichenOptionTranslation: Decodable, Equatable, Sendable {
   /// The Bannzeichen option’s name.
-  /// 
+  ///
   /// The surrounding parenthesis will/should not be included, they will/should be generated.
   let name: String
 
@@ -31688,7 +31688,7 @@ public struct AnimistPower: Decodable, Equatable, Sendable, Identifiable {
   let property: Property.ID
 
   /// The tribe traditions the animist power is available to. It may be available to all or only specific tribes.
-  /// 
+  ///
   /// If no tribe tradition is given, the animist power is generally available to all tribe traditions.
   let tribeTradition: [Tribe.ID]
 
@@ -32970,7 +32970,7 @@ public struct MagicalRune: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalRuneTranslation: Decodable, Equatable, Sendable {
   /// The magical rune’s name.
-  /// 
+  ///
   /// If the rune has an option, the option’s name will/should not be included in the name as well as its surrounding parenthesis. It will/should be combined on demand.
   let name: String
 
@@ -33078,7 +33078,7 @@ public struct MagicalRuneOption: Decodable, Equatable, Sendable, Identifiable, C
 
 public struct MagicalRuneOptionTranslation: Decodable, Equatable, Sendable {
   /// The magical rune option’s name.
-  /// 
+  ///
   /// The surrounding parenthesis will/should not be included, they will/should be generated.
   let name: String
 
@@ -33454,7 +33454,7 @@ public struct LiturgicalChantRating: Decodable, Equatable, Sendable {
   let id: [LiturgyIdentifier]
 
   /// The rating bonus provided for the selected liturgical chant. If used in a profession variant, it can also be used to lower the bonus of the base profession.
-  /// 
+  ///
   /// **Note:** If due to a variant a liturgical chant rating is lowered to 0, the liturgical chant is considered deactivated. Both setting the value for a liturgical chant and deactivating it by setting it to 0 takes into account the additional activation cost for liturgical chants.
   let ratingModifier: Int
 
@@ -33958,7 +33958,7 @@ public struct TradeSecret: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Definitions for possible options for the activatable entry.
-  /// 
+  ///
   ///       Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
   let selectOptions: TradeSecretSelectOptions?
 
@@ -34043,7 +34043,7 @@ public struct TradeSecretTranslation: Decodable, Equatable, Sendable {
 }
 
 /// Definitions for possible options for the activatable entry. They can either be derived from entry categories or be defined explicitly. Both can happen as well, but if there is an explicitly defined select option and a derived select option has the same identifier (which may only happen if skill or combat technique identifiers are used for explicit select options), the explicit definition overwrites the derived option.
-/// 
+///
 /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
 public struct TradeSecretSelectOptions: Decodable, Equatable, Sendable {
   /// An entry category with optional further configuration. All available entries from the specified categories will be included as separate select options. You can also specify a set of groups that should only be included. Groups not mentioned will be excluded then.
@@ -34742,7 +34742,7 @@ public struct CombatTechniquesSelectOptionCategory: Decodable, Equatable, Sendab
   let categories: [CombatTechniquesSelectOptionCategoryCategory]
 
   /// Generate binding cost values for each entry.
-  /// 
+  ///
   /// *Note: This only works if the entry it is defined on supports binding costs, i.e. is a tradition artifact enchantment.*
   let bindingCost: SelectOptionsBindingCostValue<CombatTechniqueIdentifier>?
 
@@ -35199,7 +35199,7 @@ public struct ProfessionActivatablePrerequisite: Decodable, Equatable, Sendable 
 }
 
 /// A list of preconditions for the prerequisite it is defined on, so that it only takes effect if the prerequisites in this list are matched.
-/// 
+///
 /// Usually appears at the `when` property of the parent prerequisite.
 public typealias Preconditions = [PreconditionGroup]
 
@@ -36097,7 +36097,7 @@ public struct AttributeAdjustments: Decodable, Equatable, Sendable {
   let fixed: [FixedAttributeAdjustment]?
 
   /// An array of attribute maximum modifiers, where the attribute they apply to is selected from a list of options.
-  /// 
+  ///
   /// The array only permits a single entry because no race specified more than one selectable attribute adjustment so far. But the schema allows for multiple entries to be future-proof.
   let selectable: [1 of SelectableAttributeAdjustment]?
 
@@ -37879,12 +37879,12 @@ public struct AnimalDisease: Decodable, Equatable, Sendable, Identifiable {
   let cause: [Cause]
 
   /// The animal types this disease applies to.
-  /// 
+  ///
   /// If no animal types are given, the animal disease applies to all animal types.
   let animalTypes: [AnimalType.ID]
 
   /// If and at which chance the disease can be communicated to intelligent creatures.
-  /// 
+  ///
   /// If no causes are given, the disease is not communicable to intelligent creatures.
   let communicabilityToIntelligentCreatures: [Cause]
 
@@ -40646,7 +40646,7 @@ public struct ReferenceListNodeImprovementCostSource: Decodable, Equatable, Send
   let target: ReferenceListNodeImprovementCostSourceTarget
 
   /// The highest value the improvement cost are displayed for.
-  /// 
+  ///
   /// The minimum maximum value should depend on what is the upper bound of the range of adventure point cost that are equal across multiple values (value increases for attributes are always 15 up to (and including) value 14, while value increases for skills are always 1 to 4, depending on the improvement cost, up to (and including) value 12), since those ranges should be combined into a single table row.
   let maximumRating: Int
 
@@ -44277,12 +44277,12 @@ public struct FamiliarsTrick: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The animal types this trick is available to. Either it is available to all or only a list of specific animal types.
-  /// 
+  ///
   /// If no animal types are given, the familiars trick applies to all animal types.
   let animalTypes: [AnimalType.ID]
 
   /// The magical traditions whose familiars can use this trick. Either it is available to all or only a list of specific traditions.
-  /// 
+  ///
   /// If no traditions are given, the familiars trick is not restricted by the magical tradition at all.
   let traditions: [MagicalTradition.ID]?
 
@@ -46253,7 +46253,7 @@ public struct CombatTechniqueSettings: Decodable, Equatable, Sendable {
   /// The attribute that increases the attack value of a close combat technique.
   let closeCombatTechniqueAttackAttribute: Attribute.ID
 
-  /// Character traits that modify the parry base of a close combat technique. If an optional rule. 
+  /// Character traits that modify the parry base of a close combat technique. If an optional rule.
   let parryModifiers: [CombatTechniqueParryModifier]?
 
   private enum CodingKeys: String, CodingKey {
