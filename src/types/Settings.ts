@@ -169,9 +169,17 @@ const StyleSpecialAbilitySettings = DB.TypeAlias(import.meta.url, {
         comment: "The focus rule for combat style special abilities and its advanced complements.",
         type: FocusRuleIdentifier(),
       }),
+      combatCombination: DB.Required({
+        comment: "The entry that allows a third combat style special ability from either type.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
       magic: DB.Required({
         comment: "The focus rule for magic style special abilities and its advanced complements.",
         type: FocusRuleIdentifier(),
+      }),
+      magicCombination: DB.Required({
+        comment: "The entry that allows a second magic style special ability.",
+        type: DB.IncludeIdentifier(ActivatableIdentifier),
       }),
       liturgical: DB.Required({
         comment:
@@ -189,6 +197,10 @@ const SkillSettings = DB.TypeAlias(import.meta.url, {
         comment:
           "The entry that grants a bonus of 1 towards the maximum skill rating per selection.",
         type: DB.IncludeIdentifier(ActivatableIdentifier),
+      }),
+      offsettingAttributesForRoutineChecks: DB.Required({
+        comment: "The rule that allows offsetting attributes for routine checks.",
+        type: OptionalRuleIdentifier(),
       }),
     }),
 })
@@ -247,6 +259,11 @@ const SpellworkSettings = DB.TypeAlias(import.meta.url, {
           "Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
       }),
+      associatedEnergy: DB.Required({
+        comment:
+          "The energy that is associated with spellworks. This is used to determine what energy to display on the character sheet.",
+        type: DerivedCharacteristicIdentifier(),
+      }),
     }),
 })
 
@@ -290,6 +307,11 @@ const LiturgicalChantSettings = DB.TypeAlias(import.meta.url, {
         comment:
           "Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.",
         type: FocusRuleIdentifier(),
+      }),
+      associatedEnergy: DB.Required({
+        comment:
+          "The energy that is associated with liturgical chants. This is used to determine what energy to display on the character sheet.",
+        type: DerivedCharacteristicIdentifier(),
       }),
     }),
 })

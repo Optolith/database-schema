@@ -28,6 +28,11 @@ export const DerivedCharacteristic = DB.Entity(import.meta.url, {
         comment: "The derived characteristic may have a specific use in the game.",
         type: DB.IncludeIdentifier(DerivedCharacteristicType),
       }),
+      isCombatRelated: DB.Required({
+        comment:
+          "The derived characteristic is relevant in combat and should be shown on combat-related character sheets.",
+        type: DB.Boolean(),
+      }),
       calculation: DB.Required({
         comment: "Instructions for calculating the derived characteristic’s value.",
         type: DB.IncludeIdentifier(DerivedCharacteristicCalculation),

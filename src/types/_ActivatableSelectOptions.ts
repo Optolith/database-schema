@@ -237,19 +237,26 @@ const SelectOptionRuleMultiple = DB.Enum(import.meta.url, {
     }),
     Range: DB.EnumCase({
       comment: "A range of numbers of options that can be selected.",
-      type: DB.Object({
-        min: DB.Optional({
-          comment:
-            "The minimum number of options that need to be selected. If left empty it defaults to 1.",
-          type: DB.Integer({ minimum: 2 }),
-        }),
-        max: DB.Required({
-          comment: "The maximum number of options that need to be selected.",
-          type: DB.Integer({ minimum: 2 }),
-        }),
-      }),
+      type: DB.IncludeIdentifier(SelectOptionRuleMultipleRange),
     }),
   }),
+})
+
+const SelectOptionRuleMultipleRange = DB.TypeAlias(import.meta.url, {
+  name: "SelectOptionRuleMultipleRange",
+  comment: "A range of numbers of options that can be selected.",
+  type: () =>
+    DB.Object({
+      min: DB.Optional({
+        comment:
+          "The minimum number of options that need to be selected. If left empty it defaults to 1.",
+        type: DB.Integer({ minimum: 2 }),
+      }),
+      max: DB.Required({
+        comment: "The maximum number of options that need to be selected.",
+        type: DB.Integer({ minimum: 2 }),
+      }),
+    }),
 })
 
 const SelectOptionRule = DB.TypeAlias(import.meta.url, {
@@ -367,6 +374,17 @@ const optionMatchesSelectOptions = (
                 const skillGroup = getInstanceById("Skill", actualOption.Skill)?.group
                 return skillGroup === undefined || category.Skills.groups.includes(skillGroup)
               })()),
+        )
+      )
+    case "SkillGroup":
+      return (
+        derivedSelectOptions?.kind === "Skills" &&
+        derivedSelectOptions.Skills.categories.some(
+          category =>
+            category.kind === "Skills" &&
+            category.Skills.specific === undefined &&
+            (category.Skills.groups === undefined ||
+              category.Skills.groups.includes(actualOption.SkillGroup)),
         )
       )
     case "CloseCombatTechnique":

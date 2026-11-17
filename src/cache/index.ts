@@ -26,6 +26,7 @@ import {
   type ResolvedSkillApplicationIdentifier,
   type SkillApplicationsCache,
 } from "./skillApplications.ts"
+import { buildSkillsBySkillGroupCache, type SkillsBySkillGroupCache } from "./skillsBySkillGroup.ts"
 import { buildDerivedTradeSecretsCache, type DerivedTradeSecretsCache } from "./tradeSecrets.ts"
 
 /**
@@ -38,11 +39,13 @@ export type Cache = {
   magicalAndBlessedAdvantagesAndDisadvantages: MagicalAndBlessedAdvantagesAndDisadvantagesCache
   newApplicationsAndUses: NewApplicationsAndUsesCache
   skillApplications: SkillApplicationsCache
+  skillsBySkillGroup: SkillsBySkillGroupCache
 }
 
 export type {
   ActivatableSelectOptionsCache,
   AncestorBloodAdvantagesCache,
+  DerivedTradeSecretsCache,
   MagicalAndBlessedAdvantagesAndDisadvantagesCache,
   NewApplicationsAndUsesCache,
   ResolvedNewSkillApplication,
@@ -51,6 +54,8 @@ export type {
   ResolvedSkillApplication,
   ResolvedSkillApplicationIdentifier,
   ResolvedSkillUse,
+  SkillApplicationsCache,
+  SkillsBySkillGroupCache,
 }
 
 /**
@@ -77,6 +82,7 @@ export const createCache = (db: ReadonlyTSONDB<TSONDBTypes>): Cache => {
     activatableSelectOptions,
   )
   const skillApplications = skillApplicationsCacheBuilder(db, settings, newApplicationsAndUses)
+  const skillsBySkillGroup = buildSkillsBySkillGroupCache(db, settings)
 
   return {
     activatableSelectOptions,
@@ -85,5 +91,6 @@ export const createCache = (db: ReadonlyTSONDB<TSONDBTypes>): Cache => {
     magicalAndBlessedAdvantagesAndDisadvantages,
     newApplicationsAndUses,
     skillApplications,
+    skillsBySkillGroup,
   }
 }

@@ -428,6 +428,11 @@ export const RequirableSelectOptionIdentifier = DB.Enum(import.meta.url, {
     General: DB.EnumCase({ type: GeneralIdentifier() }),
     Race: DB.EnumCase({ type: RaceIdentifier() }),
     Skill: DB.EnumCase({ type: SkillIdentifier() }),
+    SkillGroup: DB.EnumCase({
+      comment:
+        "This refers to all skills within the group, rather than being a select option itself.",
+      type: SkillGroupIdentifier(),
+    }),
     SkillApplication: DB.EnumCase({ type: SkillApplicationIdentifier() }),
     CloseCombatTechnique: DB.EnumCase({ type: CloseCombatTechniqueIdentifier() }),
     RangedCombatTechnique: DB.EnumCase({ type: RangedCombatTechniqueIdentifier() }),

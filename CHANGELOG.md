@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.124.2](https://github.com/Optolith/database-schema/compare/v0.124.1...v0.124.2) (2026-11-17)
+
+### Bug Fixes
+
+* **swift:** visibility of database methods ([9cb88b5](https://github.com/Optolith/database-schema/commit/9cb88b5e63e39136a191020fdea08a3b6c9f5eac))
+
+## [0.124.1](https://github.com/Optolith/database-schema/compare/v0.124.0...v0.124.1) (2026-11-17)
+
+### Features
+
+* swift typings ([39f3fdd](https://github.com/Optolith/database-schema/commit/39f3fdd20ea03ebbfb23e4fd7f8aec20ad8cf06b))
+
+### Bug Fixes
+
+* **swift:** include data wrapper ([ea6ea5a](https://github.com/Optolith/database-schema/commit/ea6ea5a4b0283ddeb3a3772dcb0f1ecf73097037))
+
+## [0.124.0](https://github.com/Optolith/database-schema/compare/v0.123.0...v0.124.0) (2026-11-13)
+
+### ⚠ BREAKING CHANGES
+
+* character sheed save translations
+
+### Features
+
+* character sheed save translations ([bdfb31d](https://github.com/Optolith/database-schema/commit/bdfb31d6d3920ba62cad9198bdcb0a10ee74fb52))
+
+## [0.123.0](https://github.com/Optolith/database-schema/compare/v0.122.0...v0.123.0) (2026-11-12)
+
+### ⚠ BREAKING CHANGES
+
+* base settings and translations for character sheet
+* remaining translations for basic character sheet
+* routine checks optional rule setting
+
+### Features
+
+* base settings and translations for character sheet ([32dca23](https://github.com/Optolith/database-schema/commit/32dca23d95c1a096940950b160c233b61bb73d83))
+* remaining translations for basic character sheet ([da3256d](https://github.com/Optolith/database-schema/commit/da3256daff0cd6908a96986627c49818ed015961))
+* routine checks optional rule setting ([0888e14](https://github.com/Optolith/database-schema/commit/0888e14ca423482c119063764a2e32086c36d8b4))
+
+## [0.122.0](https://github.com/Optolith/database-schema/compare/v0.121.0...v0.122.0) (2026-11-11)
+
+### ⚠ BREAKING CHANGES
+
+* add settings for managing style special abilities
+
+### Features
+
+* add settings for managing style special abilities ([4db45c7](https://github.com/Optolith/database-schema/commit/4db45c75972737e3eebadbab714e349623ad09d1))
+
+## [0.121.0](https://github.com/Optolith/database-schema/compare/v0.120.1...v0.121.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow skill group in prerequisite options
+
+### Features
+
+* allow skill group in prerequisite options ([03ee2e3](https://github.com/Optolith/database-schema/commit/03ee2e3dc859c6c2faf7532ccf022f2191b2a07c))
+* **cache:** skills by skill group cache ([55dbfd1](https://github.com/Optolith/database-schema/commit/55dbfd13b1e69c766524e674adc8b18becef69bb))
+
 ## [0.120.1](https://github.com/Optolith/database-schema/compare/v0.120.0...v0.120.1) (2026-11-10)
 
 ### Features

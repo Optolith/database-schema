@@ -28,9 +28,27 @@ export const Locale = DB.Entity(import.meta.url, {
         // oxlint-disable-next-line no-warning-comments
         // TODO: Make Required again once translations are added for all locales
         comment: "The translations strings for the locale.",
-        // prettier-ignore
-        type: DB.TranslationObject({
-          // Menu
+        type: DB.IncludeIdentifier(Translations),
+      }),
+    }),
+  uniqueConstraints: [
+    [
+      {
+        keyPath: "name",
+      },
+      {
+        keyPath: "region",
+      },
+    ],
+  ],
+})
+
+export const Translations = DB.TypeAlias(import.meta.url, {
+  name: "Translations",
+  type: () =>
+    DB.TranslationObject(
+      {
+        // Menu
           "About {$app}": null,
           "Preferences …": null,
           "Services": null,
@@ -1873,19 +1891,9 @@ export const Locale = DB.Entity(import.meta.url, {
           "Poison Effect": null,
           "Psychic Effect": null,
           "Supernatural Effect": null,
-        }, { allKeysAreRequired: true }),
-      }),
-    }),
-  uniqueConstraints: [
-    [
-      {
-        keyPath: "name",
       },
-      {
-        keyPath: "region",
-      },
-    ],
-  ],
+      { allKeysAreRequired: true },
+    ),
 })
 
 const LocaleMeasurementAdjustments = DB.TypeAlias(import.meta.url, {
