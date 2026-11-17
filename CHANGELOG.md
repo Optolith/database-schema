@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.124.1](https://github.com/Optolith/database-schema/compare/v0.124.0...v0.124.1) (2026-11-17)
+
+### Features
+
+* swift typings ([39f3fdd](https://github.com/Optolith/database-schema/commit/39f3fdd20ea03ebbfb23e4fd7f8aec20ad8cf06b))
+
+### Bug Fixes
+
+* **swift:** include data wrapper ([ea6ea5a](https://github.com/Optolith/database-schema/commit/ea6ea5a4b0283ddeb3a3772dcb0f1ecf73097037))
+
 ## [0.124.0](https://github.com/Optolith/database-schema/compare/v0.123.0...v0.124.0) (2026-11-13)
 
 ### ⚠ BREAKING CHANGES
