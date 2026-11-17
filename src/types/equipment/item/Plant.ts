@@ -119,12 +119,23 @@ const PlantOccurences = DB.TypeAlias(import.meta.url, {
         translation: NestedTranslationMap(
           DB.Optional,
           "PlantOccurrences",
-          DB.Object({
-            note: DB.Required({
-              comment: "A note to all occurences of this plant",
-              type: DB.String({ minLength: 1, markdown: "block" }),
-            }),
-          }),
+          DB.Object(
+            {
+              note: DB.Optional({
+                comment:
+                  "A note to all occurences of this plant. This note is added after the generated string divided by ;",
+                type: DB.String({ minLength: 1, markdown: "block" }),
+              }),
+              replacement: DB.Optional({
+                comment:
+                  "A replacement string. This replaces the generated string. If `note` is provided, it is appended to the replaced string.",
+                type: DB.String({ minLength: 1, markdown: "inline" }),
+              }),
+            },
+            {
+              minProperties: 1,
+            },
+          ),
         ),
       },
       {
@@ -148,12 +159,22 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
       translation: NestedTranslationMap(
         DB.Optional,
         "PlantOccurrence",
-        DB.Object({
-          note: DB.Required({
-            comment: "A note added to this occurrence",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
-          }),
-        }),
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note added to this occurrence",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+            replacement: DB.Optional({
+              comment:
+                "A replacement string. If `note` is provided, it is appended to the replaced string.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+          },
+          {
+            minProperties: 1,
+          },
+        ),
       ),
     }),
 })
@@ -162,6 +183,17 @@ const PlantOccurrenceTier = DB.Enum(import.meta.url, {
   name: "PlantOccurrenceTier",
   values: () => ({
     AllBiomes: DB.EnumCase({ type: null }),
+    Specific: DB.EnumCase({
+      type: DB.Array(DB.IncludeIdentifier(PlantOccurrenceSpecificRegion), {
+        minItems: 1,
+      }),
+    }),
+  }),
+})
+
+const PlantOccurrenceSpecificRegion = DB.Enum(import.meta.url, {
+  name: "PlantOccurrenceSpecificRegion",
+  values: () => ({
     Biomes: DB.EnumCase({
       type: DB.Array(BiomeIdentifier(), { minItems: 1 }),
     }),
