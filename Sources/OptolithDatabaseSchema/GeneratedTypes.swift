@@ -1028,7 +1028,7 @@ public struct LocaleMap<T: Decodable & Equatable & Sendable>: Decodable, Equatab
   }
 }
 
-protocol ChildEntity {
+public protocol ChildEntity {
   associatedtype ParentID: Equatable & Sendable
 
   static var parentId: KeyPath<Self, ParentID> & Sendable { get }

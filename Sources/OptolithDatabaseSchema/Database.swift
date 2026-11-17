@@ -9,28 +9,28 @@ import Foundation
 
 public class Database {
     private let data: CompressedDatabaseRepresentation
-    
-    init(from file: Data) throws {
+
+    public init(from file: Data) throws {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        
+
         self.data = try decoder.decode(CompressedDatabaseRepresentationWithMetadata.self, from: file).data
     }
-    
-    func getInstance<T>(of type: T.Type, by id: String) -> T? {
+
+    public func getInstance<T>(of type: T.Type, by id: String) -> T? {
         data.getDictionary(for: type)[id]
     }
-    
-    func getAllInstances<T>(of type: T.Type) -> [T] {
+
+    public func getAllInstances<T>(of type: T.Type) -> [T] {
         Array(data.getDictionary(for: type).values)
     }
-    
-    func getSingletonInstance<T>(of type: T.Type) -> T? {
+
+    public func getSingletonInstance<T>(of type: T.Type) -> T? {
         data.getSingleton(for: type)
     }
-    
-    func getAllChildInstances<T: ChildEntity>(of type: T.Type, forParent parent: T.ParentID) -> [T] {
+
+    public func getAllChildInstances<T: ChildEntity>(of type: T.Type, forParent parent: T.ParentID) -> [T] {
         data.getDictionary(for: type).values.filter { parent == $0[keyPath: T.parentId] }
     }
 }
