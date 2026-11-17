@@ -15,7 +15,7 @@ public class Database {
         decoder.dateDecodingStrategy = .iso8601
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        self.data = try decoder.decode(CompressedDatabaseRepresentation.self, from: file)
+        self.data = try decoder.decode(CompressedDatabaseRepresentationWithMetadata.self, from: file).data
     }
     
     func getInstance<T>(of type: T.Type, by id: String) -> T? {
