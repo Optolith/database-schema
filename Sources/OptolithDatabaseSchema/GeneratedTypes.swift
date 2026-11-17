@@ -1074,21 +1074,21 @@ public struct AdvancedCombatSpecialAbility: Decodable, Equatable, Sendable, Iden
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// The definition of how the combat special ability can be used in combat.
-  let usageType: CombatSpecialAbilityUsageType
+  public let usageType: CombatSpecialAbilityUsageType
 
   /// The definition of if the combat special ability can be used when armed or when unarmed.
-  let type: CombatSpecialAbilityType
+  public let type: CombatSpecialAbilityType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -1097,24 +1097,24 @@ public struct AdvancedCombatSpecialAbility: Decodable, Equatable, Sendable, Iden
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The penalty the special ability gives when used.
-  let penalty: Penalty?
+  public let penalty: Penalty?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The combat techniques the special ability is applicable to.
-  let combatTechniques: ApplicableCombatTechniques
+  public let combatTechniques: ApplicableCombatTechniques
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvancedCombatSpecialAbilityTranslation>
+  public let translations: LocaleMap<AdvancedCombatSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -1167,26 +1167,26 @@ public struct AdvancedCombatSpecialAbility: Decodable, Equatable, Sendable, Iden
 
 public struct AdvancedCombatSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -1214,10 +1214,10 @@ public struct AdvancedCombatSpecialAbilityTranslation: Decodable, Equatable, Sen
 /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
 public struct ActivatableNameBuilderRules: Decodable, Equatable, Sendable {
   /// Where the level is placed in the name if the activatable has levels. Defaults to “After”.
-  let levelPlacement: ActivatableNameLevelPlacement?
+  public let levelPlacement: ActivatableNameLevelPlacement?
 
   /// Whether to use parenthesis around the printed options. Defaults to true.
-  let useParenthesis: Bool?
+  public let useParenthesis: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case levelPlacement = "levelPlacement"
@@ -1325,10 +1325,10 @@ public enum CombatSpecialAbilityType: Decodable, Equatable, Sendable {
 /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
 public struct SelectOptions: Decodable, Equatable, Sendable {
   /// An entry category with optional further configuration. All available entries from the specified categories will be included as separate select options. You can also specify a set of groups that should only be included. Groups not mentioned will be excluded then.
-  let derived: SelectOptionCategory?
+  public let derived: SelectOptionCategory?
 
   /// Rules for how options can be selected and relate to each other. Defaults to a single predefined option if the entry has select options defined, otherwise undefined.
-  let rules: SelectOptionRules?
+  public let rules: SelectOptionRules?
 
   private enum CodingKeys: String, CodingKey {
     case derived = "derived"
@@ -1482,10 +1482,10 @@ public enum SelectOptionCategory: Decodable, Equatable, Sendable {
 
 public struct BlessedTraditionsSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Should the principles (code) of the tradition be required to select the respective tradition?
-  let requirePrinciples: Bool?
+  public let requirePrinciples: Bool?
 
   /// If set, only includes traditions of the specified type.
-  let onlyType: BlessedTraditionTypeForSelectOptionCategory?
+  public let onlyType: BlessedTraditionTypeForSelectOptionCategory?
 
   private enum CodingKeys: String, CodingKey {
     case requirePrinciples = "require_principles"
@@ -1530,7 +1530,7 @@ public enum BlessedTraditionTypeForSelectOptionCategory: Decodable, Equatable, S
 
 public struct ElementsSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Only include entries with the listed identifiers.
-  let specific: [Element.ID]?
+  public let specific: [Element.ID]?
 
   private enum CodingKeys: String, CodingKey {
     case specific = "specific"
@@ -1549,7 +1549,7 @@ public struct Element: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ElementTranslation>
+  public let translations: LocaleMap<ElementTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -1580,7 +1580,7 @@ public struct Element: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ElementTranslation: Decodable, Equatable, Sendable {
   /// The element’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -1595,24 +1595,24 @@ public struct ElementTranslation: Decodable, Equatable, Sendable {
 
 /// A supported locale. The locale is used to identify the language and region of the content.
 public struct Locale: Decodable, Equatable, Sendable, Identifiable {
-  public typealias ID = UUID
+  public typealias ID = String
 
   public let id: ID
 
   /// Name of the language in its language.
-  let name: String
+  public let name: String
 
   /// Region in which the language is spoken in its language.
-  let region: String
+  public let region: String
 
   /// The language is not (fully) implemented and thus needs to be excluded from stable releases.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
   /// Measurement adjustments for units used in the locale.
-  let measurementAdjustments: LocaleMeasurementAdjustments?
+  public let measurementAdjustments: LocaleMeasurementAdjustments?
 
   /// The translations strings for the locale.
-  let translations: Translations?
+  public let translations: Translations?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -1652,16 +1652,16 @@ public struct Locale: Decodable, Equatable, Sendable, Identifiable {
 /// Measurements in the database always use the metric system, although the actual unit used in the locale’s translation may be different. Some translation may use different units where values have to be converted using a multiplier.
 public struct LocaleMeasurementAdjustments: Decodable, Equatable, Sendable {
   /// Some lengths in the database are stored in kilometers (or “miles”, as it is called originally). This multiplier is used to convert these lengths to the unit used in the locale’s translation.
-  let milesMultiplier: Float?
+  public let milesMultiplier: Float?
 
   /// Some lengths in the database are stored in meters (or “steps”, as it is called originally). This multiplier is used to convert these lengths to the unit used in the locale’s translation (e.g. yards).
-  let stepsMultiplier: Float?
+  public let stepsMultiplier: Float?
 
   /// Some lengths in the database are stored in centimeters (or “halffingers”, as it is called originally). This multiplier is used to convert these lengths to the unit used in the locale’s translation (e.g. inches).
-  let halffingersMultiplier: Float?
+  public let halffingersMultiplier: Float?
 
   /// Weights in the database are stored in kilogram (or “stone”, as it is called originally). This multiplier is used to convert these weights to the unit used in the locale’s translation (e.g. pounds).
-  let stonesMultiplier: Float?
+  public let stonesMultiplier: Float?
 
   private enum CodingKeys: String, CodingKey {
     case milesMultiplier = "milesMultiplier"
@@ -1681,1547 +1681,1547 @@ public struct LocaleMeasurementAdjustments: Decodable, Equatable, Sendable {
 }
 
 public struct Translations: Decodable, Equatable, Sendable {
-  let `About {$app}`: String
-  let `Preferences …`: String
-  let `Services`: String
-  let `Hide {$app}`: String
-  let `Hide Others`: String
-  let `Show All`: String
-  let `Quit {$app}`: String
-  let `.input {$os :string} {{File}}`: String
-  let `Close`: String
-  let `Quit`: String
-  let `Edit`: String
-  let `Undo`: String
-  let `Redo`: String
-  let `Cut`: String
-  let `Copy`: String
-  let `Paste`: String
-  let `Delete`: String
-  let `Select All`: String
-  let `View`: String
-  let `Toggle Full Screen`: String
-  let `Window`: String
-  let `Minimize`: String
-  let `Zoom`: String
-  let `Main Window`: String
-  let `Bring All to Front`: String
-  let `Settings`: String
-  let `Main Language`: String
-  let `System Language`: String
-  let `Fallback Language`: String
-  let `No fallback language`: String
-  let `Appearance`: String
-  let `Auto`: String
-  let `Light`: String
-  let `Dark`: String
-  let `Edit characters after creation`: String
-  let `Show animations`: String
-  let `Check for updates`: String
-  let `Updater`: String
-  let `Checking for updates …`: String
-  let `New version available`: String
-  let `Version {$version} is available! Do you wish to download and install?`: String
-  let `Download`: String
-  let `Download Later`: String
-  let `Downloading update …`: String
-  let `Update downloaded`: String
-  let `Quit and Install`: String
-  let `Install Later`: String
-  let `No update available`: String
-  let `You're running the latest version available.`: String
-  let `Characters`: String
-  let `Groups`: String
-  let `Library`: String
-  let `FAQ`: String
-  let `About`: String
-  let `Imprint`: String
-  let `Third-Party Licenses`: String
-  let `Last Changes`: String
-  let `Profile`: String
-  let `Overview`: String
-  let `Personal Data`: String
-  let `Character Sheet`: String
-  let `Pact`: String
-  let `Rule Set`: String
-  let `Race, Culture & Profession`: String
-  let `Race`: String
-  let `Culture`: String
-  let `Profession`: String
-  let `Attributes`: String
-  let `Advantages & Disadvantages`: String
-  let `Advantages`: String
-  let `Disadvantages`: String
-  let `Abilities`: String
-  let `Skills`: String
-  let `Combat Techniques`: String
-  let `Special Abilities`: String
-  let `Spells`: String
-  let `Liturgical Chants`: String
-  let `Belongings`: String
-  let `Equipment`: String
-  let `Hit Zone Armor`: String
-  let `Pets`: String
-  let `{$value} AP Remaining`: String
-  let `Save`: String
-  let `Show Settings`: String
-  let `Toggle DevTools`: String
-  let `Adventure Points`: String
-  let `AP`: String
-  let `.input {$value :number} {{{$value} Adventure Points}}`: String
-  let `{$value} Adventure Points`: String
-  let `{$value} AP`: String
-  let `{$value} Total AP`: String
-  let `{$value} AP Spent`: String
-  let `{$value}/{$max} AP spent on advantages`: String
-  let `Thereof {$value}/{$max} on magic advantages`: String
-  let `Thereof {$value}/{$max} on blessed advantages`: String
-  let `{$value}/{$max} AP received from disadvantages`: String
-  let `Thereof {$value}/{$max} from magic disadvantages`: String
-  let `Thereof {$value}/{$max} from blessed disadvantages`: String
-  let `{$value} AP spent on race`: String
-  let `{$value} AP spent on profession`: String
-  let `{$value} AP spent on attributes`: String
-  let `{$value} AP spent on skills`: String
-  let `{$value} AP spent on combat techniques`: String
-  let `{$value} AP spent on spells`: String
-  let `{$value} AP spent on cantrips`: String
-  let `{$value} AP spent on liturgical chants`: String
-  let `{$value} AP spent on blessings`: String
-  let `{$value} AP spent on special abilities`: String
-  let `{$value} AP spent on improving/buying back LP/AE/KP`: String
-  let `header.dialogs.herosaved`: String
-  let `header.dialogs.allsaved`: String
-  let `header.dialogs.everythingelsesaved`: String
-  let `header.dialogs.saveconfigerror.title`: String
-  let `header.dialogs.saveconfigerror.message`: String
-  let `header.dialogs.saveheroeserror.title`: String
-  let `header.dialogs.saveheroeserror.message`: String
-  let `general.weightvalue`: String
-  let `general.pricevalue`: String
-  let `general.lengthvalue`: String
-  let `D`: String
-  let `{$count}D{$sides}`: String
-  let `general.none`: String
-  let `general.or`: String
-  let `general.and`: String
-  let `general.error`: String
-  let `general.errorcode`: String
-  let `general.emptylistplaceholder`: String
-  let `general.emptylistnoresultsplaceholder`: String
-  let `No Results`: String
-  let `Search`: String
-  let `Sort By`: String
-  let `Name`: String
-  let `Date Modified`: String
-  let `Date Created`: String
-  let `Group`: String
-  let `Property`: String
-  let `general.filters.sort.bylocation`: String
-  let `general.filters.sort.bycost`: String
-  let `general.filters.sort.byweight`: String
-  let `general.filters.showactivatedentries`: String
-  let `Done`: String
-  let `OK`: String
-  let `Cancel`: String
-  let `Create`: String
-  let `Apply`: String
-  let `Add`: String
-  let `Not enough AP`: String
-  let `.input {$value :number} {{You are missing {$value} Adventure Points to do this.}}`: String
-  let `Exceeding Adventure Points limit for advantages`: String
-  let `You cannot spend more than {$max} AP on advantages. You would exceed this limit by {$over} AP.`: String
-  let `Exceeding Adventure Points limit for magical advantages`: String
-  let `You cannot spend more than {$max} AP on magical advantages. You would exceed this limit by {$over} AP.`: String
-  let `Exceeding Adventure Points limit for blessed advantages`: String
-  let `You cannot spend more than {$max} AP on blessed advantages. You would exceed this limit by {$over} AP.`: String
-  let `Exceeding Adventure Points limit for disadvantages`: String
-  let `You cannot receive more than {$max} AP from disadvantages. You would exceed this limit by {$over} AP.`: String
-  let `Exceeding Adventure Points limit for magical disadvantages`: String
-  let `You cannot receive more than {$max} AP from magical disadvantages. You would exceed this limit by {$over} AP.`: String
-  let `Exceeding Adventure Points limit for blessed disadvantages`: String
-  let `You cannot receive more than {$max} AP from blessed disadvantages. You would exceed this limit by {$over} AP.`: String
-  let `heroes.filters.origin.allheroes`: String
-  let `heroes.filters.origin.ownheroes`: String
-  let `heroes.filters.origin.sharedheroes`: String
-  let `Import`: String
-  let `New Character`: String
-  let `Duplicate Character`: String
-  let `Export Character as OPTLC file`: String
-  let `Delete Character`: String
-  let `Open Character`: String
-  let `heroes.saveherobtn`: String
-  let `heroes.unsavedhero.name`: String
-  let `heroes.list.adventurepoints`: String
-  let `heroes.dialogs.herosaved`: String
-  let `heroes.dialogs.importheroerror.title`: String
-  let `heroes.dialogs.importheroerror.message`: String
-  let `heroes.dialogs.heroexportsavelocation.title`: String
-  let `heroes.dialogs.herojsonsaveerror.title`: String
-  let `heroes.dialogs.herojsonsaveerror.message`: String
-  let `heroes.dialogs.unsavedactions.title`: String
-  let `heroes.dialogs.unsavedactions.message`: String
-  let `heroes.dialogs.unsavedactions.quit`: String
-  let `heroes.dialogs.unsavedactions.saveandquit`: String
-  let `Do you really want to delete character {$name}?`: String
-  let `Name of Character`: String
-  let `Sex`: String
-  let `Custom Sex`: String
-  let `Custom Sex Name`: String
-  let `Experience Level`: String
-  let `Counts as male when checking binary sex prerequisites`: String
-  let `Counts as female when checking binary sex prerequisites`: String
-  let `Counts as having a penis when checking sex characteristic prerequisites`: String
-  let `Counts as having a vagina when checking sex characteristic prerequisites`: String
-  let `heroes.dialogs.herocreation.title`: String
-  let `heroes.dialogs.herocreation.nameofhero`: String
-  let `heroes.dialogs.herocreation.sex.placeholder`: String
-  let `heroes.dialogs.herocreation.sex.male`: String
-  let `heroes.dialogs.herocreation.sex.female`: String
-  let `heroes.dialogs.herocreation.experiencelevel.placeholder`: String
-  let `heroes.dialogs.herocreation.startbtn`: String
-  let `wiki.chooseacategory`: String
-  let `wiki.chooseacategorytodisplayalist`: String
-  let `wiki.filters.races`: String
-  let `wiki.filters.cultures`: String
-  let `wiki.filters.professions`: String
-  let `wiki.filters.advantages`: String
-  let `wiki.filters.disadvantages`: String
-  let `wiki.filters.skills`: String
-  let `wiki.filters.skills.all`: String
-  let `wiki.filters.combattechniques`: String
-  let `wiki.filters.combattechniques.all`: String
-  let `wiki.filters.magic`: String
-  let `wiki.filters.magic.all`: String
-  let `wiki.filters.liturgicalchants`: String
-  let `wiki.filters.liturgicalchants.all`: String
-  let `wiki.filters.specialabilities`: String
-  let `wiki.filters.specialabilities.all`: String
-  let `wiki.filters.itemtemplates`: String
-  let `wiki.filters.itemtemplates.all`: String
-  let `Edit Name`: String
-  let `Change Name`: String
-  let `Edit Profession Name`: String
-  let `Change Profession Name`: String
-  let `Add AP`: String
-  let `Add Adventure Points`: String
-  let `How many Adventure Points do you want to add?`: String
-  let `Finish Character Creation`: String
-  let `Select New Avatar`: String
-  let `Delete Avatar`: String
-  let `profile.dialogs.changeheroavatar.title`: String
-  let `profile.dialogs.changeheroavatar.selectfilebtn`: String
-  let `profile.dialogs.changeheroavatar.imagefiletype`: String
-  let `profile.dialogs.changeheroavatar.invalidfilewarning`: String
-  let `Male`: String
-  let `Female`: String
-  let `Bal’Thani`: String
-  let `Tsajana`: String
-  let `Family`: String
-  let `Place of Birth`: String
-  let `Date of Birth`: String
-  let `Age`: String
-  let `Hair Color`: String
-  let `Eye Color`: String
-  let `Size`: String
-  let `Weight`: String
-  let `Title`: String
-  let `Social Status`: String
-  let `Characteristics`: String
-  let `Other Information`: String
-  let `Reroll Eye Color`: String
-  let `Reroll Hair Color`: String
-  let `Reroll Size`: String
-  let `Reroll Weight`: String
-  let `personaldata.cultureareaknowledge`: String
-  let `You can save up no more than 10 AP to use later during the game, and you cannot begin the game with a negative AP balance.`: String
-  let `Print to PDF`: String
-  let `Save Character Sheet as PDF`: String
-  let `Character Sheet saved as PDF`: String
-  let `Error during save`: String
-  let `Show check attribute values`: String
-  let `Use parchment background`: String
-  let `Zoom factor`: String
-  let `sheets.charactersheet`: String
-  let `sheets.attributemodifiers.title`: String
-  let `sheets.mainsheet.title`: String
-  let `sheets.mainsheet.name`: String
-  let `sheets.mainsheet.family`: String
-  let `sheets.mainsheet.placeofbirth`: String
-  let `sheets.mainsheet.dateofbirth`: String
-  let `sheets.mainsheet.age`: String
-  let `sheets.mainsheet.sex`: String
-  let `sheets.mainsheet.race`: String
-  let `sheets.mainsheet.size`: String
-  let `sheets.mainsheet.weight`: String
-  let `sheets.mainsheet.haircolor`: String
-  let `sheets.mainsheet.eyecolor`: String
-  let `sheets.mainsheet.culture`: String
-  let `sheets.mainsheet.socialstatus`: String
-  let `sheets.mainsheet.profession`: String
-  let `sheets.mainsheet.rank`: String
-  let `sheets.mainsheet.characteristics`: String
-  let `sheets.mainsheet.otherinfo`: String
-  let `sheets.mainsheet.experiencelevellabel`: String
-  let `sheets.mainsheet.totalaplabel`: String
-  let `sheets.mainsheet.apcollectedlabel`: String
-  let `sheets.mainsheet.apspentlabel`: String
-  let `sheets.mainsheet.avatarlabel`: String
-  let `sheets.mainsheet.advantages`: String
-  let `sheets.mainsheet.disadvantages`: String
-  let `sheets.mainsheet.generalspecialabilites`: String
-  let `sheets.mainsheet.fatepoints`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.value`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.bonuspenalty`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.bonus`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.bought`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.max`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.current`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.basestat`: String
-  let `sheets.mainsheet.derivedcharacteristics.labels.permanentlylostboughtback`: String
-  let `Game Stats`: String
-  let `sheets.gamestatssheet.skillstable.title`: String
-  let `sheets.gamestatssheet.skillstable.labels.skill`: String
-  let `sheets.gamestatssheet.skillstable.labels.check`: String
-  let `sheets.gamestatssheet.skillstable.labels.encumbrance`: String
-  let `sheets.gamestatssheet.skillstable.labels.improvementcost`: String
-  let `sheets.gamestatssheet.skillstable.labels.skillrating`: String
-  let `R`: String
-  let `Notes`: String
-  let `sheets.gamestatssheet.skillstable.encumbrance.yes`: String
-  let `sheets.gamestatssheet.skillstable.encumbrance.no`: String
-  let `Myb.`: String
-  let `sheets.gamestatssheet.skillstable.groups.pages`: String
-  let `sheets.gamestatssheet.languages.title`: String
-  let `sheets.gamestatssheet.languages.nativetongue`: String
-  let `sheets.gamestatssheet.knownscripts.title`: String
-  let `sheets.gamestatssheet.routinechecks.title`: String
-  let `sheets.gamestatssheet.routinechecks.textRow1`: String
-  let `sheets.gamestatssheet.routinechecks.textRow2`: String
-  let `sheets.gamestatssheet.routinechecks.textRow3`: String
-  let `sheets.gamestatssheet.routinechecks.textRow4`: String
-  let `sheets.gamestatssheet.routinechecks.labels.checkmod`: String
-  let `sheets.gamestatssheet.routinechecks.labels.neededsr`: String
-  let `sheets.gamestatssheet.routinechecks.from3on`: String
-  let `sheets.gamestatssheet.qualitylevels.title`: String
-  let `sheets.gamestatssheet.qualitylevels.labels.skillpoints`: String
-  let `sheets.gamestatssheet.qualitylevels.labels.qualitylevel`: String
-  let `Combat`: String
-  let `sheets.combatsheet.combattechniquestable.title`: String
-  let `sheets.combatsheet.combattechniquestable.labels.combattechnique`: String
-  let `Prim. Attr.`: String
-  let `sheets.combatsheet.combattechniquestable.labels.improvementcost`: String
-  let `sheets.combatsheet.combattechniquestable.labels.combattechniquerating`: String
-  let `AT/RC`: String
-  let `sheets.combatsheet.combattechniquestable.labels.parry`: String
-  let `sheets.combatsheet.lifepoints.title`: String
-  let `sheets.combatsheet.lifepoints.max`: String
-  let `sheets.combatsheet.lifepoints.current`: String
-  let `sheets.combatsheet.lifepoints.pain1`: String
-  let `sheets.combatsheet.lifepoints.pain2`: String
-  let `sheets.combatsheet.lifepoints.pain3`: String
-  let `sheets.combatsheet.lifepoints.pain4`: String
-  let `sheets.combatsheet.lifepoints.dying`: String
-  let `sheets.combatsheet.closecombatweapons`: String
-  let `sheets.combatsheet.closecombatweapons.labels.weapon`: String
-  let `sheets.combatsheet.closecombatweapons.labels.combattechnique`: String
-  let `sheets.combatsheet.closecombatweapons.labels.damagebonus`: String
-  let `sheets.combatsheet.closecombatweapons.labels.damagepoints`: String
-  let `sheets.combatsheet.closecombatweapons.labels.attackparrymodifier`: String
-  let `sheets.combatsheet.closecombatweapons.labels.reach`: String
-  let `sheets.combatsheet.closecombatweapons.labels.breakingpointrating`: String
-  let `sheets.combatsheet.closecombatweapons.labels.damaged`: String
-  let `sheets.combatsheet.closecombatweapons.labels.attack`: String
-  let `sheets.combatsheet.closecombatweapons.labels.parry`: String
-  let `sheets.combatsheet.closecombatweapons.labels.weight`: String
-  let `sheets.combatsheet.rangedcombatweapons`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.weapon`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.combattechnique`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.reloadtime`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.damagepoints`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.ammunition`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.rangebrackets`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.breakingpointrating`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.damaged`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.rangedcombat`: String
-  let `sheets.combatsheet.rangedcombatweapons.labels.weight`: String
-  let `sheets.combatsheet.armors.title`: String
-  let `sheets.combatsheet.armors.labels.armor`: String
-  let `sheets.combatsheet.armors.labels.sturdinessrating`: String
-  let `sheets.combatsheet.armors.labels.wear`: String
-  let `sheets.combatsheet.armors.labels.protection`: String
-  let `sheets.combatsheet.armors.labels.encumbrance`: String
-  let `sheets.combatsheet.armors.labels.movementinitiative`: String
-  let `sheets.combatsheet.armors.labels.carriedwhereexamples`: String
-  let `sheets.combatsheet.armors.labels.head`: String
-  let `sheets.combatsheet.armors.labels.torso`: String
-  let `sheets.combatsheet.armors.labels.leftarm`: String
-  let `sheets.combatsheet.armors.labels.rightarm`: String
-  let `sheets.combatsheet.armors.labels.leftleg`: String
-  let `sheets.combatsheet.armors.labels.rightleg`: String
-  let `sheets.combatsheet.armors.labels.weight`: String
-  let `sheets.combatsheet.shieldparryingweapon.title`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.shieldparryingweapon`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.structurepoints`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.breakingpointrating`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.damaged`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.attackparrymodifier`: String
-  let `sheets.combatsheet.shieldparryingweapon.labels.weight`: String
-  let `sheets.combatsheet.actions`: String
-  let `sheets.combatsheet.combatspecialabilities`: String
-  let `sheets.combatsheet.conditions`: String
-  let `sheets.combatsheet.states`: String
-  let `sheets.belongingssheet.title`: String
-  let `sheets.belongingssheet.equipmenttable.title`: String
-  let `sheets.belongingssheet.equipmenttable.labels.item`: String
-  let `sheets.belongingssheet.equipmenttable.labels.number`: String
-  let `sheets.belongingssheet.equipmenttable.labels.price`: String
-  let `sheets.belongingssheet.equipmenttable.labels.weight`: String
-  let `sheets.belongingssheet.equipmenttable.labels.carriedwhere`: String
-  let `sheets.belongingssheet.equipmenttable.labels.total`: String
-  let `sheets.belongingssheet.purse.title`: String
-  let `sheets.belongingssheet.purse.ducats`: String
-  let `sheets.belongingssheet.purse.silverthalers`: String
-  let `sheets.belongingssheet.purse.halers`: String
-  let `sheets.belongingssheet.purse.kreutzers`: String
-  let `sheets.belongingssheet.purse.gems`: String
-  let `sheets.belongingssheet.purse.jewelry`: String
-  let `sheets.belongingssheet.purse.other`: String
-  let `sheets.belongingssheet.carryingcapacity.title`: String
-  let `sheets.belongingssheet.carryingcapacity.calc`: String
-  let `sheets.belongingssheet.carryingcapacity.label`: String
-  let `sheets.belongingssheet.animal.title`: String
-  let `sheets.belongingssheet.animal.name`: String
-  let `sheets.belongingssheet.animal.sizecategory`: String
-  let `sheets.belongingssheet.animal.type`: String
-  let `sheets.belongingssheet.animal.ap`: String
-  let `sheets.belongingssheet.animal.protection`: String
-  let `sheets.belongingssheet.animal.attackname`: String
-  let `sheets.belongingssheet.animal.attack`: String
-  let `sheets.belongingssheet.animal.parry`: String
-  let `sheets.belongingssheet.animal.damagepoints`: String
-  let `sheets.belongingssheet.animal.reach`: String
-  let `sheets.belongingssheet.animal.actions`: String
-  let `sheets.belongingssheet.animal.skills`: String
-  let `sheets.belongingssheet.animal.specialabilities`: String
-  let `sheets.belongingssheet.animal.notes`: String
-  let `{$energy} Max`: String
-  let `Current`: String
-  let `Spells & Rituals`: String
-  let `sheets.spellssheet.spellstable.title`: String
-  let `Spell/Ritual`: String
-  let `sheets.spellssheet.spellstable.labels.check`: String
-  let `sheets.spellssheet.spellstable.labels.skillrating`: String
-  let `sheets.spellssheet.spellstable.labels.cost`: String
-  let `sheets.spellssheet.spellstable.labels.castingtime`: String
-  let `sheets.spellssheet.spellstable.labels.range`: String
-  let `sheets.spellssheet.spellstable.labels.duration`: String
-  let `sheets.spellssheet.spellstable.labels.property`: String
-  let `sheets.spellssheet.spellstable.labels.improvementcost`: String
-  let `sheets.spellssheet.spellstable.labels.effect`: String
-  let `sheets.spellssheet.spellstable.labels.pages`: String
-  let `unfamiliar spell`: String
-  let `sheets.spellssheet.primaryattribute`: String
-  let `sheets.spellssheet.properties`: String
-  let `sheets.spellssheet.tradition`: String
-  let `sheets.spellssheet.magicalspecialabilities`: String
-  let `sheets.spellssheet.cantrips`: String
-  let `Liturgical Chants & Ceremonies`: String
-  let `sheets.chantssheet.chantstable.title`: String
-  let `Liturgical Chant`: String
-  let `sheets.chantssheet.chantstable.labels.check`: String
-  let `sheets.chantssheet.chantstable.labels.skillrating`: String
-  let `sheets.chantssheet.chantstable.labels.cost`: String
-  let `sheets.chantssheet.chantstable.labels.castingtime`: String
-  let `sheets.chantssheet.chantstable.labels.range`: String
-  let `sheets.chantssheet.chantstable.labels.duration`: String
-  let `sheets.chantssheet.chantstable.labels.aspect`: String
-  let `sheets.chantssheet.chantstable.labels.improvementcost`: String
-  let `sheets.chantssheet.chantstable.labels.effect`: String
-  let `sheets.chantssheet.chantstable.labels.pages`: String
-  let `sheets.chantssheet.primaryattribute`: String
-  let `sheets.chantssheet.aspects`: String
-  let `sheets.chantssheet.tradition`: String
-  let `Blessed Special Abilities`: String
-  let `sheets.chantssheet.blessings`: String
-  let `pacts.pactcategory`: String
-  let `pacts.nopact`: String
-  let `pacts.pactlevel`: String
-  let `pacts.fairytype`: String
-  let `pacts.domain`: String
-  let `pacts.userdefined`: String
-  let `pacts.demontype`: String
-  let `pacts.circleofdamnation`: String
-  let `pacts.minorpact`: String
-  let `pacts.pactisincompletehint`: String
-  let `pacts.name`: String
-  let `Rule Sources`: String
-  let `Use all publications`: String
-  let `Focus Rules`: String
-  let `Optional Rules`: String
-  let `Alternative Rules`: String
-  let `rules.manualherodatarepair`: String
-  let `rules.manualherodatarepairexplanation`: String
-  let `Select Race`: String
-  let `Select Culture`: String
-  let `Select Profession`: String
-  let `Show uncommon cultures`: String
-  let `Show uncommon professions`: String
-  let `Go to Culture Selection`: String
-  let `Go to Profession Selection`: String
-  let `No variant`: String
-  let `Visible professions by group`: String
-  let `All Professions`: String
-  let `Only Mundane Professions`: String
-  let `Only Magic Professions`: String
-  let `Only Blessed Professions`: String
-  let `Finalize Race, Culture and Profession Selection`: String
-  let `Attribute Adjustment`: String
-  let `Select Attribute Adjustment`: String
-  let `Buy Cultural Package`: String
-  let `Buy Script`: String
-  let `NT`: String
-  let `Other Selections`: String
-  let `rcpselectoptions.race`: String
-  let `rcpselectoptions.culture`: String
-  let `rcpselectoptions.profession`: String
-  let `rcpselectoptions.cantripsfromlist`: String
-  let `rcpselectoptions.cantrip.one`: String
-  let `rcpselectoptions.cantrip.two`: String
-  let `rcpselectoptions.combattechniqueselection`: String
-  let `rcpselectoptions.combattechnique.one`: String
-  let `rcpselectoptions.combattechnique.two`: String
-  let `rcpselectoptions.selectattributeadjustment`: String
-  let `rcpselectoptions.buyculturalpackage`: String
-  let `rcpselectoptions.nativetongue.placeholder`: String
-  let `rcpselectoptions.buyscript`: String
-  let `rcpselectoptions.script.placeholder`: String
-  let `rcpselectoptions.combattechniquesecondselection`: String
-  let `rcpselectoptions.cursestotalingapleft`: String
-  let `rcpselectoptions.languagesandliteracytotalingapleft`: String
-  let `rcpselectoptions.applicationforskillspecialization`: String
-  let `rcpselectoptions.skillselectionap`: String
-  let `rcpselectoptions.skillspecialization`: String
-  let `rcpselectoptions.completebtn`: String
-  let `rcpselectoptions.unfamiliarspells`: String
-  let `rcpselectoptions.unfamiliarspellselectionfortraditionguildmage`: String
-  let `rcpselectoptions.unfamiliarspell.placeholder`: String
-  let `rcpselectoptions.unfamiliarspell`: String
-  let `Total Points`: String
-  let `Increment`: String
-  let `Decrement`: String
-  let `Activate`: String
-  let `Attribute Adjustment Selection`: String
-  let `Modifier`: String
-  let `Bought`: String
-  let `Lost Total`: String
-  let `Bought Back`: String
-  let `Buy Back Permanently Lost Point`: String
-  let `Permanently Lost {$energy}`: String
-  let `p{$energy}`: String
-  let `Permanently Lost Life Points`: String
-  let `pLP`: String
-  let `Permanently Lost Arcane Energy`: String
-  let `pAE`: String
-  let `Permanently Lost Karma Points`: String
-  let `pKP`: String
-  let `Loose Permanent Points`: String
-  let `How many points do you want to remove?`: String
-  let `Remove`: String
-  let `Permanently Spent`: String
-  let `Common Advantages`: String
-  let `Common Disadvantages`: String
-  let `Custom AP Cost`: String
-  let `AP Cost for {$category}`: String
-  let `Custom option`: String
-  let `Show entries with unmet prerequisites`: String
-  let `specialabilities.nativetonguelevel`: String
-  let `Adoruzepterzauber`: String
-  let `Advanced Combat Special Abilities`: String
-  let `Advanced Karma Special Abilities`: String
-  let `Advanced Magical Special Abilities`: String
-  let `Advanced Skill Special Abilities`: String
-  let `Ancestor Glyphs`: String
-  let `Arcane Orb Enchantments`: String
-  let `Attire Enchantments`: String
-  let `Beutelzauber`: String
-  let `Blessed Traditions`: String
-  let `Bowl Enchantments`: String
-  let `Brawling Special Abilities`: String
-  let `Cauldron Enchantments`: String
-  let `Ceremonial Item Special Abilities`: String
-  let `Chronicle Enchantments`: String
-  let `Combat Special Abilities`: String
-  let `Combat Style Special Abilities`: String
-  let `Command Special Abilities`: String
-  let `Dagger Rituals`: String
-  let `Familiar Special Abilities`: String
-  let `Fate Point Sex Special Abilities`: String
-  let `Fate Point Special Abilities`: String
-  let `Fools Hat Enchantments`: String
-  let `General Special Abilities`: String
-  let `Haubenzauber`: String
-  let `Hauerkettenzauber`: String
-  let `Instrument Enchantments`: String
-  let `Karma Special Abilities`: String
-  let `Keulenzauber`: String
-  let `Krallenkettenzauber`: String
-  let `Kristallkugelzauber`: String
-  let `Liturgical Style Special Abilities`: String
-  let `Lycantropic Gifts`: String
-  let `Magical Signs`: String
-  let `Magical Special Abilities`: String
-  let `Magical Traditions`: String
-  let `Magic Style Special Abilities`: String
-  let `Orb Enchantments`: String
-  let `Pact Gifts`: String
-  let `Protective/Warding Circle Special Abilities`: String
-  let `Ring Enchantments`: String
-  let `Schweinetrommelzauber`: String
-  let `Sermons`: String
-  let `Sex Special Abilities`: String
-  let `Sickle Rituals`: String
-  let `Sikaryan Drain Special Abilities`: String
-  let `Skill Style Special Abilities`: String
-  let `Spell Sword Enchantments`: String
-  let `Staff Enchantments`: String
-  let `Toy Enchantments`: String
-  let `Trinkhornzauber`: String
-  let `Vampiric Gifts`: String
-  let `Visions`: String
-  let `Wand Enchantments`: String
-  let `Weapon Enchantments`: String
-  let `inlinewiki.rule`: String
-  let `inlinewiki.effect`: String
-  let `inlinewiki.extendedcombatspecialabilities`: String
-  let `inlinewiki.extendedmagicalspecialabilities`: String
-  let `inlinewiki.extendedblessedspecialabilities`: String
-  let `inlinewiki.extendedskillspecialabilities`: String
-  let `inlinewiki.penalty`: String
-  let `inlinewiki.level`: String
-  let `inlinewiki.perlevel`: String
-  let `inlinewiki.volume`: String
-  let `inlinewiki.aspect`: String
-  let `inlinewiki.bindingcost`: String
-  let `inlinewiki.protectivecircle`: String
-  let `inlinewiki.wardingcircle`: String
-  let `inlinewiki.actions`: String
-  let `inlinewiki.racecultureorprofessionrequiresautomaticorsuggested`: String
-  let `inlinewiki.advantage`: String
-  let `inlinewiki.disadvantage`: String
-  let `inlinewiki.primaryattributeofthetradition`: String
-  let `inlinewiki.knowledgeofspell`: String
-  let `inlinewiki.knowledgeofliturgicalchant`: String
-  let `inlinewiki.appropriatecombatstylespecialability`: String
-  let `inlinewiki.appropriatemagicalstylespecialability`: String
-  let `inlinewiki.appropriateblessedstylespecialability`: String
-  let `inlinewiki.appropriateskillstylespecialability`: String
-  let `inlinewiki.sex`: String
-  let `inlinewiki.sex.male`: String
-  let `inlinewiki.sex.female`: String
-  let `inlinewiki.combattechniques.groups.all`: String
-  let `inlinewiki.combattechniques.groups.allmeleecombattechniques`: String
-  let `inlinewiki.combattechniques.groups.allrangedcombattechniques`: String
-  let `inlinewiki.combattechniques.groups.allmeleecombattechniqueswithparry`: String
-  let `inlinewiki.combattechniques.groups.allmeleecombattechniquesforonehandedweapons`: String
-  let `inlinewiki.socialstatusxorhigher`: String
-  let `Common Skills`: String
-  let `SR`: String
-  let `Skill Rating`: String
-  let `IC`: String
-  let `New Applications`: String
-  let `Uses`: String
-  let `Strongly Recommended`: String
-  let `Common`: String
-  let `Uncommon`: String
-  let `Unfamiliar Spells`: String
-  let `CTR`: String
-  let `Combat Technique Rating`: String
-  let `P`: String
-  let `Primary Attribute(s)`: String
-  let `AT`: String
-  let `Attack`: String
-  let `PA`: String
-  let `Parry`: String
-  let `Close Combat`: String
-  let `Ranged Combat`: String
-  let `Special`: String
-  let `Primary Attribute`: String
-  let `Cantrips`: String
-  let `Rituals`: String
-  let `Curses`: String
-  let `Elven Magical Songs`: String
-  let `Domination Rituals`: String
-  let `Magical Dances`: String
-  let `Magical Melodies`: String
-  let `Jester Tricks`: String
-  let `Animist Powers`: String
-  let `Geode Rituals`: String
-  let `Zibilja Rituals`: String
-  let `Bannzeichen`: String
-  let `Goblin Rituals`: String
-  let `Magical Runes`: String
-  let `Mod`: String
-  let `Check Modifier`: String
-  let `spells.traditions.general`: String
-  let `magicalactions.animistforces.tribes.general`: String
-  let ` (modified by {$modifier})`: String
-  let ` (−{$modifier})`: String
-  let `{$values :list type=disjunction}, depending on which value is higher`: String
-  let `Invocation Difficulty`: String
-  let `ID`: String
-  let `Creation Difficulty`: String
-  let `CD`: String
-  let `Object`: String
-  let `Effect`: String
-  let `Rules`: String
-  let `Casting Time`: String
-  let `Ritual Time`: String
-  let `Liturgical Time`: String
-  let `Ceremonial Time`: String
-  let `AE Cost`: String
-  let `KP Cost`: String
-  let `Range`: String
-  let `Duration`: String
-  let `Target Category`: String
-  let `Traditions`: String
-  let ` (you cannot use a modification on this spell’s casting time)`: String
-  let ` (you cannot use a modification on this spell’s cost)`: String
-  let ` (you cannot use a modification on this spell’s range)`: String
-  let ` (you cannot use a modification on this ritual’s ritual time)`: String
-  let ` (you cannot use a modification on this ritual’s cost)`: String
-  let ` (you cannot use a modification on this ritual’s range)`: String
-  let ` (you cannot use a modification on this chant’s liturgical time)`: String
-  let ` (you cannot use a modification on this chant’s cost)`: String
-  let ` (you cannot use a modification on this chant’s range)`: String
-  let ` (you cannot use a modification on this ceremony’s ceremonial time)`: String
-  let ` (you cannot use a modification on this ceremony’s cost)`: String
-  let ` (you cannot use a modification on this ceremony’s range)`: String
-  let ` (cannot modify)`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} act}}`: String
-  let `{$value} act`: String
-  let `act`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} actions}}`: String
-  let `{$value} actions`: String
-  let `actions`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} s}}`: String
-  let `{$value} s`: String
-  let `s`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} seconds}}`: String
-  let `{$value} seconds`: String
-  let `seconds`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} min}}`: String
-  let `{$value} min`: String
-  let `min`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} minutes}}`: String
-  let `{$value} minutes`: String
-  let `minutes`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} h}}`: String
-  let `{$value} h`: String
-  let `h`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} hours}}`: String
-  let `{$value} hours`: String
-  let `hours`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} d}}`: String
-  let `{$value} d`: String
-  let `d`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} days}}`: String
-  let `{$value} days`: String
-  let `days`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} wks.}}`: String
-  let `{$value} wks.`: String
-  let `wks.`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} weeks}}`: String
-  let `{$value} weeks`: String
-  let `weeks`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} mos.}}`: String
-  let `{$value} mos.`: String
-  let `mos.`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} months}}`: String
-  let `{$value} months`: String
-  let `months`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} yrs.}}`: String
-  let `{$value} yrs.`: String
-  let `yrs.`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} years}}`: String
-  let `{$value} years`: String
-  let `years`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} dcs.}}`: String
-  let `{$value} dcs.`: String
-  let `dcs.`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} decades}}`: String
-  let `{$value} decades`: String
-  let `decades`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} cent.}}`: String
-  let `{$value} cent.`: String
-  let `cent.`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} centuries}}`: String
-  let `{$value} centuries`: String
-  let `centuries`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} SA}}`: String
-  let `{$value} SA`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} seduction actions}}`: String
-  let `{$value} seduction actions`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} rnds}}`: String
-  let `{$value} rnds`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} rounds}}`: String
-  let `{$value} rounds`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} CR}}`: String
-  let `{$value} CR`: String
-  let `CR`: String
-  let `.input {$value :number} .input {$style :string} {{{$value} combat rounds}}`: String
-  let `{$value} combat rounds`: String
-  let `combat rounds`: String
-  let `{$value} AE`: String
-  let `{$value} KP`: String
-  let `min. `: String
-  let `at least `: String
-  let `min. {$value}`: String
-  let `at least {$value}`: String
-  let `/{$value}`: String
-  let ` per {$value}`: String
-  let `{$baseCost}, minimum of {$value}`: String
-  let ` ({$value} perm.)`: String
-  let `.input {$value :number} {{, {$value} of which are permanent}}`: String
-  let `, {$value} of which are permanent`: String
-  let `half of the activation cost`: String
-  let `50%`: String
-  let ` and `: String
-  let ` + `: String
-  let ` or `: String
-  let ` / `: String
-  let ` for `: String
-  let ` (no more than {$value})`: String
-  let ` (max. {$value})`: String
-  let `no more than {$value}`: String
-  let `max. {$value}`: String
-  let `Immediate`: String
-  let `Permanent`: String
-  let `no more than `: String
-  let `max. `: String
-  let `Quality Levels`: String
-  let `QL`: String
-  let `QL {$value}`: String
-  let `Skill Points`: String
-  let `SP`: String
-  let `Sustained`: String
-  let `(S)`: String
-  let `.input {$value :number} {{{$value} yards}}`: String
-  let `{$value} yards`: String
-  let `{$value} yd`: String
-  let `.input {$value :number} {{{$value} miles}}`: String
-  let `{$value} miles`: String
-  let `{$value} mi.`: String
-  let `Sight`: String
-  let `Self`: String
-  let `Global`: String
-  let `Touch`: String
-  let `Radius`: String
-  let ` (casting)`: String
-  let `activation`: String
-  let `Zone`: String
-  let `Liturgical Chants and Ceremonies`: String
-  let `Spellworks`: String
-  let `General`: String
-  let `Note`: String
-  let `all`: String
-  let `none`: String
-  let `State`: String
-  let `Social Status {$minStatus} or higher`: String
-  let `Person with {$sexualCharacteristic}`: String
-  let `Penis`: String
-  let `Vagina`: String
-  let `the SR for {$skill} combined must add up to at least {$minRating}`: String
-  let `.input {$minRating :number} {{{$count} on at least SR {$minRating}: {$list}}}`: String
-  let `.input {$count :number} .input {$minRating :number} {{{$count} arcane works with the property {$property} at SR {$minRating} or higher}}`: String
-  let `.input {$count :number} {{at least {$count} arcane works with properties for {$specialAbility}}}`: String
-  let `.input {$count :number} .input {$minRating :number} {{{$count} liturgical chants and ceremonies with the aspect {$aspect} at SR {$minRating} or higher}}`: String
-  let `.input {$count :number} {{{$count} of the following skills}}`: String
-  let `.input {$count :number} {{{$count} combat techniques}}`: String
-  let `.input {$count :number} {{{$count} close combat techniques}}`: String
-  let `.input {$count :number} {{{$count} ranged combat techniques}}`: String
-  let `special ability`: String
-  let `no special ability`: String
-  let `.input {$entity :string} {{a special ability}}`: String
-  let `Tradition`: String
-  let `Tradition ({$tradition})`: String
-  let `Church`: String
-  let `Shaman`: String
-  let `Tradition must be able to use rituals`: String
-  let `Tradition must be able to bind familiars`: String
-  let `spell enhancement`: String
-  let `liturgical enhancement`: String
-  let `for`: String
-  let `no other ancestor blood advantage`: String
-  let `Race, culture, or profession must have {$entry} as an automatic or suggested {$itemOfCategory}`: String
-  let `advantage`: String
-  let `no advantage`: String
-  let `disadvantage`: String
-  let `no disadvantage`: String
-  let `no prerequisite {$prerequisite}`: String
-  let `domain {$domain}`: String
-  let `{$pact} level {$pactLevel}`: String
-  let `Level {$level}`: String
-  let `cannot be chosen at the same time as {$trait}`: String
-  let `must have {$trait}`: String
-  let `no influence`: String
-  let `inlinewiki.castingtime`: String
-  let `inlinewiki.ritualtime`: String
-  let `inlinewiki.aecost`: String
-  let `inlinewiki.range`: String
-  let `inlinewiki.duration`: String
-  let `inlinewiki.targetcategory`: String
-  let `inlinewiki.property`: String
-  let `inlinewiki.traditions`: String
-  let `inlinewiki.skill`: String
-  let `inlinewiki.lengthoftime`: String
-  let `inlinewiki.musictradition`: String
-  let `inlinewiki.youcannotuseamodificationonthisspellscastingtime`: String
-  let `inlinewiki.youcannotuseamodificationonthisspellsritualtime`: String
-  let `inlinewiki.youcannotuseamodificationonthisspellscost`: String
-  let `inlinewiki.youcannotuseamodificationonthisspellsrange`: String
-  let `inlinewiki.youcannotuseamodificationonthisspellsduration`: String
-  let `inlinewiki.spellenhancements`: String
-  let `inlinewiki.spellenhancements.title`: String
-  let `inlinewiki.tribaltraditions`: String
-  let `inlinewiki.brew`: String
-  let `inlinewiki.spirithalf`: String
-  let `inlinewiki.spirithalf.short`: String
-  let `inlinewiki.spiritortoughness`: String
-  let `inlinewiki.spiritortoughness.short`: String
-  let `inlinewiki.note`: String
-  let `Blessings`: String
-  let `Ceremonies`: String
-  let `liturgicalchants.addbtn`: String
-  let `liturgicalchants.header.name`: String
-  let `liturgicalchants.header.traditions`: String
-  let `liturgicalchants.header.group`: String
-  let `liturgicalchants.header.skillrating`: String
-  let `liturgicalchants.header.skillrating.tooltip`: String
-  let `liturgicalchants.header.check`: String
-  let `liturgicalchants.header.checkmodifier`: String
-  let `liturgicalchants.header.checkmodifier.tooltip`: String
-  let `liturgicalchants.header.improvementcost`: String
-  let `liturgicalchants.header.improvementcost.tooltip`: String
-  let `liturgicalchants.groups.blessing`: String
-  let `liturgicalchants.aspects.general`: String
-  let `inlinewiki.liturgicaltime`: String
-  let `inlinewiki.ceremonialtime`: String
-  let `inlinewiki.kpcost`: String
-  let `inlinewiki.youcannotuseamodificationonthischantsliturgicaltime`: String
-  let `inlinewiki.youcannotuseamodificationonthischantsceremonialtime`: String
-  let `inlinewiki.youcannotuseamodificationonthischantscost`: String
-  let `inlinewiki.youcannotuseamodificationonthischantsrange`: String
-  let `inlinewiki.youcannotuseamodificationonthischantsduration`: String
-  let `inlinewiki.liturgicalchantenhancements`: String
-  let `inlinewiki.liturgicalchantenhancements.title`: String
-  let `equipment.header.name`: String
-  let `equipment.header.group`: String
-  let `equipment.addbtn`: String
-  let `equipment.createbtn`: String
-  let `equipment.filters.allcombattechniques`: String
-  let `equipment.purse.title`: String
-  let `equipment.purse.ducats`: String
-  let `equipment.purse.silverthalers`: String
-  let `equipment.purse.halers`: String
-  let `equipment.purse.kreutzers`: String
-  let `equipment.purse.carryingcapacity`: String
-  let `equipment.purse.initialstartingwealthandcarryingcapacity`: String
-  let `equipment.purse.earnpay`: String
-  let `equipment.purse.earn`: String
-  let `equipment.purse.pay`: String
-  let `equipment.purse.notefirst`: String
-  let `equipment.purse.notesecond`: String
-  let `equipment.purse.currentcredit`: String
-  let `equipment.purse.amount`: String
-  let `equipment.dialogs.addedit.damage`: String
-  let `equipment.dialogs.addedit.length`: String
-  let `equipment.dialogs.addedit.range`: String
-  let `equipment.dialogs.addedit.edititem`: String
-  let `equipment.dialogs.addedit.createitem`: String
-  let `equipment.dialogs.addedit.number`: String
-  let `equipment.dialogs.addedit.name`: String
-  let `equipment.dialogs.addedit.price`: String
-  let `equipment.dialogs.addedit.weight`: String
-  let `equipment.dialogs.addedit.carriedwhere`: String
-  let `equipment.dialogs.addedit.itemgroup`: String
-  let `equipment.dialogs.addedit.itemgrouphint`: String
-  let `equipment.dialogs.addedit.improvisedweapon`: String
-  let `equipment.dialogs.addedit.improvisedweapongroup`: String
-  let `equipment.dialogs.addedit.template`: String
-  let `equipment.dialogs.addedit.combattechnique`: String
-  let `equipment.dialogs.addedit.primaryattributeanddamagethreshold`: String
-  let `equipment.dialogs.addedit.primaryattribute`: String
-  let `equipment.dialogs.addedit.primaryattribute.short`: String
-  let `equipment.dialogs.addedit.damagethreshold`: String
-  let `equipment.dialogs.addedit.separatedamagethresholds`: String
-  let `equipment.dialogs.addedit.breakingpointratingmodifier`: String
-  let `equipment.dialogs.addedit.damaged`: String
-  let `equipment.dialogs.addedit.reach`: String
-  let `equipment.dialogs.addedit.attackparrymodifier`: String
-  let `equipment.dialogs.addedit.structurepoints`: String
-  let `equipment.dialogs.addedit.lengthwithunit`: String
-  let `equipment.dialogs.addedit.parryingweapon`: String
-  let `equipment.dialogs.addedit.twohandedweapon`: String
-  let `equipment.dialogs.addedit.reloadtime`: String
-  let `equipment.dialogs.addedit.rangeclose`: String
-  let `equipment.dialogs.addedit.rangemedium`: String
-  let `equipment.dialogs.addedit.rangefar`: String
-  let `equipment.dialogs.addedit.ammunition`: String
-  let `equipment.dialogs.addedit.protection`: String
-  let `equipment.dialogs.addedit.encumbrance`: String
-  let `equipment.dialogs.addedit.armortype`: String
-  let `equipment.dialogs.addedit.sturdinessmodifier`: String
-  let `equipment.dialogs.addedit.wear`: String
-  let `equipment.dialogs.addedit.hitzonearmoronly`: String
-  let `equipment.dialogs.addedit.movementmodifier`: String
-  let `equipment.dialogs.addedit.initiativemodifier`: String
-  let `equipment.dialogs.addedit.additionalpenalties`: String
-  let `hitzonearmors.header.name`: String
-  let `hitzonearmors.createbtn`: String
-  let `hitzonearmors.dialogs.addedit.name`: String
-  let `hitzonearmors.dialogs.addedit.edithitzonearmor`: String
-  let `hitzonearmors.dialogs.addedit.createhitzonearmor`: String
-  let `hitzonearmors.dialogs.addedit.head`: String
-  let `hitzonearmors.dialogs.addedit.torso`: String
-  let `hitzonearmors.dialogs.addedit.leftarm`: String
-  let `hitzonearmors.dialogs.addedit.rightarm`: String
-  let `hitzonearmors.dialogs.addedit.leftleg`: String
-  let `hitzonearmors.dialogs.addedit.rightleg`: String
-  let `hitzonearmors.dialogs.addedit.wear`: String
-  let `inlinewiki.equipment.weight`: String
-  let `inlinewiki.equipment.price`: String
-  let `inlinewiki.equipment.ammunition`: String
-  let `inlinewiki.equipment.combattechnique`: String
-  let `inlinewiki.equipment.damage`: String
-  let `inlinewiki.equipment.primaryattributeanddamagethreshold`: String
-  let `inlinewiki.equipment.attackparrymodifier`: String
-  let `inlinewiki.equipment.reach`: String
-  let `inlinewiki.equipment.length`: String
-  let `inlinewiki.equipment.reloadtime`: String
-  let `inlinewiki.equipment.range`: String
-  let `inlinewiki.equipment.actionsvalue`: String
-  let `inlinewiki.equipment.protection`: String
-  let `inlinewiki.equipment.encumbrance`: String
-  let `inlinewiki.equipment.additionalpenalties`: String
-  let `inlinewiki.equipment.note`: String
-  let `inlinewiki.equipment.rules`: String
-  let `inlinewiki.equipment.weaponadvantage`: String
-  let `inlinewiki.equipment.weapondisadvantage`: String
-  let `inlinewiki.equipment.armoradvantage`: String
-  let `inlinewiki.equipment.armordisadvantage`: String
-  let `pets.dialogs.addedit.deleteavatarbtn`: String
-  let `pets.dialogs.addedit.name`: String
-  let `pets.dialogs.addedit.sizecategory`: String
-  let `pets.dialogs.addedit.type`: String
-  let `pets.dialogs.addedit.apspent`: String
-  let `pets.dialogs.addedit.totalap`: String
-  let `pets.dialogs.addedit.protection`: String
-  let `pets.dialogs.addedit.attackname`: String
-  let `pets.dialogs.addedit.attack`: String
-  let `pets.dialogs.addedit.parry`: String
-  let `pets.dialogs.addedit.damagepoints`: String
-  let `pets.dialogs.addedit.reach`: String
-  let `pets.dialogs.addedit.actions`: String
-  let `pets.dialogs.addedit.skills`: String
-  let `pets.dialogs.addedit.specialabilities`: String
-  let `pets.dialogs.addedit.notes`: String
-  let `pets.dialogs.addedit.addbtn`: String
-  let `pets.dialogs.addedit.savebtn`: String
-  let `Show details`: String
-  let `Maximum Attribute Value`: String
-  let `Maximum Skill Value`: String
-  let `Maximum Combat Technique`: String
-  let `Maximum Attribute Total`: String
-  let `Number of Spells/Liturgical Chants`: String
-  let `Number from other Traditions`: String
-  let `Check`: String
-  let `Applications`: String
-  let `Encumbrance`: String
-  let `Yes`: String
-  let `No`: String
-  let `Maybe`: String
-  let `Tools`: String
-  let `Quality`: String
-  let `Failed Check`: String
-  let `Critical Success`: String
-  let `Botch`: String
-  let `Improvement Cost`: String
-  let `Front Cover Inside`: String
-  let `Back Cover Inside`: String
-  let `.input {$printing :number} {{since the {$printing}. printing}}`: String
-  let `.input {$printing :number} {{removed in {$printing}. printing}}`: String
-  let `Base Value`: String
-  let `Base {$name} from Race`: String
-  let `Race Base {$abbreviation}`: String
-  let `Primary attribute for the magic user’s Tradition`: String
-  let `Primary attribute for the Blessed One’s Tradition`: String
-  let `The following rule is a Level {$level} focus rule for the topic {$topic}.`: String
-  let `Protective Circle`: String
-  let `Warding Circle`: String
-  let `Prerequisites`: String
-  let `AP Value`: String
-  let `.input {$value :number} {{{$value} Adventure Points per level}}`: String
-  let `tiny`: String
-  let `small`: String
-  let `medium`: String
-  let `large`: String
-  let `huge`: String
-  let `{$values} AP for size category {$labels} (per level)`: String
-  let `A/B/C/D skill`: String
-  let `A/B/C/D spell`: String
-  let `A/B/C/D ritual`: String
-  let `A/B/C/D liturgical chant`: String
-  let `A/B/C/D ceremony`: String
-  let `A/B/C/D spellwork`: String
-  let `A/B/C/D liturgical chant or ceremony`: String
-  let `A/B/C/D ability`: String
-  let `B/C/D combat technique`: String
-  let `depending on the trade secret`: String
-  let `{$values} Adventure Points for the {$labels} purchase`: String
-  let `{$values}/and so on Adventure Points for the {$labels}/and so on purchase`: String
-  let `.input {$value :number} {{{$value} Adventure Points with {$name}}}`: String
-  let `Half the chosen disease’s level in adventure points`: String
-  let `The chosen disease’s level in adventure points`: String
-  let `Half the chosen poison’s level in adventure points`: String
-  let `The chosen poison’s level in adventure points`: String
-  let `{$values} adventure points for a {$sized} animal shape`: String
-  let `Aspect`: String
-  let `As chosen`: String
-  let `Passive`: String
-  let `Active`: String
-  let `Basic Maneuver`: String
-  let `Special Maneuver`: String
-  let `AC`: String
-  let `UC`: String
-  let `Volume`: String
-  let `Brew`: String
-  let `Penalty`: String
-  let `Binding Cost`: String
-  let `one or two of these special abilities can alternatively be replaced by advanced special abilities {$first} and/or {$second}`: String
-  let `.input {$count :number} {{{$count} more by primary patron}}`: String
-  let `Patron`: String
-  let `.input {$count :number} {{Here you can select {$count} fitting special abilities.}}`: String
-  let `.input {$count :number} {{{$previousList} as well as {$count} advanced special abilities}}`: String
-  let `.input {$count :number} {{{$previousList} as well as {$count} advanced special abilities depending on {$option}}}`: String
-  let `.input {$count :number} {{{$count} of the following list}}`: String
-  let `corresponding combat style special ability`: String
-  let `corresponding liturgical style special ability`: String
-  let `corresponding magic style special ability`: String
-  let `corresponding skill style special ability`: String
-  let `No Blessings`: String
-  let `Restricted Blessings`: String
-  let `Strongly Restricted Blessings`: String
-  let `{$nameOfBlessedOnes} cannot use blessings.`: String
-  let `{$nameOfBlessedOnes} cannot use {$blessings :list type=disjunction}.`: String
-  let `Favored Skills`: String
-  let `The primary attribute of this Tradition is {$attr}.`: String
-  let `This primary attribute of this Tradition is {$attr}; however, {$casters} use only half of this stat (rounded up) to calculate their base AE pool or purchase AE.`: String
-  let `Tradition ({$name}) has no associated primary attribute, meaning {$casters} receive no bonus to the AE pool and cannot purchase additional AE.`: String
-  let `.input {$count :number} {{{$baseList}, and {$count} of your choice from the following list: {$selection}}}`: String
-  let `All`: String
-  let `All Combat Techniques`: String
-  let `All Combat Techniques used in hunting`: String
-  let `All Close Combat Techniques`: String
-  let `All Ranged Combat Techniques`: String
-  let `Depends on combat style; both combat styles can be used only for their corresponding combat techniques`: String
-  let `only improvised weapons`: String
-  let `weapon must have a pointed blade`: String
-  let `while mounted`: String
-  let `while weapon of race {$race}`: String
-  let `except {$list}`: String
-  let `All Two-Handed Weapons`: String
-  let `All Parrying Weapons`: String
-  let `with parry`: String
-  let `that may be performed with one-handed weapons`: String
-  let `only those with at least one blunt side`: String
-  let `only {$nameWithLevel}`: String
-  let `only {$weapons}`: String
-  let `Magical Rank`: String
-  let `Magical Title`: String
-  let `Magical Honor`: String
-  let `Magical Punishment`: String
-  let `Blessed Rank`: String
-  let `Blessed Title`: String
-  let `Blessed Honor`: String
-  let `Blessed Punishment`: String
-  let `.input {$ord :number} {{{$ord}. attack}}`: String
-  let `.input {$ord :number} {{{$ord}. throw}}`: String
-  let `depending on the level of the special ability {$name}`: String
-  let `for parry`: String
-  let `one-handed weapon`: String
-  let `two-handed weapon`: String
-  let `for secondary fighters with/without special ability {$name}`: String
-  let `{$start} to {$end}`: String
-  let `Depends on zone`: String
-  let `.input {$points :number} {{{$points} points}}`: String
-  let `.input {$points :number} {{{$points} points per level}}`: String
-  let `{$points} points`: String
-  let `{$points} points for levels {$levels}`: String
-  let `{$value} LP`: String
-  let `.input {$value :number} {{{$value} permanent AE}}`: String
-  let `{$value} permanent AE`: String
-  let `{$value} pAE`: String
-  let `{$cost} per {$interval}`: String
-  let `{$cost}/{$interval}`: String
-  let `{$cost} per {$countable}`: String
-  let `{$cost}/{$countable}`: String
-  let `{$cost} per level`: String
-  let `{$cost} for level {$level}`: String
-  let `Variable`: String
-  let `Guideline`: String
-  let `Elective Spellworks Package`: String
-  let `Restricted Spellworks`: String
-  let `All, at the GM’s discretion`: String
-  let `.input {$count :number} {{only {$count} additional spellworks with the Property {$property}}}`: String
-  let `no spellworks with the Property {$property}`: String
-  let `Demon Summoning`: String
-  let `the following spells are not taught: {$spells}`: String
-  let `no Borbaradian spellworks`: String
-  let `no spellworks that inflict DP or sDP on intelligent creatures`: String
-  let `Spellwork Changes`: String
-  let `Skills (+)`: String
-  let `Skills (−)`: String
-  let `{$replacement} instead of {$base}`: String
-  let `Clothing Package {$socialStatus}`: String
-  let `Cost`: String
-  let `Total`: String
-  let `.input {$value :number} {{{$value} pounds}}`: String
-  let `{$value} pounds`: String
-  let `.input {$value :number} {{{$value} lbs}}`: String
-  let `{$value} lbs`: String
-  let `.input {$value :number} {{{$value} silverthalers}}`: String
-  let `{$value} silverthalers`: String
-  let `{$value} S`: String
-  let `.input {$from :number} .input {$to :number} {{{$from}–{$to} pounds}}`: String
-  let `.input {$from :number} .input {$to :number} {{{$from}–{$to} silverthalers}}`: String
-  let `free`: String
-  let `various`: String
-  let `invaluable`: String
-  let `Damage Points`: String
-  let `DP`: String
-  let `Special (Damage)`: String
-  let `Primary Attribute + Damage Threshold`: String
-  let `P+T`: String
-  let `Attack/Parry Modifier`: String
-  let `AT/PA Mod`: String
-  let `Reach`: String
-  let `RE`: String
-  let `Weight (Bronze/Silver/Gold)`: String
-  let `Length`: String
-  let `Cost (Bronze/Silver/Gold)`: String
-  let `Cost/10 carats`: String
-  let `Reload Time`: String
-  let `RT`: String
-  let `Range Brackets`: String
-  let `RA`: String
-  let `Ammunition`: String
-  let `Protection`: String
-  let `PRO`: String
-  let `ENC`: String
-  let `Additional Penalties`: String
-  let `Burning Time`: String
-  let `Color`: String
-  let `Language/Script`: String
-  let `Complexity`: String
-  let `Weapon Advantage`: String
-  let `Weapon Disadvantage`: String
-  let `Armor Advantage`: String
-  let `Armor Disadvantage`: String
-  let `Combat Technique {$name}`: String
-  let `Primitive`: String
-  let `Simple`: String
-  let `Complex`: String
-  let `Various`: String
-  let `Parrying weapon (PA bonus +1 for the main weapon)`: String
-  let `{$variantArmor} is a type of {$baseArmor}.`: String
-  let `{$variantHitZoneArmor} counts as {$baseArmor} for hit zone {$hitZone}.`: String
-  let `Arms`: String
-  let `Head`: String
-  let `Legs`: String
-  let `Torso`: String
-  let `many shamans`: String
-  let `To buy this item during hero creation, the character must have Tradition ({$traditions}).`: String
-  let `To buy {$itemName} during hero creation, the character must have Tradition ({$traditions}).`: String
-  let `Sanctified ({$traditions})`: String
-  let `only {$blessedOnes} may purchase weapons sanctified by {$gods}, respectively.`: String
-  let `only {$blessedOnes} may purchase weapons sanctified by {$god}.`: String
-  let `To buy this item during hero creation, the character must be from {$cultures}.`: String
-  let `To buy {$itemName} during hero creation, the character must be from {$cultures}.`: String
-  let `To buy this item during hero creation, the character must have a shamanistic tradition.`: String
-  let `To buy {$itemName} during hero creation, the character must have a shamanistic tradition.`: String
-  let `.input {$value :number} {{{$value} inches}}`: String
-  let `unlimited`: String
-  let `Structure Points`: String
-  let `.input {$value :number} {{{$value} Structure Points}}`: String
-  let `{$value} Structure Points`: String
-  let `Components`: String
-  let `Use`: String
-  let `purchase`: String
-  let `sale`: String
-  let `2H`: String
-  let `i`: String
-  let `Large Shield`: String
-  let `Medium Shield`: String
-  let `Small Shield`: String
-  let `{$value} structure points`: String
-  let `indestructible`: String
-  let `additional {$value} AT for main weapon`: String
-  let `Price`: String
-  let `all armor`: String
-  let `all metal armor`: String
-  let `all weapons with metal blades or tips`: String
-  let `all weapons with a metal surface`: String
-  let `all weapons with a handle that can be wrapped with leather`: String
-  let `only models with a reload time of at least {$timeSpan}`: String
-  let `{$weapons} that use bullets as ammunition`: String
-  let `.input {$otherComponentsCount :number} {{{$itemComponent} cannot be combined with item components {$otherComponents}}}`: String
-  let `all ammunition types`: String
-  let `all arrow and bolt types`: String
-  let `Weapons`: String
-  let `Melee Weapons`: String
-  let `Ranged Weapons`: String
-  let `Armor`: String
-  let `Standard Armor`: String
-  let `Special Armor`: String
-  let `Helmets`: String
-  let `Pieces of Armor`: String
-  let `Weapon Accessories`: String
-  let `Armor Accessories`: String
-  let `Item Components`: String
-  let `Clothes`: String
-  let `Clothing Packages for Social Status`: String
-  let `Travel Gear and Tools`: String
-  let `Illumination/Light Sources`: String
-  let `Illumination Refills and Supplies`: String
-  let `Bandages and Remedies`: String
-  let `Containers`: String
-  let `Ropes and Chains`: String
-  let `Thieves' Tools`: String
-  let `Tools of the Trade`: String
-  let `Laboratories`: String
-  let `Orienteering Aids`: String
-  let `Jewelry`: String
-  let `Gems and Precious Stones`: String
-  let `Stationery`: String
-  let `Books`: String
-  let `Magical Artifacts`: String
-  let `Alchemicae`: String
-  let `Poisons`: String
-  let `Musical Instruments`: String
-  let `Luxury Goods`: String
-  let `Animals`: String
-  let `Animal Care`: String
-  let `Vehicles`: String
-  let `Ceremonial Items`: String
-  let `Equipment of Blessed Ones`: String
-  let `Liebesspielzeug`: String
-  let `Newspapers`: String
-  let `Working Supernatural Creatures`: String
-  let `{$types} poison`: String
-  let `Weapon (poison)`: String
-  let `Ingestion (poison)`: String
-  let `Inhalation (poison)`: String
-  let `Contact (poison)`: String
-  let `Level`: String
-  let `Type`: String
-  let `animal venom`: String
-  let `alchemical poison`: String
-  let `mineral poison`: String
-  let `plant poison`: String
-  let `demonic poison`: String
-  let `Archaic laboratory`: String
-  let `Witch kitchen`: String
-  let `Alchemist’s laboratory`: String
-  let `Resistance`: String
-  let `{$values :list type=disjunction}, depending on which value is lower`: String
-  let `Start`: String
-  let `immediate`: String
-  let `instant`: String
-  let `Typical Ingredients`: String
-  let `Price of Ingredients/Level`: String
-  let `Laboratory`: String
-  let `Brewing Difficulty`: String
-  let `Brewing Process`: String
-  let `Trade Secret`: String
-  let `The poison levels equals the QL.`: String
-  let `.input {$value :number} {{{$value} applications every {$interval}}}`: String
-  let `{$valueRange} on {$dice}`: String
-  let `Ingestion`: String
-  let `Side Effect`: String
-  let `Overdose`: String
-  let `Legality`: String
-  let `legal`: String
-  let `illegal`: String
-  let `Addiction`: String
-  let `Value/Cost`: String
-  let `cannot be extracted`: String
-  let `.input {$hiddenCount :number} {{Alternative Names}}`: String
-  let `.input {$count :number} {{check required every {$count}. application}}`: String
-  let `.input {$count :number} {{check required every {$count}. application in the same month}}`: String
-  let `see {$link}`: String
-  let `CoD`: String
-  let `Search Difficulty`: String
-  let `Identification Difficulty`: String
-  let `Plant Applications`: String
-  let `Remedies and Traditions`: String
-  let `Romance Novel`: String
-  let `Poetry`: String
-  let `Political Pamphlet`: String
-  let `Crime Story`: String
-  let `Fairy Tale`: String
-  let `Novel`: String
-  let `Professional Publication`: String
-  let `Magical Book`: String
-  let `Religious Works`: String
-  let `Content Quality`: String
-  let `Modest`: String
-  let `Average`: String
-  let `Demanding`: String
-  let `CL {$level}`: String
-  let `Availability`: String
-  let `Reconstruction`: String
-  let `References`: String
-  let `Entertainment`: String
-  let `Topics`: String
-  let `Place of Publication`: String
-  let `Value`: String
-  let `Failed`: String
-  let `Progress`: String
-  let `Incubation Time`: String
-  let `Damage`: String
-  let `Duration (Disease)`: String
-  let `Causes`: String
-  let `Treatment`: String
-  let `Antidote`: String
-  let `.input {$value :number} {{{$value}%}}`: String
-  let `Animal Types`: String
-  let `Communicability to Intelligent Creatures`: String
-  let `childhood disease`: String
-  let `magical disease`: String
-  let `sexually transmittable disease`: String
-  let `Can be combined with`: String
-  let `Skill`: String
-  let `{$defaultDuration}, but no more than {$maximumDuration}`: String
-  let `Music Tradition`: String
-  let `long`: String
-  let `short`: String
-  let `one-time`: String
-  let `sustainable`: String
-  let `{$firstPersonValue} for the first person; {$additionalPersonValue} for each additional person`: String
-  let `Tribe Tradition`: String
-  let `Depends on animal type`: String
-  let `Crafting Time (slow / fast)`: String
-  let `Duration (slow / fast)`: String
-  let `Combat Technique`: String
-  let `CT`: String
-  let `All familiars know this trick by default.`: String
-  let `All AE`: String
-  let `All AE, at least {$value} AE`: String
-  let `depends on spent AE`: String
-  let `{$derivedCharacteristic} Base Value`: String
-  let `Attribute Adjustments`: String
-  let `one attribute of your choice`: String
-  let `Common Cultures`: String
-  let `Automatic Advantages`: String
-  let `Automatic Disadvantages`: String
-  let `Strongly recommended Advantages and Disadvantages`: String
-  let `The following advantages and disadvantages distinguish Aventurian {$race}. You should choose these advantages and disadvantages. If you don’t want to take them, talk to your GM.`: String
-  let `Uncommon Advantages`: String
-  let `Uncommon Disadvantages`: String
-  let `all magical and Blessed One advantages`: String
-  let `all magical and Blessed One disadvantages`: String
-  let `all Blessed One advantages`: String
-  let `all Blessed One disadvantages`: String
-  let `all magical advantages`: String
-  let `all magical disadvantages`: String
-  let `Language`: String
-  let `Script`: String
-  let `Area Knowledge`: String
-  let `Common Professions`: String
-  let `Uncommon Skills`: String
-  let `Common Names`: String
-  let `Cultural Package {$cultureName}`: String
-  let `for example, {$examples}`: String
-  let `all but {$excludedProfessions :list type=conjunction}`: String
-  let `Mundane Professions`: String
-  let `profane professions`: String
-  let `fighter professions`: String
-  let `religious professions`: String
-  let `Magic Professions`: String
-  let `Blessed Professions`: String
-  let `rare`: String
-  let `very rare`: String
-  let `Magic Dilettante`: String
-  let `mostly {$variants :list type=conjunction}`: String
-  let `only {$variants :list type=conjunction}`: String
-  let `Spellworks/Magical Actions`: String
-  let `Suggested Advantages`: String
-  let `Suggested Disadvantages`: String
-  let `Unsuitable Advantages`: String
-  let `Unsuitable Disadvantages`: String
-  let `Variants`: String
-  let `Languages and Literacy totaling {$apValue} AP`: String
-  let `no Languages and Literacy totaling {$apValue} AP`: String
-  let `Languages totaling {$apValue} AP`: String
-  let `no Languages totaling {$apValue} AP`: String
-  let `Skill Specialization {$possibleSkills}`: String
-  let `no Skill Specialization {$possibleSkills}`: String
-  let `Skill Specialization for a {$skillOfGroup}`: String
-  let `no Skill Specialization for a {$skillOfGroup}`: String
-  let `.input {$count :number} {{{$count} of the following combat techniques {$rating}}}`: String
-  let `.input {$count :number} {{{$previous}, {$count} others {$rating}}}`: String
-  let `{$previous}, the others {$rating}`: String
-  let `Curses totaling {$apValue} AP`: String
-  let `no Curses totaling {$apValue} AP`: String
-  let `Liturgies totaling {$apValue} AP`: String
-  let `no Liturgies totaling {$apValue} AP`: String
-  let `{$apValue} AP to improve other {$skillsOfGroup}`: String
-  let `{$apValue} AP to distribute among the following skills: {$list}`: String
-  let `maximum SR per skill: {$maxSR}`: String
-  let `no AP to improve other {$skillsOfGroup}`: String
-  let `.input {$count :number} {{{$count} cantrips}}`: String
-  let `{$apValue} AP to distribute among the following combat techniques: {$list}`: String
-  let `no AP to distribute among the following combat techniques: {$list}`: String
-  let `.input {$count :number} {{{$count} more spellworks totaling {$apValue} AP}}`: String
-  let `{$count} more spellworks totaling {$apValue} AP`: String
-  let `{$count} from the following list`: String
-  let `The Twelve Blessings`: String
-  let `.input {$count :number} {{{$count} of the following liturgical chants {$rating}}}`: String
-  let `except for {$list :list type=conjunction}`: String
-  let `depends on selected tradition`: String
-  let `Additional Prerequisites`: String
-  let `no changes`: String
-  let `Enhancements`: String
-  let `SR {$value}`: String
-  let `.input {$hiddenCount :number} {{Prerequisites}}`: String
-  let `Spell Enhancement {$spell}`: String
-  let `Ritual Enhancement {$ritual}`: String
-  let `Liturgical Enhancement {$liturgicalChantOrCeremony}`: String
-  let `Secret Knowledge`: String
-  let `Activation`: String
-  let `Main Talisman`: String
-  let `Minor Talisman`: String
-  let `Powerful Talisman`: String
-  let `Regalia`: String
-  let `Talisman`: String
-  let `Profession Package`: String
-  let `Optional Rule`: String
-  let `Beneficial Effect`: String
-  let `Defensive Effect`: String
-  let `Healing Effect`: String
-  let `Physical Effect`: String
-  let `Poison Effect`: String
-  let `Psychic Effect`: String
-  let `Supernatural Effect`: String
+  public let `About {$app}`: String
+  public let `Preferences …`: String
+  public let `Services`: String
+  public let `Hide {$app}`: String
+  public let `Hide Others`: String
+  public let `Show All`: String
+  public let `Quit {$app}`: String
+  public let `.input {$os :string} {{File}}`: String
+  public let `Close`: String
+  public let `Quit`: String
+  public let `Edit`: String
+  public let `Undo`: String
+  public let `Redo`: String
+  public let `Cut`: String
+  public let `Copy`: String
+  public let `Paste`: String
+  public let `Delete`: String
+  public let `Select All`: String
+  public let `View`: String
+  public let `Toggle Full Screen`: String
+  public let `Window`: String
+  public let `Minimize`: String
+  public let `Zoom`: String
+  public let `Main Window`: String
+  public let `Bring All to Front`: String
+  public let `Settings`: String
+  public let `Main Language`: String
+  public let `System Language`: String
+  public let `Fallback Language`: String
+  public let `No fallback language`: String
+  public let `Appearance`: String
+  public let `Auto`: String
+  public let `Light`: String
+  public let `Dark`: String
+  public let `Edit characters after creation`: String
+  public let `Show animations`: String
+  public let `Check for updates`: String
+  public let `Updater`: String
+  public let `Checking for updates …`: String
+  public let `New version available`: String
+  public let `Version {$version} is available! Do you wish to download and install?`: String
+  public let `Download`: String
+  public let `Download Later`: String
+  public let `Downloading update …`: String
+  public let `Update downloaded`: String
+  public let `Quit and Install`: String
+  public let `Install Later`: String
+  public let `No update available`: String
+  public let `You're running the latest version available.`: String
+  public let `Characters`: String
+  public let `Groups`: String
+  public let `Library`: String
+  public let `FAQ`: String
+  public let `About`: String
+  public let `Imprint`: String
+  public let `Third-Party Licenses`: String
+  public let `Last Changes`: String
+  public let `Profile`: String
+  public let `Overview`: String
+  public let `Personal Data`: String
+  public let `Character Sheet`: String
+  public let `Pact`: String
+  public let `Rule Set`: String
+  public let `Race, Culture & Profession`: String
+  public let `Race`: String
+  public let `Culture`: String
+  public let `Profession`: String
+  public let `Attributes`: String
+  public let `Advantages & Disadvantages`: String
+  public let `Advantages`: String
+  public let `Disadvantages`: String
+  public let `Abilities`: String
+  public let `Skills`: String
+  public let `Combat Techniques`: String
+  public let `Special Abilities`: String
+  public let `Spells`: String
+  public let `Liturgical Chants`: String
+  public let `Belongings`: String
+  public let `Equipment`: String
+  public let `Hit Zone Armor`: String
+  public let `Pets`: String
+  public let `{$value} AP Remaining`: String
+  public let `Save`: String
+  public let `Show Settings`: String
+  public let `Toggle DevTools`: String
+  public let `Adventure Points`: String
+  public let `AP`: String
+  public let `.input {$value :number} {{{$value} Adventure Points}}`: String
+  public let `{$value} Adventure Points`: String
+  public let `{$value} AP`: String
+  public let `{$value} Total AP`: String
+  public let `{$value} AP Spent`: String
+  public let `{$value}/{$max} AP spent on advantages`: String
+  public let `Thereof {$value}/{$max} on magic advantages`: String
+  public let `Thereof {$value}/{$max} on blessed advantages`: String
+  public let `{$value}/{$max} AP received from disadvantages`: String
+  public let `Thereof {$value}/{$max} from magic disadvantages`: String
+  public let `Thereof {$value}/{$max} from blessed disadvantages`: String
+  public let `{$value} AP spent on race`: String
+  public let `{$value} AP spent on profession`: String
+  public let `{$value} AP spent on attributes`: String
+  public let `{$value} AP spent on skills`: String
+  public let `{$value} AP spent on combat techniques`: String
+  public let `{$value} AP spent on spells`: String
+  public let `{$value} AP spent on cantrips`: String
+  public let `{$value} AP spent on liturgical chants`: String
+  public let `{$value} AP spent on blessings`: String
+  public let `{$value} AP spent on special abilities`: String
+  public let `{$value} AP spent on improving/buying back LP/AE/KP`: String
+  public let `header.dialogs.herosaved`: String
+  public let `header.dialogs.allsaved`: String
+  public let `header.dialogs.everythingelsesaved`: String
+  public let `header.dialogs.saveconfigerror.title`: String
+  public let `header.dialogs.saveconfigerror.message`: String
+  public let `header.dialogs.saveheroeserror.title`: String
+  public let `header.dialogs.saveheroeserror.message`: String
+  public let `general.weightvalue`: String
+  public let `general.pricevalue`: String
+  public let `general.lengthvalue`: String
+  public let `D`: String
+  public let `{$count}D{$sides}`: String
+  public let `general.none`: String
+  public let `general.or`: String
+  public let `general.and`: String
+  public let `general.error`: String
+  public let `general.errorcode`: String
+  public let `general.emptylistplaceholder`: String
+  public let `general.emptylistnoresultsplaceholder`: String
+  public let `No Results`: String
+  public let `Search`: String
+  public let `Sort By`: String
+  public let `Name`: String
+  public let `Date Modified`: String
+  public let `Date Created`: String
+  public let `Group`: String
+  public let `Property`: String
+  public let `general.filters.sort.bylocation`: String
+  public let `general.filters.sort.bycost`: String
+  public let `general.filters.sort.byweight`: String
+  public let `general.filters.showactivatedentries`: String
+  public let `Done`: String
+  public let `OK`: String
+  public let `Cancel`: String
+  public let `Create`: String
+  public let `Apply`: String
+  public let `Add`: String
+  public let `Not enough AP`: String
+  public let `.input {$value :number} {{You are missing {$value} Adventure Points to do this.}}`: String
+  public let `Exceeding Adventure Points limit for advantages`: String
+  public let `You cannot spend more than {$max} AP on advantages. You would exceed this limit by {$over} AP.`: String
+  public let `Exceeding Adventure Points limit for magical advantages`: String
+  public let `You cannot spend more than {$max} AP on magical advantages. You would exceed this limit by {$over} AP.`: String
+  public let `Exceeding Adventure Points limit for blessed advantages`: String
+  public let `You cannot spend more than {$max} AP on blessed advantages. You would exceed this limit by {$over} AP.`: String
+  public let `Exceeding Adventure Points limit for disadvantages`: String
+  public let `You cannot receive more than {$max} AP from disadvantages. You would exceed this limit by {$over} AP.`: String
+  public let `Exceeding Adventure Points limit for magical disadvantages`: String
+  public let `You cannot receive more than {$max} AP from magical disadvantages. You would exceed this limit by {$over} AP.`: String
+  public let `Exceeding Adventure Points limit for blessed disadvantages`: String
+  public let `You cannot receive more than {$max} AP from blessed disadvantages. You would exceed this limit by {$over} AP.`: String
+  public let `heroes.filters.origin.allheroes`: String
+  public let `heroes.filters.origin.ownheroes`: String
+  public let `heroes.filters.origin.sharedheroes`: String
+  public let `Import`: String
+  public let `New Character`: String
+  public let `Duplicate Character`: String
+  public let `Export Character as OPTLC file`: String
+  public let `Delete Character`: String
+  public let `Open Character`: String
+  public let `heroes.saveherobtn`: String
+  public let `heroes.unsavedhero.name`: String
+  public let `heroes.list.adventurepoints`: String
+  public let `heroes.dialogs.herosaved`: String
+  public let `heroes.dialogs.importheroerror.title`: String
+  public let `heroes.dialogs.importheroerror.message`: String
+  public let `heroes.dialogs.heroexportsavelocation.title`: String
+  public let `heroes.dialogs.herojsonsaveerror.title`: String
+  public let `heroes.dialogs.herojsonsaveerror.message`: String
+  public let `heroes.dialogs.unsavedactions.title`: String
+  public let `heroes.dialogs.unsavedactions.message`: String
+  public let `heroes.dialogs.unsavedactions.quit`: String
+  public let `heroes.dialogs.unsavedactions.saveandquit`: String
+  public let `Do you really want to delete character {$name}?`: String
+  public let `Name of Character`: String
+  public let `Sex`: String
+  public let `Custom Sex`: String
+  public let `Custom Sex Name`: String
+  public let `Experience Level`: String
+  public let `Counts as male when checking binary sex prerequisites`: String
+  public let `Counts as female when checking binary sex prerequisites`: String
+  public let `Counts as having a penis when checking sex characteristic prerequisites`: String
+  public let `Counts as having a vagina when checking sex characteristic prerequisites`: String
+  public let `heroes.dialogs.herocreation.title`: String
+  public let `heroes.dialogs.herocreation.nameofhero`: String
+  public let `heroes.dialogs.herocreation.sex.placeholder`: String
+  public let `heroes.dialogs.herocreation.sex.male`: String
+  public let `heroes.dialogs.herocreation.sex.female`: String
+  public let `heroes.dialogs.herocreation.experiencelevel.placeholder`: String
+  public let `heroes.dialogs.herocreation.startbtn`: String
+  public let `wiki.chooseacategory`: String
+  public let `wiki.chooseacategorytodisplayalist`: String
+  public let `wiki.filters.races`: String
+  public let `wiki.filters.cultures`: String
+  public let `wiki.filters.professions`: String
+  public let `wiki.filters.advantages`: String
+  public let `wiki.filters.disadvantages`: String
+  public let `wiki.filters.skills`: String
+  public let `wiki.filters.skills.all`: String
+  public let `wiki.filters.combattechniques`: String
+  public let `wiki.filters.combattechniques.all`: String
+  public let `wiki.filters.magic`: String
+  public let `wiki.filters.magic.all`: String
+  public let `wiki.filters.liturgicalchants`: String
+  public let `wiki.filters.liturgicalchants.all`: String
+  public let `wiki.filters.specialabilities`: String
+  public let `wiki.filters.specialabilities.all`: String
+  public let `wiki.filters.itemtemplates`: String
+  public let `wiki.filters.itemtemplates.all`: String
+  public let `Edit Name`: String
+  public let `Change Name`: String
+  public let `Edit Profession Name`: String
+  public let `Change Profession Name`: String
+  public let `Add AP`: String
+  public let `Add Adventure Points`: String
+  public let `How many Adventure Points do you want to add?`: String
+  public let `Finish Character Creation`: String
+  public let `Select New Avatar`: String
+  public let `Delete Avatar`: String
+  public let `profile.dialogs.changeheroavatar.title`: String
+  public let `profile.dialogs.changeheroavatar.selectfilebtn`: String
+  public let `profile.dialogs.changeheroavatar.imagefiletype`: String
+  public let `profile.dialogs.changeheroavatar.invalidfilewarning`: String
+  public let `Male`: String
+  public let `Female`: String
+  public let `Bal’Thani`: String
+  public let `Tsajana`: String
+  public let `Family`: String
+  public let `Place of Birth`: String
+  public let `Date of Birth`: String
+  public let `Age`: String
+  public let `Hair Color`: String
+  public let `Eye Color`: String
+  public let `Size`: String
+  public let `Weight`: String
+  public let `Title`: String
+  public let `Social Status`: String
+  public let `Characteristics`: String
+  public let `Other Information`: String
+  public let `Reroll Eye Color`: String
+  public let `Reroll Hair Color`: String
+  public let `Reroll Size`: String
+  public let `Reroll Weight`: String
+  public let `personaldata.cultureareaknowledge`: String
+  public let `You can save up no more than 10 AP to use later during the game, and you cannot begin the game with a negative AP balance.`: String
+  public let `Print to PDF`: String
+  public let `Save Character Sheet as PDF`: String
+  public let `Character Sheet saved as PDF`: String
+  public let `Error during save`: String
+  public let `Show check attribute values`: String
+  public let `Use parchment background`: String
+  public let `Zoom factor`: String
+  public let `sheets.charactersheet`: String
+  public let `sheets.attributemodifiers.title`: String
+  public let `sheets.mainsheet.title`: String
+  public let `sheets.mainsheet.name`: String
+  public let `sheets.mainsheet.family`: String
+  public let `sheets.mainsheet.placeofbirth`: String
+  public let `sheets.mainsheet.dateofbirth`: String
+  public let `sheets.mainsheet.age`: String
+  public let `sheets.mainsheet.sex`: String
+  public let `sheets.mainsheet.race`: String
+  public let `sheets.mainsheet.size`: String
+  public let `sheets.mainsheet.weight`: String
+  public let `sheets.mainsheet.haircolor`: String
+  public let `sheets.mainsheet.eyecolor`: String
+  public let `sheets.mainsheet.culture`: String
+  public let `sheets.mainsheet.socialstatus`: String
+  public let `sheets.mainsheet.profession`: String
+  public let `sheets.mainsheet.rank`: String
+  public let `sheets.mainsheet.characteristics`: String
+  public let `sheets.mainsheet.otherinfo`: String
+  public let `sheets.mainsheet.experiencelevellabel`: String
+  public let `sheets.mainsheet.totalaplabel`: String
+  public let `sheets.mainsheet.apcollectedlabel`: String
+  public let `sheets.mainsheet.apspentlabel`: String
+  public let `sheets.mainsheet.avatarlabel`: String
+  public let `sheets.mainsheet.advantages`: String
+  public let `sheets.mainsheet.disadvantages`: String
+  public let `sheets.mainsheet.generalspecialabilites`: String
+  public let `sheets.mainsheet.fatepoints`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.value`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.bonuspenalty`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.bonus`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.bought`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.max`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.current`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.basestat`: String
+  public let `sheets.mainsheet.derivedcharacteristics.labels.permanentlylostboughtback`: String
+  public let `Game Stats`: String
+  public let `sheets.gamestatssheet.skillstable.title`: String
+  public let `sheets.gamestatssheet.skillstable.labels.skill`: String
+  public let `sheets.gamestatssheet.skillstable.labels.check`: String
+  public let `sheets.gamestatssheet.skillstable.labels.encumbrance`: String
+  public let `sheets.gamestatssheet.skillstable.labels.improvementcost`: String
+  public let `sheets.gamestatssheet.skillstable.labels.skillrating`: String
+  public let `R`: String
+  public let `Notes`: String
+  public let `sheets.gamestatssheet.skillstable.encumbrance.yes`: String
+  public let `sheets.gamestatssheet.skillstable.encumbrance.no`: String
+  public let `Myb.`: String
+  public let `sheets.gamestatssheet.skillstable.groups.pages`: String
+  public let `sheets.gamestatssheet.languages.title`: String
+  public let `sheets.gamestatssheet.languages.nativetongue`: String
+  public let `sheets.gamestatssheet.knownscripts.title`: String
+  public let `sheets.gamestatssheet.routinechecks.title`: String
+  public let `sheets.gamestatssheet.routinechecks.textRow1`: String
+  public let `sheets.gamestatssheet.routinechecks.textRow2`: String
+  public let `sheets.gamestatssheet.routinechecks.textRow3`: String
+  public let `sheets.gamestatssheet.routinechecks.textRow4`: String
+  public let `sheets.gamestatssheet.routinechecks.labels.checkmod`: String
+  public let `sheets.gamestatssheet.routinechecks.labels.neededsr`: String
+  public let `sheets.gamestatssheet.routinechecks.from3on`: String
+  public let `sheets.gamestatssheet.qualitylevels.title`: String
+  public let `sheets.gamestatssheet.qualitylevels.labels.skillpoints`: String
+  public let `sheets.gamestatssheet.qualitylevels.labels.qualitylevel`: String
+  public let `Combat`: String
+  public let `sheets.combatsheet.combattechniquestable.title`: String
+  public let `sheets.combatsheet.combattechniquestable.labels.combattechnique`: String
+  public let `Prim. Attr.`: String
+  public let `sheets.combatsheet.combattechniquestable.labels.improvementcost`: String
+  public let `sheets.combatsheet.combattechniquestable.labels.combattechniquerating`: String
+  public let `AT/RC`: String
+  public let `sheets.combatsheet.combattechniquestable.labels.parry`: String
+  public let `sheets.combatsheet.lifepoints.title`: String
+  public let `sheets.combatsheet.lifepoints.max`: String
+  public let `sheets.combatsheet.lifepoints.current`: String
+  public let `sheets.combatsheet.lifepoints.pain1`: String
+  public let `sheets.combatsheet.lifepoints.pain2`: String
+  public let `sheets.combatsheet.lifepoints.pain3`: String
+  public let `sheets.combatsheet.lifepoints.pain4`: String
+  public let `sheets.combatsheet.lifepoints.dying`: String
+  public let `sheets.combatsheet.closecombatweapons`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.weapon`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.combattechnique`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.damagebonus`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.damagepoints`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.attackparrymodifier`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.reach`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.breakingpointrating`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.damaged`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.attack`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.parry`: String
+  public let `sheets.combatsheet.closecombatweapons.labels.weight`: String
+  public let `sheets.combatsheet.rangedcombatweapons`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.weapon`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.combattechnique`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.reloadtime`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.damagepoints`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.ammunition`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.rangebrackets`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.breakingpointrating`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.damaged`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.rangedcombat`: String
+  public let `sheets.combatsheet.rangedcombatweapons.labels.weight`: String
+  public let `sheets.combatsheet.armors.title`: String
+  public let `sheets.combatsheet.armors.labels.armor`: String
+  public let `sheets.combatsheet.armors.labels.sturdinessrating`: String
+  public let `sheets.combatsheet.armors.labels.wear`: String
+  public let `sheets.combatsheet.armors.labels.protection`: String
+  public let `sheets.combatsheet.armors.labels.encumbrance`: String
+  public let `sheets.combatsheet.armors.labels.movementinitiative`: String
+  public let `sheets.combatsheet.armors.labels.carriedwhereexamples`: String
+  public let `sheets.combatsheet.armors.labels.head`: String
+  public let `sheets.combatsheet.armors.labels.torso`: String
+  public let `sheets.combatsheet.armors.labels.leftarm`: String
+  public let `sheets.combatsheet.armors.labels.rightarm`: String
+  public let `sheets.combatsheet.armors.labels.leftleg`: String
+  public let `sheets.combatsheet.armors.labels.rightleg`: String
+  public let `sheets.combatsheet.armors.labels.weight`: String
+  public let `sheets.combatsheet.shieldparryingweapon.title`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.shieldparryingweapon`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.structurepoints`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.breakingpointrating`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.damaged`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.attackparrymodifier`: String
+  public let `sheets.combatsheet.shieldparryingweapon.labels.weight`: String
+  public let `sheets.combatsheet.actions`: String
+  public let `sheets.combatsheet.combatspecialabilities`: String
+  public let `sheets.combatsheet.conditions`: String
+  public let `sheets.combatsheet.states`: String
+  public let `sheets.belongingssheet.title`: String
+  public let `sheets.belongingssheet.equipmenttable.title`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.item`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.number`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.price`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.weight`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.carriedwhere`: String
+  public let `sheets.belongingssheet.equipmenttable.labels.total`: String
+  public let `sheets.belongingssheet.purse.title`: String
+  public let `sheets.belongingssheet.purse.ducats`: String
+  public let `sheets.belongingssheet.purse.silverthalers`: String
+  public let `sheets.belongingssheet.purse.halers`: String
+  public let `sheets.belongingssheet.purse.kreutzers`: String
+  public let `sheets.belongingssheet.purse.gems`: String
+  public let `sheets.belongingssheet.purse.jewelry`: String
+  public let `sheets.belongingssheet.purse.other`: String
+  public let `sheets.belongingssheet.carryingcapacity.title`: String
+  public let `sheets.belongingssheet.carryingcapacity.calc`: String
+  public let `sheets.belongingssheet.carryingcapacity.label`: String
+  public let `sheets.belongingssheet.animal.title`: String
+  public let `sheets.belongingssheet.animal.name`: String
+  public let `sheets.belongingssheet.animal.sizecategory`: String
+  public let `sheets.belongingssheet.animal.type`: String
+  public let `sheets.belongingssheet.animal.ap`: String
+  public let `sheets.belongingssheet.animal.protection`: String
+  public let `sheets.belongingssheet.animal.attackname`: String
+  public let `sheets.belongingssheet.animal.attack`: String
+  public let `sheets.belongingssheet.animal.parry`: String
+  public let `sheets.belongingssheet.animal.damagepoints`: String
+  public let `sheets.belongingssheet.animal.reach`: String
+  public let `sheets.belongingssheet.animal.actions`: String
+  public let `sheets.belongingssheet.animal.skills`: String
+  public let `sheets.belongingssheet.animal.specialabilities`: String
+  public let `sheets.belongingssheet.animal.notes`: String
+  public let `{$energy} Max`: String
+  public let `Current`: String
+  public let `Spells & Rituals`: String
+  public let `sheets.spellssheet.spellstable.title`: String
+  public let `Spell/Ritual`: String
+  public let `sheets.spellssheet.spellstable.labels.check`: String
+  public let `sheets.spellssheet.spellstable.labels.skillrating`: String
+  public let `sheets.spellssheet.spellstable.labels.cost`: String
+  public let `sheets.spellssheet.spellstable.labels.castingtime`: String
+  public let `sheets.spellssheet.spellstable.labels.range`: String
+  public let `sheets.spellssheet.spellstable.labels.duration`: String
+  public let `sheets.spellssheet.spellstable.labels.property`: String
+  public let `sheets.spellssheet.spellstable.labels.improvementcost`: String
+  public let `sheets.spellssheet.spellstable.labels.effect`: String
+  public let `sheets.spellssheet.spellstable.labels.pages`: String
+  public let `unfamiliar spell`: String
+  public let `sheets.spellssheet.primaryattribute`: String
+  public let `sheets.spellssheet.properties`: String
+  public let `sheets.spellssheet.tradition`: String
+  public let `sheets.spellssheet.magicalspecialabilities`: String
+  public let `sheets.spellssheet.cantrips`: String
+  public let `Liturgical Chants & Ceremonies`: String
+  public let `sheets.chantssheet.chantstable.title`: String
+  public let `Liturgical Chant`: String
+  public let `sheets.chantssheet.chantstable.labels.check`: String
+  public let `sheets.chantssheet.chantstable.labels.skillrating`: String
+  public let `sheets.chantssheet.chantstable.labels.cost`: String
+  public let `sheets.chantssheet.chantstable.labels.castingtime`: String
+  public let `sheets.chantssheet.chantstable.labels.range`: String
+  public let `sheets.chantssheet.chantstable.labels.duration`: String
+  public let `sheets.chantssheet.chantstable.labels.aspect`: String
+  public let `sheets.chantssheet.chantstable.labels.improvementcost`: String
+  public let `sheets.chantssheet.chantstable.labels.effect`: String
+  public let `sheets.chantssheet.chantstable.labels.pages`: String
+  public let `sheets.chantssheet.primaryattribute`: String
+  public let `sheets.chantssheet.aspects`: String
+  public let `sheets.chantssheet.tradition`: String
+  public let `Blessed Special Abilities`: String
+  public let `sheets.chantssheet.blessings`: String
+  public let `pacts.pactcategory`: String
+  public let `pacts.nopact`: String
+  public let `pacts.pactlevel`: String
+  public let `pacts.fairytype`: String
+  public let `pacts.domain`: String
+  public let `pacts.userdefined`: String
+  public let `pacts.demontype`: String
+  public let `pacts.circleofdamnation`: String
+  public let `pacts.minorpact`: String
+  public let `pacts.pactisincompletehint`: String
+  public let `pacts.name`: String
+  public let `Rule Sources`: String
+  public let `Use all publications`: String
+  public let `Focus Rules`: String
+  public let `Optional Rules`: String
+  public let `Alternative Rules`: String
+  public let `rules.manualherodatarepair`: String
+  public let `rules.manualherodatarepairexplanation`: String
+  public let `Select Race`: String
+  public let `Select Culture`: String
+  public let `Select Profession`: String
+  public let `Show uncommon cultures`: String
+  public let `Show uncommon professions`: String
+  public let `Go to Culture Selection`: String
+  public let `Go to Profession Selection`: String
+  public let `No variant`: String
+  public let `Visible professions by group`: String
+  public let `All Professions`: String
+  public let `Only Mundane Professions`: String
+  public let `Only Magic Professions`: String
+  public let `Only Blessed Professions`: String
+  public let `Finalize Race, Culture and Profession Selection`: String
+  public let `Attribute Adjustment`: String
+  public let `Select Attribute Adjustment`: String
+  public let `Buy Cultural Package`: String
+  public let `Buy Script`: String
+  public let `NT`: String
+  public let `Other Selections`: String
+  public let `rcpselectoptions.race`: String
+  public let `rcpselectoptions.culture`: String
+  public let `rcpselectoptions.profession`: String
+  public let `rcpselectoptions.cantripsfromlist`: String
+  public let `rcpselectoptions.cantrip.one`: String
+  public let `rcpselectoptions.cantrip.two`: String
+  public let `rcpselectoptions.combattechniqueselection`: String
+  public let `rcpselectoptions.combattechnique.one`: String
+  public let `rcpselectoptions.combattechnique.two`: String
+  public let `rcpselectoptions.selectattributeadjustment`: String
+  public let `rcpselectoptions.buyculturalpackage`: String
+  public let `rcpselectoptions.nativetongue.placeholder`: String
+  public let `rcpselectoptions.buyscript`: String
+  public let `rcpselectoptions.script.placeholder`: String
+  public let `rcpselectoptions.combattechniquesecondselection`: String
+  public let `rcpselectoptions.cursestotalingapleft`: String
+  public let `rcpselectoptions.languagesandliteracytotalingapleft`: String
+  public let `rcpselectoptions.applicationforskillspecialization`: String
+  public let `rcpselectoptions.skillselectionap`: String
+  public let `rcpselectoptions.skillspecialization`: String
+  public let `rcpselectoptions.completebtn`: String
+  public let `rcpselectoptions.unfamiliarspells`: String
+  public let `rcpselectoptions.unfamiliarspellselectionfortraditionguildmage`: String
+  public let `rcpselectoptions.unfamiliarspell.placeholder`: String
+  public let `rcpselectoptions.unfamiliarspell`: String
+  public let `Total Points`: String
+  public let `Increment`: String
+  public let `Decrement`: String
+  public let `Activate`: String
+  public let `Attribute Adjustment Selection`: String
+  public let `Modifier`: String
+  public let `Bought`: String
+  public let `Lost Total`: String
+  public let `Bought Back`: String
+  public let `Buy Back Permanently Lost Point`: String
+  public let `Permanently Lost {$energy}`: String
+  public let `p{$energy}`: String
+  public let `Permanently Lost Life Points`: String
+  public let `pLP`: String
+  public let `Permanently Lost Arcane Energy`: String
+  public let `pAE`: String
+  public let `Permanently Lost Karma Points`: String
+  public let `pKP`: String
+  public let `Loose Permanent Points`: String
+  public let `How many points do you want to remove?`: String
+  public let `Remove`: String
+  public let `Permanently Spent`: String
+  public let `Common Advantages`: String
+  public let `Common Disadvantages`: String
+  public let `Custom AP Cost`: String
+  public let `AP Cost for {$category}`: String
+  public let `Custom option`: String
+  public let `Show entries with unmet prerequisites`: String
+  public let `specialabilities.nativetonguelevel`: String
+  public let `Adoruzepterzauber`: String
+  public let `Advanced Combat Special Abilities`: String
+  public let `Advanced Karma Special Abilities`: String
+  public let `Advanced Magical Special Abilities`: String
+  public let `Advanced Skill Special Abilities`: String
+  public let `Ancestor Glyphs`: String
+  public let `Arcane Orb Enchantments`: String
+  public let `Attire Enchantments`: String
+  public let `Beutelzauber`: String
+  public let `Blessed Traditions`: String
+  public let `Bowl Enchantments`: String
+  public let `Brawling Special Abilities`: String
+  public let `Cauldron Enchantments`: String
+  public let `Ceremonial Item Special Abilities`: String
+  public let `Chronicle Enchantments`: String
+  public let `Combat Special Abilities`: String
+  public let `Combat Style Special Abilities`: String
+  public let `Command Special Abilities`: String
+  public let `Dagger Rituals`: String
+  public let `Familiar Special Abilities`: String
+  public let `Fate Point Sex Special Abilities`: String
+  public let `Fate Point Special Abilities`: String
+  public let `Fools Hat Enchantments`: String
+  public let `General Special Abilities`: String
+  public let `Haubenzauber`: String
+  public let `Hauerkettenzauber`: String
+  public let `Instrument Enchantments`: String
+  public let `Karma Special Abilities`: String
+  public let `Keulenzauber`: String
+  public let `Krallenkettenzauber`: String
+  public let `Kristallkugelzauber`: String
+  public let `Liturgical Style Special Abilities`: String
+  public let `Lycantropic Gifts`: String
+  public let `Magical Signs`: String
+  public let `Magical Special Abilities`: String
+  public let `Magical Traditions`: String
+  public let `Magic Style Special Abilities`: String
+  public let `Orb Enchantments`: String
+  public let `Pact Gifts`: String
+  public let `Protective/Warding Circle Special Abilities`: String
+  public let `Ring Enchantments`: String
+  public let `Schweinetrommelzauber`: String
+  public let `Sermons`: String
+  public let `Sex Special Abilities`: String
+  public let `Sickle Rituals`: String
+  public let `Sikaryan Drain Special Abilities`: String
+  public let `Skill Style Special Abilities`: String
+  public let `Spell Sword Enchantments`: String
+  public let `Staff Enchantments`: String
+  public let `Toy Enchantments`: String
+  public let `Trinkhornzauber`: String
+  public let `Vampiric Gifts`: String
+  public let `Visions`: String
+  public let `Wand Enchantments`: String
+  public let `Weapon Enchantments`: String
+  public let `inlinewiki.rule`: String
+  public let `inlinewiki.effect`: String
+  public let `inlinewiki.extendedcombatspecialabilities`: String
+  public let `inlinewiki.extendedmagicalspecialabilities`: String
+  public let `inlinewiki.extendedblessedspecialabilities`: String
+  public let `inlinewiki.extendedskillspecialabilities`: String
+  public let `inlinewiki.penalty`: String
+  public let `inlinewiki.level`: String
+  public let `inlinewiki.perlevel`: String
+  public let `inlinewiki.volume`: String
+  public let `inlinewiki.aspect`: String
+  public let `inlinewiki.bindingcost`: String
+  public let `inlinewiki.protectivecircle`: String
+  public let `inlinewiki.wardingcircle`: String
+  public let `inlinewiki.actions`: String
+  public let `inlinewiki.racecultureorprofessionrequiresautomaticorsuggested`: String
+  public let `inlinewiki.advantage`: String
+  public let `inlinewiki.disadvantage`: String
+  public let `inlinewiki.primaryattributeofthetradition`: String
+  public let `inlinewiki.knowledgeofspell`: String
+  public let `inlinewiki.knowledgeofliturgicalchant`: String
+  public let `inlinewiki.appropriatecombatstylespecialability`: String
+  public let `inlinewiki.appropriatemagicalstylespecialability`: String
+  public let `inlinewiki.appropriateblessedstylespecialability`: String
+  public let `inlinewiki.appropriateskillstylespecialability`: String
+  public let `inlinewiki.sex`: String
+  public let `inlinewiki.sex.male`: String
+  public let `inlinewiki.sex.female`: String
+  public let `inlinewiki.combattechniques.groups.all`: String
+  public let `inlinewiki.combattechniques.groups.allmeleecombattechniques`: String
+  public let `inlinewiki.combattechniques.groups.allrangedcombattechniques`: String
+  public let `inlinewiki.combattechniques.groups.allmeleecombattechniqueswithparry`: String
+  public let `inlinewiki.combattechniques.groups.allmeleecombattechniquesforonehandedweapons`: String
+  public let `inlinewiki.socialstatusxorhigher`: String
+  public let `Common Skills`: String
+  public let `SR`: String
+  public let `Skill Rating`: String
+  public let `IC`: String
+  public let `New Applications`: String
+  public let `Uses`: String
+  public let `Strongly Recommended`: String
+  public let `Common`: String
+  public let `Uncommon`: String
+  public let `Unfamiliar Spells`: String
+  public let `CTR`: String
+  public let `Combat Technique Rating`: String
+  public let `P`: String
+  public let `Primary Attribute(s)`: String
+  public let `AT`: String
+  public let `Attack`: String
+  public let `PA`: String
+  public let `Parry`: String
+  public let `Close Combat`: String
+  public let `Ranged Combat`: String
+  public let `Special`: String
+  public let `Primary Attribute`: String
+  public let `Cantrips`: String
+  public let `Rituals`: String
+  public let `Curses`: String
+  public let `Elven Magical Songs`: String
+  public let `Domination Rituals`: String
+  public let `Magical Dances`: String
+  public let `Magical Melodies`: String
+  public let `Jester Tricks`: String
+  public let `Animist Powers`: String
+  public let `Geode Rituals`: String
+  public let `Zibilja Rituals`: String
+  public let `Bannzeichen`: String
+  public let `Goblin Rituals`: String
+  public let `Magical Runes`: String
+  public let `Mod`: String
+  public let `Check Modifier`: String
+  public let `spells.traditions.general`: String
+  public let `magicalactions.animistforces.tribes.general`: String
+  public let ` (modified by {$modifier})`: String
+  public let ` (−{$modifier})`: String
+  public let `{$values :list type=disjunction}, depending on which value is higher`: String
+  public let `Invocation Difficulty`: String
+  public let `ID`: String
+  public let `Creation Difficulty`: String
+  public let `CD`: String
+  public let `Object`: String
+  public let `Effect`: String
+  public let `Rules`: String
+  public let `Casting Time`: String
+  public let `Ritual Time`: String
+  public let `Liturgical Time`: String
+  public let `Ceremonial Time`: String
+  public let `AE Cost`: String
+  public let `KP Cost`: String
+  public let `Range`: String
+  public let `Duration`: String
+  public let `Target Category`: String
+  public let `Traditions`: String
+  public let ` (you cannot use a modification on this spell’s casting time)`: String
+  public let ` (you cannot use a modification on this spell’s cost)`: String
+  public let ` (you cannot use a modification on this spell’s range)`: String
+  public let ` (you cannot use a modification on this ritual’s ritual time)`: String
+  public let ` (you cannot use a modification on this ritual’s cost)`: String
+  public let ` (you cannot use a modification on this ritual’s range)`: String
+  public let ` (you cannot use a modification on this chant’s liturgical time)`: String
+  public let ` (you cannot use a modification on this chant’s cost)`: String
+  public let ` (you cannot use a modification on this chant’s range)`: String
+  public let ` (you cannot use a modification on this ceremony’s ceremonial time)`: String
+  public let ` (you cannot use a modification on this ceremony’s cost)`: String
+  public let ` (you cannot use a modification on this ceremony’s range)`: String
+  public let ` (cannot modify)`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} act}}`: String
+  public let `{$value} act`: String
+  public let `act`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} actions}}`: String
+  public let `{$value} actions`: String
+  public let `actions`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} s}}`: String
+  public let `{$value} s`: String
+  public let `s`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} seconds}}`: String
+  public let `{$value} seconds`: String
+  public let `seconds`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} min}}`: String
+  public let `{$value} min`: String
+  public let `min`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} minutes}}`: String
+  public let `{$value} minutes`: String
+  public let `minutes`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} h}}`: String
+  public let `{$value} h`: String
+  public let `h`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} hours}}`: String
+  public let `{$value} hours`: String
+  public let `hours`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} d}}`: String
+  public let `{$value} d`: String
+  public let `d`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} days}}`: String
+  public let `{$value} days`: String
+  public let `days`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} wks.}}`: String
+  public let `{$value} wks.`: String
+  public let `wks.`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} weeks}}`: String
+  public let `{$value} weeks`: String
+  public let `weeks`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} mos.}}`: String
+  public let `{$value} mos.`: String
+  public let `mos.`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} months}}`: String
+  public let `{$value} months`: String
+  public let `months`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} yrs.}}`: String
+  public let `{$value} yrs.`: String
+  public let `yrs.`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} years}}`: String
+  public let `{$value} years`: String
+  public let `years`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} dcs.}}`: String
+  public let `{$value} dcs.`: String
+  public let `dcs.`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} decades}}`: String
+  public let `{$value} decades`: String
+  public let `decades`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} cent.}}`: String
+  public let `{$value} cent.`: String
+  public let `cent.`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} centuries}}`: String
+  public let `{$value} centuries`: String
+  public let `centuries`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} SA}}`: String
+  public let `{$value} SA`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} seduction actions}}`: String
+  public let `{$value} seduction actions`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} rnds}}`: String
+  public let `{$value} rnds`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} rounds}}`: String
+  public let `{$value} rounds`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} CR}}`: String
+  public let `{$value} CR`: String
+  public let `CR`: String
+  public let `.input {$value :number} .input {$style :string} {{{$value} combat rounds}}`: String
+  public let `{$value} combat rounds`: String
+  public let `combat rounds`: String
+  public let `{$value} AE`: String
+  public let `{$value} KP`: String
+  public let `min. `: String
+  public let `at least `: String
+  public let `min. {$value}`: String
+  public let `at least {$value}`: String
+  public let `/{$value}`: String
+  public let ` per {$value}`: String
+  public let `{$baseCost}, minimum of {$value}`: String
+  public let ` ({$value} perm.)`: String
+  public let `.input {$value :number} {{, {$value} of which are permanent}}`: String
+  public let `, {$value} of which are permanent`: String
+  public let `half of the activation cost`: String
+  public let `50%`: String
+  public let ` and `: String
+  public let ` + `: String
+  public let ` or `: String
+  public let ` / `: String
+  public let ` for `: String
+  public let ` (no more than {$value})`: String
+  public let ` (max. {$value})`: String
+  public let `no more than {$value}`: String
+  public let `max. {$value}`: String
+  public let `Immediate`: String
+  public let `Permanent`: String
+  public let `no more than `: String
+  public let `max. `: String
+  public let `Quality Levels`: String
+  public let `QL`: String
+  public let `QL {$value}`: String
+  public let `Skill Points`: String
+  public let `SP`: String
+  public let `Sustained`: String
+  public let `(S)`: String
+  public let `.input {$value :number} {{{$value} yards}}`: String
+  public let `{$value} yards`: String
+  public let `{$value} yd`: String
+  public let `.input {$value :number} {{{$value} miles}}`: String
+  public let `{$value} miles`: String
+  public let `{$value} mi.`: String
+  public let `Sight`: String
+  public let `Self`: String
+  public let `Global`: String
+  public let `Touch`: String
+  public let `Radius`: String
+  public let ` (casting)`: String
+  public let `activation`: String
+  public let `Zone`: String
+  public let `Liturgical Chants and Ceremonies`: String
+  public let `Spellworks`: String
+  public let `General`: String
+  public let `Note`: String
+  public let `all`: String
+  public let `none`: String
+  public let `State`: String
+  public let `Social Status {$minStatus} or higher`: String
+  public let `Person with {$sexualCharacteristic}`: String
+  public let `Penis`: String
+  public let `Vagina`: String
+  public let `the SR for {$skill} combined must add up to at least {$minRating}`: String
+  public let `.input {$minRating :number} {{{$count} on at least SR {$minRating}: {$list}}}`: String
+  public let `.input {$count :number} .input {$minRating :number} {{{$count} arcane works with the property {$property} at SR {$minRating} or higher}}`: String
+  public let `.input {$count :number} {{at least {$count} arcane works with properties for {$specialAbility}}}`: String
+  public let `.input {$count :number} .input {$minRating :number} {{{$count} liturgical chants and ceremonies with the aspect {$aspect} at SR {$minRating} or higher}}`: String
+  public let `.input {$count :number} {{{$count} of the following skills}}`: String
+  public let `.input {$count :number} {{{$count} combat techniques}}`: String
+  public let `.input {$count :number} {{{$count} close combat techniques}}`: String
+  public let `.input {$count :number} {{{$count} ranged combat techniques}}`: String
+  public let `special ability`: String
+  public let `no special ability`: String
+  public let `.input {$entity :string} {{a special ability}}`: String
+  public let `Tradition`: String
+  public let `Tradition ({$tradition})`: String
+  public let `Church`: String
+  public let `Shaman`: String
+  public let `Tradition must be able to use rituals`: String
+  public let `Tradition must be able to bind familiars`: String
+  public let `spell enhancement`: String
+  public let `liturgical enhancement`: String
+  public let `for`: String
+  public let `no other ancestor blood advantage`: String
+  public let `Race, culture, or profession must have {$entry} as an automatic or suggested {$itemOfCategory}`: String
+  public let `advantage`: String
+  public let `no advantage`: String
+  public let `disadvantage`: String
+  public let `no disadvantage`: String
+  public let `no prerequisite {$prerequisite}`: String
+  public let `domain {$domain}`: String
+  public let `{$pact} level {$pactLevel}`: String
+  public let `Level {$level}`: String
+  public let `cannot be chosen at the same time as {$trait}`: String
+  public let `must have {$trait}`: String
+  public let `no influence`: String
+  public let `inlinewiki.castingtime`: String
+  public let `inlinewiki.ritualtime`: String
+  public let `inlinewiki.aecost`: String
+  public let `inlinewiki.range`: String
+  public let `inlinewiki.duration`: String
+  public let `inlinewiki.targetcategory`: String
+  public let `inlinewiki.property`: String
+  public let `inlinewiki.traditions`: String
+  public let `inlinewiki.skill`: String
+  public let `inlinewiki.lengthoftime`: String
+  public let `inlinewiki.musictradition`: String
+  public let `inlinewiki.youcannotuseamodificationonthisspellscastingtime`: String
+  public let `inlinewiki.youcannotuseamodificationonthisspellsritualtime`: String
+  public let `inlinewiki.youcannotuseamodificationonthisspellscost`: String
+  public let `inlinewiki.youcannotuseamodificationonthisspellsrange`: String
+  public let `inlinewiki.youcannotuseamodificationonthisspellsduration`: String
+  public let `inlinewiki.spellenhancements`: String
+  public let `inlinewiki.spellenhancements.title`: String
+  public let `inlinewiki.tribaltraditions`: String
+  public let `inlinewiki.brew`: String
+  public let `inlinewiki.spirithalf`: String
+  public let `inlinewiki.spirithalf.short`: String
+  public let `inlinewiki.spiritortoughness`: String
+  public let `inlinewiki.spiritortoughness.short`: String
+  public let `inlinewiki.note`: String
+  public let `Blessings`: String
+  public let `Ceremonies`: String
+  public let `liturgicalchants.addbtn`: String
+  public let `liturgicalchants.header.name`: String
+  public let `liturgicalchants.header.traditions`: String
+  public let `liturgicalchants.header.group`: String
+  public let `liturgicalchants.header.skillrating`: String
+  public let `liturgicalchants.header.skillrating.tooltip`: String
+  public let `liturgicalchants.header.check`: String
+  public let `liturgicalchants.header.checkmodifier`: String
+  public let `liturgicalchants.header.checkmodifier.tooltip`: String
+  public let `liturgicalchants.header.improvementcost`: String
+  public let `liturgicalchants.header.improvementcost.tooltip`: String
+  public let `liturgicalchants.groups.blessing`: String
+  public let `liturgicalchants.aspects.general`: String
+  public let `inlinewiki.liturgicaltime`: String
+  public let `inlinewiki.ceremonialtime`: String
+  public let `inlinewiki.kpcost`: String
+  public let `inlinewiki.youcannotuseamodificationonthischantsliturgicaltime`: String
+  public let `inlinewiki.youcannotuseamodificationonthischantsceremonialtime`: String
+  public let `inlinewiki.youcannotuseamodificationonthischantscost`: String
+  public let `inlinewiki.youcannotuseamodificationonthischantsrange`: String
+  public let `inlinewiki.youcannotuseamodificationonthischantsduration`: String
+  public let `inlinewiki.liturgicalchantenhancements`: String
+  public let `inlinewiki.liturgicalchantenhancements.title`: String
+  public let `equipment.header.name`: String
+  public let `equipment.header.group`: String
+  public let `equipment.addbtn`: String
+  public let `equipment.createbtn`: String
+  public let `equipment.filters.allcombattechniques`: String
+  public let `equipment.purse.title`: String
+  public let `equipment.purse.ducats`: String
+  public let `equipment.purse.silverthalers`: String
+  public let `equipment.purse.halers`: String
+  public let `equipment.purse.kreutzers`: String
+  public let `equipment.purse.carryingcapacity`: String
+  public let `equipment.purse.initialstartingwealthandcarryingcapacity`: String
+  public let `equipment.purse.earnpay`: String
+  public let `equipment.purse.earn`: String
+  public let `equipment.purse.pay`: String
+  public let `equipment.purse.notefirst`: String
+  public let `equipment.purse.notesecond`: String
+  public let `equipment.purse.currentcredit`: String
+  public let `equipment.purse.amount`: String
+  public let `equipment.dialogs.addedit.damage`: String
+  public let `equipment.dialogs.addedit.length`: String
+  public let `equipment.dialogs.addedit.range`: String
+  public let `equipment.dialogs.addedit.edititem`: String
+  public let `equipment.dialogs.addedit.createitem`: String
+  public let `equipment.dialogs.addedit.number`: String
+  public let `equipment.dialogs.addedit.name`: String
+  public let `equipment.dialogs.addedit.price`: String
+  public let `equipment.dialogs.addedit.weight`: String
+  public let `equipment.dialogs.addedit.carriedwhere`: String
+  public let `equipment.dialogs.addedit.itemgroup`: String
+  public let `equipment.dialogs.addedit.itemgrouphint`: String
+  public let `equipment.dialogs.addedit.improvisedweapon`: String
+  public let `equipment.dialogs.addedit.improvisedweapongroup`: String
+  public let `equipment.dialogs.addedit.template`: String
+  public let `equipment.dialogs.addedit.combattechnique`: String
+  public let `equipment.dialogs.addedit.primaryattributeanddamagethreshold`: String
+  public let `equipment.dialogs.addedit.primaryattribute`: String
+  public let `equipment.dialogs.addedit.primaryattribute.short`: String
+  public let `equipment.dialogs.addedit.damagethreshold`: String
+  public let `equipment.dialogs.addedit.separatedamagethresholds`: String
+  public let `equipment.dialogs.addedit.breakingpointratingmodifier`: String
+  public let `equipment.dialogs.addedit.damaged`: String
+  public let `equipment.dialogs.addedit.reach`: String
+  public let `equipment.dialogs.addedit.attackparrymodifier`: String
+  public let `equipment.dialogs.addedit.structurepoints`: String
+  public let `equipment.dialogs.addedit.lengthwithunit`: String
+  public let `equipment.dialogs.addedit.parryingweapon`: String
+  public let `equipment.dialogs.addedit.twohandedweapon`: String
+  public let `equipment.dialogs.addedit.reloadtime`: String
+  public let `equipment.dialogs.addedit.rangeclose`: String
+  public let `equipment.dialogs.addedit.rangemedium`: String
+  public let `equipment.dialogs.addedit.rangefar`: String
+  public let `equipment.dialogs.addedit.ammunition`: String
+  public let `equipment.dialogs.addedit.protection`: String
+  public let `equipment.dialogs.addedit.encumbrance`: String
+  public let `equipment.dialogs.addedit.armortype`: String
+  public let `equipment.dialogs.addedit.sturdinessmodifier`: String
+  public let `equipment.dialogs.addedit.wear`: String
+  public let `equipment.dialogs.addedit.hitzonearmoronly`: String
+  public let `equipment.dialogs.addedit.movementmodifier`: String
+  public let `equipment.dialogs.addedit.initiativemodifier`: String
+  public let `equipment.dialogs.addedit.additionalpenalties`: String
+  public let `hitzonearmors.header.name`: String
+  public let `hitzonearmors.createbtn`: String
+  public let `hitzonearmors.dialogs.addedit.name`: String
+  public let `hitzonearmors.dialogs.addedit.edithitzonearmor`: String
+  public let `hitzonearmors.dialogs.addedit.createhitzonearmor`: String
+  public let `hitzonearmors.dialogs.addedit.head`: String
+  public let `hitzonearmors.dialogs.addedit.torso`: String
+  public let `hitzonearmors.dialogs.addedit.leftarm`: String
+  public let `hitzonearmors.dialogs.addedit.rightarm`: String
+  public let `hitzonearmors.dialogs.addedit.leftleg`: String
+  public let `hitzonearmors.dialogs.addedit.rightleg`: String
+  public let `hitzonearmors.dialogs.addedit.wear`: String
+  public let `inlinewiki.equipment.weight`: String
+  public let `inlinewiki.equipment.price`: String
+  public let `inlinewiki.equipment.ammunition`: String
+  public let `inlinewiki.equipment.combattechnique`: String
+  public let `inlinewiki.equipment.damage`: String
+  public let `inlinewiki.equipment.primaryattributeanddamagethreshold`: String
+  public let `inlinewiki.equipment.attackparrymodifier`: String
+  public let `inlinewiki.equipment.reach`: String
+  public let `inlinewiki.equipment.length`: String
+  public let `inlinewiki.equipment.reloadtime`: String
+  public let `inlinewiki.equipment.range`: String
+  public let `inlinewiki.equipment.actionsvalue`: String
+  public let `inlinewiki.equipment.protection`: String
+  public let `inlinewiki.equipment.encumbrance`: String
+  public let `inlinewiki.equipment.additionalpenalties`: String
+  public let `inlinewiki.equipment.note`: String
+  public let `inlinewiki.equipment.rules`: String
+  public let `inlinewiki.equipment.weaponadvantage`: String
+  public let `inlinewiki.equipment.weapondisadvantage`: String
+  public let `inlinewiki.equipment.armoradvantage`: String
+  public let `inlinewiki.equipment.armordisadvantage`: String
+  public let `pets.dialogs.addedit.deleteavatarbtn`: String
+  public let `pets.dialogs.addedit.name`: String
+  public let `pets.dialogs.addedit.sizecategory`: String
+  public let `pets.dialogs.addedit.type`: String
+  public let `pets.dialogs.addedit.apspent`: String
+  public let `pets.dialogs.addedit.totalap`: String
+  public let `pets.dialogs.addedit.protection`: String
+  public let `pets.dialogs.addedit.attackname`: String
+  public let `pets.dialogs.addedit.attack`: String
+  public let `pets.dialogs.addedit.parry`: String
+  public let `pets.dialogs.addedit.damagepoints`: String
+  public let `pets.dialogs.addedit.reach`: String
+  public let `pets.dialogs.addedit.actions`: String
+  public let `pets.dialogs.addedit.skills`: String
+  public let `pets.dialogs.addedit.specialabilities`: String
+  public let `pets.dialogs.addedit.notes`: String
+  public let `pets.dialogs.addedit.addbtn`: String
+  public let `pets.dialogs.addedit.savebtn`: String
+  public let `Show details`: String
+  public let `Maximum Attribute Value`: String
+  public let `Maximum Skill Value`: String
+  public let `Maximum Combat Technique`: String
+  public let `Maximum Attribute Total`: String
+  public let `Number of Spells/Liturgical Chants`: String
+  public let `Number from other Traditions`: String
+  public let `Check`: String
+  public let `Applications`: String
+  public let `Encumbrance`: String
+  public let `Yes`: String
+  public let `No`: String
+  public let `Maybe`: String
+  public let `Tools`: String
+  public let `Quality`: String
+  public let `Failed Check`: String
+  public let `Critical Success`: String
+  public let `Botch`: String
+  public let `Improvement Cost`: String
+  public let `Front Cover Inside`: String
+  public let `Back Cover Inside`: String
+  public let `.input {$printing :number} {{since the {$printing}. printing}}`: String
+  public let `.input {$printing :number} {{removed in {$printing}. printing}}`: String
+  public let `Base Value`: String
+  public let `Base {$name} from Race`: String
+  public let `Race Base {$abbreviation}`: String
+  public let `Primary attribute for the magic user’s Tradition`: String
+  public let `Primary attribute for the Blessed One’s Tradition`: String
+  public let `The following rule is a Level {$level} focus rule for the topic {$topic}.`: String
+  public let `Protective Circle`: String
+  public let `Warding Circle`: String
+  public let `Prerequisites`: String
+  public let `AP Value`: String
+  public let `.input {$value :number} {{{$value} Adventure Points per level}}`: String
+  public let `tiny`: String
+  public let `small`: String
+  public let `medium`: String
+  public let `large`: String
+  public let `huge`: String
+  public let `{$values} AP for size category {$labels} (per level)`: String
+  public let `A/B/C/D skill`: String
+  public let `A/B/C/D spell`: String
+  public let `A/B/C/D ritual`: String
+  public let `A/B/C/D liturgical chant`: String
+  public let `A/B/C/D ceremony`: String
+  public let `A/B/C/D spellwork`: String
+  public let `A/B/C/D liturgical chant or ceremony`: String
+  public let `A/B/C/D ability`: String
+  public let `B/C/D combat technique`: String
+  public let `depending on the trade secret`: String
+  public let `{$values} Adventure Points for the {$labels} purchase`: String
+  public let `{$values}/and so on Adventure Points for the {$labels}/and so on purchase`: String
+  public let `.input {$value :number} {{{$value} Adventure Points with {$name}}}`: String
+  public let `Half the chosen disease’s level in adventure points`: String
+  public let `The chosen disease’s level in adventure points`: String
+  public let `Half the chosen poison’s level in adventure points`: String
+  public let `The chosen poison’s level in adventure points`: String
+  public let `{$values} adventure points for a {$sized} animal shape`: String
+  public let `Aspect`: String
+  public let `As chosen`: String
+  public let `Passive`: String
+  public let `Active`: String
+  public let `Basic Maneuver`: String
+  public let `Special Maneuver`: String
+  public let `AC`: String
+  public let `UC`: String
+  public let `Volume`: String
+  public let `Brew`: String
+  public let `Penalty`: String
+  public let `Binding Cost`: String
+  public let `one or two of these special abilities can alternatively be replaced by advanced special abilities {$first} and/or {$second}`: String
+  public let `.input {$count :number} {{{$count} more by primary patron}}`: String
+  public let `Patron`: String
+  public let `.input {$count :number} {{Here you can select {$count} fitting special abilities.}}`: String
+  public let `.input {$count :number} {{{$previousList} as well as {$count} advanced special abilities}}`: String
+  public let `.input {$count :number} {{{$previousList} as well as {$count} advanced special abilities depending on {$option}}}`: String
+  public let `.input {$count :number} {{{$count} of the following list}}`: String
+  public let `corresponding combat style special ability`: String
+  public let `corresponding liturgical style special ability`: String
+  public let `corresponding magic style special ability`: String
+  public let `corresponding skill style special ability`: String
+  public let `No Blessings`: String
+  public let `Restricted Blessings`: String
+  public let `Strongly Restricted Blessings`: String
+  public let `{$nameOfBlessedOnes} cannot use blessings.`: String
+  public let `{$nameOfBlessedOnes} cannot use {$blessings :list type=disjunction}.`: String
+  public let `Favored Skills`: String
+  public let `The primary attribute of this Tradition is {$attr}.`: String
+  public let `This primary attribute of this Tradition is {$attr}; however, {$casters} use only half of this stat (rounded up) to calculate their base AE pool or purchase AE.`: String
+  public let `Tradition ({$name}) has no associated primary attribute, meaning {$casters} receive no bonus to the AE pool and cannot purchase additional AE.`: String
+  public let `.input {$count :number} {{{$baseList}, and {$count} of your choice from the following list: {$selection}}}`: String
+  public let `All`: String
+  public let `All Combat Techniques`: String
+  public let `All Combat Techniques used in hunting`: String
+  public let `All Close Combat Techniques`: String
+  public let `All Ranged Combat Techniques`: String
+  public let `Depends on combat style; both combat styles can be used only for their corresponding combat techniques`: String
+  public let `only improvised weapons`: String
+  public let `weapon must have a pointed blade`: String
+  public let `while mounted`: String
+  public let `while weapon of race {$race}`: String
+  public let `except {$list}`: String
+  public let `All Two-Handed Weapons`: String
+  public let `All Parrying Weapons`: String
+  public let `with parry`: String
+  public let `that may be performed with one-handed weapons`: String
+  public let `only those with at least one blunt side`: String
+  public let `only {$nameWithLevel}`: String
+  public let `only {$weapons}`: String
+  public let `Magical Rank`: String
+  public let `Magical Title`: String
+  public let `Magical Honor`: String
+  public let `Magical Punishment`: String
+  public let `Blessed Rank`: String
+  public let `Blessed Title`: String
+  public let `Blessed Honor`: String
+  public let `Blessed Punishment`: String
+  public let `.input {$ord :number} {{{$ord}. attack}}`: String
+  public let `.input {$ord :number} {{{$ord}. throw}}`: String
+  public let `depending on the level of the special ability {$name}`: String
+  public let `for parry`: String
+  public let `one-handed weapon`: String
+  public let `two-handed weapon`: String
+  public let `for secondary fighters with/without special ability {$name}`: String
+  public let `{$start} to {$end}`: String
+  public let `Depends on zone`: String
+  public let `.input {$points :number} {{{$points} points}}`: String
+  public let `.input {$points :number} {{{$points} points per level}}`: String
+  public let `{$points} points`: String
+  public let `{$points} points for levels {$levels}`: String
+  public let `{$value} LP`: String
+  public let `.input {$value :number} {{{$value} permanent AE}}`: String
+  public let `{$value} permanent AE`: String
+  public let `{$value} pAE`: String
+  public let `{$cost} per {$interval}`: String
+  public let `{$cost}/{$interval}`: String
+  public let `{$cost} per {$countable}`: String
+  public let `{$cost}/{$countable}`: String
+  public let `{$cost} per level`: String
+  public let `{$cost} for level {$level}`: String
+  public let `Variable`: String
+  public let `Guideline`: String
+  public let `Elective Spellworks Package`: String
+  public let `Restricted Spellworks`: String
+  public let `All, at the GM’s discretion`: String
+  public let `.input {$count :number} {{only {$count} additional spellworks with the Property {$property}}}`: String
+  public let `no spellworks with the Property {$property}`: String
+  public let `Demon Summoning`: String
+  public let `the following spells are not taught: {$spells}`: String
+  public let `no Borbaradian spellworks`: String
+  public let `no spellworks that inflict DP or sDP on intelligent creatures`: String
+  public let `Spellwork Changes`: String
+  public let `Skills (+)`: String
+  public let `Skills (−)`: String
+  public let `{$replacement} instead of {$base}`: String
+  public let `Clothing Package {$socialStatus}`: String
+  public let `Cost`: String
+  public let `Total`: String
+  public let `.input {$value :number} {{{$value} pounds}}`: String
+  public let `{$value} pounds`: String
+  public let `.input {$value :number} {{{$value} lbs}}`: String
+  public let `{$value} lbs`: String
+  public let `.input {$value :number} {{{$value} silverthalers}}`: String
+  public let `{$value} silverthalers`: String
+  public let `{$value} S`: String
+  public let `.input {$from :number} .input {$to :number} {{{$from}–{$to} pounds}}`: String
+  public let `.input {$from :number} .input {$to :number} {{{$from}–{$to} silverthalers}}`: String
+  public let `free`: String
+  public let `various`: String
+  public let `invaluable`: String
+  public let `Damage Points`: String
+  public let `DP`: String
+  public let `Special (Damage)`: String
+  public let `Primary Attribute + Damage Threshold`: String
+  public let `P+T`: String
+  public let `Attack/Parry Modifier`: String
+  public let `AT/PA Mod`: String
+  public let `Reach`: String
+  public let `RE`: String
+  public let `Weight (Bronze/Silver/Gold)`: String
+  public let `Length`: String
+  public let `Cost (Bronze/Silver/Gold)`: String
+  public let `Cost/10 carats`: String
+  public let `Reload Time`: String
+  public let `RT`: String
+  public let `Range Brackets`: String
+  public let `RA`: String
+  public let `Ammunition`: String
+  public let `Protection`: String
+  public let `PRO`: String
+  public let `ENC`: String
+  public let `Additional Penalties`: String
+  public let `Burning Time`: String
+  public let `Color`: String
+  public let `Language/Script`: String
+  public let `Complexity`: String
+  public let `Weapon Advantage`: String
+  public let `Weapon Disadvantage`: String
+  public let `Armor Advantage`: String
+  public let `Armor Disadvantage`: String
+  public let `Combat Technique {$name}`: String
+  public let `Primitive`: String
+  public let `Simple`: String
+  public let `Complex`: String
+  public let `Various`: String
+  public let `Parrying weapon (PA bonus +1 for the main weapon)`: String
+  public let `{$variantArmor} is a type of {$baseArmor}.`: String
+  public let `{$variantHitZoneArmor} counts as {$baseArmor} for hit zone {$hitZone}.`: String
+  public let `Arms`: String
+  public let `Head`: String
+  public let `Legs`: String
+  public let `Torso`: String
+  public let `many shamans`: String
+  public let `To buy this item during hero creation, the character must have Tradition ({$traditions}).`: String
+  public let `To buy {$itemName} during hero creation, the character must have Tradition ({$traditions}).`: String
+  public let `Sanctified ({$traditions})`: String
+  public let `only {$blessedOnes} may purchase weapons sanctified by {$gods}, respectively.`: String
+  public let `only {$blessedOnes} may purchase weapons sanctified by {$god}.`: String
+  public let `To buy this item during hero creation, the character must be from {$cultures}.`: String
+  public let `To buy {$itemName} during hero creation, the character must be from {$cultures}.`: String
+  public let `To buy this item during hero creation, the character must have a shamanistic tradition.`: String
+  public let `To buy {$itemName} during hero creation, the character must have a shamanistic tradition.`: String
+  public let `.input {$value :number} {{{$value} inches}}`: String
+  public let `unlimited`: String
+  public let `Structure Points`: String
+  public let `.input {$value :number} {{{$value} Structure Points}}`: String
+  public let `{$value} Structure Points`: String
+  public let `Components`: String
+  public let `Use`: String
+  public let `purchase`: String
+  public let `sale`: String
+  public let `2H`: String
+  public let `i`: String
+  public let `Large Shield`: String
+  public let `Medium Shield`: String
+  public let `Small Shield`: String
+  public let `{$value} structure points`: String
+  public let `indestructible`: String
+  public let `additional {$value} AT for main weapon`: String
+  public let `Price`: String
+  public let `all armor`: String
+  public let `all metal armor`: String
+  public let `all weapons with metal blades or tips`: String
+  public let `all weapons with a metal surface`: String
+  public let `all weapons with a handle that can be wrapped with leather`: String
+  public let `only models with a reload time of at least {$timeSpan}`: String
+  public let `{$weapons} that use bullets as ammunition`: String
+  public let `.input {$otherComponentsCount :number} {{{$itemComponent} cannot be combined with item components {$otherComponents}}}`: String
+  public let `all ammunition types`: String
+  public let `all arrow and bolt types`: String
+  public let `Weapons`: String
+  public let `Melee Weapons`: String
+  public let `Ranged Weapons`: String
+  public let `Armor`: String
+  public let `Standard Armor`: String
+  public let `Special Armor`: String
+  public let `Helmets`: String
+  public let `Pieces of Armor`: String
+  public let `Weapon Accessories`: String
+  public let `Armor Accessories`: String
+  public let `Item Components`: String
+  public let `Clothes`: String
+  public let `Clothing Packages for Social Status`: String
+  public let `Travel Gear and Tools`: String
+  public let `Illumination/Light Sources`: String
+  public let `Illumination Refills and Supplies`: String
+  public let `Bandages and Remedies`: String
+  public let `Containers`: String
+  public let `Ropes and Chains`: String
+  public let `Thieves' Tools`: String
+  public let `Tools of the Trade`: String
+  public let `Laboratories`: String
+  public let `Orienteering Aids`: String
+  public let `Jewelry`: String
+  public let `Gems and Precious Stones`: String
+  public let `Stationery`: String
+  public let `Books`: String
+  public let `Magical Artifacts`: String
+  public let `Alchemicae`: String
+  public let `Poisons`: String
+  public let `Musical Instruments`: String
+  public let `Luxury Goods`: String
+  public let `Animals`: String
+  public let `Animal Care`: String
+  public let `Vehicles`: String
+  public let `Ceremonial Items`: String
+  public let `Equipment of Blessed Ones`: String
+  public let `Liebesspielzeug`: String
+  public let `Newspapers`: String
+  public let `Working Supernatural Creatures`: String
+  public let `{$types} poison`: String
+  public let `Weapon (poison)`: String
+  public let `Ingestion (poison)`: String
+  public let `Inhalation (poison)`: String
+  public let `Contact (poison)`: String
+  public let `Level`: String
+  public let `Type`: String
+  public let `animal venom`: String
+  public let `alchemical poison`: String
+  public let `mineral poison`: String
+  public let `plant poison`: String
+  public let `demonic poison`: String
+  public let `Archaic laboratory`: String
+  public let `Witch kitchen`: String
+  public let `Alchemist’s laboratory`: String
+  public let `Resistance`: String
+  public let `{$values :list type=disjunction}, depending on which value is lower`: String
+  public let `Start`: String
+  public let `immediate`: String
+  public let `instant`: String
+  public let `Typical Ingredients`: String
+  public let `Price of Ingredients/Level`: String
+  public let `Laboratory`: String
+  public let `Brewing Difficulty`: String
+  public let `Brewing Process`: String
+  public let `Trade Secret`: String
+  public let `The poison levels equals the QL.`: String
+  public let `.input {$value :number} {{{$value} applications every {$interval}}}`: String
+  public let `{$valueRange} on {$dice}`: String
+  public let `Ingestion`: String
+  public let `Side Effect`: String
+  public let `Overdose`: String
+  public let `Legality`: String
+  public let `legal`: String
+  public let `illegal`: String
+  public let `Addiction`: String
+  public let `Value/Cost`: String
+  public let `cannot be extracted`: String
+  public let `.input {$hiddenCount :number} {{Alternative Names}}`: String
+  public let `.input {$count :number} {{check required every {$count}. application}}`: String
+  public let `.input {$count :number} {{check required every {$count}. application in the same month}}`: String
+  public let `see {$link}`: String
+  public let `CoD`: String
+  public let `Search Difficulty`: String
+  public let `Identification Difficulty`: String
+  public let `Plant Applications`: String
+  public let `Remedies and Traditions`: String
+  public let `Romance Novel`: String
+  public let `Poetry`: String
+  public let `Political Pamphlet`: String
+  public let `Crime Story`: String
+  public let `Fairy Tale`: String
+  public let `Novel`: String
+  public let `Professional Publication`: String
+  public let `Magical Book`: String
+  public let `Religious Works`: String
+  public let `Content Quality`: String
+  public let `Modest`: String
+  public let `Average`: String
+  public let `Demanding`: String
+  public let `CL {$level}`: String
+  public let `Availability`: String
+  public let `Reconstruction`: String
+  public let `References`: String
+  public let `Entertainment`: String
+  public let `Topics`: String
+  public let `Place of Publication`: String
+  public let `Value`: String
+  public let `Failed`: String
+  public let `Progress`: String
+  public let `Incubation Time`: String
+  public let `Damage`: String
+  public let `Duration (Disease)`: String
+  public let `Causes`: String
+  public let `Treatment`: String
+  public let `Antidote`: String
+  public let `.input {$value :number} {{{$value}%}}`: String
+  public let `Animal Types`: String
+  public let `Communicability to Intelligent Creatures`: String
+  public let `childhood disease`: String
+  public let `magical disease`: String
+  public let `sexually transmittable disease`: String
+  public let `Can be combined with`: String
+  public let `Skill`: String
+  public let `{$defaultDuration}, but no more than {$maximumDuration}`: String
+  public let `Music Tradition`: String
+  public let `long`: String
+  public let `short`: String
+  public let `one-time`: String
+  public let `sustainable`: String
+  public let `{$firstPersonValue} for the first person; {$additionalPersonValue} for each additional person`: String
+  public let `Tribe Tradition`: String
+  public let `Depends on animal type`: String
+  public let `Crafting Time (slow / fast)`: String
+  public let `Duration (slow / fast)`: String
+  public let `Combat Technique`: String
+  public let `CT`: String
+  public let `All familiars know this trick by default.`: String
+  public let `All AE`: String
+  public let `All AE, at least {$value} AE`: String
+  public let `depends on spent AE`: String
+  public let `{$derivedCharacteristic} Base Value`: String
+  public let `Attribute Adjustments`: String
+  public let `one attribute of your choice`: String
+  public let `Common Cultures`: String
+  public let `Automatic Advantages`: String
+  public let `Automatic Disadvantages`: String
+  public let `Strongly recommended Advantages and Disadvantages`: String
+  public let `The following advantages and disadvantages distinguish Aventurian {$race}. You should choose these advantages and disadvantages. If you don’t want to take them, talk to your GM.`: String
+  public let `Uncommon Advantages`: String
+  public let `Uncommon Disadvantages`: String
+  public let `all magical and Blessed One advantages`: String
+  public let `all magical and Blessed One disadvantages`: String
+  public let `all Blessed One advantages`: String
+  public let `all Blessed One disadvantages`: String
+  public let `all magical advantages`: String
+  public let `all magical disadvantages`: String
+  public let `Language`: String
+  public let `Script`: String
+  public let `Area Knowledge`: String
+  public let `Common Professions`: String
+  public let `Uncommon Skills`: String
+  public let `Common Names`: String
+  public let `Cultural Package {$cultureName}`: String
+  public let `for example, {$examples}`: String
+  public let `all but {$excludedProfessions :list type=conjunction}`: String
+  public let `Mundane Professions`: String
+  public let `profane professions`: String
+  public let `fighter professions`: String
+  public let `religious professions`: String
+  public let `Magic Professions`: String
+  public let `Blessed Professions`: String
+  public let `rare`: String
+  public let `very rare`: String
+  public let `Magic Dilettante`: String
+  public let `mostly {$variants :list type=conjunction}`: String
+  public let `only {$variants :list type=conjunction}`: String
+  public let `Spellworks/Magical Actions`: String
+  public let `Suggested Advantages`: String
+  public let `Suggested Disadvantages`: String
+  public let `Unsuitable Advantages`: String
+  public let `Unsuitable Disadvantages`: String
+  public let `Variants`: String
+  public let `Languages and Literacy totaling {$apValue} AP`: String
+  public let `no Languages and Literacy totaling {$apValue} AP`: String
+  public let `Languages totaling {$apValue} AP`: String
+  public let `no Languages totaling {$apValue} AP`: String
+  public let `Skill Specialization {$possibleSkills}`: String
+  public let `no Skill Specialization {$possibleSkills}`: String
+  public let `Skill Specialization for a {$skillOfGroup}`: String
+  public let `no Skill Specialization for a {$skillOfGroup}`: String
+  public let `.input {$count :number} {{{$count} of the following combat techniques {$rating}}}`: String
+  public let `.input {$count :number} {{{$previous}, {$count} others {$rating}}}`: String
+  public let `{$previous}, the others {$rating}`: String
+  public let `Curses totaling {$apValue} AP`: String
+  public let `no Curses totaling {$apValue} AP`: String
+  public let `Liturgies totaling {$apValue} AP`: String
+  public let `no Liturgies totaling {$apValue} AP`: String
+  public let `{$apValue} AP to improve other {$skillsOfGroup}`: String
+  public let `{$apValue} AP to distribute among the following skills: {$list}`: String
+  public let `maximum SR per skill: {$maxSR}`: String
+  public let `no AP to improve other {$skillsOfGroup}`: String
+  public let `.input {$count :number} {{{$count} cantrips}}`: String
+  public let `{$apValue} AP to distribute among the following combat techniques: {$list}`: String
+  public let `no AP to distribute among the following combat techniques: {$list}`: String
+  public let `.input {$count :number} {{{$count} more spellworks totaling {$apValue} AP}}`: String
+  public let `{$count} more spellworks totaling {$apValue} AP`: String
+  public let `{$count} from the following list`: String
+  public let `The Twelve Blessings`: String
+  public let `.input {$count :number} {{{$count} of the following liturgical chants {$rating}}}`: String
+  public let `except for {$list :list type=conjunction}`: String
+  public let `depends on selected tradition`: String
+  public let `Additional Prerequisites`: String
+  public let `no changes`: String
+  public let `Enhancements`: String
+  public let `SR {$value}`: String
+  public let `.input {$hiddenCount :number} {{Prerequisites}}`: String
+  public let `Spell Enhancement {$spell}`: String
+  public let `Ritual Enhancement {$ritual}`: String
+  public let `Liturgical Enhancement {$liturgicalChantOrCeremony}`: String
+  public let `Secret Knowledge`: String
+  public let `Activation`: String
+  public let `Main Talisman`: String
+  public let `Minor Talisman`: String
+  public let `Powerful Talisman`: String
+  public let `Regalia`: String
+  public let `Talisman`: String
+  public let `Profession Package`: String
+  public let `Optional Rule`: String
+  public let `Beneficial Effect`: String
+  public let `Defensive Effect`: String
+  public let `Healing Effect`: String
+  public let `Physical Effect`: String
+  public let `Poison Effect`: String
+  public let `Psychic Effect`: String
+  public let `Supernatural Effect`: String
 }
 
 public struct PropertiesSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Does each property require it to be active as a selection on an instance?
-  let requireActiveSelectionOnEntry: ActivatableIdentifier?
+  public let requireActiveSelectionOnEntry: ActivatableIdentifier?
 
   /// Require a minimum number of spellworks of the respective property to be on a minimum skill rating.
-  let requireMinimumSpellworksOn: RequiredMinimumSkillsToBeOnSkillRating?
+  public let requireMinimumSpellworksOn: RequiredMinimumSkillsToBeOnSkillRating?
 
   private enum CodingKeys: String, CodingKey {
     case requireActiveSelectionOnEntry = "requireActiveSelectionOnEntry"
@@ -3544,17 +3544,17 @@ public struct Advantage: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
-  let subtype: AdvantageDisadvantageSubtype?
+  public let subtype: AdvantageDisadvantageSubtype?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -3563,27 +3563,27 @@ public struct Advantage: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// This entry has a direct influence on the existence of other entries. It may add or remove entries.
-  let automaticEntries: [AutomaticEntry]?
+  public let automaticEntries: [AutomaticEntry]?
 
-  let prerequisites: AdvantageDisadvantagePrerequisites?
+  public let prerequisites: AdvantageDisadvantagePrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// Does this advantage count towards the maximum of AP to be spent on advantages?
-  let hasMaximumSpentInfluence: Bool
+  public let hasMaximumSpentInfluence: Bool
 
   /// Does this advantage exclusively applies to arcane spellworks and not to magical actions and magical applications?
-  let isExclusiveToArcaneSpellworks: Bool
+  public let isExclusiveToArcaneSpellworks: Bool
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvantageTranslation>
+  public let translations: LocaleMap<AdvantageTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -3636,30 +3636,30 @@ public struct Advantage: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AdvantageTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The range of the advantage.
   @available(*, deprecated)
-  let range: String?
+  public let range: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -3752,25 +3752,25 @@ public struct GeneralSelectOption: Decodable, Equatable, Sendable, Identifiable,
   public let id: ID
 
   /// The entry that contains select option.
-  let parent: SelectOptionParentIdentifier
+  public let parent: SelectOptionParentIdentifier
 
   /// Sometimes, professions use specific text selections that are not contained in described lists. This ensures you can use them for professions only. They are not going to be displayed as options to the user.
-  let professionOnly: Bool?
+  public let professionOnly: Bool?
 
   /// Prerequisites for the select option.
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// Specific binding cost for the select option. Only has an effect if the associated entry supports binding costs.
-  let bindingCost: Int?
+  public let bindingCost: Int?
 
   /// Specific AP cost for the select option.
-  let apValue: Int?
+  public let apValue: Int?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GeneralSelectOptionTranslation>
+  public let translations: LocaleMap<GeneralSelectOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -3813,15 +3813,15 @@ public struct GeneralSelectOption: Decodable, Equatable, Sendable, Identifiable,
 
 public struct GeneralSelectOptionTranslation: Decodable, Equatable, Sendable {
   /// The name of the select option.
-  let name: String
+  public let name: String
 
   /// The name of the select option when displayed in a generated profession text.
-  let nameInProfession: String?
+  public let nameInProfession: String?
 
   /// The description of the select option. Useful for Bad Habits, Trade Secrets and other entries where a description is available.
-  let description: String?
+  public let description: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4153,17 +4153,17 @@ public struct Disadvantage: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
-  let subtype: AdvantageDisadvantageSubtype?
+  public let subtype: AdvantageDisadvantageSubtype?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -4172,24 +4172,24 @@ public struct Disadvantage: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: AdvantageDisadvantagePrerequisites?
+  public let prerequisites: AdvantageDisadvantagePrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// Does this advantage count towards the maximum of AP to be spent on advantages?
-  let hasMaximumSpentInfluence: Bool
+  public let hasMaximumSpentInfluence: Bool
 
   /// Does this advantage exclusively applies to arcane spellworks and not to magical actions and magical applications?
-  let isExclusiveToArcaneSpellworks: Bool
+  public let isExclusiveToArcaneSpellworks: Bool
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DisadvantageTranslation>
+  public let translations: LocaleMap<DisadvantageTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -4240,29 +4240,29 @@ public struct Disadvantage: Decodable, Equatable, Sendable, Identifiable {
 
 public struct DisadvantageTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The range.
-  let range: String?
+  public let range: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4299,16 +4299,16 @@ public struct NewSkillApplication: Decodable, Equatable, Sendable, Identifiable,
   public let id: ID
 
   /// The entry that enables the new skill application.
-  let parent: NewSkillApplicationOrUseParentIdentifier
+  public let parent: NewSkillApplicationOrUseParentIdentifier
 
   /// The skill(s) this application belongs to.
-  let skills: [Skill.ID]
+  public let skills: [Skill.ID]
 
   /// If an application applies to multiple skills, it may need to ensure the respective skill is on a certain skill rating if the activatable entry cannot ensure this prerequisite.
-  let requiredSkillRating: Int?
+  public let requiredSkillRating: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NewSkillApplicationTranslation>?
+  public let translations: LocaleMap<NewSkillApplicationTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -4345,7 +4345,7 @@ public struct NewSkillApplication: Decodable, Equatable, Sendable, Identifiable,
 
 public struct NewSkillApplicationTranslation: Decodable, Equatable, Sendable {
   /// The name of the application if different from the activatable entry’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4472,15 +4472,15 @@ public struct AdvancedKarmaSpecialAbility: Decodable, Equatable, Sendable, Ident
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -4489,18 +4489,18 @@ public struct AdvancedKarmaSpecialAbility: Decodable, Equatable, Sendable, Ident
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvancedKarmaSpecialAbilityTranslation>
+  public let translations: LocaleMap<AdvancedKarmaSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -4545,23 +4545,23 @@ public struct AdvancedKarmaSpecialAbility: Decodable, Equatable, Sendable, Ident
 
 public struct AdvancedKarmaSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4594,16 +4594,16 @@ public struct SkillUse: Decodable, Equatable, Sendable, Identifiable, ChildEntit
   public let id: ID
 
   /// The entry that enables the use.
-  let parent: NewSkillApplicationOrUseParentIdentifier
+  public let parent: NewSkillApplicationOrUseParentIdentifier
 
   /// The skill(s) this use belongs to.
-  let skills: [Skill.ID]
+  public let skills: [Skill.ID]
 
   /// If a use applies to multiple skills, it may need to ensure the respective skill is on a certain skill rating if the activatable entry cannot ensure this prerequisite.
-  let requiredSkillRating: Int?
+  public let requiredSkillRating: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillUseTranslation>?
+  public let translations: LocaleMap<SkillUseTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -4640,7 +4640,7 @@ public struct SkillUse: Decodable, Equatable, Sendable, Identifiable, ChildEntit
 
 public struct SkillUseTranslation: Decodable, Equatable, Sendable {
   /// The name of the use if different from the activatable entry’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4659,25 +4659,25 @@ public struct Skill: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// Lists applications for the skill, if any. This does not necessarily include all possible applications. There may also be new applications that could be purchased via certain advantages or special abilities.
-  let applications: Applications
+  public let applications: Applications
 
   /// Indicates whether encumbrance gives a penalty for checks with the skill.
-  let encumbrance: EncumbranceInfluence
+  public let encumbrance: EncumbranceInfluence
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The skill group this skill belongs to.
-  let group: SkillGroup.ID
+  public let group: SkillGroup.ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillTranslation>
+  public let translations: LocaleMap<SkillTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -4720,30 +4720,30 @@ public struct Skill: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SkillTranslation: Decodable, Equatable, Sendable {
   /// The skill’s name.
-  let name: String
+  public let name: String
 
   /// If there are options available that can not be put into a selection list (like different cults), provide the label text for the input element here. Otherwise leave empty.
-  let applicationsInputLabel: String?
+  public let applicationsInputLabel: String?
 
   /// The text listing the certain circumstances in which the encumbrance may count. This text must be used if `encumbrance` is set to `"Maybe"`, otherwise it is ignored if defined.
-  let encumbranceDescription: String?
+  public let encumbranceDescription: String?
 
   /// Mentions any tools from the equipment list that are necessary to employ the skill.
-  let tools: String?
+  public let tools: String?
 
   /// Gives examples of the effects that various QL might provide.
-  let quality: String
+  public let quality: String
 
   /// Lists examples of results for a failed check.
-  let failed: String
+  public let failed: String
 
   /// Lists examples of results for a critical success.
-  let critical: String
+  public let critical: String
 
   /// Lists examples of results for botches.
-  let botch: String
+  public let botch: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4782,13 +4782,13 @@ public struct Attribute: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The position of the attribute in lists. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// The display color of the attribute.
-  let color: AttributeColor
+  public let color: AttributeColor
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AttributeTranslation>
+  public let translations: LocaleMap<AttributeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -4823,13 +4823,13 @@ public struct Attribute: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AttributeTranslation: Decodable, Equatable, Sendable {
   /// The attribute’s name.
-  let name: String
+  public let name: String
 
   /// The abbreviation of the attribute’s name.
-  let abbreviation: String
+  public let abbreviation: String
 
   /// The description of the attribute.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -4906,7 +4906,7 @@ public enum AttributeColor: Decodable, Equatable, Sendable {
 
 /// The skill’s applications
 public struct Applications: Decodable, Equatable, Sendable {
-  let derived: ApplicationCategory?
+  public let derived: ApplicationCategory?
 
   private enum CodingKeys: String, CodingKey {
     case derived = "derived"
@@ -4961,13 +4961,13 @@ public struct SkillApplication: Decodable, Equatable, Sendable, Identifiable, Ch
   public let id: ID
 
   /// The skill this application belongs to.
-  let parent: Skill.ID
+  public let parent: Skill.ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillApplicationTranslation>
+  public let translations: LocaleMap<SkillApplicationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -5002,7 +5002,7 @@ public struct SkillApplication: Decodable, Equatable, Sendable, Identifiable, Ch
 
 public struct SkillApplicationTranslation: Decodable, Equatable, Sendable {
   /// The skill application’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -5021,10 +5021,10 @@ public typealias PublicationRefs = [PublicationRef]
 /// A source reference. It contains the book's publisher identifier and the page where it occurs. If an entry spans multiple pages, provide the last page as well.
 public struct PublicationRef: Decodable, Equatable, Sendable {
   /// The publication’s identifier.
-  let id: Publication.ID
+  public let id: Publication.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let occurrences: LocaleMap<Occurrence>
+  public let occurrences: LocaleMap<Occurrence>
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -5041,10 +5041,10 @@ public struct PublicationRef: Decodable, Equatable, Sendable {
 
 public struct Occurrence: Decodable, Equatable, Sendable {
   /// The initial occurrence of the entry.
-  let initial: InitialOccurrence
+  public let initial: InitialOccurrence
 
   /// Revisions of the entry, resulting in either changed page references or re-addition or removal of an entry.
-  let revisions: [Revision]?
+  public let revisions: [Revision]?
 
   private enum CodingKeys: String, CodingKey {
     case initial = "initial"
@@ -5066,18 +5066,18 @@ public struct Publication: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The publication category.
-  let category: PublicationCategory
+  public let category: PublicationCategory
 
   /// If the publication may contain adult content.
-  let containsAdultContent: Bool
+  public let containsAdultContent: Bool
 
   /// If the publication is not (fully) implemented and thus needs to be excluded from stable releases.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
-  let prerequisites: PublicationPrerequisites?
+  public let prerequisites: PublicationPrerequisites?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PublicationTranslation>
+  public let translations: LocaleMap<PublicationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case category = "category"
@@ -5116,19 +5116,19 @@ public struct Publication: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PublicationTranslation: Decodable, Equatable, Sendable {
   /// The publisher’s publication identifier.
-  let publisherId: String?
+  public let publisherId: String?
 
   /// The publication’s name.
-  let name: String
+  public let name: String
 
   /// The publication’s abbreviation.
-  let abbreviation: String
+  public let abbreviation: String
 
   /// The publication’s release date.
-  let releaseDate: Date?
+  public let releaseDate: Date?
 
   /// If this publication translation is not (fully) implemented and thus needs to be excluded from stable releases.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
   private enum CodingKeys: String, CodingKey {
     case publisherId = "publisherId"
@@ -5228,8 +5228,8 @@ public enum PrerequisitesElement<T: Decodable & Equatable & Sendable>: Decodable
 }
 
 public struct PrerequisitesDisjunction<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let list: [T]
-  let displayOption: DisplayOption?
+  public let list: [T]
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -5275,10 +5275,10 @@ public struct ReplacementDisplayOption: Decodable, Equatable, Sendable {
   /// If the replacement text is a sentence or sentence-like fragment, this property ensures it is integrated into the prerequisite string correctly.
   ///
   /// A standalone sentence is connected to the previous prerequisite string with a period and a period is also added at the end of the sentence automatically, if it is not present. A connected sentence is connected to the previous prerequisite string with a semicolon and a period is not added to the end of the sentence. In this case, if there are prerequisites after this one, they will be connected using a semicolon again, unless a different punctuation mark is present at the end of the given text.
-  let sentenceType: SentenceType?
+  public let sentenceType: SentenceType?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ReplacementDisplayOptionTranslation>
+  public let translations: LocaleMap<ReplacementDisplayOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case sentenceType = "sentence_type"
@@ -5295,7 +5295,7 @@ public struct ReplacementDisplayOption: Decodable, Equatable, Sendable {
 
 public struct ReplacementDisplayOptionTranslation: Decodable, Equatable, Sendable {
   /// The replacement text.
-  let replacement: String
+  public let replacement: String
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -5341,10 +5341,10 @@ public enum SentenceType: Decodable, Equatable, Sendable {
 
 /// A prerequisite group has no influence on validation logic. It serves as a single unit for displaying purposes, where the source uses a prerequisites item that cannot be represented as a single prerequisite.
 public struct PrerequisiteGroup<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let list: [T]
+  public let list: [T]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PrerequisiteGroupTranslation>
+  public let translations: LocaleMap<PrerequisiteGroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -5360,7 +5360,7 @@ public struct PrerequisiteGroup<T: Decodable & Equatable & Sendable>: Decodable,
 }
 
 public struct PrerequisiteGroupTranslation: Decodable, Equatable, Sendable {
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -5397,9 +5397,9 @@ public enum PublicationPrerequisiteGroup: Decodable, Equatable, Sendable {
 
 public struct PublicationPrerequisite: Decodable, Equatable, Sendable {
   /// The publication’s identifier.
-  let id: Publication.ID
+  public let id: Publication.ID
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -5416,13 +5416,13 @@ public struct PublicationPrerequisite: Decodable, Equatable, Sendable {
 
 public struct InitialOccurrence: Decodable, Equatable, Sendable {
   /// The publication’s printing since which the entry is present. Leave empty if present since the beginning.
-  let printing: Int?
+  public let printing: Int?
 
   /// The initial page references.
-  let pages: [PageRange]
+  public let pages: [PageRange]
 
   /// Whether the entry has been removed in this initial occurrence. This can be used if the entry has been removed by the release of this publication (that is, the first printing), which can be useful for books that introduce major revisions of rules into the game.
-  let isRemoved: Bool?
+  public let isRemoved: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case printing = "printing"
@@ -5441,10 +5441,10 @@ public struct InitialOccurrence: Decodable, Equatable, Sendable {
 
 public struct PageRange: Decodable, Equatable, Sendable {
   /// The page where it occurs. If the entry spans multiple pages, use this as the first page and `last_page` as the last page.
-  let firstPage: Page
+  public let firstPage: Page
 
   /// The last page where it occurs. If there is only one page, set this to the same as `first_page` oder remove it.
-  let lastPage: Page?
+  public let lastPage: Page?
 
   private enum CodingKeys: String, CodingKey {
     case firstPage = "first_page"
@@ -5521,10 +5521,10 @@ public enum Revision: Decodable, Equatable, Sendable {
 
 public struct Since: Decodable, Equatable, Sendable {
   /// The publication’s printing since which the entry is present again or has changed page references.
-  let printing: Int
+  public let printing: Int
 
   /// The changed or new page references.
-  let pages: [PageRange]
+  public let pages: [PageRange]
 
   private enum CodingKeys: String, CodingKey {
     case printing = "printing"
@@ -5543,7 +5543,7 @@ public struct Deprecation: Decodable, Equatable, Sendable {
   /// The publication’s printing since which the entry has been removed.
   ///
   /// This can also be used if the entry hss been removed by the release of this publication (that is, the first printing).
-  let printing: Int
+  public let printing: Int
 
   private enum CodingKeys: String, CodingKey {
     case printing = "printing"
@@ -5632,16 +5632,16 @@ public struct SkillGroup: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The position of the skill group in lists. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// The skill group’s skill check attributes
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// The display color of the skill group.
-  let color: GradientColor
+  public let color: GradientColor
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillGroupTranslation>
+  public let translations: LocaleMap<SkillGroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -5678,10 +5678,10 @@ public struct SkillGroup: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SkillGroupTranslation: Decodable, Equatable, Sendable {
   /// The skill group’s name.
-  let name: String
+  public let name: String
 
   /// The skill group’s long name.
-  let longName: String
+  public let longName: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -5749,10 +5749,10 @@ public typealias Errata = [Erratum]
 
 public struct Erratum: Decodable, Equatable, Sendable {
   /// The date when the change was confirmed and applied to the entry.
-  let date: Date
+  public let date: Date
 
   /// A description of what changed.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case date = "date"
@@ -5773,10 +5773,10 @@ public typealias PrerequisitesForLevels<T: Decodable & Equatable & Sendable> = [
 
 public struct PrerequisiteForLevel<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The level to which the prerequisite applies.
-  let level: Int
+  public let level: Int
 
   /// The prerequisite.
-  let prerequisite: PrerequisitesElement<T>
+  public let prerequisite: PrerequisitesElement<T>
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -5910,8 +5910,8 @@ public enum GeneralPrerequisiteGroup: Decodable, Equatable, Sendable {
 
 /// Requires a specific sex.
 public struct SexPrerequisite: Decodable, Equatable, Sendable {
-  let id: BinarySex
-  let displayOption: DisplayOption?
+  public let id: BinarySex
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -5956,11 +5956,11 @@ public enum BinarySex: Decodable, Equatable, Sendable {
 /// Requires a specific race or one of a specific set of races. You can also provide an object to say whether the hero must meet one of the races or if the entry does not allow one of the races.
 public struct RacePrerequisite: Decodable, Equatable, Sendable {
   /// The race’s identifier.
-  let id: Race.ID
+  public let id: Race.ID
 
-  let active: Bool
+  public let active: Bool
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -5983,25 +5983,25 @@ public struct Race: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// How many Adventure Points does the race cost during character creation?
-  let apValue: Int
+  public let apValue: Int
 
   /// The race’s base values.
-  let baseValues: BaseValues
+  public let baseValues: BaseValues
 
   /// How many different hair colors a race may have. By default, they have a single one that is for their whole body, but a race may have multiple if their hair color is different for different body parts. Additionally, if the hair color is labelled differently (e.g. scale color), there might be multiple colors for different body parts as well. This should only be set if the hair color count is higher than 1.
-  let hairColorCount: Int?
+  public let hairColorCount: Int?
 
   /// Configuration for random weight generation.
-  let weight: RandomWeightGeneration
+  public let weight: RandomWeightGeneration
 
   /// Defines the starting ages for the race. It depends on the selected experience level.
-  let startingAge: [ExperienceLevel.ID: StartingAgeConfigForExperienceLevel]?
+  public let startingAge: [ExperienceLevel.ID: StartingAgeConfigForExperienceLevel]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RaceTranslation>
+  public let translations: LocaleMap<RaceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -6044,10 +6044,10 @@ public struct Race: Decodable, Equatable, Sendable, Identifiable {
 
 public struct StartingAgeConfigForExperienceLevel: Decodable, Equatable, Sendable {
   /// The base value for the selected experience level.
-  let base: Int
+  public let base: Int
 
   /// The random value for the selected experience level. It is going to be added to the base value.
-  let random: Dice
+  public let random: Dice
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -6064,15 +6064,15 @@ public struct StartingAgeConfigForExperienceLevel: Decodable, Equatable, Sendabl
 
 public struct RaceTranslation: Decodable, Equatable, Sendable {
   /// The race’s name.
-  let name: String
+  public let name: String
 
   /// The race’s name in prerequisites, if different from the normal race’s name.
-  let nameInPrerequisites: String?
+  public let nameInPrerequisites: String?
 
   /// The label for hair colors if it is not a hair color in that sense: Some races may have different labels for hair color such as scale color.
-  let hairColorLabel: String?
+  public let hairColorLabel: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6096,7 +6096,7 @@ public typealias BaseValues = [DerivedCharacteristic.ID: RaceBaseValue]
 /// The base value for a derived characteristic that is granted by the race.
 public struct RaceBaseValue: Decodable, Equatable, Sendable {
   /// The base value for the derived characteristic that is granted by the race.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -6115,24 +6115,24 @@ public struct DerivedCharacteristic: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// The position of the derived characteristic in lists. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// The derived characteristic may have a specific use in the game.
-  let type: DerivedCharacteristicType?
+  public let type: DerivedCharacteristicType?
 
   /// The derived characteristic is relevant in combat and should be shown on combat-related character sheets.
-  let isCombatRelated: Bool
+  public let isCombatRelated: Bool
 
   /// Instructions for calculating the derived characteristic’s value.
-  let calculation: DerivedCharacteristicCalculation
+  public let calculation: DerivedCharacteristicCalculation
 
-  let prerequisites: DerivedCharacteristicPrerequisites?
+  public let prerequisites: DerivedCharacteristicPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DerivedCharacteristicTranslation>
+  public let translations: LocaleMap<DerivedCharacteristicTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -6175,22 +6175,22 @@ public struct DerivedCharacteristic: Decodable, Equatable, Sendable, Identifiabl
 
 public struct DerivedCharacteristicTranslation: Decodable, Equatable, Sendable {
   /// The derived characteristic’s name.
-  let name: String
+  public let name: String
 
   /// The derived characteristic’s abbreviation.
-  let abbreviation: String
+  public let abbreviation: String
 
   /// The unit the derived characteristic is measured in, if different from the main abbreviation.
-  let unitAbbreviation: String?
+  public let unitAbbreviation: String?
 
   /// The value-aware unit the derived characteristic is measured in, if different from the normal unit abbreviation. The string must follow the MessageFormat 2 specification and receives the value for the unit as the parameter `$value`. This can be used to display the unit in singular or plural form depending on the value, if relevant.
-  let unitAbbreviationValueAware: String?
+  public let unitAbbreviationValueAware: String?
 
   /// The derived characteristic’s description.
-  let description: String?
+  public let description: String?
 
   /// Possible calculation strings for the final value.
-  let calculation: CalculationTranslation?
+  public let calculation: CalculationTranslation?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6249,10 +6249,10 @@ public struct EnergyType: Decodable, Equatable, Sendable {
   /// If set, the energy’s maximum value can be improved by spending AP.
   ///
   /// If the energy’s permanent losses can be bought back, points will not be able to be purchased unless all permanent losses have been bought back.
-  let purchase: DerivedCharacteristicPurchase?
+  public let purchase: DerivedCharacteristicPurchase?
 
   /// If set, the energy can suffer permanent losses that reduce its maximum value. It may also be possible to buy back these permanent losses.
-  let permanentLoss: DerivedCharacteristicPermanentLoss?
+  public let permanentLoss: DerivedCharacteristicPermanentLoss?
 
   private enum CodingKeys: String, CodingKey {
     case purchase = "purchase"
@@ -6269,10 +6269,10 @@ public struct EnergyType: Decodable, Equatable, Sendable {
 
 public struct DerivedCharacteristicPurchase: Decodable, Equatable, Sendable {
   /// The cost for improving the derived characteristic by one.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The maximum value that can be achieved for the derived characteristic through improvements.
-  let maximum: DerivedCharacteristicPurchaseMaximumValue
+  public let maximum: DerivedCharacteristicPurchaseMaximumValue
 
   private enum CodingKeys: String, CodingKey {
     case improvementCost = "improvementCost"
@@ -6343,7 +6343,7 @@ public enum DerivedCharacteristicPrimaryAttributeValue: Decodable, Equatable, Se
 
 public struct DerivedCharacteristicPermanentLoss: Decodable, Equatable, Sendable {
   /// If set, permanent losses to the derived characteristic can be bought back for the specified cost.
-  let canBeBoughtBack: DerivedCharacteristicBuyBack?
+  public let canBeBoughtBack: DerivedCharacteristicBuyBack?
 
   private enum CodingKeys: String, CodingKey {
     case canBeBoughtBack = "canBeBoughtBack"
@@ -6358,7 +6358,7 @@ public struct DerivedCharacteristicPermanentLoss: Decodable, Equatable, Sendable
 
 public struct DerivedCharacteristicBuyBack: Decodable, Equatable, Sendable {
   /// The AP cost for buying back one point.
-  let cost: Int
+  public let cost: Int
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -6373,10 +6373,10 @@ public struct DerivedCharacteristicBuyBack: Decodable, Equatable, Sendable {
 
 public struct DerivedCharacteristicCalculation: Decodable, Equatable, Sendable {
   /// The base value for the calculation.
-  let base: DerivedCharacteristicBase
+  public let base: DerivedCharacteristicBase
 
   /// A list of modifiers that are applied to the base value. The modifiers are applied in the order they appear in the list.
-  let modifiers: [DerivedCharacteristicModifier]?
+  public let modifiers: [DerivedCharacteristicModifier]?
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -6490,13 +6490,13 @@ public enum DerivedCharacteristicBaseValue: Decodable, Equatable, Sendable {
 
 public struct DerivedCharacteristicModifier: Decodable, Equatable, Sendable {
   /// The entry that, when active, causes the modifier.
-  let source: DerivedCharacteristicModifierPrerequisiteGroup
+  public let source: DerivedCharacteristicModifierPrerequisiteGroup
 
   /// The mathematical operation that modifies the base value. The previous result is on the left side.
-  let operation: DerivedCharacteristicModifierOperation
+  public let operation: DerivedCharacteristicModifierOperation
 
   /// The value that is used in the modifier operation. If the source entry has levels, the value is multiplied by the source entry’s level.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case source = "source"
@@ -6542,9 +6542,9 @@ public enum DerivedCharacteristicModifierPrerequisiteGroup: Decodable, Equatable
 
 /// Requires a specific extension rule (focus rule or optional rule) to be used/active.
 public struct RulePrerequisite: Decodable, Equatable, Sendable {
-  let id: ExtensionRuleIdentifier
-  let active: Bool
-  let displayOption: DisplayOption?
+  public let id: ExtensionRuleIdentifier
+  public let active: Bool
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -6594,21 +6594,21 @@ public struct FocusRule: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The associated subject.
-  let subject: Subject.ID
+  public let subject: Subject.ID
 
   /// The focus rule’s level.
-  let level: Int
+  public let level: Int
 
   /// Has the focus rule not been implemented in Optolith yet? This is also true if the focus rule does not (currently) apply to any Optolith feature.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
-  let prerequisites: RulePrerequisites?
+  public let prerequisites: RulePrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FocusRuleTranslation>
+  public let translations: LocaleMap<FocusRuleTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case subject = "subject"
@@ -6649,12 +6649,12 @@ public struct FocusRule: Decodable, Equatable, Sendable, Identifiable {
 
 public struct FocusRuleTranslation: Decodable, Equatable, Sendable {
   /// The focus rule’s name.
-  let name: String
+  public let name: String
 
   /// The description of the focus rule.
-  let description: String
+  public let description: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6678,7 +6678,7 @@ public struct Subject: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SubjectTranslation>
+  public let translations: LocaleMap<SubjectTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -6709,7 +6709,7 @@ public struct Subject: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SubjectTranslation: Decodable, Equatable, Sendable {
   /// The subject.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6752,18 +6752,18 @@ public struct OptionalRule: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Has the optional rule not been implemented in Optolith yet? This is also true if the optional rule does not (currently) apply to any Optolith feature.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
   /// How this optional rule influences the complexity of the game, if specified.
-  let complexityInfluence: ComplexityInfluence?
+  public let complexityInfluence: ComplexityInfluence?
 
-  let prerequisites: RulePrerequisites?
+  public let prerequisites: RulePrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<OptionalRuleTranslation>
+  public let translations: LocaleMap<OptionalRuleTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case isMissingImplementation = "isMissingImplementation"
@@ -6802,15 +6802,15 @@ public struct OptionalRule: Decodable, Equatable, Sendable, Identifiable {
 
 public struct OptionalRuleTranslation: Decodable, Equatable, Sendable {
   /// The optional rule’s name.
-  let name: String
+  public let name: String
 
   /// The description of the optional rule, as stated in the optional rule box.
-  let description: String
+  public let description: String
 
   /// Sometimes, an optional rule does not only contain all the rules belonging to it in its rule box, but also in the main text.
-  let additionalRules: String?
+  public let additionalRules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6838,13 +6838,13 @@ public struct OptionalRuleOption: Decodable, Equatable, Sendable, Identifiable, 
   public let id: ID
 
   /// The optional rule this option belongs to.
-  let parent: OptionalRule.ID
+  public let parent: OptionalRule.ID
 
   /// The value what this option means in context of the optional rule.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<OptionalRuleOptionTranslation>
+  public let translations: LocaleMap<OptionalRuleOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -6879,7 +6879,7 @@ public struct OptionalRuleOption: Decodable, Equatable, Sendable, Identifiable, 
 
 public struct OptionalRuleOptionTranslation: Decodable, Equatable, Sendable {
   /// The optional rule option’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -6933,20 +6933,20 @@ public enum ComplexityInfluence: Decodable, Equatable, Sendable {
 /// Requires a specific advantage, disadvantage or special ability.
 public struct ActivatablePrerequisite: Decodable, Equatable, Sendable {
   /// The activatable entry’s identifier.
-  let id: ActivatableIdentifier
+  public let id: ActivatableIdentifier
 
   /// If the required entry should be required to be active or inactive.
-  let active: Bool
+  public let active: Bool
 
   /// The required minimum level of the entry.
-  let level: Int?
+  public let level: Int?
 
   /// Required select options. Order is important. Typically, you only need the first array index, though.
-  let options: [RequirableSelectOptionIdentifier]?
+  public let options: [RequirableSelectOptionIdentifier]?
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
-  let when: Preconditions?
+  public let when: Preconditions?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -7124,22 +7124,22 @@ public struct CloseCombatTechnique: Decodable, Equatable, Sendable, Identifiable
   public let id: ID
 
   /// Special rules for the combat technique that apply to all weapons in this category.
-  let special: CloseCombatTechniqueSpecialRules
+  public let special: CloseCombatTechniqueSpecialRules
 
   /// The primary attribute(s).
-  let primaryAttribute: [Attribute.ID]
+  public let primaryAttribute: [Attribute.ID]
 
   /// The *Breaking Point Rating* of the respective combat technique.
-  let breakingPointRating: Int
+  public let breakingPointRating: Int
 
   /// States which column is used to improve the combat technique.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CloseCombatTechniqueTranslation>
+  public let translations: LocaleMap<CloseCombatTechniqueTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case special = "special"
@@ -7180,12 +7180,12 @@ public struct CloseCombatTechnique: Decodable, Equatable, Sendable, Identifiable
 
 public struct CloseCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The combat technique’s name.
-  let name: String
+  public let name: String
 
   /// Additional rules for the combat technique, if applicable.
-  let special: String?
+  public let special: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7205,18 +7205,18 @@ public struct CloseCombatTechniqueTranslation: Decodable, Equatable, Sendable {
 /// Special rules for the combat technique that apply to all weapons in this category.
 public struct CloseCombatTechniqueSpecialRules: Decodable, Equatable, Sendable {
   /// Do weapons of this combat technique have an attack modifier?
-  let hasAttackModifier: WeaponCombatTechniqueValueRule
+  public let hasAttackModifier: WeaponCombatTechniqueValueRule
 
   /// Is parrying possible with this combat technique?
-  let canParry: WeaponCombatTechniqueValueRule
+  public let canParry: WeaponCombatTechniqueValueRule
 
-  let hasDamageThreshold: WeaponCombatTechniqueValueRule
+  public let hasDamageThreshold: WeaponCombatTechniqueValueRule
 
-  let hasReach: WeaponCombatTechniqueValueRule
+  public let hasReach: WeaponCombatTechniqueValueRule
 
-  let hasLength: WeaponCombatTechniqueValueRule
+  public let hasLength: WeaponCombatTechniqueValueRule
 
-  let hasShieldSize: WeaponCombatTechniqueValueRule
+  public let hasShieldSize: WeaponCombatTechniqueValueRule
 
   private enum CodingKeys: String, CodingKey {
     case hasAttackModifier = "hasAttackModifier"
@@ -7283,22 +7283,22 @@ public struct RangedCombatTechnique: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Special rules for the combat technique that apply to all weapons in this category.
-  let special: RangedCombatTechniqueSpecialRules
+  public let special: RangedCombatTechniqueSpecialRules
 
   /// The primary attribute(s).
-  let primaryAttribute: [Attribute.ID]
+  public let primaryAttribute: [Attribute.ID]
 
   /// The *Breaking Point Rating* of the respective combat technique.
-  let breakingPointRating: Int
+  public let breakingPointRating: Int
 
   /// States which column is used to improve the combat technique.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RangedCombatTechniqueTranslation>
+  public let translations: LocaleMap<RangedCombatTechniqueTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case special = "special"
@@ -7339,12 +7339,12 @@ public struct RangedCombatTechnique: Decodable, Equatable, Sendable, Identifiabl
 
 public struct RangedCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The combat technique’s name.
-  let name: String
+  public let name: String
 
   /// Additional rules for the combat technique, if applicable.
-  let special: String?
+  public let special: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7363,7 +7363,7 @@ public struct RangedCombatTechniqueTranslation: Decodable, Equatable, Sendable {
 
 /// Special rules for the combat technique that apply to all weapons in this category.
 public struct RangedCombatTechniqueSpecialRules: Decodable, Equatable, Sendable {
-  let hasAmmunition: WeaponCombatTechniqueValueRule
+  public let hasAmmunition: WeaponCombatTechniqueValueRule
 
   private enum CodingKeys: String, CodingKey {
     case hasAmmunition = "has_ammunition"
@@ -7382,13 +7382,13 @@ public struct Property: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The property check’s attributes. Only the properties from the Core Rules have defined property checks.
-  let check: SkillCheck?
+  public let check: SkillCheck?
 
   /// The property’s derived specializations.
-  let derivedSpecializations: DerivedPropertySpecializations?
+  public let derivedSpecializations: DerivedPropertySpecializations?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PropertyTranslation>
+  public let translations: LocaleMap<PropertyTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -7423,7 +7423,7 @@ public struct Property: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PropertyTranslation: Decodable, Equatable, Sendable {
   /// The property’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7445,10 +7445,10 @@ public struct PropertySpecialization: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// The associated property.
-  let parent: Property.ID
+  public let parent: Property.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PropertySpecializationTranslation>
+  public let translations: LocaleMap<PropertySpecializationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -7481,7 +7481,7 @@ public struct PropertySpecialization: Decodable, Equatable, Sendable, Identifiab
 
 public struct PropertySpecializationTranslation: Decodable, Equatable, Sendable {
   /// The property’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7522,7 +7522,7 @@ public struct Aspect: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AspectTranslation>
+  public let translations: LocaleMap<AspectTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -7553,10 +7553,10 @@ public struct Aspect: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AspectTranslation: Decodable, Equatable, Sendable {
   /// The aspect’s name.
-  let name: String
+  public let name: String
 
   /// In some languages, the aspect’s grammatical gender influences the full name of a *Master of (Aspect)* instance. To make this possible, the *name* (**not** the *name in library*) is joined with what is contained in this field.
-  let masterOfAspectSuffix: String?
+  public let masterOfAspectSuffix: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7577,31 +7577,31 @@ public struct Disease: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The disease’s level.
-  let level: Int
+  public let level: Int
 
   /// Depending on the disease or poison, apply Spirit or Toughness as a penalty to the disease or poison roll. It may also happen that the minimum is applied as a penalty.
-  let resistance: Resistance
+  public let resistance: Resistance
 
   /// What causes the disease? The GM rolls 1D20 to see if a character gets infected. If the infection check succeeds, the GM makes a disease check to determine the severity of the infection.
-  let cause: [Cause]
+  public let cause: [Cause]
 
   /// AP value and prerequisites of the disease’s trade secret.
-  let tradeSecret: RecipeTradeSecret?
+  public let tradeSecret: RecipeTradeSecret?
 
   /// Whether the disease is a childhood disease.
-  let isChildhoodDisease: Bool
+  public let isChildhoodDisease: Bool
 
   /// Whether the disease is a magical disease.
-  let isMagicalDisease: Bool
+  public let isMagicalDisease: Bool
 
   /// Whether the disease is sexually transmittable.
-  let isSexuallyTransmittableDisease: Bool
+  public let isSexuallyTransmittableDisease: Bool
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DiseaseTranslation>
+  public let translations: LocaleMap<DiseaseTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -7648,33 +7648,33 @@ public struct Disease: Decodable, Equatable, Sendable, Identifiable {
 
 public struct DiseaseTranslation: Decodable, Equatable, Sendable {
   /// The disease’s name.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// The disease’s progress, in detail.
-  let progress: String
+  public let progress: String
 
   /// After infection, how much time passes before symptoms appear?
-  let incubationTime: String
+  public let incubationTime: String
 
   /// The damage caused by the disease. If the disease check fails, apply the lessened effects.
-  let damage: Reduceable<String>
+  public let damage: Reduceable<String>
 
   /// The duration of the disease. If the disease check fails, use the lessened duration.
-  let duration: Reduceable<String>
+  public let duration: Reduceable<String>
 
   /// Special information about the disease.
-  let special: String?
+  public let special: String?
 
   /// Methods known to lessen the disease’s progress or relieve symptoms.
-  let treatment: String
+  public let treatment: String
 
   /// Known remedies for the disease.
-  let cure: String
+  public let cure: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7736,7 +7736,7 @@ public enum Resistance: Decodable, Equatable, Sendable {
 /// A single derived characteristic that classifies as a resistance.
 public struct SingleResistance: Decodable, Equatable, Sendable {
   /// The derived characteristic that is used for the skill check.
-  let derivedCharacteristic: DerivedCharacteristic.ID
+  public let derivedCharacteristic: DerivedCharacteristic.ID
 
   private enum CodingKeys: String, CodingKey {
     case derivedCharacteristic = "derivedCharacteristic"
@@ -7752,7 +7752,7 @@ public struct SingleResistance: Decodable, Equatable, Sendable {
 /// Multiple derived characteristics that classify as resistances whose minimum value represents the actual resistance against the disease.
 public struct MinimumResistance: Decodable, Equatable, Sendable {
   /// The derived characteristic that is used for the skill check.
-  let derivedCharacteristics: [DerivedCharacteristic.ID]
+  public let derivedCharacteristics: [DerivedCharacteristic.ID]
 
   private enum CodingKeys: String, CodingKey {
     case derivedCharacteristics = "derivedCharacteristics"
@@ -7768,10 +7768,10 @@ public struct MinimumResistance: Decodable, Equatable, Sendable {
 /// What causes the disease? The GM rolls 1D20 to see if a character gets infected. If the infection check succeeds, the GM makes a disease check to determine the severity of the infection.
 public struct Cause: Decodable, Equatable, Sendable {
   /// The chance to get infected by this cause, in percent. Some causes do not have a specific chance.
-  let chance: Int?
+  public let chance: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CauseTranslation>
+  public let translations: LocaleMap<CauseTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case chance = "chance"
@@ -7788,13 +7788,13 @@ public struct Cause: Decodable, Equatable, Sendable {
 
 public struct CauseTranslation: Decodable, Equatable, Sendable {
   /// The cause’s name.
-  let name: String
+  public let name: String
 
   /// The chance to get infected by this cause. If present for this language, this overrides the universal `chance` field; they cannot be used at the same time.
-  let chance: String?
+  public let chance: String?
 
   /// An additional note about this cause.
-  let note: String?
+  public let note: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7814,13 +7814,13 @@ public struct CauseTranslation: Decodable, Equatable, Sendable {
 /// A recipe’s trade secret inherits the source references from its recipe. Specifying source references here instead means none of the recipe’s source references are inherited.
 public struct RecipeTradeSecret: Decodable, Equatable, Sendable {
   /// The AP value of the trade secret.
-  let apValue: Int
+  public let apValue: Int
 
   /// The prerequisites of the trade secret, if any.
-  let prerequisites: PlainGeneralPrerequisites?
+  public let prerequisites: PlainGeneralPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -7841,13 +7841,13 @@ public typealias PlainGeneralPrerequisites = PlainPrerequisites<GeneralPrerequis
 
 public struct AlternativeName: Decodable, Equatable, Sendable {
   /// An alternative name of the disease.
-  let name: String
+  public let name: String
 
   /// The region where this alternative name is used.
-  let region: String?
+  public let region: String?
 
   /// The language of that alternative name if any.
-  let language: Language.ID?
+  public let language: Language.ID?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7870,21 +7870,21 @@ public struct Language: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The continents this language is present on.
-  let continent: [AssociatedContinent]
+  public let continent: [AssociatedContinent]
 
   /// If applicable, a description of what may be a specialization.
-  let customSpecializations: IndefiniteSpecializations?
+  public let customSpecializations: IndefiniteSpecializations?
 
-  let prerequisites: LanguagePrerequisites?
+  public let prerequisites: LanguagePrerequisites?
 
   /// The maximum possible level of the language. Only specified if lower than default of 3.
-  let maxLevel: Int?
+  public let maxLevel: Int?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LanguageTranslation>
+  public let translations: LocaleMap<LanguageTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case continent = "continent"
@@ -7925,15 +7925,15 @@ public struct Language: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LanguageTranslation: Decodable, Equatable, Sendable {
   /// The language’s name.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// The description of the language.
-  let description: String?
+  public let description: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -7954,10 +7954,10 @@ public struct LanguageTranslation: Decodable, Equatable, Sendable {
 
 public struct AssociatedContinent: Decodable, Equatable, Sendable {
   /// The continent’s identifier.
-  let id: Continent.ID
+  public let id: Continent.ID
 
   /// Is the language considered virtually extinct in this continent?
-  let isExtinct: Bool
+  public let isExtinct: Bool
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -7979,7 +7979,7 @@ public struct Continent: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ContinentTranslation>
+  public let translations: LocaleMap<ContinentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -8010,7 +8010,7 @@ public struct Continent: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ContinentTranslation: Decodable, Equatable, Sendable {
   /// The continent name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -8032,13 +8032,13 @@ public struct LanguageSpecialization: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// The language this specialization belongs to.
-  let parent: Language.ID
+  public let parent: Language.ID
 
   /// The specialization is only mentioned in a culture’s description and not where the language itself is defined.
-  let onlyForCulture: Bool
+  public let onlyForCulture: Bool
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LanguageSpecializationTranslation>
+  public let translations: LocaleMap<LanguageSpecializationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -8073,10 +8073,10 @@ public struct LanguageSpecialization: Decodable, Equatable, Sendable, Identifiab
 
 public struct LanguageSpecializationTranslation: Decodable, Equatable, Sendable {
   /// The specialization’s name.
-  let name: String
+  public let name: String
 
   /// The specialization description. It will be appended to the name in parenthesis.
-  let description: String?
+  public let description: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -8093,7 +8093,7 @@ public struct LanguageSpecializationTranslation: Decodable, Equatable, Sendable 
 
 public struct IndefiniteSpecializations: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteSpecializationsTranslation>
+  public let translations: LocaleMap<IndefiniteSpecializationsTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -8108,10 +8108,10 @@ public struct IndefiniteSpecializations: Decodable, Equatable, Sendable {
 
 public struct IndefiniteSpecializationsTranslation: Decodable, Equatable, Sendable {
   /// The specializations description.
-  let description: String
+  public let description: String
 
   /// An input label or placeholder text for an UI element if it differs from the `description`.
-  let label: String?
+  public let label: String?
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -8163,22 +8163,22 @@ public enum LanguagePrerequisiteGroup: Decodable, Equatable, Sendable {
 /// A prerequisite that is either not verifyable in general – e.g. roleplay or background information – or the referenced entities were not made available for use yet – e.g. races –, but which should be displayed, because it is part of the prerequisite string from the sources.
 public struct TextPrerequisite: Decodable, Equatable, Sendable {
   /// The method how the prerequisite should be verified. Either is passes all verification text or it denies all verification tests. The latter results in the associated entry to never be available for purchase.
-  let verification: TextVerificationRule
+  public let verification: TextVerificationRule
 
   /// If the text is a sentence or sentence-like fragment, this property ensures it is integrated into the prerequisite string correctly.
   ///
   /// A standalone sentence is connected to the previous prerequisite string with a period and a period is also added at the end of the sentence automatically, if it is not present. A connected sentence is connected to the previous prerequisite string with a semicolon and a period is not added to the end of the sentence. In this case, if there are prerequisites after this one, they will be connected using a semicolon again, unless a different punctuation mark is present at the end of the given text.
-  let sentenceType: SentenceType?
+  public let sentenceType: SentenceType?
 
   /// If the text does not represent an actual prerequisite but a prerequisite for the use of certain aspects or the entry the prerequisite is associated with, or something like that, this property is set to `true`.
   ///
   /// If all prerequisites of an entry are marked as meta, the entry is considered to have no prerequisites and thus the string `none` must be rendered before the list of meta prerequisites.
   ///
   /// This is the only use case for this property.
-  let isMeta: Bool?
+  public let isMeta: Bool?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TextPrerequisiteTranslation>
+  public let translations: LocaleMap<TextPrerequisiteTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case verification = "verification"
@@ -8199,7 +8199,7 @@ public struct TextPrerequisite: Decodable, Equatable, Sendable {
 
 public struct TextPrerequisiteTranslation: Decodable, Equatable, Sendable {
   /// The displayed text.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -8244,13 +8244,13 @@ public enum TextVerificationRule: Decodable, Equatable, Sendable {
 /// This streamlines the wording for diseases and poison by using a unified wording for *lessened* (disease) and *degraded* (poison).
 public struct Reduceable<Content: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The default value. In the source, it's the text before the slash.
-  let `default`: Content
+  public let `default`: Content
 
   /// The reduced value. In the source, it's the text after the slash. Some entries may not have a reduced value, i.e. there is no slash with text after it. If the text after the slash is a dash, include it here as well.
-  let reduced: Content?
+  public let reduced: Content?
 
   /// An additional text that applies regardless of the effect being reduced or not.
-  let additonal: String?
+  public let additonal: String?
 
   private enum CodingKeys: String, CodingKey {
     case `default` = "default"
@@ -8273,34 +8273,34 @@ public struct Poison: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The poison’s application type(s).
-  let applicationType: [PoisonApplicationType]
+  public let applicationType: [PoisonApplicationType]
 
   /// The poison’s source type and dependent additional values.
-  let sourceType: PoisonSourceType
+  public let sourceType: PoisonSourceType
 
   /// Use Spirit or Toughness as a modifier for the poison.
-  let resistance: Resistance
+  public let resistance: Resistance
 
   /// When the poison takes effect.
-  let start: PoisonStart
+  public let start: PoisonStart
 
   /// The normal and degraded poison’s duration.
-  let duration: Reduceable<PoisonDuration>
+  public let duration: Reduceable<PoisonDuration>
 
   /// The raw (ingredients) value per level, in silverthalers.
-  let value: Int?
+  public let value: Int?
 
   /// Price for one dose, in silverthalers.
-  let cost: PoisonCost?
+  public let cost: PoisonCost?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PoisonTranslation>
+  public let translations: LocaleMap<PoisonTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case applicationType = "application_type"
@@ -8349,18 +8349,18 @@ public struct Poison: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PoisonTranslation: Decodable, Equatable, Sendable {
   /// The name of the poison.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// The normal and degraded poison’s effects.
-  let effect: Reduceable<String>
+  public let effect: Reduceable<String>
 
   /// Notes on the poison’s special features.
-  let notes: String?
+  public let notes: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -8473,13 +8473,13 @@ public enum PoisonSourceType: Decodable, Equatable, Sendable {
 
 public struct AnimalVenom: Decodable, Equatable, Sendable {
   /// The poison’s level.
-  let level: AnimalVenomLevel
+  public let level: AnimalVenomLevel
 
   /// If `false`, the poison cannot be extracted.
-  let isExtractable: Bool
+  public let isExtractable: Bool
 
   /// The complexity of the poison. Complex poisons define AP value and prerequisites of the poison’s trade secret.
-  let complexity: RecipeComplexity?
+  public let complexity: RecipeComplexity?
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -8532,10 +8532,10 @@ public typealias AnimalVenomLevelBySubType = [AnimalVenomLevelBySubTypeItem]
 
 public struct AnimalVenomLevelBySubTypeItem: Decodable, Equatable, Sendable {
   /// The poison’s level.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalVenomLevelBySubTypeTranslation>
+  public let translations: LocaleMap<AnimalVenomLevelBySubTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -8552,7 +8552,7 @@ public struct AnimalVenomLevelBySubTypeItem: Decodable, Equatable, Sendable {
 
 public struct AnimalVenomLevelBySubTypeTranslation: Decodable, Equatable, Sendable {
   /// The subtype name. If there are multiple subtypes with the same level, specify them separately.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -8600,28 +8600,28 @@ public enum RecipeComplexity: Decodable, Equatable, Sendable {
 
 public struct AlchemicalPoison: Decodable, Equatable, Sendable {
   /// Effect type(s) of an alchemical poison.
-  let effectTypes: [EffectType]
+  public let effectTypes: [EffectType]
 
   /// The cost per ingredient level in silverthalers.
-  let costPerIngredientLevel: Int
+  public let costPerIngredientLevel: Int
 
   /// The laboratory level needed to brew the poison.
-  let laboratory: LaboratoryLevel
+  public let laboratory: LaboratoryLevel
 
   /// The brewing difficulty, which represents the challenge of creating a poison.
-  let brewingDifficulty: Int
+  public let brewingDifficulty: Int
 
   /// AP value and prerequisites of the poison recipe’s trade secret.
-  let tradeSecret: RecipeTradeSecret
+  public let tradeSecret: RecipeTradeSecret
 
   /// Additional information if the poison is an intoxicant.
-  let intoxicant: Intoxicant?
+  public let intoxicant: Intoxicant?
 
   /// Whether the poison is of demonic nature or not.
-  let isDemonic: Bool?
+  public let isDemonic: Bool?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AlchemicalPoisonTranslation>
+  public let translations: LocaleMap<AlchemicalPoisonTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case effectTypes = "effect_types"
@@ -8650,10 +8650,10 @@ public struct AlchemicalPoison: Decodable, Equatable, Sendable {
 
 public struct AlchemicalPoisonTranslation: Decodable, Equatable, Sendable {
   /// A list of typical ingredients.
-  let typicalIngredients: [String]
+  public let typicalIngredients: [String]
 
   /// Prerequsites for the brewing process, if any.
-  let brewingProcessPrerequisites: String?
+  public let brewingProcessPrerequisites: String?
 
   private enum CodingKeys: String, CodingKey {
     case typicalIngredients = "typical_ingredients"
@@ -8755,13 +8755,13 @@ public enum LaboratoryLevel: Decodable, Equatable, Sendable {
 
 public struct Intoxicant: Decodable, Equatable, Sendable {
   /// Whether the use of the intoxicant is legal or not, usually from the perspective of most middle-Aventurian an northern-Aventurian nations.
-  let legality: IntoxicantLegality
+  public let legality: IntoxicantLegality
 
   /// The chance of getting addicted after an ingestion in addition to the maximum interval at which it, while addicted, must be ingested to not suffer from withdrawal symptoms.
-  let addiction: IntoxicantAddiction?
+  public let addiction: IntoxicantAddiction?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IntoxicantTranslation>
+  public let translations: LocaleMap<IntoxicantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case legality = "legality"
@@ -8780,16 +8780,16 @@ public struct Intoxicant: Decodable, Equatable, Sendable {
 
 public struct IntoxicantTranslation: Decodable, Equatable, Sendable {
   /// How to ingest the intoxicant.
-  let ingestion: String?
+  public let ingestion: String?
 
   /// The intoxicants side effects that always happen, no matter whether the intoxicant has the default or the reduced effect.
-  let sideEffect: String?
+  public let sideEffect: String?
 
   /// What happens if the intoxicant has been overdosed, that is, it has been ingested another time within the duration.
-  let overdose: String?
+  public let overdose: String?
 
   /// Special information about the intoxicant.
-  let special: String?
+  public let special: String?
 
   private enum CodingKeys: String, CodingKey {
     case ingestion = "ingestion"
@@ -8810,7 +8810,7 @@ public struct IntoxicantTranslation: Decodable, Equatable, Sendable {
 
 /// Whether the use of the intoxicant is legal or not, usually from the perspective of most middle-Aventurian an northern-Aventurian nations.
 public struct IntoxicantLegality: Decodable, Equatable, Sendable {
-  let isLegal: Bool
+  public let isLegal: Bool
 
   private enum CodingKeys: String, CodingKey {
     case isLegal = "is_legal"
@@ -8826,19 +8826,19 @@ public struct IntoxicantLegality: Decodable, Equatable, Sendable {
 /// The chance of getting addicted after an ingestion in addition to the maximum interval at which it, while addicted, must be ingested to not suffer from withdrawal symptoms.
 public struct IntoxicantAddiction: Decodable, Equatable, Sendable {
   /// The chance of getting addicted after an ingestion in percent. Some intoxicants do not have a contant chance of addiction.
-  let chance: Int?
+  public let chance: Int?
 
   /// The interval at which to check for addiction after an ingestion. If set to one, every ingestion has to be checked for addiction. If set to two, every second ingestion has to be checked, and so on.
-  let check: IntoxicantAddictionCheck?
+  public let check: IntoxicantAddictionCheck?
 
   /// The maximum interval at which it, while addicted, must be ingested to not suffer from withdrawal symptoms.
-  let withdrawalPrevention: IntoxicantAddictionWithdrawalPrevention?
+  public let withdrawalPrevention: IntoxicantAddictionWithdrawalPrevention?
 
   /// The disease that represents the addiction.
-  let disease: Disease.ID?
+  public let disease: Disease.ID?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IntoxicantAddictionTranslation>?
+  public let translations: LocaleMap<IntoxicantAddictionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case chance = "chance"
@@ -8861,7 +8861,7 @@ public struct IntoxicantAddiction: Decodable, Equatable, Sendable {
 
 public struct IntoxicantAddictionTranslation: Decodable, Equatable, Sendable {
   /// The chance of getting addicted after an ingestion. Use if and only if the plain constant percent is not sufficient.
-  let chance: String
+  public let chance: String
 
   private enum CodingKeys: String, CodingKey {
     case chance = "chance"
@@ -8876,10 +8876,10 @@ public struct IntoxicantAddictionTranslation: Decodable, Equatable, Sendable {
 
 /// The interval at which to check for addiction after an ingestion. If set to one, every ingestion has to be checked for addiction. If set to two, every second ingestion has to be checked, and so on.
 public struct IntoxicantAddictionCheck: Decodable, Equatable, Sendable {
-  let interval: Int
+  public let interval: Int
 
   /// If true, only ingestions in the same month count for the check interval.
-  let onlySameMonth: Bool?
+  public let onlySameMonth: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case interval = "interval"
@@ -8896,10 +8896,10 @@ public struct IntoxicantAddictionCheck: Decodable, Equatable, Sendable {
 
 public struct IntoxicantAddictionWithdrawalPrevention: Decodable, Equatable, Sendable {
   /// The amount that must be ingested within the interval to prevent withdrawal symptoms.
-  let amount: Int
+  public let amount: Int
 
   /// The maximum interval at which it, while addicted, must be ingested to not suffer from withdrawal symptoms.
-  let interval: IntoxicantAddictionWithdrawalPreventionInterval
+  public let interval: IntoxicantAddictionWithdrawalPreventionInterval
 
   private enum CodingKeys: String, CodingKey {
     case amount = "amount"
@@ -8944,7 +8944,7 @@ public enum IntoxicantAddictionWithdrawalPreventionInterval: Decodable, Equatabl
 
 public struct ConstantIntoxicantAddictionInterval: Decodable, Equatable, Sendable {
   /// The interval value in days.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -8959,7 +8959,7 @@ public struct ConstantIntoxicantAddictionInterval: Decodable, Equatable, Sendabl
 
 public struct DiceBasedIntoxicantAddictionInterval: Decodable, Equatable, Sendable {
   /// The dice that define the interval value in days.
-  let dice: Dice
+  public let dice: Dice
 
   private enum CodingKeys: String, CodingKey {
     case dice = "dice"
@@ -8974,10 +8974,10 @@ public struct DiceBasedIntoxicantAddictionInterval: Decodable, Equatable, Sendab
 
 public struct Dice: Decodable, Equatable, Sendable {
   /// Number of dice of the same type. Example: 2 in 2D6.
-  let number: Int
+  public let number: Int
 
   /// Number of sides on every die. Example: 6 in 2D6.
-  let sides: DieType
+  public let sides: DieType
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -8997,7 +8997,7 @@ public typealias DieType = Int
 
 public struct MineralPoison: Decodable, Equatable, Sendable {
   /// The poison’s level.
-  let level: Int
+  public let level: Int
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -9012,13 +9012,13 @@ public struct MineralPoison: Decodable, Equatable, Sendable {
 
 public struct PlantPoison: Decodable, Equatable, Sendable {
   /// Effect type(s) of a plant poison.
-  let effectTypes: [EffectType]?
+  public let effectTypes: [EffectType]?
 
   /// The poison’s level.
-  let level: Int
+  public let level: Int
 
   /// Additional information if the poison is an intoxicant.
-  let intoxicant: Intoxicant?
+  public let intoxicant: Intoxicant?
 
   private enum CodingKeys: String, CodingKey {
     case effectTypes = "effect_types"
@@ -9037,7 +9037,7 @@ public struct PlantPoison: Decodable, Equatable, Sendable {
 
 public struct DemonicPoison: Decodable, Equatable, Sendable {
   /// The poison’s level.
-  let level: DemonicPoisonLevel
+  public let level: DemonicPoisonLevel
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -9078,7 +9078,7 @@ public enum DemonicPoisonLevel: Decodable, Equatable, Sendable {
 }
 
 public struct QualityLevelDemonicPoisonLevel: Decodable, Equatable, Sendable {
-  let source: QualityLevelDemonicPoisonLevelSource
+  public let source: QualityLevelDemonicPoisonLevelSource
 
   private enum CodingKeys: String, CodingKey {
     case source = "source"
@@ -9115,7 +9115,7 @@ public enum QualityLevelDemonicPoisonLevelSource: Decodable, Equatable, Sendable
 
 public struct ConstantDemonicPoisonLevel: Decodable, Equatable, Sendable {
   /// The poison’s level.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -9161,8 +9161,8 @@ public enum PoisonStart: Decodable, Equatable, Sendable {
 }
 
 public struct ExpressionBasedPoisonTime: Decodable, Equatable, Sendable {
-  let value: ExpressionBasedPoisonTimeValue
-  let unit: PoisonTimeUnit
+  public let value: ExpressionBasedPoisonTimeValue
+  public let unit: PoisonTimeUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -9255,7 +9255,7 @@ public enum PoisonTimeUnit: Decodable, Equatable, Sendable {
 
 public struct IndefinitePoisonTime: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefinitePoisonTimeTranslation>?
+  public let translations: LocaleMap<IndefinitePoisonTimeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -9270,7 +9270,7 @@ public struct IndefinitePoisonTime: Decodable, Equatable, Sendable {
 
 public struct IndefinitePoisonTimeTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: String?
+  public let description: String?
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -9370,7 +9370,7 @@ public enum PoisonCost: Decodable, Equatable, Sendable {
 
 public struct NoPoisonCost: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NoPoisonCostTranslation>?
+  public let translations: LocaleMap<NoPoisonCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -9385,7 +9385,7 @@ public struct NoPoisonCost: Decodable, Equatable, Sendable {
 
 public struct NoPoisonCostTranslation: Decodable, Equatable, Sendable {
   /// A description of the cost.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -9400,7 +9400,7 @@ public struct NoPoisonCostTranslation: Decodable, Equatable, Sendable {
 
 public struct IndefinitePoisonCost: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefinitePoisonCostTranslation>
+  public let translations: LocaleMap<IndefinitePoisonCostTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -9415,7 +9415,7 @@ public struct IndefinitePoisonCost: Decodable, Equatable, Sendable {
 
 public struct IndefinitePoisonCostTranslation: Decodable, Equatable, Sendable {
   /// A description of the cost.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -9431,10 +9431,10 @@ public struct IndefinitePoisonCostTranslation: Decodable, Equatable, Sendable {
 /// The cost depends on whether the poison is being purchased or sold.
 public struct DependingOnPurchaseOrSalePoisonCost: Decodable, Equatable, Sendable {
   /// The cost when purchasing the poison.
-  let purchase: Float
+  public let purchase: Float
 
   /// The cost when selling the poison.
-  let sale: Float
+  public let sale: Float
 
   private enum CodingKeys: String, CodingKey {
     case purchase = "purchase"
@@ -9451,13 +9451,13 @@ public struct DependingOnPurchaseOrSalePoisonCost: Decodable, Equatable, Sendabl
 
 public struct CostRange: Decodable, Equatable, Sendable {
   /// The lower bound of the cost in silverthalers.
-  let from: Float
+  public let from: Float
 
   /// The upper bound of the cost in silverthalers.
-  let to: Float?
+  public let to: Float?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CostRangeTranslation>?
+  public let translations: LocaleMap<CostRangeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case from = "from"
@@ -9476,7 +9476,7 @@ public struct CostRange: Decodable, Equatable, Sendable {
 
 public struct CostRangeTranslation: Decodable, Equatable, Sendable {
   /// The cost get wrapped by this text using a placeholder in the text.
-  let wrapInText: String
+  public let wrapInText: String
 
   private enum CodingKeys: String, CodingKey {
     case wrapInText = "wrap_in_text"
@@ -9519,13 +9519,13 @@ public struct AnimalShape: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The animal shape’s path.
-  let path: AnimalShapePath.ID
+  public let path: AnimalShapePath.ID
 
   /// The animal shape’s size.
-  let size: AnimalShapeSize.ID
+  public let size: AnimalShapeSize.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalShapeTranslation>
+  public let translations: LocaleMap<AnimalShapeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case path = "path"
@@ -9560,7 +9560,7 @@ public struct AnimalShape: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalShapeTranslation: Decodable, Equatable, Sendable {
   /// The animal shape’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -9579,7 +9579,7 @@ public struct AnimalShapePath: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalShapePathTranslation>
+  public let translations: LocaleMap<AnimalShapePathTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -9610,7 +9610,7 @@ public struct AnimalShapePath: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalShapePathTranslation: Decodable, Equatable, Sendable {
   /// The animal shape path’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -9629,13 +9629,13 @@ public struct AnimalShapeSize: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The animal shape size’s volume points
-  let volume: Int
+  public let volume: Int
 
   /// The animal shape size’s adventure point value
-  let apValue: Int
+  public let apValue: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalShapeSizeTranslation>
+  public let translations: LocaleMap<AnimalShapeSizeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case volume = "volume"
@@ -9670,10 +9670,10 @@ public struct AnimalShapeSize: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalShapeSizeTranslation: Decodable, Equatable, Sendable {
   /// The animal shape size’s name.
-  let name: String
+  public let name: String
 
   /// The animal shape size’s name in the generated AP Value text for the Animal Shape entry.
-  let nameInAPValue: String
+  public let nameInAPValue: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -9694,31 +9694,31 @@ public struct LiturgicalChant: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a liturgical chant.
-  let parameters: FastPerformanceParameters
+  public let parameters: FastPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The tradition(s) the liturgical chant is available for. Note that general aspects do not have an associated tradition and thus need to be defined in a special way.
-  let traditions: [LiturgyTradition]
+  public let traditions: [LiturgyTradition]
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The prerequisites for the liturgical chant.
-  let prerequisites: LiturgyPrerequisites?
+  public let prerequisites: LiturgyPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LiturgicalChantTranslation>
+  public let translations: LocaleMap<LiturgicalChantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -9765,30 +9765,30 @@ public struct LiturgicalChant: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LiturgicalChantTranslation: Decodable, Equatable, Sendable {
   /// The liturgical chant’s name.
-  let name: String
+  public let name: String
 
   /// A compressed name of the liturgical chant for use in small areas (e.g. on character sheet). Should only be defined if the `name` does not fit on character sheet.
-  let nameCompressed: String?
+  public let nameCompressed: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -9886,10 +9886,10 @@ public enum DerivedCharacteristicSkillCheckPenalty: Decodable, Equatable, Sendab
 /// A single derived characteristic that classifies as a resistance that represents a penalty for the associated skill check. It may be halved for the skill check.
 public struct SingleDerivedCharacteristicSkillCheckPenalty: Decodable, Equatable, Sendable {
   /// The derived characteristic that is used for the skill check.
-  let derivedCharacteristic: DerivedCharacteristic.ID
+  public let derivedCharacteristic: DerivedCharacteristic.ID
 
   /// Is the penalty halved for this skill check?
-  let halved: Bool
+  public let halved: Bool
 
   private enum CodingKeys: String, CodingKey {
     case derivedCharacteristic = "derivedCharacteristic"
@@ -9907,7 +9907,7 @@ public struct SingleDerivedCharacteristicSkillCheckPenalty: Decodable, Equatable
 /// Multiple derived characteristics that classify as resistances whose maximum value represents a penalty for the associated skill check.
 public struct MaximumDerivedCharacteristicSkillCheckPenalty: Decodable, Equatable, Sendable {
   /// The derived characteristic that is used for the skill check.
-  let derivedCharacteristics: [DerivedCharacteristic.ID]
+  public let derivedCharacteristics: [DerivedCharacteristic.ID]
 
   private enum CodingKeys: String, CodingKey {
     case derivedCharacteristics = "derivedCharacteristics"
@@ -9950,10 +9950,10 @@ public enum FastPerformanceParameters: Decodable, Equatable, Sendable {
 public typealias FastOneTimePerformanceParameters = OneTimePerformanceParameters<FastCastingTime>
 
 public struct OneTimePerformanceParameters<CastingTime: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let castingTime: CastingTime
-  let cost: OneTimeCost
-  let range: Range
-  let duration: DurationForOneTime
+  public let castingTime: CastingTime
+  public let cost: OneTimeCost
+  public let range: Range
+  public let duration: DurationForOneTime
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -10043,13 +10043,13 @@ public enum SingleOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct ModifiableOneTimeCost: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// The part of the cost value that has to be spent permanently.
-  let permanentValue: Int?
+  public let permanentValue: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ModifiableOneTimeCostTranslation>?
+  public let translations: LocaleMap<ModifiableOneTimeCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initial_modification_level"
@@ -10068,7 +10068,7 @@ public struct ModifiableOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct ModifiableOneTimeCostTranslation: Decodable, Equatable, Sendable {
   /// A replacement string.
-  let replacement: ResponsiveTextReplace
+  public let replacement: ResponsiveTextReplace
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -10087,13 +10087,13 @@ public struct SkillModificationLevel: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// Configuration for this level for fast skills (spells, liturgical chants).
-  let fast: FastSkillModificationLevelConfig
+  public let fast: FastSkillModificationLevelConfig
 
   /// Configuration for this level for slow skills (rituals, ceremonies).
-  let slow: SlowSkillModificationLevelConfig
+  public let slow: SlowSkillModificationLevelConfig
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillModificationLevelTranslation>?
+  public let translations: LocaleMap<SkillModificationLevelTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case fast = "fast"
@@ -10128,10 +10128,10 @@ public struct SkillModificationLevel: Decodable, Equatable, Sendable, Identifiab
 
 public struct SkillModificationLevelTranslation: Decodable, Equatable, Sendable {
   /// Configuration for this level for fast skills (spells, liturgical chants). Values set here override the default generated text.
-  let fast: LevelTypeConfigTranslation?
+  public let fast: LevelTypeConfigTranslation?
 
   /// Configuration for this level for slow skills (rituals, ceremonies). Values set here override the default generated text.
-  let slow: LevelTypeConfigTranslation?
+  public let slow: LevelTypeConfigTranslation?
 
   private enum CodingKeys: String, CodingKey {
     case fast = "fast"
@@ -10148,13 +10148,13 @@ public struct SkillModificationLevelTranslation: Decodable, Equatable, Sendable 
 
 public struct FastSkillModificationLevelConfig: Decodable, Equatable, Sendable {
   /// The casting time in actions.
-  let castingTime: Int
+  public let castingTime: Int
 
   /// The range in meters.
-  let range: Int
+  public let range: Int
 
   /// The cost in AE/KP.
-  let cost: Int
+  public let cost: Int
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -10173,13 +10173,13 @@ public struct FastSkillModificationLevelConfig: Decodable, Equatable, Sendable {
 
 public struct SlowSkillModificationLevelConfig: Decodable, Equatable, Sendable {
   /// The casting time.
-  let castingTime: SlowSkillCastingTime
+  public let castingTime: SlowSkillCastingTime
 
   /// The range in meters.
-  let range: Int
+  public let range: Int
 
   /// The cost in AE/KP.
-  let cost: Int
+  public let cost: Int
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -10198,10 +10198,10 @@ public struct SlowSkillModificationLevelConfig: Decodable, Equatable, Sendable {
 
 public struct SlowSkillCastingTime: Decodable, Equatable, Sendable {
   /// The (unitless) casting time.
-  let value: Int
+  public let value: Int
 
   /// The unit for the `value`.
-  let unit: SlowSkillCastingTimeUnit
+  public let unit: SlowSkillCastingTimeUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -10245,7 +10245,7 @@ public enum SlowSkillCastingTimeUnit: Decodable, Equatable, Sendable {
 
 /// Configuration translation of a type for a level. Values set here override the default generated text.
 public struct LevelTypeConfigTranslation: Decodable, Equatable, Sendable {
-  let range: String
+  public let range: String
 
   private enum CodingKeys: String, CodingKey {
     case range = "range"
@@ -10261,10 +10261,10 @@ public struct LevelTypeConfigTranslation: Decodable, Equatable, Sendable {
 /// A text from the source that can be also displayed in small areas using a compressed version. It is used as a replacement for a generated text while the generated text is still provided and should be used.
 public struct ResponsiveTextReplace: Decodable, Equatable, Sendable {
   /// The full replacement string. It must contain `$1`, which is going to be replaced with the generated string, so additional information can be provided without duplicating concrete numeric values.
-  let full: String
+  public let full: String
 
   /// A compressed replacement string for use in small areas (e.g. on character sheet). It must contain `$1`, which is going to be replaced with the generated string, so additional information can be provided without duplicating concrete numeric values.
-  let compressed: String
+  public let compressed: String
 
   private enum CodingKeys: String, CodingKey {
     case full = "full"
@@ -10281,19 +10281,19 @@ public struct ResponsiveTextReplace: Decodable, Equatable, Sendable {
 
 public struct NonModifiableOneTimeCost: Decodable, Equatable, Sendable {
   /// If `true`, the non-modifiable value is a minimum value.
-  let isMinimum: Bool?
+  public let isMinimum: Bool?
 
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The part of the cost value that has to be spent permanently.
-  let permanentValue: Int?
+  public let permanentValue: Int?
 
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: NonModifiableOneTimeCostPerCountable?
+  public let per: NonModifiableOneTimeCostPerCountable?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NonModifiableOneTimeCostTranslation>?
+  public let translations: LocaleMap<NonModifiableOneTimeCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case isMinimum = "is_minimum"
@@ -10316,7 +10316,7 @@ public struct NonModifiableOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct NonModifiableOneTimeCostTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional
+  public let note: ResponsiveTextOptional
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -10331,10 +10331,10 @@ public struct NonModifiableOneTimeCostTranslation: Decodable, Equatable, Sendabl
 
 public struct NonModifiableOneTimeCostPerCountable: Decodable, Equatable, Sendable {
   /// If defined, the minimum total AE that have to be spent casting the skill.
-  let minimumTotal: Int?
+  public let minimumTotal: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NonModifiableOneTimeCostPerCountableTranslation>
+  public let translations: LocaleMap<NonModifiableOneTimeCostPerCountableTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case minimumTotal = "minimum_total"
@@ -10351,7 +10351,7 @@ public struct NonModifiableOneTimeCostPerCountable: Decodable, Equatable, Sendab
 
 public struct NonModifiableOneTimeCostPerCountableTranslation: Decodable, Equatable, Sendable {
   /// The countable entity name.
-  let countable: ResponsiveText
+  public let countable: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case countable = "countable"
@@ -10367,10 +10367,10 @@ public struct NonModifiableOneTimeCostPerCountableTranslation: Decodable, Equata
 /// A text from the source that can be also displayed in small areas using a compressed version.
 public struct ResponsiveText: Decodable, Equatable, Sendable {
   /// The full text from the source.
-  let full: String
+  public let full: String
 
   /// A compressed text for use in small areas (e.g. on character sheet).
-  let compressed: String
+  public let compressed: String
 
   private enum CodingKeys: String, CodingKey {
     case full = "full"
@@ -10388,10 +10388,10 @@ public struct ResponsiveText: Decodable, Equatable, Sendable {
 /// A text from the source that can be also displayed in small areas using a compressed version, if available.
 public struct ResponsiveTextOptional: Decodable, Equatable, Sendable {
   /// The full text from the source.
-  let full: String
+  public let full: String
 
   /// A compressed text for use in small areas (e.g. on character sheet). If this is not present, it should not appear in those areas.
-  let compressed: String?
+  public let compressed: String?
 
   private enum CodingKeys: String, CodingKey {
     case full = "full"
@@ -10408,7 +10408,7 @@ public struct ResponsiveTextOptional: Decodable, Equatable, Sendable {
 
 public struct IndefiniteOneTimeCost: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteOneTimeCostTranslation>
+  public let translations: LocaleMap<IndefiniteOneTimeCostTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -10423,7 +10423,7 @@ public struct IndefiniteOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct IndefiniteOneTimeCostTranslation: Decodable, Equatable, Sendable {
   /// A description of where the cost come from.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -10467,7 +10467,7 @@ public enum OneTimeCostMap: Decodable, Equatable, Sendable {
 
 public struct ModifiableOneTimeCostMap: Decodable, Equatable, Sendable {
   /// The cost map.
-  let map: ParameterMap<ModifiableOneTimeCostMapOptionValue>
+  public let map: ParameterMap<ModifiableOneTimeCostMapOptionValue>
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -10490,13 +10490,13 @@ public typealias ParameterMap<Value: Decodable & Equatable & Sendable> = ValueMa
 /// The `an item the size of a` would be the *list prefix* string, while the list of options would contain four options with the activation cost and the name.
 public struct ValueMap<Option: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The possible values and associated labels.
-  let options: [Option]
+  public let options: [Option]
 
   /// The style of the generated string. It may either be displayed in a compressed way (e.g. `1/2/3 AE for a small/medium/large object`) or in a verbose way (e.g. `1 AE for a small object, 2 AE for a medium object, 3 AE for a large object`).
-  let style: ValueMapStyle
+  public let style: ValueMapStyle
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ValueMapTranslation>?
+  public let translations: LocaleMap<ValueMapTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -10515,13 +10515,13 @@ public struct ValueMap<Option: Decodable & Equatable & Sendable>: Decodable, Equ
 
 public struct ValueMapTranslation: Decodable, Equatable, Sendable {
   /// Place a string between the `for` and the grouped map option labels.
-  let listPrefix: ResponsiveTextOptional?
+  public let listPrefix: ResponsiveTextOptional?
 
   /// Place a string after the grouped map option labels.
-  let listSuffix: ResponsiveTextOptional?
+  public let listSuffix: ResponsiveTextOptional?
 
   /// If the string from the book cannot be generated using the default generation technique, use this string. All options still need to be inserted properly, since it may be used by in-game tools to provide a selection to players.
-  let replacement: ResponsiveTextOptional?
+  public let replacement: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case listPrefix = "listPrefix"
@@ -10584,10 +10584,10 @@ public enum ValueMapStyle: Decodable, Equatable, Sendable {
 
 public struct ParameterMapOption<Value: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The value this option represents. If used for sustained cost, the interval cost is always half of this value.
-  let value: Value
+  public let value: Value
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ParameterMapOptionTranslation>
+  public let translations: LocaleMap<ParameterMapOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -10604,10 +10604,10 @@ public struct ParameterMapOption<Value: Decodable & Equatable & Sendable>: Decod
 
 public struct ParameterMapOptionTranslation: Decodable, Equatable, Sendable {
   /// The description of the option for cost string generation.
-  let label: ResponsiveTextOptional
+  public let label: ResponsiveTextOptional
 
   /// The description of the option if used standalone (e.g. in an in-game tool where you can select how many AE you have to pay). Only used if different from `label`.
-  let standaloneLabel: ResponsiveTextOptional?
+  public let standaloneLabel: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -10624,10 +10624,10 @@ public struct ParameterMapOptionTranslation: Decodable, Equatable, Sendable {
 
 public struct ModifiableOneTimeCostMapOptionValue: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// The part of the cost value that has to be spent permanently.
-  let permanentValue: Int?
+  public let permanentValue: Int?
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initialModificationLevel"
@@ -10644,7 +10644,7 @@ public struct ModifiableOneTimeCostMapOptionValue: Decodable, Equatable, Sendabl
 
 public struct NonModifiableOneTimeCostMap: Decodable, Equatable, Sendable {
   /// The cost map.
-  let map: ParameterMap<NonModifiableOneTimeCostMapOptionValue>
+  public let map: ParameterMap<NonModifiableOneTimeCostMapOptionValue>
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -10659,10 +10659,10 @@ public struct NonModifiableOneTimeCostMap: Decodable, Equatable, Sendable {
 
 public struct NonModifiableOneTimeCostMapOptionValue: Decodable, Equatable, Sendable {
   /// The full cost value for this option.
-  let value: Int
+  public let value: Int
 
   /// The part of the cost value that has to be spent permanently.
-  let permanentValue: Int?
+  public let permanentValue: Int?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -10679,10 +10679,10 @@ public struct NonModifiableOneTimeCostMapOptionValue: Decodable, Equatable, Send
 
 public struct Range: Decodable, Equatable, Sendable {
   /// The range value.
-  let value: RangeValue
+  public let value: RangeValue
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RangeTranslation>?
+  public let translations: LocaleMap<RangeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -10699,10 +10699,10 @@ public struct Range: Decodable, Equatable, Sendable {
 
 public struct RangeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string. If `note` is provided, it is appended to the replaced string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -10772,13 +10772,13 @@ public enum RangeValue: Decodable, Equatable, Sendable {
 
 public struct ModifiableRange: Decodable, Equatable, Sendable {
   /// If `true`, the range is a maximum range.
-  let isMaximum: Bool?
+  public let isMaximum: Bool?
 
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// If `true`, the range is a radius.
-  let isRadius: Bool?
+  public let isRadius: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case isMaximum = "is_maximum"
@@ -10797,16 +10797,16 @@ public struct ModifiableRange: Decodable, Equatable, Sendable {
 
 public struct ExpressionBasedRange: Decodable, Equatable, Sendable {
   /// If the range is the maximum range.
-  let isMaximum: Bool?
+  public let isMaximum: Bool?
 
   /// An expression that evaluates to the range.
-  let value: ExpressionBasedParameterValue
+  public let value: ExpressionBasedParameterValue
 
   /// The duration unit.
-  let unit: RangeUnit
+  public let unit: RangeUnit
 
   /// If `true`, the range is a radius.
-  let isRadius: Bool?
+  public let isRadius: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case isMaximum = "is_maximum"
@@ -10930,10 +10930,10 @@ public enum DurationForOneTime: Decodable, Equatable, Sendable {
 
 public struct Immediate: Decodable, Equatable, Sendable {
   /// Specified if the duration has a maximum time span.
-  let maximum: DurationUnitValue?
+  public let maximum: DurationUnitValue?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ImmediateTranslation>?
+  public let translations: LocaleMap<ImmediateTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case maximum = "maximum"
@@ -10950,7 +10950,7 @@ public struct Immediate: Decodable, Equatable, Sendable {
 
 public struct ImmediateTranslation: Decodable, Equatable, Sendable {
   /// A replacement string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -10965,10 +10965,10 @@ public struct ImmediateTranslation: Decodable, Equatable, Sendable {
 
 public struct DurationUnitValue: Decodable, Equatable, Sendable {
   /// The (unitless) duration value.
-  let value: Int
+  public let value: Int
 
   /// The unit of the `value`.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -11062,7 +11062,7 @@ public enum DurationUnit: Decodable, Equatable, Sendable {
 
 public struct CustomDurationUnit: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CustomDurationUnitTranslation>
+  public let translations: LocaleMap<CustomDurationUnitTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -11077,22 +11077,22 @@ public struct CustomDurationUnit: Decodable, Equatable, Sendable {
 
 public struct CustomDurationUnitTranslation: Decodable, Equatable, Sendable {
   /// The name of the custom duration unit.
-  let name: String
+  public let name: String
 
   /// A translation for a numeric value of the custom duration unit, e.g. ‘3 days’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.
-  let fullNumber: String
+  public let fullNumber: String
 
   /// A translation for an arbitrary value of the custom duration unit, e.g. ‘3–4 days’ or ‘QL days’. The translation string can and should make use of the `$value` variable.
-  let full: String
+  public let full: String
 
   /// A symbol or shortened label for the custom duration unit for use in small spaces.
-  let symbol: String
+  public let symbol: String
 
   /// A translation for a numeric value of the custom duration unit for use in small spaces, e.g. ‘3 d.’. The translation string can and should make use of the `$value` and `$style` variables. The `$style` variable can be either `interval` or `default`.
-  let compressedNumber: String
+  public let compressedNumber: String
 
   /// A translation for an arbitrary value of the custom duration unit for use in small spaces, e.g. ‘3–4 d.’ or ‘QL d.’. The translation string can and should make use of the `$value` variable.
-  let compressed: String
+  public let compressed: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -11117,7 +11117,7 @@ public struct CustomDurationUnitTranslation: Decodable, Equatable, Sendable {
 
 public struct PermanentDuration: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PermanentDurationTranslation>?
+  public let translations: LocaleMap<PermanentDurationTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -11132,7 +11132,7 @@ public struct PermanentDuration: Decodable, Equatable, Sendable {
 
 public struct PermanentDurationTranslation: Decodable, Equatable, Sendable {
   /// A replacement string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -11147,16 +11147,16 @@ public struct PermanentDurationTranslation: Decodable, Equatable, Sendable {
 
 public struct ExpressionBasedDuration: Decodable, Equatable, Sendable {
   /// If the duration is the maximum duration, so it may end earlier.
-  let isMaximum: Bool?
+  public let isMaximum: Bool?
 
   /// An expression that evaluates to the duration.
-  let value: ExpressionBasedParameterValue
+  public let value: ExpressionBasedParameterValue
 
   /// The duration unit.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ExpressionBasedDurationTranslation>?
+  public let translations: LocaleMap<ExpressionBasedDurationTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case isMaximum = "is_maximum"
@@ -11177,7 +11177,7 @@ public struct ExpressionBasedDuration: Decodable, Equatable, Sendable {
 
 public struct ExpressionBasedDurationTranslation: Decodable, Equatable, Sendable {
   /// A replacement string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -11192,7 +11192,7 @@ public struct ExpressionBasedDurationTranslation: Decodable, Equatable, Sendable
 
 public struct IndefiniteDuration: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteDurationTranslation>
+  public let translations: LocaleMap<IndefiniteDurationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -11207,7 +11207,7 @@ public struct IndefiniteDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteDurationTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -11227,10 +11227,10 @@ public typealias FastCastingTime = CastingTimeIncludingLovemaking<FastSkillNonMo
 /// There must always be at least one casting time value.
 public struct CastingTimeIncludingLovemaking<NonModifiable: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The default casting time definition.
-  let `default`: CastingTime<NonModifiable>?
+  public let `default`: CastingTime<NonModifiable>?
 
   /// The casting time during lovemaking. In Aventurian Intimacy, you may only use an activatable skill during lovemaking if it has a casting time used during lovemaking.
-  let duringLovemaking: CastingTimeDuringLovemaking?
+  public let duringLovemaking: CastingTimeDuringLovemaking?
 
   private enum CodingKeys: String, CodingKey {
     case `default` = "default"
@@ -11274,10 +11274,10 @@ public enum CastingTime<NonModifiable: Decodable & Equatable & Sendable>: Decoda
 
 public struct ModifiableCastingTime: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ModifiableCastingTimeTranslation>?
+  public let translations: LocaleMap<ModifiableCastingTimeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initial_modification_level"
@@ -11294,7 +11294,7 @@ public struct ModifiableCastingTime: Decodable, Equatable, Sendable {
 
 public struct ModifiableCastingTimeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -11310,10 +11310,10 @@ public struct ModifiableCastingTimeTranslation: Decodable, Equatable, Sendable {
 /// The casting time during lovemaking. In Aventurian Intimacy, you may only use an activatable skill during lovemaking if it has a casting time used during lovemaking.
 public struct CastingTimeDuringLovemaking: Decodable, Equatable, Sendable {
   /// The (unitless) casting time value.
-  let value: Int
+  public let value: Int
 
   /// The unit of the `value`.
-  let unit: CastingTimeDuringLovemakingUnit
+  public let unit: CastingTimeDuringLovemakingUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -11357,10 +11357,10 @@ public enum CastingTimeDuringLovemakingUnit: Decodable, Equatable, Sendable {
 
 public struct FastSkillNonModifiableCastingTime: Decodable, Equatable, Sendable {
   /// The casting time value in actions.
-  let actions: Int
+  public let actions: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FastSkillNonModifiableCastingTimeTranslation>?
+  public let translations: LocaleMap<FastSkillNonModifiableCastingTimeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case actions = "actions"
@@ -11377,7 +11377,7 @@ public struct FastSkillNonModifiableCastingTime: Decodable, Equatable, Sendable 
 
 public struct FastSkillNonModifiableCastingTimeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -11393,10 +11393,10 @@ public struct FastSkillNonModifiableCastingTimeTranslation: Decodable, Equatable
 public typealias FastSustainedPerformanceParameters = SustainedPerformanceParameters<FastCastingTime>
 
 public struct SustainedPerformanceParameters<CastingTime: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let castingTime: CastingTime
-  let cost: SustainedCost
-  let range: Range
-  let duration: DurationForSustained?
+  public let castingTime: CastingTime
+  public let cost: SustainedCost
+  public let range: Range
+  public let duration: DurationForSustained?
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -11471,10 +11471,10 @@ public enum SingleSustainedCost: Decodable, Equatable, Sendable {
 
 public struct ModifiableSustainedCost: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// The sustain interval.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initial_modification_level"
@@ -11491,16 +11491,16 @@ public struct ModifiableSustainedCost: Decodable, Equatable, Sendable {
 
 public struct NonModifiableSustainedCost: Decodable, Equatable, Sendable {
   /// If `true`, the non-modifiable value is a minimum value.
-  let isMinimum: Bool?
+  public let isMinimum: Bool?
 
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: NonModifiableSustainedCostPerCountable?
+  public let per: NonModifiableSustainedCostPerCountable?
 
   /// The sustain interval.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case isMinimum = "is_minimum"
@@ -11521,10 +11521,10 @@ public struct NonModifiableSustainedCost: Decodable, Equatable, Sendable {
 
 public struct NonModifiableSustainedCostPerCountable: Decodable, Equatable, Sendable {
   /// If defined, the minimum total AE that have to be spent casting the skill.
-  let minimumTotal: Int?
+  public let minimumTotal: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NonModifiableSustainedCostPerCountableTranslation>
+  public let translations: LocaleMap<NonModifiableSustainedCostPerCountableTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case minimumTotal = "minimum_total"
@@ -11541,7 +11541,7 @@ public struct NonModifiableSustainedCostPerCountable: Decodable, Equatable, Send
 
 public struct NonModifiableSustainedCostPerCountableTranslation: Decodable, Equatable, Sendable {
   /// The countable entity name.
-  let countable: ResponsiveText
+  public let countable: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case countable = "countable"
@@ -11583,10 +11583,10 @@ public enum SustainedCostMap: Decodable, Equatable, Sendable {
 
 public struct ModifiableSustainedCostMap: Decodable, Equatable, Sendable {
   /// The cost map.
-  let map: ParameterMap<ModifiableSustainedCostMapOptionValue>
+  public let map: ParameterMap<ModifiableSustainedCostMapOptionValue>
 
   /// The sustain interval.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -11603,7 +11603,7 @@ public struct ModifiableSustainedCostMap: Decodable, Equatable, Sendable {
 
 public struct ModifiableSustainedCostMapOptionValue: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initialModificationLevel"
@@ -11618,10 +11618,10 @@ public struct ModifiableSustainedCostMapOptionValue: Decodable, Equatable, Senda
 
 public struct NonModifiableSustainedCostMap: Decodable, Equatable, Sendable {
   /// The cost map.
-  let map: ParameterMap<NonModifiableSustainedCostMapOptionValue>
+  public let map: ParameterMap<NonModifiableSustainedCostMapOptionValue>
 
   /// The sustain interval.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -11638,7 +11638,7 @@ public struct NonModifiableSustainedCostMap: Decodable, Equatable, Sendable {
 
 public struct NonModifiableSustainedCostMapOptionValue: Decodable, Equatable, Sendable {
   /// The full cost value for this option.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -11653,7 +11653,7 @@ public struct NonModifiableSustainedCostMapOptionValue: Decodable, Equatable, Se
 
 public struct DurationForSustained: Decodable, Equatable, Sendable {
   /// The sustained skill can be active a maximum amount of time.
-  let maximum: DurationUnitValue
+  public let maximum: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case maximum = "maximum"
@@ -11672,10 +11672,10 @@ public struct DurationForSustained: Decodable, Equatable, Sendable {
 public typealias AffectedTargetCategories = [SpecificAffectedTargetCategory]
 
 public struct SpecificAffectedTargetCategory: Decodable, Equatable, Sendable {
-  let id: SpecificAffectedTargetCategoryIdentifier
+  public let id: SpecificAffectedTargetCategoryIdentifier
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SpecificAffectedTargetCategoryTranslation>?
+  public let translations: LocaleMap<SpecificAffectedTargetCategoryTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -11691,7 +11691,7 @@ public struct SpecificAffectedTargetCategory: Decodable, Equatable, Sendable {
 }
 
 public struct SpecificAffectedTargetCategoryTranslation: Decodable, Equatable, Sendable {
-  let note: String
+  public let note: String
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -11757,10 +11757,10 @@ public struct TargetCategory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// A superordinate target category, if present.
-  let parent: TargetCategory.ID?
+  public let parent: TargetCategory.ID?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TargetCategoryTranslation>
+  public let translations: LocaleMap<TargetCategoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -11793,7 +11793,7 @@ public struct TargetCategory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TargetCategoryTranslation: Decodable, Equatable, Sendable {
   /// The target category’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -11835,10 +11835,10 @@ public enum LiturgyTradition: Decodable, Equatable, Sendable {
 
 public struct LiturgyTraditionWithAspects: Decodable, Equatable, Sendable {
   /// The blessed tradition.
-  let tradition: BlessedTradition.ID
+  public let tradition: BlessedTradition.ID
 
   /// The aspect(s) from the tradition the ceremony belongs to. Note that not all traditions have aspects. Traditions with aspects must have at least one aspect specified.
-  let aspects: [Aspect.ID]?
+  public let aspects: [Aspect.ID]?
 
   private enum CodingKeys: String, CodingKey {
     case tradition = "tradition"
@@ -11859,47 +11859,47 @@ public struct BlessedTradition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The group of traditions this tradition belongs to.
-  let group: BlessedTraditionGroup.ID
+  public let group: BlessedTraditionGroup.ID
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The tradition’s primary attribute. Leave empty if the tradition does not have one.
-  let primary: Attribute.ID?
+  public let primary: Attribute.ID?
 
   /// The tradition’s aspects, if any.
-  let aspects: [2 of Aspect.ID]?
+  public let aspects: [2 of Aspect.ID]?
 
   /// The tradition’s primary blessing. Leave empty if the tradition does not have one.
-  let primaryBlessing: Blessing.ID?
+  public let primaryBlessing: Blessing.ID?
 
   /// A list of favored combat techniques.
-  let favoredCombatTechniques: FavoredCombatTechniques?
+  public let favoredCombatTechniques: FavoredCombatTechniques?
 
   /// A list of favored skills.
-  let favoredSkills: [Skill.ID]
+  public let favoredSkills: [Skill.ID]
 
   /// On activation of the tradition, a specific number of skills from a list of skills must be selected as being favored.
-  let favoredSkillsSelection: FavoredSkillsSelection?
+  public let favoredSkillsSelection: FavoredSkillsSelection?
 
   /// The type of the tradition. May be either church or shamanistic.
-  let type: BlessedTraditionType
+  public let type: BlessedTraditionType
 
   /// The select option’s identifier of the disadvantage *Principles* that represent this tradition’s code, if any.
-  let associatedPrinciplesId: GeneralSelectOption.ID?
+  public let associatedPrinciplesId: GeneralSelectOption.ID?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BlessedTraditionTranslation>
+  public let translations: LocaleMap<BlessedTraditionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case group = "group"
@@ -11956,32 +11956,32 @@ public struct BlessedTradition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BlessedTraditionTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// A shorter name of the tradition’s name, used in liturgical chant descriptions. This is not the same as the name in the library.
-  let nameCompressed: String?
+  public let nameCompressed: String?
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The name of Blessed Ones of this tradition.
-  let nameOfBlessedOnes: String
+  public let nameOfBlessedOnes: String
 
   /// The name of the god of this tradition, if it has one. Defaults to the name of the tradition if not set.
-  let nameOfGod: String?
+  public let nameOfGod: String?
 
   /// The special rules of the tradition. They should be sorted like they are in the book.
-  let specialRules: [SpecialRule]
+  public let specialRules: [SpecialRule]
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -12016,7 +12016,7 @@ public struct BlessedTraditionGroup: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BlessedTraditionGroupTranslation>
+  public let translations: LocaleMap<BlessedTraditionGroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -12047,10 +12047,10 @@ public struct BlessedTraditionGroup: Decodable, Equatable, Sendable, Identifiabl
 
 public struct BlessedTraditionGroupTranslation: Decodable, Equatable, Sendable {
   /// The name of the group.
-  let name: String
+  public let name: String
 
   /// The text to use when all Blessed Ones of this group are recommended for a culture.
-  let nameInCulture: String
+  public let nameInCulture: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -12071,16 +12071,16 @@ public struct Blessing: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Measurable parameters of a blessing.
-  let parameters: BlessingPerformanceParameters
+  public let parameters: BlessingPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BlessingTranslation>
+  public let translations: LocaleMap<BlessingTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parameters = "parameters"
@@ -12117,21 +12117,21 @@ public struct Blessing: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BlessingTranslation: Decodable, Equatable, Sendable {
   /// The blessing’s name.
-  let name: String
+  public let name: String
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   @available(*, deprecated)
-  let range: String
+  public let range: String
 
   @available(*, deprecated)
-  let duration: String
+  public let duration: String
 
   @available(*, deprecated)
-  let target: String
+  public let target: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -12156,8 +12156,8 @@ public struct BlessingTranslation: Decodable, Equatable, Sendable {
 
 /// Measurable parameters of a blessing.
 public struct BlessingPerformanceParameters: Decodable, Equatable, Sendable {
-  let range: BlessingRange
-  let duration: BlessingDuration
+  public let range: BlessingRange
+  public let duration: BlessingDuration
 
   private enum CodingKeys: String, CodingKey {
     case range = "range"
@@ -12206,16 +12206,16 @@ public enum BlessingRange: Decodable, Equatable, Sendable {
 
 public struct FixedRange: Decodable, Equatable, Sendable {
   /// If `true`, the range is a maximum range.
-  let isMaximum: Bool?
+  public let isMaximum: Bool?
 
   /// The (unitless) range value.
-  let value: Int
+  public let value: Int
 
   /// The unit of the `value`.
-  let unit: RangeUnit
+  public let unit: RangeUnit
 
   /// If `true`, the range is a radius.
-  let isRadius: Bool?
+  public let isRadius: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case isMaximum = "is_maximum"
@@ -12268,10 +12268,10 @@ public enum BlessingDuration: Decodable, Equatable, Sendable {
 
 public struct FixedBlessingDuration: Decodable, Equatable, Sendable {
   /// The (unitless) duration.
-  let value: Int
+  public let value: Int
 
   /// The duration unit.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -12288,7 +12288,7 @@ public struct FixedBlessingDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteBlessingDuration: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteBlessingDurationTranslation>
+  public let translations: LocaleMap<IndefiniteBlessingDurationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -12303,7 +12303,7 @@ public struct IndefiniteBlessingDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteBlessingDurationTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -12355,7 +12355,7 @@ public enum FavoredCombatTechniques: Decodable, Equatable, Sendable {
 
 public struct SpecificFavoredCombatTechniques: Decodable, Equatable, Sendable {
   /// A list of specific favored combat techniques.
-  let list: [CombatTechniqueIdentifier]
+  public let list: [CombatTechniqueIdentifier]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -12397,10 +12397,10 @@ public enum CombatTechniqueIdentifier: Decodable, Equatable, Sendable {
 
 public struct FavoredSkillsSelection: Decodable, Equatable, Sendable {
   /// The number of skills that can be selected.
-  let number: Int
+  public let number: Int
 
   /// The possible set of skills.
-  let options: [Skill.ID]
+  public let options: [Skill.ID]
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -12446,7 +12446,7 @@ public enum BlessedTraditionType: Decodable, Equatable, Sendable {
 /// Additional rules for church traditions.
 public struct ChurchBlessedTradition: Decodable, Equatable, Sendable {
   /// If a tradition restricts the possible blessings, the blessings that are **not** allowed.
-  let restrictedBlessings: RestrictedBlessings?
+  public let restrictedBlessings: RestrictedBlessings?
 
   private enum CodingKeys: String, CodingKey {
     case restrictedBlessings = "restrictedBlessings"
@@ -12489,7 +12489,7 @@ public enum RestrictedBlessings: Decodable, Equatable, Sendable {
 
 /// Additional rules for shamanistic traditions.
 public struct ShamanisticBlessedTradition: Decodable, Equatable, Sendable {
-  let canUseBoneMaceAsCeremonialItem: Bool
+  public let canUseBoneMaceAsCeremonialItem: Bool
 
   private enum CodingKeys: String, CodingKey {
     case canUseBoneMaceAsCeremonialItem = "can_use_bone_mace_as_ceremonial_item"
@@ -12558,10 +12558,10 @@ public typealias AdventurePointsSingleValue = Int
 /// An entry with levels may have different costs for each level.
 public struct AdventurePointsValueByLevel: Decodable, Equatable, Sendable {
   /// The list of adventure point values, where the position in the list corresponds to the level (i.e. the first value is for level I, the second value is for level II, and so on). The length of the list must match the amount of levels the special ability has.
-  let list: [AdventurePointsSingleValue]
+  public let list: [AdventurePointsSingleValue]
 
   /// Values may be added to each level based on the size category of the character. Negative values mean that the AP value is lowered.
-  let additionalBySizeCategory: BySizeCategory<Int>?
+  public let additionalBySizeCategory: BySizeCategory<Int>?
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -12578,11 +12578,11 @@ public struct AdventurePointsValueByLevel: Decodable, Equatable, Sendable {
 
 /// An object that holds values for the different size categories
 public struct BySizeCategory<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let tiny: T
-  let small: T
-  let medium: T
-  let large: T
-  let huge: T
+  public let tiny: T
+  public let small: T
+  public let medium: T
+  public let large: T
+  public let huge: T
 
   private enum CodingKeys: String, CodingKey {
     case tiny = "tiny"
@@ -12606,7 +12606,7 @@ public struct BySizeCategory<T: Decodable & Equatable & Sendable>: Decodable, Eq
 /// The adventure points value is derived from the selection of the special ability. Its display value may be able to be derived from the given information for the select options. If that is not the case or the generated text would not match the original one, a replacement text can be provided.
 public struct AdventurePointsDerivedFromSelection: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdventurePointsDerivedFromSelectionTranslation>?
+  public let translations: LocaleMap<AdventurePointsDerivedFromSelectionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -12621,10 +12621,10 @@ public struct AdventurePointsDerivedFromSelection: Decodable, Equatable, Sendabl
 
 public struct AdventurePointsDerivedFromSelectionTranslation: Decodable, Equatable, Sendable {
   /// Place a string between the `for` and the grouped option names.
-  let listPrepend: String?
+  public let listPrepend: String?
 
   /// A replacement for the generated text if it would not match the original one.
-  let replacement: String?
+  public let replacement: String?
 
   private enum CodingKeys: String, CodingKey {
     case listPrepend = "listPrepend"
@@ -12642,13 +12642,13 @@ public struct AdventurePointsDerivedFromSelectionTranslation: Decodable, Equatab
 /// The adventure points cost depends on if an instance of an entry is active.
 public struct AdventurePointsDependingOnActive: Decodable, Equatable, Sendable {
   /// The identifier of the entry to that decides which AP value to pick.
-  let id: ActivatableIdentifier
+  public let id: ActivatableIdentifier
 
   /// The adventure points value if an instance of the referenced entry is active.
-  let active: AdventurePointsSingleValue
+  public let active: AdventurePointsSingleValue
 
   /// The adventure points value if no instance of the referenced entry is active.
-  let inactive: AdventurePointsSingleValue
+  public let inactive: AdventurePointsSingleValue
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -12696,13 +12696,13 @@ public enum AdventurePointsDependingOnActiveInstances: Decodable, Equatable, Sen
 /// The adventure points cost depends on how many instances of the entry are already active.
 public struct AdventurePointsDependingOnActiveInstancesThreshold: Decodable, Equatable, Sendable {
   /// The normal adventure points value.
-  let normal: Int
+  public let normal: Int
 
   /// The number of active instances **after** which the alternative cost applies.
-  let threshold: Int
+  public let threshold: Int
 
   /// The alternative adventure points value.
-  let alternative: Int
+  public let alternative: Int
 
   private enum CodingKeys: String, CodingKey {
     case normal = "normal"
@@ -12722,12 +12722,12 @@ public struct AdventurePointsDependingOnActiveInstancesThreshold: Decodable, Equ
 /// The adventure points cost depends on how many instances of the entry are already active.
 public struct AdventurePointsDependingOnActiveInstancesExpression: Decodable, Equatable, Sendable {
   /// The expression to calculate the AP value.
-  let expression: AdventurePointsDependingOnActiveInstancesExpressionExpression
+  public let expression: AdventurePointsDependingOnActiveInstancesExpressionExpression
 
   /// Custom labels for the expression values. If not provided, the default labels will be used.
   ///
   /// The values to provide must be in the same order as they appear in the expression. For example, if the expression is `Active * 2 + 1`, the first option corresponds to `1`, the second option corresponds to `3`, and so on. Only the amount of options specified will be displayed.
-  let customLabels: AdventurePointsDependingOnActiveInstancesExpressionLabels?
+  public let customLabels: AdventurePointsDependingOnActiveInstancesExpressionLabels?
 
   private enum CodingKeys: String, CodingKey {
     case expression = "expression"
@@ -12783,7 +12783,7 @@ public typealias AdventurePointsDependingOnActiveInstancesExpressionLabels = Val
 
 public struct AdventurePointsDependingOnActiveInstancesExpressionLabelsOption: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdventurePointsDependingOnActiveInstancesExpressionLabelsOptionTranslation>
+  public let translations: LocaleMap<AdventurePointsDependingOnActiveInstancesExpressionLabelsOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -12798,7 +12798,7 @@ public struct AdventurePointsDependingOnActiveInstancesExpressionLabelsOption: D
 
 public struct AdventurePointsDependingOnActiveInstancesExpressionLabelsOptionTranslation: Decodable, Equatable, Sendable {
   /// The description of the option for cost string generation.
-  let label: ResponsiveTextOptional
+  public let label: ResponsiveTextOptional
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -12813,10 +12813,10 @@ public struct AdventurePointsDependingOnActiveInstancesExpressionLabelsOptionTra
 
 public struct SpecialRule: Decodable, Equatable, Sendable {
   /// An optional label that is displayed and placed before the actual text.
-  let label: String?
+  public let label: String?
 
   /// The text of a special rule.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -12890,7 +12890,7 @@ public enum ActivatableSkillEffect: Decodable, Equatable, Sendable {
 
 public struct ActivatableSkillPlainEffect: Decodable, Equatable, Sendable {
   /// The effect description.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -12905,13 +12905,13 @@ public struct ActivatableSkillPlainEffect: Decodable, Equatable, Sendable {
 
 public struct ActivatableSkillEffectForEachQualityLevel: Decodable, Equatable, Sendable {
   /// The effect description before the list of effects for each quality level.
-  let textBefore: String
+  public let textBefore: String
 
   /// The list of effects for each quality level. The first element represents QL 1, the second element QL 2, and so on.
-  let qualityLevels: [6 of String]
+  public let qualityLevels: [6 of String]
 
   /// The effect description after the list of effects for each quality level.
-  let textAfter: String?
+  public let textAfter: String?
 
   private enum CodingKeys: String, CodingKey {
     case textBefore = "text_before"
@@ -12930,13 +12930,13 @@ public struct ActivatableSkillEffectForEachQualityLevel: Decodable, Equatable, S
 
 public struct ActivatableSkillEffectForEachTwoQualityLevels: Decodable, Equatable, Sendable {
   /// The effect description before the list of effects for each quality level.
-  let textBefore: String
+  public let textBefore: String
 
   /// The list of effects for each two quality levels. The first element represents QL 1–2, the second element QL 3–4 and the third element QL 5–6.
-  let qualityLevels: [3 of String]
+  public let qualityLevels: [3 of String]
 
   /// The effect description after the list of effects for each quality level.
-  let textAfter: String?
+  public let textAfter: String?
 
   private enum CodingKeys: String, CodingKey {
     case textBefore = "text_before"
@@ -12954,8 +12954,8 @@ public struct ActivatableSkillEffectForEachTwoQualityLevels: Decodable, Equatabl
 }
 
 public struct OldParameter: Decodable, Equatable, Sendable {
-  let full: String
-  let abbr: String
+  public let full: String
+  public let abbr: String
 
   private enum CodingKeys: String, CodingKey {
     case full = "full"
@@ -12979,21 +12979,21 @@ public struct Enhancement: Decodable, Equatable, Sendable, Identifiable, ChildEn
   public let id: ID
 
   /// The spellwork or liturgy this enhancement belongs to
-  let parent: SkillWithEnhancementsIdentifier
+  public let parent: SkillWithEnhancementsIdentifier
 
   /// The skill rating required to learn this enhancement.
-  let skillRating: Int
+  public let skillRating: Int
 
   /// Defines how to determine the AP cost of an enhancement.
-  let adventurePoints: EnhancementAdventurePoints
+  public let adventurePoints: EnhancementAdventurePoints
 
-  let prerequisites: EnhancementPrerequisites?
+  public let prerequisites: EnhancementPrerequisites?
 
   /// Only defined if different than the associated skill.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<EnhancementTranslation>
+  public let translations: LocaleMap<EnhancementTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -13034,15 +13034,15 @@ public struct Enhancement: Decodable, Equatable, Sendable, Identifiable, ChildEn
 
 public struct EnhancementTranslation: Decodable, Equatable, Sendable {
   /// The name of the enhancement.
-  let name: String
+  public let name: String
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -13104,40 +13104,40 @@ public struct Spell: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a spell.
-  let parameters: FastPerformanceParameters
+  public let parameters: FastPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The associated property specialization.
-  let propertySpecialization: AnyPropertySpecializationIdentifier?
+  public let propertySpecialization: AnyPropertySpecializationIdentifier?
 
   /// The tradition(s) the spell is available for. It may be *generally* available to all traditions or it may be only familiar in specific traditions.
-  let traditions: SpellworkTraditions
+  public let traditions: SpellworkTraditions
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The prerequisites for the spell.
-  let prerequisites: SpellworkPrerequisites?
+  public let prerequisites: SpellworkPrerequisites?
 
   /// Possible effects of the reversed spell.
-  let reversalis: Reversalis?
+  public let reversalis: Reversalis?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SpellTranslation>
+  public let translations: LocaleMap<SpellTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -13190,27 +13190,27 @@ public struct Spell: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SpellTranslation: Decodable, Equatable, Sendable {
   /// The spell’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -13300,65 +13300,65 @@ public struct MagicalTradition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The tradition’s primary attribute. Leave empty if the tradition does not have one.
-  let primary: PrimaryAttribute?
+  public let primary: PrimaryAttribute?
 
   /// Can a member of the tradition learn cantrips?
-  let canLearnCantrips: Bool
+  public let canLearnCantrips: Bool
 
   /// Can a member of the tradition learn spells?
-  let canLearnSpells: Bool
+  public let canLearnSpells: Bool
 
   /// Can a member of the tradition learn rituals?
-  let canLearnRituals: Bool
+  public let canLearnRituals: Bool
 
   /// Can this magical tradition bind familiars?
-  let canBindFamiliars: Bool
+  public let canBindFamiliars: Bool
 
   /// Does the tradition allow learning more traditions or having learned a different tradition before learning this tradition?
-  let allowsMultipleTraditions: Bool
+  public let allowsMultipleTraditions: Bool
 
   /// Is the maximum AP you’re able to spent on magical advantages and able to get by magical disadvantages different than the default of 50 AP?
-  let alternativeMagicalAdventurePointsMaximum: Int?
+  public let alternativeMagicalAdventurePointsMaximum: Int?
 
   /// Are advantages/disadvantages required to not exclusively apply to arcane spellworks, but also to the tradition’s magical actions or applications?
-  let requireNonSpellworkExclusiveEffects: Bool
+  public let requireNonSpellworkExclusiveEffects: Bool
 
   /// Is this a magical dilettante tradition?
-  let isMagicalDilettante: Bool
+  public let isMagicalDilettante: Bool
 
   /// If arcane spellworks from a different tradition count as arcane spellworks of this tradition, this is the different tradition’s reference.
-  let useArcaneSpellworksFromTradition: MagicalTradition.ID?
+  public let useArcaneSpellworksFromTradition: MagicalTradition.ID?
 
   /// If arcane spellworks with a specific property count as arcane spellworks of this tradition, this is the property’s reference.
-  let useArcaneSpellworksFromProperty: Property.ID?
+  public let useArcaneSpellworksFromProperty: Property.ID?
 
   /// The magical actions of the tradition, if any.
-  let magicalActions: AssociatedMagicalActions?
+  public let magicalActions: AssociatedMagicalActions?
 
   /// The influences for the tradition. Influences are enabled by Focus Rules.
-  let influences: [Influence.ID]?
+  public let influences: [Influence.ID]?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalTraditionTranslation>
+  public let translations: LocaleMap<MagicalTraditionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -13427,32 +13427,32 @@ public struct MagicalTradition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalTraditionTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The name used for the arcane spellworks of the tradition if it is different than the `name` of the special ability.
-  let nameForArcaneSpellworks: String?
+  public let nameForArcaneSpellworks: String?
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The name of spellcasters of this tradition. This is used to derive special rules from the data set already for this tradition.
-  let nameOfSpellcasters: String
+  public let nameOfSpellcasters: String
 
   /// The special rules of the tradition. They should be sorted like they are in the book.
-  let specialRules: [SpecialRule]
+  public let specialRules: [SpecialRule]
 
   /// Supplemental content for the tradition, such as additional information or clarifications.
-  let supplementalContent: String?
+  public let supplementalContent: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -13483,10 +13483,10 @@ public struct MagicalTraditionTranslation: Decodable, Equatable, Sendable {
 
 public struct PrimaryAttribute: Decodable, Equatable, Sendable {
   /// The attribute’s identifier.
-  let id: Attribute.ID
+  public let id: Attribute.ID
 
   /// Typically, the value of the primary attribute (if one exists) is added onto the base of 20 AE to get the actual AE. But sometimes, only half the value is added.
-  let useHalfForArcaneEnergy: Bool
+  public let useHalfForArcaneEnergy: Bool
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -13581,7 +13581,7 @@ public enum AssociatedMagicalActions: Decodable, Equatable, Sendable {
 
 public struct AssociatedElvenMagicalSongs: Decodable, Equatable, Sendable {
   /// If checked, only distored Elven magical songs can be used. Otherwise, only undistorted Elven magical songs can be used.
-  let areDistorted: Bool
+  public let areDistorted: Bool
 
   private enum CodingKeys: String, CodingKey {
     case areDistorted = "areDistorted"
@@ -13599,13 +13599,13 @@ public struct Influence: Decodable, Equatable, Sendable, Identifiable {
 
   public let id: ID
 
-  let prerequisites: InfluencePrerequisites?
+  public let prerequisites: InfluencePrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<InfluenceTranslation>
+  public let translations: LocaleMap<InfluenceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -13640,15 +13640,15 @@ public struct Influence: Decodable, Equatable, Sendable, Identifiable {
 
 public struct InfluenceTranslation: Decodable, Equatable, Sendable {
   /// The influence’s name.
-  let name: String
+  public let name: String
 
   /// Some general rules for the influence. They will be prepended to the effects. This can be used for influences that do not have any effects and should contain the text mentioning this fact.
-  let rules: String?
+  public let rules: String?
 
   /// The effects of the influence. They should be sorted like they are in the book.
-  let effects: [InfluenceEffect]?
+  public let effects: [InfluenceEffect]?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -13713,12 +13713,12 @@ public enum InfluencePrerequisiteGroup: Decodable, Equatable, Sendable {
 
 public struct InfluencePrerequisite: Decodable, Equatable, Sendable {
   /// The influence’s identifier.
-  let id: Influence.ID
+  public let id: Influence.ID
 
   /// If the referenced influence must or must not be chosen.
-  let active: Bool
+  public let active: Bool
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -13738,9 +13738,9 @@ public struct InfluencePrerequisite: Decodable, Equatable, Sendable {
 /// Requires a specific profession.
 public struct ProfessionPrerequisite: Decodable, Equatable, Sendable {
   /// The profession’s identifier.
-  let id: Profession.ID
+  public let id: Profession.ID
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -13761,7 +13761,7 @@ public struct Profession: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The profession group.
-  let group: ProfessionGroup
+  public let group: ProfessionGroup
 
   private enum CodingKeys: String, CodingKey {
     case group = "group"
@@ -13856,10 +13856,10 @@ public enum MundaneProfessionGroup: Decodable, Equatable, Sendable {
 
 public struct MagicalProfessionGroup: Decodable, Equatable, Sendable {
   /// The curriculum/academy associated with this magical profession, if any.
-  let curriculum: Curriculum.ID?
+  public let curriculum: Curriculum.ID?
 
   /// The tradition’s subgroup associated with this magical profession, if any.
-  let subgroup: MagicalTraditionSubgroup.ID?
+  public let subgroup: MagicalTraditionSubgroup.ID?
 
   private enum CodingKeys: String, CodingKey {
     case curriculum = "curriculum"
@@ -13881,19 +13881,19 @@ public struct Curriculum: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The institution’s guideline.
-  let guideline: Guideline.ID
+  public let guideline: Guideline.ID
 
   /// The institution’s elective spellworks package.
-  let electiveSpellworks: ElectiveSpellworks?
+  public let electiveSpellworks: ElectiveSpellworks?
 
   /// The institution’s restricted spellworks package.
-  let restrictedSpellworks: RestrictedSpellworks?
+  public let restrictedSpellworks: RestrictedSpellworks?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CurriculumTranslation>
+  public let translations: LocaleMap<CurriculumTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case guideline = "guideline"
@@ -13932,9 +13932,9 @@ public struct Curriculum: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CurriculumTranslation: Decodable, Equatable, Sendable {
   /// The institution’s name.
-  let name: String
+  public let name: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -13955,10 +13955,10 @@ public struct Guideline: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Maximum number of spells that can be exchanged.
-  let spellworkChangesAllowed: Int
+  public let spellworkChangesAllowed: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GuidelineTranslation>
+  public let translations: LocaleMap<GuidelineTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case spellworkChangesAllowed = "spellwork_changes_allowed"
@@ -13991,7 +13991,7 @@ public struct Guideline: Decodable, Equatable, Sendable, Identifiable {
 
 public struct GuidelineTranslation: Decodable, Equatable, Sendable {
   /// The guideline’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -14033,7 +14033,7 @@ public enum ElectiveSpellworks: Decodable, Equatable, Sendable {
 }
 
 public struct SpecificElectiveSpellworks: Decodable, Equatable, Sendable {
-  let list: [ElectiveSpellwork]
+  public let list: [ElectiveSpellwork]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -14047,10 +14047,10 @@ public struct SpecificElectiveSpellworks: Decodable, Equatable, Sendable {
 }
 
 public struct ElectiveSpellwork: Decodable, Equatable, Sendable {
-  let id: SpellworkIdentifier
+  public let id: SpellworkIdentifier
 
   /// The elective spellwork may only take effect if a certain condition is met. The condition may be related to professions or profession variants, but it is designed so that it can work without a specific profession, as multiple may belong to an institute, but with referencing other entities instead.
-  let restriction: ElectiveSpellworkRestriction?
+  public let restriction: ElectiveSpellworkRestriction?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14098,40 +14098,40 @@ public struct Ritual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a ritual.
-  let parameters: SlowPerformanceParameters
+  public let parameters: SlowPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The associated property specialization.
-  let propertySpecialization: AnyPropertySpecializationIdentifier?
+  public let propertySpecialization: AnyPropertySpecializationIdentifier?
 
   /// The tradition(s) the ritual is available for. It may be *generally* available to all traditions or it may be only familiar in specific traditions.
-  let traditions: SpellworkTraditions
+  public let traditions: SpellworkTraditions
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The prerequisites for the ritual.
-  let prerequisites: SpellworkPrerequisites?
+  public let prerequisites: SpellworkPrerequisites?
 
   /// Possible effects of the reversed spell.
-  let reversalis: Reversalis?
+  public let reversalis: Reversalis?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RitualTranslation>
+  public let translations: LocaleMap<RitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -14184,27 +14184,27 @@ public struct Ritual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct RitualTranslation: Decodable, Equatable, Sendable {
   /// The ritual’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -14264,13 +14264,13 @@ public typealias SlowCastingTime = CastingTimeIncludingLovemaking<SlowSkillNonMo
 
 public struct SlowSkillNonModifiableCastingTime: Decodable, Equatable, Sendable {
   /// The (unitless) casting time value.
-  let value: Int
+  public let value: Int
 
   /// The unit of the `value`.
-  let unit: SlowSkillCastingTimeUnit
+  public let unit: SlowSkillCastingTimeUnit
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SlowSkillNonModifiableCastingTimeTranslation>?
+  public let translations: LocaleMap<SlowSkillNonModifiableCastingTimeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -14289,7 +14289,7 @@ public struct SlowSkillNonModifiableCastingTime: Decodable, Equatable, Sendable 
 
 public struct SlowSkillNonModifiableCastingTimeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -14335,12 +14335,12 @@ public enum SpellworkPrerequisiteGroup: Decodable, Equatable, Sendable {
 
 public struct RatedPrerequisite: Decodable, Equatable, Sendable {
   /// The rated entry’s identifier.
-  let id: RatedIdentifier
+  public let id: RatedIdentifier
 
   /// The required minimum value.
-  let value: Int
+  public let value: Int
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14420,31 +14420,31 @@ public struct Ceremony: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a ceremony.
-  let parameters: SlowPerformanceParameters
+  public let parameters: SlowPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The tradition(s) the ceremony is available for. Note that general aspects do not have an associated tradition and thus need to be defined in a special way.
-  let traditions: [LiturgyTradition]
+  public let traditions: [LiturgyTradition]
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// The prerequisites for the ceremony.
-  let prerequisites: LiturgyPrerequisites?
+  public let prerequisites: LiturgyPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CeremonyTranslation>
+  public let translations: LocaleMap<CeremonyTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -14491,30 +14491,30 @@ public struct Ceremony: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CeremonyTranslation: Decodable, Equatable, Sendable {
   /// The ceremony’s name.
-  let name: String
+  public let name: String
 
   /// A compressed name of the ceremony for use in small areas (e.g. on character sheet). Should only be defined if the `name` does not fit on character sheet.
-  let nameCompressed: String?
+  public let nameCompressed: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -14549,10 +14549,10 @@ public typealias Reversalis = [ReversalisEffect]
 /// A single possible effect of the reversed spell. A reversed spell can have a different property than the original spell.
 public struct ReversalisEffect: Decodable, Equatable, Sendable {
   /// The associated property of the reversed spell.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ReversalisEffectTranslation>
+  public let translations: LocaleMap<ReversalisEffectTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case property = "property"
@@ -14569,7 +14569,7 @@ public struct ReversalisEffect: Decodable, Equatable, Sendable {
 
 public struct ReversalisEffectTranslation: Decodable, Equatable, Sendable {
   /// The effect description of the reversed spell.
-  let effect: String
+  public let effect: String
 
   private enum CodingKeys: String, CodingKey {
     case effect = "effect"
@@ -14652,13 +14652,13 @@ public enum RestrictedSpellwork: Decodable, Equatable, Sendable {
 
 public struct RestrictedProperty: Decodable, Equatable, Sendable {
   /// The identifier of the property that spellworks are disallowed from.
-  let id: Property.ID
+  public let id: Property.ID
 
   /// Exclude specific spellworks from the restriction.
-  let exclude: [SpellworkIdentifier]?
+  public let exclude: [SpellworkIdentifier]?
 
   /// Spellworks from this property up to a certain number are allowed. Spellworks excluded from this restriction definition using `exclude` do not contribute to the maximum.
-  let maximum: Int?
+  public let maximum: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14684,18 +14684,18 @@ public struct LessonPackage: Decodable, Equatable, Sendable, Identifiable, Child
   public let id: ID
 
   /// The associated curriculum.
-  let curriculum: Curriculum.ID
+  public let curriculum: Curriculum.ID
 
   /// The AP value of the lesson package. This is only used to compare the generated AP value with the one in the book for error checking.
-  let apValue: Int?
+  public let apValue: Int?
 
   /// The spell values difference of the lesson package. This field reflects the changes (difference) to the field of the same name in the profession package. If a spell gets to SR 0 because of this, it will be removed completely.
-  let spellworkChanges: [SpellworkChange]?
+  public let spellworkChanges: [SpellworkChange]?
 
-  let skills: [AbilityAdjustment]?
+  public let skills: [AbilityAdjustment]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LessonPackageTranslation>
+  public let translations: LocaleMap<LessonPackageTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case curriculum = "curriculum"
@@ -14734,10 +14734,10 @@ public struct LessonPackage: Decodable, Equatable, Sendable, Identifiable, Child
 
 public struct LessonPackageTranslation: Decodable, Equatable, Sendable {
   /// The lesson package’s name.
-  let name: String
+  public let name: String
 
   /// The spell values difference of the lesson package. Use this field to specify a text that is displayed instead of the generated `spellwork_changes` list. The field is displayed even if no list is present.
-  let spellworkChanges: String?
+  public let spellworkChanges: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -14753,8 +14753,8 @@ public struct LessonPackageTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct SpellworkChange: Decodable, Equatable, Sendable {
-  let base: SpellworkAdjustment
-  let replacement: SpellworkAdjustment
+  public let base: SpellworkAdjustment
+  public let replacement: SpellworkAdjustment
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -14770,13 +14770,13 @@ public struct SpellworkChange: Decodable, Equatable, Sendable {
 }
 
 public struct SpellworkAdjustment: Decodable, Equatable, Sendable {
-  let id: SpellworkIdentifier
+  public let id: SpellworkIdentifier
 
   /// The skill points that will be added to the current skill rating. If a spell gets to a skill rating of 0 because of this, it will be removed completely.
-  let points: Int
+  public let points: Int
 
   /// The target tradition. If the target spell is not from the Guild Mage tradition, specify the tradition identifier here.
-  let tradition: MagicalTradition.ID?
+  public let tradition: MagicalTradition.ID?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14826,13 +14826,13 @@ public enum AbilityAdjustment: Decodable, Equatable, Sendable {
 }
 
 public struct CombatTechniqueAdjustment: Decodable, Equatable, Sendable {
-  let id: CombatTechniqueIdentifier
+  public let id: CombatTechniqueIdentifier
 
   /// The combat technique points that will be added to the current combat technique rating.
-  let points: Int
+  public let points: Int
 
   /// The combat technique rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking. Note that 6 is always added to that number, so to get a base rating of 10, this field should be 4.
-  let basePoints: Int?
+  public let basePoints: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14850,13 +14850,13 @@ public struct CombatTechniqueAdjustment: Decodable, Equatable, Sendable {
 }
 
 public struct SkillAdjustment: Decodable, Equatable, Sendable {
-  let id: Skill.ID
+  public let id: Skill.ID
 
   /// The skill points that will be added to the current skill rating.
-  let points: Int
+  public let points: Int
 
   /// The skill rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking.
-  let basePoints: Int?
+  public let basePoints: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14874,16 +14874,16 @@ public struct SkillAdjustment: Decodable, Equatable, Sendable {
 }
 
 public struct SpellworkAdjustmentWithBase: Decodable, Equatable, Sendable {
-  let id: SpellworkIdentifier
+  public let id: SpellworkIdentifier
 
   /// The skill points that will be added to the current skill rating. If a spell gets to a skill rating of 0 because of this, it will be removed completely.
-  let points: Int
+  public let points: Int
 
   /// The spell rating of the base profession package. This is only used to compare the derived rating from the profession package with the one in the book for error checking.
-  let basePoints: Int?
+  public let basePoints: Int?
 
   /// The target tradition. If the target spell is not from the Guild Mage tradition, specify the tradition identifier here.
-  let tradition: MagicalTradition.ID?
+  public let tradition: MagicalTradition.ID?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -14911,10 +14911,10 @@ public struct MagicalTraditionSubgroup: Decodable, Equatable, Sendable, Identifi
   public let id: ID
 
   /// The magical tradition this subgroup belongs to.
-  let parent: MagicalTradition.ID
+  public let parent: MagicalTradition.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalTraditionSubgroupTranslation>
+  public let translations: LocaleMap<MagicalTraditionSubgroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -14947,7 +14947,7 @@ public struct MagicalTraditionSubgroup: Decodable, Equatable, Sendable, Identifi
 
 public struct MagicalTraditionSubgroupTranslation: Decodable, Equatable, Sendable {
   /// The name of the ceremonial item. This should be the heading used in the respective publication.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -14962,7 +14962,7 @@ public struct MagicalTraditionSubgroupTranslation: Decodable, Equatable, Sendabl
 
 public struct ReligiousProfessionGroup: Decodable, Equatable, Sendable {
   /// The associated blessed tradition (religion).
-  let associatedTradition: BlessedTradition.ID?
+  public let associatedTradition: BlessedTradition.ID?
 
   private enum CodingKeys: String, CodingKey {
     case associatedTradition = "associatedTradition"
@@ -14984,25 +14984,25 @@ public struct ProfessionVersion: Decodable, Equatable, Sendable, Identifiable, C
   public let id: ID
 
   /// The associated profession.
-  let profession: Profession.ID
+  public let profession: Profession.ID
 
   /// A list of typical advantages.
-  let suggestedAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let suggestedAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of typical disadvantages.
-  let suggestedDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let suggestedDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of advantages that do not fit well with this profession; to be checked with the GM before taking any of them.
-  let unsuitableAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let unsuitableAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of disadvantages that do not fit well with this profession; to be checked with the GM before taking any of them.
-  let unsuitableDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let unsuitableDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ProfessionVersionTranslation>
+  public let translations: LocaleMap<ProfessionVersionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case profession = "profession"
@@ -15045,24 +15045,24 @@ public struct ProfessionVersion: Decodable, Equatable, Sendable, Identifiable, C
 
 public struct ProfessionVersionTranslation: Decodable, Equatable, Sendable {
   /// The basic profession’s name.
-  let name: ProfessionName
+  public let name: ProfessionName
 
   /// A name addition of the profession. This will contain texts like name of the academy or the witch circle. It is enclosed in parenthesis, but the database entry must not contain parenthesis.
-  let specification: ProfessionName?
+  public let specification: ProfessionName?
 
   /// A list of typical advantages.
-  let suggestedAdvantages: String?
+  public let suggestedAdvantages: String?
 
   /// A list of typical disadvantages.
-  let suggestedDisadvantages: String?
+  public let suggestedDisadvantages: String?
 
   /// A list of advantages that do not fit well with this profession; to be checked with the GM before taking any of them.
-  let unsuitableAdvantages: String?
+  public let unsuitableAdvantages: String?
 
   /// A list of disadvantages that do not fit well with this profession; to be checked with the GM before taking any of them.
-  let unsuitableDisadvantages: String?
+  public let unsuitableDisadvantages: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -15096,40 +15096,40 @@ public struct ProfessionPackage: Decodable, Equatable, Sendable, Identifiable, C
   public let id: ID
 
   /// The associated profession version.
-  let professionVersion: ProfessionVersion.ID
+  public let professionVersion: ProfessionVersion.ID
 
   /// The associated experience level. By default, profession packages are associated with the experience level *Experienced*.
-  let experienceLevel: ExperienceLevel.ID
+  public let experienceLevel: ExperienceLevel.ID
 
   /// What does the professional package cost in adventure points?
-  let apValue: Int
+  public let apValue: Int
 
   /// Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.
-  let prerequisites: ProfessionPrerequisites?
+  public let prerequisites: ProfessionPrerequisites?
 
   /// In some areas, the profession package grants a loose set of stats where the player must choose between different options for the profession package.
-  let options: ProfessionPackageOptions?
+  public let options: ProfessionPackageOptions?
 
   /// Any special abilities the profession receives from the package.
-  let specialAbilities: [ProfessionSpecialAbility]?
+  public let specialAbilities: [ProfessionSpecialAbility]?
 
   /// Provides ratings for the combat techniques that the hero receives from the package.
-  let combatTechniques: [CombatTechniqueRating]?
+  public let combatTechniques: [CombatTechniqueRating]?
 
   /// The skill ratings the package grants to the hero.
-  let skills: [SkillRating]?
+  public let skills: [SkillRating]?
 
   /// The cantrips the profession receives from the package.
-  let cantrips: [Cantrip.ID]?
+  public let cantrips: [Cantrip.ID]?
 
   /// The skill ratings a magical profession receives for spells; these spells are considered activated. Spells from an unfamiliar Tradition, if any, are identified as such.
-  let spells: [MagicalSkillRating]?
+  public let spells: [MagicalSkillRating]?
 
   /// Clerical professions receive these liturgical chants at the listed skill ratings. These liturgical chants are considered activated.
-  let liturgicalChants: [LiturgicalChantRating]?
+  public let liturgicalChants: [LiturgicalChantRating]?
 
   /// If the selection of a profession variant is required.
-  let isVariantSelectionRequired: Bool
+  public let isVariantSelectionRequired: Bool
 
   private enum CodingKeys: String, CodingKey {
     case professionVersion = "profession_version"
@@ -15187,28 +15187,28 @@ public struct ExperienceLevel: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The AP value you get.
-  let adventurePoints: Int
+  public let adventurePoints: Int
 
   /// The highest possible attribute value.
-  let maxAttributeValue: Int
+  public let maxAttributeValue: Int
 
   /// The highest possible skill rating.
-  let maxSkillRating: Int
+  public let maxSkillRating: Int
 
   /// The highest possible combat technique rating.
-  let maxCombatTechniqueRating: Int
+  public let maxCombatTechniqueRating: Int
 
   /// The limit for the sum of all attribute values.
-  let maxAttributeTotal: Int
+  public let maxAttributeTotal: Int
 
   /// The maximum of spells/chants you can activate.
-  let maxNumberOfSpellsLiturgicalChants: Int
+  public let maxNumberOfSpellsLiturgicalChants: Int
 
   /// The maximum of spells of an unfamiliar tradition you can activate.
-  let maxNumberOfUnfamiliarSpells: Int
+  public let maxNumberOfUnfamiliarSpells: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ExperienceLevelTranslation>
+  public let translations: LocaleMap<ExperienceLevelTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case adventurePoints = "adventure_points"
@@ -15253,7 +15253,7 @@ public struct ExperienceLevel: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ExperienceLevelTranslation: Decodable, Equatable, Sendable {
   /// The experience level’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -15328,9 +15328,9 @@ public enum ProfessionPrerequisiteGroup: Decodable, Equatable, Sendable {
 /// Requires a specific culture or one of a specific set of cultures.
 public struct CulturePrerequisite: Decodable, Equatable, Sendable {
   /// The culture’s identifier.
-  let id: Culture.ID
+  public let id: Culture.ID
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -15351,46 +15351,46 @@ public struct Culture: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// A list of native languages (usually it is only one).
-  let language: [CultureLanguage]
+  public let language: [CultureLanguage]
 
   /// A list of native scripts (usually it is only one). If the culture does not use any script, leave this array empty.
-  let script: [Script.ID]?
+  public let script: [Script.ID]?
 
   /// If the area knowledge has a fixed value or can be adjusted.
-  let areaKnowledge: AreaKnowledge
+  public let areaKnowledge: AreaKnowledge
 
   /// A list of possible social status in the respective culture.
-  let socialStatus: [SocialStatus.ID]
+  public let socialStatus: [SocialStatus.ID]
 
   /// A list of professions that are typical for the culture, as well as professions that are rarely practiced or encountered in the culture. The list is either defined by group (as multiple lists) or plain (as a single list).
-  let commonProfessions: CommonProfessions
+  public let commonProfessions: CommonProfessions
 
   /// A list of common advantages.
-  let commonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let commonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of common disadvantages.
-  let commonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let commonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of uncommon advantages.
-  let uncommonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let uncommonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of uncommon disadvantages.
-  let uncommonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let uncommonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of common skills.
-  let commonSkills: [CommonnessRatedSkill]
+  public let commonSkills: [CommonnessRatedSkill]
 
   /// A list of uncommon skills.
-  let uncommonSkills: [CommonnessRatedSkill]?
+  public let uncommonSkills: [CommonnessRatedSkill]?
 
   /// The skill points you get for buying the culture package.
-  let culturalPackage: [CulturalPackageItem]
+  public let culturalPackage: [CulturalPackageItem]
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CultureTranslation>
+  public let translations: LocaleMap<CultureTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case language = "language"
@@ -15447,33 +15447,33 @@ public struct Culture: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CultureTranslation: Decodable, Equatable, Sendable {
   /// The culture’s name.
-  let name: String
+  public let name: String
 
   /// The culture’s name in prerequisites, if different from the normal culture’s name.
-  let nameInPrerequisites: String?
+  public let nameInPrerequisites: String?
 
   /// The name for people of this culture, if different from the normal culture’s name.
-  let nameOfPeople: String?
+  public let nameOfPeople: String?
 
   /// The description of the area knowledge.
-  let areaKnowledge: AreaKnowledgeTranslation
+  public let areaKnowledge: AreaKnowledgeTranslation
 
   /// The respective common advantages text from the source book.
-  let commonAdvantages: String?
+  public let commonAdvantages: String?
 
   /// The respective common disadvantages text from the source book.
-  let commonDisadvantages: String?
+  public let commonDisadvantages: String?
 
   /// The respective uncommon advantages text from the source book.
-  let uncommonAdvantages: String?
+  public let uncommonAdvantages: String?
 
   /// The respective uncommon disadvantages text from the source book.
-  let uncommonDisadvantages: String?
+  public let uncommonDisadvantages: String?
 
   /// Structured description of common names.
-  let commonNames: CommonNames
+  public let commonNames: CommonNames
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -15507,13 +15507,13 @@ public struct CultureTranslation: Decodable, Equatable, Sendable {
 /// A native languages with optional specializations.
 public struct CultureLanguage: Decodable, Equatable, Sendable {
   /// The language’s identifier.
-  let id: Language.ID
+  public let id: Language.ID
 
   /// The language specializations, if any.
-  let specializations: [LanguageSpecialization.ID]?
+  public let specializations: [LanguageSpecialization.ID]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CultureLanguageTranslation>?
+  public let translations: LocaleMap<CultureLanguageTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -15532,10 +15532,10 @@ public struct CultureLanguage: Decodable, Equatable, Sendable {
 
 public struct CultureLanguageTranslation: Decodable, Equatable, Sendable {
   /// The concrete language specialization, if the language allows to specify arbitrary text.
-  let specialization: String?
+  public let specialization: String?
 
   /// A different prompt for the language specialization, if the language allows to specify arbitrary text.
-  let specializationPrompt: String?
+  public let specializationPrompt: String?
 
   private enum CodingKeys: String, CodingKey {
     case specialization = "specialization"
@@ -15556,19 +15556,19 @@ public struct Script: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The script’s adventure point value
-  let apValue: Int?
+  public let apValue: Int?
 
   /// A list of languages that use this script.
-  let associatedLanguages: [Language.ID]
+  public let associatedLanguages: [Language.ID]
 
   /// The continents this language is present on.
-  let continent: [AssociatedContinent]
+  public let continent: [AssociatedContinent]
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ScriptTranslation>
+  public let translations: LocaleMap<ScriptTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -15607,15 +15607,15 @@ public struct Script: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ScriptTranslation: Decodable, Equatable, Sendable {
   /// The script’s name.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// The description of the alphabet.
-  let alphabet: String?
+  public let alphabet: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -15637,7 +15637,7 @@ public struct ScriptTranslation: Decodable, Equatable, Sendable {
 /// If the area knowledge has a fixed value or can be adjusted.
 public struct AreaKnowledge: Decodable, Equatable, Sendable {
   /// `true` if the area knowledge has a fixed value, `false` if it can be adjusted.
-  let isFixed: Bool
+  public let isFixed: Bool
 
   private enum CodingKeys: String, CodingKey {
     case isFixed = "is_fixed"
@@ -15656,10 +15656,10 @@ public struct SocialStatus: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The social status’ position. The higher the position, the more powerful the social status. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SocialStatusTranslation>
+  public let translations: LocaleMap<SocialStatusTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -15692,7 +15692,7 @@ public struct SocialStatus: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SocialStatusTranslation: Decodable, Equatable, Sendable {
   /// The social status’ name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -15738,10 +15738,10 @@ public typealias PlainCommonProfessions = CommonProfessionConstraints<Profession
 /// A list of professions. The filter specifies how the list is applied to all mundane professions.
 public struct CommonProfessionConstraints<Constraint: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The list of constraints.
-  let constraints: [Constraint]
+  public let constraints: [Constraint]
 
   /// This defines how the list of constraints should be offset against the list of all mundane professions: Either only the professions are kept that intersect with the constraints or only the professions are kept that are different from the constraints.
-  let operation: CommonProfessionConstraintsOperation
+  public let operation: CommonProfessionConstraintsOperation
 
   private enum CodingKeys: String, CodingKey {
     case constraints = "constraints"
@@ -15786,9 +15786,9 @@ public enum CommonProfessionConstraintsOperation: Decodable, Equatable, Sendable
 
 /// Lists of professions by group.
 public struct GroupedCommonProfessions: Decodable, Equatable, Sendable {
-  let mundane: CommonProfessionConstraints<MundaneCommonProfessionConstraint>?
-  let magic: CommonProfessionConstraints<MagicCommonProfessionConstraint>?
-  let blessed: CommonProfessionConstraints<BlessedCommonProfessionConstraint>?
+  public let mundane: CommonProfessionConstraints<MundaneCommonProfessionConstraint>?
+  public let magic: CommonProfessionConstraints<MagicCommonProfessionConstraint>?
+  public let blessed: CommonProfessionConstraints<BlessedCommonProfessionConstraint>?
 
   private enum CodingKeys: String, CodingKey {
     case mundane = "mundane"
@@ -15829,13 +15829,13 @@ public enum MundaneCommonProfessionConstraint: Decodable, Equatable, Sendable {
 
 public struct ProfessionConstraint: Decodable, Equatable, Sendable {
   /// The profession’s identifier.
-  let id: Profession.ID
+  public let id: Profession.ID
 
   /// Some profession variants are more common than others. There may be cultures where some variants are not represented at all.
-  let weightedVariants: Weighted<ProfessionVariant.ID>?
+  public let weightedVariants: Weighted<ProfessionVariant.ID>?
 
   /// Some professions may be found in a culture, but are not that common.
-  let rarity: Rarity?
+  public let rarity: Rarity?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -15855,10 +15855,10 @@ public struct ProfessionConstraint: Decodable, Equatable, Sendable {
 /// Some professions or profession variants are more common than others. There may be cultures where some professions or profession variants are not represented at all.
 public struct Weighted<ProfessionOrVariant: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The list of more common professions or profession variants.
-  let elements: [ProfessionOrVariant]
+  public let elements: [ProfessionOrVariant]
 
   /// The list of more common professions or profession variants.
-  let weight: CommonnessWeight
+  public let weight: CommonnessWeight
 
   private enum CodingKeys: String, CodingKey {
     case elements = "elements"
@@ -15915,34 +15915,34 @@ public struct ProfessionVariant: Decodable, Equatable, Sendable, Identifiable, C
   public let id: ID
 
   /// The associated profession package.
-  let professionPackage: ProfessionPackage.ID
+  public let professionPackage: ProfessionPackage.ID
 
   /// The AP value you have to pay for the package variant. Some variants may reduce the AP value of the base package.
-  let apValue: Int?
+  public let apValue: Int?
 
   /// Which prerequisites must be met to buy the stat block? For example, a character might need the advantage Spellcaster or Blessed. Note: the AP cost for a profession package does not include these prerequisites.
-  let prerequisites: ProfessionVariantPrerequisites?
+  public let prerequisites: ProfessionVariantPrerequisites?
 
   /// In some areas, the profession package grants a loose set of stats where the player must choose between different options for the profession package. The variant may override or remove those options.
-  let options: ProfessionVariantPackageOptions?
+  public let options: ProfessionVariantPackageOptions?
 
   /// Any special abilities the profession receives from the package variant.
-  let specialAbilities: [ProfessionVariantSpecialAbility]?
+  public let specialAbilities: [ProfessionVariantSpecialAbility]?
 
   /// Provides ratings for the combat techniques that the hero receives from the package variant.
-  let combatTechniques: [CombatTechniqueRating]?
+  public let combatTechniques: [CombatTechniqueRating]?
 
   /// The skill ratings the package variant grants to the hero.
-  let skills: [SkillRating]?
+  public let skills: [SkillRating]?
 
   /// The skill ratings a magical profession variant receives for spells; these spells are considered activated. Spells from an unfamiliar Tradition, if any, are identified as such.
-  let spells: [MagicalSkillRating]?
+  public let spells: [MagicalSkillRating]?
 
   /// Clerical profession variants receive these liturgical chants at the listed skill ratings. These liturgical chants are considered activated.
-  let liturgicalChants: [LiturgicalChantRating]?
+  public let liturgicalChants: [LiturgicalChantRating]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ProfessionVariantTranslation>
+  public let translations: LocaleMap<ProfessionVariantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case professionPackage = "profession_package"
@@ -15991,13 +15991,13 @@ public struct ProfessionVariant: Decodable, Equatable, Sendable, Identifiable, C
 
 public struct ProfessionVariantTranslation: Decodable, Equatable, Sendable {
   /// The profession variant’s name.
-  let name: ProfessionName
+  public let name: ProfessionName
 
   /// A text that replaces the generated text for the profession variant.
-  let fullText: String?
+  public let fullText: String?
 
   /// A text that is appended to the generated text for the profession variant.
-  let concludingText: String?
+  public let concludingText: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -16050,17 +16050,17 @@ public enum PrerequisiteDiff<T: Decodable & Equatable & Sendable>: Decodable, Eq
 
 /// In some areas, the profession package grants a loose set of stats where the player must choose between different options for the profession package. The variant may override or remove those options.
 public struct ProfessionVariantPackageOptions: Decodable, Equatable, Sendable {
-  let skillSpecialization: VariantOptionAction<SkillSpecializationOptions>?
-  let languagesScripts: VariantOptionAction<LanguagesScriptsOptions>?
-  let specialAbilitiesForAdventurePoints: VariantOptionAction<SpecialAbilitiesForAdventurePointsOption>?
-  let combatTechniques: VariantOptionAction<CombatTechniquesOptions>?
-  let combatTechniquesForAdventurePoints: VariantOptionAction<CombatTechniquesForAdventurePointsOption>?
-  let cantrips: VariantOptionAction<CantripsOptions>?
-  let curses: VariantOptionAction<CursesOptions>?
-  let skills: VariantOptionAction<SkillsOptions>?
-  let spellworks: VariantOptionAction<SpellworksOptions>?
-  let spellworksForChosenProperty: VariantOptionAction<SpellworksForChosenProperty>?
-  let liturgies: VariantOptionAction<LiturgiesOptions>?
+  public let skillSpecialization: VariantOptionAction<SkillSpecializationOptions>?
+  public let languagesScripts: VariantOptionAction<LanguagesScriptsOptions>?
+  public let specialAbilitiesForAdventurePoints: VariantOptionAction<SpecialAbilitiesForAdventurePointsOption>?
+  public let combatTechniques: VariantOptionAction<CombatTechniquesOptions>?
+  public let combatTechniquesForAdventurePoints: VariantOptionAction<CombatTechniquesForAdventurePointsOption>?
+  public let cantrips: VariantOptionAction<CantripsOptions>?
+  public let curses: VariantOptionAction<CursesOptions>?
+  public let skills: VariantOptionAction<SkillsOptions>?
+  public let spellworks: VariantOptionAction<SpellworksOptions>?
+  public let spellworksForChosenProperty: VariantOptionAction<SpellworksForChosenProperty>?
+  public let liturgies: VariantOptionAction<LiturgiesOptions>?
 
   private enum CodingKeys: String, CodingKey {
     case skillSpecialization = "skill_specialization"
@@ -16151,7 +16151,7 @@ public enum SkillSpecializationOptions: Decodable, Equatable, Sendable {
 /// Select an application from a skill or from one of a list of skills where you get a skill specialization for.
 public struct SpecificSkillSpecializationOptions: Decodable, Equatable, Sendable {
   /// Possible skill(s) to get a skill specialization for.
-  let options: [Skill.ID]
+  public let options: [Skill.ID]
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -16167,10 +16167,10 @@ public struct SpecificSkillSpecializationOptions: Decodable, Equatable, Sendable
 /// Buy languages and scripts for a specific amount of AP.
 public struct LanguagesScriptsOptions: Decodable, Equatable, Sendable {
   /// If scripts are included in the selection.
-  let includeScripts: Bool
+  public let includeScripts: Bool
 
   /// The AP value you can buy languages and scripts for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case includeScripts = "includeScripts"
@@ -16188,10 +16188,10 @@ public struct LanguagesScriptsOptions: Decodable, Equatable, Sendable {
 /// Buy special abilities for a specific amount of AP.
 public struct SpecialAbilitiesForAdventurePointsOption: Decodable, Equatable, Sendable {
   /// The groups you can choose special abilities from.
-  let groups: [SpecialAbilitiesForAdventurePointsOptionGroup]
+  public let groups: [SpecialAbilitiesForAdventurePointsOptionGroup]
 
   /// The AP value you can buy special abilities for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case groups = "groups"
@@ -16501,13 +16501,13 @@ public enum SpecialAbilitiesForAdventurePointsOptionGroup: Decodable, Equatable,
 /// Select one or more combat techniques you get a CtR bonus for.
 public struct CombatTechniquesOptions: Decodable, Equatable, Sendable {
   /// Specify the number of combat techniques that can be selected so that they get increased to a specific CtR. There can be multiple selections with different CtRs.
-  let fixed: [RatingForCombatTechniquesNumber]
+  public let fixed: [RatingForCombatTechniquesNumber]
 
   /// Define if after the fixed selections the remaining unselected combat techniques will receive a certain rating bonus as well.
-  let restRatingModifier: Int?
+  public let restRatingModifier: Int?
 
   /// The list of combat techniques to choose from.
-  let options: [CombatTechniqueIdentifier]
+  public let options: [CombatTechniqueIdentifier]
 
   private enum CodingKeys: String, CodingKey {
     case fixed = "fixed"
@@ -16526,12 +16526,12 @@ public struct CombatTechniquesOptions: Decodable, Equatable, Sendable {
 
 public struct RatingForCombatTechniquesNumber: Decodable, Equatable, Sendable {
   /// The number of selectable combat techniques.
-  let number: Int
+  public let number: Int
 
   /// The rating bonus provided for the selected combat technique(s).
   ///
   /// **Note:** This is a rating *bonus*, so it will be *added* to the default value of 6.
-  let ratingModifier: Int
+  public let ratingModifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -16549,10 +16549,10 @@ public struct RatingForCombatTechniquesNumber: Decodable, Equatable, Sendable {
 /// Distribe a set amount of Adventure Points among a given set of combat techniques.
 public struct CombatTechniquesForAdventurePointsOption: Decodable, Equatable, Sendable {
   /// The AP value to distribute.
-  let apValue: Int
+  public let apValue: Int
 
   /// The list of combat techniques to distribute to.
-  let options: [CombatTechniqueIdentifier]
+  public let options: [CombatTechniqueIdentifier]
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "apValue"
@@ -16570,10 +16570,10 @@ public struct CombatTechniquesForAdventurePointsOption: Decodable, Equatable, Se
 /// Select one or more cantrips you receive.
 public struct CantripsOptions: Decodable, Equatable, Sendable {
   /// The number of selectable cantrips.
-  let number: Int
+  public let number: Int
 
   /// The list of cantrips to choose from.
-  let options: [Cantrip.ID]
+  public let options: [Cantrip.ID]
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -16594,22 +16594,22 @@ public struct Cantrip: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Measurable parameters of a cantrip.
-  let parameters: CantripPerformanceParameters
+  public let parameters: CantripPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// A note specifying the dissemination of the cantrip in different traditions. Sometimes a cantrip is exclusively available to one or more specific traditions, but usually one the academies and traditions are listed the cantrip is most commonly teached in.
-  let note: CantripNote?
+  public let note: CantripNote?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CantripTranslation>
+  public let translations: LocaleMap<CantripTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parameters = "parameters"
@@ -16650,21 +16650,21 @@ public struct Cantrip: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CantripTranslation: Decodable, Equatable, Sendable {
   /// The cantrip’s name.
-  let name: String
+  public let name: String
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   @available(*, deprecated)
-  let range: String
+  public let range: String
 
   @available(*, deprecated)
-  let duration: String
+  public let duration: String
 
   @available(*, deprecated)
-  let target: String
+  public let target: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -16689,8 +16689,8 @@ public struct CantripTranslation: Decodable, Equatable, Sendable {
 
 /// Measurable parameters of a cantrip.
 public struct CantripPerformanceParameters: Decodable, Equatable, Sendable {
-  let range: CantripRange
-  let duration: CantripDuration
+  public let range: CantripRange
+  public let duration: CantripDuration
 
   private enum CodingKeys: String, CodingKey {
     case range = "range"
@@ -16776,13 +16776,13 @@ public enum CantripDuration: Decodable, Equatable, Sendable {
 
 public struct FixedCantripDuration: Decodable, Equatable, Sendable {
   /// If the duration is the maximum duration, so it may end earlier.
-  let isMaximum: Bool?
+  public let isMaximum: Bool?
 
   /// The (unitless) duration.
-  let value: Int
+  public let value: Int
 
   /// The duration unit.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   private enum CodingKeys: String, CodingKey {
     case isMaximum = "is_maximum"
@@ -16801,7 +16801,7 @@ public struct FixedCantripDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteCantripDuration: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteCantripDurationTranslation>
+  public let translations: LocaleMap<IndefiniteCantripDurationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -16816,7 +16816,7 @@ public struct IndefiniteCantripDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteCantripDurationTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -16859,7 +16859,7 @@ public enum CantripNote: Decodable, Equatable, Sendable {
 
 public struct ExclusiveCantripNote: Decodable, Equatable, Sendable {
   /// The traditions the cantrip is exclusively available to.
-  let traditions: [MagicalTradition.ID]
+  public let traditions: [MagicalTradition.ID]
 
   private enum CodingKeys: String, CodingKey {
     case traditions = "traditions"
@@ -16874,7 +16874,7 @@ public struct ExclusiveCantripNote: Decodable, Equatable, Sendable {
 
 public struct CommonCantripNotes: Decodable, Equatable, Sendable {
   /// The academies and traditions the cantrip is commonly teached in.
-  let list: [CommonCantripNote]
+  public let list: [CommonCantripNote]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -16916,10 +16916,10 @@ public enum CommonCantripNote: Decodable, Equatable, Sendable {
 
 public struct CommonCantripTraditionNote: Decodable, Equatable, Sendable {
   /// The magical tradition’s identifier.
-  let id: MagicalTradition.ID
+  public let id: MagicalTradition.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CommonCantripTraditionNoteTranslation>?
+  public let translations: LocaleMap<CommonCantripTraditionNoteTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -16936,7 +16936,7 @@ public struct CommonCantripTraditionNote: Decodable, Equatable, Sendable {
 
 public struct CommonCantripTraditionNoteTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: String
+  public let note: String
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -16952,7 +16952,7 @@ public struct CommonCantripTraditionNoteTranslation: Decodable, Equatable, Senda
 /// Buy curses for a specific amount of AP.
 public struct CursesOptions: Decodable, Equatable, Sendable {
   /// The AP value you can buy curses for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -16968,13 +16968,13 @@ public struct CursesOptions: Decodable, Equatable, Sendable {
 /// Buy skills for a specific amount of AP.
 public struct SkillsOptions: Decodable, Equatable, Sendable {
   /// If specified, you may only choose from skills of the specified group.
-  let group: SkillGroup.ID
+  public let group: SkillGroup.ID
 
   /// The list of specific skills to distribute AP to.
-  let specific: [Skill.ID]?
+  public let specific: [Skill.ID]?
 
   /// The AP value you can buy skills for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case group = "group"
@@ -16994,10 +16994,10 @@ public struct SkillsOptions: Decodable, Equatable, Sendable {
 /// Buy a set number of spells and rituals for a specific amount of AP.
 public struct SpellworksOptions: Decodable, Equatable, Sendable {
   /// The number of spells and rituals to select.
-  let number: Int
+  public let number: Int
 
   /// The AP value you can buy spells and rituals for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -17015,10 +17015,10 @@ public struct SpellworksOptions: Decodable, Equatable, Sendable {
 /// Buy spells and rituals that match the property option of a selected special ability for a specific amount of AP.
 public struct SpellworksForChosenProperty: Decodable, Equatable, Sendable {
   /// The entry that has a property as a select option, where you have to choose between multiple properties within the profession (the special ability must be entered as a `Selection`).
-  let entry: SpecialAbilityIdentifier
+  public let entry: SpecialAbilityIdentifier
 
   /// The AP value you can buy spells and rituals for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case entry = "entry"
@@ -17331,15 +17331,15 @@ public struct Adoruzepterzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -17348,27 +17348,27 @@ public struct Adoruzepterzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdoruzepterzauberTranslation>
+  public let translations: LocaleMap<AdoruzepterzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -17419,38 +17419,38 @@ public struct Adoruzepterzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AdoruzepterzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -17526,7 +17526,7 @@ public enum Volume: Decodable, Equatable, Sendable {
 
 public struct FixedVolume: Decodable, Equatable, Sendable {
   /// The volume points.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case points = "points"
@@ -17541,7 +17541,7 @@ public struct FixedVolume: Decodable, Equatable, Sendable {
 
 public struct VolumePerLevel: Decodable, Equatable, Sendable {
   /// The volume points per level.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case points = "points"
@@ -17556,7 +17556,7 @@ public struct VolumePerLevel: Decodable, Equatable, Sendable {
 
 public struct VolumeByLevel: Decodable, Equatable, Sendable {
   /// The volume points for each level. The first element is the volume points for the first level, the second element is the volume points for the second level, and so on.
-  let list: [VolumeByLevelItem]
+  public let list: [VolumeByLevelItem]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -17571,7 +17571,7 @@ public struct VolumeByLevel: Decodable, Equatable, Sendable {
 
 public struct VolumeByLevelItem: Decodable, Equatable, Sendable {
   /// The volume points for this level.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case points = "points"
@@ -17625,10 +17625,10 @@ public typealias VolumeMap = ParameterMap<VolumeMapOptionValue>
 
 public struct VolumeMapOptionValue: Decodable, Equatable, Sendable {
   /// The full permanent AE cost value for this option.
-  let points: Int
+  public let points: Int
 
   /// Links to the options this volume specification is meant for.
-  let associatedOptions: [VolumeMapOptionAssociatedOption]
+  public let associatedOptions: [VolumeMapOptionAssociatedOption]
 
   private enum CodingKeys: String, CodingKey {
     case points = "points"
@@ -17645,7 +17645,7 @@ public struct VolumeMapOptionValue: Decodable, Equatable, Sendable {
 
 public struct VolumeMapOptionAssociatedOption: Decodable, Equatable, Sendable {
   /// The option’s identifier.
-  let id: VolumePointsOptionReferenceIdentifier
+  public let id: VolumePointsOptionReferenceIdentifier
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -17687,7 +17687,7 @@ public enum VolumePointsOptionReferenceIdentifier: Decodable, Equatable, Sendabl
 
 public struct VolumeDerivedFromSelection: Decodable, Equatable, Sendable {
   /// The volume for the selection if it does not define a specific one.
-  let fallback: Int
+  public let fallback: Int
 
   private enum CodingKeys: String, CodingKey {
     case fallback = "fallback"
@@ -17792,19 +17792,19 @@ public enum ArcaneEnergyCost: Decodable, Equatable, Sendable {
 
 public struct FixedArcaneEnergyCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// Set to `true` if the AE costs are permanent.
-  let isPermanent: Bool?
+  public let isPermanent: Bool?
 
   /// Specified if the AE cost `value` has to be paid for each time interval.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   /// The AE cost are per level of the enchantment. It may either be displayed in a compressed way (e.g. `1 AE per level`) or in a verbose way (e.g. `1 AE for level I; 2 AE for level II`).
-  let perLevel: FixedArcaneEnergyCostPerLevel?
+  public let perLevel: FixedArcaneEnergyCostPerLevel?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FixedArcaneEnergyCostTranslation>?
+  public let translations: LocaleMap<FixedArcaneEnergyCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -17827,7 +17827,7 @@ public struct FixedArcaneEnergyCost: Decodable, Equatable, Sendable {
 
 public struct FixedArcaneEnergyCostTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated option string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -17870,13 +17870,13 @@ public enum FixedArcaneEnergyCostPerLevel: Decodable, Equatable, Sendable {
 
 public struct ArcaneEnergyCostPerCountable: Decodable, Equatable, Sendable {
   /// The AE cost value that has to be per a specific countable entity.
-  let value: Int
+  public let value: Int
 
   /// If defined, in addition to the cost per entity you have to pay a flat amount, regardless of the entity count.
-  let baseValue: Int?
+  public let baseValue: Int?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneEnergyCostPerCountableTranslation>
+  public let translations: LocaleMap<ArcaneEnergyCostPerCountableTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -17895,10 +17895,10 @@ public struct ArcaneEnergyCostPerCountable: Decodable, Equatable, Sendable {
 
 public struct ArcaneEnergyCostPerCountableTranslation: Decodable, Equatable, Sendable {
   /// The cost have to be per a specific countable entity, e.g. `8 AE per person`.
-  let per: ResponsiveText
+  public let per: ResponsiveText
 
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case per = "per"
@@ -17915,10 +17915,10 @@ public struct ArcaneEnergyCostPerCountableTranslation: Decodable, Equatable, Sen
 
 public struct IntervalArcaneEnergyCost: Decodable, Equatable, Sendable {
   /// The AE cost value that has to be payed each interval.
-  let value: Int
+  public let value: Int
 
   /// The time interval for which the AE cost `value` has to be paid.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -17935,10 +17935,10 @@ public struct IntervalArcaneEnergyCost: Decodable, Equatable, Sendable {
 
 public struct ActivationAndHalfIntervalArcaneEnergyCost: Decodable, Equatable, Sendable {
   /// The AE cost value that has to be payed for activation. Half of this value has to be payed each interval.
-  let value: Int
+  public let value: Int
 
   /// The time interval for which the AE cost `value` has to be paid.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -17955,10 +17955,10 @@ public struct ActivationAndHalfIntervalArcaneEnergyCost: Decodable, Equatable, S
 
 public struct IndefiniteArcaneEnergyCost: Decodable, Equatable, Sendable {
   /// Specified if the indefinite AP cost description needs to be modified by a certain value.
-  let modifier: IndefiniteArcaneEnergyCostModifier?
+  public let modifier: IndefiniteArcaneEnergyCostModifier?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteArcaneEnergyCostTranslation>
+  public let translations: LocaleMap<IndefiniteArcaneEnergyCostTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case modifier = "modifier"
@@ -17975,7 +17975,7 @@ public struct IndefiniteArcaneEnergyCost: Decodable, Equatable, Sendable {
 
 public struct IndefiniteArcaneEnergyCostTranslation: Decodable, Equatable, Sendable {
   /// A description of where the cost come from.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -17990,10 +17990,10 @@ public struct IndefiniteArcaneEnergyCostTranslation: Decodable, Equatable, Senda
 
 public struct IndefiniteArcaneEnergyCostModifier: Decodable, Equatable, Sendable {
   /// The arithmetic how to apply the `value` to the `base`.
-  let arithmetic: IndefiniteArcaneEnergyCostModifierArithmetic
+  public let arithmetic: IndefiniteArcaneEnergyCostModifierArithmetic
 
   /// The value that is applied to the `base` using the defined `arithmetic`.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case arithmetic = "arithmetic"
@@ -18032,7 +18032,7 @@ public enum IndefiniteArcaneEnergyCostModifierArithmetic: Decodable, Equatable, 
 
 public struct ArcaneEnergyCostDisjunction: Decodable, Equatable, Sendable {
   /// The possible AE cost values.
-  let options: [ArcaneEnergyCostDisjunctionOption]
+  public let options: [ArcaneEnergyCostDisjunctionOption]
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -18047,10 +18047,10 @@ public struct ArcaneEnergyCostDisjunction: Decodable, Equatable, Sendable {
 
 public struct ArcaneEnergyCostDisjunctionOption: Decodable, Equatable, Sendable {
   /// A possible AE cost value.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneEnergyCostDisjunctionOptionTranslation>?
+  public let translations: LocaleMap<ArcaneEnergyCostDisjunctionOptionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -18067,7 +18067,7 @@ public struct ArcaneEnergyCostDisjunctionOption: Decodable, Equatable, Sendable 
 
 public struct ArcaneEnergyCostDisjunctionOptionTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated option string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -18082,10 +18082,10 @@ public struct ArcaneEnergyCostDisjunctionOptionTranslation: Decodable, Equatable
 
 public struct ArcaneEnergyCostByLevel: Decodable, Equatable, Sendable {
   /// A continuous range of arcane energy cost for each level. The first element is the AE cost for the first level, the second element is the AE cost for the second level, and so on.
-  let levels: [ArcaneEnergyCostByLevelLevel]
+  public let levels: [ArcaneEnergyCostByLevelLevel]
 
   /// How to display the AE cost by level.
-  let style: ArcaneEnergyCostByLevelStyle
+  public let style: ArcaneEnergyCostByLevelStyle
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18102,7 +18102,7 @@ public struct ArcaneEnergyCostByLevel: Decodable, Equatable, Sendable {
 
 public struct ArcaneEnergyCostByLevelLevel: Decodable, Equatable, Sendable {
   /// The arcane energy cost for this level.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -18187,7 +18187,7 @@ public struct FixedBindingCost: Decodable, Equatable, Sendable {
   /// The permanent AE cost.
   ///
   /// If the enchantment has multiple levels, it is only applied for the first level.
-  let permanentValue: Int
+  public let permanentValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case permanentValue = "permanent_value"
@@ -18202,7 +18202,7 @@ public struct FixedBindingCost: Decodable, Equatable, Sendable {
 
 public struct BindingCostPerLevel: Decodable, Equatable, Sendable {
   /// The permanent AE cost per level.
-  let permanentValue: Int
+  public let permanentValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case permanentValue = "permanent_value"
@@ -18242,7 +18242,7 @@ public typealias BindingCostMap = ParameterMap<BindingCostMapOptionValue>
 
 public struct BindingCostMapOptionValue: Decodable, Equatable, Sendable {
   /// The full permanent AE cost value for this option.
-  let permanentValue: Int
+  public let permanentValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case permanentValue = "permanentValue"
@@ -18257,10 +18257,10 @@ public struct BindingCostMapOptionValue: Decodable, Equatable, Sendable {
 
 public struct BindingCostDerivedFromSelection: Decodable, Equatable, Sendable {
   /// The binding cost for the selection if it does not define a specific one.
-  let fallback: Int
+  public let fallback: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BindingCostDerivedFromSelectionTranslation>?
+  public let translations: LocaleMap<BindingCostDerivedFromSelectionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case fallback = "fallback"
@@ -18277,10 +18277,10 @@ public struct BindingCostDerivedFromSelection: Decodable, Equatable, Sendable {
 
 public struct BindingCostDerivedFromSelectionTranslation: Decodable, Equatable, Sendable {
   /// Place a string between the `for` and the grouped option names.
-  let listPrepend: String?
+  public let listPrepend: String?
 
   /// A replacement for the generated text if it would not match the original one.
-  let replacement: String?
+  public let replacement: String?
 
   private enum CodingKeys: String, CodingKey {
     case listPrepend = "listPrepend"
@@ -18330,15 +18330,15 @@ public struct AdvancedMagicalSpecialAbility: Decodable, Equatable, Sendable, Ide
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -18347,18 +18347,18 @@ public struct AdvancedMagicalSpecialAbility: Decodable, Equatable, Sendable, Ide
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvancedMagicalSpecialAbilityTranslation>
+  public let translations: LocaleMap<AdvancedMagicalSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18403,23 +18403,23 @@ public struct AdvancedMagicalSpecialAbility: Decodable, Equatable, Sendable, Ide
 
 public struct AdvancedMagicalSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -18449,15 +18449,15 @@ public struct AdvancedSkillSpecialAbility: Decodable, Equatable, Sendable, Ident
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -18466,18 +18466,18 @@ public struct AdvancedSkillSpecialAbility: Decodable, Equatable, Sendable, Ident
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvancedSkillSpecialAbilityTranslation>
+  public let translations: LocaleMap<AdvancedSkillSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18522,23 +18522,23 @@ public struct AdvancedSkillSpecialAbility: Decodable, Equatable, Sendable, Ident
 
 public struct AdvancedSkillSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -18568,15 +18568,15 @@ public struct AncestorGlyph: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -18585,21 +18585,21 @@ public struct AncestorGlyph: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The AE cost of the ancestor glyph.
-  let aeCost: Int
+  public let aeCost: Int
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AncestorGlyphTranslation>
+  public let translations: LocaleMap<AncestorGlyphTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18646,23 +18646,23 @@ public struct AncestorGlyph: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AncestorGlyphTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -18691,15 +18691,15 @@ public struct ArcaneOrbEnchantment: Decodable, Equatable, Sendable, Identifiable
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -18708,27 +18708,27 @@ public struct ArcaneOrbEnchantment: Decodable, Equatable, Sendable, Identifiable
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneOrbEnchantmentTranslation>
+  public let translations: LocaleMap<ArcaneOrbEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18779,38 +18779,38 @@ public struct ArcaneOrbEnchantment: Decodable, Equatable, Sendable, Identifiable
 
 public struct ArcaneOrbEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -18847,15 +18847,15 @@ public struct AttireEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -18864,27 +18864,27 @@ public struct AttireEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AttireEnchantmentTranslation>
+  public let translations: LocaleMap<AttireEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -18935,38 +18935,38 @@ public struct AttireEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AttireEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -19003,15 +19003,15 @@ public struct Beutelzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -19020,27 +19020,27 @@ public struct Beutelzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BeutelzauberTranslation>
+  public let translations: LocaleMap<BeutelzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -19091,38 +19091,38 @@ public struct Beutelzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BeutelzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -19159,15 +19159,15 @@ public struct BowlEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -19176,27 +19176,27 @@ public struct BowlEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BowlEnchantmentTranslation>
+  public let translations: LocaleMap<BowlEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -19247,38 +19247,38 @@ public struct BowlEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BowlEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -19315,18 +19315,18 @@ public struct BrawlingSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// The definition of how the combat special ability can be used in combat.
-  let usageType: CombatSpecialAbilityUsageType
+  public let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -19335,21 +19335,21 @@ public struct BrawlingSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The combat techniques the special ability is applicable to.
-  let combatTechniques: ApplicableCombatTechniques
+  public let combatTechniques: ApplicableCombatTechniques
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BrawlingSpecialAbilityTranslation>
+  public let translations: LocaleMap<BrawlingSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -19398,23 +19398,23 @@ public struct BrawlingSpecialAbility: Decodable, Equatable, Sendable, Identifiab
 
 public struct BrawlingSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -19485,7 +19485,7 @@ public enum ApplicableCombatTechniques: Decodable, Equatable, Sendable {
 }
 
 public struct AllApplicableCombatTechniques: Decodable, Equatable, Sendable {
-  let restrictions: ApplicableAllCombatTechniquesRestrictions?
+  public let restrictions: ApplicableAllCombatTechniquesRestrictions?
 
   private enum CodingKeys: String, CodingKey {
     case restrictions = "restrictions"
@@ -19499,11 +19499,11 @@ public struct AllApplicableCombatTechniques: Decodable, Equatable, Sendable {
 }
 
 public struct ApplicableAllCombatTechniquesRestrictions: Decodable, Equatable, Sendable {
-  let isImprovised: Bool?
-  let hasPointedBlade: Bool?
-  let whileMounted: Bool?
-  let race: Race.ID?
-  let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<CombatTechniqueIdentifier>?
+  public let isImprovised: Bool?
+  public let hasPointedBlade: Bool?
+  public let whileMounted: Bool?
+  public let race: Race.ID?
+  public let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<CombatTechniqueIdentifier>?
 
   private enum CodingKeys: String, CodingKey {
     case isImprovised = "isImprovised"
@@ -19526,7 +19526,7 @@ public struct ApplicableAllCombatTechniquesRestrictions: Decodable, Equatable, S
 
 public struct ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<Ref: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The combat techniques this combat special ability is **not** applicable to.
-  let list: [Ref]
+  public let list: [Ref]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -19540,7 +19540,7 @@ public struct ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<Ref:
 }
 
 public struct AllApplicableCloseCombatTechniques: Decodable, Equatable, Sendable {
-  let restrictions: ApplicableCloseCombatTechniquesRestrictions?
+  public let restrictions: ApplicableCloseCombatTechniquesRestrictions?
 
   private enum CodingKeys: String, CodingKey {
     case restrictions = "restrictions"
@@ -19554,26 +19554,26 @@ public struct AllApplicableCloseCombatTechniques: Decodable, Equatable, Sendable
 }
 
 public struct ApplicableCloseCombatTechniquesRestrictions: Decodable, Equatable, Sendable {
-  let isImprovised: Bool?
+  public let isImprovised: Bool?
 
-  let hasPointedBlade: Bool?
+  public let hasPointedBlade: Bool?
 
-  let whileMounted: Bool?
+  public let whileMounted: Bool?
 
-  let hasParry: Bool?
+  public let hasParry: Bool?
 
-  let isOneHanded: Bool?
+  public let isOneHanded: Bool?
 
-  let isTwoHanded: Bool?
+  public let isTwoHanded: Bool?
 
-  let isParryingWeapon: Bool?
+  public let isParryingWeapon: Bool?
 
-  let race: Race.ID?
+  public let race: Race.ID?
 
   /// Only a class of melee weapon is allowed
-  let weaponClass: MeleeWeaponClass?
+  public let weaponClass: MeleeWeaponClass?
 
-  let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<CloseCombatTechnique.ID>?
+  public let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<CloseCombatTechnique.ID>?
 
   private enum CodingKeys: String, CodingKey {
     case isImprovised = "isImprovised"
@@ -19627,7 +19627,7 @@ public enum MeleeWeaponClass: Decodable, Equatable, Sendable {
 }
 
 public struct AllApplicableRangedCombatTechniques: Decodable, Equatable, Sendable {
-  let restrictions: ApplicableRangedCombatTechniquesRestrictions?
+  public let restrictions: ApplicableRangedCombatTechniquesRestrictions?
 
   private enum CodingKeys: String, CodingKey {
     case restrictions = "restrictions"
@@ -19641,11 +19641,11 @@ public struct AllApplicableRangedCombatTechniques: Decodable, Equatable, Sendabl
 }
 
 public struct ApplicableRangedCombatTechniquesRestrictions: Decodable, Equatable, Sendable {
-  let isImprovised: Bool?
-  let hasPointedBlade: Bool?
-  let whileMounted: Bool?
-  let race: Race.ID?
-  let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<RangedCombatTechnique.ID>?
+  public let isImprovised: Bool?
+  public let hasPointedBlade: Bool?
+  public let whileMounted: Bool?
+  public let race: Race.ID?
+  public let excludeCombatTechniques: ApplicableCombatTechniquesNegativeCombatTechniquesRestriction<RangedCombatTechnique.ID>?
 
   private enum CodingKeys: String, CodingKey {
     case isImprovised = "isImprovised"
@@ -19667,7 +19667,7 @@ public struct ApplicableRangedCombatTechniquesRestrictions: Decodable, Equatable
 }
 
 public struct SpecificApplicableCombatTechniques: Decodable, Equatable, Sendable {
-  let list: [SpecificApplicableCombatTechnique]
+  public let list: [SpecificApplicableCombatTechnique]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -19681,12 +19681,12 @@ public struct SpecificApplicableCombatTechniques: Decodable, Equatable, Sendable
 }
 
 public struct SpecificApplicableCombatTechnique: Decodable, Equatable, Sendable {
-  let id: CombatTechniqueIdentifier
+  public let id: CombatTechniqueIdentifier
 
-  let restrictions: ApplicableSpecificCombatTechniquesRestrictions?
+  public let restrictions: ApplicableSpecificCombatTechniquesRestrictions?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SpecificApplicableCombatTechniqueTranslation>?
+  public let translations: LocaleMap<SpecificApplicableCombatTechniqueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -19705,7 +19705,7 @@ public struct SpecificApplicableCombatTechnique: Decodable, Equatable, Sendable 
 
 public struct SpecificApplicableCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The additional restriction(s) of the combat technique.
-  let restrictions: String
+  public let restrictions: String
 
   private enum CodingKeys: String, CodingKey {
     case restrictions = "restrictions"
@@ -19719,21 +19719,21 @@ public struct SpecificApplicableCombatTechniqueTranslation: Decodable, Equatable
 }
 
 public struct ApplicableSpecificCombatTechniquesRestrictions: Decodable, Equatable, Sendable {
-  let isImprovised: Bool?
+  public let isImprovised: Bool?
 
-  let hasPointedBlade: Bool?
+  public let hasPointedBlade: Bool?
 
-  let whileMounted: Bool?
+  public let whileMounted: Bool?
 
-  let race: Race.ID?
+  public let race: Race.ID?
 
   /// The combat special ability is only applicable on a certain level.
-  let level: Int?
+  public let level: Int?
 
-  let hasOneBluntSide: Bool?
+  public let hasOneBluntSide: Bool?
 
   /// The specific weapons this combat special ability is only applicable to.
-  let weapons: [Weapon.ID]?
+  public let weapons: [Weapon.ID]?
 
   private enum CodingKeys: String, CodingKey {
     case isImprovised = "isImprovised"
@@ -19764,37 +19764,37 @@ public struct Weapon: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost?
+  public let cost: Cost?
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// A list of stat blocks for each close combat technique this weapon can be used with.
-  let meleeUses: [CloseCombatTechnique.ID: MeleeWeaponUse]?
+  public let meleeUses: [CloseCombatTechnique.ID: MeleeWeaponUse]?
 
   /// A list of stat blocks for each ranged combat technique this weapon can be used with.
-  let rangedUses: [RangedCombatTechnique.ID: RangedWeaponUse]?
+  public let rangedUses: [RangedCombatTechnique.ID: RangedWeaponUse]?
 
   /// Define if during character creation this weapon can only be bought by a specific subset of characters.
-  let restrictedTo: RestrictedTo?
+  public let restrictedTo: RestrictedTo?
 
   /// The weapon is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecifics?
+  public let knownItemSpecifics: KnownItemSpecifics?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<WeaponTranslation>
+  public let translations: LocaleMap<WeaponTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -19849,27 +19849,27 @@ public typealias RangedWeaponUse = RangedWeapon
 
 public struct WeaponTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
   /// The weapon advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The weapon disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   /// The weapon is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecificsTranslation?
+  public let knownItemSpecifics: KnownItemSpecificsTranslation?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -19941,7 +19941,7 @@ public enum Cost: Decodable, Equatable, Sendable {
 
 public struct InvaluableCost: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<InvaluableCostTranslation>?
+  public let translations: LocaleMap<InvaluableCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -19956,7 +19956,7 @@ public struct InvaluableCost: Decodable, Equatable, Sendable {
 
 public struct InvaluableCostTranslation: Decodable, Equatable, Sendable {
   /// The cost get wrapped by this text using a placeholder in the text.
-  let wrapInText: String
+  public let wrapInText: String
 
   private enum CodingKeys: String, CodingKey {
     case wrapInText = "wrap_in_text"
@@ -19971,10 +19971,10 @@ public struct InvaluableCostTranslation: Decodable, Equatable, Sendable {
 
 public struct FixedCost: Decodable, Equatable, Sendable {
   /// The cost in silverthalers.
-  let value: Float
+  public let value: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FixedCostTranslation>?
+  public let translations: LocaleMap<FixedCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -19991,7 +19991,7 @@ public struct FixedCost: Decodable, Equatable, Sendable {
 
 public struct FixedCostTranslation: Decodable, Equatable, Sendable {
   /// The cost get wrapped by this text using a placeholder in the text.
-  let wrapInText: String
+  public let wrapInText: String
 
   private enum CodingKeys: String, CodingKey {
     case wrapInText = "wrap_in_text"
@@ -20043,13 +20043,13 @@ public enum Complexity: Decodable, Equatable, Sendable {
 /// A item’s trade secret inherits the source references from its item. Specifying source references here instead means none of the item’s source references are inherited.
 public struct ComplexComplexity: Decodable, Equatable, Sendable {
   /// The AP value for the trade secret.
-  let apValue: Int
+  public let apValue: Int
 
   /// The prerequisites of the trade secret, if any. Note that the special ability prerequisite for weapon and armor trade secrets is added automatically based on the value in the `Settings` singleton entity.
-  let prerequisites: PlainGeneralPrerequisites?
+  public let prerequisites: PlainGeneralPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -20099,7 +20099,7 @@ public typealias StructurePointsPoints = [StructurePointsComponent]
 
 public struct StructurePointsComponent: Decodable, Equatable, Sendable {
   /// The structure points.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case points = "points"
@@ -20116,34 +20116,34 @@ public typealias MeleeWeapon = GenMeleeWeapon<MeleeDamage>
 
 public struct GenMeleeWeapon<Damage: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The damage of a weapon can consist of random dice rolls and flat damage.
-  let damage: Damage
+  public let damage: Damage
 
   /// The primary attribute damage and threshold value.
-  let damageThreshold: PrimaryAttributeDamageThreshold?
+  public let damageThreshold: PrimaryAttributeDamageThreshold?
 
   /// The AT modifier.
-  let attackModifier: AttackModifier?
+  public let attackModifier: AttackModifier?
 
   /// The PA modifier.
-  let parryModifier: ParryModifier?
+  public let parryModifier: ParryModifier?
 
   /// The reach of the weapon.
-  let reach: [Reach.ID]?
+  public let reach: [Reach.ID]?
 
   /// The length of the weapon in cm/halffingers.
-  let length: Length?
+  public let length: Length?
 
   /// The shield size and potential size-depending values.
-  let size: ShieldSize?
+  public let size: ShieldSize?
 
   /// Is the weapon a parrying weapon?
-  let isParryingWeapon: Bool
+  public let isParryingWeapon: Bool
 
   /// Is the weapon a two-handed weapon?
-  let isTwoHandedWeapon: Bool
+  public let isTwoHandedWeapon: Bool
 
   /// Is the weapon an improvised weapon?
-  let isImprovisedWeapon: Bool
+  public let isImprovisedWeapon: Bool
 
   private enum CodingKeys: String, CodingKey {
     case damage = "damage"
@@ -20204,7 +20204,7 @@ public enum PrimaryAttributeDamageThreshold: Decodable, Equatable, Sendable {
 
 public struct DefaultPrimaryAttributeDamageThreshold: Decodable, Equatable, Sendable {
   /// The attribute value representing the damage threshold for the primary attribute of the item's combat technique.
-  let threshold: Int
+  public let threshold: Int
 
   private enum CodingKeys: String, CodingKey {
     case threshold = "threshold"
@@ -20219,7 +20219,7 @@ public struct DefaultPrimaryAttributeDamageThreshold: Decodable, Equatable, Send
 
 public struct PrimaryAttributeDamageThresholdList: Decodable, Equatable, Sendable {
   /// A list of primary attributes with their associated threshold.
-  let list: [SinglePrimaryAttributeDamageThreshold]
+  public let list: [SinglePrimaryAttributeDamageThreshold]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -20234,10 +20234,10 @@ public struct PrimaryAttributeDamageThresholdList: Decodable, Equatable, Sendabl
 
 public struct SinglePrimaryAttributeDamageThreshold: Decodable, Equatable, Sendable {
   /// The primary attribute.
-  let attribute: Attribute.ID
+  public let attribute: Attribute.ID
 
   /// The attribute value representing the damage threshold.
-  let threshold: Int
+  public let threshold: Int
 
   private enum CodingKeys: String, CodingKey {
     case attribute = "attribute"
@@ -20264,10 +20264,10 @@ public struct Reach: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The position of the reach in lists. Lower values indicate a shorter range; higher values a larger range. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ReachTranslation>
+  public let translations: LocaleMap<ReachTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -20300,7 +20300,7 @@ public struct Reach: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ReachTranslation: Decodable, Equatable, Sendable {
   /// The reach’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -20352,7 +20352,7 @@ public enum ShieldSize: Decodable, Equatable, Sendable {
 /// The damage of a weapon consists of a random part using dice and an optional flat part.
 public struct LargeShieldSize: Decodable, Equatable, Sendable {
   /// The attack penalty from the shield, if any.
-  let attackPenalty: Int?
+  public let attackPenalty: Int?
 
   private enum CodingKeys: String, CodingKey {
     case attackPenalty = "attack_penalty"
@@ -20368,10 +20368,10 @@ public struct LargeShieldSize: Decodable, Equatable, Sendable {
 /// The damage of a weapon consists of a random part using dice and an optional flat part.
 public struct MeleeDamage: Decodable, Equatable, Sendable {
   /// How many dice of which type are rolled to get the damage.
-  let dice: Dice
+  public let dice: Dice
 
   /// Flat damage, if any. It gets added to the result of the dice rolls.
-  let flat: Int?
+  public let flat: Int?
 
   private enum CodingKeys: String, CodingKey {
     case dice = "dice"
@@ -20390,22 +20390,22 @@ public typealias RangedWeapon = GenRangedWeapon<RangedDamage>
 
 public struct GenRangedWeapon<Damage: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The damage of a weapon can consist of random dice rolls and flat damage.
-  let damage: Damage
+  public let damage: Damage
 
   /// One or multiple reload times.
-  let reloadTime: [ReloadTime]
+  public let reloadTime: [ReloadTime]
 
   /// The range brackets for the weapon: close, medium, far. Distances in m.
-  let range: RangeBrackets
+  public let range: RangeBrackets
 
   /// The needed ammunition.
-  let ammunition: AmmunitionishIdentifier?
+  public let ammunition: AmmunitionishIdentifier?
 
   /// The length of the weapon in cm/halffingers.
-  let length: Length?
+  public let length: Length?
 
   /// Is the weapon an improvised weapon?
-  let isImprovisedWeapon: Bool
+  public let isImprovisedWeapon: Bool
 
   private enum CodingKeys: String, CodingKey {
     case damage = "damage"
@@ -20430,7 +20430,7 @@ public struct GenRangedWeapon<Damage: Decodable & Equatable & Sendable>: Decodab
 
 public struct ReloadTime: Decodable, Equatable, Sendable {
   /// A reload time value in actions.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -20445,13 +20445,13 @@ public struct ReloadTime: Decodable, Equatable, Sendable {
 
 public struct RangeBrackets: Decodable, Equatable, Sendable {
   /// The close range bracket for the weapon. Distance in m.
-  let close: Int
+  public let close: Int
 
   /// The medium range bracket for the weapon. Distance in m.
-  let medium: Int
+  public let medium: Int
 
   /// The far range bracket for the weapon. Distance in m.
-  let far: Int
+  public let far: Int
 
   private enum CodingKeys: String, CodingKey {
     case close = "close"
@@ -20501,19 +20501,19 @@ public struct Ammunition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AmmunitionTranslation>
+  public let translations: LocaleMap<AmmunitionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -20552,18 +20552,18 @@ public struct Ammunition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AmmunitionTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -20620,10 +20620,10 @@ public enum RangedDamage: Decodable, Equatable, Sendable {
 /// The damage of a weapon consists of a random part using dice and an optional flat part.
 public struct DefaultRangedDamage: Decodable, Equatable, Sendable {
   /// How many dice of which type are rolled to get the damage.
-  let dice: Dice
+  public let dice: Dice
 
   /// Flat damage, if any. It gets added to the result of the dice rolls.
-  let flat: Int?
+  public let flat: Int?
 
   private enum CodingKeys: String, CodingKey {
     case dice = "dice"
@@ -20641,19 +20641,19 @@ public struct DefaultRangedDamage: Decodable, Equatable, Sendable {
 /// If the item is in any case restricted to a subset of characters. The differenciating aspect may be tradition, race, culture, or a profession. Each element must be applicable to a character.
 public struct RestrictedTo: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of races. If only one race is allowed, the list may only have a single element.
-  let races: RestrictedToRaces?
+  public let races: RestrictedToRaces?
 
   /// The item is restricted to one of a list of cultures. If only one culture is allowed, the list may only have a single element.
-  let cultures: RestrictedToCultures?
+  public let cultures: RestrictedToCultures?
 
   /// The item is restricted to one of a list of professions. If only one profession is allowed, the list may only have a single element.
-  let professions: RestrictedToProfessions?
+  public let professions: RestrictedToProfessions?
 
   /// The item is restricted to one of a list of magical traditions. If only one magical tradition is allowed, the list may only have a single element.
-  let magicalTraditions: RestrictedToMagicalTraditions?
+  public let magicalTraditions: RestrictedToMagicalTraditions?
 
   /// The item is restricted to one of a list of blessed traditions. If only one blessed tradition is allowed, the list may only have a single element.
-  let blessedTraditions: RestrictedToBlessedTraditions?
+  public let blessedTraditions: RestrictedToBlessedTraditions?
 
   private enum CodingKeys: String, CodingKey {
     case races = "races"
@@ -20677,10 +20677,10 @@ public struct RestrictedTo: Decodable, Equatable, Sendable {
 /// The item is restricted to one of a list of races. If only one race is allowed, the list may only have a single element.
 public struct RestrictedToRaces: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of races. If only one race is allowed, the list may only have a single element.
-  let scope: [Race.ID]
+  public let scope: [Race.ID]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RestrictedToRacesTranslation>
+  public let translations: LocaleMap<RestrictedToRacesTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case scope = "scope"
@@ -20697,10 +20697,10 @@ public struct RestrictedToRaces: Decodable, Equatable, Sendable {
 
 public struct RestrictedToRacesTranslation: Decodable, Equatable, Sendable {
   /// The item’s name and surrounding words influenced by grammatical agreement.
-  let item: String
+  public let item: String
 
   /// The name of the group of cultures from that race.
-  let groupOfCultures: String
+  public let groupOfCultures: String
 
   private enum CodingKeys: String, CodingKey {
     case item = "item"
@@ -20718,10 +20718,10 @@ public struct RestrictedToRacesTranslation: Decodable, Equatable, Sendable {
 /// The item is restricted to one of a list of cultures. If only one culture is allowed, the list may only have a single element.
 public struct RestrictedToCultures: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of cultures. If only one culture is allowed, the list may only have a single element.
-  let scope: [Culture.ID]
+  public let scope: [Culture.ID]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RestrictedToCulturesTranslation>
+  public let translations: LocaleMap<RestrictedToCulturesTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case scope = "scope"
@@ -20738,10 +20738,10 @@ public struct RestrictedToCultures: Decodable, Equatable, Sendable {
 
 public struct RestrictedToCulturesTranslation: Decodable, Equatable, Sendable {
   /// The item’s name and surrounding words influenced by grammatical agreement.
-  let item: String
+  public let item: String
 
   /// The name of the culture(s) integrated into the text.
-  let cultures: String
+  public let cultures: String
 
   private enum CodingKeys: String, CodingKey {
     case item = "item"
@@ -20759,7 +20759,7 @@ public struct RestrictedToCulturesTranslation: Decodable, Equatable, Sendable {
 /// The item is restricted to one of a list of professions. If only one profession is allowed, the list may only have a single element.
 public struct RestrictedToProfessions: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of professions. If only one profession is allowed, the list may only have a single element.
-  let scope: [Profession.ID]
+  public let scope: [Profession.ID]
 
   private enum CodingKeys: String, CodingKey {
     case scope = "scope"
@@ -20775,10 +20775,10 @@ public struct RestrictedToProfessions: Decodable, Equatable, Sendable {
 /// The item is restricted to one of a list of magical traditions. If only one magical tradition is allowed, the list may only have a single element.
 public struct RestrictedToMagicalTraditions: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of magical traditions. If only one magical tradition is allowed, the list may only have a single element.
-  let scope: [MagicalTradition.ID]
+  public let scope: [MagicalTradition.ID]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RestrictedToMagicalTraditionsTranslation>
+  public let translations: LocaleMap<RestrictedToMagicalTraditionsTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case scope = "scope"
@@ -20795,7 +20795,7 @@ public struct RestrictedToMagicalTraditions: Decodable, Equatable, Sendable {
 
 public struct RestrictedToMagicalTraditionsTranslation: Decodable, Equatable, Sendable {
   /// The item’s name and surrounding words influenced by grammatical agreement.
-  let item: String
+  public let item: String
 
   private enum CodingKeys: String, CodingKey {
     case item = "item"
@@ -20811,13 +20811,13 @@ public struct RestrictedToMagicalTraditionsTranslation: Decodable, Equatable, Se
 /// The item is restricted to one of a list of blessed traditions. If only one blessed tradition is allowed, the list may only have a single element. The item may also be declared as sanctified.
 public struct RestrictedToBlessedTraditions: Decodable, Equatable, Sendable {
   /// The item is restricted to one of a list of blessed traditions. If only one blessed tradition is allowed, the list may only have a single element.
-  let scope: RestrictedToBlessedTraditionsScope
+  public let scope: RestrictedToBlessedTraditionsScope
 
   /// The item is sanctified by the applicable listed tradition.
-  let isSanctifiedBy: Bool
+  public let isSanctifiedBy: Bool
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RestrictedToBlessedTraditionsTranslation>
+  public let translations: LocaleMap<RestrictedToBlessedTraditionsTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case scope = "scope"
@@ -20836,13 +20836,13 @@ public struct RestrictedToBlessedTraditions: Decodable, Equatable, Sendable {
 
 public struct RestrictedToBlessedTraditionsTranslation: Decodable, Equatable, Sendable {
   /// The item’s sanctified prefix, if different from the generated one.
-  let sanctified: String?
+  public let sanctified: String?
 
   /// The item’s name and surrounding words influenced by grammatical agreement.
-  let item: String
+  public let item: String
 
   /// The blessed ones able to buy the item, if different from the generated one.
-  let blessedOnes: String?
+  public let blessedOnes: String?
 
   private enum CodingKeys: String, CodingKey {
     case sanctified = "sanctified"
@@ -20894,19 +20894,19 @@ public enum RestrictedToBlessedTraditionsScope: Decodable, Equatable, Sendable {
 
 public struct KnownItemSpecifics: Decodable, Equatable, Sendable {
   /// The age of the item is known.
-  let age: KnownItemAge?
+  public let age: KnownItemAge?
 
   /// The condition of the item is known and well specified.
-  let condition: KnownItemCondition?
+  public let condition: KnownItemCondition?
 
   /// The breaking point rating (weapon) or sturdiness rating (armor) of the item. Either a specific rating or a general unbreakability.
-  let stabilityRating: KnownItemStabilityRating?
+  public let stabilityRating: KnownItemStabilityRating?
 
   /// The *Damaged* (weapon) or *Wear* (armor) level of the item, if any.
-  let damageLevel: Int?
+  public let damageLevel: Int?
 
   /// The collector’s value of the known item.
-  let collectorsValue: CollectorsValue
+  public let collectorsValue: CollectorsValue
 
   private enum CodingKeys: String, CodingKey {
     case age = "age"
@@ -21066,10 +21066,10 @@ public enum CollectorsValue: Decodable, Equatable, Sendable {
 
 public struct ConstantCollectorsValue: Decodable, Equatable, Sendable {
   /// The collector’s value is a fixed price in silverthalers.
-  let value: Float
+  public let value: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ConstantCollectorsValueTranslation>?
+  public let translations: LocaleMap<ConstantCollectorsValueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -21086,10 +21086,10 @@ public struct ConstantCollectorsValue: Decodable, Equatable, Sendable {
 
 public struct ConstantCollectorsValueTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -21106,10 +21106,10 @@ public struct ConstantCollectorsValueTranslation: Decodable, Equatable, Sendable
 
 public struct MinimumCollectorsValue: Decodable, Equatable, Sendable {
   /// The collector’s value is a range with an open end and the specified price in silverthalers as the minimum.
-  let value: Float
+  public let value: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MinimumCollectorsValueTranslation>?
+  public let translations: LocaleMap<MinimumCollectorsValueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -21126,10 +21126,10 @@ public struct MinimumCollectorsValue: Decodable, Equatable, Sendable {
 
 public struct MinimumCollectorsValueTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -21146,7 +21146,7 @@ public struct MinimumCollectorsValueTranslation: Decodable, Equatable, Sendable 
 
 public struct KnownItemSpecificsTranslation: Decodable, Equatable, Sendable {
   /// The condition of the item.
-  let condition: String
+  public let condition: String
 
   private enum CodingKeys: String, CodingKey {
     case condition = "condition"
@@ -21165,15 +21165,15 @@ public struct CauldronEnchantment: Decodable, Equatable, Sendable, Identifiable 
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -21182,30 +21182,30 @@ public struct CauldronEnchantment: Decodable, Equatable, Sendable, Identifiable 
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// Witches can learn to brew special things in their Witch's Cauldron. These brews can be categorized in different types.
-  let brew: Brew.ID
+  public let brew: Brew.ID
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CauldronEnchantmentTranslation>
+  public let translations: LocaleMap<CauldronEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -21258,38 +21258,38 @@ public struct CauldronEnchantment: Decodable, Equatable, Sendable, Identifiable 
 
 public struct CauldronEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21326,7 +21326,7 @@ public struct Brew: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BrewTranslation>
+  public let translations: LocaleMap<BrewTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -21357,7 +21357,7 @@ public struct Brew: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BrewTranslation: Decodable, Equatable, Sendable {
   /// The brew’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21375,18 +21375,18 @@ public struct CeremonialItemSpecialAbility: Decodable, Equatable, Sendable, Iden
 
   public let id: ID
 
-  let associatedItem: CeremonialItemSpecialAbilityGroup.ID?
+  public let associatedItem: CeremonialItemSpecialAbilityGroup.ID?
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -21395,21 +21395,21 @@ public struct CeremonialItemSpecialAbility: Decodable, Equatable, Sendable, Iden
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The blessed aspect.
-  let aspect: CeremonialItemSpecialAbilityAspect?
+  public let aspect: CeremonialItemSpecialAbilityAspect?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CeremonialItemSpecialAbilityTranslation>
+  public let translations: LocaleMap<CeremonialItemSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case associatedItem = "associatedItem"
@@ -21458,23 +21458,23 @@ public struct CeremonialItemSpecialAbility: Decodable, Equatable, Sendable, Iden
 
 public struct CeremonialItemSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21503,7 +21503,7 @@ public struct CeremonialItemSpecialAbilityGroup: Decodable, Equatable, Sendable,
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CeremonialItemSpecialAbilityGroupTranslation>
+  public let translations: LocaleMap<CeremonialItemSpecialAbilityGroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -21534,10 +21534,10 @@ public struct CeremonialItemSpecialAbilityGroup: Decodable, Equatable, Sendable,
 
 public struct CeremonialItemSpecialAbilityGroupTranslation: Decodable, Equatable, Sendable {
   /// The name of the ceremonial item. This should be the heading used in the respective publication.
-  let name: String
+  public let name: String
 
   /// The name of the ceremonial item for sorting purposes, if different from the actual name.
-  let nameForSorting: String
+  public let nameForSorting: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21584,7 +21584,7 @@ public typealias SingleCeremonialItemSpecialAbilityAspect = Aspect.ID
 public typealias CeremonialItemSpecialAbilityAspectByTradition = [BlessedTradition.ID: CeremonialItemSpecialAbilityAspectForTradition]
 
 public struct CeremonialItemSpecialAbilityAspectForTradition: Decodable, Equatable, Sendable {
-  let aspect: Aspect.ID
+  public let aspect: Aspect.ID
 
   private enum CodingKeys: String, CodingKey {
     case aspect = "aspect"
@@ -21603,15 +21603,15 @@ public struct ChronicleEnchantment: Decodable, Equatable, Sendable, Identifiable
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -21620,27 +21620,27 @@ public struct ChronicleEnchantment: Decodable, Equatable, Sendable, Identifiable
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ChronicleEnchantmentTranslation>
+  public let translations: LocaleMap<ChronicleEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -21691,38 +21691,38 @@ public struct ChronicleEnchantment: Decodable, Equatable, Sendable, Identifiable
 
 public struct ChronicleEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21759,18 +21759,18 @@ public struct CombatSpecialAbility: Decodable, Equatable, Sendable, Identifiable
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// The definition of how the combat special ability can be used in combat.
-  let usageType: CombatSpecialAbilityUsageType
+  public let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -21779,24 +21779,24 @@ public struct CombatSpecialAbility: Decodable, Equatable, Sendable, Identifiable
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The penalty the special ability gives when used.
-  let penalty: Penalty?
+  public let penalty: Penalty?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The combat techniques the special ability is applicable to.
-  let combatTechniques: ApplicableCombatTechniques
+  public let combatTechniques: ApplicableCombatTechniques
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CombatSpecialAbilityTranslation>
+  public let translations: LocaleMap<CombatSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -21847,30 +21847,30 @@ public struct CombatSpecialAbility: Decodable, Equatable, Sendable, Identifiable
 
 public struct CombatSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The penalty the special ability gives when used.
   @available(*, deprecated)
-  let penalty: String?
+  public let penalty: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -21952,10 +21952,10 @@ public enum Penalty: Decodable, Equatable, Sendable {
 
 public struct SinglePenalty: Decodable, Equatable, Sendable {
   /// The penalty value.
-  let value: Int
+  public let value: Int
 
   /// Set to `true` if the penalty applies to the parry instead of the attack.
-  let appliesToParry: Bool?
+  public let appliesToParry: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -21972,13 +21972,13 @@ public struct SinglePenalty: Decodable, Equatable, Sendable {
 
 public struct PenaltyByHandedness: Decodable, Equatable, Sendable {
   /// The penalty value for one-handed weapons.
-  let oneHanded: Int
+  public let oneHanded: Int
 
   /// The penalty value for two-handed weapons.
-  let twoHanded: Int
+  public let twoHanded: Int
 
   /// Set to `true` if the penalty applies to the parry instead of the attack.
-  let appliesToParry: Bool?
+  public let appliesToParry: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case oneHanded = "one_handed"
@@ -21997,13 +21997,13 @@ public struct PenaltyByHandedness: Decodable, Equatable, Sendable {
 
 public struct PenaltyByActivation: Decodable, Equatable, Sendable {
   /// The penalty value if the entry has been bought by the character.
-  let active: Int
+  public let active: Int
 
   /// The penalty value if the entry has not been bought by the character.
-  let inactive: Int
+  public let inactive: Int
 
   /// Set to `true` if the penalty applies to the parry instead of the attack.
-  let appliesToParry: Bool?
+  public let appliesToParry: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case active = "active"
@@ -22021,7 +22021,7 @@ public struct PenaltyByActivation: Decodable, Equatable, Sendable {
 }
 
 public struct PenaltySelection: Decodable, Equatable, Sendable {
-  let options: PenaltySelectionOptions
+  public let options: PenaltySelectionOptions
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -22063,7 +22063,7 @@ public enum PenaltySelectionOptions: Decodable, Equatable, Sendable {
 
 public struct SpecificPenaltySelectionOptions: Decodable, Equatable, Sendable {
   /// The list of specific penalty options.
-  let list: [SpecificPenaltySelectionOption]
+  public let list: [SpecificPenaltySelectionOption]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -22078,7 +22078,7 @@ public struct SpecificPenaltySelectionOptions: Decodable, Equatable, Sendable {
 
 public struct SpecificPenaltySelectionOption: Decodable, Equatable, Sendable {
   /// The penalty value.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -22093,10 +22093,10 @@ public struct SpecificPenaltySelectionOption: Decodable, Equatable, Sendable {
 
 public struct PenaltySelectionOptionsRange: Decodable, Equatable, Sendable {
   /// The minimum penalty value.
-  let minimum: Int
+  public let minimum: Int
 
   /// The maximum penalty value.
-  let maximum: Int
+  public let maximum: Int
 
   private enum CodingKeys: String, CodingKey {
     case minimum = "minimum"
@@ -22113,10 +22113,10 @@ public struct PenaltySelectionOptionsRange: Decodable, Equatable, Sendable {
 
 public struct PenaltyByLevel: Decodable, Equatable, Sendable {
   /// A continuous range of penalties for each level. The first element is the penalty for the first level, the second element is the penalty for the second level, and so on.
-  let levels: [PenaltyByLevelLevel]
+  public let levels: [PenaltyByLevelLevel]
 
   /// The combat-related special ability of which the level defines the penalty instead.
-  let external: PenaltyByExternalLevel?
+  public let external: PenaltyByExternalLevel?
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -22133,7 +22133,7 @@ public struct PenaltyByLevel: Decodable, Equatable, Sendable {
 
 public struct PenaltyByLevelLevel: Decodable, Equatable, Sendable {
   /// The penalty value for this level.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -22149,7 +22149,7 @@ public struct PenaltyByLevelLevel: Decodable, Equatable, Sendable {
 /// The combat-related special ability of which the level defines the penalty instead.
 public struct PenaltyByExternalLevel: Decodable, Equatable, Sendable {
   /// The identifier of the combat-related special ability of which the level defines the penalty instead.
-  let id: CombatRelatedSpecialAbilityIdentifier
+  public let id: CombatRelatedSpecialAbilityIdentifier
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -22205,21 +22205,21 @@ public struct CombatStyleSpecialAbility: Decodable, Equatable, Sendable, Identif
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// The definition of how the combat style can be used in combat.
-  let usageType: CombatSpecialAbilityTypeUsageType
+  public let usageType: CombatSpecialAbilityTypeUsageType
 
   /// The definition of if the combat special ability can be used when armed or when unarmed.
-  let type: CombatSpecialAbilityType
+  public let type: CombatSpecialAbilityType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -22228,27 +22228,27 @@ public struct CombatStyleSpecialAbility: Decodable, Equatable, Sendable, Identif
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The penalty the special ability gives when used.
-  let penalty: Penalty?
+  public let penalty: Penalty?
 
   /// The Advanced Special Abilities for the respective Style Special Ability. Sometimes, only a specific select option or a set of select options of an entry is allowed, which can be modelled by the option property. It can also be that you can choose from a set of special abilities, but then you can’t specify an option.
-  let advanced: [3 of AdvancedSpecialAbility<AdvancedCombatSpecialAbility.ID>]
+  public let advanced: [3 of AdvancedSpecialAbility<AdvancedCombatSpecialAbility.ID>]
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The combat techniques the special ability is applicable to.
-  let combatTechniques: ApplicableCombatTechniques
+  public let combatTechniques: ApplicableCombatTechniques
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CombatStyleSpecialAbilityTranslation>
+  public let translations: LocaleMap<CombatStyleSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -22303,23 +22303,23 @@ public struct CombatStyleSpecialAbility: Decodable, Equatable, Sendable, Identif
 
 public struct CombatStyleSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -22426,10 +22426,10 @@ public enum AdvancedSpecialAbility<Identifier: Decodable & Equatable & Sendable>
 
 public struct RestrictAdvancedSpecialAbilityOptions<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The advanced special ability’s identifier.
-  let id: Identifier
+  public let id: Identifier
 
   /// Specify the select option(s) that only are allowed for the referenced advanced special ability; others are disallowed.
-  let option: [AdvancedSpecialAbilityRestrictedOptionIdentifier]
+  public let option: [AdvancedSpecialAbilityRestrictedOptionIdentifier]
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -22493,12 +22493,12 @@ public enum AdvancedSpecialAbilityRestrictedOptionIdentifier: Decodable, Equatab
 
 public struct OneOfAdvancedSpecialAbilityOptions<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The possible advanced special abilities.
-  let options: [Identifier]
+  public let options: [Identifier]
 
   /// Do have to choose the advanced special ability when buying the style special ability? Otherwise the decision can be made later.
-  let isSelectionRequiredOnPurchase: Bool
+  public let isSelectionRequiredOnPurchase: Bool
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -22517,12 +22517,12 @@ public struct OneOfAdvancedSpecialAbilityOptions<Identifier: Decodable & Equatab
 
 public struct AdvancedSpecialAbilityDerivedFromExternalOption<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The possible advanced special abilities.
-  let externalEntry: MagicalTradition.ID
+  public let externalEntry: MagicalTradition.ID
 
   /// Map options from the external entry to allowed advanced special abilities.
-  let map: [AdvancedSpecialAbilityDerivedFromExternalOptionMapping<Identifier>]
+  public let map: [AdvancedSpecialAbilityDerivedFromExternalOptionMapping<Identifier>]
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case externalEntry = "external_entry"
@@ -22542,10 +22542,10 @@ public struct AdvancedSpecialAbilityDerivedFromExternalOption<Identifier: Decoda
 /// Mapping from an option of the external entry to an allowed advanced special ability.
 public struct AdvancedSpecialAbilityDerivedFromExternalOptionMapping<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The select option’s identifier.
-  let fromOption: Patron.ID
+  public let fromOption: Patron.ID
 
   /// The advanced special ability’s identifier.
-  let toAdvanced: Identifier
+  public let toAdvanced: Identifier
 
   private enum CodingKeys: String, CodingKey {
     case fromOption = "from_option"
@@ -22566,43 +22566,43 @@ public struct Patron: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The patron’s category.
-  let category: PatronCategory.ID
+  public let category: PatronCategory.ID
 
   /// The patron-specific skills.
-  let skills: [3 of Skill.ID]
+  public let skills: [3 of Skill.ID]
 
   /// The patron is only available to a certain set of cultures. It may be available to all, it may be available to only specific ones (intersection) and it may be available to all except specific ones to the listed cultures (difference).
-  let culture: PatronCulture
+  public let culture: PatronCulture
 
   /// The patron-specific powers. Used by animist power Animal Powers I–III and should only be present on animal patrons.
-  let powers: AnimalPowers?
+  public let powers: AnimalPowers?
 
   /// The patron-specific AE cost. Used by several animist forces for animal patrons.
-  let aeCost: Int?
+  public let aeCost: Int?
 
   /// The patron-specific improvement cost. Used by several animist forces for animal patrons.
-  let improvementCost: ImprovementCost?
+  public let improvementCost: ImprovementCost?
 
   /// The patron may grant common advantages that are taken into account during character creation.
   ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
-  let commonAdvantages: [Advantage.ID]?
+  public let commonAdvantages: [Advantage.ID]?
 
   /// The patron may grant common disadvantages that are taken into account during character creation.
   ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
-  let commonDisadvantages: [Disadvantage.ID]?
+  public let commonDisadvantages: [Disadvantage.ID]?
 
   /// The animist may learn spellworks common for this patron.
   ///
   /// *Source:* Geisterwald & Knochenklippen, p. 6-7
-  let commonSpellworks: [SpellworkIdentifier]?
+  public let commonSpellworks: [SpellworkIdentifier]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PatronTranslation>
+  public let translations: LocaleMap<PatronTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case category = "category"
@@ -22653,7 +22653,7 @@ public struct Patron: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PatronTranslation: Decodable, Equatable, Sendable {
   /// The patron’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -22672,10 +22672,10 @@ public struct PatronCategory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The list of cultures where patrons from this category can be the primary patron of.
-  let primaryPatronCultures: [Culture.ID]
+  public let primaryPatronCultures: [Culture.ID]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PatronCategoryTranslation>
+  public let translations: LocaleMap<PatronCategoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case primaryPatronCultures = "primary_patron_cultures"
@@ -22708,7 +22708,7 @@ public struct PatronCategory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PatronCategoryTranslation: Decodable, Equatable, Sendable {
   /// The patron category’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -22723,8 +22723,8 @@ public struct PatronCategoryTranslation: Decodable, Equatable, Sendable {
 
 /// The patron cultures the patron is or is not part of. If the patron is part of all patron cultures, the set should be empty and the operation should be difference.
 public struct PatronCulture: Decodable, Equatable, Sendable {
-  let set: [Tribe.ID]
-  let operation: PatronCultureOperation?
+  public let set: [Tribe.ID]
+  public let operation: PatronCultureOperation?
 
   private enum CodingKeys: String, CodingKey {
     case set = "set"
@@ -22745,10 +22745,10 @@ public struct Tribe: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The prerequisite(s) to be of this tribe.
-  let prerequisites: TribePrerequisites
+  public let prerequisites: TribePrerequisites
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TribeTranslation>
+  public let translations: LocaleMap<TribeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -22781,7 +22781,7 @@ public struct Tribe: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TribeTranslation: Decodable, Equatable, Sendable {
   /// The tribe’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -22852,9 +22852,9 @@ public enum PatronCultureOperation: Decodable, Equatable, Sendable {
 }
 
 public struct AnimalPowers: Decodable, Equatable, Sendable {
-  let level1: AnimalPowersLevel1
-  let level2: AnimalPowersLevel2
-  let level3: AnimalPowersLevel3
+  public let level1: AnimalPowersLevel1
+  public let level2: AnimalPowersLevel2
+  public let level3: AnimalPowersLevel3
 
   private enum CodingKeys: String, CodingKey {
     case level1 = "level1"
@@ -22902,13 +22902,13 @@ public enum AnimalPowerLevel1: Decodable, Equatable, Sendable {
 
 public struct AdvantageAnimalPower: Decodable, Equatable, Sendable {
   /// The advantage’s identifier.
-  let id: Advantage.ID
+  public let id: Advantage.ID
 
   /// It grants a higher level of the advantage.
-  let level: Int?
+  public let level: Int?
 
   /// It grants a specific general option of the advantage.
-  let option: Int?
+  public let option: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -22927,10 +22927,10 @@ public struct AdvantageAnimalPower: Decodable, Equatable, Sendable {
 
 public struct SkillAnimalPower: Decodable, Equatable, Sendable {
   /// The skill’s identifier.
-  let id: Skill.ID
+  public let id: Skill.ID
 
   /// The points that gets added to the skill’s rating.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -22971,10 +22971,10 @@ public enum AnimalPowerLevel2: Decodable, Equatable, Sendable {
 
 public struct CombatAnimalPower: Decodable, Equatable, Sendable {
   /// The combat value.
-  let id: CombatAnimalPowerType
+  public let id: CombatAnimalPowerType
 
   /// The value that gets added to the combat value.
-  let value: Int?
+  public let value: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -23062,10 +23062,10 @@ public enum AnimalPowerLevel3: Decodable, Equatable, Sendable {
 
 public struct AttributeAnimalPower: Decodable, Equatable, Sendable {
   /// The attribute’s identifier.
-  let id: Attribute.ID
+  public let id: Attribute.ID
 
   /// The value that gets added to the attribute.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -23082,13 +23082,13 @@ public struct AttributeAnimalPower: Decodable, Equatable, Sendable {
 
 public struct AdvancedSpecialAbilityByOption<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// Map options from the external entry to allowed advanced special abilities.
-  let map: [AdvancedSpecialAbilityByOptionMapping<Identifier>]
+  public let map: [AdvancedSpecialAbilityByOptionMapping<Identifier>]
 
   /// One of the options counts all fallback options and should be sorted last in the list.
-  let fallbackOption: GeneralSelectOption.ID?
+  public let fallbackOption: GeneralSelectOption.ID?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AdvancedSpecialAbilityByOptionTranslation>?
+  public let translations: LocaleMap<AdvancedSpecialAbilityByOptionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -23107,7 +23107,7 @@ public struct AdvancedSpecialAbilityByOption<Identifier: Decodable & Equatable &
 
 public struct AdvancedSpecialAbilityByOptionTranslation: Decodable, Equatable, Sendable {
   /// How to label all options before listing each option with its advanced special ability/-ies.
-  let label: String
+  public let label: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -23123,10 +23123,10 @@ public struct AdvancedSpecialAbilityByOptionTranslation: Decodable, Equatable, S
 /// Mapping from an option of this entry to an allowed advanced special ability.
 public struct AdvancedSpecialAbilityByOptionMapping<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The select option’s identifier.
-  let option: GeneralSelectOption.ID
+  public let option: GeneralSelectOption.ID
 
   /// The advanced special ability’s identifier.
-  let associatedAdvanced: AdvancedSpecialAbilityByOptionMappingRule<Identifier>
+  public let associatedAdvanced: AdvancedSpecialAbilityByOptionMappingRule<Identifier>
 
   private enum CodingKeys: String, CodingKey {
     case option = "option"
@@ -23175,18 +23175,18 @@ public struct CommandSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// The definition of how the combat special ability can be used in combat.
-  let usageType: CombatSpecialAbilityUsageType
+  public let usageType: CombatSpecialAbilityUsageType
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23195,21 +23195,21 @@ public struct CommandSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The combat techniques the special ability is applicable to.
-  let combatTechniques: ApplicableCombatTechniques
+  public let combatTechniques: ApplicableCombatTechniques
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CommandSpecialAbilityTranslation>
+  public let translations: LocaleMap<CommandSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -23258,23 +23258,23 @@ public struct CommandSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
 
 public struct CommandSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -23299,13 +23299,13 @@ public struct CommandSpecialAbilityTranslation: Decodable, Equatable, Sendable {
 
 public struct PenaltyByAttack: Decodable, Equatable, Sendable {
   /// A list of penalties for subsequent attacks. The first element is the penalty for the first attack, the second element is the penalty for the second attack, and so on. The order of the first element may be changed using `initial_order`, so that e.g. if set to `2`, the first element is the penalty for the second attack, the second element is the penalty for the third attack, and so on.
-  let list: [PenaltyByAttackOrderItem]
+  public let list: [PenaltyByAttackOrderItem]
 
   /// The order of the first element in the `list` of penalties.
-  let initialOrder: Int?
+  public let initialOrder: Int?
 
   /// Set if a predefined different word should be used instead of the word `attack` for display purposes.
-  let attackReplacement: PenaltyByAttackReplacement?
+  public let attackReplacement: PenaltyByAttackReplacement?
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -23324,7 +23324,7 @@ public struct PenaltyByAttack: Decodable, Equatable, Sendable {
 
 public struct PenaltyByAttackOrderItem: Decodable, Equatable, Sendable {
   /// The penalty value for this order.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -23366,15 +23366,15 @@ public struct DaggerRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23383,26 +23383,26 @@ public struct DaggerRitual: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
-  let cost: DaggerRitualCost?
+  public let cost: DaggerRitualCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DaggerRitualTranslation>
+  public let translations: LocaleMap<DaggerRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -23453,38 +23453,38 @@ public struct DaggerRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct DaggerRitualTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -23543,8 +23543,8 @@ public enum DaggerRitualCost: Decodable, Equatable, Sendable {
 }
 
 public struct DaggerRitualArcaneEnergyCost: Decodable, Equatable, Sendable {
-  let aeCost: ArcaneEnergyCost
-  let lpCost: LifePointsCost?
+  public let aeCost: ArcaneEnergyCost
+  public let lpCost: LifePointsCost?
 
   private enum CodingKeys: String, CodingKey {
     case aeCost = "ae_cost"
@@ -23583,7 +23583,7 @@ public enum LifePointsCost: Decodable, Equatable, Sendable {
 
 public struct FixedLifePointsCost: Decodable, Equatable, Sendable {
   /// The LP cost value.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -23602,15 +23602,15 @@ public struct FamiliarSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23619,18 +23619,18 @@ public struct FamiliarSpecialAbility: Decodable, Equatable, Sendable, Identifiab
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FamiliarSpecialAbilityTranslation>
+  public let translations: LocaleMap<FamiliarSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -23675,23 +23675,23 @@ public struct FamiliarSpecialAbility: Decodable, Equatable, Sendable, Identifiab
 
 public struct FamiliarSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -23720,15 +23720,15 @@ public struct FatePointSexSpecialAbility: Decodable, Equatable, Sendable, Identi
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23737,18 +23737,18 @@ public struct FatePointSexSpecialAbility: Decodable, Equatable, Sendable, Identi
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FatePointSexSpecialAbilityTranslation>
+  public let translations: LocaleMap<FatePointSexSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -23793,23 +23793,23 @@ public struct FatePointSexSpecialAbility: Decodable, Equatable, Sendable, Identi
 
 public struct FatePointSexSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -23838,15 +23838,15 @@ public struct FatePointSpecialAbility: Decodable, Equatable, Sendable, Identifia
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23855,18 +23855,18 @@ public struct FatePointSpecialAbility: Decodable, Equatable, Sendable, Identifia
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FatePointSpecialAbilityTranslation>
+  public let translations: LocaleMap<FatePointSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -23911,23 +23911,23 @@ public struct FatePointSpecialAbility: Decodable, Equatable, Sendable, Identifia
 
 public struct FatePointSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -23956,15 +23956,15 @@ public struct FoolsHatEnchantment: Decodable, Equatable, Sendable, Identifiable 
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -23973,27 +23973,27 @@ public struct FoolsHatEnchantment: Decodable, Equatable, Sendable, Identifiable 
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FoolsHatEnchantmentTranslation>
+  public let translations: LocaleMap<FoolsHatEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24044,38 +24044,38 @@ public struct FoolsHatEnchantment: Decodable, Equatable, Sendable, Identifiable 
 
 public struct FoolsHatEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24112,15 +24112,15 @@ public struct GeneralSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24129,18 +24129,18 @@ public struct GeneralSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GeneralSpecialAbilityTranslation>
+  public let translations: LocaleMap<GeneralSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24185,26 +24185,26 @@ public struct GeneralSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
 
 public struct GeneralSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24235,15 +24235,15 @@ public struct Haubenzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24252,27 +24252,27 @@ public struct Haubenzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HaubenzauberTranslation>
+  public let translations: LocaleMap<HaubenzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24323,38 +24323,38 @@ public struct Haubenzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HaubenzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24391,15 +24391,15 @@ public struct Hauerkettenzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24408,27 +24408,27 @@ public struct Hauerkettenzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HauerkettenzauberTranslation>
+  public let translations: LocaleMap<HauerkettenzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24479,38 +24479,38 @@ public struct Hauerkettenzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HauerkettenzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24547,15 +24547,15 @@ public struct InstrumentEnchantment: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24564,27 +24564,27 @@ public struct InstrumentEnchantment: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<InstrumentEnchantmentTranslation>
+  public let translations: LocaleMap<InstrumentEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24635,38 +24635,38 @@ public struct InstrumentEnchantment: Decodable, Equatable, Sendable, Identifiabl
 
 public struct InstrumentEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24703,15 +24703,15 @@ public struct KarmaSpecialAbility: Decodable, Equatable, Sendable, Identifiable 
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24720,18 +24720,18 @@ public struct KarmaSpecialAbility: Decodable, Equatable, Sendable, Identifiable 
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<KarmaSpecialAbilityTranslation>
+  public let translations: LocaleMap<KarmaSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24776,23 +24776,23 @@ public struct KarmaSpecialAbility: Decodable, Equatable, Sendable, Identifiable 
 
 public struct KarmaSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24821,15 +24821,15 @@ public struct Keulenzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24838,27 +24838,27 @@ public struct Keulenzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<KeulenzauberTranslation>
+  public let translations: LocaleMap<KeulenzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -24909,38 +24909,38 @@ public struct Keulenzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct KeulenzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -24977,15 +24977,15 @@ public struct Krallenkettenzauber: Decodable, Equatable, Sendable, Identifiable 
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -24994,27 +24994,27 @@ public struct Krallenkettenzauber: Decodable, Equatable, Sendable, Identifiable 
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<KrallenkettenzauberTranslation>
+  public let translations: LocaleMap<KrallenkettenzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25065,38 +25065,38 @@ public struct Krallenkettenzauber: Decodable, Equatable, Sendable, Identifiable 
 
 public struct KrallenkettenzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25133,15 +25133,15 @@ public struct Kristallkugelzauber: Decodable, Equatable, Sendable, Identifiable 
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25150,27 +25150,27 @@ public struct Kristallkugelzauber: Decodable, Equatable, Sendable, Identifiable 
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<KristallkugelzauberTranslation>
+  public let translations: LocaleMap<KristallkugelzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25221,38 +25221,38 @@ public struct Kristallkugelzauber: Decodable, Equatable, Sendable, Identifiable 
 
 public struct KristallkugelzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25289,15 +25289,15 @@ public struct LiturgicalStyleSpecialAbility: Decodable, Equatable, Sendable, Ide
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25306,21 +25306,21 @@ public struct LiturgicalStyleSpecialAbility: Decodable, Equatable, Sendable, Ide
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The Advanced Special Abilities for the respective Style Special Ability. Sometimes, only a specific select option or a set of select options of an entry is allowed, which can be modelled by the option property. It can also be that you can choose from a set of special abilities, but then you can’t specify an option.
-  let advanced: [3 of AdvancedSpecialAbility<AdvancedKarmaSpecialAbility.ID>]
+  public let advanced: [3 of AdvancedSpecialAbility<AdvancedKarmaSpecialAbility.ID>]
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LiturgicalStyleSpecialAbilityTranslation>
+  public let translations: LocaleMap<LiturgicalStyleSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25367,23 +25367,23 @@ public struct LiturgicalStyleSpecialAbility: Decodable, Equatable, Sendable, Ide
 
 public struct LiturgicalStyleSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25412,15 +25412,15 @@ public struct LycantropicGift: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25429,18 +25429,18 @@ public struct LycantropicGift: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LycantropicGiftTranslation>
+  public let translations: LocaleMap<LycantropicGiftTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25485,23 +25485,23 @@ public struct LycantropicGift: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LycantropicGiftTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25529,22 +25529,22 @@ public struct MagicalSign: Decodable, Equatable, Sendable, Identifiable {
 
   public let id: ID
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The cost in AE.
-  let cost: MagicalSignCost?
+  public let cost: MagicalSignCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration?
+  public let property: PropertyDeclaration?
 
   /// The adventure points value.
-  let apValue: Int
+  public let apValue: Int
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalSignTranslation>
+  public let translations: LocaleMap<MagicalSignTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -25585,23 +25585,23 @@ public struct MagicalSign: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalSignTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25653,10 +25653,10 @@ public enum MagicalSignCost: Decodable, Equatable, Sendable {
 
 public struct ConstantMagicalSignCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The part of the cost value that has to be spent permanently.
-  let permanentValue: Int?
+  public let permanentValue: Int?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -25677,15 +25677,15 @@ public struct MagicalSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25694,18 +25694,18 @@ public struct MagicalSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalSpecialAbilityTranslation>
+  public let translations: LocaleMap<MagicalSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25750,26 +25750,26 @@ public struct MagicalSpecialAbility: Decodable, Equatable, Sendable, Identifiabl
 
 public struct MagicalSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// A string that is used as a label for an input field.
-  let input: String?
+  public let input: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25800,15 +25800,15 @@ public struct MagicStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25817,21 +25817,21 @@ public struct MagicStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The Advanced Special Abilities for the respective Style Special Ability. Sometimes, only a specific select option or a set of select options of an entry is allowed, which can be modelled by the option property. It can also be that you can choose from a set of special abilities, but then you can’t specify an option.
-  let advanced: [3 of AdvancedSpecialAbility<AdvancedMagicalSpecialAbility.ID>]
+  public let advanced: [3 of AdvancedSpecialAbility<AdvancedMagicalSpecialAbility.ID>]
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicStyleSpecialAbilityTranslation>
+  public let translations: LocaleMap<MagicStyleSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -25878,28 +25878,28 @@ public struct MagicStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
 
 public struct MagicStyleSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// A part of the name that is appended in parenthesis. This can be used to specify the group of people that typically uses this entry (e.g. the name of the witch circle for a magic style for witches).
   ///
   /// If `name_in_library` is specified, this will be ignored for places where the `name_in_library` is used.
-  let additionalName: String?
+  public let additionalName: String?
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -25930,15 +25930,15 @@ public struct OrbEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -25947,27 +25947,27 @@ public struct OrbEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<OrbEnchantmentTranslation>
+  public let translations: LocaleMap<OrbEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26018,38 +26018,38 @@ public struct OrbEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct OrbEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26086,18 +26086,18 @@ public struct PactGift: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The pact category this pact gift is associated with. This is mainly used for allowing multiple pact gifts of the same name for different pact categories.
-  let associatedPactCategory: PactCategory.ID?
+  public let associatedPactCategory: PactCategory.ID?
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -26106,24 +26106,24 @@ public struct PactGift: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// This pact gift gives permanent levels of the condition *Demonic Consumption*.
-  let permanentDemonicConsumption: PactGiftPermanentDemonicConsumption?
+  public let permanentDemonicConsumption: PactGiftPermanentDemonicConsumption?
 
   /// This entry has a direct influence on the existence of other entries. It may add or remove entries.
-  let automaticEntries: [AutomaticEntry]?
+  public let automaticEntries: [AutomaticEntry]?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PactGiftTranslation>
+  public let translations: LocaleMap<PactGiftTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case associatedPactCategory = "associatedPactCategory"
@@ -26174,23 +26174,23 @@ public struct PactGift: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PactGiftTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26219,10 +26219,10 @@ public struct PactCategory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PactCategoryTranslation>
+  public let translations: LocaleMap<PactCategoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case src = "src"
@@ -26255,9 +26255,9 @@ public struct PactCategory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PactCategoryTranslation: Decodable, Equatable, Sendable {
   /// The pact category’s name.
-  let name: String
+  public let name: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26281,10 +26281,10 @@ public struct PactType: Decodable, Equatable, Sendable, Identifiable, ChildEntit
   public let id: ID
 
   /// The pact category this type belongs to.
-  let parent: PactCategory.ID
+  public let parent: PactCategory.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PactTypeTranslation>
+  public let translations: LocaleMap<PactTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -26317,7 +26317,7 @@ public struct PactType: Decodable, Equatable, Sendable, Identifiable, ChildEntit
 
 public struct PactTypeTranslation: Decodable, Equatable, Sendable {
   /// The type’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26339,10 +26339,10 @@ public struct PactDomain: Decodable, Equatable, Sendable, Identifiable, ChildEnt
   public let id: ID
 
   /// The pact category this domain belongs to.
-  let parent: PactCategory.ID
+  public let parent: PactCategory.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PactDomainTranslation>
+  public let translations: LocaleMap<PactDomainTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -26375,7 +26375,7 @@ public struct PactDomain: Decodable, Equatable, Sendable, Identifiable, ChildEnt
 
 public struct PactDomainTranslation: Decodable, Equatable, Sendable {
   /// The domain’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26417,7 +26417,7 @@ public enum PactGiftPermanentDemonicConsumption: Decodable, Equatable, Sendable 
 
 public struct FixedPactGiftPermanentDemonicConsumption: Decodable, Equatable, Sendable {
   /// The levels of *Demonic Consumption* the pact gift causes.
-  let levels: Int
+  public let levels: Int
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26432,7 +26432,7 @@ public struct FixedPactGiftPermanentDemonicConsumption: Decodable, Equatable, Se
 
 public struct PactGiftPermanentDemonicConsumptionPerLevel: Decodable, Equatable, Sendable {
   /// The levels of *Demonic Consumption* the pact gift causes per activated level of the pact gift.
-  let levels: Int
+  public let levels: Int
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26447,13 +26447,13 @@ public struct PactGiftPermanentDemonicConsumptionPerLevel: Decodable, Equatable,
 
 public struct AutomaticEntry: Decodable, Equatable, Sendable {
   /// What type of action is applied to the target entry?
-  let action: AutomaticEntryAction
+  public let action: AutomaticEntryAction
 
   /// If an entry is added or removed, does is cost or grant adventure points or is it free of charge?
-  let applyApValue: Bool
+  public let applyApValue: Bool
 
   /// The entry that is to be added or removed. It can be a fixed entry or a selection where the player must choose one entry.
-  let target: AutomaticEntryTarget
+  public let target: AutomaticEntryTarget
 
   private enum CodingKeys: String, CodingKey {
     case action = "action"
@@ -26525,7 +26525,7 @@ public enum AutomaticEntryTarget: Decodable, Equatable, Sendable {
 }
 
 public struct AutomaticEntryTargetSelection: Decodable, Equatable, Sendable {
-  let list: AutomaticEntryTargetSelectionList
+  public let list: AutomaticEntryTargetSelectionList
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -26566,10 +26566,10 @@ public enum AutomaticEntryTargetSelectionList: Decodable, Equatable, Sendable {
 }
 
 public struct FixedAutomaticEntryTarget: Decodable, Equatable, Sendable {
-  let id: ActivatableIdentifier
+  public let id: ActivatableIdentifier
 
   /// The level of the target entry to be added or removed. If this is omitted for a multi-level entry, level 1 is assumed.
-  let level: Int?
+  public let level: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -26590,15 +26590,15 @@ public struct ProtectiveWardingCircleSpecialAbility: Decodable, Equatable, Senda
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -26607,21 +26607,21 @@ public struct ProtectiveWardingCircleSpecialAbility: Decodable, Equatable, Senda
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The cost in AE.
-  let cost: Int
+  public let cost: Int
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ProtectiveWardingCircleSpecialAbilityTranslation>
+  public let translations: LocaleMap<ProtectiveWardingCircleSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26668,26 +26668,26 @@ public struct ProtectiveWardingCircleSpecialAbility: Decodable, Equatable, Senda
 
 public struct ProtectiveWardingCircleSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rules for the protective circle variant.
-  let protectiveCircle: String
+  public let protectiveCircle: String
 
   /// The rules for the warding circle variant.
-  let wardingCircle: String?
+  public let wardingCircle: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26718,15 +26718,15 @@ public struct RingEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -26735,27 +26735,27 @@ public struct RingEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RingEnchantmentTranslation>
+  public let translations: LocaleMap<RingEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26806,38 +26806,38 @@ public struct RingEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct RingEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -26874,15 +26874,15 @@ public struct Schweinetrommelzauber: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -26891,27 +26891,27 @@ public struct Schweinetrommelzauber: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SchweinetrommelzauberTranslation>
+  public let translations: LocaleMap<SchweinetrommelzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -26962,38 +26962,38 @@ public struct Schweinetrommelzauber: Decodable, Equatable, Sendable, Identifiabl
 
 public struct SchweinetrommelzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27030,15 +27030,15 @@ public struct Sermon: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27047,18 +27047,18 @@ public struct Sermon: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SermonTranslation>
+  public let translations: LocaleMap<SermonTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27103,23 +27103,23 @@ public struct Sermon: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SermonTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27148,15 +27148,15 @@ public struct SexSpecialAbility: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27165,18 +27165,18 @@ public struct SexSpecialAbility: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SexSpecialAbilityTranslation>
+  public let translations: LocaleMap<SexSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27221,23 +27221,23 @@ public struct SexSpecialAbility: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SexSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27266,15 +27266,15 @@ public struct SickleRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27283,27 +27283,27 @@ public struct SickleRitual: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SickleRitualTranslation>
+  public let translations: LocaleMap<SickleRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27354,38 +27354,38 @@ public struct SickleRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SickleRitualTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27422,15 +27422,15 @@ public struct SikaryanDrainSpecialAbility: Decodable, Equatable, Sendable, Ident
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27439,18 +27439,18 @@ public struct SikaryanDrainSpecialAbility: Decodable, Equatable, Sendable, Ident
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SikaryanDrainSpecialAbilityTranslation>
+  public let translations: LocaleMap<SikaryanDrainSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27495,23 +27495,23 @@ public struct SikaryanDrainSpecialAbility: Decodable, Equatable, Sendable, Ident
 
 public struct SikaryanDrainSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27540,15 +27540,15 @@ public struct SkillStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27557,21 +27557,21 @@ public struct SkillStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
   /// The Advanced Special Abilities for the respective Style Special Ability. Sometimes, only a specific select option or a set of select options of an entry is allowed, which can be modelled by the option property. It can also be that you can choose from a set of special abilities, but then you can’t specify an option.
-  let advanced: [3 of AdvancedSpecialAbility<AdvancedSkillStyleSpecialAbilityIdentifier>]
+  public let advanced: [3 of AdvancedSpecialAbility<AdvancedSkillStyleSpecialAbilityIdentifier>]
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillStyleSpecialAbilityTranslation>
+  public let translations: LocaleMap<SkillStyleSpecialAbilityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27618,23 +27618,23 @@ public struct SkillStyleSpecialAbility: Decodable, Equatable, Sendable, Identifi
 
 public struct SkillStyleSpecialAbilityTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27690,15 +27690,15 @@ public struct SpellSwordEnchantment: Decodable, Equatable, Sendable, Identifiabl
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27707,27 +27707,27 @@ public struct SpellSwordEnchantment: Decodable, Equatable, Sendable, Identifiabl
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SpellSwordEnchantmentTranslation>
+  public let translations: LocaleMap<SpellSwordEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27778,38 +27778,38 @@ public struct SpellSwordEnchantment: Decodable, Equatable, Sendable, Identifiabl
 
 public struct SpellSwordEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -27846,15 +27846,15 @@ public struct StaffEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -27863,27 +27863,27 @@ public struct StaffEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<StaffEnchantmentTranslation>
+  public let translations: LocaleMap<StaffEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -27934,38 +27934,38 @@ public struct StaffEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct StaffEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28002,15 +28002,15 @@ public struct ToyEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28019,27 +28019,27 @@ public struct ToyEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ToyEnchantmentTranslation>
+  public let translations: LocaleMap<ToyEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28090,38 +28090,38 @@ public struct ToyEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ToyEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28158,15 +28158,15 @@ public struct Trinkhornzauber: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28175,27 +28175,27 @@ public struct Trinkhornzauber: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TrinkhornzauberTranslation>
+  public let translations: LocaleMap<TrinkhornzauberTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28246,38 +28246,38 @@ public struct Trinkhornzauber: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TrinkhornzauberTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28314,15 +28314,15 @@ public struct VampiricGift: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28331,18 +28331,18 @@ public struct VampiricGift: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<VampiricGiftTranslation>
+  public let translations: LocaleMap<VampiricGiftTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28387,23 +28387,23 @@ public struct VampiricGift: Decodable, Equatable, Sendable, Identifiable {
 
 public struct VampiricGiftTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28432,15 +28432,15 @@ public struct Vision: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28449,18 +28449,18 @@ public struct Vision: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<VisionTranslation>
+  public let translations: LocaleMap<VisionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28505,23 +28505,23 @@ public struct Vision: Decodable, Equatable, Sendable, Identifiable {
 
 public struct VisionTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The rule text.
-  let rules: String
+  public let rules: String
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28550,15 +28550,15 @@ public struct WandEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28567,24 +28567,24 @@ public struct WandEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<WandEnchantmentTranslation>
+  public let translations: LocaleMap<WandEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28633,38 +28633,38 @@ public struct WandEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct WandEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28701,15 +28701,15 @@ public struct WeaponEnchantment: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Number of available levels.
-  let levels: Int?
+  public let levels: Int?
 
   /// Rules for building the name of an activatable. These rules are used when the activatable doesn't have a custom name specified.
-  let nameBuilderRules: ActivatableNameBuilderRules?
+  public let nameBuilderRules: ActivatableNameBuilderRules?
 
   /// Definitions for possible options for the activatable entry, derived from entry categories.
   ///
   /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: SelectOptions?
+  public let selectOptions: SelectOptions?
 
   /// The number stating how often you can buy the entry. The **default** depends on the entry type:
   ///
@@ -28718,27 +28718,27 @@ public struct WeaponEnchantment: Decodable, Equatable, Sendable, Identifiable {
   /// - **Special Abilities:** `1` if no options can be selected, otherwise the number of possible options
   ///
   /// The maximum is only set if it differs from the defaults specified above.
-  let maximum: Int?
+  public let maximum: Int?
 
-  let prerequisites: GeneralPrerequisites?
+  public let prerequisites: GeneralPrerequisites?
 
   /// The volume points the enchantment needs.
-  let volume: Volume
+  public let volume: Volume
 
   /// The cost when casting the entry.
-  let cost: EnchantmentCost?
+  public let cost: EnchantmentCost?
 
   /// The magic property’s identifier. `DependingOnProperty` can only be used if the special ability has an option to select a property.
-  let property: PropertyDeclaration
+  public let property: PropertyDeclaration
 
   /// The adventure points value.
-  let apValue: AdventurePointsValue
+  public let apValue: AdventurePointsValue
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<WeaponEnchantmentTranslation>
+  public let translations: LocaleMap<WeaponEnchantmentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case levels = "levels"
@@ -28789,38 +28789,38 @@ public struct WeaponEnchantment: Decodable, Equatable, Sendable, Identifiable {
 
 public struct WeaponEnchantmentTranslation: Decodable, Equatable, Sendable {
   /// Name of the activatable entry.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   /// A note, appended to the generated cost string in parenthesis.
-  let costNote: ResponsiveTextOptional?
+  public let costNote: ResponsiveTextOptional?
 
   /// The binding cost for an enchantment.
   @available(*, deprecated)
-  let bindingCost: String?
+  public let bindingCost: String?
 
   /// The AE cost.
   @available(*, deprecated)
-  let aeCost: String?
+  public let aeCost: String?
 
   /// The volume points the enchantment needs.
   @available(*, deprecated)
-  let volume: String?
+  public let volume: String?
 
   /// The string to append to the generated AP value text.
   @available(*, deprecated)
-  let apValueAppend: String?
+  public let apValueAppend: String?
 
   /// The adventure points value.
   @available(*, deprecated)
-  let apValue: String?
+  public let apValue: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -28854,7 +28854,7 @@ public struct WeaponEnchantmentTranslation: Decodable, Equatable, Sendable {
 /// Buy liturgical chants and ceremonies for a specific amount of AP.
 public struct LiturgiesOptions: Decodable, Equatable, Sendable {
   /// The AP value you can buy liturgical chants and ceremonies for.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "ap_value"
@@ -28869,10 +28869,10 @@ public struct LiturgiesOptions: Decodable, Equatable, Sendable {
 
 public struct ProfessionVariantSpecialAbility: Decodable, Equatable, Sendable {
   /// If the selection is added to the base profession or if it removes a selection from the base profession with the same values.
-  let action: VariantSpecialAbilityAction
+  public let action: VariantSpecialAbilityAction
 
   /// The special ability to add or remove.
-  let value: ProfessionSpecialAbility
+  public let value: ProfessionSpecialAbility
 
   private enum CodingKeys: String, CodingKey {
     case action = "action"
@@ -28943,13 +28943,13 @@ public enum ProfessionSpecialAbility: Decodable, Equatable, Sendable {
 
 public struct SingleProfessionSpecialAbility: Decodable, Equatable, Sendable {
   /// The identifier of the special ability to grant.
-  let id: ProfessionSpecialAbilityIdentifier
+  public let id: ProfessionSpecialAbilityIdentifier
 
   /// The level of the received special ability. If not specified and the special ability has levels, level 1 is used automatically.
-  let level: Int?
+  public let level: Int?
 
   /// Received select options. Order is important. Typically, you only need the first array index, though.
-  let options: [ProfessionActivatableOption]?
+  public let options: [ProfessionActivatableOption]?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29302,7 +29302,7 @@ public enum ProfessionActivatableOption: Decodable, Equatable, Sendable {
 
 public struct ProfessionSpecialAbilityTextOption: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ProfessionSpecialAbilityTextOptionTranslation>
+  public let translations: LocaleMap<ProfessionSpecialAbilityTextOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -29317,7 +29317,7 @@ public struct ProfessionSpecialAbilityTextOption: Decodable, Equatable, Sendable
 
 public struct ProfessionSpecialAbilityTextOptionTranslation: Decodable, Equatable, Sendable {
   /// The text of the option.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -29332,7 +29332,7 @@ public struct ProfessionSpecialAbilityTextOptionTranslation: Decodable, Equatabl
 
 public struct ProfessionSpecialAbilitySelection: Decodable, Equatable, Sendable {
   /// The list of special abilities to choose from. Must contain at least two entries.
-  let options: [SingleProfessionSpecialAbility]
+  public let options: [SingleProfessionSpecialAbility]
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -29347,12 +29347,12 @@ public struct ProfessionSpecialAbilitySelection: Decodable, Equatable, Sendable 
 
 public struct CombatTechniqueRating: Decodable, Equatable, Sendable {
   /// The identifier of the combat technique to provide the rating for.
-  let id: CombatTechniqueIdentifier
+  public let id: CombatTechniqueIdentifier
 
   /// The rating bonus provided for the combat technique. If used in a profession variant, it can also be used to lower the bonus of the base profession.
   ///
   /// **Note:** This is a rating *bonus*, so it will be *added* to the default value of 6.
-  let ratingModifier: Int
+  public let ratingModifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29369,10 +29369,10 @@ public struct CombatTechniqueRating: Decodable, Equatable, Sendable {
 
 public struct SkillRating: Decodable, Equatable, Sendable {
   /// The identifier of the skill to provide the rating for.
-  let id: Skill.ID
+  public let id: Skill.ID
 
   /// The rating bonus provided for the skill. If used in a profession variant, it can also be used to lower the bonus of the base profession
-  let ratingModifier: Int
+  public let ratingModifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29389,12 +29389,12 @@ public struct SkillRating: Decodable, Equatable, Sendable {
 
 public struct MagicalSkillRating: Decodable, Equatable, Sendable {
   /// The identifier(s) of the spell(s) to choose from to provide the rating for. If multiple spells are provided, they must all have the same improvement cost.
-  let id: [ProfessionMagicalSkillIdentifier]
+  public let id: [ProfessionMagicalSkillIdentifier]
 
   /// The rating bonus provided for the (selected) magical skill. If used in a profession variant, it can also be used to lower the bonus of the base profession.
   ///
   /// **Note:** If due to a variant a spell rating is lowered to 0, the spell is considered deactivated. Both setting the value for a spell and deactivating it by setting it to 0 takes into account the additional activation cost for spells.
-  let ratingModifier: Int
+  public let ratingModifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29438,10 +29438,10 @@ public enum ProfessionMagicalSkillIdentifier: Decodable, Equatable, Sendable {
 
 public struct ProfessionSpellworkIdentifier: Decodable, Equatable, Sendable {
   /// The identifier of the spell to provide the rating for.
-  let id: SpellworkIdentifier
+  public let id: SpellworkIdentifier
 
   /// If the spell is not part of the magical tradition required by the package, this references the magical tradition it is part of. It can also be used to define the target magical tradition of a spell if multiple magical traditions are required and the spell is available to multiple of them.
-  let tradition: MagicalTradition.ID?
+  public let tradition: MagicalTradition.ID?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29458,10 +29458,10 @@ public struct ProfessionSpellworkIdentifier: Decodable, Equatable, Sendable {
 
 public struct ProfessionMagicalActionIdentifier: Decodable, Equatable, Sendable {
   /// The identifier of the magical action to provide the rating for.
-  let id: MagicalActionIdentifier
+  public let id: MagicalActionIdentifier
 
   /// Some Bannzeichen have options that can be selected. If the magical action has an option, this property can be set to specify the option.
-  let option: BannzeichenOption.ID?
+  public let option: BannzeichenOption.ID?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -29559,22 +29559,22 @@ public struct Bannzeichen: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// Measurable parameters of a Bannzeichen.
-  let parameters: BannzeichenPerformanceParameters
+  public let parameters: BannzeichenPerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: BannzeichenImprovementCost
+  public let improvementCost: BannzeichenImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BannzeichenTranslation>
+  public let translations: LocaleMap<BannzeichenTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -29617,27 +29617,27 @@ public struct BannzeichenTranslation: Decodable, Equatable, Sendable {
   /// The Bannzeichen’s name.
   ///
   /// If the Bannzeichen has an option, the option’s name will/should not be included in the name as well as its surrounding parenthesis. It will/should be combined on demand.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The native name of the Bannzeichen. It has to be specified unless it is defined by an option.
-  let nativeName: String?
+  public let nativeName: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   /// The ae-cost of the Bannzeichen
-  let cost: String?
+  public let cost: String?
 
   /// The crafting time of the Bannzeichen
-  let craftingTime: String?
+  public let craftingTime: String?
 
   /// The duration of the Bannzeichen
-  let duration: String?
+  public let duration: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -29673,18 +29673,18 @@ public struct BannzeichenOption: Decodable, Equatable, Sendable, Identifiable, C
   public let id: ID
 
   /// The Bannzeichen this option belongs to.
-  let parent: Bannzeichen.ID
+  public let parent: Bannzeichen.ID
 
   /// The option-specific AE cost.
-  let cost: SingleBannzeichenCost?
+  public let cost: SingleBannzeichenCost?
 
   /// The option-specific improvement cost.
-  let improvementCost: ImprovementCost?
+  public let improvementCost: ImprovementCost?
 
-  let suboption: BannzeichenSuboption?
+  public let suboption: BannzeichenSuboption?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BannzeichenOptionTranslation>
+  public let translations: LocaleMap<BannzeichenOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -29725,7 +29725,7 @@ public struct BannzeichenOptionTranslation: Decodable, Equatable, Sendable {
   /// The Bannzeichen option’s name.
   ///
   /// The surrounding parenthesis will/should not be included, they will/should be generated.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -29740,10 +29740,10 @@ public struct BannzeichenOptionTranslation: Decodable, Equatable, Sendable {
 
 public struct SingleBannzeichenCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SingleBannzeichenCostTranslation>?
+  public let translations: LocaleMap<SingleBannzeichenCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -29760,7 +29760,7 @@ public struct SingleBannzeichenCost: Decodable, Equatable, Sendable {
 
 public struct SingleBannzeichenCostTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional
+  public let note: ResponsiveTextOptional
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -29798,7 +29798,7 @@ public enum BannzeichenSuboption: Decodable, Equatable, Sendable {
 
 public struct CustomBannzeichenSuboption: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CustomBannzeichenSuboptionTranslation>
+  public let translations: LocaleMap<CustomBannzeichenSuboptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -29813,7 +29813,7 @@ public struct CustomBannzeichenSuboption: Decodable, Equatable, Sendable {
 
 public struct CustomBannzeichenSuboptionTranslation: Decodable, Equatable, Sendable {
   /// One or more examples for the suboption.
-  let examples: [String]?
+  public let examples: [String]?
 
   private enum CodingKeys: String, CodingKey {
     case examples = "examples"
@@ -29829,13 +29829,13 @@ public struct CustomBannzeichenSuboptionTranslation: Decodable, Equatable, Senda
 /// Measurable parameters of a Bannzeichen.
 public struct BannzeichenPerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost.
-  let cost: BannzeichenCost
+  public let cost: BannzeichenCost
 
   /// The crafting time.
-  let craftingTime: BannzeichenCraftingTime
+  public let craftingTime: BannzeichenCraftingTime
 
   /// The duration.
-  let duration: BannzeichenDuration
+  public let duration: BannzeichenDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -29891,7 +29891,7 @@ public enum BannzeichenCost: Decodable, Equatable, Sendable {
 
 public struct BannzeichenCostDisjunction: Decodable, Equatable, Sendable {
   /// A set of possible AE cost values.
-  let list: [SingleBannzeichenCost]
+  public let list: [SingleBannzeichenCost]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -29906,10 +29906,10 @@ public struct BannzeichenCostDisjunction: Decodable, Equatable, Sendable {
 
 public struct BannzeichenCraftingTime: Decodable, Equatable, Sendable {
   /// The crafting time in actions.
-  let value: Int
+  public let value: Int
 
   /// The crafting time has to be per a specific countable entity, e.g. `8 Actions per person`.
-  let per: BannzeichenCraftingTimePerCountable?
+  public let per: BannzeichenCraftingTimePerCountable?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -29926,7 +29926,7 @@ public struct BannzeichenCraftingTime: Decodable, Equatable, Sendable {
 
 public struct BannzeichenCraftingTimePerCountable: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BannzeichenCraftingTimePerCountableTranslation>
+  public let translations: LocaleMap<BannzeichenCraftingTimePerCountableTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -29941,7 +29941,7 @@ public struct BannzeichenCraftingTimePerCountable: Decodable, Equatable, Sendabl
 
 public struct BannzeichenCraftingTimePerCountableTranslation: Decodable, Equatable, Sendable {
   /// The countable entity name.
-  let countable: ResponsiveText
+  public let countable: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case countable = "countable"
@@ -29956,10 +29956,10 @@ public struct BannzeichenCraftingTimePerCountableTranslation: Decodable, Equatab
 
 public struct BannzeichenDuration: Decodable, Equatable, Sendable {
   /// The duration on slow Bannzeichen application.
-  let slow: ExpressionBasedDuration
+  public let slow: ExpressionBasedDuration
 
   /// The duration on fast Bannzeichen application.
-  let fast: ExpressionBasedDuration
+  public let fast: ExpressionBasedDuration
 
   private enum CodingKeys: String, CodingKey {
     case slow = "slow"
@@ -30007,22 +30007,22 @@ public struct Curse: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a curse.
-  let parameters: CursePerformanceParameters
+  public let parameters: CursePerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CurseTranslation>
+  public let translations: LocaleMap<CurseTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -30063,18 +30063,18 @@ public struct Curse: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CurseTranslation: Decodable, Equatable, Sendable {
   /// The curse’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -30098,10 +30098,10 @@ public struct CurseTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a curse.
 public struct CursePerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost.
-  let cost: CurseCost
+  public let cost: CurseCost
 
   /// The duration.
-  let duration: CurseDuration
+  public let duration: CurseDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -30145,10 +30145,10 @@ public enum CurseCost: Decodable, Equatable, Sendable {
 
 public struct FixedCurseCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FixedCurseCostTranslation>?
+  public let translations: LocaleMap<FixedCurseCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -30165,10 +30165,10 @@ public struct FixedCurseCost: Decodable, Equatable, Sendable {
 
 public struct FixedCurseCostTranslation: Decodable, Equatable, Sendable {
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: ResponsiveText?
+  public let per: ResponsiveText?
 
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   private enum CodingKeys: String, CodingKey {
     case per = "per"
@@ -30217,10 +30217,10 @@ public enum CurseDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteCurseDuration: Decodable, Equatable, Sendable {
   /// Specified if the duration has a maximum time span.
-  let maximum: MaximumIndefiniteCurseDuration?
+  public let maximum: MaximumIndefiniteCurseDuration?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteCurseDurationTranslation>
+  public let translations: LocaleMap<IndefiniteCurseDurationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case maximum = "maximum"
@@ -30237,7 +30237,7 @@ public struct IndefiniteCurseDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteCurseDurationTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -30278,31 +30278,31 @@ public struct ElvenMagicalSong: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of an Elven magical song.
-  let parameters: ElvenMagicalSongPerformanceParameters
+  public let parameters: ElvenMagicalSongPerformanceParameters
 
   /// To enhance their songs, elves can make a check on either *Singing (Two-Voiced Singing)* or *Music (appropriate application)* (or both) before making the check for the song.
-  let skill: [Skill.ID]
+  public let skill: [Skill.ID]
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// Is the song a distorted Elven magical song?
-  let isDistorted: Bool
+  public let isDistorted: Bool
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ElvenMagicalSongTranslation>
+  public let translations: LocaleMap<ElvenMagicalSongTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -30349,15 +30349,15 @@ public struct ElvenMagicalSong: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ElvenMagicalSongTranslation: Decodable, Equatable, Sendable {
   /// The Elven magical song’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -30379,7 +30379,7 @@ public struct ElvenMagicalSongTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of an Elven magical song.
 public struct ElvenMagicalSongPerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost.
-  let cost: ElvenMagicalSongCost
+  public let cost: ElvenMagicalSongCost
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -30394,16 +30394,16 @@ public struct ElvenMagicalSongPerformanceParameters: Decodable, Equatable, Senda
 
 public struct ElvenMagicalSongCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// Specified if the AE cost `value` has to be paid for each time interval.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   /// A permanent AE cost, independent from a possible interval.
-  let permanent: ElvenMagicalSongPermanentCost?
+  public let permanent: ElvenMagicalSongPermanentCost?
 
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: NonModifiableOneTimeCostPerCountable?
+  public let per: NonModifiableOneTimeCostPerCountable?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -30424,10 +30424,10 @@ public struct ElvenMagicalSongCost: Decodable, Equatable, Sendable {
 
 public struct ElvenMagicalSongPermanentCost: Decodable, Equatable, Sendable {
   /// The permanent AE cost value.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ElvenMagicalSongPermanentCostTranslation>?
+  public let translations: LocaleMap<ElvenMagicalSongPermanentCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -30444,7 +30444,7 @@ public struct ElvenMagicalSongPermanentCost: Decodable, Equatable, Sendable {
 
 public struct ElvenMagicalSongPermanentCostTranslation: Decodable, Equatable, Sendable {
   /// A replacement string for the permanent cost.
-  let replacement: ResponsiveTextReplace
+  public let replacement: ResponsiveTextReplace
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -30463,22 +30463,22 @@ public struct DominationRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a domination ritual.
-  let parameters: DominationRitualPerformanceParameters
+  public let parameters: DominationRitualPerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DominationRitualTranslation>
+  public let translations: LocaleMap<DominationRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -30519,18 +30519,18 @@ public struct DominationRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct DominationRitualTranslation: Decodable, Equatable, Sendable {
   /// The domination ritual’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -30554,10 +30554,10 @@ public struct DominationRitualTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a domination ritual.
 public struct DominationRitualPerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost.
-  let cost: DominationRitualCost
+  public let cost: DominationRitualCost
 
   /// The duration.
-  let duration: DominationRitualDuration
+  public let duration: DominationRitualDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -30574,10 +30574,10 @@ public struct DominationRitualPerformanceParameters: Decodable, Equatable, Senda
 
 public struct DominationRitualCost: Decodable, Equatable, Sendable {
   /// The initial skill modification identifier/level.
-  let initialModificationLevel: SkillModificationLevel.ID
+  public let initialModificationLevel: SkillModificationLevel.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DominationRitualCostTranslation>?
+  public let translations: LocaleMap<DominationRitualCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case initialModificationLevel = "initial_modification_level"
@@ -30594,7 +30594,7 @@ public struct DominationRitualCost: Decodable, Equatable, Sendable {
 
 public struct DominationRitualCostTranslation: Decodable, Equatable, Sendable {
   /// AE cost in addition to the normal AE cost.
-  let additional: ResponsiveText
+  public let additional: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case additional = "additional"
@@ -30636,10 +30636,10 @@ public enum DominationRitualDuration: Decodable, Equatable, Sendable {
 
 public struct IndefiniteDominationRitualDuration: Decodable, Equatable, Sendable {
   /// Specified if the duration has a maximum time span.
-  let maximum: MaximumIndefiniteDominationRitualDuration?
+  public let maximum: MaximumIndefiniteDominationRitualDuration?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteDominationRitualDurationTranslation>
+  public let translations: LocaleMap<IndefiniteDominationRitualDurationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case maximum = "maximum"
@@ -30656,7 +30656,7 @@ public struct IndefiniteDominationRitualDuration: Decodable, Equatable, Sendable
 
 public struct IndefiniteDominationRitualDurationTranslation: Decodable, Equatable, Sendable {
   /// A description of the duration.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -30697,31 +30697,31 @@ public struct MagicalMelody: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// To enhance their songs, elves can make a check on either *Singing (Two-Voiced Singing)* or *Music (appropriate application)* (or both) before making the check for the song.
-  let skill: [Skill.ID]
+  public let skill: [Skill.ID]
 
   /// Measurable parameters of a magical melody.
-  let parameters: MagicalMelodyPerformanceParameters
+  public let parameters: MagicalMelodyPerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The music tradition(s) the magical melody is available for. This also defines the different names in each music tradition.
-  let musicTradition: [ArcaneBardTraditionReference]
+  public let musicTradition: [ArcaneBardTraditionReference]
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalMelodyTranslation>
+  public let translations: LocaleMap<MagicalMelodyTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -30768,18 +30768,18 @@ public struct MagicalMelody: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalMelodyTranslation: Decodable, Equatable, Sendable {
   /// The magical melody’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -30803,10 +30803,10 @@ public struct MagicalMelodyTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a magical melody.
 public struct MagicalMelodyPerformanceParameters: Decodable, Equatable, Sendable {
   /// The duration.
-  let duration: MusicDuration
+  public let duration: MusicDuration
 
   /// The AE cost.
-  let cost: MagicalMelodyCost
+  public let cost: MagicalMelodyCost
 
   private enum CodingKeys: String, CodingKey {
     case duration = "duration"
@@ -30822,8 +30822,8 @@ public struct MagicalMelodyPerformanceParameters: Decodable, Equatable, Sendable
 }
 
 public struct MusicDuration: Decodable, Equatable, Sendable {
-  let length: MusicLength
-  let reusability: MusicReusability
+  public let length: MusicLength
+  public let reusability: MusicReusability
 
   private enum CodingKeys: String, CodingKey {
     case length = "length"
@@ -30921,10 +30921,10 @@ public enum MagicalMelodyCost: Decodable, Equatable, Sendable {
 
 public struct FixedMagicalMelodyCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The interval at which to pay half the initial cost.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -30941,7 +30941,7 @@ public struct FixedMagicalMelodyCost: Decodable, Equatable, Sendable {
 
 public struct FirstPersonMagicalMelodyCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value for the first targeted person. The AE cost for each additional person is half this value.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -30957,10 +30957,10 @@ public struct FirstPersonMagicalMelodyCost: Decodable, Equatable, Sendable {
 /// A reference to a music tradition with the music-tradition-specific name of the entry.
 public struct ArcaneBardTraditionReference: Decodable, Equatable, Sendable {
   /// The music tradition’s identifier.
-  let id: ArcaneBardTradition.ID
+  public let id: ArcaneBardTradition.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneBardTraditionReferenceTranslationTranslation>
+  public let translations: LocaleMap<ArcaneBardTraditionReferenceTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -30977,7 +30977,7 @@ public struct ArcaneBardTraditionReference: Decodable, Equatable, Sendable {
 
 public struct ArcaneBardTraditionReferenceTranslationTranslation: Decodable, Equatable, Sendable {
   /// The music-tradition-specific name of the entry.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -30995,10 +30995,10 @@ public struct ArcaneBardTradition: Decodable, Equatable, Sendable, Identifiable 
 
   public let id: ID
 
-  let prerequisites: ArcaneTraditionPrerequisites
+  public let prerequisites: ArcaneTraditionPrerequisites
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneBardTraditionTranslationTranslation>
+  public let translations: LocaleMap<ArcaneBardTraditionTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -31031,7 +31031,7 @@ public struct ArcaneBardTradition: Decodable, Equatable, Sendable, Identifiable 
 
 public struct ArcaneBardTraditionTranslationTranslation: Decodable, Equatable, Sendable {
   /// The arcane tradition’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31079,25 +31079,25 @@ public struct MagicalDance: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// Measurable parameters of a magical dance.
-  let parameters: MagicalDancePerformanceParameters
+  public let parameters: MagicalDancePerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The music tradition(s) the magical dance is available for. This also defines the different names in each music tradition.
-  let musicTradition: [ArcaneDancerTraditionReference]
+  public let musicTradition: [ArcaneDancerTraditionReference]
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalDanceTranslation>
+  public let translations: LocaleMap<MagicalDanceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -31140,18 +31140,18 @@ public struct MagicalDance: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalDanceTranslation: Decodable, Equatable, Sendable {
   /// The magical dance’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31175,10 +31175,10 @@ public struct MagicalDanceTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a magical dance.
 public struct MagicalDancePerformanceParameters: Decodable, Equatable, Sendable {
   /// The duration.
-  let duration: MusicDuration
+  public let duration: MusicDuration
 
   /// The AE cost.
-  let cost: MagicalDanceCost
+  public let cost: MagicalDanceCost
 
   private enum CodingKeys: String, CodingKey {
     case duration = "duration"
@@ -31222,10 +31222,10 @@ public enum MagicalDanceCost: Decodable, Equatable, Sendable {
 
 public struct FixedMagicalDanceCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: NonModifiableOneTimeCostPerCountable?
+  public let per: NonModifiableOneTimeCostPerCountable?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -31242,10 +31242,10 @@ public struct FixedMagicalDanceCost: Decodable, Equatable, Sendable {
 
 public struct IndefiniteMagicalDanceCost: Decodable, Equatable, Sendable {
   /// Specified if the indefinite description's result value is to be modified by a certain number.
-  let modifier: CheckResultBasedModifier?
+  public let modifier: CheckResultBasedModifier?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteMagicalDanceCostTranslation>
+  public let translations: LocaleMap<IndefiniteMagicalDanceCostTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case modifier = "modifier"
@@ -31262,7 +31262,7 @@ public struct IndefiniteMagicalDanceCost: Decodable, Equatable, Sendable {
 
 public struct IndefiniteMagicalDanceCostTranslation: Decodable, Equatable, Sendable {
   /// A description of where the cost come from.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -31277,10 +31277,10 @@ public struct IndefiniteMagicalDanceCostTranslation: Decodable, Equatable, Senda
 
 public struct CheckResultBasedModifier: Decodable, Equatable, Sendable {
   /// The arithmetic how to apply the `value` to the `base`.
-  let arithmetic: CheckResultArithmetic
+  public let arithmetic: CheckResultArithmetic
 
   /// The value that is applied to the `base` using the defined `arithmetic`.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case arithmetic = "arithmetic"
@@ -31326,10 +31326,10 @@ public enum CheckResultArithmetic: Decodable, Equatable, Sendable {
 /// A reference to a music tradition with the music-tradition-specific name of the entry.
 public struct ArcaneDancerTraditionReference: Decodable, Equatable, Sendable {
   /// The music tradition’s identifier.
-  let id: ArcaneDancerTradition.ID
+  public let id: ArcaneDancerTradition.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneDancerTraditionReferenceTranslationTranslation>
+  public let translations: LocaleMap<ArcaneDancerTraditionReferenceTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -31346,7 +31346,7 @@ public struct ArcaneDancerTraditionReference: Decodable, Equatable, Sendable {
 
 public struct ArcaneDancerTraditionReferenceTranslationTranslation: Decodable, Equatable, Sendable {
   /// The music-tradition-specific name of the entry.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31364,10 +31364,10 @@ public struct ArcaneDancerTradition: Decodable, Equatable, Sendable, Identifiabl
 
   public let id: ID
 
-  let prerequisites: ArcaneTraditionPrerequisites
+  public let prerequisites: ArcaneTraditionPrerequisites
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArcaneDancerTraditionTranslationTranslation>
+  public let translations: LocaleMap<ArcaneDancerTraditionTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -31400,7 +31400,7 @@ public struct ArcaneDancerTradition: Decodable, Equatable, Sendable, Identifiabl
 
 public struct ArcaneDancerTraditionTranslationTranslation: Decodable, Equatable, Sendable {
   /// The arcane tradition’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31419,28 +31419,28 @@ public struct JesterTrick: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a jester trick.
-  let parameters: JesterTrickPerformanceParameters
+  public let parameters: JesterTrickPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<JesterTrickTranslation>
+  public let translations: LocaleMap<JesterTrickTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -31485,27 +31485,27 @@ public struct JesterTrick: Decodable, Equatable, Sendable, Identifiable {
 
 public struct JesterTrickTranslation: Decodable, Equatable, Sendable {
   /// The jester trick’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31535,16 +31535,16 @@ public struct JesterTrickTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a jester trick.
 public struct JesterTrickPerformanceParameters: Decodable, Equatable, Sendable {
   /// The casting time.
-  let castingTime: JesterTrickCastingTime
+  public let castingTime: JesterTrickCastingTime
 
   /// The AE cost.
-  let cost: JesterTrickCost
+  public let cost: JesterTrickCost
 
   /// The range.
-  let range: JesterTrickRange
+  public let range: JesterTrickRange
 
   /// The duration.
-  let duration: JesterTrickDuration
+  public let duration: JesterTrickDuration
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -31565,7 +31565,7 @@ public struct JesterTrickPerformanceParameters: Decodable, Equatable, Sendable {
 
 public struct JesterTrickCastingTime: Decodable, Equatable, Sendable {
   /// The casting time in actions.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -31580,7 +31580,7 @@ public struct JesterTrickCastingTime: Decodable, Equatable, Sendable {
 
 public struct JesterTrickCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -31627,7 +31627,7 @@ public enum JesterTrickRange: Decodable, Equatable, Sendable {
 
 public struct FixedJesterTrickRange: Decodable, Equatable, Sendable {
   /// The range in steps/m.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -31673,39 +31673,39 @@ public struct AnimistPower: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of an animist power.
-  let parameters: AnimistPowerPerformanceParameters
+  public let parameters: AnimistPowerPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories?
+  public let target: AffectedTargetCategories?
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The tribe traditions the animist power is available to. It may be available to all or only specific tribes.
   ///
   /// If no tribe tradition is given, the animist power is generally available to all tribe traditions.
-  let tribeTradition: [Tribe.ID]
+  public let tribeTradition: [Tribe.ID]
 
   /// States which column is used to improve the skill.
-  let improvementCost: AnimistPowerImprovementCost
+  public let improvementCost: AnimistPowerImprovementCost
 
   /// The prerequisites for the animist power.
-  let prerequisites: AnimistPowerPrerequisites?
+  public let prerequisites: AnimistPowerPrerequisites?
 
   /// The animist power can have multiple levels. Each level is skilled separately. A previous level must be on at least 10 so that the next higher level can be activated and skilled. A higher level cannot be skilled higher than a lower level. Each level also adds an effect text to the text of the first level.
-  let levels: [AnimistPowerLevel]?
+  public let levels: [AnimistPowerLevel]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimistPowerTranslation>
+  public let translations: LocaleMap<AnimistPowerTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -31756,24 +31756,24 @@ public struct AnimistPower: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimistPowerTranslation: Decodable, Equatable, Sendable {
   /// The animist power’s name.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let prerequisites: String?
+  public let prerequisites: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -31828,10 +31828,10 @@ public enum AnimistPowerPerformanceParameters: Decodable, Equatable, Sendable {
 
 public struct OneTimeAnimistPowerPerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost value, either a flat value or defined dynamically by the primary patron.
-  let cost: OneTimeAnimistPowerCost
+  public let cost: OneTimeAnimistPowerCost
 
   /// The duration.
-  let duration: OneTimeAnimistPowerDuration
+  public let duration: OneTimeAnimistPowerDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -31875,10 +31875,10 @@ public enum OneTimeAnimistPowerCost: Decodable, Equatable, Sendable {
 
 public struct FixedOneTimeAnimistPowerCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// If defined, the AE cost has to be paid each interval.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -31895,10 +31895,10 @@ public struct FixedOneTimeAnimistPowerCost: Decodable, Equatable, Sendable {
 
 public struct AnimistPowerCostByPrimaryPatron: Decodable, Equatable, Sendable {
   /// If defined, half of the AE cost `value` has to be paid each interval.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimistPowerCostByPrimaryPatronTranslation>?
+  public let translations: LocaleMap<AnimistPowerCostByPrimaryPatronTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case interval = "interval"
@@ -31915,7 +31915,7 @@ public struct AnimistPowerCostByPrimaryPatron: Decodable, Equatable, Sendable {
 
 public struct AnimistPowerCostByPrimaryPatronTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional
+  public let note: ResponsiveTextOptional
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -31957,7 +31957,7 @@ public enum OneTimeAnimistPowerDuration: Decodable, Equatable, Sendable {
 
 public struct SustainedAnimistPowerPerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost value, either a flat value or defined dynamically by the primary patron.
-  let cost: SustainedAnimistPowerCost
+  public let cost: SustainedAnimistPowerCost
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -31999,10 +31999,10 @@ public enum SustainedAnimistPowerCost: Decodable, Equatable, Sendable {
 
 public struct FixedSustainedAnimistPowerCost: Decodable, Equatable, Sendable {
   /// The (temporary) AE cost value.
-  let value: Int
+  public let value: Int
 
   /// Half of the AE cost `value` has to be paid each interval.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -32071,15 +32071,15 @@ public enum AnimistPowerPrerequisiteGroup: Decodable, Equatable, Sendable {
 /// Requires a specific animist power to be on a minimum value.
 public struct AnimistPowerPrerequisite: Decodable, Equatable, Sendable {
   /// The animist power’s identifier.
-  let id: AnimistPower.ID
+  public let id: AnimistPower.ID
 
   /// The level to which the minimum value applies.
-  let level: Int?
+  public let level: Int?
 
   /// The required minimum value.
-  let value: Int
+  public let value: Int
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -32100,13 +32100,13 @@ public struct AnimistPowerPrerequisite: Decodable, Equatable, Sendable {
 
 public struct AnimistPowerLevel: Decodable, Equatable, Sendable {
   /// The level number.
-  let level: Int
+  public let level: Int
 
   /// The source references, if different than the references for level 1.
-  let src: PublicationRefs?
+  public let src: PublicationRefs?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimistPowerLevelTranslation>
+  public let translations: LocaleMap<AnimistPowerLevelTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -32125,7 +32125,7 @@ public struct AnimistPowerLevel: Decodable, Equatable, Sendable {
 
 public struct AnimistPowerLevelTranslation: Decodable, Equatable, Sendable {
   /// An additional effect description for this level.
-  let effect: String
+  public let effect: String
 
   private enum CodingKeys: String, CodingKey {
     case effect = "effect"
@@ -32144,25 +32144,25 @@ public struct GeodeRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// Measurable parameters of a geode ritual.
-  let parameters: GeodeRitualPerformanceParameters
+  public let parameters: GeodeRitualPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// The prerequisites for the geode ritual.
-  let prerequisites: GeodeRitualPrerequisites?
+  public let prerequisites: GeodeRitualPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GeodeRitualTranslation>
+  public let translations: LocaleMap<GeodeRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -32205,27 +32205,27 @@ public struct GeodeRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct GeodeRitualTranslation: Decodable, Equatable, Sendable {
   /// The geode ritual’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -32255,16 +32255,16 @@ public struct GeodeRitualTranslation: Decodable, Equatable, Sendable {
 /// Measurable parameters of a geode ritual.
 public struct GeodeRitualPerformanceParameters: Decodable, Equatable, Sendable {
   /// The casting time.
-  let castingTime: SlowSkillNonModifiableCastingTime
+  public let castingTime: SlowSkillNonModifiableCastingTime
 
   /// The AE cost.
-  let cost: GeodeRitualCost
+  public let cost: GeodeRitualCost
 
   /// The range.
-  let range: GeodeRitualRange
+  public let range: GeodeRitualRange
 
   /// The duration.
-  let duration: GeodeRitualDuration
+  public let duration: GeodeRitualDuration
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -32312,7 +32312,7 @@ public enum GeodeRitualCost: Decodable, Equatable, Sendable {
 
 public struct FixedGeodeRitualCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -32354,7 +32354,7 @@ public enum GeodeRitualRange: Decodable, Equatable, Sendable {
 
 public struct FixedGeodeRitualRange: Decodable, Equatable, Sendable {
   /// The range in steps/m.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -32429,28 +32429,28 @@ public struct GoblinRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a goblin ritual.
-  let parameters: GoblinRitualPerformanceParameters
+  public let parameters: GoblinRitualPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GoblinRitualTranslation>
+  public let translations: LocaleMap<GoblinRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -32495,27 +32495,27 @@ public struct GoblinRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct GoblinRitualTranslation: Decodable, Equatable, Sendable {
   /// The goblin ritual’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -32572,16 +32572,16 @@ public enum GoblinRitualPerformanceParameters: Decodable, Equatable, Sendable {
 
 public struct GoblinRitualOneTimePerformanceParameters: Decodable, Equatable, Sendable {
   /// The casting time.
-  let castingTime: GoblinRitualCastingTime
+  public let castingTime: GoblinRitualCastingTime
 
   /// The AE cost.
-  let cost: GoblinRitualOneTimeCost
+  public let cost: GoblinRitualOneTimeCost
 
   /// The range.
-  let range: GoblinRitualRange
+  public let range: GoblinRitualRange
 
   /// The duration.
-  let duration: GoblinRitualDuration
+  public let duration: GoblinRitualDuration
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -32601,8 +32601,8 @@ public struct GoblinRitualOneTimePerformanceParameters: Decodable, Equatable, Se
 }
 
 public struct GoblinRitualCastingTime: Decodable, Equatable, Sendable {
-  let value: Int
-  let unit: GoblinRitualCastingTimeUnit
+  public let value: Int
+  public let unit: GoblinRitualCastingTimeUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -32653,10 +32653,10 @@ public typealias GoblinRitualOneTimeCost = NonModifiableOneTimeCost
 
 public struct GoblinRitualRange: Decodable, Equatable, Sendable {
   /// The range value.
-  let value: GoblinRitualRangeValue
+  public let value: GoblinRitualRangeValue
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GoblinRitualRangeTranslation>?
+  public let translations: LocaleMap<GoblinRitualRangeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -32673,10 +32673,10 @@ public struct GoblinRitualRange: Decodable, Equatable, Sendable {
 
 public struct GoblinRitualRangeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string. If `note` is provided, it is appended to the replaced string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -32757,13 +32757,13 @@ public enum GoblinRitualDuration: Decodable, Equatable, Sendable {
 
 public struct GoblinRitualSustainedPerformanceParameters: Decodable, Equatable, Sendable {
   /// The casting time.
-  let castingTime: GoblinRitualCastingTime
+  public let castingTime: GoblinRitualCastingTime
 
   /// The AE cost.
-  let cost: GoblinRitualSustainedCost
+  public let cost: GoblinRitualSustainedCost
 
   /// The range.
-  let range: GoblinRitualRange
+  public let range: GoblinRitualRange
 
   private enum CodingKeys: String, CodingKey {
     case castingTime = "casting_time"
@@ -32788,28 +32788,28 @@ public struct ZibiljaRitual: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: SkillCheckPenalty?
+  public let checkPenalty: SkillCheckPenalty?
 
   /// Measurable parameters of a zibilja ritual.
-  let parameters: ZibiljaRitualPerformanceParameters
+  public let parameters: ZibiljaRitualPerformanceParameters
 
   /// The target category – the kind of creature or object – the skill affects.
-  let target: AffectedTargetCategories
+  public let target: AffectedTargetCategories
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: ImprovementCost
+  public let improvementCost: ImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ZibiljaRitualTranslation>
+  public let translations: LocaleMap<ZibiljaRitualTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -32854,27 +32854,27 @@ public struct ZibiljaRitual: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ZibiljaRitualTranslation: Decodable, Equatable, Sendable {
   /// The zibilja ritual’s name.
-  let name: String
+  public let name: String
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let castingTime: OldParameter?
+  public let castingTime: OldParameter?
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let range: OldParameter?
+  public let range: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
   @available(*, deprecated)
-  let target: String?
+  public let target: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -32909,25 +32909,25 @@ public struct MagicalRune: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Lists the linked three attributes used to make a skill check.
-  let check: SkillCheck
+  public let check: SkillCheck
 
   /// In some cases, the target's Spirit or Toughness is applied as a penalty.
-  let checkPenalty: MagicalRuneCheckPenalty?
+  public let checkPenalty: MagicalRuneCheckPenalty?
 
   /// Measurable parameters of a magical rune.
-  let parameters: MagicalRunePerformanceParameters
+  public let parameters: MagicalRunePerformanceParameters
 
   /// The associated property.
-  let property: Property.ID
+  public let property: Property.ID
 
   /// States which column is used to improve the skill.
-  let improvementCost: MagicalRuneImprovementCost
+  public let improvementCost: MagicalRuneImprovementCost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalRuneTranslation>
+  public let translations: LocaleMap<MagicalRuneTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case check = "check"
@@ -32972,27 +32972,27 @@ public struct MagicalRuneTranslation: Decodable, Equatable, Sendable {
   /// The magical rune’s name.
   ///
   /// If the rune has an option, the option’s name will/should not be included in the name as well as its surrounding parenthesis. It will/should be combined on demand.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The native name of the magical rune. It has to be specified unless it is defined by an option.
-  let nativeName: String?
+  public let nativeName: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level. It may also be a list for each two quality levels.
-  let effect: ActivatableSkillEffect
+  public let effect: ActivatableSkillEffect
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let craftingTime: OldParameterBySpeed?
+  public let craftingTime: OldParameterBySpeed?
 
   @available(*, deprecated)
-  let duration: OldParameterBySpeed?
+  public let duration: OldParameterBySpeed?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -33028,18 +33028,18 @@ public struct MagicalRuneOption: Decodable, Equatable, Sendable, Identifiable, C
   public let id: ID
 
   /// The magical rune this option belongs to.
-  let parent: MagicalRune.ID
+  public let parent: MagicalRune.ID
 
   /// The option-specific AE cost.
-  let cost: SingleMagicalRuneCost?
+  public let cost: SingleMagicalRuneCost?
 
   /// The option-specific improvement cost.
-  let improvementCost: ImprovementCost?
+  public let improvementCost: ImprovementCost?
 
-  let suboption: MagicalRuneSuboption?
+  public let suboption: MagicalRuneSuboption?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalRuneOptionTranslation>
+  public let translations: LocaleMap<MagicalRuneOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -33080,10 +33080,10 @@ public struct MagicalRuneOptionTranslation: Decodable, Equatable, Sendable {
   /// The magical rune option’s name.
   ///
   /// The surrounding parenthesis will/should not be included, they will/should be generated.
-  let name: String
+  public let name: String
 
   /// The native name of the magical rune option.
-  let nativeName: String
+  public let nativeName: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -33100,10 +33100,10 @@ public struct MagicalRuneOptionTranslation: Decodable, Equatable, Sendable {
 
 public struct SingleMagicalRuneCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SingleMagicalRuneCostTranslation>?
+  public let translations: LocaleMap<SingleMagicalRuneCostTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -33120,7 +33120,7 @@ public struct SingleMagicalRuneCost: Decodable, Equatable, Sendable {
 
 public struct SingleMagicalRuneCostTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis.
-  let note: ResponsiveTextOptional
+  public let note: ResponsiveTextOptional
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -33158,7 +33158,7 @@ public enum MagicalRuneSuboption: Decodable, Equatable, Sendable {
 
 public struct CustomMagicalRuneSuboption: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CustomMagicalRuneSuboptionTranslation>
+  public let translations: LocaleMap<CustomMagicalRuneSuboptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -33173,7 +33173,7 @@ public struct CustomMagicalRuneSuboption: Decodable, Equatable, Sendable {
 
 public struct CustomMagicalRuneSuboptionTranslation: Decodable, Equatable, Sendable {
   /// One or more examples for the suboption.
-  let examples: [String]?
+  public let examples: [String]?
 
   private enum CodingKeys: String, CodingKey {
     case examples = "examples"
@@ -33210,9 +33210,9 @@ public enum MagicalRuneCheckPenalty: Decodable, Equatable, Sendable {
 
 public struct MagicalRuneCombatTechniqueCheckPenalty: Decodable, Equatable, Sendable {
   /// A map from combat techniques to their modifiers.
-  let map: [MagicalRuneCombatTechniqueCheckPenaltyMapping]
+  public let map: [MagicalRuneCombatTechniqueCheckPenaltyMapping]
 
-  let rest: MagicalRuneCombatTechniqueCheckPenaltyRest
+  public let rest: MagicalRuneCombatTechniqueCheckPenaltyRest
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -33229,10 +33229,10 @@ public struct MagicalRuneCombatTechniqueCheckPenalty: Decodable, Equatable, Send
 
 public struct MagicalRuneCombatTechniqueCheckPenaltyMapping: Decodable, Equatable, Sendable {
   /// The combat technique’s identifier.
-  let id: CombatTechniqueIdentifier
+  public let id: CombatTechniqueIdentifier
 
   /// The check modifier for the specified combat technique.
-  let modifier: Int
+  public let modifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33249,7 +33249,7 @@ public struct MagicalRuneCombatTechniqueCheckPenaltyMapping: Decodable, Equatabl
 
 public struct MagicalRuneCombatTechniqueCheckPenaltyRest: Decodable, Equatable, Sendable {
   /// The check modifier for combat techniques not specified in `map`.
-  let modifier: Int
+  public let modifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case modifier = "modifier"
@@ -33265,13 +33265,13 @@ public struct MagicalRuneCombatTechniqueCheckPenaltyRest: Decodable, Equatable, 
 /// Measurable parameters of a magical rune.
 public struct MagicalRunePerformanceParameters: Decodable, Equatable, Sendable {
   /// The AE cost.
-  let cost: MagicalRuneCost
+  public let cost: MagicalRuneCost
 
   /// The crafting time.
-  let craftingTime: MagicalRuneCraftingTime
+  public let craftingTime: MagicalRuneCraftingTime
 
   /// The duration.
-  let duration: MagicalRuneDuration
+  public let duration: MagicalRuneDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -33322,7 +33322,7 @@ public enum MagicalRuneCost: Decodable, Equatable, Sendable {
 
 public struct MagicalRuneCostDisjunction: Decodable, Equatable, Sendable {
   /// A set of possible AE cost values.
-  let list: [SingleMagicalRuneCost]
+  public let list: [SingleMagicalRuneCost]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -33337,10 +33337,10 @@ public struct MagicalRuneCostDisjunction: Decodable, Equatable, Sendable {
 
 public struct MagicalRuneCraftingTime: Decodable, Equatable, Sendable {
   /// The crafting time in actions.
-  let value: Int
+  public let value: Int
 
   /// The crafting time has to be per a specific countable entity, e.g. `8 Actions per person`.
-  let per: MagicalRuneCraftingTimePerCountable?
+  public let per: MagicalRuneCraftingTimePerCountable?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -33357,7 +33357,7 @@ public struct MagicalRuneCraftingTime: Decodable, Equatable, Sendable {
 
 public struct MagicalRuneCraftingTimePerCountable: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalRuneCraftingTimePerCountableTranslation>
+  public let translations: LocaleMap<MagicalRuneCraftingTimePerCountableTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -33372,7 +33372,7 @@ public struct MagicalRuneCraftingTimePerCountable: Decodable, Equatable, Sendabl
 
 public struct MagicalRuneCraftingTimePerCountableTranslation: Decodable, Equatable, Sendable {
   /// The countable entity name.
-  let countable: ResponsiveText
+  public let countable: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case countable = "countable"
@@ -33387,10 +33387,10 @@ public struct MagicalRuneCraftingTimePerCountableTranslation: Decodable, Equatab
 
 public struct MagicalRuneDuration: Decodable, Equatable, Sendable {
   /// The duration on slow rune application.
-  let slow: ExpressionBasedDuration
+  public let slow: ExpressionBasedDuration
 
   /// The duration on fast rune application.
-  let fast: ExpressionBasedDuration
+  public let fast: ExpressionBasedDuration
 
   private enum CodingKeys: String, CodingKey {
     case slow = "slow"
@@ -33433,8 +33433,8 @@ public enum MagicalRuneImprovementCost: Decodable, Equatable, Sendable {
 }
 
 public struct OldParameterBySpeed: Decodable, Equatable, Sendable {
-  let slow: OldParameter
-  let fast: OldParameter
+  public let slow: OldParameter
+  public let fast: OldParameter
 
   private enum CodingKeys: String, CodingKey {
     case slow = "slow"
@@ -33451,12 +33451,12 @@ public struct OldParameterBySpeed: Decodable, Equatable, Sendable {
 
 public struct LiturgicalChantRating: Decodable, Equatable, Sendable {
   /// The identifier(s) of the liturgical chant(s) to choose from to provide the rating for. If multiple liturgical chants are provided, they must all have the same improvement cost.
-  let id: [LiturgyIdentifier]
+  public let id: [LiturgyIdentifier]
 
   /// The rating bonus provided for the selected liturgical chant. If used in a profession variant, it can also be used to lower the bonus of the base profession.
   ///
   /// **Note:** If due to a variant a liturgical chant rating is lowered to 0, the liturgical chant is considered deactivated. Both setting the value for a liturgical chant and deactivating it by setting it to 0 takes into account the additional activation cost for liturgical chants.
-  let ratingModifier: Int
+  public let ratingModifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33501,13 +33501,13 @@ public enum LiturgyIdentifier: Decodable, Equatable, Sendable {
 /// The name of the profession that may have sex-specific names. Useful if the term in generell is different (i.e. actor/actress) or if the language uses gendered nouns. The default name is also used in case neither the male nor female name strictly applies.
 public struct ProfessionName: Decodable, Equatable, Sendable {
   /// The name from the source publication. This is also used if a character has no specified gender or is neither male nor female.
-  let `default`: String
+  public let `default`: String
 
   /// The male name, if different from the default name.
-  let male: String?
+  public let male: String?
 
   /// The female name, if different from the default name.
-  let female: String?
+  public let female: String?
 
   private enum CodingKeys: String, CodingKey {
     case `default` = "default"
@@ -33586,13 +33586,13 @@ public enum MagicCommonProfessionConstraint: Decodable, Equatable, Sendable {
 
 public struct MagicalTraditionConstraint: Decodable, Equatable, Sendable {
   /// The magical tradition’s identifier.
-  let id: MagicalTradition.ID
+  public let id: MagicalTradition.ID
 
   /// Some professions are more common than others. There may be cultures where some professions are not represented at all.
-  let weightedProfessions: Weighted<Profession.ID>?
+  public let weightedProfessions: Weighted<Profession.ID>?
 
   /// Some traditions may be found in a culture, but are not that common.
-  let rarity: Rarity?
+  public let rarity: Rarity?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33648,13 +33648,13 @@ public enum BlessedCommonProfessionConstraint: Decodable, Equatable, Sendable {
 
 public struct BlessedTraditionConstraint: Decodable, Equatable, Sendable {
   /// The blessed tradition’s identifier.
-  let id: BlessedTradition.ID
+  public let id: BlessedTradition.ID
 
   /// Some professions are more common than others. There may be cultures where some professions are not represented at all.
-  let weightedProfessions: Weighted<Profession.ID>?
+  public let weightedProfessions: Weighted<Profession.ID>?
 
   /// Some traditions may be found in a culture, but are not that common.
-  let rarity: Rarity?
+  public let rarity: Rarity?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33673,13 +33673,13 @@ public struct BlessedTraditionConstraint: Decodable, Equatable, Sendable {
 
 public struct BlessedTraditionGroupConstraint: Decodable, Equatable, Sendable {
   /// The blessed tradition group’s identifier.
-  let id: BlessedTraditionGroup.ID
+  public let id: BlessedTraditionGroup.ID
 
   /// Some traditions are more common than others. There may be cultures where some traditions are not represented at all.
-  let weightedProfessions: Weighted<BlessedTradition.ID>?
+  public let weightedProfessions: Weighted<BlessedTradition.ID>?
 
   /// Some traditions may be found in a culture, but are not that common.
-  let rarity: Rarity?
+  public let rarity: Rarity?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33726,16 +33726,16 @@ public enum CommonnessRatedAdvantageDisadvantage<Identifier: Decodable & Equatab
 /// Reference to a commonness-rated advantage or disadvantage. Commonness-rating terms used in the source books are strongly recommended, common, uncommon, suggested and unsuitable.
 public struct SingleCommonnessRatedAdvantageDisadvantage<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The advantage’s or disadvantage’s identifier.
-  let id: Identifier
+  public let id: Identifier
 
   /// The level of a commonness-rated advantage or disadvantage.
-  let level: CommonnessRatedAdvantageDisadvantageLevel?
+  public let level: CommonnessRatedAdvantageDisadvantageLevel?
 
   /// The options the commonness rating applies to.
-  let options: [CommonnessSelectOptionIdentifier]?
+  public let options: [CommonnessSelectOptionIdentifier]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SingleCommonnessRatedAdvantageDisadvantageTranslation>?
+  public let translations: LocaleMap<SingleCommonnessRatedAdvantageDisadvantageTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -33756,13 +33756,13 @@ public struct SingleCommonnessRatedAdvantageDisadvantage<Identifier: Decodable &
 
 public struct SingleCommonnessRatedAdvantageDisadvantageTranslation: Decodable, Equatable, Sendable {
   /// The options the commonness rating applies to. This can be specified if plain options cannot exactly describe the options as written in the publication.
-  let options: String?
+  public let options: String?
 
   /// A note, appended to the generated string in parenthesis. If options are specified as well, both will be in a single set of parentheses, with the note after the options.
-  let note: String?
+  public let note: String?
 
   /// A text that replaces the entire entry. No other text is generated for display, however, providing levels or a selection of options will still be relevant for highlighting entries in the application. This should only be used if the text cannot be generated from other fields at all.
-  let full: String?
+  public let full: String?
 
   private enum CodingKeys: String, CodingKey {
     case options = "options"
@@ -33808,8 +33808,8 @@ public enum CommonnessRatedAdvantageDisadvantageLevel: Decodable, Equatable, Sen
 }
 
 public struct CommonnessRatedAdvantageDisadvantageLevelRange: Decodable, Equatable, Sendable {
-  let min: Int
-  let max: Int
+  public let min: Int
+  public let max: Int
 
   private enum CodingKeys: String, CodingKey {
     case min = "min"
@@ -33960,21 +33960,21 @@ public struct TradeSecret: Decodable, Equatable, Sendable, Identifiable {
   /// Definitions for possible options for the activatable entry.
   ///
   ///       Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
-  let selectOptions: TradeSecretSelectOptions?
+  public let selectOptions: TradeSecretSelectOptions?
 
   /// The trade secret’s adventure point value
-  let apValue: TradeSecretAdventurePointsValue
+  public let apValue: TradeSecretAdventurePointsValue
 
   /// Is this trade secret considered secret knowledge?
-  let isSecretKnowledge: Bool
+  public let isSecretKnowledge: Bool
 
-  let prerequisites: PlainGeneralPrerequisites?
+  public let prerequisites: PlainGeneralPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TradeSecretTranslation>
+  public let translations: LocaleMap<TradeSecretTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case selectOptions = "select_options"
@@ -34015,15 +34015,15 @@ public struct TradeSecret: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TradeSecretTranslation: Decodable, Equatable, Sendable {
   /// The trade secret’s name.
-  let name: String
+  public let name: String
 
   /// The full name of the entry as stated in the sources. Only use when `name` needs to be different from full name for text generation purposes.
-  let nameInLibrary: String?
+  public let nameInLibrary: String?
 
   /// The description of the trade secret.
-  let description: String?
+  public let description: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -34047,7 +34047,7 @@ public struct TradeSecretTranslation: Decodable, Equatable, Sendable {
 /// Note that this is only a full definition of options for simple logic that can be made explicit using the more detailed configuration for both derived categories and explicit options. There are quite a few entries whose option logic cannot be fully represented here, so that it needs to be implemented manually.
 public struct TradeSecretSelectOptions: Decodable, Equatable, Sendable {
   /// An entry category with optional further configuration. All available entries from the specified categories will be included as separate select options. You can also specify a set of groups that should only be included. Groups not mentioned will be excluded then.
-  let derived: TradeSecretSelectOptionCategory?
+  public let derived: TradeSecretSelectOptionCategory?
 
   private enum CodingKeys: String, CodingKey {
     case derived = "derived"
@@ -34184,13 +34184,13 @@ public enum TradeSecretSelectOptionCategory: Decodable, Equatable, Sendable {
 
 public struct AspectSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Does each aspect require it to be active as a selection on an instance?
-  let requireActiveSelectionOnEntry: ActivatableIdentifier?
+  public let requireActiveSelectionOnEntry: ActivatableIdentifier?
 
   /// The generated name should be the *Master of (Aspect)* suffix for this aspect instead of the aspect's name. If an aspect does not provide a suffix (such as the General aspect), it is automatically excluded from the list.
-  let useMasterOfSuffixAsName: Bool?
+  public let useMasterOfSuffixAsName: Bool?
 
   /// Require a minimum number of liturgies of the respective aspect to be on a minimum skill rating.
-  let requireMinimumLiturgiesOn: RequiredMinimumSkillsToBeOnSkillRating?
+  public let requireMinimumLiturgiesOn: RequiredMinimumSkillsToBeOnSkillRating?
 
   private enum CodingKeys: String, CodingKey {
     case requireActiveSelectionOnEntry = "requireActiveSelectionOnEntry"
@@ -34210,10 +34210,10 @@ public struct AspectSelectOptionCategory: Decodable, Equatable, Sendable {
 /// Require a minimum number of spellworks/liturgies of the respective property/aspect to be on a minimum skill rating.
 public struct RequiredMinimumSkillsToBeOnSkillRating: Decodable, Equatable, Sendable {
   /// The minimum number of liturgies that need to be on the defined minimum skill rating.
-  let number: Int
+  public let number: Int
 
   /// The minimum skill rating the defined minimum number of liturgies need to be on.
-  let rating: Int
+  public let rating: Int
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -34230,7 +34230,7 @@ public struct RequiredMinimumSkillsToBeOnSkillRating: Decodable, Equatable, Send
 
 public struct DiseasesPoisonsSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Only convert half the disease/poison level into the AP value.
-  let useHalfLevelAsApValue: Bool?
+  public let useHalfLevelAsApValue: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case useHalfLevelAsApValue = "use_half_level_as_ap_value"
@@ -34245,7 +34245,7 @@ public struct DiseasesPoisonsSelectOptionCategory: Decodable, Equatable, Sendabl
 
 public struct LanguagesSelectOptionCategory: Decodable, Equatable, Sendable {
   /// Generate prerequisites for each entry of the category.
-  let prerequisites: [LanguagesSelectOptionCategoryPrerequisite]?
+  public let prerequisites: [LanguagesSelectOptionCategoryPrerequisite]?
 
   private enum CodingKeys: String, CodingKey {
     case prerequisites = "prerequisites"
@@ -34283,13 +34283,13 @@ public enum LanguagesSelectOptionCategoryPrerequisite: Decodable, Equatable, Sen
 /// The entry requires or prohibits itself as a select option of another entry.
 public struct OptionPrerequisite: Decodable, Equatable, Sendable {
   /// The target entry's identifier.
-  let id: ActivatableIdentifier
+  public let id: ActivatableIdentifier
 
   /// Is the select option required (`true`) or prohibited (`false`)?
-  let active: Bool
+  public let active: Bool
 
   /// The required level, if any.
-  let level: Int?
+  public let level: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -34308,10 +34308,10 @@ public struct OptionPrerequisite: Decodable, Equatable, Sendable {
 
 public struct SkillsSelectOptionCategory: Decodable, Equatable, Sendable {
   /// A list of skill categories.
-  let categories: [SkillsSelectOptionCategoryCategory]
+  public let categories: [SkillsSelectOptionCategoryCategory]
 
   /// Generate AP values for each entry.
-  let apValue: SelectOptionsAdventurePointsValue<SkillishIdentifier>?
+  public let apValue: SelectOptionsAdventurePointsValue<SkillishIdentifier>?
 
   private enum CodingKeys: String, CodingKey {
     case categories = "categories"
@@ -34370,22 +34370,22 @@ public enum SkillsSelectOptionCategoryCategory: Decodable, Equatable, Sendable {
 
 public struct SkillSelectOptionCategoryCategory: Decodable, Equatable, Sendable {
   /// Only include entries of the specified groups.
-  let groups: [SkillGroup.ID]?
+  public let groups: [SkillGroup.ID]?
 
   /// Only include or exclude specific skills.
-  let specific: SpecificFromSkillSelectOptionCategoryCategory<Skill.ID>?
+  public let specific: SpecificFromSkillSelectOptionCategoryCategory<Skill.ID>?
 
   /// Registers new applications, which get enabled once this entry is activated with its respective select option. It specifies an entry-unique identifier, the skill it belongs to is derived from the select option automatically. A translation can be left out if its name equals the name of the origin entry.
-  let skillApplications: [SkillApplicationOrUse]?
+  public let skillApplications: [SkillApplicationOrUse]?
 
   /// Registers uses, which get enabled once this entry is activated with its respective select option. It specifies an entry-unique identifier, the skill it belongs to is derived from the select option automatically. A translation can be left out if its name equals the name of the origin entry.
-  let skillUses: [SkillApplicationOrUse]?
+  public let skillUses: [SkillApplicationOrUse]?
 
   /// Generate prerequisites for each entry of the category.
-  let prerequisites: [SkillSelectOptionCategoryPrerequisite]?
+  public let prerequisites: [SkillSelectOptionCategoryPrerequisite]?
 
   /// Generate AP values for each entry.
-  let apValue: SelectOptionsAdventurePointsValue<Skill.ID>?
+  public let apValue: SelectOptionsAdventurePointsValue<Skill.ID>?
 
   private enum CodingKeys: String, CodingKey {
     case groups = "groups"
@@ -34409,10 +34409,10 @@ public struct SkillSelectOptionCategoryCategory: Decodable, Equatable, Sendable 
 }
 
 public struct SpecificFromSkillSelectOptionCategoryCategory<Ref: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let operation: SpecificFromSkillSelectOptionCategoryCategoryOperation
+  public let operation: SpecificFromSkillSelectOptionCategoryCategoryOperation
 
   /// The list of specific entries.
-  let list: [Ref]
+  public let list: [Ref]
 
   private enum CodingKeys: String, CodingKey {
     case operation = "operation"
@@ -34457,10 +34457,10 @@ public enum SpecificFromSkillSelectOptionCategoryCategoryOperation: Decodable, E
 
 public struct SkillApplicationOrUse: Decodable, Equatable, Sendable {
   /// The application’s or use’s identifier. An entry-unique, increasing integer.
-  let id: Int
+  public let id: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SkillApplicationOrUseTranslation>?
+  public let translations: LocaleMap<SkillApplicationOrUseTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -34477,7 +34477,7 @@ public struct SkillApplicationOrUse: Decodable, Equatable, Sendable {
 
 public struct SkillApplicationOrUseTranslation: Decodable, Equatable, Sendable {
   /// The name of the application or use if different from the activatable entry’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -34519,7 +34519,7 @@ public enum SkillSelectOptionCategoryPrerequisite: Decodable, Equatable, Sendabl
 
 public struct SelfPrerequisite: Decodable, Equatable, Sendable {
   /// The entry requires itself on a certain Skill Rating.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -34563,10 +34563,10 @@ public enum SelectOptionsAdventurePointsValue<Identifier: Decodable & Equatable 
 /// Derive the cost from the improvement cost of each entry. The AP value is calculated by multiplying the improvement cost with `multiplier` and then adding `offset`.
 public struct SelectOptionsDeriveAdventurePointsValueFromImprovementCost: Decodable, Equatable, Sendable {
   /// This number is multiplied with the improvement cost of the entry (A = 1 to D = 4).
-  let multiplier: Int?
+  public let multiplier: Int?
 
   /// This number is added to the multiplied improvement cost of the entry.
-  let offset: Int?
+  public let offset: Int?
 
   private enum CodingKeys: String, CodingKey {
     case multiplier = "multiplier"
@@ -34583,10 +34583,10 @@ public struct SelectOptionsDeriveAdventurePointsValueFromImprovementCost: Decoda
 
 public struct SelectOptionsFixedAdventurePointsValue<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// A mapping of skill identifiers to their specific AP values.
-  let map: [SelectOptionsFixedAdventurePointsValueMapping<Identifier>]
+  public let map: [SelectOptionsFixedAdventurePointsValueMapping<Identifier>]
 
   /// The default value of an entry. Used as a fallback if no value is found in `list`.
-  let `default`: Int
+  public let `default`: Int
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -34603,10 +34603,10 @@ public struct SelectOptionsFixedAdventurePointsValue<Identifier: Decodable & Equ
 
 public struct SelectOptionsFixedAdventurePointsValueMapping<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The entry’s identifier.
-  let id: Identifier
+  public let id: Identifier
 
   /// The AP value for the specified entry.
-  let apValue: Int
+  public let apValue: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -34623,10 +34623,10 @@ public struct SelectOptionsFixedAdventurePointsValueMapping<Identifier: Decodabl
 
 public struct GenericSkillsSelectOptionCategoryCategory<Ref: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// Only include (`Intersection`) or exclude (`Difference`) specific entries.
-  let specific: SpecificFromSkillSelectOptionCategoryCategory<Ref>?
+  public let specific: SpecificFromSkillSelectOptionCategoryCategory<Ref>?
 
   /// Generate prerequisites for each entry of the category.
-  let prerequisites: [SkillSelectOptionCategoryPrerequisite]?
+  public let prerequisites: [SkillSelectOptionCategoryPrerequisite]?
 
   private enum CodingKeys: String, CodingKey {
     case specific = "specific"
@@ -34739,15 +34739,15 @@ public enum SkillishIdentifier: Decodable, Equatable, Sendable {
 
 public struct CombatTechniquesSelectOptionCategory: Decodable, Equatable, Sendable {
   /// A list of combat technique categories.
-  let categories: [CombatTechniquesSelectOptionCategoryCategory]
+  public let categories: [CombatTechniquesSelectOptionCategoryCategory]
 
   /// Generate binding cost values for each entry.
   ///
   /// *Note: This only works if the entry it is defined on supports binding costs, i.e. is a tradition artifact enchantment.*
-  let bindingCost: SelectOptionsBindingCostValue<CombatTechniqueIdentifier>?
+  public let bindingCost: SelectOptionsBindingCostValue<CombatTechniqueIdentifier>?
 
   /// Generate AP values for each entry.
-  let apValue: SelectOptionsAdventurePointsValue<CombatTechniqueIdentifier>?
+  public let apValue: SelectOptionsAdventurePointsValue<CombatTechniqueIdentifier>?
 
   private enum CodingKeys: String, CodingKey {
     case categories = "categories"
@@ -34816,10 +34816,10 @@ public enum SelectOptionsBindingCostValue<Identifier: Decodable & Equatable & Se
 
 public struct SelectOptionsFixedBindingCostValue<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// A mapping of skill identifiers to their specific binding cost values.
-  let map: [SelectOptionsFixedBindingCostValueMapping<Identifier>]
+  public let map: [SelectOptionsFixedBindingCostValueMapping<Identifier>]
 
   /// The default value of an entry. Used as a fallback if no value is found in `list`.
-  let `default`: Int
+  public let `default`: Int
 
   private enum CodingKeys: String, CodingKey {
     case map = "map"
@@ -34836,10 +34836,10 @@ public struct SelectOptionsFixedBindingCostValue<Identifier: Decodable & Equatab
 
 public struct SelectOptionsFixedBindingCostValueMapping<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The entry’s identifier.
-  let id: Identifier
+  public let id: Identifier
 
   /// The binding cost for the specified entry.
-  let bindingCost: Int
+  public let bindingCost: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -34856,7 +34856,7 @@ public struct SelectOptionsFixedBindingCostValueMapping<Identifier: Decodable & 
 
 public struct TargetCategoriesSelectOptionCategory: Decodable, Equatable, Sendable {
   /// A list of target categories.
-  let list: [SpecificTargetCategory]
+  public let list: [SpecificTargetCategory]
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -34871,10 +34871,10 @@ public struct TargetCategoriesSelectOptionCategory: Decodable, Equatable, Sendab
 
 public struct SpecificTargetCategory: Decodable, Equatable, Sendable {
   /// The target category’s identifier.
-  let id: TargetCategory.ID
+  public let id: TargetCategory.ID
 
   /// The volume for this specific selection.
-  let volume: Int?
+  public let volume: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -34922,7 +34922,7 @@ public struct Region: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RegionTranslation>
+  public let translations: LocaleMap<RegionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -34953,7 +34953,7 @@ public struct Region: Decodable, Equatable, Sendable, Identifiable {
 
 public struct RegionTranslation: Decodable, Equatable, Sendable {
   /// The region’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -34968,10 +34968,10 @@ public struct RegionTranslation: Decodable, Equatable, Sendable {
 
 /// Reference to a commonness-rated advantage or disadvantage. Commonness-rating terms used in the source books are strongly recommended, common, uncommon, suggested and unsuitable.
 public struct CommonnessRatedAdvantageDisadvantageGroup<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let list: [SingleCommonnessRatedAdvantageDisadvantageInGroup<Identifier>]
+  public let list: [SingleCommonnessRatedAdvantageDisadvantageInGroup<Identifier>]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CommonnessRatedAdvantageDisadvantageGroupTranslation>
+  public let translations: LocaleMap<CommonnessRatedAdvantageDisadvantageGroupTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -34988,7 +34988,7 @@ public struct CommonnessRatedAdvantageDisadvantageGroup<Identifier: Decodable & 
 
 public struct CommonnessRatedAdvantageDisadvantageGroupTranslation: Decodable, Equatable, Sendable {
   /// The text replacing all entries in the group.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -35004,13 +35004,13 @@ public struct CommonnessRatedAdvantageDisadvantageGroupTranslation: Decodable, E
 /// Reference to a commonness-rated advantage or disadvantage. Commonness-rating terms used in the source books are strongly recommended, common, uncommon, suggested and unsuitable.
 public struct SingleCommonnessRatedAdvantageDisadvantageInGroup<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The advantage’s or disadvantage’s identifier.
-  let id: Identifier
+  public let id: Identifier
 
   /// The level of a commonness-rated advantage or disadvantage.
-  let level: CommonnessRatedAdvantageDisadvantageLevel?
+  public let level: CommonnessRatedAdvantageDisadvantageLevel?
 
   /// The options the commonness rating applies to.
-  let options: [CommonnessSelectOptionIdentifier]?
+  public let options: [CommonnessSelectOptionIdentifier]?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35031,10 +35031,10 @@ public typealias CommonnessRatedSkill = Skill.ID
 
 public struct CulturalPackageItem: Decodable, Equatable, Sendable {
   /// The skill’s identifier.
-  let id: Skill.ID
+  public let id: Skill.ID
 
   /// The skill points for the respective skill you get for buying the cultural package.
-  let points: Int
+  public let points: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35052,13 +35052,13 @@ public struct CulturalPackageItem: Decodable, Equatable, Sendable {
 /// Description and examples of the area knowledge.
 public struct AreaKnowledgeTranslation: Decodable, Equatable, Sendable {
   /// The full description without examples in parenthesis.
-  let description: String
+  public let description: String
 
   /// A shorter version of the description, used in input fields and other UI elements where the space might be to small to use the full description.
-  let abbreviated: String
+  public let abbreviated: String
 
   /// Examples of areas, if applicable.
-  let examples: [AreaKnowledgeExample]?
+  public let examples: [AreaKnowledgeExample]?
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -35076,7 +35076,7 @@ public struct AreaKnowledgeTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct AreaKnowledgeExample: Decodable, Equatable, Sendable {
-  let area: String
+  public let area: String
 
   private enum CodingKeys: String, CodingKey {
     case area = "area"
@@ -35092,13 +35092,13 @@ public struct AreaKnowledgeExample: Decodable, Equatable, Sendable {
 /// Structured description of common names.
 public struct CommonNames: Decodable, Equatable, Sendable {
   /// First names can be gender-neutral, but they can also be for a specific binary sex. They are sorted into groups.
-  let firstNameGroups: [CommonNameGroup]?
+  public let firstNameGroups: [CommonNameGroup]?
 
   /// Last names can be gender-neutral, like family names, but they can also be for a specific binary sex. They are sorted into groups.
-  let lastNameGroups: [CommonNameGroup]?
+  public let lastNameGroups: [CommonNameGroup]?
 
   /// Special naming rules.
-  let namingRules: String?
+  public let namingRules: String?
 
   private enum CodingKeys: String, CodingKey {
     case firstNameGroups = "first_name_groups"
@@ -35117,13 +35117,13 @@ public struct CommonNames: Decodable, Equatable, Sendable {
 
 public struct CommonNameGroup: Decodable, Equatable, Sendable {
   /// The group label.
-  let label: String
+  public let label: String
 
   /// The binary sex if the group is only for a certain binary sex.
-  let sex: BinarySex?
+  public let sex: BinarySex?
 
   /// The names from the group.
-  let names: [CommonName]
+  public let names: [CommonName]
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -35141,10 +35141,10 @@ public struct CommonNameGroup: Decodable, Equatable, Sendable {
 }
 
 public struct CommonName: Decodable, Equatable, Sendable {
-  let name: String
+  public let name: String
 
   /// Additional information about the name, appended in parenthesis.
-  let note: String?
+  public let note: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -35162,20 +35162,20 @@ public struct CommonName: Decodable, Equatable, Sendable {
 /// Requires a specific advantage, disadvantage or special ability in a profession.
 public struct ProfessionActivatablePrerequisite: Decodable, Equatable, Sendable {
   /// The activatable entry’s identifier.
-  let id: ActivatableIdentifier
+  public let id: ActivatableIdentifier
 
   /// If the required entry should be required to be active or inactive.
-  let active: Bool
+  public let active: Bool
 
   /// The required minimum level of the entry.
-  let level: Int?
+  public let level: Int?
 
   /// Required select options. Order is important. Typically, you only need the first array index, though.
-  let options: [ProfessionActivatableOption]?
+  public let options: [ProfessionActivatableOption]?
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
-  let when: Preconditions?
+  public let when: Preconditions?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35237,7 +35237,7 @@ public enum PreconditionGroup: Decodable, Equatable, Sendable {
 
 /// Requires a specific sexual characteristic.
 public struct SexualCharacteristicPrerequisite: Decodable, Equatable, Sendable {
-  let id: SexualCharacteristic
+  public let id: SexualCharacteristic
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35279,15 +35279,15 @@ public enum SexualCharacteristic: Decodable, Equatable, Sendable {
 
 public struct RatedMinimumNumberPrerequisiteForProfession: Decodable, Equatable, Sendable {
   /// The minimum number of skills that need to be on the defined minimum skill rating.
-  let number: Int
+  public let number: Int
 
   /// The minimum skill rating the defined minimum number of skills need to be on.
-  let value: Int
+  public let value: Int
 
   /// The targets that contribute to satisfying the prerequisite.
-  let targets: RatedMinimumNumberPrerequisiteTargetForProfession
+  public let targets: RatedMinimumNumberPrerequisiteTargetForProfession
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -35345,7 +35345,7 @@ public enum RatedMinimumNumberPrerequisiteTargetForProfession: Decodable, Equata
 
 public struct RatedMinimumNumberPrerequisiteSkillsTarget: Decodable, Equatable, Sendable {
   /// The skills that are taken into account for satisfying the prerequisite.
-  let targets: [Skill.ID]
+  public let targets: [Skill.ID]
 
   private enum CodingKeys: String, CodingKey {
     case targets = "targets"
@@ -35360,7 +35360,7 @@ public struct RatedMinimumNumberPrerequisiteSkillsTarget: Decodable, Equatable, 
 
 public struct RatedMinimumNumberPrerequisiteCombatTechniquesTarget: Decodable, Equatable, Sendable {
   /// The skills that are taken into account for satisfying the prerequisite.
-  let group: RatedMinimumNumberPrerequisiteCombatTechniquesTargetGroup
+  public let group: RatedMinimumNumberPrerequisiteCombatTechniquesTargetGroup
 
   private enum CodingKeys: String, CodingKey {
     case group = "group"
@@ -35437,7 +35437,7 @@ public enum RatedMinimumNumberPrerequisiteSpellworksTargetForProfession: Decodab
 
 public struct RatedMinimumNumberPrerequisiteLiturgiesTarget: Decodable, Equatable, Sendable {
   /// The aspect of which the liturgical chants are taken into account for satisfying the prerequisite.
-  let aspect: Aspect.ID
+  public let aspect: Aspect.ID
 
   private enum CodingKeys: String, CodingKey {
     case aspect = "aspect"
@@ -35452,12 +35452,12 @@ public struct RatedMinimumNumberPrerequisiteLiturgiesTarget: Decodable, Equatabl
 
 public struct EnergyPrerequisite: Decodable, Equatable, Sendable {
   /// The energy’s identifier.
-  let id: DerivedCharacteristic.ID
+  public let id: DerivedCharacteristic.ID
 
   /// The required value of additionally bought points.
-  let value: Int
+  public let value: Int
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35476,18 +35476,18 @@ public struct EnergyPrerequisite: Decodable, Equatable, Sendable {
 
 /// In some areas, the profession package grants a loose set of stats where the player must choose between different options for the profession package.
 public struct ProfessionPackageOptions: Decodable, Equatable, Sendable {
-  let skillSpecialization: SkillSpecializationOptions?
-  let languagesScripts: LanguagesScriptsOptions?
-  let specialAbilitiesForAdventurePoints: SpecialAbilitiesForAdventurePointsOption?
-  let combatTechniques: CombatTechniquesOptions?
-  let combatTechniquesForAdventurePoints: CombatTechniquesForAdventurePointsOption?
-  let cantrips: CantripsOptions?
-  let curses: CursesOptions?
-  let skills: SkillsOptions?
-  let spellworks: SpellworksOptions?
-  let spellworksForChosenProperty: SpellworksForChosenProperty?
-  let liturgies: LiturgiesOptions?
-  let lockAdventurePoints: LockAdventurePointsOption?
+  public let skillSpecialization: SkillSpecializationOptions?
+  public let languagesScripts: LanguagesScriptsOptions?
+  public let specialAbilitiesForAdventurePoints: SpecialAbilitiesForAdventurePointsOption?
+  public let combatTechniques: CombatTechniquesOptions?
+  public let combatTechniquesForAdventurePoints: CombatTechniquesForAdventurePointsOption?
+  public let cantrips: CantripsOptions?
+  public let curses: CursesOptions?
+  public let skills: SkillsOptions?
+  public let spellworks: SpellworksOptions?
+  public let spellworksForChosenProperty: SpellworksForChosenProperty?
+  public let liturgies: LiturgiesOptions?
+  public let lockAdventurePoints: LockAdventurePointsOption?
 
   private enum CodingKeys: String, CodingKey {
     case skillSpecialization = "skill_specialization"
@@ -35525,10 +35525,10 @@ public struct ProfessionPackageOptions: Decodable, Equatable, Sendable {
 /// Keep AP for use after character creation to buy or improve entries.
 public struct LockAdventurePointsOption: Decodable, Equatable, Sendable {
   /// The AP value that is going to be locked for later use.
-  let apValue: Int
+  public let apValue: Int
 
   /// The entries the AP can be used for.
-  let entries: [SpellworkIdentifier]
+  public let entries: [SpellworkIdentifier]
 
   private enum CodingKeys: String, CodingKey {
     case apValue = "apValue"
@@ -35545,10 +35545,10 @@ public struct LockAdventurePointsOption: Decodable, Equatable, Sendable {
 
 public struct InfluenceEffect: Decodable, Equatable, Sendable {
   /// An optional label that is displayed and placed before the actual text.
-  let label: String
+  public let label: String
 
   /// The effect text.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -35596,7 +35596,7 @@ public enum EnhancementAdventurePoints: Decodable, Equatable, Sendable {
 
 public struct DerivedEnhancementAdventurePoints: Decodable, Equatable, Sendable {
   /// The value to multiply with the numeric representation of the associated skill's improvement cost to form the final AP cost of this enhancement.
-  let multiplier: Int
+  public let multiplier: Int
 
   private enum CodingKeys: String, CodingKey {
     case multiplier = "multiplier"
@@ -35641,7 +35641,7 @@ public enum EnhancementPrerequisiteGroup: Decodable, Equatable, Sendable {
 /// Requires a specific enhancement from a skill.
 public struct EnhancementPrerequisite: Decodable, Equatable, Sendable {
   /// The required enhancement.
-  let id: Enhancement.ID
+  public let id: Enhancement.ID
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -35727,9 +35727,9 @@ public enum DerivedCharacteristicPrerequisiteGroup: Decodable, Equatable, Sendab
 
 public struct BlessedTraditionPrerequisite: Decodable, Equatable, Sendable {
   /// The blessed tradition prerequisite may only be satified if the blessed tradition is either church or shamanistic.
-  let restriction: BlessedTraditionPrerequisiteRestriction?
+  public let restriction: BlessedTraditionPrerequisiteRestriction?
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case restriction = "restriction"
@@ -35774,9 +35774,9 @@ public enum BlessedTraditionPrerequisiteRestriction: Decodable, Equatable, Senda
 
 public struct MagicalTraditionPrerequisite: Decodable, Equatable, Sendable {
   /// The magical tradition prerequisite may only be satified if the magical tradition can learn rituals or can bind familiars.
-  let restriction: MagicalTraditionPrerequisiteRestriction?
+  public let restriction: MagicalTraditionPrerequisiteRestriction?
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case restriction = "restriction"
@@ -35821,13 +35821,13 @@ public enum MagicalTraditionPrerequisiteRestriction: Decodable, Equatable, Senda
 
 public struct CalculationTranslation: Decodable, Equatable, Sendable {
   /// The default calculation string.
-  let `default`: String
+  public let `default`: String
 
   /// The calculation string if only half of the primary attribute is used.
-  let halfPrimary: String?
+  public let halfPrimary: String?
 
   /// The calculation string if no primary attribute is used.
-  let noPrimary: String?
+  public let noPrimary: String?
 
   private enum CodingKeys: String, CodingKey {
     case `default` = "default"
@@ -35847,10 +35847,10 @@ public struct CalculationTranslation: Decodable, Equatable, Sendable {
 /// Configuration for random weight generation.
 public struct RandomWeightGeneration: Decodable, Equatable, Sendable {
   /// The base value used for random weight. The height subtrahend; in case of `Height - 110 + 2D6` it is `110`.
-  let base: Int
+  public let base: Int
 
   /// The dice used for random weight.
-  let random: [WeightDice]
+  public let random: [WeightDice]
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -35867,13 +35867,13 @@ public struct RandomWeightGeneration: Decodable, Equatable, Sendable {
 
 public struct WeightDice: Decodable, Equatable, Sendable {
   /// Number of dice of the same type. Example: 2 in 2D6.
-  let number: Int
+  public let number: Int
 
   /// Number of sides on every die. Example: 6 in 2D6.
-  let sides: DieType
+  public let sides: DieType
 
   /// The strategy how to offset the randomly generated values against the base value. Either they are all added or subtracted or even results are added and odd results are subtracted.
-  let offsetStrategy: WeightDiceOffsetStrategy
+  public let offsetStrategy: WeightDiceOffsetStrategy
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -35932,49 +35932,49 @@ public struct RaceVariant: Decodable, Equatable, Sendable, Identifiable, ChildEn
   public let id: ID
 
   /// The associated race.
-  let race: Race.ID
+  public let race: Race.ID
 
   /// Describes how to raise or lower maximum attribute values during character creation.
-  let attributeAdjustments: AttributeAdjustments
+  public let attributeAdjustments: AttributeAdjustments
 
   /// The list of common cultures.
-  let commonCultures: [Culture.ID]?
+  public let commonCultures: [Culture.ID]?
 
   /// A list of automatically applied advantages.
-  let automaticAdvantages: [AutomaticAdvantageDisadvantage<Advantage.ID>]?
+  public let automaticAdvantages: [AutomaticAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of automatically applied disadvantages.
-  let automaticDisadvantages: [AutomaticAdvantageDisadvantage<Disadvantage.ID>]?
+  public let automaticDisadvantages: [AutomaticAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of strongly recommended advantages.
-  let stronglyRecommendedAdvantages: [AutomaticAdvantageDisadvantage<Advantage.ID>]?
+  public let stronglyRecommendedAdvantages: [AutomaticAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of strongly recommended disadvantages.
-  let stronglyRecommendedDisadvantages: [AutomaticAdvantageDisadvantage<Disadvantage.ID>]?
+  public let stronglyRecommendedDisadvantages: [AutomaticAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of common advantages.
-  let commonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let commonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of common disadvantages.
-  let commonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let commonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// A list of uncommon advantages.
-  let uncommonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
+  public let uncommonAdvantages: [CommonnessRatedAdvantageDisadvantage<Advantage.ID>]?
 
   /// A list of uncommon disadvantages.
-  let uncommonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
+  public let uncommonDisadvantages: [CommonnessRatedAdvantageDisadvantage<Disadvantage.ID>]?
 
   /// An array containing 20 (numeric) hair color identifiers. The array also represents the 20-sided die for a random hair color.
-  let hairColor: [20 of HairColor.ID]
+  public let hairColor: [20 of HairColor.ID]
 
   /// An array containing 20 (numeric) eye color identifiers. The array also represents the 20-sided die for a random eye color.
-  let eyeColor: [20 of EyeColor.ID]
+  public let eyeColor: [20 of EyeColor.ID]
 
   /// Configuration for random height generation.
-  let height: RandomHeightGeneration
+  public let height: RandomHeightGeneration
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RaceVariantTranslation>
+  public let translations: LocaleMap<RaceVariantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case race = "race"
@@ -36033,34 +36033,34 @@ public struct RaceVariant: Decodable, Equatable, Sendable, Identifiable, ChildEn
 
 public struct RaceVariantTranslation: Decodable, Equatable, Sendable {
   /// The race variant’s name. If this is the only variant for a base race and thus just provides the missing information without actually being able to select, fill in the name of the base race.
-  let name: String
+  public let name: String
 
   /// The respective attribute adjustments text from the source book.
-  let attributeAdjustments: String?
+  public let attributeAdjustments: String?
 
   /// The respective automatic advantages text from the source book.
-  let automaticAdvantages: String?
+  public let automaticAdvantages: String?
 
   /// The respective automatic disadvantages text from the source book.
-  let automaticDisadvantages: String?
+  public let automaticDisadvantages: String?
 
   /// The respective strongly recommended advantages text from the source book.
-  let stronglyRecommendedAdvantages: String?
+  public let stronglyRecommendedAdvantages: String?
 
   /// The respective strongly recommended disadvantages text from the source book.
-  let stronglyRecommendedDisadvantages: String?
+  public let stronglyRecommendedDisadvantages: String?
 
   /// The respective common advantages text from the source book.
-  let commonAdvantages: String?
+  public let commonAdvantages: String?
 
   /// The respective common disadvantages text from the source book.
-  let commonDisadvantages: String?
+  public let commonDisadvantages: String?
 
   /// The respective uncommon advantages text from the source book.
-  let uncommonAdvantages: String?
+  public let uncommonAdvantages: String?
 
   /// The respective uncommon disadvantages text from the source book.
-  let uncommonDisadvantages: String?
+  public let uncommonDisadvantages: String?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -36094,12 +36094,12 @@ public struct RaceVariantTranslation: Decodable, Equatable, Sendable {
 /// Describes how to raise or lower maximum attribute values during character creation.
 public struct AttributeAdjustments: Decodable, Equatable, Sendable {
   /// The values by which the maximum of the respective attribute is modified.
-  let fixed: [FixedAttributeAdjustment]?
+  public let fixed: [FixedAttributeAdjustment]?
 
   /// An array of attribute maximum modifiers, where the attribute they apply to is selected from a list of options.
   ///
   /// The array only permits a single entry because no race specified more than one selectable attribute adjustment so far. But the schema allows for multiple entries to be future-proof.
-  let selectable: [1 of SelectableAttributeAdjustment]?
+  public let selectable: [1 of SelectableAttributeAdjustment]?
 
   private enum CodingKeys: String, CodingKey {
     case fixed = "fixed"
@@ -36117,10 +36117,10 @@ public struct AttributeAdjustments: Decodable, Equatable, Sendable {
 /// A value by which the maximum of the respective attribute is modified.
 public struct FixedAttributeAdjustment: Decodable, Equatable, Sendable {
   /// The attribute the modifier applies to.
-  let id: Attribute.ID
+  public let id: Attribute.ID
 
   /// The value by which the specified attribute’s maximum is modified (negative values will lower the maximum).
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36138,10 +36138,10 @@ public struct FixedAttributeAdjustment: Decodable, Equatable, Sendable {
 /// A value that will be added to the current maximum of the selected attribute that has been chosen from the listed attributes (negative values will lower the maximum).
 public struct SelectableAttributeAdjustment: Decodable, Equatable, Sendable {
   /// A list of attributes the player has to choose from.
-  let list: [Attribute.ID]
+  public let list: [Attribute.ID]
 
   /// The value by which the selected attribute’s maximum is modified (negative values will lower the maximum).
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case list = "list"
@@ -36159,13 +36159,13 @@ public struct SelectableAttributeAdjustment: Decodable, Equatable, Sendable {
 /// An advantage or disadvantage that is automatically applied to the character after selecting the race. This does only work for advantages or disadvantages with no further configuration such as level or special selection.
 public struct AutomaticAdvantageDisadvantage<Identifier: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
   /// The automatic advantage or disadvantage.
-  let id: Identifier
+  public let id: Identifier
 
   /// The level of the entry.
-  let level: Int?
+  public let level: Int?
 
   /// Required select options. Order is important. Typically, you only need the first array index, though.
-  let options: [RequirableSelectOptionIdentifier]?
+  public let options: [RequirableSelectOptionIdentifier]?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36188,7 +36188,7 @@ public struct HairColor: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HairColorTranslation>
+  public let translations: LocaleMap<HairColorTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -36219,7 +36219,7 @@ public struct HairColor: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HairColorTranslation: Decodable, Equatable, Sendable {
   /// The hair color’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -36238,7 +36238,7 @@ public struct EyeColor: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<EyeColorTranslation>
+  public let translations: LocaleMap<EyeColorTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -36269,7 +36269,7 @@ public struct EyeColor: Decodable, Equatable, Sendable, Identifiable {
 
 public struct EyeColorTranslation: Decodable, Equatable, Sendable {
   /// The eye color’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -36285,10 +36285,10 @@ public struct EyeColorTranslation: Decodable, Equatable, Sendable {
 /// Configuration for random height generation.
 public struct RandomHeightGeneration: Decodable, Equatable, Sendable {
   /// The base value used for random height.
-  let base: Int
+  public let base: Int
 
   /// The dice used for random height.
-  let random: [Dice]
+  public let random: [Dice]
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -36306,15 +36306,15 @@ public struct RandomHeightGeneration: Decodable, Equatable, Sendable {
 /// Requires a specific pact.
 public struct PactPrerequisite: Decodable, Equatable, Sendable {
   /// The required pact category.
-  let category: PactCategory.ID
+  public let category: PactCategory.ID
 
   /// The required domain(s).
-  let domain: [PactDomain.ID]?
+  public let domain: [PactDomain.ID]?
 
   /// The level to which the minimum value applies.
-  let level: Int?
+  public let level: Int?
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case category = "category"
@@ -36336,9 +36336,9 @@ public struct PactPrerequisite: Decodable, Equatable, Sendable {
 /// Requires a minimum social status.
 public struct SocialStatusPrerequisite: Decodable, Equatable, Sendable {
   /// The minimum social status’s identifier.
-  let id: SocialStatus.ID
+  public let id: SocialStatus.ID
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36355,8 +36355,8 @@ public struct SocialStatusPrerequisite: Decodable, Equatable, Sendable {
 
 /// Requires a specific state to be active.
 public struct StatePrerequisite: Decodable, Equatable, Sendable {
-  let id: State.ID
-  let displayOption: DisplayOption?
+  public let id: State.ID
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36377,10 +36377,10 @@ public struct State: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<StateTranslation>
+  public let translations: LocaleMap<StateTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case src = "src"
@@ -36413,12 +36413,12 @@ public struct State: Decodable, Equatable, Sendable, Identifiable {
 
 public struct StateTranslation: Decodable, Equatable, Sendable {
   /// The state’s name.
-  let name: String
+  public let name: String
 
   /// The description of the state.
-  let description: String
+  public let description: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -36437,12 +36437,12 @@ public struct StateTranslation: Decodable, Equatable, Sendable {
 
 public struct PrimaryAttributePrerequisite: Decodable, Equatable, Sendable {
   /// Is the required primary attribute for spellcasters or blessed ones?
-  let category: PrimaryAttributeCategory
+  public let category: PrimaryAttributeCategory
 
   /// Required value of the attribute.
-  let value: Int
+  public let value: Int
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case category = "category"
@@ -36489,9 +36489,9 @@ public enum PrimaryAttributeCategory: Decodable, Equatable, Sendable {
 /// Requires a specific cantrip or blessing.
 public struct TinyActivatablePrerequisite: Decodable, Equatable, Sendable {
   /// The required item.
-  let id: TinyActivatableIdentifier
+  public let id: TinyActivatableIdentifier
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36534,8 +36534,8 @@ public enum TinyActivatableIdentifier: Decodable, Equatable, Sendable {
 }
 
 public struct AnySpecialAbilityOfGroupPrerequisite: Decodable, Equatable, Sendable {
-  let group: SpecialAbilityGroup
-  let displayOption: DisplayOption?
+  public let group: SpecialAbilityGroup
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case group = "group"
@@ -36844,15 +36844,15 @@ public enum SpecialAbilityGroup: Decodable, Equatable, Sendable {
 
 public struct RatedMinimumNumberPrerequisite: Decodable, Equatable, Sendable {
   /// The minimum number of skills that need to be on the defined minimum skill rating.
-  let number: Int
+  public let number: Int
 
   /// The minimum skill rating the defined minimum number of skills need to be on.
-  let value: Int
+  public let value: Int
 
   /// The targets that contribute to satisfying the prerequisite.
-  let targets: RatedMinimumNumberPrerequisiteTarget
+  public let targets: RatedMinimumNumberPrerequisiteTarget
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case number = "number"
@@ -36910,7 +36910,7 @@ public enum RatedMinimumNumberPrerequisiteTarget: Decodable, Equatable, Sendable
 
 public struct RatedMinimumNumberPrerequisiteSpellworksTarget: Decodable, Equatable, Sendable {
   /// The property of which the spells are taken into account for satisfying the prerequisite.
-  let property: Property.ID
+  public let property: Property.ID
 
   private enum CodingKeys: String, CodingKey {
     case property = "property"
@@ -36925,12 +36925,12 @@ public struct RatedMinimumNumberPrerequisiteSpellworksTarget: Decodable, Equatab
 
 public struct RatedSumPrerequisite: Decodable, Equatable, Sendable {
   /// The minimum required sum of the targets’ ratings.
-  let sum: Int
+  public let sum: Int
 
   /// The targets that are included in calculating the sum.
-  let targets: [Skill.ID]
+  public let targets: [Skill.ID]
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case sum = "sum"
@@ -36949,12 +36949,12 @@ public struct RatedSumPrerequisite: Decodable, Equatable, Sendable {
 
 public struct PersonalityTraitPrerequisite: Decodable, Equatable, Sendable {
   /// The personality trait’s identifier.
-  let id: PersonalityTrait.ID
+  public let id: PersonalityTrait.ID
 
   /// If checked, the prerequisite **must** be present. If not checked, prerequisite **must not** be present.
-  let active: Bool
+  public let active: Bool
 
-  let displayOption: DisplayOption?
+  public let displayOption: DisplayOption?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -36978,18 +36978,18 @@ public struct PersonalityTrait: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The personality trait’s level.
-  let level: Int
+  public let level: Int
 
-  let prerequisites: PersonalityTraitPrerequisites?
+  public let prerequisites: PersonalityTraitPrerequisites?
 
   /// The lower-level personality trait(s) this trait can be combined with.
-  let combinationOptions: [PersonalityTrait.ID]?
+  public let combinationOptions: [PersonalityTrait.ID]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PersonalityTraitTranslation>
+  public let translations: LocaleMap<PersonalityTraitTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -37028,12 +37028,12 @@ public struct PersonalityTrait: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PersonalityTraitTranslation: Decodable, Equatable, Sendable {
   /// The personality trait’s name.
-  let name: String
+  public let name: String
 
   /// The effects of the personality trait. They should be sorted like they are in the book.
-  let effects: [PersonalityTraitEffect]
+  public let effects: [PersonalityTraitEffect]
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37091,10 +37091,10 @@ public enum PersonalityTraitPrerequisiteGroup: Decodable, Equatable, Sendable {
 
 public struct PersonalityTraitEffect: Decodable, Equatable, Sendable {
   /// A label that is displayed and placed before the actual text.
-  let label: String
+  public let label: String
 
   /// The effect text.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -37240,7 +37240,7 @@ public enum AdvantageDisadvantagePrerequisiteGroup: Decodable, Equatable, Sendab
 
 public struct AdvantagesSelectOptionCategory: Decodable, Equatable, Sendable {
   /// A list of advantages of which the generated advantages must depend on at least one of them each.
-  let dependingOn: [Advantage.ID]
+  public let dependingOn: [Advantage.ID]
 
   private enum CodingKeys: String, CodingKey {
     case dependingOn = "dependingOn"
@@ -37259,10 +37259,10 @@ public typealias SelectOptionRules = [SelectOptionRule]
 /// A rule for how options can be selected and relate to each other.
 public struct SelectOptionRule: Decodable, Equatable, Sendable {
   /// The value of the rule.
-  let value: SelectOptionRuleValue
+  public let value: SelectOptionRuleValue
 
   /// Sometimes, multiple options from a single list have to or can be chosen.
-  let multiple: SelectOptionRuleMultiple?
+  public let multiple: SelectOptionRuleMultiple?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -37324,7 +37324,7 @@ public enum SelectOptionRuleValue: Decodable, Equatable, Sendable {
 
 public struct PredefinedOrTextInputSelectOptionRuleValue: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PredefinedOrTextInputSelectOptionRuleValueTranslation>
+  public let translations: LocaleMap<PredefinedOrTextInputSelectOptionRuleValueTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -37339,10 +37339,10 @@ public struct PredefinedOrTextInputSelectOptionRuleValue: Decodable, Equatable, 
 
 public struct PredefinedOrTextInputSelectOptionRuleValueTranslation: Decodable, Equatable, Sendable {
   /// The label for the text input field.
-  let inputLabel: String
+  public let inputLabel: String
 
   /// The label for the extra option in the list of select options that unlocks the text input field.
-  let optionLabel: String
+  public let optionLabel: String
 
   private enum CodingKeys: String, CodingKey {
     case inputLabel = "inputLabel"
@@ -37359,10 +37359,10 @@ public struct PredefinedOrTextInputSelectOptionRuleValueTranslation: Decodable, 
 
 public struct ChildSelectOptionRuleValue: Decodable, Equatable, Sendable {
   /// The index of the parent select option in the list of selected options.
-  let parentIndex: Int
+  public let parentIndex: Int
 
   /// The entity you can choose from.
-  let entity: ChildEntityForSelectOption
+  public let entity: ChildEntityForSelectOption
 
   private enum CodingKeys: String, CodingKey {
     case parentIndex = "parentIndex"
@@ -37402,7 +37402,7 @@ public enum ChildEntityForSelectOption: Decodable, Equatable, Sendable {
 
 public struct TextInputSelectOptionRuleValue: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TextInputSelectOptionRuleValueTranslation>
+  public let translations: LocaleMap<TextInputSelectOptionRuleValueTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -37417,7 +37417,7 @@ public struct TextInputSelectOptionRuleValue: Decodable, Equatable, Sendable {
 
 public struct TextInputSelectOptionRuleValueTranslation: Decodable, Equatable, Sendable {
   /// The label for the text input field.
-  let inputLabel: String
+  public let inputLabel: String
 
   private enum CodingKeys: String, CodingKey {
     case inputLabel = "inputLabel"
@@ -37463,10 +37463,10 @@ public enum SelectOptionRuleMultiple: Decodable, Equatable, Sendable {
 /// A range of numbers of options that can be selected.
 public struct SelectOptionRuleMultipleRange: Decodable, Equatable, Sendable {
   /// The minimum number of options that need to be selected. If left empty it defaults to 1.
-  let min: Int?
+  public let min: Int?
 
   /// The maximum number of options that need to be selected.
-  let max: Int
+  public let max: Int
 
   private enum CodingKeys: String, CodingKey {
     case min = "min"
@@ -37487,16 +37487,16 @@ public struct AlternativeRule: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The player types this alternative rule is suitable for.
-  let playerTypes: [PlayerType.ID]
+  public let playerTypes: [PlayerType.ID]
 
   /// Has the alternative rule not been implemented in Optolith yet? This is also true if the alternative rule does not (currently) apply to any Optolith feature.
-  let isMissingImplementation: Bool
+  public let isMissingImplementation: Bool
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AlternativeRuleTranslation>
+  public let translations: LocaleMap<AlternativeRuleTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case playerTypes = "playerTypes"
@@ -37533,12 +37533,12 @@ public struct AlternativeRule: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AlternativeRuleTranslation: Decodable, Equatable, Sendable {
   /// The alternative rule’s name.
-  let name: String
+  public let name: String
 
   /// The description of the alternative rule.
-  let description: String
+  public let description: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37562,7 +37562,7 @@ public struct PlayerType: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PlayerTypeTranslation>
+  public let translations: LocaleMap<PlayerTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -37593,7 +37593,7 @@ public struct PlayerType: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PlayerTypeTranslation: Decodable, Equatable, Sendable {
   /// The player type.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37612,16 +37612,16 @@ public struct Animal: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalTranslation>
+  public let translations: LocaleMap<AnimalTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -37658,18 +37658,18 @@ public struct Animal: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37696,19 +37696,19 @@ public struct AnimalCare: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Values depending on whether the animal care is feed.
-  let type: AnimalCareType
+  public let type: AnimalCareType
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalCareTranslation>
+  public let translations: LocaleMap<AnimalCareTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case type = "type"
@@ -37747,18 +37747,18 @@ public struct AnimalCare: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalCareTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37809,10 +37809,10 @@ public enum AnimalCareType: Decodable, Equatable, Sendable {
 
 public struct GeneralAnimalCare: Decodable, Equatable, Sendable {
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -37829,7 +37829,7 @@ public struct GeneralAnimalCare: Decodable, Equatable, Sendable {
 
 public struct AnimalFeed: Decodable, Equatable, Sendable {
   /// The cost in silverthalers.
-  let cost: AnimalFeedCost
+  public let cost: AnimalFeedCost
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -37870,29 +37870,29 @@ public struct AnimalDisease: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The disease’s level.
-  let level: Int
+  public let level: Int
 
   /// Depending on the disease or poison, apply Spirit or Toughness as a penalty to the disease or poison roll. It may also happen that the minimum is applied as a penalty.
-  let resistance: Resistance
+  public let resistance: Resistance
 
   /// What causes the disease? The GM rolls 1D20 to see if a character gets infected. If the infection check succeeds, the GM makes a disease check to determine the severity of the infection.
-  let cause: [Cause]
+  public let cause: [Cause]
 
   /// The animal types this disease applies to.
   ///
   /// If no animal types are given, the animal disease applies to all animal types.
-  let animalTypes: [AnimalType.ID]
+  public let animalTypes: [AnimalType.ID]
 
   /// If and at which chance the disease can be communicated to intelligent creatures.
   ///
   /// If no causes are given, the disease is not communicable to intelligent creatures.
-  let communicabilityToIntelligentCreatures: [Cause]
+  public let communicabilityToIntelligentCreatures: [Cause]
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalDiseaseTranslation>
+  public let translations: LocaleMap<AnimalDiseaseTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case level = "level"
@@ -37935,33 +37935,33 @@ public struct AnimalDisease: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalDiseaseTranslation: Decodable, Equatable, Sendable {
   /// The disease’s name.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// The disease’s progress, in detail.
-  let progress: String
+  public let progress: String
 
   /// After infection, how much time passes before symptoms appear?
-  let incubationTime: String
+  public let incubationTime: String
 
   /// The damage caused by the disease. If the disease check fails, apply the lessened effects.
-  let damage: Reduceable<String>
+  public let damage: Reduceable<String>
 
   /// The duration of the disease. If the disease check fails, use the lessened duration.
-  let duration: Reduceable<String>
+  public let duration: Reduceable<String>
 
   /// Special information about the disease.
-  let special: String?
+  public let special: String?
 
   /// Methods known to lessen the disease’s progress or relieve symptoms.
-  let treatment: String
+  public let treatment: String
 
   /// Known remedies for the disease.
-  let cure: String
+  public let cure: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -37998,7 +37998,7 @@ public struct AnimalType: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<AnimalTypeTranslation>
+  public let translations: LocaleMap<AnimalTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -38029,7 +38029,7 @@ public struct AnimalType: Decodable, Equatable, Sendable, Identifiable {
 
 public struct AnimalTypeTranslation: Decodable, Equatable, Sendable {
   /// The animal type’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38048,43 +38048,43 @@ public struct Armor: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: ArmorComplexity?
+  public let complexity: ArmorComplexity?
 
   /// The PRO value.
-  let protection: Protection
+  public let protection: Protection
 
   /// The ENC value.
-  let encumbrance: Encumbrance
+  public let encumbrance: Encumbrance
 
   /// Does the armor have additional penalties (MOV -1, INI -1)?
-  let hasAdditionalPenalties: HasAdditionalPenalties
+  public let hasAdditionalPenalties: HasAdditionalPenalties
 
   /// The armor type.
-  let armorType: ArmorType
+  public let armorType: ArmorType
 
   /// Specify if armor is only available for a specific hit zone.
-  let hitZone: HitZone?
+  public let hitZone: HitZone?
 
   /// Define if during character creation this weapon can only be bought by a specific subset of characters.
-  let restrictedTo: RestrictedTo?
+  public let restrictedTo: RestrictedTo?
 
   /// The armor is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecifics?
+  public let knownItemSpecifics: KnownItemSpecifics?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArmorTranslation>
+  public let translations: LocaleMap<ArmorTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -38139,27 +38139,27 @@ public struct Armor: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ArmorTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
   /// The armor advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The armor disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   /// The weapon is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecificsTranslation?
+  public let knownItemSpecifics: KnownItemSpecificsTranslation?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38262,7 +38262,7 @@ public typealias CustomHasAdditionalPenalties = [DerivedCharacteristic.ID: Custo
 
 public struct CustomAdditionalPenalty: Decodable, Equatable, Sendable {
   /// The value of the additional penalty.
-  let value: Int
+  public let value: Int
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -38311,10 +38311,10 @@ public enum ArmorType: Decodable, Equatable, Sendable {
 /// A standard armor.
 public struct StandardArmorType: Decodable, Equatable, Sendable {
   /// An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.
-  let sturdinessRating: Int
+  public let sturdinessRating: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<StandardArmorTypeTranslation>
+  public let translations: LocaleMap<StandardArmorTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case sturdinessRating = "sturdinessRating"
@@ -38331,7 +38331,7 @@ public struct StandardArmorType: Decodable, Equatable, Sendable {
 
 public struct StandardArmorTypeTranslation: Decodable, Equatable, Sendable {
   /// The name of this armor when referenced as the base of a variant in a note.
-  let nameInNote: String
+  public let nameInNote: String
 
   private enum CodingKeys: String, CodingKey {
     case nameInNote = "nameInNote"
@@ -38347,13 +38347,13 @@ public struct StandardArmorTypeTranslation: Decodable, Equatable, Sendable {
 /// The armor is a variant of a standard armor but still defines its own sturdiness rating and thus its own armor type.
 public struct StandardVariantArmorType: Decodable, Equatable, Sendable {
   /// The standard armor this armor is a variant of.
-  let variantOf: Armor.ID
+  public let variantOf: Armor.ID
 
   /// An armor type can have a *sturdiness rating*. The higher the rating, the more durable the armor. Rolling higher than this rating during a sturdiness check means the armor receives one level of the new condition *Wear*.
-  let sturdinessRating: Int
+  public let sturdinessRating: Int
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<StandardVariantArmorTypeTranslation>
+  public let translations: LocaleMap<StandardVariantArmorTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case variantOf = "variantOf"
@@ -38372,7 +38372,7 @@ public struct StandardVariantArmorType: Decodable, Equatable, Sendable {
 
 public struct StandardVariantArmorTypeTranslation: Decodable, Equatable, Sendable {
   /// The name of this armor when referenced as being a variant of another armor in a note.
-  let nameInNote: String
+  public let nameInNote: String
 
   private enum CodingKeys: String, CodingKey {
     case nameInNote = "nameInNote"
@@ -38388,10 +38388,10 @@ public struct StandardVariantArmorTypeTranslation: Decodable, Equatable, Sendabl
 /// The armor is a variant of a standard armor but also defines its own .
 public struct VariantArmorType: Decodable, Equatable, Sendable {
   /// The standard armor this armor is a variant of.
-  let variantOf: Armor.ID
+  public let variantOf: Armor.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<VariantArmorTypeTranslation>
+  public let translations: LocaleMap<VariantArmorTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case variantOf = "variantOf"
@@ -38408,7 +38408,7 @@ public struct VariantArmorType: Decodable, Equatable, Sendable {
 
 public struct VariantArmorTypeTranslation: Decodable, Equatable, Sendable {
   /// The name of this armor when referenced as being a variant of another armor in a note.
-  let nameInNote: String
+  public let nameInNote: String
 
   private enum CodingKeys: String, CodingKey {
     case nameInNote = "nameInNote"
@@ -38461,7 +38461,7 @@ public enum HitZone: Decodable, Equatable, Sendable {
 
 public struct HeadHitZone: Decodable, Equatable, Sendable {
   /// In some cases, multiple armors for the same hit zone can be combined. They're listed at the item that can be combined with others.
-  let combinationPossibilities: HeadHitZoneCombinationPossibilities?
+  public let combinationPossibilities: HeadHitZoneCombinationPossibilities?
 
   private enum CodingKeys: String, CodingKey {
     case combinationPossibilities = "combination_possibilities"
@@ -38476,10 +38476,10 @@ public struct HeadHitZone: Decodable, Equatable, Sendable {
 
 public struct HeadHitZoneCombinationPossibilities: Decodable, Equatable, Sendable {
   /// A list of armors that can be combined with this armor.
-  let armors: [Armor.ID]
+  public let armors: [Armor.ID]
 
   /// The PRO value that is added to the PRO value of the other armor instead of adding the normale PRO value.
-  let protection: Int?
+  public let protection: Int?
 
   private enum CodingKeys: String, CodingKey {
     case armors = "armors"
@@ -38500,28 +38500,28 @@ public struct ArmorAccessory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ArmorAccessoryTranslation>
+  public let translations: LocaleMap<ArmorAccessoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -38566,18 +38566,18 @@ public struct ArmorAccessory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ArmorAccessoryTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38628,16 +38628,16 @@ public enum CombatUse: Decodable, Equatable, Sendable {
 
 public struct ImprovisedWeapon: Decodable, Equatable, Sendable {
   /// A list of stat blocks for each close combat technique this weapon can be used with.
-  let meleeUses: [CloseCombatTechnique.ID: ImprovisedMeleeWeaponUse]?
+  public let meleeUses: [CloseCombatTechnique.ID: ImprovisedMeleeWeaponUse]?
 
   /// A list of stat blocks for each ranged combat technique this weapon can be used with.
-  let rangedUses: [RangedCombatTechnique.ID: ImprovisedRangedWeaponUse]?
+  public let rangedUses: [RangedCombatTechnique.ID: ImprovisedRangedWeaponUse]?
 
   /// Define if during character creation this weapon can only be bought by a specific subset of characters.
-  let restrictedTo: RestrictedTo?
+  public let restrictedTo: RestrictedTo?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ImprovisedWeaponTranslation>?
+  public let translations: LocaleMap<ImprovisedWeaponTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case meleeUses = "melee_uses"
@@ -38662,10 +38662,10 @@ public typealias ImprovisedRangedWeaponUse = RangedWeapon
 
 public struct ImprovisedWeaponTranslation: Decodable, Equatable, Sendable {
   /// The weapon advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The weapon disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   private enum CodingKeys: String, CodingKey {
     case advantage = "advantage"
@@ -38682,25 +38682,25 @@ public struct ImprovisedWeaponTranslation: Decodable, Equatable, Sendable {
 
 public struct SecondaryArmor: Decodable, Equatable, Sendable {
   /// The PRO value.
-  let protection: Protection
+  public let protection: Protection
 
   /// The ENC value.
-  let encumbrance: Encumbrance
+  public let encumbrance: Encumbrance
 
   /// Does the armor have additional penalties (MOV -1, INI -1)?
-  let hasAdditionalPenalties: HasAdditionalPenalties
+  public let hasAdditionalPenalties: HasAdditionalPenalties
 
   /// The armor type.
-  let armorType: ArmorType
+  public let armorType: ArmorType
 
   /// Specify if armor is only available for a specific hit zone.
-  let hitZone: HitZone?
+  public let hitZone: HitZone?
 
   /// Define if during character creation this armor can only be bought by a specific subset of characters.
-  let restrictedTo: RestrictedTo?
+  public let restrictedTo: RestrictedTo?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SecondaryArmorTranslation>?
+  public let translations: LocaleMap<SecondaryArmorTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case protection = "protection"
@@ -38727,10 +38727,10 @@ public struct SecondaryArmor: Decodable, Equatable, Sendable {
 
 public struct SecondaryArmorTranslation: Decodable, Equatable, Sendable {
   /// The armor advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The armor disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   private enum CodingKeys: String, CodingKey {
     case advantage = "advantage"
@@ -38751,28 +38751,28 @@ public struct BandageOrRemedy: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BandageOrRemedyTranslation>
+  public let translations: LocaleMap<BandageOrRemedyTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -38817,18 +38817,18 @@ public struct BandageOrRemedy: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BandageOrRemedyTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38855,7 +38855,7 @@ public struct Biome: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BiomeTranslation>
+  public let translations: LocaleMap<BiomeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -38886,7 +38886,7 @@ public struct Biome: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BiomeTranslation: Decodable, Equatable, Sendable {
   /// The biome's name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38908,10 +38908,10 @@ public struct SubBiome: Decodable, Equatable, Sendable, Identifiable, ChildEntit
   public let id: ID
 
   /// The biome this sub-biome belongs to.
-  let parent: Biome.ID
+  public let parent: Biome.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SubBiomeTranslation>
+  public let translations: LocaleMap<SubBiomeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -38944,7 +38944,7 @@ public struct SubBiome: Decodable, Equatable, Sendable, Identifiable, ChildEntit
 
 public struct SubBiomeTranslation: Decodable, Equatable, Sendable {
   /// The subbiome's name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -38966,10 +38966,10 @@ public struct BotanicRegion: Decodable, Equatable, Sendable, Identifiable, Child
   public let id: ID
 
   /// The subbiome this region belongs to.
-  let parent: SubBiome.ID
+  public let parent: SubBiome.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BotanicRegionTranslation>
+  public let translations: LocaleMap<BotanicRegionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -39002,7 +39002,7 @@ public struct BotanicRegion: Decodable, Equatable, Sendable, Identifiable, Child
 
 public struct BotanicRegionTranslation: Decodable, Equatable, Sendable {
   /// The region's name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -39021,37 +39021,37 @@ public struct Book: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The type of book.
-  let types: [BookType]
+  public let types: [BookType]
 
   /// The language(s) and script(s) the book is written in.
-  let languageAndScript: BookPrerequisites?
+  public let languageAndScript: BookPrerequisites?
 
   /// The cost in silverthalers.
-  let cost: BookCost
+  public let cost: BookCost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The quality of the book’s content.
-  let contentQuality: BookContentQuality?
+  public let contentQuality: BookContentQuality?
 
   /// Skills and abilities you can learn by reading the book, as well as any other rules and effects concerning the book.
-  let rules: BookRules?
+  public let rules: BookRules?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BookTranslation>
+  public let translations: LocaleMap<BookTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case types = "types"
@@ -39102,27 +39102,27 @@ public struct Book: Decodable, Equatable, Sendable, Identifiable {
 
 public struct BookTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// The language(s) and script(s) the book is written in.
-  let languageAndScript: String?
+  public let languageAndScript: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// The legality of the item, if specified.
-  let legality: String?
+  public let legality: String?
 
   /// The availability of the item, if specified.
-  let availability: String?
+  public let availability: String?
 
   /// Special properties or features of the item.
-  let special: String?
+  public let special: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -39284,10 +39284,10 @@ public enum BookPrerequisiteGroup: Decodable, Equatable, Sendable {
 
 public struct LanguagePrerequisite: Decodable, Equatable, Sendable {
   /// The language’s identifier.
-  let id: Language.ID
+  public let id: Language.ID
 
   /// The required minimum level of the language.
-  let level: Int
+  public let level: Int
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -39304,7 +39304,7 @@ public struct LanguagePrerequisite: Decodable, Equatable, Sendable {
 
 public struct ScriptPrerequisite: Decodable, Equatable, Sendable {
   /// The script’s identifier.
-  let id: Script.ID
+  public let id: Script.ID
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -39382,10 +39382,10 @@ public enum BookCostVariant: Decodable, Equatable, Sendable {
 /// A definite cost value for the book, such as a specific cost or cost range.
 public struct DefiniteBookCostVariant: Decodable, Equatable, Sendable {
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<DefiniteBookCostVariantTranslation>?
+  public let translations: LocaleMap<DefiniteBookCostVariantTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -39402,7 +39402,7 @@ public struct DefiniteBookCostVariant: Decodable, Equatable, Sendable {
 
 public struct DefiniteBookCostVariantTranslation: Decodable, Equatable, Sendable {
   /// The label for the cost variant, e.g. “Original script”.
-  let label: String?
+  public let label: String?
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -39418,7 +39418,7 @@ public struct DefiniteBookCostVariantTranslation: Decodable, Equatable, Sendable
 /// An indefinite cost value for the book, which means it is impossible to narrow the range of the cost value by any numbers.
 public struct IndefiniteBookCostVariant: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteBookCostVariantTranslation>
+  public let translations: LocaleMap<IndefiniteBookCostVariantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -39433,10 +39433,10 @@ public struct IndefiniteBookCostVariant: Decodable, Equatable, Sendable {
 
 public struct IndefiniteBookCostVariantTranslation: Decodable, Equatable, Sendable {
   /// The label for the cost variant, e.g. “Original script”.
-  let label: String?
+  public let label: String?
 
   /// The description of the cost variant, e.g. “less”.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -39520,7 +39520,7 @@ public enum BookRules: Decodable, Equatable, Sendable {
 /// The book’s rules without any special effects or conditions.
 public struct PlainBookRules: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PlainBookRulesTranslation>
+  public let translations: LocaleMap<PlainBookRulesTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -39535,16 +39535,16 @@ public struct PlainBookRules: Decodable, Equatable, Sendable {
 
 public struct PlainBookRulesTranslation: Decodable, Equatable, Sendable {
   /// The (main) rules text.
-  let text: String
+  public let text: String
 
   /// Rules for reconstructing certain skills or abilities from the book.
-  let reconstruction: String?
+  public let reconstruction: String?
 
   /// References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.
-  let references: String?
+  public let references: String?
 
   /// Additional rules text that comes after all other rules.
-  let textAfter: String?
+  public let textAfter: String?
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -39565,10 +39565,10 @@ public struct PlainBookRulesTranslation: Decodable, Equatable, Sendable {
 
 /// The book’s rules with differences between each edition and more differentiation between types of rules.
 public struct BookRulesByEdition: Decodable, Equatable, Sendable {
-  let editions: [BookRulesOfEdition]
+  public let editions: [BookRulesOfEdition]
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BookRulesByEditionTranslation>?
+  public let translations: LocaleMap<BookRulesByEditionTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case editions = "editions"
@@ -39585,7 +39585,7 @@ public struct BookRulesByEdition: Decodable, Equatable, Sendable {
 
 public struct BookRulesByEditionTranslation: Decodable, Equatable, Sendable {
   /// Additional rules text that comes after all other rules.
-  let textAfter: String?
+  public let textAfter: String?
 
   private enum CodingKeys: String, CodingKey {
     case textAfter = "textAfter"
@@ -39600,10 +39600,10 @@ public struct BookRulesByEditionTranslation: Decodable, Equatable, Sendable {
 
 public struct BookRulesOfEdition: Decodable, Equatable, Sendable {
   /// The language(s) and script(s) the book is written in.
-  let languageAndScript: BookPrerequisites?
+  public let languageAndScript: BookPrerequisites?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<BookRulesOfEditionTranslation>
+  public let translations: LocaleMap<BookRulesOfEditionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case languageAndScript = "languageAndScript"
@@ -39620,19 +39620,19 @@ public struct BookRulesOfEdition: Decodable, Equatable, Sendable {
 
 public struct BookRulesOfEditionTranslation: Decodable, Equatable, Sendable {
   /// The edition(s) the rules apply to.
-  let label: String
+  public let label: String
 
   /// The language(s) and script(s) the book is written in.
-  let languageAndScript: String?
+  public let languageAndScript: String?
 
   /// The rules text.
-  let text: String
+  public let text: String
 
   /// Rules for reconstructing certain skills or abilities from the book.
-  let reconstruction: String?
+  public let reconstruction: String?
 
   /// References to skills and abilities that, while mentioned in the book, cannot be learned from this book alone.
-  let references: String?
+  public let references: String?
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -39659,31 +39659,31 @@ public struct CeremonialItem: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The deity associated with the equipment item.
-  let associatedTradition: RestrictedToBlessedTraditionsScope
+  public let associatedTradition: RestrictedToBlessedTraditionsScope
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CeremonialItemTranslation>
+  public let translations: LocaleMap<CeremonialItemTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -39730,18 +39730,18 @@ public struct CeremonialItem: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CeremonialItemTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -39768,28 +39768,28 @@ public struct Clothes: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ClothesTranslation>
+  public let translations: LocaleMap<ClothesTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -39834,18 +39834,18 @@ public struct Clothes: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ClothesTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -39872,13 +39872,13 @@ public struct ClothingPackage: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The social status this clothing represents.
-  let socialStatus: SocialStatus.ID
+  public let socialStatus: SocialStatus.ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -39917,10 +39917,10 @@ public struct Condition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ConditionTranslation>
+  public let translations: LocaleMap<ConditionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case src = "src"
@@ -39953,15 +39953,15 @@ public struct Condition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ConditionTranslation: Decodable, Equatable, Sendable {
   /// The condition’s name.
-  let name: String
+  public let name: String
 
   /// Additional rules for the condition, if applicable.
-  let rules: String?
+  public let rules: String?
 
   /// The effects for level 1 to 4.
-  let effects: [4 of String]
+  public let effects: [4 of String]
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -39986,28 +39986,28 @@ public struct Container: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ContainerTranslation>
+  public let translations: LocaleMap<ContainerTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -40052,18 +40052,18 @@ public struct Container: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ContainerTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -40089,13 +40089,13 @@ public struct CoreRule: Decodable, Equatable, Sendable, Identifiable {
 
   public let id: ID
 
-  let content: [ContentNode]
+  public let content: [ContentNode]
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<CoreRuleTranslation>
+  public let translations: LocaleMap<CoreRuleTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case content = "content"
@@ -40130,9 +40130,9 @@ public struct CoreRule: Decodable, Equatable, Sendable, Identifiable {
 
 public struct CoreRuleTranslation: Decodable, Equatable, Sendable {
   /// The core rule’s name.
-  let name: String
+  public let name: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -40187,10 +40187,10 @@ public enum ContentNode: Decodable, Equatable, Sendable {
 /// A core rule nested inside this core rule. It may be displayed as a separate page or its content may be included in this rule's text, which will automatically generate a proper heading. No content node of a type other than `Child` should follow a child node, since then it may look like the the text may be part of the child node.
 public struct ChildNode: Decodable, Equatable, Sendable {
   /// The nested core rule’s identifier.
-  let id: CoreRule.ID
+  public let id: CoreRule.ID
 
   /// If the nested core rule's content should be integrated into this core rule and a proper heading should be added. Otherwise create a link to a separate view of that core rule.
-  let include: Bool
+  public let include: Bool
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -40208,7 +40208,7 @@ public struct ChildNode: Decodable, Equatable, Sendable {
 /// A simple text block, containing one or multiple paragraphs. Headings are not allowed, they should be handled as nested core rules instead.
 public struct TextNode: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TextNodeTranslation>
+  public let translations: LocaleMap<TextNodeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -40223,7 +40223,7 @@ public struct TextNode: Decodable, Equatable, Sendable {
 
 public struct TextNodeTranslation: Decodable, Equatable, Sendable {
   /// Markdown-formatted text.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -40239,7 +40239,7 @@ public struct TextNodeTranslation: Decodable, Equatable, Sendable {
 /// Generate the full text for a single entry as part of this core rule's text.
 public struct ReferenceNode: Decodable, Equatable, Sendable {
   /// The nested core rule’s identifier.
-  let id: CoreRuleDerivableContentIdentifier
+  public let id: CoreRuleDerivableContentIdentifier
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -40291,10 +40291,10 @@ public enum CoreRuleDerivableContentIdentifier: Decodable, Equatable, Sendable {
 
 /// Generate a list or table from a specific entity type.
 public struct ReferenceListNode: Decodable, Equatable, Sendable {
-  let source: ReferenceListNodeSource
+  public let source: ReferenceListNodeSource
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ReferenceListNodeTranslation>
+  public let translations: LocaleMap<ReferenceListNodeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case source = "source"
@@ -40311,7 +40311,7 @@ public struct ReferenceListNode: Decodable, Equatable, Sendable {
 
 public struct ReferenceListNodeTranslation: Decodable, Equatable, Sendable {
   /// Markdown-formatted text.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -40643,12 +40643,12 @@ public enum ReferenceListNodeSource: Decodable, Equatable, Sendable {
 
 public struct ReferenceListNodeImprovementCostSource: Decodable, Equatable, Sendable {
   /// Define if the cost for attributes or skills should be defined. The cost for attributes start with value 9, while the cost for skills start with 1 in addition to possible activation cost.
-  let target: ReferenceListNodeImprovementCostSourceTarget
+  public let target: ReferenceListNodeImprovementCostSourceTarget
 
   /// The highest value the improvement cost are displayed for.
   ///
   /// The minimum maximum value should depend on what is the upper bound of the range of adventure point cost that are equal across multiple values (value increases for attributes are always 15 up to (and including) value 14, while value increases for skills are always 1 to 4, depending on the improvement cost, up to (and including) value 12), since those ranges should be combined into a single table row.
-  let maximumRating: Int
+  public let maximumRating: Int
 
   private enum CodingKeys: String, CodingKey {
     case target = "target"
@@ -40696,31 +40696,31 @@ public struct Elixir: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Effect type(s) of an alchemical poison.
-  let effectTypes: [EffectType]?
+  public let effectTypes: [EffectType]?
 
   /// The raw (ingredients) value per level, in silverthalers.
-  let value: Int?
+  public let value: Int?
 
   /// The cost per ingredient level in silverthalers.
-  let costPerIngredientLevel: Int
+  public let costPerIngredientLevel: Int
 
   /// The laboratory level needed to brew the elixir.
-  let laboratory: LaboratoryLevel
+  public let laboratory: LaboratoryLevel
 
   /// The brewing difficulty, which represents the challenge of creating an elixir.
-  let brewingDifficulty: Int
+  public let brewingDifficulty: Int
 
   /// AP value and prerequisites of the elixir recipe’s trade secret.
-  let tradeSecret: RecipeTradeSecret?
+  public let tradeSecret: RecipeTradeSecret?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ElixirTranslationTranslation>
+  public let translations: LocaleMap<ElixirTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case effectTypes = "effect_types"
@@ -40767,27 +40767,27 @@ public struct Elixir: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ElixirTranslationTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// The recipe’s description.
-  let description: String?
+  public let description: String?
 
   /// Special information about the elixir.
-  let special: String?
+  public let special: String?
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// A list of typical ingredients.
-  let typicalIngredients: [String]
+  public let typicalIngredients: [String]
 
   /// Prerequsites for the brewing process, if any.
-  let brewingProcessPrerequisites: String?
+  public let brewingProcessPrerequisites: String?
 
   /// The effect description may be either a plain text or a text that is divided by a list of effects for each quality level.
-  let qualityLevels: ElixirEffect
+  public let qualityLevels: ElixirEffect
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -40844,7 +40844,7 @@ public enum ElixirEffect: Decodable, Equatable, Sendable {
 
 public struct ElixirPlainEffect: Decodable, Equatable, Sendable {
   /// The effect description.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -40859,7 +40859,7 @@ public struct ElixirPlainEffect: Decodable, Equatable, Sendable {
 
 public struct ElixirEffectForEachQualityLevel: Decodable, Equatable, Sendable {
   /// The list of effects for each quality level. The first element represents QL 1, the second element QL 2, and so on.
-  let qualityLevels: [6 of String]
+  public let qualityLevels: [6 of String]
 
   private enum CodingKeys: String, CodingKey {
     case qualityLevels = "qualityLevels"
@@ -40878,13 +40878,13 @@ public struct EquipmentCategory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The position of the category in the list. This has to be a unique value.
-  let position: Int
+  public let position: Int
 
   /// The type of the equipment category.
-  let type: EquipmentCategoryType
+  public let type: EquipmentCategoryType
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<EquipmentCategoryTranslation>
+  public let translations: LocaleMap<EquipmentCategoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case position = "position"
@@ -40919,7 +40919,7 @@ public struct EquipmentCategory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct EquipmentCategoryTranslation: Decodable, Equatable, Sendable {
   /// The equipment category’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -40964,22 +40964,22 @@ public enum EquipmentCategoryType: Decodable, Equatable, Sendable {
 
 public struct DefaultEquipmentCategoryTypeRules: Decodable, Equatable, Sendable {
   /// The combat values that are allowed for this category. If any combat value is allowed and used, advantages, disadvantages and known item specifics are also allowed to be defined for the item.
-  let combatValues: AllowedCombatValues
+  public let combatValues: AllowedCombatValues
 
   /// Presence of restrictions to certain groups for items in this category.
-  let restrictedTo: ValueRule
+  public let restrictedTo: ValueRule
 
   /// Presence of structure points to certain groups for items in this category.
-  let structurePoints: ValueRule
+  public let structurePoints: ValueRule
 
   /// Presence of weight to certain groups for items in this category.
-  let weight: ValueRule
+  public let weight: ValueRule
 
   /// Presence of complexity to certain groups for items in this category.
-  let complexity: ValueRule
+  public let complexity: ValueRule
 
   /// Presence of burning time to certain groups for items in this category.
-  let burningTime: ValueRule
+  public let burningTime: ValueRule
 
   private enum CodingKeys: String, CodingKey {
     case combatValues = "combatValues"
@@ -41005,10 +41005,10 @@ public struct DefaultEquipmentCategoryTypeRules: Decodable, Equatable, Sendable 
 /// The combat values that are allowed for this category. If any combat value is allowed and used, advantages, disadvantages and known item specifics are also allowed to be defined for the item.
 public struct AllowedCombatValues: Decodable, Equatable, Sendable {
   /// Is the item allowed to be used as a weapon?
-  let isWeaponAllowed: Bool
+  public let isWeaponAllowed: Bool
 
   /// Is the item allowed to be used as an armor?
-  let isArmorAllowed: Bool
+  public let isArmorAllowed: Bool
 
   private enum CodingKeys: String, CodingKey {
     case isWeaponAllowed = "isWeaponAllowed"
@@ -41119,25 +41119,25 @@ public struct EquipmentOfBlessedOnes: Decodable, Equatable, Sendable, Identifiab
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The traditions this item is associated with.
-  let associatedTraditions: [AssociatedTradition]
+  public let associatedTraditions: [AssociatedTradition]
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<EquipmentOfBlessedOnesTranslation>
+  public let translations: LocaleMap<EquipmentOfBlessedOnesTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -41180,18 +41180,18 @@ public struct EquipmentOfBlessedOnes: Decodable, Equatable, Sendable, Identifiab
 
 public struct EquipmentOfBlessedOnesTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -41245,13 +41245,13 @@ public struct EquipmentPackage: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All items in the package. You have to provide the item (template) identifier and you can optionally provide the number of how often an item is included in the package.
-  let items: [EquipmentPackageItem]?
+  public let items: [EquipmentPackageItem]?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<EquipmentPackageTranslation>
+  public let translations: LocaleMap<EquipmentPackageTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case items = "items"
@@ -41286,7 +41286,7 @@ public struct EquipmentPackage: Decodable, Equatable, Sendable, Identifiable {
 
 public struct EquipmentPackageTranslation: Decodable, Equatable, Sendable {
   /// The equipment package’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -41301,10 +41301,10 @@ public struct EquipmentPackageTranslation: Decodable, Equatable, Sendable {
 
 public struct EquipmentPackageItem: Decodable, Equatable, Sendable {
   /// The item’s identifier.
-  let id: EquipmentIdentifier
+  public let id: EquipmentIdentifier
 
   /// The number of how often the item is included in the package.
-  let number: Int?
+  public let number: Int?
 
   private enum CodingKeys: String, CodingKey {
     case id = "id"
@@ -41517,22 +41517,22 @@ public struct GemOrPreciousStone: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The associated property.
-  let property: GemOrPreviousStoneProperty?
+  public let property: GemOrPreviousStoneProperty?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<GemOrPreciousStoneTranslation>
+  public let translations: LocaleMap<GemOrPreciousStoneTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -41573,21 +41573,21 @@ public struct GemOrPreciousStone: Decodable, Equatable, Sendable, Identifiable {
 
 public struct GemOrPreciousStoneTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// The color of the gem or stone.
-  let color: String?
+  public let color: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -41612,10 +41612,10 @@ public struct GemOrPreciousStoneTranslation: Decodable, Equatable, Sendable {
 
 public struct GemOrPreviousStoneProperty: Decodable, Equatable, Sendable {
   /// The associated property.
-  let base: Property.ID
+  public let base: Property.ID
 
   /// The associated property specialization.
-  let specialization: AnyPropertySpecializationIdentifier?
+  public let specialization: AnyPropertySpecializationIdentifier?
 
   private enum CodingKeys: String, CodingKey {
     case base = "base"
@@ -41636,31 +41636,31 @@ public struct IlluminationLightSource: Decodable, Equatable, Sendable, Identifia
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The burning time is the time how long the light source can be lit. After that time you have to use a new light source.
-  let burningTime: BurningTime
+  public let burningTime: BurningTime
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IlluminationLightSourceTranslation>
+  public let translations: LocaleMap<IlluminationLightSourceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -41707,18 +41707,18 @@ public struct IlluminationLightSource: Decodable, Equatable, Sendable, Identifia
 
 public struct IlluminationLightSourceTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -41768,10 +41768,10 @@ public enum BurningTime: Decodable, Equatable, Sendable {
 
 public struct LimitedBurningTime: Decodable, Equatable, Sendable {
   /// The (unitless) time value.
-  let value: Float
+  public let value: Float
 
   /// The time unit.
-  let unit: LimitedBurningTimeUnit
+  public let unit: LimitedBurningTimeUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -41814,28 +41814,28 @@ public struct IlluminationRefillOrSupply: Decodable, Equatable, Sendable, Identi
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IlluminationRefillOrSupplyTranslation>
+  public let translations: LocaleMap<IlluminationRefillOrSupplyTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -41880,18 +41880,18 @@ public struct IlluminationRefillOrSupply: Decodable, Equatable, Sendable, Identi
 
 public struct IlluminationRefillOrSupplyTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -41918,28 +41918,28 @@ public struct ItemComponent: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: ItemComponentCost
+  public let cost: ItemComponentCost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The items the component can be applied to.
-  let applicableItems: ApplicableItems
+  public let applicableItems: ApplicableItems
 
   /// Other components this component is not compatible with.
-  let incompatibleWith: [ItemComponent.ID]?
+  public let incompatibleWith: [ItemComponent.ID]?
 
   /// Special rules for the item component.
-  let rules: ItemComponentRules?
+  public let rules: ItemComponentRules?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ItemComponentTranslation>
+  public let translations: LocaleMap<ItemComponentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -41984,15 +41984,15 @@ public struct ItemComponent: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ItemComponentTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
   /// The items the component can be applied to. Used if the generated text is not sufficient.
-  let applicableItems: String?
+  public let applicableItems: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -42020,13 +42020,13 @@ public struct ItemComponentOption: Decodable, Equatable, Sendable, Identifiable,
   public let id: ID
 
   /// The item component this option belongs to.
-  let parent: ItemComponent.ID
+  public let parent: ItemComponent.ID
 
   /// The cost in silverthalers.
-  let cost: Float
+  public let cost: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ItemComponentOptionTranslation>
+  public let translations: LocaleMap<ItemComponentOptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case parent = "parent"
@@ -42061,7 +42061,7 @@ public struct ItemComponentOption: Decodable, Equatable, Sendable, Identifiable,
 
 public struct ItemComponentOptionTranslation: Decodable, Equatable, Sendable {
   /// The label for the option.
-  let label: String
+  public let label: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -42121,10 +42121,10 @@ public enum ItemComponentCost: Decodable, Equatable, Sendable {
 
 public struct ItemComponentCostByCombatTechnique: Decodable, Equatable, Sendable {
   /// The cost in silverthalers for close combat techniques.
-  let close: [CloseCombatTechnique.ID: ItemComponentCostByCloseCombatTechnique]?
+  public let close: [CloseCombatTechnique.ID: ItemComponentCostByCloseCombatTechnique]?
 
   /// The cost in silverthalers for ranged combat techniques.
-  let ranged: [RangedCombatTechnique.ID: ItemComponentCostByRangedCombatTechnique]?
+  public let ranged: [RangedCombatTechnique.ID: ItemComponentCostByRangedCombatTechnique]?
 
   private enum CodingKeys: String, CodingKey {
     case close = "close"
@@ -42141,10 +42141,10 @@ public struct ItemComponentCostByCombatTechnique: Decodable, Equatable, Sendable
 
 public struct ItemComponentCostByCloseCombatTechnique: Decodable, Equatable, Sendable {
   /// The cost in silverthalers for the close combat technique.
-  let value: Float
+  public let value: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ItemComponentCostByCloseCombatTechniqueTranslation>?
+  public let translations: LocaleMap<ItemComponentCostByCloseCombatTechniqueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -42163,10 +42163,10 @@ public typealias ItemComponentCostByCloseCombatTechniqueTranslation = ItemCompon
 
 public struct ItemComponentCostByRangedCombatTechnique: Decodable, Equatable, Sendable {
   /// The cost in silverthalers for the ranged combat technique.
-  let value: Float
+  public let value: Float
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ItemComponentCostByRangedCombatTechniqueTranslation>?
+  public let translations: LocaleMap<ItemComponentCostByRangedCombatTechniqueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -42185,7 +42185,7 @@ public typealias ItemComponentCostByRangedCombatTechniqueTranslation = ItemCompo
 
 public struct ItemComponentCostByCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The label for cost, if different from the name of the combat technique.
-  let label: String
+  public let label: String
 
   private enum CodingKeys: String, CodingKey {
     case label = "label"
@@ -42238,13 +42238,13 @@ public enum ApplicableItems: Decodable, Equatable, Sendable {
 
 public struct ApplicableMeleeWeapons: Decodable, Equatable, Sendable {
   /// Specific weapons this component can be applied to.
-  let weapons: [Weapon.ID]?
+  public let weapons: [Weapon.ID]?
 
   /// Weapons of combat techniques this component can be applied to.
-  let combatTechniques: [ApplicableMeleeCombatTechnique]?
+  public let combatTechniques: [ApplicableMeleeCombatTechnique]?
 
   /// The category of weapons this component can be applied to.
-  let category: ApplicableMeleeWeaponCategory?
+  public let category: ApplicableMeleeWeaponCategory?
 
   private enum CodingKeys: String, CodingKey {
     case weapons = "weapons"
@@ -42263,10 +42263,10 @@ public struct ApplicableMeleeWeapons: Decodable, Equatable, Sendable {
 
 public struct ApplicableMeleeCombatTechnique: Decodable, Equatable, Sendable {
   /// The combat technique this component can be applied to.
-  let combatTechnique: CloseCombatTechnique.ID
+  public let combatTechnique: CloseCombatTechnique.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ApplicableMeleeCombatTechniqueTranslation>?
+  public let translations: LocaleMap<ApplicableMeleeCombatTechniqueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case combatTechnique = "combatTechnique"
@@ -42283,7 +42283,7 @@ public struct ApplicableMeleeCombatTechnique: Decodable, Equatable, Sendable {
 
 public struct ApplicableMeleeCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The name that should be displayed if the name of combat technique should not be used.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -42330,16 +42330,16 @@ public enum ApplicableMeleeWeaponCategory: Decodable, Equatable, Sendable {
 
 public struct ApplicableRangedWeapons: Decodable, Equatable, Sendable {
   /// Specific weapons this component can be applied to.
-  let weapons: [Weapon.ID]?
+  public let weapons: [Weapon.ID]?
 
   /// Weapons of combat techniques this component can be applied to.
-  let combatTechniques: [ApplicableRangedCombatTechnique]?
+  public let combatTechniques: [ApplicableRangedCombatTechnique]?
 
   /// The minimum reload time a crossbow must have for it to be compatible with this component.
-  let minimumReloadTime: Int?
+  public let minimumReloadTime: Int?
 
   /// Whether the crossbow must use bullets to be compatible with this component.
-  let usesBullets: Bool?
+  public let usesBullets: Bool?
 
   private enum CodingKeys: String, CodingKey {
     case weapons = "weapons"
@@ -42360,10 +42360,10 @@ public struct ApplicableRangedWeapons: Decodable, Equatable, Sendable {
 
 public struct ApplicableRangedCombatTechnique: Decodable, Equatable, Sendable {
   /// The combat technique this component can be applied to.
-  let combatTechnique: RangedCombatTechnique.ID
+  public let combatTechnique: RangedCombatTechnique.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ApplicableRangedCombatTechniqueTranslation>?
+  public let translations: LocaleMap<ApplicableRangedCombatTechniqueTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case combatTechnique = "combatTechnique"
@@ -42380,7 +42380,7 @@ public struct ApplicableRangedCombatTechnique: Decodable, Equatable, Sendable {
 
 public struct ApplicableRangedCombatTechniqueTranslation: Decodable, Equatable, Sendable {
   /// The name that should be displayed if the name of combat technique should not be used.
-  let text: String
+  public let text: String
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -42395,13 +42395,13 @@ public struct ApplicableRangedCombatTechniqueTranslation: Decodable, Equatable, 
 
 public struct ApplicableAmmunition: Decodable, Equatable, Sendable {
   /// Specific ammunition this component can be applied to.
-  let ammunition: [SpecialAmmunition.ID]?
+  public let ammunition: [SpecialAmmunition.ID]?
 
   /// Whether the list of ammunition is inverted, i.e. whether the component can be applied to all ammunition – or those of the specified category – except for the listed ammunition.
-  let invertAmmunition: Bool?
+  public let invertAmmunition: Bool?
 
   /// The category of weapons this component can be applied to.
-  let category: ApplicableAmmunitionCategory?
+  public let category: ApplicableAmmunitionCategory?
 
   private enum CodingKeys: String, CodingKey {
     case ammunition = "ammunition"
@@ -42424,22 +42424,22 @@ public struct SpecialAmmunition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The base ammunition type that is affected by this specialization.
-  let applicableTo: [Ammunition.ID]
+  public let applicableTo: [Ammunition.ID]
 
   /// The cost modifier for the base price of affected ammunition.
-  let costModifier: Int
+  public let costModifier: Int
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SpecialAmmunitionTranslation>
+  public let translations: LocaleMap<SpecialAmmunitionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case applicableTo = "applicableTo"
@@ -42480,18 +42480,18 @@ public struct SpecialAmmunition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SpecialAmmunitionTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -42536,10 +42536,10 @@ public enum ApplicableAmmunitionCategory: Decodable, Equatable, Sendable {
 
 public struct ApplicableArmor: Decodable, Equatable, Sendable {
   /// Specific armor this component can be applied to.
-  let armor: [Armor.ID]?
+  public let armor: [Armor.ID]?
 
   /// The category of weapons this component can be applied to.
-  let category: ApplicableArmorCategory?
+  public let category: ApplicableArmorCategory?
 
   private enum CodingKeys: String, CodingKey {
     case armor = "armor"
@@ -42577,7 +42577,7 @@ public enum ApplicableArmorCategory: Decodable, Equatable, Sendable {
 }
 
 public struct ItemComponentRules: Decodable, Equatable, Sendable {
-  let baseItemModifications: ItemComponentBaseItemModifications?
+  public let baseItemModifications: ItemComponentBaseItemModifications?
 
   private enum CodingKeys: String, CodingKey {
     case baseItemModifications = "baseItemModifications"
@@ -42592,31 +42592,31 @@ public struct ItemComponentRules: Decodable, Equatable, Sendable {
 
 public struct ItemComponentBaseItemModifications: Decodable, Equatable, Sendable {
   /// The damage points added to the damage points of the base item. Negative values lower the damage points.
-  let damagePoints: Int?
+  public let damagePoints: Int?
 
   /// The attack modifier added to the attack modifier of the base item. Negative values lower the attack modifier.
-  let attackModifier: Int?
+  public let attackModifier: Int?
 
   /// The parry modifier added to the parry modifier of the base item. Negative values lower the parry modifier.
-  let parryModifier: Int?
+  public let parryModifier: Int?
 
   /// The protection added to the protection of the base item. Negative values lower the protection.
-  let protection: Int?
+  public let protection: Int?
 
   /// The encumbrance added to the encumbrance of the base item. Negative values lower the encumbrance.
-  let encumbrance: Int?
+  public let encumbrance: Int?
 
   /// The range added to the range of the base item. Negative values lower the range.
-  let range: Int?
+  public let range: Int?
 
   /// The reload time added to the reload time of the base item. Negative values lower the reload time.
-  let reloadTime: Int?
+  public let reloadTime: Int?
 
   /// The weight added to the weight of the base item. Negative values lower the weight.
-  let weight: Float?
+  public let weight: Float?
 
   /// The breaking point rating added to the breaking point rating of the base item. Negative values lower the breaking point rating.
-  let breakingPointRating: Int?
+  public let breakingPointRating: Int?
 
   private enum CodingKeys: String, CodingKey {
     case damagePoints = "damagePoints"
@@ -42651,25 +42651,25 @@ public struct Jewelry: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: JewelryMaterialDifference<Float>
+  public let cost: JewelryMaterialDifference<Float>
 
   /// The weight in kg.
-  let weight: JewelryMaterialDifference<Weight>
+  public let weight: JewelryMaterialDifference<Weight>
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<JewelryTranslation>
+  public let translations: LocaleMap<JewelryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -42712,18 +42712,18 @@ public struct Jewelry: Decodable, Equatable, Sendable, Identifiable {
 
 public struct JewelryTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -42746,9 +42746,9 @@ public struct JewelryTranslation: Decodable, Equatable, Sendable {
 
 /// Jewelry can have different values for a property based on the material.
 public struct JewelryMaterialDifference<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let bronze: T
-  let silver: T
-  let gold: T
+  public let bronze: T
+  public let silver: T
+  public let gold: T
 
   private enum CodingKeys: String, CodingKey {
     case bronze = "bronze"
@@ -42771,25 +42771,25 @@ public struct Laboratory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The level of the laboratory.
-  let level: Int
+  public let level: Int
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LaboratoryTranslation>
+  public let translations: LocaleMap<LaboratoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -42832,18 +42832,18 @@ public struct Laboratory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LaboratoryTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -42870,28 +42870,28 @@ public struct Liebesspielzeug: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LiebesspielzeugTranslation>
+  public let translations: LocaleMap<LiebesspielzeugTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -42936,18 +42936,18 @@ public struct Liebesspielzeug: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LiebesspielzeugTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -42974,28 +42974,28 @@ public struct LuxuryGood: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<LuxuryGoodTranslation>
+  public let translations: LocaleMap<LuxuryGoodTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43040,18 +43040,18 @@ public struct LuxuryGood: Decodable, Equatable, Sendable, Identifiable {
 
 public struct LuxuryGoodTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43078,28 +43078,28 @@ public struct MagicalArtifact: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MagicalArtifactTranslation>
+  public let translations: LocaleMap<MagicalArtifactTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43144,33 +43144,33 @@ public struct MagicalArtifact: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MagicalArtifactTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Description text.
-  let description: String?
+  public let description: String?
 
   /// A note.
-  let note: String?
+  public let note: String?
 
   /// Rules text.
-  let rules: String?
+  public let rules: String?
 
   /// Effect text.
-  let effect: String?
+  public let effect: String?
 
   /// Cost text.
-  let cost: String?
+  public let cost: String?
 
   /// How to trigger the effect of the artifact.
-  let trigger: String?
+  public let trigger: String?
 
   /// The type of artifact.
-  let type: String?
+  public let type: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43207,28 +43207,28 @@ public struct MusicalInstrument: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MusicalInstrumentTranslation>
+  public let translations: LocaleMap<MusicalInstrumentTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43273,18 +43273,18 @@ public struct MusicalInstrument: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MusicalInstrumentTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43311,13 +43311,13 @@ public struct Newspaper: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<NewspaperTranslation>
+  public let translations: LocaleMap<NewspaperTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43352,13 +43352,13 @@ public struct Newspaper: Decodable, Equatable, Sendable, Identifiable {
 
 public struct NewspaperTranslation: Decodable, Equatable, Sendable {
   /// The newspaper’s name.
-  let name: String
+  public let name: String
 
   /// The topics covered by the newspaper.
-  let topics: [String]
+  public let topics: [String]
 
   /// The place the newspaper is published.
-  let placeOfPublication: String
+  public let placeOfPublication: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43381,28 +43381,28 @@ public struct OrienteeringAid: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<OrienteeringAidTranslation>
+  public let translations: LocaleMap<OrienteeringAidTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43447,18 +43447,18 @@ public struct OrienteeringAid: Decodable, Equatable, Sendable, Identifiable {
 
 public struct OrienteeringAidTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43485,28 +43485,28 @@ public struct RopeOrChain: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<RopeOrChainTranslation>
+  public let translations: LocaleMap<RopeOrChainTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43551,18 +43551,18 @@ public struct RopeOrChain: Decodable, Equatable, Sendable, Identifiable {
 
 public struct RopeOrChainTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43589,28 +43589,28 @@ public struct Stationery: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<StationeryTranslation>
+  public let translations: LocaleMap<StationeryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43655,18 +43655,18 @@ public struct Stationery: Decodable, Equatable, Sendable, Identifiable {
 
 public struct StationeryTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43693,28 +43693,28 @@ public struct ThievesTool: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ThievesToolTranslation>
+  public let translations: LocaleMap<ThievesToolTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43759,18 +43759,18 @@ public struct ThievesTool: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ThievesToolTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43797,25 +43797,25 @@ public struct ToolOfTheTrade: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ToolOfTheTradeTranslation>
+  public let translations: LocaleMap<ToolOfTheTradeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43858,18 +43858,18 @@ public struct ToolOfTheTrade: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ToolOfTheTradeTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -43896,28 +43896,28 @@ public struct TravelGearOrTool: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TravelGearOrToolTranslation>
+  public let translations: LocaleMap<TravelGearOrToolTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -43962,18 +43962,18 @@ public struct TravelGearOrTool: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TravelGearOrToolTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44000,22 +44000,22 @@ public struct Vehicle: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<VehicleTranslation>
+  public let translations: LocaleMap<VehicleTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44056,18 +44056,18 @@ public struct Vehicle: Decodable, Equatable, Sendable, Identifiable {
 
 public struct VehicleTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44094,28 +44094,28 @@ public struct WeaponAccessory: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight?
+  public let weight: Weight?
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints?
+  public let structurePoints: StructurePoints?
 
   /// The item can also be used either as an improvised weapon or as an armor, although this is not the primary use case of the item.
-  let combatUse: CombatUse?
+  public let combatUse: CombatUse?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<WeaponAccessoryTranslation>
+  public let translations: LocaleMap<WeaponAccessoryTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44160,18 +44160,18 @@ public struct WeaponAccessory: Decodable, Equatable, Sendable, Identifiable {
 
 public struct WeaponAccessoryTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44198,13 +44198,13 @@ public struct WorkingSupernaturalCreature: Decodable, Equatable, Sendable, Ident
   public let id: ID
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<WorkingSupernaturalCreatureTranslation>
+  public let translations: LocaleMap<WorkingSupernaturalCreatureTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44239,18 +44239,18 @@ public struct WorkingSupernaturalCreature: Decodable, Equatable, Sendable, Ident
 
 public struct WorkingSupernaturalCreatureTranslation: Decodable, Equatable, Sendable {
   /// The working creature’s name.
-  let name: String
+  public let name: String
 
   /// The working creature’s appearance.
-  let appearance: String
+  public let appearance: String
 
   /// The working creature’s components.
-  let components: String
+  public let components: String
 
   /// The working creature’s use.
-  let use: String
+  public let use: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44279,27 +44279,27 @@ public struct FamiliarsTrick: Decodable, Equatable, Sendable, Identifiable {
   /// The animal types this trick is available to. Either it is available to all or only a list of specific animal types.
   ///
   /// If no animal types are given, the familiars trick applies to all animal types.
-  let animalTypes: [AnimalType.ID]
+  public let animalTypes: [AnimalType.ID]
 
   /// The magical traditions whose familiars can use this trick. Either it is available to all or only a list of specific traditions.
   ///
   /// If no traditions are given, the familiars trick is not restricted by the magical tradition at all.
-  let traditions: [MagicalTradition.ID]?
+  public let traditions: [MagicalTradition.ID]?
 
   /// Measurable parameters of a familiar’s trick.
-  let parameters: FamiliarsTrickPerformanceParameters
+  public let parameters: FamiliarsTrickPerformanceParameters
 
   /// The associated property.
-  let property: FamiliarsTrickProperty
+  public let property: FamiliarsTrickProperty
 
   /// The AP value the familiar has to pay for. It may also be that a specific is known by all familiar by default. In the latter case the field is not set.
-  let apValue: Int?
+  public let apValue: Int?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<FamiliarsTrickTranslation>
+  public let translations: LocaleMap<FamiliarsTrickTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case animalTypes = "animal_types"
@@ -44342,21 +44342,21 @@ public struct FamiliarsTrick: Decodable, Equatable, Sendable, Identifiable {
 
 public struct FamiliarsTrickTranslation: Decodable, Equatable, Sendable {
   /// The familiar’s trick’s name.
-  let name: String
+  public let name: String
 
   /// For some traditions, the name of the familiar’s trick is different.
-  let nameByTradition: FamiliarsTrickNameByTradition?
+  public let nameByTradition: FamiliarsTrickNameByTradition?
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
   @available(*, deprecated)
-  let cost: OldParameter?
+  public let cost: OldParameter?
 
   @available(*, deprecated)
-  let duration: OldParameter?
+  public let duration: OldParameter?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44413,8 +44413,8 @@ public enum FamiliarsTrickPerformanceParameters: Decodable, Equatable, Sendable 
 }
 
 public struct FamiliarsTrickOneTimePerformanceParameters: Decodable, Equatable, Sendable {
-  let cost: FamiliarsTrickOneTimeCost
-  let duration: FamiliarsTrickOneTimeDuration
+  public let cost: FamiliarsTrickOneTimeCost
+  public let duration: FamiliarsTrickOneTimeDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44463,16 +44463,16 @@ public enum FamiliarsTrickOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct FamiliarsTrickFixedOneTimeCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The LP cost value.
-  let lpValue: Int?
+  public let lpValue: Int?
 
   /// The interval in which you have to pay the AE cost again.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   /// The cost have to be per a specific countable entity, e.g. `8 KP per person`.
-  let per: NonModifiableOneTimeCostPerCountable?
+  public let per: NonModifiableOneTimeCostPerCountable?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -44493,7 +44493,7 @@ public struct FamiliarsTrickFixedOneTimeCost: Decodable, Equatable, Sendable {
 
 public struct FamiliarsTrickAllOneTimeCost: Decodable, Equatable, Sendable {
   /// The minimum AE the familiar has to have/spend.
-  let minimum: Int?
+  public let minimum: Int?
 
   private enum CodingKeys: String, CodingKey {
     case minimum = "minimum"
@@ -44539,7 +44539,7 @@ public enum FamiliarsTrickOneTimeDuration: Decodable, Equatable, Sendable {
 }
 
 public struct FamiliarsTrickOneTimeIntervalPerformanceParameters: Decodable, Equatable, Sendable {
-  let cost: FamiliarsTrickOneTimeIntervalCost
+  public let cost: FamiliarsTrickOneTimeIntervalCost
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44554,10 +44554,10 @@ public struct FamiliarsTrickOneTimeIntervalPerformanceParameters: Decodable, Equ
 
 public struct FamiliarsTrickOneTimeIntervalCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The duration granted/added by paying the given AE cost.
-  let interval: DurationUnitValue
+  public let interval: DurationUnitValue
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -44573,7 +44573,7 @@ public struct FamiliarsTrickOneTimeIntervalCost: Decodable, Equatable, Sendable 
 }
 
 public struct FamiliarsTrickSustainedPerformanceParameters: Decodable, Equatable, Sendable {
-  let cost: FamiliarsTrickSustainedCost
+  public let cost: FamiliarsTrickSustainedCost
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -44588,10 +44588,10 @@ public struct FamiliarsTrickSustainedPerformanceParameters: Decodable, Equatable
 
 public struct FamiliarsTrickSustainedCost: Decodable, Equatable, Sendable {
   /// The AE cost value.
-  let value: Int
+  public let value: Int
 
   /// The interval in which you have to pay the AE cost again.
-  let interval: DurationUnitValue?
+  public let interval: DurationUnitValue?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -44635,7 +44635,7 @@ public enum FamiliarsTrickProperty: Decodable, Equatable, Sendable {
 
 public struct IndefiniteFamiliarsTrickProperty: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteFamiliarsTrickPropertyTranslation>?
+  public let translations: LocaleMap<IndefiniteFamiliarsTrickPropertyTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -44650,7 +44650,7 @@ public struct IndefiniteFamiliarsTrickProperty: Decodable, Equatable, Sendable {
 
 public struct IndefiniteFamiliarsTrickPropertyTranslation: Decodable, Equatable, Sendable {
   /// A description of the property.
-  let description: ResponsiveText
+  public let description: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -44667,7 +44667,7 @@ public typealias FamiliarsTrickNameByTradition = [MagicalTradition.ID: Familiars
 
 public struct FamiliarsTrickNameForTradition: Decodable, Equatable, Sendable {
   /// The familiar’s trick’s name for this tradition.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44686,25 +44686,25 @@ public struct HerbalAid: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The plant types this aid belongs to.
-  let types: [EffectType]
+  public let types: [EffectType]
 
   /// The difficulty for this aid to craft.
-  let craftingDifficulty: Int?
+  public let craftingDifficulty: Int?
 
   /// AP value and prerequisites of the herbal aid�s trade secret.
-  let tradeSecret: RecipeTradeSecret?
+  public let tradeSecret: RecipeTradeSecret?
 
   /// The armor or weapon this herbal aid represents.
-  let combatUse: HerbalAidCombatUse?
+  public let combatUse: HerbalAidCombatUse?
 
   /// How long this herbal aid lasts.
-  let longevity: HerbalPreservationLongevity?
+  public let longevity: HerbalPreservationLongevity?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HerbalAidTranslation>
+  public let translations: LocaleMap<HerbalAidTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case types = "types"
@@ -44747,16 +44747,16 @@ public struct HerbalAid: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HerbalAidTranslation: Decodable, Equatable, Sendable {
   /// The herbal aid's name.
-  let name: String
+  public let name: String
 
   /// The herbal aid's description.
-  let description: String?
+  public let description: String?
 
   /// The ingredients used to craft this herbal aid.
-  let ingredients: [String]
+  public let ingredients: [String]
 
   /// The typical tools used to craft this.
-  let typicalTools: [String]?
+  public let typicalTools: [String]?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -44831,13 +44831,13 @@ public enum HerbalPreservationLongevity: Decodable, Equatable, Sendable {
 
 public struct ExpressionBasedHerbalPreservationLongevity: Decodable, Equatable, Sendable {
   /// An expression that evaluates to the duration.
-  let value: HerbalPreservationLongevityExpression
+  public let value: HerbalPreservationLongevityExpression
 
   /// The duration unit.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ExpressionHerbalPreservationLongevityTranslation>?
+  public let translations: LocaleMap<ExpressionHerbalPreservationLongevityTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -44856,7 +44856,7 @@ public struct ExpressionBasedHerbalPreservationLongevity: Decodable, Equatable, 
 
 public struct ExpressionHerbalPreservationLongevityTranslation: Decodable, Equatable, Sendable {
   /// A replacement string.
-  let replacement: ResponsiveTextReplace
+  public let replacement: ResponsiveTextReplace
 
   private enum CodingKeys: String, CodingKey {
     case replacement = "replacement"
@@ -44900,7 +44900,7 @@ public enum HerbalPreservationLongevityValue: Decodable, Equatable, Sendable {
 
 public struct IndefiniteHerbalPreservationLongevity: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteHerbalPreservationLongevityTranslation>
+  public let translations: LocaleMap<IndefiniteHerbalPreservationLongevityTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -44915,7 +44915,7 @@ public struct IndefiniteHerbalPreservationLongevity: Decodable, Equatable, Senda
 
 public struct IndefiniteHerbalPreservationLongevityTranslation: Decodable, Equatable, Sendable {
   /// A text describing the duration.
-  let text: ResponsiveText
+  public let text: ResponsiveText
 
   private enum CodingKeys: String, CodingKey {
     case text = "text"
@@ -44934,16 +44934,16 @@ public struct HerbalPreservation: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The types of this preservation.
-  let types: [EffectType]
+  public let types: [EffectType]
 
   /// How long this preservation lasts.
-  let longevity: HerbalPreservationLongevity
+  public let longevity: HerbalPreservationLongevity
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HerbalPreservationTranslation>
+  public let translations: LocaleMap<HerbalPreservationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case types = "types"
@@ -44980,13 +44980,13 @@ public struct HerbalPreservation: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HerbalPreservationTranslation: Decodable, Equatable, Sendable {
   /// The herbal preservation's name.
-  let name: String
+  public let name: String
 
   /// How to prepare this preservation.
-  let preparation: String
+  public let preparation: String
 
   /// The herbal preservation's alternative effect.
-  let alternativeEffect: String
+  public let alternativeEffect: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -45009,7 +45009,7 @@ public struct HomunculusType: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<HomunculusTypeTranslation>
+  public let translations: LocaleMap<HomunculusTypeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -45040,7 +45040,7 @@ public struct HomunculusType: Decodable, Equatable, Sendable, Identifiable {
 
 public struct HomunculusTypeTranslation: Decodable, Equatable, Sendable {
   /// The homunculus type’s name.
-  let name: String
+  public let name: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -45059,46 +45059,46 @@ public struct Item: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The categories this item belongs to.
-  let categories: [EquipmentCategory.ID]
+  public let categories: [EquipmentCategory.ID]
 
   /// The cost in silverthalers.
-  let cost: Cost
+  public let cost: Cost
 
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// The complexity of crafting the item.
-  let complexity: Complexity?
+  public let complexity: Complexity?
 
   /// The structure points of the item. Use an array if the item consists of multiple components that have individual structure points.
-  let structurePoints: StructurePoints
+  public let structurePoints: StructurePoints
 
   /// The burning time is the time how long the light source can be lit. After that time you have to use a new light source.
-  let burningTime: BurningTime?
+  public let burningTime: BurningTime?
 
   /// A list of stat blocks for each close combat technique this weapon can be used with.
-  let meleeUses: [CloseCombatTechnique.ID: MeleeWeaponUse2]?
+  public let meleeUses: [CloseCombatTechnique.ID: MeleeWeaponUse2]?
 
   /// A list of stat blocks for each ranged combat technique this weapon can be used with.
-  let rangedUses: [RangedCombatTechnique.ID: RangedWeaponUse2]?
+  public let rangedUses: [RangedCombatTechnique.ID: RangedWeaponUse2]?
 
   /// Stats for this item being used as an armor.
-  let armorUse: SecondaryArmor?
+  public let armorUse: SecondaryArmor?
 
   /// Define if during character creation this weapon can only be bought by a specific subset of characters.
-  let restrictedTo: RestrictedTo?
+  public let restrictedTo: RestrictedTo?
 
   /// The weapon is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecifics?
+  public let knownItemSpecifics: KnownItemSpecifics?
 
   /// The prerequisites of the item, if any. Note that this is fully separate from the prerequisites of the item’s trade secret, which are defined independently from this.
-  let prerequisites: EquipmentPrerequisites?
+  public let prerequisites: EquipmentPrerequisites?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ItemTranslation>
+  public let translations: LocaleMap<ItemTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case categories = "categories"
@@ -45159,27 +45159,27 @@ public typealias RangedWeaponUse2 = RangedWeapon
 
 public struct ItemTranslation: Decodable, Equatable, Sendable {
   /// The item’s name.
-  let name: String
+  public let name: String
 
   /// An auxiliary name or label of the item, if available.
-  let secondaryName: String?
+  public let secondaryName: String?
 
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
   /// The weapon advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The weapon disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   /// The weapon is a known item, which implies some additional values.
-  let knownItemSpecifics: KnownItemSpecificsTranslation?
+  public let knownItemSpecifics: KnownItemSpecificsTranslation?
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -45213,10 +45213,10 @@ public struct MetaCondition: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<MetaConditionTranslation>
+  public let translations: LocaleMap<MetaConditionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case src = "src"
@@ -45249,15 +45249,15 @@ public struct MetaCondition: Decodable, Equatable, Sendable, Identifiable {
 
 public struct MetaConditionTranslation: Decodable, Equatable, Sendable {
   /// The meta condition’s name.
-  let name: String
+  public let name: String
 
   /// Additional rules for the meta condition, if applicable.
-  let rules: String?
+  public let rules: String?
 
   /// The effects for level 1 to 4.
-  let effects: [4 of String]
+  public let effects: [4 of String]
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -45282,43 +45282,43 @@ public struct Plant: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The plant types of this plant.
-  let types: [EffectType]
+  public let types: [EffectType]
 
   /// The biomes this plant occurs in and its rarity in those biomes.
-  let occurences: PlantOccurences
+  public let occurences: PlantOccurences
 
   /// The search difficulty for this plant.
-  let searchDifficulty: PlantDifficulty
+  public let searchDifficulty: PlantDifficulty
 
   /// The identification difficulty for this plant.
-  let identificationDifficulty: PlantDifficulty
+  public let identificationDifficulty: PlantDifficulty
 
   /// The applications of this plant per quality level.
-  let applications: PlantApplications
+  public let applications: PlantApplications
 
   /// The plant's touch effect.
-  let touch: PlantEffect?
+  public let touch: PlantEffect?
 
   /// The plant's inhalation effect.
-  let inhalation: PlantEffect?
+  public let inhalation: PlantEffect?
 
   /// The plant's ingestion effect.
-  let ingestion: PlantEffect?
+  public let ingestion: PlantEffect?
 
   /// The price of the plant.
-  let price: PlantPrice
+  public let price: PlantPrice
 
   /// The herbal aids and elixirs that can be crafted with this plant.
-  let recipes: [PlantRecipe]?
+  public let recipes: [PlantRecipe]?
 
   /// The longevity of the plant.
-  let longevity: PlantLongevity?
+  public let longevity: PlantLongevity?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PlantTranslation>
+  public let translations: LocaleMap<PlantTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case types = "types"
@@ -45373,16 +45373,16 @@ public struct Plant: Decodable, Equatable, Sendable, Identifiable {
 
 public struct PlantTranslation: Decodable, Equatable, Sendable {
   /// The plant's name.
-  let name: String
+  public let name: String
 
   /// A list of alternative names.
-  let alternativeNames: [AlternativeName]?
+  public let alternativeNames: [AlternativeName]?
 
   /// How this plant is used as a household remedy and in folk traditions.
-  let remediesAndTraditions: String
+  public let remediesAndTraditions: String
 
   /// What one knows about this plant for each quality level. The first element represents QL 1, the second element QL 2, and so on.
-  let knowledge: [String]
+  public let knowledge: [String]
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -45403,10 +45403,10 @@ public struct PlantTranslation: Decodable, Equatable, Sendable {
 
 public struct PlantOccurences: Decodable, Equatable, Sendable {
   /// The biomes this plant occurs in and its rarity in those biomes.
-  let items: [PlantOccurrence]?
+  public let items: [PlantOccurrence]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translation: LocaleMap<PlantOccurrencesTranslation>?
+  public let translation: LocaleMap<PlantOccurrencesTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case items = "items"
@@ -45423,7 +45423,7 @@ public struct PlantOccurences: Decodable, Equatable, Sendable {
 
 public struct PlantOccurrencesTranslation: Decodable, Equatable, Sendable {
   /// A note to all occurences of this plant
-  let note: String
+  public let note: String
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -45438,13 +45438,13 @@ public struct PlantOccurrencesTranslation: Decodable, Equatable, Sendable {
 
 public struct PlantOccurrence: Decodable, Equatable, Sendable {
   /// Where this plant occurs in.
-  let regions: PlantOccurrenceTier
+  public let regions: PlantOccurrenceTier
 
   /// The rarity of this plant in the biome.
-  let rarity: PlantRarity
+  public let rarity: PlantRarity
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translation: LocaleMap<PlantOccurrenceTranslation>?
+  public let translation: LocaleMap<PlantOccurrenceTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case regions = "regions"
@@ -45463,7 +45463,7 @@ public struct PlantOccurrence: Decodable, Equatable, Sendable {
 
 public struct PlantOccurrenceTranslation: Decodable, Equatable, Sendable {
   /// A note added to this occurrence
-  let note: String
+  public let note: String
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -45585,7 +45585,7 @@ public enum PlantDifficulty: Decodable, Equatable, Sendable {
 
 public struct IndefinitePlantDescription: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefinitePlantDescriptionTranslation>
+  public let translations: LocaleMap<IndefinitePlantDescriptionTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -45600,7 +45600,7 @@ public struct IndefinitePlantDescription: Decodable, Equatable, Sendable {
 
 public struct IndefinitePlantDescriptionTranslation: Decodable, Equatable, Sendable {
   /// A description of whatever is indefinite of this plant.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -45642,10 +45642,10 @@ public enum PlantApplications: Decodable, Equatable, Sendable {
 
 public struct PlantEffect: Decodable, Equatable, Sendable {
   /// The effect type of this plant effect.
-  let types: [EffectType]?
+  public let types: [EffectType]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PlantEffectTranslationTranslation>
+  public let translations: LocaleMap<PlantEffectTranslationTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case types = "types"
@@ -45662,7 +45662,7 @@ public struct PlantEffect: Decodable, Equatable, Sendable {
 
 public struct PlantEffectTranslationTranslation: Decodable, Equatable, Sendable {
   /// The effect of the plant.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -45704,10 +45704,10 @@ public enum PlantPrice: Decodable, Equatable, Sendable {
 
 public struct ConstantPlantPrice: Decodable, Equatable, Sendable {
   /// The value of the plant in silver coins.
-  let value: Float
+  public let value: Float
 
   /// The cost of the plant in silver coins.
-  let cost: Float
+  public let cost: Float
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -45724,7 +45724,7 @@ public struct ConstantPlantPrice: Decodable, Equatable, Sendable {
 
 public struct IndefinitePlantPrice: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefinitePlantPriceTranslation>
+  public let translations: LocaleMap<IndefinitePlantPriceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -45739,7 +45739,7 @@ public struct IndefinitePlantPrice: Decodable, Equatable, Sendable {
 
 public struct IndefinitePlantPriceTranslation: Decodable, Equatable, Sendable {
   /// A description of the price.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -45791,10 +45791,10 @@ public enum PlantRecipe: Decodable, Equatable, Sendable {
 
 public struct HerbalAidRecipe: Decodable, Equatable, Sendable {
   /// The herbal aid this recipe results in.
-  let herbalAid: HerbalAid.ID
+  public let herbalAid: HerbalAid.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translation: LocaleMap<HerbalAidRecipeTranslation>?
+  public let translation: LocaleMap<HerbalAidRecipeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case herbalAid = "herbal_aid"
@@ -45811,10 +45811,10 @@ public struct HerbalAidRecipe: Decodable, Equatable, Sendable {
 
 public struct HerbalAidRecipeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string. If `note` is provided, it is appended to the replaced string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -45831,10 +45831,10 @@ public struct HerbalAidRecipeTranslation: Decodable, Equatable, Sendable {
 
 public struct ElixirRecipe: Decodable, Equatable, Sendable {
   /// The elixir this recipe results in.
-  let elixir: Elixir.ID
+  public let elixir: Elixir.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translation: LocaleMap<ElixirRecipeTranslation>?
+  public let translation: LocaleMap<ElixirRecipeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case elixir = "elixir"
@@ -45851,10 +45851,10 @@ public struct ElixirRecipe: Decodable, Equatable, Sendable {
 
 public struct ElixirRecipeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string. If `note` is provided, it is appended to the replaced string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -45871,10 +45871,10 @@ public struct ElixirRecipeTranslation: Decodable, Equatable, Sendable {
 
 public struct PoisonRecipe: Decodable, Equatable, Sendable {
   /// The poison this recipe results in.
-  let poison: Poison.ID
+  public let poison: Poison.ID
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translation: LocaleMap<PoisonRecipeTranslation>?
+  public let translation: LocaleMap<PoisonRecipeTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case poison = "poison"
@@ -45891,10 +45891,10 @@ public struct PoisonRecipe: Decodable, Equatable, Sendable {
 
 public struct PoisonRecipeTranslation: Decodable, Equatable, Sendable {
   /// A note, appended to the generated string in parenthesis. If the generated is modified using `replacement`, the note is appended to the modifier string.
-  let note: ResponsiveTextOptional?
+  public let note: ResponsiveTextOptional?
 
   /// A replacement string. If `note` is provided, it is appended to the replaced string.
-  let replacement: ResponsiveTextReplace?
+  public let replacement: ResponsiveTextReplace?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
@@ -45911,7 +45911,7 @@ public struct PoisonRecipeTranslation: Decodable, Equatable, Sendable {
 
 public struct IndefiniteRecipe: Decodable, Equatable, Sendable {
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<IndefiniteRecipeTranslation>
+  public let translations: LocaleMap<IndefiniteRecipeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case translations = "translations"
@@ -45926,7 +45926,7 @@ public struct IndefiniteRecipe: Decodable, Equatable, Sendable {
 
 public struct IndefiniteRecipeTranslation: Decodable, Equatable, Sendable {
   /// A description of the recipe.
-  let description: String
+  public let description: String
 
   private enum CodingKeys: String, CodingKey {
     case description = "description"
@@ -45941,10 +45941,10 @@ public struct IndefiniteRecipeTranslation: Decodable, Equatable, Sendable {
 
 public struct PlantLongevity: Decodable, Equatable, Sendable {
   /// The preservations with alternative effect of this preserved plant
-  let preservations: [HerbalPreservation.ID]?
+  public let preservations: [HerbalPreservation.ID]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<PlantLongevityTranslation>?
+  public let translations: LocaleMap<PlantLongevityTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case preservations = "preservations"
@@ -45961,10 +45961,10 @@ public struct PlantLongevity: Decodable, Equatable, Sendable {
 
 public struct PlantLongevityTranslation: Decodable, Equatable, Sendable {
   /// The longevity of the raw plant
-  let raw: String?
+  public let raw: String?
 
   /// The longevity of the preserved plant
-  let preserved: String?
+  public let preserved: String?
 
   private enum CodingKeys: String, CodingKey {
     case raw = "raw"
@@ -45985,13 +45985,13 @@ public struct Service: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// Defines for which creature type(s) the service is available.
-  let availability: [ServiceAvailability]
+  public let availability: [ServiceAvailability]
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<ServiceTranslation>
+  public let translations: LocaleMap<ServiceTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case availability = "availability"
@@ -46026,12 +46026,12 @@ public struct Service: Decodable, Equatable, Sendable, Identifiable {
 
 public struct ServiceTranslation: Decodable, Equatable, Sendable {
   /// The service’s name.
-  let name: String
+  public let name: String
 
   /// The service’s description.
-  let description: String
+  public let description: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -46077,50 +46077,50 @@ public enum ServiceAvailability: Decodable, Equatable, Sendable {
 
 public struct Settings: Decodable, Equatable, Sendable {
   /// The default experience level for new characters and profession packages.
-  let defaultExperienceLevel: ExperienceLevel.ID
+  public let defaultExperienceLevel: ExperienceLevel.ID
 
   /// Settings for focus rules. This may include references to specific focus rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.
-  let focusRules: FocusRuleSettings
+  public let focusRules: FocusRuleSettings
 
   /// Which derived characteristics are affected by additional armor penalties.
-  let additionalArmorPenalties: [DerivedCharacteristic.ID]
+  public let additionalArmorPenalties: [DerivedCharacteristic.ID]
 
   /// Settings for derived trade secrets.
-  let derivedTradeSecrets: DerivedTradeSecretsSettings
+  public let derivedTradeSecrets: DerivedTradeSecretsSettings
 
   /// Settings for supernatural base advantages.
-  let supernaturalBaseAdvantages: SupernaturalBaseAdvantageSettings
+  public let supernaturalBaseAdvantages: SupernaturalBaseAdvantageSettings
 
   /// The publication that uses sexual characteristics. This makes sexual characteristic selection available for characters outside of male and female sex presets.
-  let sexualCharacteristicsPublication: Publication.ID
+  public let sexualCharacteristicsPublication: Publication.ID
 
   /// The publication that extends the description of books with additional information.
-  let extendedBookDescriptionPublication: Publication.ID
+  public let extendedBookDescriptionPublication: Publication.ID
 
-  let skills: SkillSettings
+  public let skills: SkillSettings
 
-  let combatTechniques: CombatTechniqueSettings
+  public let combatTechniques: CombatTechniqueSettings
 
-  let spellworks: SpellworkSettings
+  public let spellworks: SpellworkSettings
 
-  let magicalActions: MagicalActionSettings
+  public let magicalActions: MagicalActionSettings
 
-  let liturgicalChants: LiturgicalChantSettings
+  public let liturgicalChants: LiturgicalChantSettings
 
   /// The entry representing languages. This is used to add native languages to characters, for example.
-  let language: ActivatableIdentifier
+  public let language: ActivatableIdentifier
 
   /// The entry representing languages. This is used to add native literacy to characters, for example.
-  let script: ActivatableIdentifier
+  public let script: ActivatableIdentifier
 
   /// The entry representing skill specializations. This is used to add skill specializations to characters, for example.
-  let skillSpecialization: ActivatableIdentifier
+  public let skillSpecialization: ActivatableIdentifier
 }
 
 /// Settings for focus rules. This may include references to specific focus rules for implementing specific logic that cannot be expressed in the database schema in a meaningful way.
 public struct FocusRuleSettings: Decodable, Equatable, Sendable {
   /// Style Special Abilities and Advanced Special Abilities are part of focus rules. This type defines which focus rule must be enabled in order to use any of these special abilities. Essentially, this is a default prerequisite all of these special abilities must meet, but manually inserting them with every special ability is a lot of work and error-prone. Therefore, in order to use any of these special abilities, prerequisites for the respective focus rule must be generated for every entry.
-  let styles: StyleSpecialAbilitySettings
+  public let styles: StyleSpecialAbilitySettings
 
   private enum CodingKeys: String, CodingKey {
     case styles = "styles"
@@ -46136,22 +46136,22 @@ public struct FocusRuleSettings: Decodable, Equatable, Sendable {
 /// Style Special Abilities and Advanced Special Abilities are part of focus rules. This type defines which focus rule must be enabled in order to use any of these special abilities. Essentially, this is a default prerequisite all of these special abilities must meet, but manually inserting them with every special ability is a lot of work and error-prone. Therefore, in order to use any of these special abilities, prerequisites for the respective focus rule must be generated for every entry.
 public struct StyleSpecialAbilitySettings: Decodable, Equatable, Sendable {
   /// The focus rule for skill style special abilities and its advanced complements.
-  let skill: FocusRule.ID
+  public let skill: FocusRule.ID
 
   /// The focus rule for combat style special abilities and its advanced complements.
-  let combat: FocusRule.ID
+  public let combat: FocusRule.ID
 
   /// The entry that allows a third combat style special ability from either type.
-  let combatCombination: ActivatableIdentifier
+  public let combatCombination: ActivatableIdentifier
 
   /// The focus rule for magic style special abilities and its advanced complements.
-  let magic: FocusRule.ID
+  public let magic: FocusRule.ID
 
   /// The entry that allows a second magic style special ability.
-  let magicCombination: ActivatableIdentifier
+  public let magicCombination: ActivatableIdentifier
 
   /// The focus rule for liturgical style special abilities and its advanced complements.
-  let liturgical: FocusRule.ID
+  public let liturgical: FocusRule.ID
 
   private enum CodingKeys: String, CodingKey {
     case skill = "skill"
@@ -46177,16 +46177,16 @@ public struct StyleSpecialAbilitySettings: Decodable, Equatable, Sendable {
 /// Settings for derived trade secrets.
 public struct DerivedTradeSecretsSettings: Decodable, Equatable, Sendable {
   /// The special ability required to buy derived trade secrets for weapons.
-  let requiredSpecialAbilityForWeapons: SpecialAbilityIdentifier
+  public let requiredSpecialAbilityForWeapons: SpecialAbilityIdentifier
 
   /// The special ability required to buy derived trade secrets for ammunition.
-  let requiredSpecialAbilityForAmmunition: SpecialAbilityIdentifier
+  public let requiredSpecialAbilityForAmmunition: SpecialAbilityIdentifier
 
   /// The special ability required to buy derived trade secrets for armor.
-  let requiredSpecialAbilityForArmor: SpecialAbilityIdentifier
+  public let requiredSpecialAbilityForArmor: SpecialAbilityIdentifier
 
   /// The focus rule required to buy derived trade secrets for talismans.
-  let requiredFocusRuleForTalismans: FocusRule.ID
+  public let requiredFocusRuleForTalismans: FocusRule.ID
 
   private enum CodingKeys: String, CodingKey {
     case requiredSpecialAbilityForWeapons = "requiredSpecialAbilityForWeapons"
@@ -46208,10 +46208,10 @@ public struct DerivedTradeSecretsSettings: Decodable, Equatable, Sendable {
 /// Settings for supernatural base advantages.
 public struct SupernaturalBaseAdvantageSettings: Decodable, Equatable, Sendable {
   /// The central advantage for spellcasters.
-  let spellcasters: Advantage.ID
+  public let spellcasters: Advantage.ID
 
   /// The central advantage for Blessed Ones.
-  let blessed: Advantage.ID
+  public let blessed: Advantage.ID
 
   private enum CodingKeys: String, CodingKey {
     case spellcasters = "spellcasters"
@@ -46228,10 +46228,10 @@ public struct SupernaturalBaseAdvantageSettings: Decodable, Equatable, Sendable 
 
 public struct SkillSettings: Decodable, Equatable, Sendable {
   /// The entry that grants a bonus of 1 towards the maximum skill rating per selection.
-  let maximumSkillRatingBonusEntry: ActivatableIdentifier
+  public let maximumSkillRatingBonusEntry: ActivatableIdentifier
 
   /// The rule that allows offsetting attributes for routine checks.
-  let offsettingAttributesForRoutineChecks: OptionalRule.ID
+  public let offsettingAttributesForRoutineChecks: OptionalRule.ID
 
   private enum CodingKeys: String, CodingKey {
     case maximumSkillRatingBonusEntry = "maximumSkillRatingBonusEntry"
@@ -46248,13 +46248,13 @@ public struct SkillSettings: Decodable, Equatable, Sendable {
 
 public struct CombatTechniqueSettings: Decodable, Equatable, Sendable {
   /// The entry that grants a bonus of 1 towards the maximum skill rating per selection.
-  let maximumCombatTechniqueRatingBonusEntry: ActivatableIdentifier
+  public let maximumCombatTechniqueRatingBonusEntry: ActivatableIdentifier
 
   /// The attribute that increases the attack value of a close combat technique.
-  let closeCombatTechniqueAttackAttribute: Attribute.ID
+  public let closeCombatTechniqueAttackAttribute: Attribute.ID
 
   /// Character traits that modify the parry base of a close combat technique. If an optional rule.
-  let parryModifiers: [CombatTechniqueParryModifier]?
+  public let parryModifiers: [CombatTechniqueParryModifier]?
 
   private enum CodingKeys: String, CodingKey {
     case maximumCombatTechniqueRatingBonusEntry = "maximumCombatTechniqueRatingBonusEntry"
@@ -46273,10 +46273,10 @@ public struct CombatTechniqueSettings: Decodable, Equatable, Sendable {
 
 public struct CombatTechniqueParryModifier: Decodable, Equatable, Sendable {
   /// The entry that modifies the parry base of a close combat technique.
-  let source: OptionalRule.ID
+  public let source: OptionalRule.ID
 
   /// The modifier that is applied to the parry base of a close combat technique. If the optional rule has options, the modifier is multiplied by the option value and then applied to the parry base.
-  let modifier: Int
+  public let modifier: Int
 
   private enum CodingKeys: String, CodingKey {
     case source = "source"
@@ -46293,13 +46293,13 @@ public struct CombatTechniqueParryModifier: Decodable, Equatable, Sendable {
 
 public struct SpellworkSettings: Decodable, Equatable, Sendable {
   /// The entry that removes the maximum rating of 14 from spellworks for selected properties. It must provide the property as a selected option.
-  let maximumRatingUnlockEntry: ActivatableIdentifier
+  public let maximumRatingUnlockEntry: ActivatableIdentifier
 
   /// Spell Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.
-  let enhancementsFocusRule: FocusRule.ID
+  public let enhancementsFocusRule: FocusRule.ID
 
   /// The energy that is associated with spellworks. This is used to determine what energy to display on the character sheet.
-  let associatedEnergy: DerivedCharacteristic.ID
+  public let associatedEnergy: DerivedCharacteristic.ID
 
   private enum CodingKeys: String, CodingKey {
     case maximumRatingUnlockEntry = "maximumRatingUnlockEntry"
@@ -46318,13 +46318,13 @@ public struct SpellworkSettings: Decodable, Equatable, Sendable {
 
 public struct MagicalActionSettings: Decodable, Equatable, Sendable {
   /// The improvement cost for all curses.
-  let curseImprovementCost: ImprovementCost
+  public let curseImprovementCost: ImprovementCost
 
   /// The improvement cost for all domination rituals.
-  let dominationRitualImprovementCost: ImprovementCost
+  public let dominationRitualImprovementCost: ImprovementCost
 
   /// The improvement cost for all geode rituals.
-  let geodeRitualImprovementCost: ImprovementCost
+  public let geodeRitualImprovementCost: ImprovementCost
 
   private enum CodingKeys: String, CodingKey {
     case curseImprovementCost = "curseImprovementCost"
@@ -46343,19 +46343,19 @@ public struct MagicalActionSettings: Decodable, Equatable, Sendable {
 
 public struct LiturgicalChantSettings: Decodable, Equatable, Sendable {
   /// The general aspect for church traditions.
-  let generalAspectForChurch: Aspect.ID
+  public let generalAspectForChurch: Aspect.ID
 
   /// The general aspect for shamanistic traditions.
-  let generalAspectForShamanistic: Aspect.ID
+  public let generalAspectForShamanistic: Aspect.ID
 
   /// The entry that removes the maximum rating of 14 from liturgical chants for selected aspects. It must provide the aspect as a selected option.
-  let maximumRatingUnlockEntry: ActivatableIdentifier
+  public let maximumRatingUnlockEntry: ActivatableIdentifier
 
   /// Liturgical Chant Enhancements are part of focus rules. This type defines which focus rule must be enabled in order to use an enhancement. Essentially, this is a default prerequisite they must meet, but manually inserting them with every enhancement is a lot of work and error-prone. Therefore, in order to use an enhancement, prerequisites for the focus rule must be generated for every entry.
-  let enhancementsFocusRule: FocusRule.ID
+  public let enhancementsFocusRule: FocusRule.ID
 
   /// The energy that is associated with liturgical chants. This is used to determine what energy to display on the character sheet.
-  let associatedEnergy: DerivedCharacteristic.ID
+  public let associatedEnergy: DerivedCharacteristic.ID
 
   private enum CodingKeys: String, CodingKey {
     case generalAspectForChurch = "generalAspectForChurch"
@@ -46382,10 +46382,10 @@ public struct SexPractice: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<SexPracticeTranslation>
+  public let translations: LocaleMap<SexPracticeTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case src = "src"
@@ -46418,19 +46418,19 @@ public struct SexPractice: Decodable, Equatable, Sendable, Identifiable {
 
 public struct SexPracticeTranslation: Decodable, Equatable, Sendable {
   /// The sex practice’s name.
-  let name: String
+  public let name: String
 
   /// The rules of the sex practice.
-  let rules: String
+  public let rules: String
 
   /// How long a round of this sex practice takes.
-  let duration: String
+  public let duration: String
 
   /// Prerequisites of participants and environment. Do not specify if the sex practice has no prerequisites.
-  let prerequisites: String?
+  public let prerequisites: String?
 
   /// Effects of a failed *Seduction* check.
-  let failed: String
+  public let failed: String
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -46457,24 +46457,24 @@ public struct Talisman: Decodable, Equatable, Sendable, Identifiable {
   public let id: ID
 
   /// The tradition(s) the talisman belongs to.
-  let tradition: [BlessedTradition.ID]?
+  public let tradition: [BlessedTradition.ID]?
 
   /// The talisman type, if any.
-  let type: TalismanType?
+  public let type: TalismanType?
 
   /// The activation parameters.
-  let activation: [TalismanActivation]?
+  public let activation: [TalismanActivation]?
 
   /// The AP value for the required trade secret, if possible.
-  let apValue: Int?
+  public let apValue: Int?
 
-  let combatUse: TalismanCombatUse?
+  public let combatUse: TalismanCombatUse?
 
   /// References to where in which publications this entry has been defined. Entries may also be added or removed in later printings.
-  let src: PublicationRefs
+  public let src: PublicationRefs
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TalismanTranslation>
+  public let translations: LocaleMap<TalismanTranslation>
 
   private enum CodingKeys: String, CodingKey {
     case tradition = "tradition"
@@ -46517,12 +46517,12 @@ public struct Talisman: Decodable, Equatable, Sendable, Identifiable {
 
 public struct TalismanTranslation: Decodable, Equatable, Sendable {
   /// The talisman’s name.
-  let name: String
+  public let name: String
 
   /// The effect description.
-  let effect: String
+  public let effect: String
 
-  let errata: Errata?
+  public let errata: Errata?
 
   private enum CodingKeys: String, CodingKey {
     case name = "name"
@@ -46583,10 +46583,10 @@ public enum TalismanType: Decodable, Equatable, Sendable {
 
 public struct TalismanActivation: Decodable, Equatable, Sendable {
   /// The cost to activate the talisman.
-  let cost: TalismanActivationCost
+  public let cost: TalismanActivationCost
 
   /// The duration of how long the talisman will be active.
-  let duration: TalismanActivationDuration
+  public let duration: TalismanActivationDuration
 
   private enum CodingKeys: String, CodingKey {
     case cost = "cost"
@@ -46603,10 +46603,10 @@ public struct TalismanActivation: Decodable, Equatable, Sendable {
 
 public struct TalismanActivationCost: Decodable, Equatable, Sendable {
   /// The (numeric) cost value.
-  let value: Int
+  public let value: Int
 
   /// The unit in which to pay the cost.
-  let unit: DerivedCharacteristic.ID
+  public let unit: DerivedCharacteristic.ID
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -46623,10 +46623,10 @@ public struct TalismanActivationCost: Decodable, Equatable, Sendable {
 
 public struct TalismanActivationDuration: Decodable, Equatable, Sendable {
   /// The (numeric) duration value.
-  let value: TalismanActivationDurationExpression
+  public let value: TalismanActivationDurationExpression
 
   /// The unit of the duration.
-  let unit: DurationUnit
+  public let unit: DurationUnit
 
   private enum CodingKeys: String, CodingKey {
     case value = "value"
@@ -46672,16 +46672,16 @@ public enum TalismanActivationDurationExpressionValue: Decodable, Equatable, Sen
 
 public struct TalismanCombatUse: Decodable, Equatable, Sendable {
   /// The weight in kg.
-  let weight: Weight
+  public let weight: Weight
 
   /// A list of stat blocks for each close combat technique this talisman can be used with.
-  let meleeUses: [CloseCombatTechnique.ID: MeleeTalismanUse]?
+  public let meleeUses: [CloseCombatTechnique.ID: MeleeTalismanUse]?
 
   /// A list of stat blocks for each ranged combat technique this talisman can be used with.
-  let rangedUses: [RangedCombatTechnique.ID: RangedTalismanUse]?
+  public let rangedUses: [RangedCombatTechnique.ID: RangedTalismanUse]?
 
   /// All translations for the entry, identified by IETF language tag (BCP47).
-  let translations: LocaleMap<TalismanCombatUseTranslation>?
+  public let translations: LocaleMap<TalismanCombatUseTranslation>?
 
   private enum CodingKeys: String, CodingKey {
     case weight = "weight"
@@ -46706,16 +46706,16 @@ public typealias RangedTalismanUse = TalismanRangedWeapon
 
 public struct TalismanCombatUseTranslation: Decodable, Equatable, Sendable {
   /// Note text.
-  let note: String?
+  public let note: String?
 
   /// Special rules text.
-  let rules: String?
+  public let rules: String?
 
   /// The weapon advantage text.
-  let advantage: String?
+  public let advantage: String?
 
   /// The weapon disadvantage text.
-  let disadvantage: String?
+  public let disadvantage: String?
 
   private enum CodingKeys: String, CodingKey {
     case note = "note"
