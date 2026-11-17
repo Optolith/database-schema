@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.124.2](https://github.com/Optolith/database-schema/compare/v0.124.1...v0.124.2) (2026-11-17)
+
+### Bug Fixes
+
+* **swift:** visibility of database methods ([9cb88b5](https://github.com/Optolith/database-schema/commit/9cb88b5e63e39136a191020fdea08a3b6c9f5eac))
+
 ## [0.124.1](https://github.com/Optolith/database-schema/compare/v0.124.0...v0.124.1) (2026-11-17)
 
 ### Features
