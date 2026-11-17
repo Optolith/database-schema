@@ -291,27 +291,29 @@ const AnimalVenomLevel = DB.Enum(import.meta.url, {
 
 const AnimalVenomLevelBySubType = DB.TypeAlias(import.meta.url, {
   name: "AnimalVenomLevelBySubType",
+  type: () => DB.Array(DB.IncludeIdentifier(AnimalVenomLevelBySubTypeItem), { minItems: 1 }),
+})
+
+export const AnimalVenomLevelBySubTypeItem = DB.TypeAlias(import.meta.url, {
+  name: "AnimalVenomLevelBySubTypeItem",
   type: () =>
-    DB.Array(
-      DB.Object({
-        value: DB.Required({
-          comment: "The poison’s level.",
-          type: DB.Integer({ minimum: 1, maximum: 6 }),
-        }),
-        translations: NestedTranslationMap(
-          DB.Required,
-          "AnimalVenomLevelBySubType",
-          DB.Object({
-            name: DB.Required({
-              comment:
-                "The subtype name. If there are multiple subtypes with the same level, specify them separately.",
-              type: DB.String({ minLength: 1 }),
-            }),
-          }),
-        ),
+    DB.Object({
+      value: DB.Required({
+        comment: "The poison’s level.",
+        type: DB.Integer({ minimum: 1, maximum: 6 }),
       }),
-      { minItems: 1 },
-    ),
+      translations: NestedTranslationMap(
+        DB.Required,
+        "AnimalVenomLevelBySubType",
+        DB.Object({
+          name: DB.Required({
+            comment:
+              "The subtype name. If there are multiple subtypes with the same level, specify them separately.",
+            type: DB.String({ minLength: 1 }),
+          }),
+        }),
+      ),
+    }),
 })
 
 export const AlchemicalPoison = DB.TypeAlias(import.meta.url, {

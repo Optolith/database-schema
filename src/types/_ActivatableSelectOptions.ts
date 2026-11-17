@@ -237,19 +237,26 @@ const SelectOptionRuleMultiple = DB.Enum(import.meta.url, {
     }),
     Range: DB.EnumCase({
       comment: "A range of numbers of options that can be selected.",
-      type: DB.Object({
-        min: DB.Optional({
-          comment:
-            "The minimum number of options that need to be selected. If left empty it defaults to 1.",
-          type: DB.Integer({ minimum: 2 }),
-        }),
-        max: DB.Required({
-          comment: "The maximum number of options that need to be selected.",
-          type: DB.Integer({ minimum: 2 }),
-        }),
-      }),
+      type: DB.IncludeIdentifier(SelectOptionRuleMultipleRange),
     }),
   }),
+})
+
+const SelectOptionRuleMultipleRange = DB.TypeAlias(import.meta.url, {
+  name: "SelectOptionRuleMultipleRange",
+  comment: "A range of numbers of options that can be selected.",
+  type: () =>
+    DB.Object({
+      min: DB.Optional({
+        comment:
+          "The minimum number of options that need to be selected. If left empty it defaults to 1.",
+        type: DB.Integer({ minimum: 2 }),
+      }),
+      max: DB.Required({
+        comment: "The maximum number of options that need to be selected.",
+        type: DB.Integer({ minimum: 2 }),
+      }),
+    }),
 })
 
 const SelectOptionRule = DB.TypeAlias(import.meta.url, {

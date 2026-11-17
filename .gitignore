@@ -1,4 +1,5 @@
 gen
+# Sources/OptolithDatabaseSchema/GeneratedTypes.swift
 node_modules
 lib
 *.tsbuildinfo
