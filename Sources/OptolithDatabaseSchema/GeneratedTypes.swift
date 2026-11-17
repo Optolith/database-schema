@@ -3744,8 +3744,8 @@ public enum AdvantageDisadvantageSubtype: Decodable, Equatable, Sendable {
 }
 
 public struct GeneralSelectOption: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = SelectOptionParentIdentifier
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = SelectOptionParentIdentifier
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -4291,8 +4291,8 @@ public struct DisadvantageTranslation: Decodable, Equatable, Sendable {
 
 /// Registers new skill applications, which get enabled once the referenced entry is activated. It specifies the skill(s) it belongs to. A translation can be left out if its name equals the name of the origin activatable entry.
 public struct NewSkillApplication: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = NewSkillApplicationOrUseParentIdentifier
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = NewSkillApplicationOrUseParentIdentifier
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -4586,8 +4586,8 @@ public struct AdvancedKarmaSpecialAbilityTranslation: Decodable, Equatable, Send
 
 /// Registers uses, which get enabled once this entry is activated. It specifies the skill(s) it belongs to. A translation can be left out if its name equals the name of the origin activatable entry.
 public struct SkillUse: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = NewSkillApplicationOrUseParentIdentifier
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = NewSkillApplicationOrUseParentIdentifier
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -4953,8 +4953,8 @@ public enum ApplicationCategory: Decodable, Equatable, Sendable {
 }
 
 public struct SkillApplication: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Skill.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = Skill.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -6830,8 +6830,8 @@ public struct OptionalRuleTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct OptionalRuleOption: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = OptionalRule.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = OptionalRule.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -7437,8 +7437,8 @@ public struct PropertyTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct PropertySpecialization: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Property.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = Property.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -8024,8 +8024,8 @@ public struct ContinentTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct LanguageSpecialization: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Language.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = Language.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -12971,8 +12971,8 @@ public struct OldParameter: Decodable, Equatable, Sendable {
 }
 
 public struct Enhancement: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = SkillWithEnhancementsIdentifier
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = SkillWithEnhancementsIdentifier
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -14676,8 +14676,8 @@ public struct RestrictedProperty: Decodable, Equatable, Sendable {
 }
 
 public struct LessonPackage: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Curriculum.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.curriculum
+  public typealias ParentID = Curriculum.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.curriculum
 
   public typealias ID = UUID
 
@@ -14903,8 +14903,8 @@ public struct SpellworkAdjustmentWithBase: Decodable, Equatable, Sendable {
 }
 
 public struct MagicalTraditionSubgroup: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = MagicalTradition.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = MagicalTradition.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -14976,8 +14976,8 @@ public struct ReligiousProfessionGroup: Decodable, Equatable, Sendable {
 }
 
 public struct ProfessionVersion: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Profession.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.profession
+  public typealias ParentID = Profession.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.profession
 
   public typealias ID = UUID
 
@@ -15088,8 +15088,8 @@ public struct ProfessionVersionTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct ProfessionPackage: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = ProfessionVersion.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.professionVersion
+  public typealias ParentID = ProfessionVersion.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.professionVersion
 
   public typealias ID = UUID
 
@@ -15907,8 +15907,8 @@ public enum CommonnessWeight: Decodable, Equatable, Sendable {
 }
 
 public struct ProfessionVariant: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = ProfessionPackage.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.professionPackage
+  public typealias ParentID = ProfessionPackage.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.professionPackage
 
   public typealias ID = UUID
 
@@ -26273,8 +26273,8 @@ public struct PactCategoryTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct PactType: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = PactCategory.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = PactCategory.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -26331,8 +26331,8 @@ public struct PactTypeTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct PactDomain: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = PactCategory.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = PactCategory.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -29665,8 +29665,8 @@ public struct BannzeichenTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct BannzeichenOption: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Bannzeichen.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = Bannzeichen.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -33020,8 +33020,8 @@ public struct MagicalRuneTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct MagicalRuneOption: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = MagicalRune.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = MagicalRune.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -35924,8 +35924,8 @@ public enum WeightDiceOffsetStrategy: Decodable, Equatable, Sendable {
 }
 
 public struct RaceVariant: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Race.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.race
+  public typealias ParentID = Race.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.race
 
   public typealias ID = UUID
 
@@ -38900,8 +38900,8 @@ public struct BiomeTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct SubBiome: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = Biome.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = Biome.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -38958,8 +38958,8 @@ public struct SubBiomeTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct BotanicRegion: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = SubBiome.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = SubBiome.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
@@ -42012,8 +42012,8 @@ public struct ItemComponentTranslation: Decodable, Equatable, Sendable {
 }
 
 public struct ItemComponentOption: Decodable, Equatable, Sendable, Identifiable, ChildEntity {
-  typealias ParentID = ItemComponent.ID
-  static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
+  public typealias ParentID = ItemComponent.ID
+  public static let parentId: KeyPath<Self, ParentID> & Sendable = \.parent
 
   public typealias ID = UUID
 
