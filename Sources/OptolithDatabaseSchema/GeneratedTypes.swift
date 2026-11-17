@@ -1595,7 +1595,7 @@ public struct ElementTranslation: Decodable, Equatable, Sendable {
 
 /// A supported locale. The locale is used to identify the language and region of the content.
 public struct Locale: Decodable, Equatable, Sendable, Identifiable {
-  public typealias ID = UUID
+  public typealias ID = String
 
   public let id: ID
 
