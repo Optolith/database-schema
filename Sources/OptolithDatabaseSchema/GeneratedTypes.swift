@@ -1020,11 +1020,11 @@ public struct CompressedDatabaseRepresentation: Decodable {
 
 /// All translations for the entry, identified by IETF language tag (BCP47).
 public struct LocaleMap<T: Decodable & Equatable & Sendable>: Decodable, Equatable, Sendable {
-  let dict: [Locale.ID: T]
+  public let map: [Locale.ID: T]
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.singleValueContainer()
-    self.dict = try container.decode([Locale.ID: T].self)
+    self.map = try container.decode([Locale.ID: T].self)
   }
 }
 
