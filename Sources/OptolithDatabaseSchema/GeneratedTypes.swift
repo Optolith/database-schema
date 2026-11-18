@@ -1636,11 +1636,8 @@ public struct Locale: Decodable, Equatable, Sendable, Identifiable {
     guard let id = explicitId ?? derivedId else {
         throw DatabaseInstanceIdDecodingError.missingIdentifierString
     }
-    guard let uuid = UUID(uuidString: id) else {
-        throw DatabaseInstanceIdDecodingError.invalidUUID
-    }
 
-    self.id = uuid
+    self.id = id
     self.name = try container.decode(String.self, forKey: .name)
     self.region = try container.decode(String.self, forKey: .region)
     self.isMissingImplementation = try container.decode(Bool.self, forKey: .isMissingImplementation)
