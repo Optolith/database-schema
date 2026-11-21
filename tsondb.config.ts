@@ -101,6 +101,7 @@ const config: GenerationConfig<TSONDBTypes> = {
               (schema.getDeclaration("EquipmentIdentifier") as DB.EnumDecl).type.value.values
           ) {
             if (
+              // oxlint-disable-next-line typescript/no-unnecessary-condition
               decl.type.value.properties.complexity?.type.kind === "IncludeIdentifierType" &&
               decl.type.value.properties.complexity.type.reference.name === "Complexity"
             ) {
@@ -108,6 +109,7 @@ const config: GenerationConfig<TSONDBTypes> = {
             }
 
             if (
+              // oxlint-disable-next-line typescript/no-unnecessary-condition
               decl.type.value.properties.complexity?.type.kind === "IncludeIdentifierType" &&
               decl.type.value.properties.complexity.type.reference.name === "ArmorComplexity"
             ) {
