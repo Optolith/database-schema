@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CompressedDatabaseRepresentationWithMetadata.swift
 //  OptolithDatabaseSchema
 //
 //  Created by Lukas Obermann on 17.11.26.

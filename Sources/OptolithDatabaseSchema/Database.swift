@@ -15,14 +15,16 @@ public class Database {
         decoder.dateDecodingStrategy = .iso8601
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
-        self.data = try decoder.decode(CompressedDatabaseRepresentationWithMetadata.self, from: file).data
+        self.data = try decoder.decode(
+            CompressedDatabaseRepresentationWithMetadata.self, from: file
+        ).data
     }
 
-    public func getInstance<T>(of type: T.Type, by id: String) -> T? {
+    public func getInstance<T: Entity>(of type: T.Type, by id: T.ID) -> T? {
         data.getDictionary(for: type)[id]
     }
 
-    public func getAllInstances<T>(of type: T.Type) -> [T] {
+    public func getAllInstances<T: Entity>(of type: T.Type) -> [T] {
         Array(data.getDictionary(for: type).values)
     }
 
@@ -30,7 +32,9 @@ public class Database {
         data.getSingleton(for: type)
     }
 
-    public func getAllChildInstances<T: ChildEntity>(of type: T.Type, forParent parent: T.ParentID) -> [T] {
+    public func getAllChildInstances<T: ChildEntity>(of type: T.Type, forParent parent: T.ParentID)
+        -> [T]
+    {
         data.getDictionary(for: type).values.filter { parent == $0[keyPath: T.parentId] }
     }
 }
