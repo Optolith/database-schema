@@ -15,7 +15,7 @@ public struct Cache: Sendable {
     public let skillApplications: SkillApplicationsCache
     public let skillsBySkillGroup: SkillsBySkillGroupCache
 
-    init(from database: Database, settings: Settings) {
+    public init(from database: Database, settings: Settings) {
         activatableSelectOptions = ActivatableSelectOptionsCache(from: database)
         ancestorBloodAdvantages = AncestorBloodAdvantagesCache(from: database)
         derivedTradeSecrets = TradeSecretsCache(from: database, settings: settings)
