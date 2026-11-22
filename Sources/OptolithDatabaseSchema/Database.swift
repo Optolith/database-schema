@@ -41,4 +41,10 @@ public class Database {
     {
         data.getDictionary(for: type).values.filter { parent == $0[keyPath: T.parentId] }
     }
+
+    public func countChildInstances<T: ChildEntity>(of type: T.Type, forParent parent: T.ParentID)
+        -> Int
+    {
+        data.getDictionary(for: type).values.count { parent == $0[keyPath: T.parentId] }
+    }
 }
