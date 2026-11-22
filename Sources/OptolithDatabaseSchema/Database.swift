@@ -28,6 +28,10 @@ public class Database {
         Array(data.getDictionary(for: type).values)
     }
 
+    public func countInstances<T: Entity>(of type: T.Type) -> Int {
+        data.getDictionary(for: type).count
+    }
+
     public func getSingletonInstance<T>(of type: T.Type) -> T? {
         data.getSingleton(for: type)
     }
