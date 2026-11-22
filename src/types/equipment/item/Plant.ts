@@ -21,7 +21,10 @@ export const Plant = DB.Entity(import.meta.url, {
     DB.Object({
       types: DB.Required({
         comment: "The plant types of this plant.",
-        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       occurences: DB.Required({
         comment: "The biomes this plant occurs in and its rarity in those biomes.",
@@ -74,7 +77,9 @@ export const Plant = DB.Entity(import.meta.url, {
           }),
           alternative_names: DB.Optional({
             comment: "A list of alternative names.",
-            type: DB.Array(DB.IncludeIdentifier(AlternativeName), { minItems: 1 }),
+            type: DB.Array(DB.IncludeIdentifier(AlternativeName), {
+              minItems: 1,
+            }),
           }),
           remedies_and_traditions: DB.Required({
             comment: "How this plant is used as a household remedy and in folk traditions.",
@@ -107,17 +112,30 @@ const PlantOccurences = DB.TypeAlias(import.meta.url, {
       {
         items: DB.Optional({
           comment: "The biomes this plant occurs in and its rarity in those biomes.",
-          type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), { minItems: 1 }),
+          type: DB.Array(DB.IncludeIdentifier(PlantOccurrence), {
+            minItems: 1,
+          }),
         }),
         translation: NestedTranslationMap(
           DB.Optional,
           "PlantOccurrences",
-          DB.Object({
-            note: DB.Required({
-              comment: "A note to all occurences of this plant",
-              type: DB.String({ minLength: 1, markdown: "block" }),
-            }),
-          }),
+          DB.Object(
+            {
+              note: DB.Optional({
+                comment:
+                  "A note to all occurences of this plant. This note is added after the generated string divided by ;",
+                type: DB.String({ minLength: 1, markdown: "block" }),
+              }),
+              replacement: DB.Optional({
+                comment:
+                  "A replacement string. This replaces the generated string. If `note` is provided, it is appended to the replaced string.",
+                type: DB.String({ minLength: 1, markdown: "inline" }),
+              }),
+            },
+            {
+              minProperties: 1,
+            },
+          ),
         ),
       },
       {
@@ -141,12 +159,22 @@ const PlantOccurrence = DB.TypeAlias(import.meta.url, {
       translation: NestedTranslationMap(
         DB.Optional,
         "PlantOccurrence",
-        DB.Object({
-          note: DB.Required({
-            comment: "A note added to this occurrence",
-            type: DB.String({ minLength: 1, markdown: "inline" }),
-          }),
-        }),
+        DB.Object(
+          {
+            note: DB.Optional({
+              comment: "A note added to this occurrence",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+            replacement: DB.Optional({
+              comment:
+                "A replacement string. If `note` is provided, it is appended to the replaced string.",
+              type: DB.String({ minLength: 1, markdown: "inline" }),
+            }),
+          },
+          {
+            minProperties: 1,
+          },
+        ),
       ),
     }),
 })
@@ -155,6 +183,17 @@ const PlantOccurrenceTier = DB.Enum(import.meta.url, {
   name: "PlantOccurrenceTier",
   values: () => ({
     AllBiomes: DB.EnumCase({ type: null }),
+    Specific: DB.EnumCase({
+      type: DB.Array(DB.IncludeIdentifier(PlantOccurrenceSpecificRegion), {
+        minItems: 1,
+      }),
+    }),
+  }),
+})
+
+const PlantOccurrenceSpecificRegion = DB.Enum(import.meta.url, {
+  name: "PlantOccurrenceSpecificRegion",
+  values: () => ({
     Biomes: DB.EnumCase({
       type: DB.Array(BiomeIdentifier(), { minItems: 1 }),
     }),
@@ -171,7 +210,9 @@ const PlantDifficulty = DB.Enum(import.meta.url, {
   name: "PlantDifficulty",
   values: () => ({
     Constant: DB.EnumCase({ type: DB.Integer() }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantDescription) }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
   }),
 })
 
@@ -195,8 +236,12 @@ const IndefinitePlantDescription = DB.TypeAlias(import.meta.url, {
 const PlantApplications = DB.Enum(import.meta.url, {
   name: "PlantApplications",
   values: () => ({
-    Constant: DB.EnumCase({ type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }) }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantDescription) }),
+    Constant: DB.EnumCase({
+      type: DB.Array(DB.Integer(), { minItems: 6, maxItems: 6 }),
+    }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantDescription),
+    }),
   }),
 })
 
@@ -206,7 +251,10 @@ const PlantEffect = DB.TypeAlias(import.meta.url, {
     DB.Object({
       types: DB.Optional({
         comment: "The effect type of this plant effect.",
-        type: DB.Array(DB.IncludeIdentifier(EffectType), { minItems: 1, uniqueItems: true }),
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
       }),
       translations: NestedTranslationMap(
         DB.Required,
@@ -227,7 +275,9 @@ const PlantPrice = DB.Enum(import.meta.url, {
     Constant: DB.EnumCase({
       type: DB.IncludeIdentifier(ConstantPlantPrice),
     }),
-    Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantPrice) }),
+    Indefinite: DB.EnumCase({
+      type: DB.IncludeIdentifier(IndefinitePlantPrice),
+    }),
   }),
 })
 
@@ -243,6 +293,16 @@ const ConstantPlantPrice = DB.TypeAlias(import.meta.url, {
         comment: "The cost of the plant in silver coins.",
         type: DB.Float({ minimum: 0 }),
       }),
+      translations: NestedTranslationMap(
+          DB.Optional,
+          "PlantPrice",
+          DB.Object({
+            note: DB.Required({
+              comment: "A note about the price.",
+              type: DB.String({ minLength: 1, markdown: "block" }),
+            }),
+          }),
+        ),
     }),
 })
 
@@ -325,10 +385,33 @@ const PoisonRecipe = DB.TypeAlias(import.meta.url, {
     }),
 })
 
+const PlantRecipeGroup = DB.Enum(import.meta.url, {
+  name: "PlantRecipeGroup",
+  values: () => ({
+    HerbalAid: DB.EnumCase({ type: null }),
+    Elixir: DB.EnumCase({ type: null }),
+    AlchemicalPoison: DB.EnumCase({ type: null }),
+    AlchemicalIntoxicant: DB.EnumCase({ type: null }),
+    PlantPoison: DB.EnumCase({ type: null }),
+    PlantIntoxicant: DB.EnumCase({ type: null }),
+  }),
+})
+
 const IndefiniteRecipe = DB.TypeAlias(import.meta.url, {
   name: "IndefiniteRecipe",
   type: () =>
     DB.Object({
+      types: DB.Optional({
+        comment: "The effect types of this recipe.",
+        type: DB.Array(DB.IncludeIdentifier(EffectType), {
+          minItems: 1,
+          uniqueItems: true,
+        }),
+      }),
+      group: DB.Optional({
+        comment: "The group this recipe belongs to.",
+        type: DB.IncludeIdentifier(PlantRecipeGroup),
+      }),
       translations: NestedTranslationMap(
         DB.Required,
         "IndefiniteRecipe",
@@ -349,7 +432,10 @@ const PlantLongevity = DB.TypeAlias(import.meta.url, {
       {
         preservations: DB.Optional({
           comment: "The preservations with alternative effect of this preserved plant",
-          type: DB.Array(HerbalPreservationIdentifier(), { minItems: 1, uniqueItems: true }),
+          type: DB.Array(HerbalPreservationIdentifier(), {
+            minItems: 1,
+            uniqueItems: true,
+          }),
         }),
         translations: NestedTranslationMap(
           DB.Optional,
