@@ -44,25 +44,46 @@ import { ActivatableIdentifier } from "../types/_IdentifierGroup.ts"
 import type { CacheBuilder } from "./internal.ts"
 import type { ResolvedNewSkillApplication, ResolvedSkillUse } from "./newApplicationsAndUses.ts"
 
+export type DerivedSelectOptionIdentifier = Case<
+  | "Advantage"
+  | "AnimalShape"
+  | "ArcaneBardTradition"
+  | "ArcaneDancerTradition"
+  | "Aspect"
+  | "BlessedTradition"
+  | "Blessing"
+  | "Cantrip"
+  | "CloseCombatTechnique"
+  | "RangedCombatTechnique"
+  | "Culture"
+  | "Disease"
+  | "Element"
+  | "HomunculusType"
+  | "Language"
+  | "Poison"
+  | "Property"
+  | "Race"
+  | "Script"
+  | "SexPractice"
+  | "Skill"
+  | "Spell"
+  | "Ritual"
+  | "LiturgicalChant"
+  | "Ceremony"
+  | "TargetCategory"
+  | "TradeSecret"
+  | "Patron",
+  string
+>
+
 export type ResolvedSelectOptionIdentifier =
   | RequirableSelectOptionIdentifier
-  | Case<
-      | "Blessing"
-      | "Cantrip"
-      | "Script"
-      | "Culture"
-      | "SexPractice"
-      | "HomunculusType"
-      | "BlessedTradition"
-      | "Disease"
-      | "Poison"
-      | "TargetCategory"
-      | "Advantage",
-      string
-    >
+  | DerivedSelectOptionIdentifier
 
-export type ResolvedSelectOption = {
-  id: ResolvedSelectOptionIdentifier
+export type ResolvedSelectOption<
+  ID extends ResolvedSelectOptionIdentifier = ResolvedSelectOptionIdentifier,
+> = {
+  id: ID
   content: Omit<GeneralSelectOption, "ap_value"> & {
     volume?: number
     ap_value?: TradeSecretAdventurePointsValue
@@ -70,6 +91,8 @@ export type ResolvedSelectOption = {
   newApplications: ResolvedNewSkillApplication[]
   uses: ResolvedSkillUse[]
 }
+
+type DerivedResolvedSelectOption = ResolvedSelectOption<DerivedSelectOptionIdentifier>
 
 const wrapPlainApValue = (
   apValue: number | undefined,
@@ -291,7 +314,7 @@ const getDerivedSkillishSelectOptions = <E extends SkillishEntityName, ID>(
 
   const instances = database.getAllInstanceContainersOfEntity(entity)
   const filteredInstances = filter === undefined ? instances : instances.filter(filter)
-  return filteredInstances.map(({ id, content }): ResolvedSelectOption => {
+  return filteredInstances.map(({ id, content }): DerivedResolvedSelectOption => {
     const wrappedId = Case<SkillishEntityName, string>(entity, id)
     return {
       id: wrappedId,
@@ -324,12 +347,12 @@ const getDerivedSelectOptions = (
   entryId: ActivatableIdentifierType,
   database: ReadonlyTSONDB<TSONDBTypes>,
   parentSrc: PublicationRefs,
-): ResolvedSelectOption[] => {
+): DerivedResolvedSelectOption[] => {
   switch (selectOptionCategory.kind) {
     case "Blessings":
       return database
         .getAllInstanceContainersOfEntity("Blessing")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Blessing", id),
           content: {
             parent: entryId,
@@ -343,7 +366,7 @@ const getDerivedSelectOptions = (
     case "Cantrips":
       return database
         .getAllInstanceContainersOfEntity("Cantrip")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Cantrip", id),
           content: {
             parent: entryId,
@@ -357,7 +380,7 @@ const getDerivedSelectOptions = (
     case "TradeSecrets":
       return database
         .getAllInstanceContainersOfEntity("TradeSecret")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("TradeSecret", id),
           content: {
             parent: entryId,
@@ -376,7 +399,7 @@ const getDerivedSelectOptions = (
     case "Scripts":
       return database
         .getAllInstanceContainersOfEntity("Script")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Script", id),
           content: {
             parent: entryId,
@@ -413,7 +436,7 @@ const getDerivedSelectOptions = (
         {},
       )
 
-      return animalShapes.map(({ id, content }): ResolvedSelectOption => {
+      return animalShapes.map(({ id, content }): DerivedResolvedSelectOption => {
         const path = animalShapePaths.find(({ id: pathId }) => pathId === content.path)
         const size = animalShapeSizes.find(({ id: sizeId }) => sizeId === content.size)
         const pathIndex =
@@ -477,7 +500,7 @@ const getDerivedSelectOptions = (
     case "ArcaneBardTraditions":
       return database
         .getAllInstanceContainersOfEntity("ArcaneBardTradition")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("ArcaneBardTradition", id),
           content: {
             parent: entryId,
@@ -496,7 +519,7 @@ const getDerivedSelectOptions = (
     case "ArcaneDancerTraditions":
       return database
         .getAllInstanceContainersOfEntity("ArcaneDancerTradition")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("ArcaneDancerTradition", id),
           content: {
             parent: entryId,
@@ -515,7 +538,7 @@ const getDerivedSelectOptions = (
     case "SexPractices":
       return database
         .getAllInstanceContainersOfEntity("SexPractice")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("SexPractice", id),
           content: {
             parent: entryId,
@@ -531,7 +554,7 @@ const getDerivedSelectOptions = (
     case "Races":
       return database
         .getAllInstanceContainersOfEntity("Race")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Race", id),
           content: {
             parent: entryId,
@@ -547,7 +570,7 @@ const getDerivedSelectOptions = (
     case "Cultures":
       return database
         .getAllInstanceContainersOfEntity("Culture")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Culture", id),
           content: {
             parent: entryId,
@@ -564,7 +587,7 @@ const getDerivedSelectOptions = (
       return [
         ...database
           .getAllInstanceContainersOfEntity("Race")
-          .map(({ id, content }): ResolvedSelectOption => ({
+          .map(({ id, content }): DerivedResolvedSelectOption => ({
             id: Case("Race", id),
             content: {
               parent: entryId,
@@ -578,7 +601,7 @@ const getDerivedSelectOptions = (
           })),
         ...database
           .getAllInstanceContainersOfEntity("Culture")
-          .map(({ id, content }): ResolvedSelectOption => ({
+          .map(({ id, content }): DerivedResolvedSelectOption => ({
             id: Case("Culture", id),
             content: {
               parent: entryId,
@@ -595,7 +618,7 @@ const getDerivedSelectOptions = (
     case "HomunculusTypes":
       return database
         .getAllInstanceContainersOfEntity("HomunculusType")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("HomunculusType", id),
           content: {
             parent: entryId,
@@ -648,7 +671,7 @@ const getDerivedSelectOptions = (
                 content.type.kind === selectOptionCategory.BlessedTraditions.onlyType?.kind
             : constant(true),
         )
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("BlessedTradition", id),
           content: {
             parent: entryId,
@@ -670,7 +693,7 @@ const getDerivedSelectOptions = (
       }: {
         id: string
         content: Element
-      }): ResolvedSelectOption => ({
+      }): DerivedResolvedSelectOption => ({
         id: Case("Element", id),
         content: {
           parent: entryId,
@@ -740,7 +763,7 @@ const getDerivedSelectOptions = (
 
       return database
         .getAllInstanceContainersOfEntity("Property")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Property", id),
           content: {
             parent: entryId,
@@ -801,7 +824,7 @@ const getDerivedSelectOptions = (
       if (selectOptionCategory.Aspects.use_master_of_suffix_as_name === true) {
         return database
           .getAllInstanceContainersOfEntity("Aspect")
-          .map(({ id, content }): ResolvedSelectOption => ({
+          .map(({ id, content }): DerivedResolvedSelectOption => ({
             id: Case("Aspect", id),
             content: {
               parent: entryId,
@@ -822,7 +845,7 @@ const getDerivedSelectOptions = (
 
       return database
         .getAllInstanceContainersOfEntity("Aspect")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Aspect", id),
           content: {
             parent: entryId,
@@ -839,7 +862,7 @@ const getDerivedSelectOptions = (
     case "Diseases":
       return database
         .getAllInstanceContainersOfEntity("Disease")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Disease", id),
           content: {
             parent: entryId,
@@ -899,7 +922,7 @@ const getDerivedSelectOptions = (
 
       return database
         .getAllInstanceContainersOfEntity("Poison")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Poison", id),
           content: {
             parent: entryId,
@@ -939,7 +962,7 @@ const getDerivedSelectOptions = (
 
       return database
         .getAllInstanceContainersOfEntity("Language")
-        .map(({ id, content }): ResolvedSelectOption => ({
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
           id: Case("Language", id),
           content: {
             parent: entryId,
@@ -1057,7 +1080,7 @@ const getDerivedSelectOptions = (
       const mapToResolvedSelectOption = (
         { id, content }: { id: string; content: TargetCategory },
         specificTargetCategory?: SpecificTargetCategory,
-      ): ResolvedSelectOption => ({
+      ): DerivedResolvedSelectOption => ({
         id: Case("TargetCategory", id),
         content: {
           parent: entryId,
@@ -1096,7 +1119,7 @@ const getDerivedSelectOptions = (
       }: {
         id: string
         content: Advantage
-      }): ResolvedSelectOption => ({
+      }): DerivedResolvedSelectOption => ({
         id: Case("Advantage", id),
         content: {
           parent: entryId,
@@ -1142,6 +1165,22 @@ const getDerivedSelectOptions = (
         )
         .map(mapToResolvedSelectOption)
     }
+
+    case "Patrons":
+      return database
+        .getAllInstanceContainersOfEntity("Patron")
+        .map(({ id, content }): DerivedResolvedSelectOption => ({
+          id: Case("Patron", id),
+          content: {
+            parent: entryId,
+            src: content.src,
+            translations: mapObject(content.translations, t10n => ({
+              name: t10n.name,
+            })),
+          },
+          newApplications: [],
+          uses: [],
+        }))
 
     default:
       return assertExhaustive(selectOptionCategory)

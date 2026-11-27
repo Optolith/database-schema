@@ -28,6 +28,11 @@ export const DerivedCharacteristic = DB.Entity(import.meta.url, {
         comment: "The derived characteristic may have a specific use in the game.",
         type: DB.IncludeIdentifier(DerivedCharacteristicType),
       }),
+      isCombatRelated: DB.Required({
+        comment:
+          "The derived characteristic is relevant in combat and should be shown on combat-related character sheets.",
+        type: DB.Boolean(),
+      }),
       calculation: DB.Required({
         comment: "Instructions for calculating the derived characteristic’s value.",
         type: DB.IncludeIdentifier(DerivedCharacteristicCalculation),
@@ -157,6 +162,16 @@ const DerivedCharacteristicBaseValue = DB.Enum(import.meta.url, {
   }),
 })
 
+const DerivedCharacteristicPurchaseMaximumValue = DB.Enum(import.meta.url, {
+  name: "DerivedCharacteristicPurchaseMaximumValue",
+  values: () => ({
+    Attribute: DB.EnumCase({ type: AttributeIdentifier() }),
+    PrimaryAttribute: DB.EnumCase({
+      type: DB.IncludeIdentifier(DerivedCharacteristicPrimaryAttributeValue),
+    }),
+  }),
+})
+
 const DerivedCharacteristicBase = DB.TypeAlias(import.meta.url, {
   name: "DerivedCharacteristicBase",
   type: () =>
@@ -237,7 +252,7 @@ const DerivedCharacteristicPurchase = DB.TypeAlias(import.meta.url, {
       maximum: DB.Required({
         comment:
           "The maximum value that can be achieved for the derived characteristic through improvements.",
-        type: DB.IncludeIdentifier(DerivedCharacteristicBase),
+        type: DB.IncludeIdentifier(DerivedCharacteristicPurchaseMaximumValue),
       }),
     }),
 })

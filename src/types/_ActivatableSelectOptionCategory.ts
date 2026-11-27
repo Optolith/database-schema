@@ -54,6 +54,7 @@ export const SelectOptionCategory = DB.Enum(import.meta.url, {
     Advantages: DB.EnumCase({
       type: DB.IncludeIdentifier(AdvantagesSelectOptionCategory),
     }),
+    Patrons: DB.EnumCase({ type: null }),
   }),
 })
 

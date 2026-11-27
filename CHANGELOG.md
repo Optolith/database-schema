@@ -2,6 +2,162 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.124.2](https://github.com/Optolith/database-schema/compare/v0.124.1...v0.124.2) (2026-11-17)
+
+### Bug Fixes
+
+* **swift:** visibility of database methods ([9cb88b5](https://github.com/Optolith/database-schema/commit/9cb88b5e63e39136a191020fdea08a3b6c9f5eac))
+
+## [0.124.1](https://github.com/Optolith/database-schema/compare/v0.124.0...v0.124.1) (2026-11-17)
+
+### Features
+
+* swift typings ([39f3fdd](https://github.com/Optolith/database-schema/commit/39f3fdd20ea03ebbfb23e4fd7f8aec20ad8cf06b))
+
+### Bug Fixes
+
+* **swift:** include data wrapper ([ea6ea5a](https://github.com/Optolith/database-schema/commit/ea6ea5a4b0283ddeb3a3772dcb0f1ecf73097037))
+
+## [0.124.0](https://github.com/Optolith/database-schema/compare/v0.123.0...v0.124.0) (2026-11-13)
+
+### ⚠ BREAKING CHANGES
+
+* character sheed save translations
+
+### Features
+
+* character sheed save translations ([bdfb31d](https://github.com/Optolith/database-schema/commit/bdfb31d6d3920ba62cad9198bdcb0a10ee74fb52))
+
+## [0.123.0](https://github.com/Optolith/database-schema/compare/v0.122.0...v0.123.0) (2026-11-12)
+
+### ⚠ BREAKING CHANGES
+
+* base settings and translations for character sheet
+* remaining translations for basic character sheet
+* routine checks optional rule setting
+
+### Features
+
+* base settings and translations for character sheet ([32dca23](https://github.com/Optolith/database-schema/commit/32dca23d95c1a096940950b160c233b61bb73d83))
+* remaining translations for basic character sheet ([da3256d](https://github.com/Optolith/database-schema/commit/da3256daff0cd6908a96986627c49818ed015961))
+* routine checks optional rule setting ([0888e14](https://github.com/Optolith/database-schema/commit/0888e14ca423482c119063764a2e32086c36d8b4))
+
+## [0.122.0](https://github.com/Optolith/database-schema/compare/v0.121.0...v0.122.0) (2026-11-11)
+
+### ⚠ BREAKING CHANGES
+
+* add settings for managing style special abilities
+
+### Features
+
+* add settings for managing style special abilities ([4db45c7](https://github.com/Optolith/database-schema/commit/4db45c75972737e3eebadbab714e349623ad09d1))
+
+## [0.121.0](https://github.com/Optolith/database-schema/compare/v0.120.1...v0.121.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* allow skill group in prerequisite options
+
+### Features
+
+* allow skill group in prerequisite options ([03ee2e3](https://github.com/Optolith/database-schema/commit/03ee2e3dc859c6c2faf7532ccf022f2191b2a07c))
+* **cache:** skills by skill group cache ([55dbfd1](https://github.com/Optolith/database-schema/commit/55dbfd13b1e69c766524e674adc8b18becef69bb))
+
+## [0.120.1](https://github.com/Optolith/database-schema/compare/v0.120.0...v0.120.1) (2026-11-10)
+
+### Features
+
+* associated magical actions for magical traditions ([9a0b455](https://github.com/Optolith/database-schema/commit/9a0b455be3f32cbee5916550a086e95dd9ffc528))
+
+## [0.120.0](https://github.com/Optolith/database-schema/compare/v0.119.0...v0.120.0) (2026-11-10)
+
+### ⚠ BREAKING CHANGES
+
+* style settings within focus rule namespace
+
+### Features
+
+* combat technique parry modifier sources ([c79a339](https://github.com/Optolith/database-schema/commit/c79a339b7af42de01767256f9fd42e62262aab0e))
+* optional rule options ([9ae0104](https://github.com/Optolith/database-schema/commit/9ae01042ac76bbfaa04185a158f834641a72cf9b))
+* style settings within focus rule namespace ([c3fdae8](https://github.com/Optolith/database-schema/commit/c3fdae88bffd3fc4795da1c665a83b59e752c5e9))
+
+## [0.119.0](https://github.com/Optolith/database-schema/compare/v0.118.0...v0.119.0) (2026-11-07)
+
+### ⚠ BREAKING CHANGES
+
+* add more translations and values for rcp application to character
+
+### Features
+
+* add more translations and values for rcp application to character ([0804a05](https://github.com/Optolith/database-schema/commit/0804a05a8244b9cee5eeac6483a022ef7498595f))
+
+## [0.118.0](https://github.com/Optolith/database-schema/compare/v0.117.0...v0.118.0) (2026-11-05)
+
+### ⚠ BREAKING CHANGES
+
+* effect type translations
+* race/culture/profession select option translations
+
+### Features
+
+* effect type translations ([ae094e2](https://github.com/Optolith/database-schema/commit/ae094e25492434373a5496aefd277a72e7b0d367))
+* race/culture/profession select option translations ([8ce1d2b](https://github.com/Optolith/database-schema/commit/8ce1d2b8368a2322de941682eea49d6ae00f27a5))
+* skill applications cache ([5bdecb5](https://github.com/Optolith/database-schema/commit/5bdecb593de31182d12043a31b513487c79cff27))
+
+## [0.117.0](https://github.com/Optolith/database-schema/compare/v0.116.2...v0.117.0) (2026-11-04)
+
+### ⚠ BREAKING CHANGES
+
+* derived patron select options
+
+### Features
+
+* complete derived select option identifier type ([ef723d4](https://github.com/Optolith/database-schema/commit/ef723d461e93ab6142bd9f911790adf61c40a721))
+* derived patron select options ([fea92e4](https://github.com/Optolith/database-schema/commit/fea92e4ee4916aa641e10808ea6cfa34b2d3e187))
+
+## [0.116.2](https://github.com/Optolith/database-schema/compare/v0.116.1...v0.116.2) (2026-11-04)
+
+### Bug Fixes
+
+* an armor can be a variant of any other armor ([b7e5e89](https://github.com/Optolith/database-schema/commit/b7e5e89108161c4fd5ca79d55dbced5534e52e80))
+* child select option custom constraint ([c36caff](https://github.com/Optolith/database-schema/commit/c36caff26433c08ec14d09857769032539d3904b))
+
+## [0.116.1](https://github.com/Optolith/database-schema/compare/v0.116.0...v0.116.1) (2026-11-04)
+
+### Features
+
+* select option rule verification ([c40bfa9](https://github.com/Optolith/database-schema/commit/c40bfa90e9e58ce92e745bee3c381004018da608))
+
+## [0.116.0](https://github.com/Optolith/database-schema/compare/v0.115.0...v0.116.0) (2026-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* translations for base race/culture/profession selection
+
+### Features
+
+* translations for base race/culture/profession selection ([81635bf](https://github.com/Optolith/database-schema/commit/81635bfd44df5d6cad623c4987d29b8b6104307f))
+
+## [0.115.0](https://github.com/Optolith/database-schema/compare/v0.114.0...v0.115.0) (2026-11-02)
+
+### ⚠ BREAKING CHANGES
+
+* translations and settings for initial character setup
+
+### Features
+
+* translations and settings for initial character setup ([5cf1733](https://github.com/Optolith/database-schema/commit/5cf17337bd59572c0f6d1ed830feb77c7510786e))
+
+## [0.114.0](https://github.com/Optolith/database-schema/compare/v0.113.1...v0.114.0) (2026-10-30)
+
+### ⚠ BREAKING CHANGES
+
+* more data-driven logic from client
+
+### Features
+
+* more data-driven logic from client ([2126a3c](https://github.com/Optolith/database-schema/commit/2126a3c70cc826a96ff427aef0c12e8cc38239ea))
+
 ## [0.113.1](https://github.com/Optolith/database-schema/compare/v0.113.0...v0.113.1) (2026-10-26)
 
 ### Bug Fixes

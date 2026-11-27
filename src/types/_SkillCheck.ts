@@ -60,12 +60,9 @@ const SingleDerivedCharacteristicSkillCheckPenalty = DB.TypeAlias(import.meta.ur
         type: DB.Boolean(),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
+  customConstraints: ({ value, getInstanceById }) =>
     nullableToArray(
-      checkDerivedCharacteristicIsResistance(
-        instanceContent.derivedCharacteristic,
-        getInstanceById,
-      ),
+      checkDerivedCharacteristicIsResistance(value.derivedCharacteristic, getInstanceById),
     ),
 })
 
@@ -83,8 +80,8 @@ const MaximumDerivedCharacteristicSkillCheckPenalty = DB.TypeAlias(import.meta.u
         }),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
-    instanceContent.derivedCharacteristics
+  customConstraints: ({ value, getInstanceById }) =>
+    value.derivedCharacteristics
       .map(id => checkDerivedCharacteristicIsResistance(id, getInstanceById))
       .filter(isNotNullish),
 })

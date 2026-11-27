@@ -2,12 +2,12 @@ import * as DB from "tsondb/schema/dsl"
 import { AlternativeName } from "../../_AlternativeNames.js"
 import {
   BiomeIdentifier,
-  SubBiomeIdentifier,
   BotanicRegionIdentifier,
+  ElixirIdentifier,
   HerbalAidIdentifier,
   HerbalPreservationIdentifier,
-  ElixirIdentifier,
   PoisonIdentifier,
+  SubBiomeIdentifier,
 } from "../../_Identifier.js"
 import { ResponsiveTextOptional, ResponsiveTextReplace } from "../../_ResponsiveText.js"
 import { NestedTranslationMap } from "../../Locale.js"
@@ -225,19 +225,25 @@ const PlantPrice = DB.Enum(import.meta.url, {
   name: "PlantPrice",
   values: () => ({
     Constant: DB.EnumCase({
-      type: DB.Object({
-        value: DB.Required({
-          comment: "The value of the plant in silver coins.",
-          type: DB.Float({ minimum: 0 }),
-        }),
-        cost: DB.Required({
-          comment: "The cost of the plant in silver coins.",
-          type: DB.Float({ minimum: 0 }),
-        }),
-      }),
+      type: DB.IncludeIdentifier(ConstantPlantPrice),
     }),
     Indefinite: DB.EnumCase({ type: DB.IncludeIdentifier(IndefinitePlantPrice) }),
   }),
+})
+
+const ConstantPlantPrice = DB.TypeAlias(import.meta.url, {
+  name: "ConstantPlantPrice",
+  type: () =>
+    DB.Object({
+      value: DB.Required({
+        comment: "The value of the plant in silver coins.",
+        type: DB.Float({ minimum: 0 }),
+      }),
+      cost: DB.Required({
+        comment: "The cost of the plant in silver coins.",
+        type: DB.Float({ minimum: 0 }),
+      }),
+    }),
 })
 
 const IndefinitePlantPrice = DB.TypeAlias(import.meta.url, {

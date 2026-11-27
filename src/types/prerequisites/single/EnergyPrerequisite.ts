@@ -18,8 +18,8 @@ export const EnergyPrerequisite = DB.TypeAlias(import.meta.url, {
         type: DB.IncludeIdentifier(DisplayOption),
       }),
     }),
-  customConstraints: ({ instanceContent, getInstanceById }) =>
-    getInstanceById("DerivedCharacteristic", instanceContent.id)?.type?.kind === "Energy"
+  customConstraints: ({ value, getInstanceById }) =>
+    getInstanceById("DerivedCharacteristic", value.id)?.type?.kind === "Energy"
       ? []
       : ["The selected derived characteristic must be an energy."],
 })

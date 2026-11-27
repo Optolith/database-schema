@@ -54,12 +54,18 @@ const CommonnessRatedAdvantageDisadvantageLevel = DB.Enum(import.meta.url, {
   values: () => ({
     Constant: DB.EnumCase({ type: DB.Integer({ minimum: 1 }) }),
     Range: DB.EnumCase({
-      type: DB.Object({
-        min: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
-        max: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
-      }),
+      type: DB.IncludeIdentifier(CommonnessRatedAdvantageDisadvantageLevelRange),
     }),
   }),
+})
+
+const CommonnessRatedAdvantageDisadvantageLevelRange = DB.TypeAlias(import.meta.url, {
+  name: "CommonnessRatedAdvantageDisadvantageLevelRange",
+  type: () =>
+    DB.Object({
+      min: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
+      max: DB.Required({ type: DB.Integer({ minimum: 1 }) }),
+    }),
 })
 
 const SingleCommonnessRatedAdvantageDisadvantageInGroup = DB.GenTypeAlias(import.meta.url, {

@@ -419,6 +419,7 @@ export const RaceVariant = DB.Entity(import.meta.url, {
         { ...advantage, id: Case("Advantage", advantage.id) },
         getInstanceById,
         getAllChildInstancesForParent,
+        true,
       ),
     ) ?? []),
     ...(instanceContent.automatic_disadvantages?.flatMap(disadvantage =>
@@ -426,6 +427,23 @@ export const RaceVariant = DB.Entity(import.meta.url, {
         { ...disadvantage, id: Case("Disadvantage", disadvantage.id) },
         getInstanceById,
         getAllChildInstancesForParent,
+        true,
+      ),
+    ) ?? []),
+    ...(instanceContent.strongly_recommended_advantages?.flatMap(disadvantage =>
+      verifyOptionsForActivatableEntry(
+        { ...disadvantage, id: Case("Advantage", disadvantage.id) },
+        getInstanceById,
+        getAllChildInstancesForParent,
+        true,
+      ),
+    ) ?? []),
+    ...(instanceContent.strongly_recommended_disadvantages?.flatMap(disadvantage =>
+      verifyOptionsForActivatableEntry(
+        { ...disadvantage, id: Case("Disadvantage", disadvantage.id) },
+        getInstanceById,
+        getAllChildInstancesForParent,
+        true,
       ),
     ) ?? []),
   ],
