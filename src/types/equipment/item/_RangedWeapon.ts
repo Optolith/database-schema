@@ -7,7 +7,7 @@ import { Dice } from "../../_Dice.js"
 import { AmmunitionishIdentifier } from "../../_IdentifierGroup.ts"
 import { Length } from "./_Weapon.js"
 
-const RangedDamage = DB.Enum(import.meta.url, {
+export const RangedDamage = DB.Enum(import.meta.url, {
   name: "RangedDamage",
   comment:
     "The damage of a ranged weapon. It consists of a random part using dice and an optional flat part ny default. Some ranged weapons may work different so that damage is either not applicable at all or it is outlined as *Special* and further defined in a description.",
@@ -74,7 +74,7 @@ export const GenRangedWeapon = DB.GenTypeAlias(import.meta.url, {
     }),
 })
 
-const RangeBrackets = DB.TypeAlias(import.meta.url, {
+export const RangeBrackets = DB.TypeAlias(import.meta.url, {
   name: "RangeBrackets",
   type: () =>
     DB.Object({
@@ -93,7 +93,7 @@ const RangeBrackets = DB.TypeAlias(import.meta.url, {
     }),
 })
 
-const ReloadTime = DB.TypeAlias(import.meta.url, {
+export const ReloadTime = DB.TypeAlias(import.meta.url, {
   name: "ReloadTime",
   type: () =>
     DB.Object({

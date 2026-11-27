@@ -57,3 +57,8 @@ export const input = DB.Optional({
   comment: "A string that is used as a label for an input field.",
   type: DB.String({ minLength: 1 }),
 })
+
+export const is_creature_ability: DB.Optional({
+  comment: "Whether this entry is a creature ability. Creature abilities can also be available to player characters, depending on the prerequisites.",
+  type: DB.Boolean(),
+})
